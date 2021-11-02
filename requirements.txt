@@ -62,3 +62,4 @@ tuspy==0.2.5
 urllib3==1.26.6
 virtualenv==20.7.1
 whitenoise==5.3.0
+django-heroku
