@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+
 from django.utils.translation import ugettext_lazy as _
 from django.core.paginator import Paginator
 import environ
