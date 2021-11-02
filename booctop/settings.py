@@ -127,7 +127,7 @@ WSGI_APPLICATION = 'booctop.wsgi.application'
 #       'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
 #       'PORT': '3306',
 #   }
-# mysql://otp2j74kv3w9g03y:ow5vd8s2bue9y9xt@x8autxobia7sgh74.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/dzjq9t85dqv8kckj
+
 DATABASES = {
    'default': {
       'ENGINE': 'django.db.backends.mysql',
