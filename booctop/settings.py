@@ -245,7 +245,7 @@ LOGIN_REDIRECT_URL = 'http://localhost:8000/en/'
 LOGOUT_REDIRECT_URL = 'logout'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '466816721163746'  # App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '2cf20f71ac45a3bb45d4b14214874e7e'  # App Secret
+SOCIAL_AUTH_FACEBOOK_SECRET = '2cf20f71ac45a3bb45d4b14214874e7e' # App Secret
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link'] # add this
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {       # add this
   'fields': 'id, name, email, picture.type(large)'
