@@ -1509,6 +1509,7 @@ def register_user(request):
                 request.session['user_type'] = "teacher"
 
             if type == "teacher":
+                print("subcategori ID: ", subcategory_id)
                 objSubCat = subcategories.objects.get(id=subcategory_id)
                 print("heeerrrr", objSubCat)
                 objUS = user_categories()
