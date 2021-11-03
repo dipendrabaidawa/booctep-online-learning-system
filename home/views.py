@@ -1819,7 +1819,7 @@ def forgotChangepassword(request):
 
 def logout_(request):
     logout(request)
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 
 @csrf_exempt

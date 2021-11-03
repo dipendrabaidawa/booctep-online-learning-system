@@ -546,7 +546,7 @@ Page loader
                   localStorage.getItem("after_login") == "" ||
                   localStorage.getItem("after_login") == null
                 ) {
-                  window.location.href = "/{{lang}}";
+                  window.location.href = document.URL;
                 } else {
                   afterlogin = JSON.parse(localStorage.getItem("after_login"));
                   url = afterlogin.url;
@@ -558,7 +558,7 @@ Page loader
                     function (res) {}
                   );
                   localStorage.setItem("after_login", "");
-                  window.location.href = "/{{lang}}";
+                  window.location.href = document.URL;
                 }
               } else {
                 $("#login_div_error").html(
