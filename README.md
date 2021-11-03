@@ -3,6 +3,7 @@ I'm glad to notice you about the workflow on this repository.
 
 # Create your branch
 $ git checkout -b
+
 $ git add .
 $ git commit -m "comment here"
 $ git push -u origin
