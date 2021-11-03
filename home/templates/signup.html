@@ -348,11 +348,12 @@
                                         {% endif %}
                                         <div class="select ">
                                             <select class="selecttt selecttt-dark firstsubcategory" id="subcategory" class="subcategory" style="border-radius: 3px;">
+                                                <option></option>
                                                 {% for i in objC %}
                                                     {% if lang == 'ar/' %}
-                                                        <option value="{{ i.id }}">{{ i.namear }}</option>
+                                                        <option value="{{ i.id }}" >{{ i.namear }}</option>
                                                     {% else %}
-                                                        <option value="{{ i.id }}">{{ i.name }}</option>
+                                                        <option value="{{ i.id }}" >{{ i.name }}</option>
                                                     {% endif %}
                                                 {% endfor %}
                                             </select>
