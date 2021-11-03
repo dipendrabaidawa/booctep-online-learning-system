@@ -5,15 +5,22 @@ I'm glad to notice you about the workflow on this repository.
 $ git checkout -b
 
 $ git add .
+
 $ git commit -m "comment here"
+
 $ git push -u origin
 
-before merging to main branch, you need to create pull request on your branch.
 
-will check your updates and merge them on my side
+Before merging to main branch, you need to create pull request on your branch.
 
-deploy the final version to heroku.
 
-don't push the assets like video and images because heroku max size is under 500 MB.
+[1] Will check your updates and merge them on my side
+
+
+[1] deploy the final version to heroku.
+
+
+[2] don't push the assets like video and images because heroku max size is under 500 MB.
+
 
 HAPPY CODDING! BEST OF LUCK!
