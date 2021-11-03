@@ -236,7 +236,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # django-paypal settings
-PAYPAL_RECEIVER_EMAIL = 'sb-wtj43p8374977@business.example.com' #'sjcdas-facilitator@gmail.com'
+PAYPAL_RECEIVER_EMAIL = 'sjcdas-facilitator@gmail.com' # 'sb-wtj43p8374977@business.example.com'
 PAYPAL_TEST = True
 
 LOGIN_URL = 'login'
