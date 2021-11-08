@@ -165,3 +165,4 @@ class Discount(models.Model):
 class Option(models.Model):
     oname = models.CharField(max_length=255, default='')
     oval = models.CharField(max_length=255, default='')
+    
