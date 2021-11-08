@@ -1622,11 +1622,11 @@
                                                             <div class="order-line">
                                                                 <span class="is-total  mediabout mediabout-dark">المجموع</span>
                                                                 <span class="is-total subtotalprice prcg prcg-dark"
-                                                                      style="">{{ course.price }}</span>
+                                                                      style="">{{ course.price|unlocalize }}</span>
                                                             </div>
                                                             <div class="order-line discountamountparent">
                                                                 <span class=" mediabout mediabout-dark">الخصم</span>
-                                                                <span class="discountamount prcg prcg-dark">{{ course.discount }}</span>
+                                                                <span class="discountamount prcg prcg-dark">{{ course.discount|unlocalize }}</span>
                                                             </div>
                                                             <div class="order-line">
                                                                 <span class=" mediabout mediabout-dark">تملك قسيمة شرائية؟</span>
@@ -1635,11 +1635,11 @@
                                                             <div class="order-line">
                                                                 <span class="is-total  mediabout mediabout-dark">Total</span>
                                                                 <span class="is-total subtotalprice prcg prcg-dark"
-                                                                      style="">{{ course.price }}</span>
+                                                                      style="">{{ course.price|unlocalize }}</span>
                                                             </div>
                                                             <div class="order-line discountamountparent">
                                                                 <span class=" mediabout mediabout-dark">Discount</span>
-                                                                <span class="discountamount prcg prcg-dark">{{ course.discount }}</span>
+                                                                <span class="discountamount prcg prcg-dark">{{ course.discount|unlocalize }}</span>
                                                             </div>
                                                             <div class="order-line">
                                                                 <span class=" mediabout mediabout-dark">Promo code?</span>
@@ -1749,14 +1749,14 @@
                                                             <div class="order-line">
                                                                 <span class="is-total mediabout mediabout-dark">السعر بعد الخصم</span>
                                                                 <span class="is-total totalsum prcgr prcgr-dark" id="totalsumid"
-                                                                      style="">{{ course.discount_price }}
+                                                                      style="">{{ course.discount_price|unlocalize|unlocalize }}
                                                                 </span>
                                                             </div>
                                                             {% else %}
                                                             <div class="order-line">
                                                                 <span class="is-total mediabout mediabout-dark">Total after discount</span>
                                                                 <span class="is-total totalsum prcgr prcgr-dark" id="totalsumid"
-                                                                      style="">{{ course.discount_price }}</span>
+                                                                      style="">{{ course.discount_price|unlocalize }}</span>
                                                             </div>
 
                                                             {% endif %}
@@ -1796,7 +1796,7 @@
                                                             <a href="javascript:void(0)"
                                                                class="button is-fullwidth buy-button is-raised checkouttest grree grree-dark">
                                                                 <p style="color: #fff;">شـراء  $<span
-                                                                        class="totalsum">{{ course.discount_price }}</span></p>
+                                                                        class="totalsum">{{ course.discount_price|unlocalize }}</span></p>
                                                             </a>
                                                             {% else %}
                                                             <a href="javascript:void(0)"
@@ -2080,7 +2080,7 @@
                                                             <div class="order-line">
                                                                 <span class="is-total  mediabout mediabout-dark">المجموع</span>
                                                                 <span class="is-total subtotalprice prcg prcg-dark"
-                                                                      style="">{{ course.price }}</span>
+                                                                      style="">{{ course.price|unlocalize }}</span>
                                                             </div>
                                                             <div class="order-line">
                                                                 <span class=" mediabout mediabout-dark">تملك قسيمة شرائية؟</span>
@@ -2089,7 +2089,7 @@
                                                             <div class="order-line">
                                                                 <span class="is-total  mediabout mediabout-dark">Total</span>
                                                                 <span class="is-total subtotalprice prcg prcg-dark"
-                                                                      style="">{{ course.price }}</span>
+                                                                      style="">{{ course.price|unlocalize }}</span>
                                                             </div>
                                                             <div class="order-line">
                                                                 <span class=" mediabout mediabout-dark">Promo code?</span>
@@ -2204,7 +2204,7 @@
                                                             <div class="order-line">
                                                                 <span class="is-total mediabout mediabout-dark">السعر بعد الخصم</span>
                                                                 <span class="is-total totalsum prcgr prcgr-dark" id="totalsumid"
-                                                                      style="">{{ course.discount_price }}</span>
+                                                                      style="">{{ course.discount_price|unlocalize }}</span>
                                                             </div>
                                                             {% else %}
                                                             <div class="order-line discountamountparent">
@@ -2215,7 +2215,7 @@
                                                             <div class="order-line">
                                                                 <span class="is-total mediabout mediabout-dark">Total after discount</span>
                                                                 <span class="is-total totalsum prcgr prcgr-dark" id="totalsumid"
-                                                                      style="">{{ course.discount_price }}</span>
+                                                                      style="">{{ course.discount_price|unlocalize }}</span>
                                                             </div>
 
                                                             {% endif %}
@@ -2255,7 +2255,7 @@
                                                             <a href="javascript:void(0)"
                                                                class="button is-fullwidth buy-button is-raised checkouttest grree grree-dark">
                                                                 <p style="color: #fff;">شـراء  $<span
-                                                                        class="totalsum">{{ course.discount_price }}</span></p>
+                                                                        class="totalsum">{{ course.discount_price|unlocalize }}</span></p>
                                                             </a>
                                                             {% else %}
                                                             <a href="javascript:void(0)"
