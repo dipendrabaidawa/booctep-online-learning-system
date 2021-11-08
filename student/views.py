@@ -31,12 +31,10 @@ def courses(request):
     user_type = request.session.get("user_type")
     filter_type = request.POST.get("type")
     page = request.POST.get("page")
-    print("type::", filter_type)
     if filter_type == None or filter_type == '':
         filter_type = -1
     else:
         filter_type = int(filter_type)
-    print("page::", page)
 
     if page == None or page == '':
         page = 1
