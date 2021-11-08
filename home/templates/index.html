@@ -397,8 +397,8 @@
                                                       {% get_current_language as lang %}
                                                       {% if lang == "ar" %}
                                                         <b class="prcg prcg-dark">
-                                                            <del style="font-weight: bold" class="prcg prcg-dark"> {{ course.price|floatformat:'2'|unlocalize }} <b>ريال</b> </del><br>   
-                                                            <b class="prcgr prcgr-dark"> {{ course.discount_price|floatformat:'2'|unlocalize }} ريال </b>
+                                                            <del style="font-weight: bold" class="prcg prcg-dark"> {{ course.price|unlocalize }} <b>ريال</b> </del><br>   
+                                                            <b class="prcgr prcgr-dark"> {{ course.discount_price|unlocalize }} ريال </b>
                                                         </b>
                                                       {% else %}
                                                       <b class="prcg prcg-dark">

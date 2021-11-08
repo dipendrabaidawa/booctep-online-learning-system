@@ -160,7 +160,7 @@ def home_view(request):
                     discount_percent = 1
                 else:
                     discount_percent = (100 - discount[0].discount) / 100
-        course.discount_price = course.price * discount_percent
+        course.discount_price = round(course.price * discount_percent, 2)
 
     # new part with admin... (05-17)
     ele = Admincontrol.objects.get(pk=1)
