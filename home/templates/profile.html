@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %} {% load static %} {% load i18n %}
 
-
+    {% load l10n %}
     <style>
 
         .mediabout{
@@ -644,7 +644,7 @@
                                                         {% endif %}
                                                         
                                                     {% else %}
-                                                        <b style=""class="prcg prcg-dark">${{ course.price }}</b>
+                                                        <b style=""class="prcg prcg-dark">${{ course.price|unlocalize }}</b>
                                                     {% endif %}
                                                     <br>
                                                     <div class="rating" style="margin-top: 10px;">
