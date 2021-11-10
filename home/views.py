@@ -3312,7 +3312,7 @@ def process_payment(request):
     return "hello"
 
 @csrf_exempt
-def payment_done(request):
+def payment_done(request, course_id, student_id):
     return render(request, 'payment_done.html')
 
 
