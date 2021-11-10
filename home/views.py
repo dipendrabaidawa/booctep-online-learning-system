@@ -655,7 +655,24 @@ def home_view1(request):
                 else:
                     return redirect(u)
 
-
+"""
+(
+    <QuerySet []>,
+    0, 
+    [], 
+    <QuerySet [<student_cart_courses: student_cart_courses object (170)>, 
+    <student_cart_courses: student_cart_courses object (169)>, 
+    <student_cart_courses: student_cart_courses object (168)>]>, 
+    4, 
+    [48, 65, 64, 46], 
+    262.0, 
+    <QuerySet [<notifications: notifications object (102)>, 
+    <notifications: notifications object (76)>]>, 
+    2, 
+    [], 
+    0
+)
+"""
 def findheader(userid):
     # show fav page.., cart page...
     favList = student_favourite_courses.objects.filter(student_id_id=userid)
@@ -3170,8 +3187,8 @@ def ecommerce_payment(request, teacher_id, id, course_url):
         'currency_code': 'USD',
         'notify_url': 'http://{}{}'.format(host,
                                            reverse('paypal-ipn')),
-        'return_url': 'http://{}{}'.format(host,
-                                           reverse('payment_done')),
+        'return_url': 'http://{}{}{}{}'.format(host,
+                                           reverse('payment_done'), course.id, user.id),
         'cancel_return': 'http://{}{}'.format(host,
                                               reverse('payment_cancelled')),
     }
@@ -3277,14 +3294,22 @@ def checkout(request):
     orderid = generateRandomChar()
     request.session['order_id'] = orderid,
     request.session['amount'] = float(totalmoney)
-    x1, x2, x3, y1, y2, y3, y4, z1, z2 = findheader(request.user.id)
-
+    data = findheader(request.user.id)
+    
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt= findheader(request.user.id)
+    
     return render(request, 'checkout.html',
                   {'lang': getLanguage(request)[0], 'orderid': orderid, 'subtotalmoney': subtotalmoney,
                    'discountmoney': discountmoney, 'totalmoney': totalmoney, 'favList': x1, 'favCnt': x2,
                    'alreadyinFav': x3, 'cartList': y1, 'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4,
                    'noti_list': z1, 'noti_cnt': z2})
 
+
+@csrf_exempt
+def process_payment(request):
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt= findheader(request.user.id)
+    print(f"Cart List {y3}")
+    return "hello"
 
 @csrf_exempt
 def payment_done(request):
