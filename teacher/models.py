@@ -120,17 +120,3 @@ class transactions(models.Model):
     fees = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(100)])
     revenue = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(100)])
     course_id = models.IntegerField(null=True, blank=True, default=0)
-
-class invoices(models.Model):
-    id = models.AutoField(primary_key=True)
-    teacher_id = models.IntegerField(default=0)
-    course_id = models.IntegerField(default=0)
-    request_date = models.DateField()
-
-class invoice_lines(models.Model):
-    id = models.AutoField(primary_key=True)
-    student_id = models.IntegerField(default=0)
-    course_id = models.IntegerField(default=0)
-    price = models.FloatField(default=0)
-    teacher_id = models.IntegerField(default=0)
-    purchase_date = models.DateField()
