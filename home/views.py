@@ -3188,7 +3188,7 @@ def ecommerce_payment(request, teacher_id, id, course_url):
         'notify_url': 'http://{}{}'.format(host,
                                            reverse('paypal-ipn')),
         'return_url': 'http://{}{}{}{}'.format(host,
-                                           reverse('payment_done'), course.id, user.id),
+                                           reverse('payment_done'), course.id, request.user.id),
         'cancel_return': 'http://{}{}'.format(host,
                                               reverse('payment_cancelled')),
     }
