@@ -2521,9 +2521,9 @@
             <footer class="modal-card-foot">
 {#                <div class="button is-success sharecoursebutton" style="background-color: rgb(22,102,197);color: #fff;">#}
 {#                </div>#}
-                {% post_to_twitter 'this is my test' course.url 'hello' '' %}
-                {% post_to_facebook 'this is my test' course.url 'hello' %}
-                {% post_to_linkedin  course.url %}
+                {% post_to_twitter 'this is my test' course.url 'Twitter' 'post-twitter' %}
+                {% post_to_facebook course.url 'Facebook' 'post-facebook' %}
+                {% post_to_linkedin  course.url 'post-linkedin' %}
                 <button class="button sharecoursemodalclose">Cancel</button>
             </footer>
         </div>
@@ -2596,6 +2596,7 @@
                     $(".sharecoursebutton").empty();
                     //$(".sharecoursebutton").append("<a target='_blank' href='https://twitter.com/share?ref_src=twsrc%5Etfw' class='twitter-share-button' data-size='large' data-url='http://localhost:8000/en/single_course/49/' data-show-count='false' style='color: white;'>Share to Twitter</a>");
                     $(".sharecoursebutton").addClass("mdi mdi-twitter");
+                    $(".post-twitter").get(0).click();
                 }
 
                 if ($(this).attr("id") == "fb") {
@@ -2610,6 +2611,7 @@
                     $(".sharecoursebutton").attr("data-layout", "button");
                     $(".sharecoursebutton").attr("data-size", "large");
                     //$(".sharecoursebutton").append("<a target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpencilerkali.com%2F&amp;src=sdkpreparse' class='fb-xfbml-parse-ignore' style='color: white;'>Share to Facebook</a>");
+                    $(".post-facebook").get(0).click();
                 }
 
                 if ($(this).attr("id") == "lin") {
@@ -2618,13 +2620,14 @@
                     $(".sharecoursebutton").empty();
                     $(".sharecoursebutton").append("Share to LinkedIn");
                     $(".sharecoursebutton").addClass("mdi mdi-linkedin");
+                    $(".post-linkedin").get(0).click();
                 }
-                $("#bulmamodal").addClass("is-active");
+                // $("#bulmamodal").addClass("is-active");
             });
 
-            $(".sharecoursemodalclose").click(function () {
-                $("#bulmamodal").removeClass("is-active");
-            });
+            // $(".sharecoursemodalclose").click(function () {
+            //     $("#bulmamodal").removeClass("is-active");
+            // });
 
             $(".applypromobutton").click(function () {
                 var course_id = '{{ course.id }}';
