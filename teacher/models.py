@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db.models.base import ModelState
 
 class categories(models.Model):
     id = models.AutoField(primary_key=True)
@@ -119,7 +120,3 @@ class transactions(models.Model):
     fees = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(100)])
     revenue = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(100)])
     course_id = models.IntegerField(null=True, blank=True, default=0)
-
-
-
-
