@@ -3309,10 +3309,11 @@ def checkout(request):
 def process_payment(request):
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt= findheader(request.user.id)
     print(f"Cart List {y3}")
-    return "hello"
+    return render(request, 'payment_done.html')
 
 @csrf_exempt
 def payment_done(request, course_id, student_id):
+
     return render(request, 'payment_done.html')
 
 
