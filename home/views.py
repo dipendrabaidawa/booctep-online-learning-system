@@ -3329,7 +3329,8 @@ def checkout(request):
 @csrf_exempt
 def process_payment(request):
     x1, x2, x3, y1, y2, purchase_courses, y4, z1, z2, msg_list, msg_cnt= findheader(request.user.id)
-    cartList = student_cart_courses.objects.filter(student_id_id=request.user.id).delete()
+    cartList = student_cart_courses.filter(student_id_id=request.user.id)
+    student_cart_courses.objects.filter(student_id_id=request.user.id).delete()
 
     for course_id in purchase_courses:
         import uuid
@@ -3340,7 +3341,7 @@ def process_payment(request):
         invoice = Invoices(invoice_number=invoice_number, course_id=course_id, student_id=request.user.id)
         invoice.save()   
     
-    return render(request, 'payment_done.html', {'cartList': y1, 'purchase_courses': purchase_courses, 'student_id': request.user.id})
+    return render(request, 'payment_done.html', {'cartList': cartList, 'purchase_courses': purchase_courses, 'student_id': request.user.id})
 
 @csrf_exempt
 def payment_done(request, course_id, student_id):
