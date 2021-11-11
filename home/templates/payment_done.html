@@ -3,7 +3,32 @@
 {% endblock %}
 {% block content %}
 
+   {% for cart in cartList %}
+   <div class="notifications__item cartitem cartitempage"  
+   data-id="{{ cart.course_id.id }}">
+   <div class="notifications__item__avatar">
+      <img src="{% static cart.course_id.cover_img %}" />
+   </div>
 
+   <div class="notifications__item__content">
+         <p >${{ cart.course_id.price }}</p>
+      <span class="notifications__item__title cartitempagename">{{ cart.course_id.name }}</span>
+      <span class="notifications__item__message">{{ cart.course_id.description }}</span>
+
+   </div>
+   <div>
+      <div class="notifications__item__option archive js-option">
+
+         <p class="notifications__item__option-i deletefromcart" data-id="{{ cart.course_id.id}}"><i class="fas fa-trash" style="font-size: large;color: rgb(66, 87, 110) "></i></p>
+         <p class="notifications__item__option-i"><i class="fas fa-heart" style="font-size: large;color: red ;"></i></p>
+      </div>
+   </div>
+   </div>
+   {% endfor %}
+   <hr>
+   {% for cart in alreadyinCart %}
+   <p>{{cart}}</p>
+   {% endfor %}
    <p>Payment done.</p>
 
 {% endblock %}
