@@ -3331,7 +3331,7 @@ def process_payment(request):
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt= findheader(request.user.id)
     print(f"Cart List {y3}")
     
-    return render(request, 'payment_done.html' {'cartList': y1, 'alreadyinCart': y3, 'student_id': request.user.id})
+    return render(request, 'payment_done.html', {'cartList': y1, 'alreadyinCart': y3, 'student_id': request.user.id})
 
 @csrf_exempt
 def payment_done(request, course_id, student_id):
