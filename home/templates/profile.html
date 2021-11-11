@@ -575,7 +575,7 @@
                                                 <div class="block-content">
                                                     <div class="meta" style="margin-bottom: 20px;">
                                                         <h4 class="blllu blllu-dark">{{ teacher.first_name }} {{ teacher.last_name }}
-                                                            <b style="color: rgb(223, 168, 117); margin-left: 10px;"> {{ teacher.total_rating }} <span class="fa fa-star"></span></b></h4>
+                                                            <b style="color: rgb(223, 168, 117); margin-left: 10px;"> {{ teacher.total_rating|unlocalize }} <span class="fa fa-star"></span></b></h4>
                                                     </div>
                                                     <div class="meta">
                                                         <h3 style="font-weight: 500;" class="mediabout mediabout-dark">نبذة عامة</h3>
@@ -724,7 +724,7 @@
                                             {% get_current_language as lang %}
                                             {% if lang == "ar" %}
                                             <h1 style="font-size: medium;font-weight: 500;margin-left: 15px;" class="blllu blllu-dark">التقييم العام:
-                                                &nbsp;&nbsp;{{ teacher.total_rating }}&nbsp;&nbsp;&nbsp;<span class="fa fa-star"
+                                                &nbsp;&nbsp;{{ teacher.total_rating|unlocalize }}&nbsp;&nbsp;&nbsp;<span class="fa fa-star"
                                                        style="color: rgb(223, 168, 117);"></span>&nbsp;&nbsp;({{ teacher.reviewCnt }} تعليق)
                                             </h1>
                                             {% else %}
@@ -761,7 +761,7 @@
                                                         <img style="border-radius: 50%;margin-right: 10px;height: 40px !important;width: 40px !important; "
                                                              src="{% static i.user.image %}" class="brd brd-dark">
                                                         <h3 class="mediabout mediabout-dark">{{ i.user.first_name }} {{ i.user.last_name }}</h3>
-                                                        <b style="color: rgb(223, 168, 117);margin-left: 10px;">{{ i.rating }}<span
+                                                        <b style="color: rgb(223, 168, 117);margin-left: 10px;">{{ i.rating|unlocalize }}<span
                                                                 class="fa fa-star"></span></b>
                                                     </div>
                                                     <div class="card-footter card-footter-dark">
