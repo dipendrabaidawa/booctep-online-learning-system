@@ -3302,7 +3302,7 @@ def checkout(request):
 
     orderid = generateRandomChar()
     host = request.get_host()
-    
+
     paypal_dict = {
         'business': settings.PAYPAL_RECEIVER_EMAIL,
         'amount': '%.2f' % float(totalmoney),
@@ -3312,7 +3312,7 @@ def checkout(request):
         'notify_url': 'http://{}{}'.format(host,
                                            reverse('paypal-ipn')),
         'return_url': 'http://{}{}'.format(host,
-                                           reverse('payment_done', args=[10, 10])),
+                                           reverse('process_payment')),
         'cancel_return': 'http://{}{}'.format(host,
                                               reverse('payment_cancelled')),
     }
