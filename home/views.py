@@ -3329,7 +3329,7 @@ def checkout(request):
 @csrf_exempt
 def process_payment(request):
     x1, x2, x3, y1, y2, purchase_courses, y4, z1, z2, msg_list, msg_cnt= findheader(request.user.id)
-    cartList = student_cart_courses.objects.filter(student_id_id=request.user_id).delete()
+    cartList = student_cart_courses.objects.filter(student_id_id=request.user.id).delete()
 
     for course_id in purchase_courses:
         import uuid
