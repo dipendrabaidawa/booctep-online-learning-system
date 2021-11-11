@@ -3297,9 +3297,28 @@ def checkout(request):
     data = findheader(request.user.id)
     
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt= findheader(request.user.id)
-    
+
+    # payment
+
+    orderid = generateRandomChar()
+    paypal_dict = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': '%.2f' % totalmoney,
+        'item_name': 'Order {}',
+        'invoice': str(order_id),
+        'currency_code': 'USD',
+        'notify_url': 'http://{}{}'.format(host,
+                                           reverse('paypal-ipn')),
+        'return_url': 'http://{}{}'.format(host,
+                                           reverse('payment_done', args=[10, 10])),
+        'cancel_return': 'http://{}{}'.format(host,
+                                              reverse('payment_cancelled')),
+    }
+
+    form = PayPalPaymentsForm(initial=paypal_dict)
+
     return render(request, 'checkout.html',
-                  {'lang': getLanguage(request)[0], 'orderid': orderid, 'subtotalmoney': subtotalmoney,
+                  {'form':form, 'lang': getLanguage(request)[0], 'orderid': orderid, 'subtotalmoney': subtotalmoney,
                    'discountmoney': discountmoney, 'totalmoney': totalmoney, 'favList': x1, 'favCnt': x2,
                    'alreadyinFav': x3, 'cartList': y1, 'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4,
                    'noti_list': z1, 'noti_cnt': z2})
@@ -3309,11 +3328,18 @@ def checkout(request):
 def process_payment(request):
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt= findheader(request.user.id)
     print(f"Cart List {y3}")
+    
     return render(request, 'payment_done.html')
 
 @csrf_exempt
 def payment_done(request, course_id, student_id):
+    import uuid
+    import datetime
+    invoice_time = datetime.datetime.now()
+    invoice_number = f"{uuid.uuid4()}-{str(invoice_time)}"
 
+    invoice = Invoices(invoice_number=invoice_number, course_id=course_id, student_id=student_id)
+    invoice.save()
     return render(request, 'payment_done.html')
 
 
