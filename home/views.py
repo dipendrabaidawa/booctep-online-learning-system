@@ -3305,7 +3305,7 @@ def checkout(request):
         'business': settings.PAYPAL_RECEIVER_EMAIL,
         'amount': '%.2f' % float(totalmoney),
         'item_name': 'Order {}',
-        'invoice': str(order_id),
+        'invoice': str(orderid),
         'currency_code': 'USD',
         'notify_url': 'http://{}{}'.format(host,
                                            reverse('paypal-ipn')),
