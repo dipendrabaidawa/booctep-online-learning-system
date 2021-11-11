@@ -3303,7 +3303,7 @@ def checkout(request):
     orderid = generateRandomChar()
     paypal_dict = {
         'business': settings.PAYPAL_RECEIVER_EMAIL,
-        'amount': '%.2f' % totalmoney,
+        'amount': '%.2f' % float(totalmoney),
         'item_name': 'Order {}',
         'invoice': str(order_id),
         'currency_code': 'USD',
