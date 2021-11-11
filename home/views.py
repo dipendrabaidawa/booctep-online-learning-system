@@ -3301,6 +3301,8 @@ def checkout(request):
     # payment
 
     orderid = generateRandomChar()
+    host = request.get_host()
+    
     paypal_dict = {
         'business': settings.PAYPAL_RECEIVER_EMAIL,
         'amount': '%.2f' % float(totalmoney),
