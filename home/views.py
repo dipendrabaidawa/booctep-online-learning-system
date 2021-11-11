@@ -3330,7 +3330,7 @@ def checkout(request):
 def process_payment(request):
     x1, x2, x3, y1, y2, purchase_course_ids, y4, z1, z2, msg_list, msg_cnt= findheader(request.user.id)
     student_cart_courses.objects.filter(student_id_id=request.user.id).delete()
-    purchase_course = []
+    purchase_courses = []
     for course_id in purchase_course_ids:
         course = Courses.objects.get(id=course_id)
         purchase_courses.append(course)
