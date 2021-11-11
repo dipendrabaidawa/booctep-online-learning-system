@@ -156,8 +156,8 @@ urlpatterns += i18n.i18n_patterns(
     url(r'^cart/$', showCartList, name='show cart list'),
     url(r'^cart/checkout/$', checkout, name='checkout'),
     # url('checkout/', checkout, name='checkout'),
-    # url(r'^process-payment/$', process_payment, name='process_payment'),
-    url(r'^payment-done/$', payment_done, name='payment_done'),
+    url(r'^process-payment/$', process_payment, name='process_payment'),
+    url(r'^payment-done/(?P<course_id>[0-9]+)/(?P<student_id>[0-9]+)/$', payment_done, name='payment_done'),
     url(r'^payment-cancelled/$', payment_canceled, name='payment_cancelled'),
 
     url(r'^cart/checkdiscountcode/$', checkdiscountcode, name='check discount code'),

@@ -655,7 +655,24 @@ def home_view1(request):
                 else:
                     return redirect(u)
 
-
+"""
+(
+    <QuerySet []>,
+    0, 
+    [], 
+    <QuerySet [<student_cart_courses: student_cart_courses object (170)>, 
+    <student_cart_courses: student_cart_courses object (169)>, 
+    <student_cart_courses: student_cart_courses object (168)>]>, 
+    4, 
+    [48, 65, 64, 46], 
+    262.0, 
+    <QuerySet [<notifications: notifications object (102)>, 
+    <notifications: notifications object (76)>]>, 
+    2, 
+    [], 
+    0
+)
+"""
 def findheader(userid):
     # show fav page.., cart page...
     favList = student_favourite_courses.objects.filter(student_id_id=userid)
@@ -3171,7 +3188,7 @@ def ecommerce_payment(request, teacher_id, id, course_url):
         'notify_url': 'http://{}{}'.format(host,
                                            reverse('paypal-ipn')),
         'return_url': 'http://{}{}'.format(host,
-                                           reverse('payment_done')),
+                                           reverse('payment_done', args=[course.id, request.user.id])),
         'cancel_return': 'http://{}{}'.format(host,
                                               reverse('payment_cancelled')),
     }
@@ -3277,17 +3294,73 @@ def checkout(request):
     orderid = generateRandomChar()
     request.session['order_id'] = orderid,
     request.session['amount'] = float(totalmoney)
-    x1, x2, x3, y1, y2, y3, y4, z1, z2 = findheader(request.user.id)
+    data = findheader(request.user.id)
+    
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt= findheader(request.user.id)
+
+    # payment
+
+    orderid = generateRandomChar()
+    host = request.get_host()
+
+    paypal_dict = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': '%.2f' % float(totalmoney),
+        'item_name': 'Order {}',
+        'invoice': str(orderid),
+        'currency_code': 'USD',
+        'notify_url': 'http://{}{}'.format(host,
+                                           reverse('paypal-ipn')),
+        'return_url': 'http://{}{}'.format(host,
+                                           reverse('process_payment')),
+        'cancel_return': 'http://{}{}'.format(host,
+                                              reverse('payment_cancelled')),
+    }
+
+    form = PayPalPaymentsForm(initial=paypal_dict)
 
     return render(request, 'checkout.html',
-                  {'lang': getLanguage(request)[0], 'orderid': orderid, 'subtotalmoney': subtotalmoney,
+                  {'form':form, 'lang': getLanguage(request)[0], 'orderid': orderid, 'subtotalmoney': subtotalmoney,
                    'discountmoney': discountmoney, 'totalmoney': totalmoney, 'favList': x1, 'favCnt': x2,
                    'alreadyinFav': x3, 'cartList': y1, 'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4,
                    'noti_list': z1, 'noti_cnt': z2})
 
 
 @csrf_exempt
-def payment_done(request):
+def process_payment(request):
+    x1, x2, x3, y1, y2, purchase_course_ids, y4, z1, z2, msg_list, msg_cnt= findheader(request.user.id)
+    student_cart_courses.objects.filter(student_id_id=request.user.id).delete()
+    purchase_courses = []
+    for course_id in purchase_course_ids:
+        course = Courses.objects.get(id=course_id)
+        purchase_courses.append(course)
+
+    for course_id in purchase_course_ids:
+        import uuid
+        import datetime
+        invoice_time = datetime.datetime.now()
+        invoice_number = f"{uuid.uuid4()}-{str(invoice_time)}"
+
+        invoice = Invoices(invoice_number=invoice_number, course_id=course_id, student_id=request.user.id)
+        invoice.save()
+
+        obj = student_register_courses(student_id_id=request.user.id, course_id_id=course_id)
+        obj.save()
+    
+    return render(request, 'payment_done.html', {'purchase_courses': purchase_courses, 'student_id': request.user.id})
+
+@csrf_exempt
+def payment_done(request, course_id, student_id):
+    import uuid
+    import datetime
+    invoice_time = datetime.datetime.now()
+    invoice_number = f"{uuid.uuid4()}-{str(invoice_time)}"
+
+    invoice = Invoices(invoice_number=invoice_number, course_id=course_id, student_id=student_id)
+    invoice.save()
+
+    obj = student_register_courses(student_id_id=student_id, course_id_id=course_id)
+    obj.save()
     return render(request, 'payment_done.html')
 
 
