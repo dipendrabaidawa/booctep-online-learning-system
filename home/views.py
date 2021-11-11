@@ -3342,7 +3342,10 @@ def process_payment(request):
         invoice_number = f"{uuid.uuid4()}-{str(invoice_time)}"
 
         invoice = Invoices(invoice_number=invoice_number, course_id=course_id, student_id=request.user.id)
-        invoice.save()   
+        invoice.save()
+
+        obj = student_register_courses(student_id_id=request.user.id, course_id_id=course_id)
+        obj.save()
     
     return render(request, 'payment_done.html', {'purchase_courses': purchase_courses, 'student_id': request.user.id})
 
@@ -3355,6 +3358,9 @@ def payment_done(request, course_id, student_id):
 
     invoice = Invoices(invoice_number=invoice_number, course_id=course_id, student_id=student_id)
     invoice.save()
+
+    obj = student_register_courses(student_id_id=student_id, course_id_id=course_id)
+    obj.save()
     return render(request, 'payment_done.html')
 
 
