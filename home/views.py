@@ -3344,7 +3344,7 @@ def process_payment(request):
         invoice = Invoices(invoice_number=invoice_number, course_id=course_id, student_id=request.user.id)
         invoice.save()   
     
-    return render(request, 'payment_done.html', {'cartList': cartList, 'purchase_courses': purchase_courses, 'student_id': request.user.id})
+    return render(request, 'payment_done.html', {'purchase_courses': purchase_courses, 'student_id': request.user.id})
 
 @csrf_exempt
 def payment_done(request, course_id, student_id):
