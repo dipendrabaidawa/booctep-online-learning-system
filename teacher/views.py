@@ -168,10 +168,18 @@ def dashboard(request):
 
     nowtime = datetime.now()
 
+    total_students = 0
+    is_there_free_course = 0
+
     for course in course_list:
         price = 0
         stu_num = student_register_courses.objects.filter(course_id_id=course.id).count()
+        total_students += stu_num
         price = course.price * stu_num
+        
+        if price == 0:
+            is_there_free_course += 1
+
         total_revenue += price
         pending_list = student_register_courses.objects.filter(course_id_id=course.id).filter(withdraw=0)
         hold_money = 0
@@ -181,7 +189,8 @@ def dashboard(request):
             time = ele.date_created
             time = datetime.strptime(time, "%Y-%m-%d %H:%M:%S")
             interval = (nowtime - time).days
-            if interval >= 30:
+            # if interval >= 30:
+            if interval >= 45:
                 ele.withdraw = 1
                 ele.save()
                 hold_money += ele.course_id.price
@@ -225,6 +234,19 @@ def dashboard(request):
     #     totalRate = 0
     # else:
     #     totalRate = round(rateSum / rateCnt, 2)
+
+    # Evaluate the revenue type
+    percentage_revenue = 50
+    # if is_there_free_course < 3 or total_rating <= 4.5 or total_students <= 1000:
+    #     percentage_revenue = 50
+    if is_there_free_course >= 3 and total_rating > 4.7 and total_students > 5000:
+        percentage_revenue = 70
+    elif is_there_free_course >= 1 and total_rating > 4.5 and total_students > 1000:
+        percentage_revenue = 60
+    
+    total_revenue = total_revenue * percentage_revenue / 100.0
+    total_hold_money = total_hold_money * percentage_revenue / 100.0 
+
     return render(request, 'teacher/dashboard.html',
                   {'lang': getLanguage(request)[0], 'courses': course_list, 'total_rating': total_rating,
                    'total_revenue': total_revenue,
