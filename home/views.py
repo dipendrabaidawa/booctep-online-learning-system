@@ -2594,9 +2594,9 @@ def searching(request):
     totalsearchresult = Courses.objects.filter(name__icontains=searchkeyword).count()
     sehList = []
     if type == -1:
-        sehList = Courses.objects.filter(name__icontains=searchkeyword)
+        sehList = Courses.objects.filter(name__icontains=searchkeyword).filter(approval_status=2)
     else:
-        sehList = Courses.objects.filter(name__icontains=searchkeyword).filter(type=type)
+        sehList = Courses.objects.filter(name__icontains=searchkeyword).filter(approval_status=2).filter(type=type)
 
     discount = Discount.objects.all()
     now = datetime.now().strftime('%Y-%m-%d')
