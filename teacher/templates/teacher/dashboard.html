@@ -2,7 +2,7 @@
 
 {% load static %}
 {% load i18n %}
-
+{% load l10n %}
 
 {% block title %}
     dashboard
@@ -315,7 +315,7 @@ a.disabled{
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">تقييم المعلم</b>
                                 </p>
-                                <span class="h2 m-0 mediabout mediabout-light">{{ total_rating }}</span>
+                                <span class="h2 m-0 mediabout mediabout-light">{{ total_rating|unlocalize }}</span>
                             </div>                            
                             <i class="material-icons icon-32pt text-20 ml-8pt">star</i>
 
@@ -329,7 +329,7 @@ a.disabled{
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">مجموع الإيرادات</b>
                                 </p>
-                                <span class="h2 m-0" style="color: rgb(144, 221, 151);">&dollar;{{ total_revenue }}</span>
+                                <span class="h2 m-0" style="color: rgb(144, 221, 151);">&dollar;{{ total_revenue|unlocalize }}</span>
                             </div>
                             <i class="material-icons icon-32pt text-20 ml-8pt">monetization_on</i>
                         </div>
@@ -342,7 +342,7 @@ a.disabled{
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">مجموع ( تحت الملاحظة )</b>
                                 </p>
-                                <span class="h2 m-0 mediabout mediabout-light">&dollar;{{ total_hold_money }}</span>
+                                <span class="h2 m-0 mediabout mediabout-light">&dollar;{{ total_hold_money|unlocalize }}</span>
                             </div>
                             <i class="material-icons icon-32pt text-20 ml-8pt">people_outline</i>
                         </div>
@@ -355,7 +355,7 @@ a.disabled{
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">مجموع التحويلات الجديدة</b>
                                 </p>
-                                <span class="h2 m-0 mediabout mediabout-light">&dollar;{{ total_transfer_money }}</span>
+                                <span class="h2 m-0 mediabout mediabout-light">&dollar;{{ total_transfer_money|unlocalize }}</span>
                             </div>
                             <i class="material-icons icon-32pt text-20 ml-8pt">people_outline</i>
                         </div>

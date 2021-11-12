@@ -1,5 +1,6 @@
 {% load static %}
 {% load i18n %}
+{% load l10n %}
 
 <script>
     var userid = '{{request.user.id}}';
@@ -732,7 +733,7 @@
                                             <span class="item-meta">
                                                 <span class="item-name"><a href="#">{{ favourite.course_id.name }}</a></span>
                                                 <span class="meta-info">
-                                                    <span class="item-price">${{ favourite.course_id.price }}</span>
+                                                    <span class="item-price">${{ favourite.course_id.price|unlocalize }}</span>
                                                 </span>
                                             </span>
                                             <span class="item-meta" style="margin-left:auto !important">
@@ -810,7 +811,7 @@
                                             <span class="item-meta">
                                                 <span class="item-name"><a>{{ cart.course_id.name }}</a></span>
                                                 <span class="meta-info">
-                                                    <span class="item-price">${{ cart.course_id.price }}</span>
+                                                    <span class="item-price">${{ cart.course_id.price|unlocalize }}</span>
                                                  </span>
                                             </span>
                                             <span class="item-meta" style="margin-left:auto !important">

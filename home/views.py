@@ -1142,8 +1142,8 @@ def single_course(request, teacher_id, course_url):
     user_info.url_name = user_info.first_name+ " " + user_info.last_name
     user_info.url_name = re.sub(r"\s+", '-', user_info.url_name)
 
-    free_course = Courses.objects.filter(user_id=teacher_id).filter(type=1).count()
-    paid_course = Courses.objects.filter(user_id=teacher_id).filter(type=0).count()
+    free_course = Courses.objects.filter(user_id=teacher_id).filter(type=1).filter(approval_status=2).count()
+    paid_course = Courses.objects.filter(user_id=teacher_id).filter(type=0).filter(approval_status=2).count()
 
     rating_list = course_comments.objects.filter(course_id_id=course.id)
 
@@ -1628,7 +1628,7 @@ def update_user(request):
         if user_type == 'teacher':
             updateUserProfile(request)
         try:
-            myfile = request.FILES['file1']
+            myfile = request.FILES['file']
             filename = myfile._get_name()
             ext = filename[filename.rfind('.'):]
             file_name = str(uuid.uuid4()) + ext
@@ -1837,6 +1837,11 @@ def forgotChangepassword(request):
 
 def logout_(request):
     logout(request)
+    url_parts = request.META['HTTP_REFERER'].split('/')
+    if 'teacher' in url_parts or 'student' in url_parts:
+        redirect_url = url_parts[0] + "//" + url_parts[2] + "/" + url_parts[3]
+        return HttpResponseRedirect(redirect_url)
+                
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 

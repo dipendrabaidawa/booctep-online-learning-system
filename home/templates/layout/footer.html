@@ -395,7 +395,7 @@
                                     {% else %}
                                         English
                                     {% endif %}                                    
-                                </span>
+                                    </span>
                                 </div>
                             </div>
                             <div class="box-chevron">
@@ -413,8 +413,8 @@
                                                     <span class="checkmark"><i data-feather="check"></i></span>
                                                 </a>
                                             </li>
-                                            <li class="" >
-                                                <a href="/en" style="width: 100%; display: flex;">
+                                            <li class="">
+                                                <a href="/en" style="width: 100%; display: flex;" class="switch-lang">
                                                     <span class="item-icon"></span>
                                                     <span class="item-name translate footcolor footcolor-dark" id="en">English</span>
                                                     <span class="checkmark"><i data-feather="check"></i></span>
@@ -433,14 +433,14 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="/ar" style="width: 100%; display: flex;">
-                                            <span class="item-icon">
-                                            </span>
+                                                <a href="/ar" style="width: 100%; display: flex;" class="switch-lang">
+                                                    <span class="item-icon">
+                                                    </span>
                                                     <span class="item-name translate" class=""
                                                           id="ar1">{% trans 'Arabic' %}</span>
                                                     <span class="checkmark">
-                                                <i data-feather="check"></i>
-                                            </span>
+                                                        <i data-feather="check"></i>
+                                                    </span>
                                                 </a>
                                             </li>
                                         {% endif %}
@@ -498,4 +498,17 @@
         localStorage.setItem(ip, 'yes')
     }
 
+    $(document).ready(function () {
+        let cur_url = window.location.href;
+        let arr = cur_url.split("/");
+        let cur_domain = arr[2];
+        let cur_path = window.location.pathname;
+        let cur_subpath = cur_path.substr(3, cur_path.length);
+        let cur_paths = cur_path.split("/");
+        let cur_lang = cur_paths[1];
+        let toggle_lang = cur_lang === "ar" ? "en" : "ar";
+        let switch_url = window.location.protocol + '//' + cur_domain + "/" + toggle_lang + cur_subpath;
+
+        $(".switch-lang").attr('href', switch_url);
+    });
 </script>
