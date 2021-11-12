@@ -1837,6 +1837,11 @@ def forgotChangepassword(request):
 
 def logout_(request):
     logout(request)
+    url_parts = request.META['HTTP_REFERER'].split('/')
+    if 'teacher' in url_parts or 'student' in url_parts:
+        redirect_url = url_parts[0] + "//" + url_parts[2] + "/" + url_parts[3]
+        return HttpResponseRedirect(redirect_url)
+                
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 
