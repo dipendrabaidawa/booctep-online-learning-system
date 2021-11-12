@@ -1628,7 +1628,7 @@ def update_user(request):
         if user_type == 'teacher':
             updateUserProfile(request)
         try:
-            myfile = request.FILES['file1']
+            myfile = request.FILES['file']
             filename = myfile._get_name()
             ext = filename[filename.rfind('.'):]
             file_name = str(uuid.uuid4()) + ext
