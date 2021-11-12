@@ -2029,24 +2029,24 @@
                                                         <div class="categories-header categories-header-dark">
                                                             <h2>وصول سريع</h2>
                                                         </div>
-                                                        <a class="button process-button cnti cnti-dark" href="index.html"
+                                                        <a class="button process-button cnti cnti-dark" href="{% url 'home' %}"
                                                            style="border: 1px solid rgb(139, 189, 189);">
                                                             واصل التسوق &nbsp;<span
                                                                 class="fa fa-shopping-cart"></span>
                                                         </a>
-                                                        <a href="wishlist.html" class="button process-button" style="">
+                                                        <a href="{% url 'show fav list' %}" class="button process-button" style="">
                                                             أذهب إلى المفضلة &nbsp;<span class="fa fa-heart"></span>
                                                         </a>
                                                         {% else %}
                                                         <div class="categories-header categories-header-dark">
                                                             <h2>Quick Access</h2>
                                                         </div>
-                                                        <a class="button process-button cnti cnti-dark" href="index.html"
+                                                        <a class="button process-button cnti cnti-dark" href="{% url 'home' %}"
                                                            style="border: 1px solid rgb(139, 189, 189);">
                                                             Continue shopping &nbsp;<span
                                                                 class="fa fa-shopping-cart"></span>
                                                         </a>
-                                                        <a href="wishlist.html" class="button process-button" style="">
+                                                        <a href="{% url 'show fav list' %}" class="button process-button" style="">
                                                             Go to Fav courses &nbsp;<span class="fa fa-heart"></span>
                                                         </a>
                                                         {% endif %}

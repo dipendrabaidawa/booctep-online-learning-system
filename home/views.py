@@ -1142,8 +1142,8 @@ def single_course(request, teacher_id, course_url):
     user_info.url_name = user_info.first_name+ " " + user_info.last_name
     user_info.url_name = re.sub(r"\s+", '-', user_info.url_name)
 
-    free_course = Courses.objects.filter(user_id=teacher_id).filter(type=1).count()
-    paid_course = Courses.objects.filter(user_id=teacher_id).filter(type=0).count()
+    free_course = Courses.objects.filter(user_id=teacher_id).filter(type=1).filter(approval_status=2).count()
+    paid_course = Courses.objects.filter(user_id=teacher_id).filter(type=0).filter(approval_status=2).count()
 
     rating_list = course_comments.objects.filter(course_id_id=course.id)
 
