@@ -468,10 +468,35 @@
 <div class="single_category-5">
   <div class="container">
     <h3 style="">Thanks for your enrollment!</h3>
-    <p>{{ course.description|safe }}</p>
+    <!-- <p>{{ course.description|safe }}</p> -->
   </div>
 </div>
 <!-- End Carousel -->
+
+<div class="container">
+    <div class="shop-wrapper">
+        <div class="cart-content">
+            <div class="schedule schedule-dark" style="margin-top: 30px !important">
+                <div class="videos-wrapper has-player" style="padding-top:16px">
+                    <div class="video-side" >
+                        <div class="video-meta"  style="background-color: inherit !important;">
+                            <span style="font-size: 20px !important; margin-left: 20px;" class="mediabout mediabout-dark">Course
+                                curriculum - Videos </span>
+                            <span class="mediabout mediabout-dark" style="float:right; margin-right: 20px;">category</span>
+                        </div>
+                        <div class="meta-box video-meta"  style="background-color: inherit !important;">
+                            <h4 style="font-size: 16px; margin-left: 20px;" class="mediabout mediabout-dark">
+                              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <a class="button primary-button is-solid raised story modal-trigger login-button-is-dark" href="{% url 'home' %}" style="margin: 10px;">Start learn
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Filters and courses -->
 <div id="shop-page" class="shop-wrapper">
