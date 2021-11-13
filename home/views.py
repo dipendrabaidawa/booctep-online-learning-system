@@ -3825,7 +3825,15 @@ def postResetPassword(request):
 
 def enrollment(request, course_id):
     course = Courses.objects.get(pk=course_id)
+    course.category = categories.objects.get(pk=course.scat_id)
     similar_course = Courses.objects.filter(scat_id=course.scat_id).filter(~Q(id=course.id))
+    for c in similar_course:
+        c.link = courseUrlGenerator(c)
+        rate_list = course_comments.objects.filter(course_id_id=c.id)
+        c.rating = getRatingFunc(rate_list)
+        c.stuCnt = len(rate_list)
+        c.videoCnt = getVideoCnt(c)
+
     favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
         request.user.id)
     return render(request, 'enrollment.html',
