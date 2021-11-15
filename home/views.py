@@ -1214,7 +1214,7 @@ def add_comment(request):
     comment = request.POST.get("comment")
     # comment_id = request.POST.get("comment_id")
     rating = request.POST.get("rating")
-    rating = float(rating)
+    rating = float(rating or 0)
     user_id = request.POST.get("user_id")
     # dt = datetime.datetime.now()
     dt = datetime.now()
@@ -2034,7 +2034,7 @@ def getVideoDuration(filename):
                              "default=noprint_wrappers=1:nokey=1", filename],
                             stdout=subprocess.PIPE,
                             stderr=subprocess.STDOUT)
-    x = float(result.stdout)
+    x = float(result.stdout or 0)
     y = convertToTimeFormat(x)
     return y
 
@@ -3169,20 +3169,20 @@ def ecommerce_payment(request, teacher_id, id, course_url):
     orderid = generateRandomChar()
 
     request.session['order_id'] = orderid,
-    request.session['amount'] = float(totalmoney)
+    request.session['amount'] = float(totalmoney or 0)
     favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
         request.user.id)
 
     # if user_type == "student":
     savedcard = payment.objects.filter(student_id=user_id)
-    counter = 0;
+    counter = 0
     for i in savedcard:
         i.cardnoending = i.card_no[-4:]
         i.cardssr = counter
         counter += 1
 
     order_id = orderid
-    amount = float(totalmoney)
+    amount = float(totalmoney or 0)
     host = request.get_host()
     paypal_dict = {
         'business': settings.PAYPAL_RECEIVER_EMAIL,
@@ -3298,7 +3298,7 @@ def checkout(request):
     totalmoney = request.POST.get('totalmoney')
     orderid = generateRandomChar()
     request.session['order_id'] = orderid,
-    request.session['amount'] = float(totalmoney)
+    request.session['amount'] = float(totalmoney or 0)
     data = findheader(request.user.id)
     
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt= findheader(request.user.id)
@@ -3310,7 +3310,7 @@ def checkout(request):
 
     paypal_dict = {
         'business': settings.PAYPAL_RECEIVER_EMAIL,
-        'amount': '%.2f' % float(totalmoney),
+        'amount': '%.2f' % float(totalmoney or 0),
         'item_name': 'Order {}',
         'invoice': str(orderid),
         'currency_code': 'USD',
@@ -3361,10 +3361,10 @@ def payment_done(request, course_id, student_id):
     invoice_time = datetime.datetime.now()
     invoice_number = f"{uuid.uuid4()}-{str(invoice_time)}"
 
-    invoice = Invoices(invoice_number=invoice_number, course_id=course_id, student_id=student_id, date_created=invoice_time.strftime("%Y-%m-%d %H:%M:%S"))
+    invoice = Invoices(invoice_number=invoice_number, course_id=course_id, student_id=student_id)
     invoice.save()
 
-    obj = student_register_courses(student_id_id=student_id, course_id_id=course_id)
+    obj = student_register_courses(student_id_id=student_id, course_id_id=course_id, date_created=invoice_time.strftime("%Y-%m-%d %H:%M:%S"))
     obj.save()
     return render(request, 'payment_done.html')
 
@@ -3826,7 +3826,15 @@ def postResetPassword(request):
 
 def enrollment(request, course_id):
     course = Courses.objects.get(pk=course_id)
+    course.category = categories.objects.get(pk=course.scat_id)
     similar_course = Courses.objects.filter(scat_id=course.scat_id).filter(~Q(id=course.id))
+    for c in similar_course:
+        c.link = courseUrlGenerator(c)
+        rate_list = course_comments.objects.filter(course_id_id=c.id)
+        c.rating = getRatingFunc(rate_list)
+        c.stuCnt = len(rate_list)
+        c.videoCnt = getVideoCnt(c)
+
     favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
         request.user.id)
     return render(request, 'enrollment.html',

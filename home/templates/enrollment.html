@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% load static %} {% block head %}
+{% extends "base.html" %} {% load static %} {% block head %} {% load l10n %} {% load i18n %}
 <style>
   .schedule video {
       width: 100% !important;
@@ -367,6 +367,114 @@
   }
 </style>
 
+  {% get_current_language as lang %}
+    {% if lang == "ar" %}
+    <style>
+        .image-owner{
+            direction: ltr;
+            float: left;
+        }
+        .full{
+            direction: ltr;
+            float: left;
+        }
+        .rating{
+            direction: ltr;
+            float: left;
+        }
+        .name{
+            direction: ltr;
+            float: left;
+        }
+        .accordion__menu{
+            background-color: none !important;
+
+        }
+        .accordion__menu-dark{
+            background-color: rgb(241, 241, 241) !important;
+        }
+    </style>
+    {% endif %}
+
+    <style>
+        .in-blk {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .goldstardiv {
+            color: gold;
+            position: relative;
+        }
+
+        .nocourseavailable {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bolder;
+        }
+
+        /****** Style Star Rating Widget *****/
+        @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+        .rating {
+            border: none;
+            float: left;
+        }
+
+        .rating > input {
+            display: none;
+        }
+
+        .rating > label:before {
+            margin: 5px;
+            font-size: 1.25em;
+            font-family: FontAwesome;
+            display: inline-block;
+            content: "\f005";
+        }
+
+        .rating > .half:before {
+            content: "\f089";
+            position: absolute;
+        }
+
+        .rating > label {
+            color: #ddd;
+            float: right;
+        }
+
+        /***** CSS Magic to Highlight Stars on Hover *****/
+        .rating > input:checked ~ label
+        {
+            color: #FFD700;
+        }
+
+        .is-comboe{
+            background-color: #fff;
+        }
+
+        .is-comboe-dark{
+            background: #adadad !important; 
+            border: 1px solid #707070 !important;
+            color: #616B75 ;
+        }
+
+        .prcgr{
+            color: rgb(25, 139, 82) !important;
+        }
+
+        .prcgr-dark{
+            color: rgb(177, 241, 209) !important;
+        }
+
+        .prcg{
+            color: rgb(204, 29, 29) !important;
+        }
+
+        .prcg-dark{
+            color: rgb(214, 169, 169) !important;
+        }
+    </style>
 {% endblock %} {% block content %}
 
 <!-- Mobile Navbar -->
@@ -468,10 +576,34 @@
 <div class="single_category-5">
   <div class="container">
     <h3 style="">Thanks for your enrollment!</h3>
-    <p>{{ course.description|safe }}</p>
+    <!-- <p>{{ course.description|safe }}</p> -->
   </div>
 </div>
 <!-- End Carousel -->
+
+<div class="container">
+    <div class="shop-wrapper">
+        <div class="cart-content">
+            <div class="schedule schedule-dark" style="margin-top: 30px !important">
+                <div class="videos-wrapper has-player" style="padding-top:16px">
+                    <div class="video-side" >
+                        <div class="video-meta"  style="background-color: inherit !important;">
+                            <span style="font-size: 20px !important; margin-left: 20px;" class="mediabout mediabout-dark">{{ course.name }}</span>
+                            <span class="mediabout mediabout-dark" style="float:right; margin-right: 20px;">{{ course.category.name }}</span>
+                        </div>
+                        <div class="meta-box video-meta"  style="background-color: inherit !important;">
+                            <h4 style="font-size: 16px; margin-left: 20px;" class="mediabout mediabout-dark">
+                              {{ course.description }}
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <a class="button primary-button is-solid raised story modal-trigger login-button-is-dark" href="{% url 'home' %}" style="margin: 10px;">Start learn
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Filters and courses -->
 <div id="shop-page" class="shop-wrapper">
@@ -523,148 +655,120 @@
                         >
                           <div class="overlay"></div>
                           <div class="image-owner">
-                            <div class="name">
-                              <span
-                                class="
-                                  fa fa-star
-                                  {%
-                                  if
-                                  course.rating
-                                  >=
-                                  1
-                                  %}checked{%
-                                  endif
-                                  %}
-                                "
-                                style="color: rgb(255, 238, 255)"
-                              ></span>
-                              <span
-                                class="
-                                  fa fa-star
-                                  {%
-                                  if
-                                  course.rating
-                                  >=
-                                  2
-                                  %}checked{%
-                                  endif
-                                  %}
-                                "
-                                style="color: rgb(255, 238, 255)"
-                              ></span>
-                              <span
-                                class="
-                                  fa fa-star
-                                  {%
-                                  if
-                                  course.rating
-                                  >=
-                                  3
-                                  %}checked{%
-                                  endif
-                                  %}
-                                "
-                                style="color: rgb(255, 238, 255)"
-                              ></span>
-                              <span
-                                class="
-                                  fa fa-star
-                                  {%
-                                  if
-                                  course.rating
-                                  >=
-                                  4
-                                  %}checked{%
-                                  endif
-                                  %}
-                                "
-                                style="color: rgb(255, 238, 255)"
-                              ></span>
-                              <span
-                                class="
-                                  fa fa-star
-                                  {%
-                                  if
-                                  course.rating
-                                  >=
-                                  5
-                                  %}checked{%
-                                  endif
-                                  %}
-                                "
-                                style="color: rgb(255, 255, 255)"
-                              ></span>
-                              <span
-                                style="
-                                  font-size: medium;
-                                  color: rgb(255, 238, 80);
-                                  font-weight: 700;
-                                  margin-left: 5px;
-                                "
-                                >{{ course.rating }}</span
-                              >
+                            <div class="name" style="display: flex; align-items: center;" style="font-size: 10px !important;">
+                                <form class="rating" data-rating="{{ course.rating }}" data-course="{{ course.id }}">
+
+                                    <input type="radio" id="star10-{{ course.id }}" name="rating" value="5" disabled />
+                                    <label class="full" for="star10-{{ course.id }}" title="Awesome - 5 stars"></label>
+
+                                    <input type="radio" id="star9-{{ course.id }}" name="rating" value="4 and a half" disabled/>
+                                    <label class="half" for="star9-{{ course.id }}" title="Pretty good - 4.5 stars"></label>
+
+                                    <input type="radio" id="star8-{{ course.id }}" name="rating" value="4" disabled/>
+                                    <label class="full" for="star8-{{ course.id }}" title="Pretty good - 4 stars"></label>
+
+                                    <input type="radio" id="star7-{{ course.id }}" name="rating" value="3 and a half" disabled/>
+                                    <label class="half" for="star7-{{ course.id }}" title="Meh - 3.5 stars"></label>
+
+                                    <input type="radio" id="star6-{{ course.id }}" name="rating" value="3" disabled/>
+                                    <label class="full" for="star6-{{ course.id }}" title="Meh - 3 stars"></label>
+
+                                    <input type="radio" id="star5-{{ course.id }}" name="rating" value="2 and a half" disabled/>
+                                    <label class="half" for="star5-{{ course.id }}" title="Kinda bad - 2.5 stars"></label>
+
+                                    <input type="radio" id="star4-{{ course.id }}" name="rating" value="2" disabled/>
+                                    <label class="full" for="star4-{{ course.id }}" title="Kinda bad - 2 stars"></label>
+
+                                    <input type="radio" id="star3-{{ course.id }}" name="rating" value="1 and a half" disabled/>
+                                    <label class="half" for="star3-{{ course.id }}" title="Meh - 1.5 stars"></label>
+
+                                    <input type="radio" id="star2-{{ course.id }}" name="rating" value="1" disabled/>
+                                    <label class="full" for="star2-{{ course.id }}" title="Sucks big time - 1 star"></label>
+
+                                    <input type="radio" id="star1-{{ course.id }}" name="rating" value="half" disabled/>
+                                    <label class="half" for="star1-{{ course.id }}" title="Sucks big time - 0.5 stars"></label>
+
+                                </form>
+                                <span style="font-size: small; color: rgb(255, 238, 80); cursor: default;">{{ course.rating|unlocalize }} &nbsp; ( {{ course.count }} )</span>
                             </div>
                           </div>
-                          <div
-                            id="invite-pop"
-                            class="photo-like pop-button has-tooltip"
-                            data-id="{{ course.id }}"
-                            data-title="Relationship"
-                          >
-                            <a class="inner">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                aria-hidden="true"
-                                focusable="false"
-                                width="1em"
-                                height="1em"
-                                style="
-                                  -ms-transform: rotate(360deg);
-                                  -webkit-transform: rotate(360deg);
-                                  transform: rotate(360deg);
-                                "
-                                preserveAspectRatio="xMidYMid meet"
-                                viewBox="0 0 24 24"
-                              >
-                                <g
-                                  fill="red"
-                                  stroke="red"
-                                  stroke-width="2"
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
+
+                          {% if course.id in alreadyinFav %}
+                            <div
+                              id="invite-pop"
+                              class="photo-like pop-button has-tooltip"
+                              data-id="{{ course.id }}"
+                              data-title="Relationship"
+                            >
+                              <a class="inner">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                                  aria-hidden="true"
+                                  focusable="false"
+                                  width="1em"
+                                  height="1em"
+                                  style="
+                                    -ms-transform: rotate(360deg);
+                                    -webkit-transform: rotate(360deg);
+                                    transform: rotate(360deg);
+                                  "
+                                  preserveAspectRatio="xMidYMid meet"
+                                  viewBox="0 0 24 24"
                                 >
-                                  <path
-                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78l1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
-                                  />
-                                </g>
-                              </svg>
-                            </a>
-                          </div>
-                          {% if course.is_cart %}
-                          <a
-                            id="follow-pop"
-                            class="photo-time pop-button has-tooltip"
-                            data-title="Relationship"
-                            data-id="{{ course.id }}"
-                          >
-                            <i
-                              class="fa fa-shopping-cart"
-                              style="font-size: 22px; color: skyblue"
-                            ></i>
-                          </a>
+                                  <g
+                                    fill="red"
+                                    stroke="red"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                  >
+                                    <path
+                                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78l1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                                    />
+                                  </g>
+                                </svg>
+                              </a>
+                            </div>
                           {% else %}
-                          <a
-                            id="follow-pop"
-                            class="photo-time pop-button has-tooltip"
-                            data-title="Relationship"
-                            data-id="{{ course.id }}"
-                          >
-                            <i
-                              class="fa fa-shopping-cart"
-                              style="font-size: 22px; color: #fff"
-                            ></i>
-                          </a>
+                            <div class="photo-like pop-button has-tooltip favbutton" id="invite-pop" data-id="{{ course.id }}">
+                                <a class="inner"
+                                   data-title="Relationship"
+                                   data-type="addFav" data-id="">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                         xmlns:xlink="http://www.w3.org/1999/xlink"
+                                         aria-hidden="true" focusable="false"
+                                         width="1em"
+                                         height="1em"
+                                         style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+                                         preserveAspectRatio="xMidYMid meet"
+                                         viewBox="0 0 24 24">
+                                        <g fill="none" stroke="#626262"
+                                           stroke-width="2"
+                                           stroke-linecap="round"
+                                           stroke-linejoin="round">
+                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78l1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                        </g>
+                                    </svg>
+                                </a>
+                            </div>
+                          {% endif %}
+                          {% if course.price > 0 %}
+                            {% if course.id in alreadyinCart %}
+                                <a id="follow-pop"
+                                class="photo-time pop-button has-tooltip is-shifted is-active"
+                                data-title="Relationship" data-id="{{ course.id }}">
+                                    <i class="fa fa-shopping-cart"
+                                    style=";font-size: 22px;color: skyblue"></i>
+                                </a>
+                            {% else %}
+                                <a id="follow-pop"
+                                class="photo-time pop-button has-tooltip"
+                                data-title="Relationship" data-id="{{ course.id }}">
+                                    <i class="fa fa-shopping-cart"
+                                    style="font-size: 22px;color: #fff;"></i>
+                                </a>
+                            {% endif %}
                           {% endif %}
                         </div>
                       </div>
@@ -706,7 +810,7 @@
                   >
                   <div class="product-actions">
                     <div class="left">
-                      <span>${{ course.price }}</span>
+                      <span>${{ course.price|unlocalize }}</span>
                     </div>
                     <div class="right">
                       <a
@@ -774,18 +878,15 @@
     </div>
   </section>
   {% else %}
-  <div class="shop-header">
-    <div class="container">
-      <div class="store-tabs">
-        <a
-          data-tab="products-tab"
-          class="tab-control"
-          style="color: grey; cursor: not-allowed"
-          >All</a
-        >
+  <section>
+    <div class="store-sections">
+      <div class="container">
+        <div class="categories-header">
+          <h2>Similar courses</h2>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <div
     class="store-sections-6"
@@ -1121,6 +1222,21 @@
       $("#modal-video-src").attr("src", "../../../../static" + url);
       $(".app-video video")[0].load();
     }
+
+    $(document).ready(function () {
+
+      $(".rating").each(function() {
+          rating = $(this).data('rating')
+          if (typeof rating === "string") {
+              rating = rating.replace(",",".")
+              rating = parseFloat(rating)
+          }
+          rating = rating * 1.0
+          course = $(this).data('course')
+          num = Math.floor(rating / 0.5)
+          $(`#star${num}-${course}`).attr('checked', true)
+      })
+    });
   </script>
 
   {% endblock %} {% block script %}
