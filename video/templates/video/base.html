@@ -494,7 +494,17 @@
         }
     }
 
+    .sweet-alert .sa-icon.sa-success:after {
+        opacity: 0.0;
+    }
 
+    .sweet-alert .sa-icon.sa-success:before {
+        opacity: 0.0;
+    }
+
+    .sweet-alert .sa-icon.sa-success .sa-fix {
+        opacity: 0.0;
+    }
 </style>
 
 <body class="layout-mini backgg backgg-dark" style="height: 100%;">
@@ -718,7 +728,7 @@
             $(".card-support").addClass('card-support-dark'); 
             $(".cennnter").addClass('cennnter-dark'); 
             $(".mediabout").addClass('mediabout-dark'); 
-            head.removeChild(link);
+            // head.removeChild(link);
 
         } else {
             $("body").removeClass('body-dark');
@@ -780,7 +790,7 @@
             $(".card-support").removeClass('card-support-dark'); 
             $(".cennnter").removeClass('cennnter-dark'); 
             $(".mediabout").removeClass('mediabout-dark'); 
-            head.removeChild(link);
+            // head.removeChild(link);
         }
     }
 

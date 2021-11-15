@@ -375,6 +375,18 @@ Page loader
         z-index: 9999;
         opacity: 1;
       }
+
+      .sweet-alert .sa-icon.sa-success:after {
+            opacity: 0.0;
+        }
+
+        .sweet-alert .sa-icon.sa-success:before {
+            opacity: 0.0;
+        }
+
+        .sweet-alert .sa-icon.sa-success .sa-fix {
+            opacity: 0.0;
+        }
     </style>
 
     <head>
@@ -861,7 +873,7 @@ Page loader
               "style",
               "border-bottom: 1px solid rgb(226, 226, 226);"
             );
-            head.removeChild(link);
+            // head.removeChild(link);
           }
         }
 
