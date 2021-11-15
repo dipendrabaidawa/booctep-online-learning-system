@@ -1024,10 +1024,11 @@ def store_course_2(request):
                                 section_id=section_id,
                                 url=full_path,
                                 promo=item['isPromo'],
-                                duration=item['duration']
+                                duration=item['duration'],
+                                lock=item['lock']
                             )
-                            if item['isPromo'] == 1 or course.price == 0.0:
-                                objVideo.lock = 0
+                            # if item['isPromo'] == 1 or course.price == 0.0:
+                            #     objVideo.lock = 0
                             objVideo.save()
 
             msg = "success"

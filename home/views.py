@@ -3824,6 +3824,23 @@ def postResetPassword(request):
 
 
 def enrollment(request, course_id):
+    if request.session.get('user_id') == None:
+        return redirect('/')
+    user_id = request.session.get("user_id")
+    user_type = request.session.get("user_type")
+
+    register_courses = student_register_courses.objects.filter(course_id_id=course_id).filter(student_id_id=user_id)
+    if register_courses.count() == 0:
+        time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        register_course = student_register_courses(
+            course_id_id=course_id,
+            student_id_id=user_id,
+            last_completed_section_id=0,
+            date_created=time,
+            withdraw=0
+        )
+        register_course.save()
+
     course = Courses.objects.get(pk=course_id)
     course.category = categories.objects.get(pk=course.scat_id)
     similar_course = Courses.objects.filter(scat_id=course.scat_id).filter(~Q(id=course.id))

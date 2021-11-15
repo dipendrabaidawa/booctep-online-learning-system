@@ -598,7 +598,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="button primary-button is-solid raised story modal-trigger login-button-is-dark" href="{% url 'home' %}" style="margin: 10px;">Start learn
+                <a class="button primary-button is-solid raised story modal-trigger login-button-is-dark" href="javascript:void(0)" style="margin: 10px;" onclick="onStartLearn({{ course.id }})">Start learn
                 </a>
             </div>
         </div>
@@ -1058,6 +1058,7 @@
     </div>
   </div>
 
+  {% get_current_language as lang %}
   <script>
     let cur_page = "{{ page }}";
 
@@ -1221,6 +1222,36 @@
       url = $(obj).data("url");
       $("#modal-video-src").attr("src", "../../../../static" + url);
       $(".app-video video")[0].load();
+    }
+
+    function onStartLearn(course_id) {
+      $.ajax({
+            method: "POST",
+            url: "/video_check/",
+            data: {
+                'id': course_id,
+            },
+            success: function (response) {
+                if (response['msg'] == "success") {
+                    if(response['continous'] == 1){
+                        course_name = response['course_name']
+                        quiz_id = response['quiz_id']
+                        question_no = response['question_no']
+                        window.location = `/quiz/${course_name}/${quiz_id}/?question=${question_no}`
+                    } else{
+                        window.location = "/{{ lang }}/video/playground/" + response['id'];
+                    }
+
+                } else if (response['msg'] == "error") {
+                    swal("Course Video Not Found!", {
+                        icon: "info",
+                        button: "Ok",
+                        closeOnClickOutside: false,
+                    }).then(function () {
+                    });
+                }
+            }
+        });
     }
 
     $(document).ready(function () {
