@@ -1624,7 +1624,6 @@ def update_user(request):
 
         # update user profile
         user_type = request.session['user_type']
-        print("here::", user_type)
         if user_type == 'teacher':
             updateUserProfile(request)
         try:
