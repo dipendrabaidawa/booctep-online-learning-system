@@ -3965,7 +3965,7 @@ def enrollment(request, course_id):
         request.user.id)
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'enrollment.html',
-                  {'course': course, 'similar_courses': similar_course, 'favList': favListShow,
+                  {'course': course, 'similar_courses': similar_course, 'favList': favListShow,'lang': getLanguage(request)[0],
                    'alreadyinFav': alreadyinFavView, 'cartList': cartListShow, 'stu_courses': stu_courses,
                    'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt, 'msg_list': msg_list,
                    'msg_cnt': msg_cnt,

@@ -478,10 +478,7 @@
 {% endblock %} {% block content %}
 
 <!-- Mobile Navbar -->
-<nav
-  class="navbar mobile-navbar is-hidden-desktop"
-  aria-label="main navigation"
->
+<nav class="navbar mobile-navbar is-hidden-desktop" aria-label="main navigation">
   <!-- Brand -->
   <div class="navbar-brand">
     <a class="navbar-item2" href="/">
@@ -575,7 +572,12 @@
 <!-- Start Carousel -->
 <div class="single_category-5">
   <div class="container">
-    <h3 style="">Thanks for your enrollment!</h3>
+    {% get_current_language as lang %}
+    {% if lang == 'ar' %}
+      <h3 style="">شكرا لتسجيلك!</h3>
+    {% else %}
+      <h3 style="">Thanks for your enrollment!</h3>
+    {% endif %}
     <!-- <p>{{ course.description|safe }}</p> -->
   </div>
 </div>
@@ -588,8 +590,14 @@
                 <div class="videos-wrapper has-player" style="padding-top:16px">
                     <div class="video-side" >
                         <div class="video-meta"  style="background-color: inherit !important;">
-                            <span style="font-size: 20px !important; margin-left: 20px;" class="mediabout mediabout-dark">{{ course.name }}</span>
-                            <span class="mediabout mediabout-dark" style="float:right; margin-right: 20px;">{{ course.category.name }}</span>
+                            {% get_current_language as lang %}
+                            {% if lang == 'ar' %}
+                              <span style="font-size: 20px !important; margin-right: 20px;" class="mediabout mediabout-dark">{{ course.name }}</span>
+                              <span class="mediabout mediabout-dark" style="float:left; margin-left: 20px;">{{ course.category.name }}</span>
+                            {% else %}
+                              <span style="font-size: 20px !important; margin-left: 20px;" class="mediabout mediabout-dark">{{ course.name }}</span>
+                              <span class="mediabout mediabout-dark" style="float:right; margin-right: 20px;">{{ course.category.name }}</span>
+                            {% endif %}
                         </div>
                         <div class="meta-box video-meta"  style="background-color: inherit !important;">
                             <h4 style="font-size: 16px; margin-left: 20px;" class="mediabout mediabout-dark">
@@ -598,8 +606,14 @@
                         </div>
                     </div>
                 </div>
-                <a class="button primary-button is-solid raised story modal-trigger login-button-is-dark" href="javascript:void(0)" style="margin: 10px;" onclick="onStartLearn({{ course.id }})">Start learn
-                </a>
+                {% get_current_language as lang %}
+                {% if lang == "ar" %}
+                  <a class="button primary-button is-solid raised story modal-trigger login-button-is-dark" href="javascript:void(0)" style="margin: 10px;" onclick="onStartLearn({{ course.id }})">ابدأ التعلم
+                  </a>
+                {% else %}
+                  <a class="button primary-button is-solid raised story modal-trigger login-button-is-dark" href="javascript:void(0)" style="margin: 10px;" onclick="onStartLearn({{ course.id }})">Start learn
+                  </a>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -882,7 +896,13 @@
     <div class="store-sections">
       <div class="container">
         <div class="categories-header">
-          <h2>Similar courses</h2>
+          {% get_current_language as lang %}
+          {% if lang == 'ar' %}
+            <h2>دورات مماثلة</h2>
+          {% else %}
+            <h2>Similar courses</h2>
+          {% endif %}
+          
         </div>
       </div>
     </div>
@@ -902,23 +922,44 @@
       style="width: 350px"
       alt=""
     />
-    <h2 style="margin-top: -40px; color: gray">
-      unfortunately, there are no courses yet in your cart
-    </h2>
-    <input
-      style="margin-bottom: 15px"
-      id="tipue_drop_input"
-      class="input c-input"
-      type="text"
-      placeholder="Search"
-      required
-    />
-    <a
-      href="index.html"
-      class="button"
-      style="max-width: 230px !important; margin-bottom: 20px"
-      >Search &nbsp;<span class="fa fa-search"></span
-    ></a>
+    {% get_current_language as lang %}
+    {% if lang == 'ar' %}
+      <h2 style="margin-top: -40px; color: gray">
+        للأسف ، لا توجد دورات في عربة التسوق الخاصة بك
+      </h2>
+      <input
+        style="margin-bottom: 15px"
+        id="tipue_drop_input"
+        class="input c-input"
+        type="text"
+        placeholder="Search"
+        required
+      />
+      <a`
+        href="index.html"
+        class="button"
+        style="max-width: 230px !important; margin-bottom: 20px"
+        >بحث &nbsp;<span class="fa fa-search"></span
+      ></a>
+    {% else %}
+      <h2 style="margin-top: -40px; color: gray">
+        unfortunately, there are no courses yet in your cart
+      </h2>
+      <input
+        style="margin-bottom: 15px"
+        id="tipue_drop_input"
+        class="input c-input"
+        type="text"
+        placeholder="Search"
+        required
+      />
+      <a
+        href="index.html"
+        class="button"
+        style="max-width: 230px !important; margin-bottom: 20px"
+        >Search &nbsp;<span class="fa fa-search"></span
+      ></a>
+    {% endif %}
   </div>
   {% endif %}
 
