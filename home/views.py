@@ -217,7 +217,7 @@ def home_view(request):
 
     if getLanguage(request)[1] == None:
         if user_type == "student":
-            stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id).order_by("-id")[:10]
+            stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
             for course in stu_courses:
                 courses = Courses.objects.get(pk=course.course_id_id)
                 course.videoCnt = getVideoCnt(courses)
@@ -230,6 +230,30 @@ def home_view(request):
                            'msg_list': msg_list, 'msg_cnt': msg_cnt,
                            'stu_courses': stu_courses, 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
                            'noti_list': noti_list, 'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
+        elif user_type == "stuteach":
+            stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
+            for course in stu_courses:
+                courses = Courses.objects.get(pk=course.course_id_id)
+                course.videoCnt = getVideoCnt(courses)
+            if user_id:
+                return render(request, 'index.html', {'course_list': course_list, 'page': page, 'type': type,
+                                                      'lang': getLanguage(request)[0], "category_obj": category_obj,
+                                                      "user_id": user_id, 'stu_courses': stu_courses, 'favList': favListShow,
+                                                      'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
+                                                      'alreadyinCart': alreadyinCartView, 'favCnt': favCnt,
+                                                      'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum,
+                                                      'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                                      'noti_cnt': noti_cnt, 'noti_list': noti_list, 'cat_id': cat_id,
+                                                      'ip': ip, 'order': order, 'host_url': host_url})
+            else:
+                return render(request, 'index.html', {'course_list': course_list, 'page': page, 'type': type,
+                                                      'lang': getLanguage(request)[0], "category_obj": category_obj, 'stu_courses': stu_courses,
+                                                      'favList': favListShow, 'cartList': cartListShow,
+                                                      'favCnt': favCnt, 'cartCnt': cartCnt,
+                                                      'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
+                                                      'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                                      'noti_list': noti_list, 'cat_id': cat_id, 'ip': ip,
+                                                      'order': order, 'host_url': host_url})
         else:
             if user_id:
                 return render(request, 'index.html', {'course_list': course_list, 'page': page, 'type': type,
@@ -264,8 +288,7 @@ def home_view(request):
             la = ur[3]
         if la == ln:
             if user_type == "student":
-                stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id).order_by("-id")[
-                              :10]
+                stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
                 return render(request, 'index.html',
                               {'stu_courses': stu_courses,
                                'course_list': course_list, 'page': page, 'type': type, 'lang': getLanguage(request)[0],
@@ -275,6 +298,27 @@ def home_view(request):
                                'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
                                'msg_list': msg_list, 'msg_cnt': msg_cnt,
                                'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
+            elif user_type == "stuteach":
+                stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
+                if user_id:
+                    return render(request, 'index.html',
+                                  {'stu_courses': stu_courses, 'course_list': course_list, 'page': page, 'type': type,
+                                   'lang': getLanguage(request)[0],
+                                   "category_obj": category_obj, "user_id": user_id, 'favList': favListShow,
+                                   'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
+                                   'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt,
+                                   'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
+                                   'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                   'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
+                else:
+                    return render(request, 'index.html',
+                                  {'stu_courses': stu_courses, 'course_list': course_list, 'page': page, 'type': type,
+                                   'lang': getLanguage(request)[0],
+                                   "category_obj": category_obj, 'favList': favListShow, 'cartList': cartListShow,
+                                   'favCnt': favCnt, 'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum,
+                                   'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                   'noti_cnt': noti_cnt, 'noti_list': noti_list, 'cat_id': cat_id, 'ip': ip,
+                                   'order': order, 'host_url': host_url})
             else:
                 if user_id:
                     return render(request, 'index.html',
@@ -303,8 +347,7 @@ def home_view(request):
                 if ur[5] == "":
                     u = u[:len(u) - 1]
                     if user_type == "student":
-                        stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id).order_by(
-                            "-id")[:10]
+                        stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
                         return render(request, 'index.html',
                                       {'course_list': course_list, 'page': page, 'type': type,
                                        'lang': getLanguage(request)[0], "category_obj": category_obj,
@@ -314,6 +357,27 @@ def home_view(request):
                                        'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
                                        'msg_list': msg_list, 'msg_cnt': msg_cnt,
                                        'stu_courses': stu_courses, 'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
+                    elif user_type == "stuteacher":
+                        stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
+                        if user_id:
+                            return render(request, 'index.html',
+                                          {'stu_courses': stu_courses, 'course_list': course_list, 'page': page, 'type': type,
+                                           'lang': getLanguage(request)[0],
+                                           "category_obj": category_obj, "user_id": user_id, 'favList': favListShow,
+                                           'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
+                                           'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt,
+                                           'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
+                                           'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                           'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
+                        else:
+                            return render(request, 'index.html',
+                                          {'stu_courses': stu_courses, 'course_list': course_list, 'page': page, 'type': type,
+                                           'lang': getLanguage(request)[0],
+                                           "category_obj": category_obj, 'favList': favListShow,
+                                           'cartList': cartListShow, 'favCnt': favCnt, 'cartCnt': cartCnt,
+                                           'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
+                                           'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                           'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
                     else:
                         if user_id:
                             return render(request, 'index.html',
@@ -342,8 +406,7 @@ def home_view(request):
                 # if ur[4] == "":
                 #     u = u[:len(u) - 1]
                 if user_type == "student":
-                    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id).order_by(
-                        "-id")[:10]
+                    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
                     return render(request, 'index.html',
                                   {'course_list': course_list, 'page': page, 'type': type,
                                    'lang': getLanguage(request)[0], "category_obj": category_obj,
@@ -353,6 +416,27 @@ def home_view(request):
                                    'msg_list': msg_list, 'msg_cnt': msg_cnt,
                                    'noti_list': noti_list, 'stu_courses': stu_courses, 'cat_id': cat_id, 'ip': ip,
                                    'order': order, 'host_url': host_url})
+                elif user_type == "stuteach":
+                    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
+                    if user_id:
+                        return render(request, 'index.html',
+                                      {'stu_courses': stu_courses, 'course_list': course_list, 'page': page, 'type': type,
+                                       'lang': getLanguage(request)[0],
+                                       "category_obj": category_obj, 'favList': favListShow,
+                                       'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
+                                       'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt,
+                                       'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
+                                       'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                       'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
+                    else:
+                        return render(request, 'index.html',
+                                      {'stu_courses': stu_courses, 'course_list': course_list, 'page': page, 'type': type,
+                                       'lang': getLanguage(request)[0],
+                                       "category_obj": category_obj, 'favList': favListShow,
+                                       'cartList': cartListShow, "user_id": user_id, 'favCnt': favCnt,
+                                       'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
+                                       'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                       'noti_list': noti_list, 'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
                 else:
                     if user_id:
                         return render(request, 'index.html',
@@ -507,7 +591,7 @@ def home_view1(request):
     if getLanguage(request)[1] == None:
 
         if user_type == "student":
-            stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id).order_by("-id")[:10]
+            stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
             for course in stu_courses:
                 courses = Courses.objects.get(pk=course.course_id_id)
                 course.videoCnt = getVideoCnt(courses)
@@ -552,8 +636,7 @@ def home_view1(request):
             la = ur[3]
         if la == ln:
             if user_type == "student":
-                stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id).order_by("-id")[
-                              :10]
+                stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
                 return render(request, 'index.html',
                               {'stu_courses': stu_courses, 'enrolled_course_list': enrolled_course_list,
                                'course_list': course_list, 'course_free_list': course_free_list,
@@ -588,8 +671,7 @@ def home_view1(request):
                 if ur[5] == "":
                     u = u[:len(u) - 1]
                     if user_type == "student":
-                        stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id).order_by(
-                            "-id")[:10]
+                        stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
                         return render(request, 'index.html',
                                       {'enrolled_course_list': enrolled_course_list, 'course_list': course_list,
                                        'course_free_list': course_free_list, 'course_paid_list': course_paid_list,
@@ -624,8 +706,7 @@ def home_view1(request):
                 if ur[4] == "":
                     u = u[:len(u) - 1]
                     if user_type == "student":
-                        stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id).order_by(
-                            "-id")[:10]
+                        stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
                         return render(request, 'index.html',
                                       {'enrolled_course_list': enrolled_course_list, 'course_list': course_list,
                                        'course_free_list': course_free_list, 'course_paid_list': course_paid_list,
@@ -732,54 +813,64 @@ def loginn(request):
 
 def about(request):
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'about.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
 
 
 def faqs(request):
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'faqs.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
 
 
 def help(request):
     user_id = request.session.get("user_id")
     user_type = request.session.get("user_type")
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
-
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'support.html',
                   {'lang': getLanguage(request)[0], 'user_type': user_type, "user_id": user_id, 'favList': x1,
                    'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
 
 
 def terms(request):
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'terms.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
 
 
 def policy(request):
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'privacy.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
 
 
 def contact(request):
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'contact.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
 
 
 def become(request):
@@ -794,10 +885,12 @@ def become(request):
     noti_list = notifications.objects.filter(user_id=request.user.id, is_read=0).order_by("-id")[:3]
     noti_cnt = notifications.objects.filter(user_id=request.user.id, is_read=0).count()
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'become.html',
                   {'lang': getLanguage(request)[0], 'catList': objC, 'favList': favListShow, 'cartList': cartListShow,
                    'favCnt': len(favList), 'cartCnt': len(cartList), 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
 
 
 def become_a_teacher(request):
@@ -811,9 +904,11 @@ def become_a_teacher(request):
     noti_list = notifications.objects.filter(user_id=request.user.id, is_read=0).order_by("-id")[:3]
     noti_cnt = notifications.objects.filter(user_id=request.user.id, is_read=0).count()
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'become-teacher.html', {'lang': getLanguage(request)[0], 'categories': categoryList, 'favList': favListShow, 'cartList': cartListShow,
                    'favCnt': len(favList), 'cartCnt': len(cartList), 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
 
 
 def save_become_teacher(request):
@@ -824,7 +919,8 @@ def save_become_teacher(request):
     status = 1
     try:
         user = User.objects.get(pk=user_id)
-        user.group_id = 3
+        # user.group_id = 3
+        user.group_id = 4
         user.save()
     except:
         status = 0
@@ -1098,7 +1194,7 @@ def single_course(request, teacher_id, course_url):
 
     data = get_courseDetails(id)
 
-    if user_type == 'teacher':
+    if user_type == 'teacher' or user_type == 'stuteach':
         obj_comment = course_comments.objects.filter(course_id_id=id)
     else:
         obj_comment = course_comments.objects.filter(course_id_id=id).filter(user_id=user_id)
@@ -1196,11 +1292,12 @@ def single_course(request, teacher_id, course_url):
     if student_cart_courses.objects.filter(student_id_id=user_id, course_id_id=course.id).exists():
         cart_exist = 1
 
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'single_course.html',
                   {'videocount': videocounter, "lang": getLanguage(request)[0], 'question_list': data['question_list'],
                    'course': course, 'similar_courses': similar_courses, 'user_type': user_type, "user_id": user_id,
                    "comment_list": obj_comment, 'id': id, 'user_info': user_info, 'free_course': free_course,
-                   'teacher_id': teacher_id,
+                   'teacher_id': teacher_id, 'stu_courses':stu_courses,
                    'paid_course': paid_course, 'includeList': _obj, 'favList': favListShow, 'promo_video': promo_video,
                    'alreadyinFav': alreadyinFavView, 'cartList': cartListShow, 'alreadyinCart': alreadyinCartView,
                    'favCnt': len(favList), 'cartCnt': len(cartList), 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
@@ -1763,9 +1860,12 @@ def ajaxlogin(request):
                 if id == 2:
                     request.session['user_id'] = str(user_id)
                     request.session['user_type'] = "student"
-                else:
+                elif id == 3:
                     request.session['user_id'] = str(user_id)
                     request.session['user_type'] = "teacher"
+                else:
+                    request.session['user_id'] = str(user_id)
+                    request.session['user_type'] = "stuteach"
                 request.session['password'] = request.POST.get('password')
                 msg = 'success'
             else:
@@ -1837,9 +1937,11 @@ def forgotChangepassword(request):
 def logout_(request):
     logout(request)
     url_parts = request.META['HTTP_REFERER'].split('/')
-    if 'teacher' in url_parts or 'student' in url_parts:
-        redirect_url = url_parts[0] + "//" + url_parts[2] + "/" + url_parts[3]
-        return HttpResponseRedirect(redirect_url)
+
+    for url_part in url_parts:
+        if 'teacher' in url_part or 'student' in url_part:
+            redirect_url = url_parts[0] + "//" + url_parts[2] + "/" + url_parts[3]
+            return HttpResponseRedirect(redirect_url)
                 
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
@@ -2658,8 +2760,9 @@ def searching(request):
     except EmptyPage:
         sehList = seh_list_paginator.page(seh_list_paginator.num_pages)
 
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'search.html', {'lang': getLanguage(request)[0],
-                                           'searchkeyword': searchkeyword,
+                                           'searchkeyword': searchkeyword, 'stu_courses':stu_courses,
                                            'totalsearchresult': totalsearchresult, "category_obj": category_obj,
                                            'course_list': sehList, 'favList': favListShow,
                                            'cartList': cartListShow, 'favCnt': favCnt, 'cartCnt': cartCnt,
@@ -2781,10 +2884,10 @@ def searching(request):
 def single_category(request, id):
     user_id = request.session.get("user_id")
     user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     type = request.POST.get('type')
     page = request.POST.get('page')
     order = request.POST.get('order')
-    # print('--------------type---------------------------',type, page, order)
 
     if page == None or page == '':
         page = 1
@@ -2869,7 +2972,7 @@ def single_category(request, id):
     else:
         return render(request, 'filter_404_page.html', {'lang': getLanguage(request)[0], 'favList': favListShow,
                                                         'cartList': cartListShow, 'favCnt': len(favList),
-                                                        'cartCnt': len(cartList),
+                                                        'cartCnt': len(cartList), 'stu_courses':stu_courses,
                                                         'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
                                                         'noti_list': noti_list, 'msg_list': msg_list,
                                                         'msg_cnt': msg_cnt, 'type': type, 'order': order})
@@ -2915,14 +3018,14 @@ def single_category(request, id):
                     course_list = course_list_paginator.page(course_list_paginator.num_pages)
                 for course in course_list:
                     course.link = courseUrlGenerator(course)
-                print('------------course list-----------------------', course_list)
+
                 if l != getLanguage(request)[0]:
                     rl = getLanguage(request)[0].split('/')
                     return render(request, 'single_category.html',
                                   {'lang': getLanguage(request)[0], 'course_list': course_list,
                                    "course_cnt": str(count), "course_name": categorie, "user_id": user_id,
                                    'category': category, 'favList': favListShow, 'alreadyinFav': alreadyinFavView,
-                                   'alreadyinCart': alreadyinCartView,
+                                   'alreadyinCart': alreadyinCartView, 'stu_courses':stu_courses,
                                    'cartList': cartListShow, 'favCnt': len(favList), 'cartCnt': len(cartList),
                                    'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
                                    'msg_list': msg_list, 'msg_cnt': msg_cnt, 'type': type, 'page': page,
@@ -2933,7 +3036,7 @@ def single_category(request, id):
                                   {'lang': getLanguage(request)[0], 'course_list': course_list,
                                    "course_cnt": str(count), "course_name": categorie, "user_id": user_id,
                                    'category': category, 'favList': favListShow, 'alreadyinFav': alreadyinFavView,
-                                   'alreadyinCart': alreadyinCartView,
+                                   'alreadyinCart': alreadyinCartView, 'stu_courses':stu_courses,
                                    'cartList': cartListShow, 'favCnt': len(favList), 'cartCnt': len(cartList),
                                    'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
                                    'msg_list': msg_list, 'msg_cnt': msg_cnt, 'type': type, 'page': page,
@@ -2942,7 +3045,7 @@ def single_category(request, id):
             else:
                 return render(request, 'filter_404_page.html', {'lang': getLanguage(request)[0], 'favList': favListShow,
                                                                 'cartList': cartListShow, 'favCnt': len(favList),
-                                                                'cartCnt': len(cartList),
+                                                                'cartCnt': len(cartList), 'stu_courses':stu_courses,
                                                                 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
                                                                 'noti_list': noti_list, 'msg_list': msg_list,
                                                                 'msg_cnt': msg_cnt, 'type': type, 'page': page,
@@ -2950,7 +3053,7 @@ def single_category(request, id):
     else:
         return render(request, 'filter_404_page.html', {'lang': getLanguage(request)[0], 'favList': favListShow,
                                                         'cartList': cartListShow, 'favCnt': len(favList),
-                                                        'cartCnt': len(cartList),
+                                                        'cartCnt': len(cartList), 'stu_courses':stu_courses,
                                                         'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
                                                         'noti_list': noti_list, 'msg_list': msg_list,
                                                         'msg_cnt': msg_cnt, 'type': type, 'page': page, 'order': order})
@@ -3130,9 +3233,11 @@ def showCartList(request):
     favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
         request.user.id)
 
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'cart.html',
                   {'cartList': cartListShow, 'lang': getLanguage(request)[0], 'favList': favListShow,
-                   'cartList1': cartList, 'favCnt': favCnt,
+                   'cartList1': cartList, 'favCnt': favCnt, 'stu_courses':stu_courses,
                    'cartCnt': cartCnt, 'subtotal': subTotal, 'subDiscount': subDiscount,'cartTotalSum': cartTotalSumPrice,
                    'noti_cnt': noti_cnt, 'page': page, 'tax': subTax,
                    'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt})
@@ -3199,12 +3304,13 @@ def ecommerce_payment(request, teacher_id, id, course_url):
 
     form = PayPalPaymentsForm(initial=paypal_dict)
 
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'ecommerce_payment.html',
                   {'form': form, 'orderid': orderid, 'totalmoney': totalmoney, 'subtotalmoney': subtotalmoney,
                    'discountmoney': discountmoney, 'lang': getLanguage(request)[0], 'savedcard': list(savedcard),
                    "course": course, "user_id": user_id, 'favList': favListShow, 'favCnt': favCnt, 'alreadyinFav': alreadyinFavView,
                    'cartList': cartListShow, 'cartCnt': cartCnt, 'alreadyinCart': alreadyinCartView, 'cartTotalSum': cartTotalSum, 'noti_list': noti_list,
-                   'noti_cnt': noti_cnt, 'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'noti_cnt': noti_cnt, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_courses': stu_courses})
     # else:
     #     return redirect("/")
 
@@ -3323,11 +3429,13 @@ def checkout(request):
 
     form = PayPalPaymentsForm(initial=paypal_dict)
 
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'checkout.html',
                   {'form':form, 'lang': getLanguage(request)[0], 'orderid': orderid, 'subtotalmoney': subtotalmoney,
                    'discountmoney': discountmoney, 'totalmoney': totalmoney, 'favList': x1, 'favCnt': x2,
                    'alreadyinFav': x3, 'cartList': y1, 'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4,
-                   'noti_list': z1, 'noti_cnt': z2})
+                   'noti_list': z1, 'noti_cnt': z2, 'stu_courses': stu_courses})
 
 
 @csrf_exempt
@@ -3543,8 +3651,10 @@ def showFavList(request):
     except EmptyPage:
         favList = wish_list_paginator.page(wish_list_paginator.num_pages)
 
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'wishlist.html',
-                  {'category_obj': category_obj, 'lang': getLanguage(request)[0], 'favList1': favList,
+                  {'stu_courses': stu_courses, 'category_obj': category_obj, 'lang': getLanguage(request)[0], 'favList1': favList,
                    'cartList': cartListShow, 'favCnt': favCnt, 'favList': favListShow,
                    'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'page': page, 'type': type,
                    'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'order': order})
@@ -3649,10 +3759,10 @@ def viewProfile(request, id, pname):
     else:
         user.total_rating = round((sum / count), 2)
     user.reviewCnt = count
-    print("test::", user.profile.header_img)
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'profile.html',
                   {'teacher': user, 'favList': favListShow, 'lang': getLanguage(request)[0], 'cartList': cartListShow,
-                   'favCnt': len(favList),
+                   'favCnt': len(favList), "stu_courses": stu_courses,
                    'cartCnt': len(cartList), 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'page': page,
                    'page1': page1,
                    'noti_list': noti_list, 'order': order, 'tab': tab, 'msg_list': msg_list, 'msg_cnt': msg_cnt})
@@ -3853,9 +3963,10 @@ def enrollment(request, course_id):
 
     favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
         request.user.id)
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'enrollment.html',
                   {'course': course, 'similar_courses': similar_course, 'favList': favListShow,
-                   'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
+                   'alreadyinFav': alreadyinFavView, 'cartList': cartListShow, 'stu_courses': stu_courses,
                    'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt, 'msg_list': msg_list,
                    'msg_cnt': msg_cnt,
                    'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt})

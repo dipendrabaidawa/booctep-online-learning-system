@@ -41,7 +41,7 @@ def courses(request):
     else:
         page = int(page)
 
-    if user_type == "student":
+    if user_type == "student" or user_type == "stuteach":
         if int(filter_type) == -1:
             course_obj = student_register_courses.objects.filter(student_id=user_id)
             filter_type = -1
@@ -290,7 +290,7 @@ def student_messages(request):
         profile = User.objects.get(id=user_id)
         user_name = profile.first_name + " " + profile.last_name
 
-    if user_type == "student":
+    if user_type == "student" or user_type == "stuteach":
         if student_register_courses.objects.filter(student_id_id=user_id).exists():
             obj = student_register_courses.objects.filter(student_id_id=user_id)
             for i in obj:

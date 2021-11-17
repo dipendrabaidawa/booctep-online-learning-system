@@ -457,9 +457,8 @@
                         <i class="mdi mdi-apps"></i>
                     </a>
                 </div>
-
                 {% if request.session.user_type == 'student' %}
-                    {% if course_list|length %}
+                    {% if stu_courses|length %}
                     {% if user.is_authenticated %}
                         {% get_current_language as lang %}
                         {% if lang == "ar" %}
@@ -481,31 +480,30 @@
                         {% endif %}
                     {% endif %}
                     {% endif %}
+
+                    {% if user.is_authenticated %}
+                        {% get_current_language as lang %}
+                        {% if lang == "ar" %}
+                        <div class="navbar-item">
+                            <a href="/{{ lang }}/become"
+                               class="button-become-a-teacher button-become-a-teacher-dark button "
+                               data-lang="about">
+                                أصبح معلم
+                            </a>
+                        </div>
+                        {% else %}
+                        <div class="navbar-item">
+                            <a href="/{{ lang }}/become"
+                               class="button-become-a-teacher button-become-a-teacher-dark button "
+                               data-lang="about">
+                               Become a teacher
+                            </a>
+                        </div>
+                        {% endif %}
+                    {% endif %}
                 {% endif %}
 
-                {% if request.session.user_type == 'student' %}
-                {% if user.is_authenticated %}
-                {% get_current_language as lang %}
-                {% if lang == "ar" %}
-                    <div class="navbar-item">
-                        <a href="/{{ lang }}/become"
-                           class="button-become-a-teacher button-become-a-teacher-dark button "
-                           data-lang="about">
-                            أصبح معلم
-                        </a>
-                    </div>
-                    {% else %}
-                    <div class="navbar-item">
-                        <a href="/{{ lang }}/become"
-                           class="button-become-a-teacher button-become-a-teacher-dark button "
-                           data-lang="about">
-                           Become a teacher
-                        </a>
-                    </div>
-
-                    {% endif %}
-                    {% endif %}
-                {% elif request.session.user_type == 'teacher' %}
+                {% if request.session.user_type == 'teacher' %}
                 {% if user.is_authenticated %}
                   {% get_current_language as lang %}
                   {% if lang == "ar" %}
@@ -525,8 +523,54 @@
                       </a>
                   </div>
                   {% endif %} 
-                  {% endif %}
-                  {% endif %}
+                {% endif %}
+                {% endif %}
+
+                {% if request.session.user_type == 'stuteach' %}
+                    {% if stu_courses|length %}
+                    {% if user.is_authenticated %}
+                        {% get_current_language as lang %}
+                        {% if lang == "ar" %}
+                        <div class="navbar-item">
+                            <a href="{% url 'student courses' %}"
+                               class="button-become-a-teacher button-become-a-teacher-dark button "
+                               data-lang="about">
+                                <b>دوراتي</b>
+                            </a>
+                        </div>
+                        {% else %}
+                        <div class="navbar-item">
+                            <a href="{% url 'student courses' %}"
+                               class="button-become-a-teacher button-become-a-teacher-dark button "
+                               data-lang="about">
+                                {% trans 'My Learning' %}
+                            </a>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+                    {% endif %}
+
+                    {% if user.is_authenticated %}
+                        {% get_current_language as lang %}
+                        {% if lang == "ar" %}
+                        <div class="navbar-item">
+                            <a href="/{{ lang }}/teacher/dashboard/"
+                               class="button-become-a-teacher button-become-a-teacher-dark button is-light"
+                               data-lang="about">
+                                {% trans 'إضافة دورة' %}
+                            </a>
+                        </div>
+                        {% else %}
+                        <div class="navbar-item">
+                            <a href="/{{ lang }}/teacher/dashboard/"
+                                class="button-become-a-teacher button-become-a-teacher-dark button is-light"
+                                data-lang="about">
+                                {% trans 'Add course' %}
+                            </a>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+                {% endif %}                
 
             </div>
         </div>
@@ -747,8 +791,7 @@
                                         </li>
                                     {% endfor %}
                                 </ul>
-                                <a href="/{{lang}}/favorite" class="button primary-button is-raised favzerovanish">Show
-                                    FavList</a>
+                                <a href="/{{lang}}/favorite" class="button primary-button is-raised favzerovanish">Show FavList</a>
                             {% else %}
                                 <div class="shopping-cart-header">
                                     <div class="shopping-cart-total">
@@ -763,15 +806,7 @@
 
                                     </li>
                                 </ul>
-                                {% if user.group_id == 2 %}
-                                    <a class="button primary-button is-raised"
-                                    href="/{{ lang }}/favorite"
-                                       onclick="set_count_zero()">{% trans 'View favorite page' %}</a>
-                                {% else %}
-                                    <a class="button primary-button is-raised"
-                                       href="/{{ lang }}/favorite"
-                                       onclick="set_count_zero()">{% trans 'View favorite page' %}</a>
-                                {% endif %}
+                                <a class="button primary-button is-raised" href="/{{ lang }}/favorite" onclick="set_count_zero()">{% trans 'View favorite page' %}</a>
                             {% endif %}
                         </div>
                     </div>
@@ -842,15 +877,7 @@
 
                                     </li>
                                 </ul>
-                                {% if user.group_id == 2 %}
-                                    <a class="button primary-button is-raised"
-
-                                       onclick="set_count_zero()" href="/{{ lang }}/favorite">{% trans 'View cart page' %}</a>
-                                {% else %}
-                                    <a class="button primary-button is-raised"
-
-                                       onclick="set_count_zero()" href="/{{ lang }}/favorite">{% trans 'View cart page' %}</a>
-                                {% endif %}
+                                <a class="button primary-button is-raised" onclick="set_count_zero()" href="/{{ lang }}/cart">{% trans 'View cart page' %}</a>
                             {% endif %}
                         </div>
                     </div>
