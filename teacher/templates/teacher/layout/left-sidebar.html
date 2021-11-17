@@ -137,6 +137,14 @@
                             <span class="sidebar-menu-text">تواصل</span>
                         </a>
                     </li>
+                    {% if request.session.user_type == 'stuteach' %}
+                    <li class="sidebar-menu-item " data-toggle="tooltip" data-title="" data-placement="right" data-boundary="window">
+                        <a class="sidebar-menu-button" href="#sm_stuteach" data-toggle="tab" role="tab" aria-controls="sm_stuteach" aria-selected="true">
+                            <i class="sidebar-menu-icon sidebar-menu-icon--right material-icons">train</i>
+                            <span class="sidebar-menu-text">إدارة الدورات</span>
+                        </a>
+                    </li>
+                    {% endif %}
                     <li class="sidebar-menu-item " data-toggle="tooltip" data-title="" data-placement="right"
                         data-container="body" data-boundary="window">
                         <a class="sidebar-menu-button" href="#sm_help" data-toggle="tab" role="tab"
@@ -175,6 +183,14 @@
                             <span class="sidebar-menu-text">Community</span>
                         </a>
                     </li>
+                    {% if request.session.user_type == 'stuteach' %}
+                    <li class="sidebar-menu-item " data-toggle="tooltip" data-title="" data-placement="right" data-boundary="window">
+                        <a class="sidebar-menu-button" href="#sm_stuteach" data-toggle="tab" role="tab" aria-controls="stu_student" aria-selected="true">
+                            <i class="sidebar-menu-icon sidebar-menu-icon--left material-icons">train</i>
+                            <span class="sidebar-menu-text">My courses</span>
+                        </a>
+                    </li>
+                    {% endif %}
                     <li class="sidebar-menu-item " data-toggle="tooltip" data-title="" data-placement="right"
                         data-container="body" data-boundary="window">
                         <a class="sidebar-menu-button" href="#sm_help" data-toggle="tab" role="tab"
@@ -194,16 +210,11 @@
                     <span class="sidebar-menu-text">swap_horiz</span>
                 </a>
             </ul>
-
         </div>
         {% get_current_language as lang %}
         {% if lang == "ar" %}
         <div class="sidebar sidebar-light sidebar-left flex sidebar-secondary pt-16pt" data-perfect-scrollbar>
             <div class="tab-content">
-
-                
-
-
                 <div class="tab-pane  fade  show " id="supervised_user_circle">
                     <div class="mediabout mediabout-light">
                         <b style="font-family: Arial, Helvetica, sans-serif !important;font-size: 22px !important;font-weight: 700 !important;margin-right: 25px;" class="">إعدادات الحساب</b>
@@ -273,6 +284,9 @@
                     <div class="mediabout mediabout-light">
                         <b style="font-family: Arial, Helvetica, sans-serif !important;font-size: 22px !important;font-weight: 700 !important;margin-right: 25px;" class=""> تواصل</b>
                     </div>
+                    {% if request.session.user_type == 'stuteach' %}
+                    <div class="sidebar-heading mediabout mediabout-light">معلم</div>
+                    {% endif %}
                     <ul class="sidebar-menu">
                         <li class="sidebar-menu-item">
                             <a class="sidebar-menu-button" href="{% url 'teacher messages' %}">
@@ -284,6 +298,43 @@
                             <a class="sidebar-menu-button" href="{% url 'teacher notifications' %}">
                                 <span class="material-icons sidebar-menu-icon sidebar-menu-icon--right mediabout mediabout-light">notifications_none</span>
                                 <span class="sidebar-menu-text mediabout mediabout-light">التنبيهات</span>
+                            </a>
+                        </li>
+                    </ul>
+                    {% if request.session.user_type == 'stuteach' %}
+                    <div class="sidebar-heading mediabout mediabout-light">طالب</div>
+                    <ul class="sidebar-menu">
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{% url 'student messages' %}">
+                                <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left mediabout mediabout-dark">mail</span>
+                                <span class="sidebar-menu-text mediabout mediabout-dark">الرسائل</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{% url 'student notifications' %}">
+                                <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left mediabout mediabout-dark">notifications_none</span>
+                                <span class="sidebar-menu-text mediabout mediabout-dark">التنبيهات</span>
+                            </a>
+                        </li>
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <div class="tab-pane " id="sm_stuteach">
+                    <div class="mediabout mediabout-dark">
+                        <b style="font-family: Arial, Helvetica, sans-serif !important;font-size: 22px !important;font-weight: 700 !important;margin-right: 25px;" class="">تعليمي</b>
+                    </div>
+                    <ul class="sidebar-menu">
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{% url 'student courses' %}">
+                                <span class="material-icons sidebar-menu-icon sidebar-menu-icon--right mediabout mediabout-dark">dvr</span>
+                                <span class="sidebar-menu-text mediabout mediabout-dark">دوراتي</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{% url 'student certificates' %}">
+                                <span class="material-icons sidebar-menu-icon sidebar-menu-icon--right mediabout mediabout-dark">class</span>
+                                <span class="sidebar-menu-text mediabout mediabout-dark">شهاداتي</span>
                             </a>
                         </li>
                     </ul>
@@ -314,10 +365,6 @@
         {% else %}
         <div class="sidebar sidebar-light sidebar-left flex sidebar-secondary pt-16pt" data-perfect-scrollbar>
             <div class="tab-content">
-
-                
-
-
                 <div class="tab-pane  fade  show " id="supervised_user_circle">
                     <div class="sidebar-heading mediabout mediabout-light">Profile</div>
                     <ul class="sidebar-menu">
@@ -348,7 +395,6 @@
                     </ul>
                 </div>
 
-                
                 <div class="tab-pane " id="sm_student">
                     <div class="sidebar-heading mediabout mediabout-light">Teacher dashboard</div>
                     <ul class="sidebar-menu">
@@ -382,6 +428,9 @@
 
                 <div class="tab-pane " id="sm_messaging">
                     <div class="sidebar-heading mediabout mediabout-light">Communicate</div>
+                    {% if request.session.user_type == 'stuteach' %}
+                    <div class="sidebar-heading mediabout mediabout-light">Teacher</div>
+                    {% endif %}
                     <ul class="sidebar-menu">
                         <li class="sidebar-menu-item">
                             <a class="sidebar-menu-button" href="{% url 'teacher messages' %}">
@@ -393,6 +442,43 @@
                             <a class="sidebar-menu-button" href="{% url 'teacher notifications' %}">
                                 <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left mediabout mediabout-light">notifications_none</span>
                                 <span class="sidebar-menu-text mediabout mediabout-light">Notifications</span>
+                            </a>
+                        </li>
+                    </ul>
+                    {% if request.session.user_type == 'stuteach' %}
+                    <div class="sidebar-heading mediabout mediabout-light">Student</div>
+                    <ul class="sidebar-menu">
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{% url 'student messages' %}">
+                                <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left mediabout mediabout-dark">mail</span>
+                                <span class="sidebar-menu-text mediabout mediabout-dark">Messages</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{% url 'student notifications' %}">
+                                <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left mediabout mediabout-dark">notifications_none</span>
+                                <span class="sidebar-menu-text mediabout mediabout-dark">Notifications</span>
+                            </a>
+                        </li>
+                    </ul>
+                    {% endif %}
+                </div>
+
+                <div class="tab-pane " id="sm_stuteach">
+                    <div class="mediabout mediabout-dark">
+                        <b style="font-family: Arial, Helvetica, sans-serif !important;font-size: 22px !important;font-weight: 700 !important;margin-left: 25px;" class="">My learning</b>
+                    </div>
+                    <ul class="sidebar-menu">
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{% url 'student courses' %}">
+                                <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left mediabout mediabout-dark">dvr</span>
+                                <span class="sidebar-menu-text mediabout mediabout-dark">Courses</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-menu-item">
+                            <a class="sidebar-menu-button" href="{% url 'student certificates' %}">
+                                <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left mediabout mediabout-dark">class</span>
+                                <span class="sidebar-menu-text mediabout mediabout-dark">Certificates</span>
                             </a>
                         </li>
                     </ul>
