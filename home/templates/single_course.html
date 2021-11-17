@@ -415,14 +415,11 @@
 {% get_current_language as lang %}
 {% if lang == "ar" %}
 <style>
-
-
-.blllu{
+    .blllu{
         color: rgb(11, 111, 241) !important;
         margin-right: 8px !important; 
     } 
     .blllu-dark{
-
         color: rgb(115, 147, 189) !important;
         margin-right: 8px !important;
     }
@@ -437,21 +434,14 @@
     }
 
     .is-combo .combo-box,
-.is-combo .image-combo-box,
-.is-combo .stacked-combo-box,
-.is-combo .user-combo-box {
-        direction: ltr !important;
-}
-
-.control-language-parent{
-    float: left !important;
-}
-
-
-
-
-
-
+    .is-combo .image-combo-box,
+    .is-combo .stacked-combo-box,
+    .is-combo .user-combo-box {
+            direction: ltr !important;
+    }
+    .control-language-parent{
+        float: left !important;
+    }
     .control-language{
     }
     .product-info{
@@ -459,201 +449,186 @@
         right: 10px !important;
     
     }
-.product-info-h{
-    direction: rtl;
-    right: 10px !important;
+    .product-info-h{
+        direction: rtl;
+        right: 10px !important;
 
-}
+    }
+    .store-sections .product-card .product-actions .right{
+        left: 30px !important;
+        float: left !important;
+        direction: ltr !important;
+    }
+    .image-owner{
+        direction: ltr;
+        float: left;
+    }
+    .full{
+        direction: ltr;
+        float: left;
+    }
+    .rating{
+        direction: ltr;
+        float: left;
+    }
+    .name{
+        direction: ltr;
+        float: left;
+    }
 
-.store-sections .product-card .product-actions .right{
-    left: 30px !important;
-    float: left !important;
-    direction: ltr !important;
-}
+    .product-card{
+        direction: rtl;
+        margin-right: 0px !important;
+    }
+    .hero-body{
+        direction: rtl;
+        margin-right: 40px; 
+        width: 93% !important;
+    }
+    .content-hero-single-course{
+        right: 0 !important;
+        margin-right: -15px !important;
+    }
+    .brd{
+        direction: rtl !important;
+        float: right !important;
+        margin-left: 10px;
+    }
+    .brd-dark{
+        direction: rtl !important;
+        float: right !important;
+        margin-left: 10px;
+    }
 
-.image-owner{
-            direction: ltr;
-            float: left;
-        }
-        .full{
-            direction: ltr;
-            float: left;
-        }
-        .rating{
-            direction: ltr;
-            float: left;
-        }
-        .name{
-            direction: ltr;
-            float: left;
-        }
-
-.product-card{
-    direction: rtl;
-    margin-right: 0px !important;
-}
-.hero-body{
-    direction: rtl;
-    margin-right: 40px; 
-    width: 93% !important;
-}
-.content-hero-single-course{
-    right: 0 !important;
-    margin-right: -15px !important;
-}
-.brd{
-    direction: rtl !important;
-    float: right !important;
-    margin-left: 10px;
-}
-.brd-dark{
-    direction: rtl !important;
-    float: right !important;
-    margin-left: 10px;
-}
-
-.shop-wrapper{
-    direction: rtl;
-}
-.shop-header .store-tabs .tab-control.is-active {
-    color: none ;
-}
-.shop-header .store-tabs .tab-control {
-    margin-left: 0px !important;
-}
-
-.shop-header .store-tabs .store-naver{
-    background: rgb(86, 107, 134) !important;
-}
-
-
-/* line 176, src/assets/scss/pages/_app-commerce.scss */
-
-.shop-header .store-tabs .tab-control.is-active:first-child ~ .store-naver {
-    margin-right: 0
-}
-
-
-/* line 182, src/assets/scss/pages/_app-commerce.scss */
-
-.shop-header .store-tabs .tab-control.is-active:nth-child(2) ~ .store-naver {
-    margin-right: 33.33% !important
-}
-
-
-/* line 188, src/assets/scss/pages/_app-commerce.scss */
-
-.shop-header .store-tabs .tab-control.is-active:nth-child(3) ~ .store-naver {
-    margin-right: 66.66% !important
-}
-
-
-/* line 195, src/assets/scss/pages/_app-commerce.scss */
-
-.shop-header .store-tabs .store-naver {
-    position: absolute;
-    bottom: 0;
-    right: 0 !important;
-    height: 2.8px;
-    width: 33.33%;
-    border-radius: 50px;
-    background: #0062ff;
-    -webkit-transition: all .3s;
-    transition: all .3s
-}
-
-
-
-
-.shop-header .store-tabs {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    max-width: 260px;
-}
-
-
-/* line 161, src/assets/scss/pages/_app-commerce.scss */
-
-.shop-header .store-tabs .tab-control {
-    display: block;
-    font-size: 1rem;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
-    text-align: center;
-    width: 33.33%;
-    color: #ABB0BE;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    -webkit-transition: color .3s;
-    transition: color .3s
-}
-
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+    .shop-wrapper{
+        direction: rtl;
+    }
     .shop-header .store-tabs .tab-control.is-active {
-    color: none ;
-}
-.shop-header .store-tabs .tab-control {
-    margin-right: 80px !important;
-}
+        color: none ;
+    }
+    .shop-header .store-tabs .tab-control {
+        margin-left: 0px !important;
+    }
 
-.shop-header .store-tabs .store-naver{
-    background: none !important;
-}
-
-
-.accordion{
-    width: 350px !important;
-}
-
-/* line 176, src/assets/scss/pages/_app-commerce.scss */
-
-.shop-header .store-tabs .tab-control.is-active:first-child ~ .store-naver {
-    margin-right: 60px
-}
+    .shop-header .store-tabs .store-naver{
+        background: rgb(86, 107, 134) !important;
+    }
 
 
-/* line 182, src/assets/scss/pages/_app-commerce.scss */
+    /* line 176, src/assets/scss/pages/_app-commerce.scss */
 
-.shop-header .store-tabs .tab-control.is-active:nth-child(2) ~ .store-naver {
-    margin-right: 33.33% !important
-}
-
-
-/* line 188, src/assets/scss/pages/_app-commerce.scss */
-
-.shop-header .store-tabs .tab-control.is-active:nth-child(3) ~ .store-naver {
-    margin-right: 66.66% !important
-}
+    .shop-header .store-tabs .tab-control.is-active:first-child ~ .store-naver {
+        margin-right: 0
+    }
 
 
-/* line 195, src/assets/scss/pages/_app-commerce.scss */
+    /* line 182, src/assets/scss/pages/_app-commerce.scss */
 
-.shop-header .store-tabs .store-naver {
-    position: absolute;
-    bottom: 0;
-    right: 20px !important;
-    height: 2.8px;
-    width: 33.33%;
-}
+    .shop-header .store-tabs .tab-control.is-active:nth-child(2) ~ .store-naver {
+        margin-right: 33.33% !important
+    }
 
 
+    /* line 188, src/assets/scss/pages/_app-commerce.scss */
+
+    .shop-header .store-tabs .tab-control.is-active:nth-child(3) ~ .store-naver {
+        margin-right: 66.66% !important
+    }
 
 
-.shop-header .store-tabs {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    max-width: 460px;
-}
+    /* line 195, src/assets/scss/pages/_app-commerce.scss */
 
-}
+    .shop-header .store-tabs .store-naver {
+        position: absolute;
+        bottom: 0;
+        right: 0 !important;
+        height: 2.8px;
+        width: 33.33%;
+        border-radius: 50px;
+        background: #0062ff;
+        -webkit-transition: all .3s;
+        transition: all .3s
+    }
+    .shop-header .store-tabs {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        max-width: 260px;
+    }
+    /* line 161, src/assets/scss/pages/_app-commerce.scss */
+
+    .shop-header .store-tabs .tab-control {
+        display: block;
+        font-size: 1rem;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 600;
+        text-align: center;
+        width: 33.33%;
+        color: #ABB0BE;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        -webkit-transition: color .3s;
+        transition: color .3s
+    }
+
+
+    /* Extra small devices (phones, 600px and down) */
+    @media only screen and (max-width: 600px) {
+        .shop-header .store-tabs .tab-control.is-active {
+        color: none ;
+    }
+    .shop-header .store-tabs .tab-control {
+        margin-right: 80px !important;
+    }
+
+    .shop-header .store-tabs .store-naver{
+        background: none !important;
+    }
+
+
+    .accordion{
+        width: 350px !important;
+    }
+
+    /* line 176, src/assets/scss/pages/_app-commerce.scss */
+
+    .shop-header .store-tabs .tab-control.is-active:first-child ~ .store-naver {
+        margin-right: 60px
+    }
+
+
+    /* line 182, src/assets/scss/pages/_app-commerce.scss */
+
+    .shop-header .store-tabs .tab-control.is-active:nth-child(2) ~ .store-naver {
+        margin-right: 33.33% !important
+    }
+
+
+    /* line 188, src/assets/scss/pages/_app-commerce.scss */
+
+    .shop-header .store-tabs .tab-control.is-active:nth-child(3) ~ .store-naver {
+        margin-right: 66.66% !important
+    }
+
+
+    /* line 195, src/assets/scss/pages/_app-commerce.scss */
+
+    .shop-header .store-tabs .store-naver {
+        position: absolute;
+        bottom: 0;
+        right: 20px !important;
+        height: 2.8px;
+        width: 33.33%;
+    }
+    .shop-header .store-tabs {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        max-width: 460px;
+    }
 </style>
-
 {% else %}
 <style>
     .blllu{
@@ -679,106 +654,98 @@
 {% endif %}
 
 <style>
+    .prcg{
+        color: rgb(204, 29, 29) !important;
+    }
+
+    .prcg-dark{
+        color: rgb(214, 169, 169) !important;
+    }
 
 
-.prcg{
-    color: rgb(204, 29, 29) !important;
-}
+    .prcgr{
+        color: rgb(25, 139, 82) !important;
+    }
 
-.prcg-dark{
-    color: rgb(214, 169, 169) !important;
-}
+    .prcgr-dark{
+        color: rgb(177, 241, 209) !important;
+    }
 
 
-.prcgr{
-    color: rgb(25, 139, 82) !important;
-}
+        .explore-item-dark:hover{
+            border: 1px solid #060808 !important;
+            background-color: #050607;
+            transition: 1ms;
+        }
+        
+    .field input{
+        background-color: inherit;
+    }
+    .field-dark input{
+        background: #cbd6df !important;
+        border: 1px solid #222831 !important;
+        color: #030303 !important;
+    }
 
-.prcgr-dark{
-    color: rgb(177, 241, 209) !important;
-}
+    .grree{
+        background-color: #04a04a !important;
+    }
 
+    .grree-dark{
+        background-color: #527961 !important;
+        color: #ddd;
+    }
+    .grree-dark{
+        background-color: #527961 !important;
+        color: #ddd;
+    }
+
+    .cnti{
+        background-color: rgb(139, 189, 189);
+        color:rgb(28, 59, 59);
+    }
+
+    .cnti-dark{
+        background-color: rgb(139, 189, 189);
+        color: rgb(13, 22, 22);
+    }
+
+    .vidddd{
+        background-color: #ABB0BE;
+    }
+
+    .vidddd-dark{
+        background-color: #c7c7c7;
+        border: 1px solid #a3a3a3;
+    }
 
     .explore-item-dark:hover{
         border: 1px solid #060808 !important;
         background-color: #050607;
         transition: 1ms;
     }
-    
-.field input{
-    background-color: inherit;
-}
-.field-dark input{
-    background: #cbd6df !important;
-    border: 1px solid #222831 !important;
-    color: #030303 !important;
-}
-
-.grree{
-    background-color: #04a04a !important;
-}
-
-.grree-dark{
-    background-color: #527961 !important;
-    color: #ddd;
-}
-.grree-dark{
-    background-color: #527961 !important;
-    color: #ddd;
-}
-
-.cnti{
-    background-color: rgb(139, 189, 189);
-    color:rgb(28, 59, 59);
-}
-
-.cnti-dark{
-    background-color: rgb(139, 189, 189);
-    color: rgb(13, 22, 22);
-}
-
-.vidddd{
-    background-color: #ABB0BE;
-}
-
-.vidddd-dark{
-    background-color: #c7c7c7;
-    border: 1px solid #a3a3a3;
-}
-
-</style>
-<style>
-    .explore-item-dark:hover{
-        border: 1px solid #060808 !important;
-        background-color: #050607;
-        transition: 1ms;
-    }
 
 
-.blllu{
+    .blllu{
         color: rgb(11, 111, 241) !important;
     } 
     .blllu-dark{
 
         color: rgb(115, 147, 189) !important;
     }
-
-
 </style>
-
 
 {% get_current_language as lang %}
 {% if lang == "en" %}
 <style>
     .liffft{
-    position: absolute;
-    right: 20px !important;
-    top: 15px !important;
-}
+        position: absolute;
+        right: 20px !important;
+        top: 15px !important;
+    }
 
 </style>
 {% endif %}
-
 
 {% get_current_language as lang %}
 {% if lang == "ar" %}
@@ -855,14 +822,16 @@
 {% endif %}
 
     <div id="fb-root"></div>
-    <script>(function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
@@ -2521,7 +2490,7 @@
 {#                </div>#}
                 {% post_to_twitter 'this is my test' course.url 'Twitter' 'post-twitter' %}
                 {% post_to_facebook course.url 'Facebook' 'post-facebook' %}
-                {% post_to_linkedin  course.url 'post-linkedin' %}
+                {% post_to_linkedin  course.url 'Linkedin' 'post-linkedin' %}
                 <button class="button sharecoursemodalclose">Cancel</button>
             </footer>
         </div>
