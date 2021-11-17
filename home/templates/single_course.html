@@ -2492,7 +2492,7 @@
                 {% post_to_facebook course.url 'Facebook' 'post-facebook' %}
                 {% comment %} {% post_to_linkedin course.url 'post-linkedin' %} {% endcomment %}
                 <div class="linkedin-this">
-                    <a href="http://www.linkedin.com/shareArticle?url={{request.META['HTTP_HOST']}}{{course.url}}{{ request.get_full_path }}" target="_blank" class="post-linkedin">
+                    <a href="http://www.linkedin.com/shareArticle?url={{request.get_host}}{{course.url}}" target="_blank" class="post-linkedin">
                         <i class="fab fa-linkedin"></i>
                     </a>
                 </div>
