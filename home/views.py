@@ -1165,7 +1165,7 @@ def single_course(request, teacher_id, course_url):
     similar_parent_cat = course.scat_id
 
     # similar_courses = Courses.objects.filter(subcat_id=similar_cat).exclude(id=id)
-    similar_courses = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).order_by('scat_id').exclude(id=id)
+    similar_courses = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).filter(approval_status=2).order_by('scat_id').exclude(id=id)
 
     for i in similar_courses:
         rating_list = course_comments.objects.filter(course_id_id=i.id)
@@ -3953,13 +3953,37 @@ def enrollment(request, course_id):
 
     course = Courses.objects.get(pk=course_id)
     course.category = categories.objects.get(pk=course.scat_id)
-    similar_course = Courses.objects.filter(scat_id=course.scat_id).filter(~Q(id=course.id))
+    # similar_course = Courses.objects.filter(scat_id=course.scat_id).filter(~Q(id=course.id))
+    similar_cat = course.subcat_id
+    similar_parent_cat = course.scat_id
+    similar_course = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).filter(approval_status=2).order_by('scat_id').exclude(id=course_id)
+
+    discount = Discount.objects.all()
+    now = datetime.now().strftime('%Y-%m-%d')
+    for i in similar_course:
+        if discount.count() == 0:
+            discount_percent = 1
+        else:
+            if now > discount[0].expire_date:
+                discount_percent = 1
+            else:
+                not_str = discount[0].not_apply_course
+                not_list = not_str.split('.')
+                if str(i.id) in not_list:
+                    discount_percent = 1
+                else:
+                    discount_percent = (100 - discount[0].discount) / 100
+        i.discount_price = round(i.price * discount_percent, 2)
+
     for c in similar_course:
         c.link = courseUrlGenerator(c)
         rate_list = course_comments.objects.filter(course_id_id=c.id)
         c.rating = getRatingFunc(rate_list)
+        c.ratingCnt = course_comments.objects.filter(course_id_id=c.id).count()
         c.stuCnt = len(rate_list)
         c.videoCnt = getVideoCnt(c)
+
+    similar_course = sorted(similar_course, key=attrgetter('rating'), reverse=True)[:5]
 
     favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
         request.user.id)

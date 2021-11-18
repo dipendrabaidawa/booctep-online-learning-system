@@ -626,7 +626,12 @@
     <div class="store-sections">
       <div class="container">
         <div class="categories-header">
-          <h2>Similar courses</h2>
+          {% get_current_language as lang %}
+          {% if lang == 'ar' %}
+            <h2>دورات مماثلة</h2>
+          {% else %}
+            <h2>Similar courses</h2>
+          {% endif %}
         </div>
         <div
           id="products-tab"
@@ -824,7 +829,15 @@
                   >
                   <div class="product-actions">
                     <div class="left">
-                      <span>${{ course.price|unlocalize }}</span>
+                      {% if course.price > 0 %}
+                          {% if course.price != course.discount_price %}
+                          <b style="color:red;"><del style="font-weight: bold">${{ course.price|unlocalize }}</del>   <b style="color: green">${{ course.discount_price|unlocalize }}</b></b>
+                          {% else %}
+                          <b style="color:red;">${{ course.price|unlocalize }}</b>
+                          {% endif %}
+                      {% else %}
+                          <b style="color:green "> Free </b>
+                      {% endif %}
                     </div>
                     <div class="right">
                       <a
@@ -840,7 +853,7 @@
                         onclick="showVideoModal({{ course.id }})"
                       >
                         <i class="fa fa-play"></i>
-                        Promo
+                        {% trans 'Demo' %}
                       </a>
                     </div>
                   </div>

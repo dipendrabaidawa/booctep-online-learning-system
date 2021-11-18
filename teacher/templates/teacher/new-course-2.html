@@ -1122,6 +1122,18 @@
         });
 
         function addCourse() {
+            for(let section of sections)
+            {
+                if (section.videoList.length === 0) {
+                    $("#loadings").css("display","none")
+                    swal({
+                        title: "You must remove sections without video.",
+                        closeOnConfirm: false,
+                    });
+                    return;
+                }
+            }
+
             let url = "/store_course_2/";
             sections.forEach((item) => {
                 section_list.push({
@@ -1179,18 +1191,6 @@
             //         return;
             //     }
             // }
-
-            for(let section of sections)
-            {
-                if (section.videoList.length === 0) {
-                    $("#loadings").css("display","none")
-                    swal({
-                        title: "You must remove sections without video.",
-                        closeOnConfirm: false,
-                    });
-                    return;
-                }
-            }            
 
             form_data.append("course_id", course_id);
             form_data.append("video_list", JSON.stringify(videoList));

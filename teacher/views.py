@@ -574,7 +574,6 @@ def add_course(request):
         url_id = "{0:0=4d}".format(course.id)
         url = '/course/' + course.name + '/' + request.user.first_name + '_' + request.user.last_name + '_' + url_id
         course.course_url = url
-        # course.save()
         return render(request, 'teacher/new-course-4.html',
                       {'course_id': course_id, 'video_list': data['video_list'], 'question_list': data['question_list'],
                        'section_list': data['section_list'], 'course': course, 'promo_video': data['promo_video'], 'lang': getLanguage(request)[0]})
