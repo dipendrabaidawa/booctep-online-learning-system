@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 # from . import views
 # from django.urls import path
-
+from django.urls import include, path
 from django.conf import settings
 from django.conf.urls import include, url, i18n
 from django.conf.urls.static import static
@@ -96,6 +96,7 @@ urlpatterns += i18n.i18n_patterns(
     url(r'^course/(?P<teacher_id>[0-9]+)/(?P<course_url>\w+)/checkdiscountcode/$', checkdiscountcodewithid, name='check discount code single'),
     # url(r'^course/checkdiscountcode/$', checkdiscountcodewithid, name='check discount code single'),
     url(r'^student/enrollment/(?P<course_id>[0-9]+)/$', enrollment, name='student enrollment'),
+    path('student/enrollments/<course_ids>', enrollments, name='student enrollments'),
     url(r'^ecommerce_cart/$', ecommerce_cart, name='ecommerce_cart'),
     # url(r'^ecommerce_payment/(?P<id>[0-9]+)/$', ecommerce_payment, name='ecommerce_payment'),
     url(r'^ecommerce_payment/(?P<id>[0-9]+)/getcardinfo/$', getcardinfo, name='getcardinfo'),

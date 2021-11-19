@@ -334,7 +334,7 @@
                                         <!-- <span class="glyphicon glyphicon-option-vertical"> </span>-->
                                         <ul class="dropdown-menu crrct" style="background-color: #afb0b4;">
                                             <li><a href="#" onclick="openSpamModal()"><i class="fa fa-pencil"></i> تبليغ عن محتوى</a></li>
-                                            {% if interval < 30 %}
+                                            {% if interval < 30 and course.type == 0 %}
                                             <li><a href="#" onclick="openRefundModal()" ><i class="fa fa-pencil"></i> طلب إسترداد</a></li>
                                             {% endif %}
                                         </ul>
@@ -343,12 +343,6 @@
                                                 class="fa fa-trophy troph-i"></i></p>
                                         {% endif %}
                                     </div>
-                                    
-                                    
-                                       
-                                       
-                                    
-                                   
                                     {% else %}
                                     <a class="troph-2 mediabout mediabout-dark" href="#" style="margin-left: 45px !important;"
                                        onclick="openRatingModal()">Leave your ratings <i class="fa fa-star troph-i mediabout mediabout-dark"></i></a>
@@ -356,7 +350,7 @@
                                        style="margin-left: 45px !important; position: absolute;top: 20px;font-size: small;right: 360px;"
                                        onclick="openSpamModal()" class="mediabout mediabout-dark">Report Spam <i class="fa fa-file troph-i"
                                                                                 style="color: rgb(219, 135, 135)"></i></a>
-                                    {% if interval < 30 %}
+                                    {% if interval < 30 and course.type == 0 %}
                                         <a href="#"
                                            style="margin-left: 45px !important; position: absolute;top: 20px;font-size: small;right: 500px;"
                                            onclick="openRefundModal()" class="mediabout mediabout-dark">Refund Money <i class="fa fa-money-bill troph-i"

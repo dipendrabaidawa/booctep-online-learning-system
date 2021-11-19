@@ -134,10 +134,17 @@ def home_view(request):
 
     category_obj = categories.objects.all()
 
-    if type == -1:
-        course_list = Courses.objects.filter(approval_status=2).order_by('created_at')
+    if user_id == None:    
+        if type == -1:
+            course_list = Courses.objects.filter(approval_status=2).order_by('created_at')
+        else:
+            course_list = Courses.objects.filter(approval_status=2).filter(type=type).order_by('created_at')
     else:
-        course_list = Courses.objects.filter(approval_status=2).filter(type=type).order_by('created_at')
+        register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
+        if type == -1:
+            course_list = Courses.objects.filter(approval_status=2).exclude(id__in=register_course_ids).order_by('created_at')
+        else:
+            course_list = Courses.objects.filter(approval_status=2).filter(type=type).exclude(id__in=register_course_ids).order_by('created_at')
     
     # get discount information
     discount = Discount.objects.all()
@@ -3462,8 +3469,17 @@ def process_payment(request):
 
             obj = student_register_courses(student_id_id=request.user.id, course_id_id=course_id, date_created=invoice_time.strftime("%Y-%m-%d %H:%M:%S"))
             obj.save()
-    
-    return redirect(enrollment)
+    # if user's type is teacher then change his account to stu&teach
+    user_id = request.session.get("user_id")
+    user_type = request.session.get("user_type")
+    if user_type == "teacher":
+        user = User.objects.get(id=user_id)
+        user.group_id = 4
+        user.save()
+        request.session['user_type'] = "stuteach"
+        
+    course_ids = json.dumps(purchase_course_ids)
+    return redirect(reverse('student enrollments', kwargs={"course_ids": course_ids}))
     # return render(request, 'payment_done.html', {'purchase_courses': purchase_courses, 'student_id': request.user.id})
 
 @csrf_exempt
@@ -3480,7 +3496,17 @@ def payment_done(request, course_id, student_id):
 
         obj = student_register_courses(student_id_id=student_id, course_id_id=course_id, date_created=invoice_time.strftime("%Y-%m-%d %H:%M:%S"))
         obj.save()
-    return redirect(enrollment)
+
+    # if user's type is teacher then change his account to stu&teach
+    user_id = request.session.get("user_id")
+    user_type = request.session.get("user_type")
+    if user_type == "teacher":
+        user = User.objects.get(id=user_id)
+        user.group_id = 4
+        user.save()
+        request.session['user_type'] = "stuteach"
+
+    return redirect(reverse('student enrollment', kwargs={"course_id": course_id}))
     # return render(request, 'payment_done.html')
 
 
@@ -4003,6 +4029,76 @@ def enrollment(request, course_id):
                    'msg_cnt': msg_cnt,
                    'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt})
 
+@csrf_exempt
+def enrollments(request, course_ids):
+    if request.session.get('user_id') == None:
+        return redirect('/')
+    user_id = request.session.get("user_id")
+    user_type = request.session.get("user_type")
+
+    course_ids = json.loads(course_ids)
+
+    courses = [];
+    for course_id in course_ids:
+        course = Courses.objects.get(pk=course_id)
+        courses.append(course) 
+
+        register_courses = student_register_courses.objects.filter(course_id_id=course_id).filter(student_id_id=user_id)
+        if register_courses.count() == 0:
+            time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            register_course = student_register_courses(
+                course_id_id=course_id,
+                student_id_id=user_id,
+                last_completed_section_id=0,
+                date_created=time,
+                withdraw=0
+            )
+            register_course.save()
+            
+    course = Courses.objects.get(pk=course_ids[0])
+    course.category = categories.objects.get(pk=course.scat_id)
+    # similar_course = Courses.objects.filter(scat_id=course.scat_id).filter(~Q(id=course.id))
+    similar_cat = course.subcat_id
+    similar_parent_cat = course.scat_id
+    similar_course = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).filter(approval_status=2).filter(~Q(id=course.id)).order_by('scat_id').exclude(id=course_id)
+
+    discount = Discount.objects.all()
+    now = datetime.now().strftime('%Y-%m-%d')
+    for i in similar_course:
+        if discount.count() == 0:
+            discount_percent = 1
+        else:
+            if now > discount[0].expire_date:
+                discount_percent = 1
+            else:
+                not_str = discount[0].not_apply_course
+                not_list = not_str.split('.')
+                if str(i.id) in not_list:
+                    discount_percent = 1
+                else:
+                    discount_percent = (100 - discount[0].discount) / 100
+        i.discount_price = round(i.price * discount_percent, 2)
+
+    for c in similar_course:
+        c.link = courseUrlGenerator(c)
+        rate_list = course_comments.objects.filter(course_id_id=c.id)
+        c.rating = getRatingFunc(rate_list)
+        c.ratingCnt = course_comments.objects.filter(course_id_id=c.id).count()
+        c.stuCnt = len(rate_list)
+        c.videoCnt = getVideoCnt(c)
+
+    similar_course = sorted(similar_course, key=attrgetter('rating'), reverse=True)[:5]
+
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+        request.user.id)
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
+
+    return render(request, 'enrollments.html',
+                  {'courses': courses, 'similar_courses': similar_course, 'favList': favListShow,'lang': getLanguage(request)[0],
+                   'alreadyinFav': alreadyinFavView, 'cartList': cartListShow, 'stu_courses': stu_courses,
+                   'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt, 'msg_list': msg_list,
+                   'msg_cnt': msg_cnt,
+                   'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt})
 
 @csrf_exempt
 def searchCourseName(request):
