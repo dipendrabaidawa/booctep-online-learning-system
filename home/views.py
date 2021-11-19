@@ -3218,7 +3218,9 @@ def showCartList(request):
                 subDiscount += cart.course_id.price * (discount / 100)
 
         subTax += cart.course_id.price * (tax / 100)
-
+    
+    subDiscount = round(subDiscount, 2)
+        
     cartListTmp = Paginator(cartList, 2)
 
     try:
@@ -3453,13 +3455,16 @@ def process_payment(request):
         invoice_time = datetime.datetime.now()
         invoice_number = f"{uuid.uuid4()}-{str(invoice_time)}"
 
-        invoice = Invoices(invoice_number=invoice_number, course_id=course_id, student_id=request.user.id)
-        invoice.save()
+        register_course = student_register_courses.objects.filter(student_id_id=request.user.id).filter(course_id_id=course_id)
+        if not register_course:
+            invoice = Invoices(invoice_number=invoice_number, course_id=course_id, student_id=request.user.id)
+            invoice.save()
 
-        obj = student_register_courses(student_id_id=request.user.id, course_id_id=course_id, date_created=invoice_time.strftime("%Y-%m-%d %H:%M:%S"))
-        obj.save()
+            obj = student_register_courses(student_id_id=request.user.id, course_id_id=course_id, date_created=invoice_time.strftime("%Y-%m-%d %H:%M:%S"))
+            obj.save()
     
-    return render(request, 'payment_done.html', {'purchase_courses': purchase_courses, 'student_id': request.user.id})
+    return redirect(enrollment)
+    # return render(request, 'payment_done.html', {'purchase_courses': purchase_courses, 'student_id': request.user.id})
 
 @csrf_exempt
 def payment_done(request, course_id, student_id):
@@ -3468,12 +3473,15 @@ def payment_done(request, course_id, student_id):
     invoice_time = datetime.datetime.now()
     invoice_number = f"{uuid.uuid4()}-{str(invoice_time)}"
 
-    invoice = Invoices(invoice_number=invoice_number, course_id=course_id, student_id=student_id)
-    invoice.save()
+    register_course = student_register_courses.objects.filter(student_id_id=student_id).filter(course_id_id=course_id)
+    if not register_course:
+        invoice = Invoices(invoice_number=invoice_number, course_id=course_id, student_id=student_id)
+        invoice.save()
 
-    obj = student_register_courses(student_id_id=student_id, course_id_id=course_id, date_created=invoice_time.strftime("%Y-%m-%d %H:%M:%S"))
-    obj.save()
-    return render(request, 'payment_done.html')
+        obj = student_register_courses(student_id_id=student_id, course_id_id=course_id, date_created=invoice_time.strftime("%Y-%m-%d %H:%M:%S"))
+        obj.save()
+    return redirect(enrollment)
+    # return render(request, 'payment_done.html')
 
 
 @csrf_exempt
