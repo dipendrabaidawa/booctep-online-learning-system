@@ -1171,9 +1171,8 @@ def single_course(request, teacher_id, course_url):
     similar_cat = course.subcat_id
     similar_parent_cat = course.scat_id
 
-    # similar_courses = Courses.objects.filter(subcat_id=similar_cat).exclude(id=id)
-    similar_courses = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).filter(approval_status=2).order_by('scat_id').exclude(id=id)
-
+    register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
+    similar_courses = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).filter(approval_status=2).exclude(id=id).exclude(id__in=register_course_ids).order_by('scat_id')                               
     for i in similar_courses:
         rating_list = course_comments.objects.filter(course_id_id=i.id)
         i.rating = getRatingFunc(rating_list)
@@ -2706,10 +2705,18 @@ def searching(request):
 
     totalsearchresult = Courses.objects.filter(name__icontains=searchkeyword).count()
     sehList = []
-    if type == -1:
-        sehList = Courses.objects.filter(name__icontains=searchkeyword).filter(approval_status=2)
+
+    if user_id == None:
+        if type == -1:
+            sehList = Courses.objects.filter(name__icontains=searchkeyword).filter(approval_status=2)
+        else:
+            sehList = Courses.objects.filter(name__icontains=searchkeyword).filter(approval_status=2).filter(type=type)
     else:
-        sehList = Courses.objects.filter(name__icontains=searchkeyword).filter(approval_status=2).filter(type=type)
+        register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
+        if type == -1:
+            sehList = Courses.objects.filter(name__icontains=searchkeyword).filter(approval_status=2).exclude(id__in=register_course_ids)
+        else:
+            sehList = Courses.objects.filter(name__icontains=searchkeyword).filter(approval_status=2).filter(type=type).exclude(id__in=register_course_ids)
 
     discount = Discount.objects.all()
     now = datetime.now().strftime('%Y-%m-%d')
@@ -2998,10 +3005,17 @@ def single_category(request, id):
         sub_obj = subcategories.objects.filter(categories_id=category_id)
         for i in sub_obj:
             if Courses.objects.filter(subcat_id=i.id).exists():
-                if type == -1:
-                    course_list = Courses.objects.filter(subcat_id=i.id).filter(approval_status=2).order_by('-created_at')
+                if user_id == None:
+                    if type == -1:
+                        course_list = Courses.objects.filter(subcat_id=i.id).filter(approval_status=2).order_by('-created_at')
+                    else:
+                        course_list = Courses.objects.filter(subcat_id=i.id).filter(type=type).filter(approval_status=2).order_by('created_at')
                 else:
-                    course_list = Courses.objects.filter(subcat_id=i.id).filter(type=type).filter(approval_status=2).order_by('created_at')
+                    register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
+                    if type == -1:
+                        course_list = Courses.objects.filter(subcat_id=i.id).filter(approval_status=2).exclude(id__in=register_course_ids).order_by('-created_at')
+                    else:
+                        course_list = Courses.objects.filter(subcat_id=i.id).filter(type=type).filter(approval_status=2).exclude(id__in=register_course_ids).order_by('created_at')
 
                 for course in course_list:
                     rating_list = course_comments.objects.filter(course_id_id=course.id)
@@ -3237,7 +3251,7 @@ def showCartList(request):
     except EmptyPage:
         cartList = cartListTmp.page(cartListTmp.num_pages)
 
-    cartTotalSumPrice = subTotal - subTax - subDiscount
+    cartTotalSumPrice = round(subTotal - subTax - subDiscount, 2)
 
     favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
         request.user.id)
@@ -3469,6 +3483,11 @@ def process_payment(request):
 
             obj = student_register_courses(student_id_id=request.user.id, course_id_id=course_id, date_created=invoice_time.strftime("%Y-%m-%d %H:%M:%S"))
             obj.save()
+
+    # removing favorite courses if payed courses are in favorite list
+    register_course_ids = student_register_courses.objects.filter(student_id_id=request.user.id).values_list('course_id_id', flat=True)
+    student_favourite_courses.objects.filter(student_id_id=request.user.id, course_id_id__in=register_course_ids).delete()
+
     # if user's type is teacher then change his account to stu&teach
     user_id = request.session.get("user_id")
     user_type = request.session.get("user_type")
@@ -3496,6 +3515,12 @@ def payment_done(request, course_id, student_id):
 
         obj = student_register_courses(student_id_id=student_id, course_id_id=course_id, date_created=invoice_time.strftime("%Y-%m-%d %H:%M:%S"))
         obj.save()
+
+    # if course is in favorite list, then remove it from favorite list
+    student_favourite_courses.objects.filter(course_id_id=course_id, student_id_id=student_id).delete()
+    student_cart_courses.objects.filter(course_id_id=course_id, student_id_id=student_id).delete()
+    # if student_favourite_courses.objects.filter(course_id_id=course_id, student_id_id=student_id).exists():
+    #     favorite_course.delete()
 
     # if user's type is teacher then change his account to stu&teach
     user_id = request.session.get("user_id")
@@ -3987,10 +4012,12 @@ def enrollment(request, course_id):
 
     course = Courses.objects.get(pk=course_id)
     course.category = categories.objects.get(pk=course.scat_id)
-    # similar_course = Courses.objects.filter(scat_id=course.scat_id).filter(~Q(id=course.id))
+    
     similar_cat = course.subcat_id
     similar_parent_cat = course.scat_id
-    similar_course = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).filter(approval_status=2).order_by('scat_id').exclude(id=course_id)
+
+    register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
+    similar_course = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).filter(approval_status=2).exclude(id=course_id).exclude(id__in=register_course_ids).order_by('scat_id')
 
     discount = Discount.objects.all()
     now = datetime.now().strftime('%Y-%m-%d')
@@ -4057,10 +4084,11 @@ def enrollments(request, course_ids):
             
     course = Courses.objects.get(pk=course_ids[0])
     course.category = categories.objects.get(pk=course.scat_id)
-    # similar_course = Courses.objects.filter(scat_id=course.scat_id).filter(~Q(id=course.id))
+    
     similar_cat = course.subcat_id
     similar_parent_cat = course.scat_id
-    similar_course = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).filter(approval_status=2).filter(~Q(id=course.id)).order_by('scat_id').exclude(id=course_id)
+    register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
+    similar_course = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).filter(approval_status=2).exclude(id=course.id).exclude(id__in=register_course_ids).order_by('scat_id')
 
     discount = Discount.objects.all()
     now = datetime.now().strftime('%Y-%m-%d')
