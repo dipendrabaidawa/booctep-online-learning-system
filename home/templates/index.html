@@ -119,6 +119,24 @@
         }
     </style>
 
+    <style>
+
+        @media (max-width: 624px) {
+        .is-comboe-hide {
+
+            display: none !important
+            ;
+        }
+        .select-phone{
+            margin-left: 20px !important;
+        }
+        .shop-header-phone{
+            padding-right: 50px !important
+            ;
+        }
+       }
+    </style>
+
     <form method="post" id="index_form" action="" style="display:none;">
         {% csrf_token %}
         <input type="hidden" id="type" value="{{ type }}" name="type">
@@ -129,7 +147,7 @@
     <!-- Filters and courses -->
     <div id="shop-page" class="shop-wrapper">
         <div class="products-navigation" style="display: none;"></div>
-        <div class="shop-header shop-header-is-dark ">
+        <div class="shop-header shop-header-phone shop-header-is-dark ">
             <div class="container" style="display: flex; justify-content: space-between;">
                 <div class="store-tabs">
                     <a class="tab-control {% if type == -1 %}is-active{% endif %}"
@@ -141,8 +159,8 @@
                     <div class="store-naver"></div>
                 </div>
                 <div class="combo-item is-combo-dark">
-                    <div class="select is-rounded  ">
-                        <select class="is-comboe is-comboe-dark" style="border-radius:3px;height:40px;margin-top:2px;"
+                    <div class="select is-comboe-hide is-rounded  ">
+                        <select class="is-comboe  is-comboe-dark" style="border-radius:3px;height:40px;margin-top:2px;"
                                 id="category_id_2">
                             {% get_current_language as lang %}
                             {% if lang == "ar" %}
@@ -158,7 +176,7 @@
                             {% endif %}
                         </select>
                     </div>
-                    <div class="select is-rounded " >
+                    <div class="select select-phone is-rounded " >
                         <select class="is-comboe is-comboe-dark" id="category_id" data-select="{{ cat_id }}"
                                 style="border-radius:3px;height:40px;margin-top:2px" onchange="category()">
                             {% get_current_language as lang %}

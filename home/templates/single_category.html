@@ -4,18 +4,26 @@
     {% load i18n %}
 {% load l10n %}
 {% get_current_language as lang %}
+
+
+<style>
+
+@media only screen and (max-width: 700px) {
+
+.single_category {
+    padding-left: 25px !important;
+    padding-right: 25px !important;
+}
+}
+</style>
+
+
     <style>
 
         /* Loading Animation */
 
   
 
-        @media only screen and (max-width: 600px) {
-
-            .single_category {
-                padding-left: 15px !important;
-            }
-        }
 
         /****** Style Star Rating Widget *****/
         @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
@@ -54,6 +62,23 @@
             color: #FFD700;
         }
 
+@media (max-width: 624px) {
+.is-comboe-hide {
+
+    display: none !important
+    ;
+}
+.select-phone{
+    margin-left: 20px !important;
+}
+.shop-header-phone{
+    padding-right: 50px !important
+    ;
+}
+}
+
+
+
     </style>
     <div id="shop-page" class="shop-wrapper">
 
@@ -72,9 +97,11 @@
         </form>
 
         <div class="products-navigation" style="display: none;">
+
+            
         </div>
         <!-- Filters and courses -->
-        <div class="shop-header">
+        <div class="shop-header shop-header-phone">
             <div class="container ">
                 <div class="store-tabs">
                     <a data-tab="products-tab" class="tab-control{% if type == -1 %} is-active {% endif %}"
@@ -120,35 +147,7 @@
                                                 <!--Grid Row-->
                                                 <div class="image-row">
                                                     <!--Photo-->
-                                                    <div class="flex-1 has-background-image loading skeleton"
-                                                         style="background-color:rgb(233, 232, 232);">
-                                                        <div class="image-owner">
-                                                            <div class="name">
-                                                                <span class="fa fa-star"
-                                                                      style="color: rgb(255, 238, 80);"></span>
-                                                                <span class="fa fa-star"
-                                                                      style="color: rgb(255, 238, 80);"></span>
-                                                                <span class="fa fa-star"
-                                                                      style="color: rgb(255, 238, 80);"></span>
-                                                                <span class="fa fa-star"
-                                                                      style="color: rgb(255, 238, 80);"></span>
-                                                                <span class="fa fa-star"
-                                                                      style="color: rgb(255, 255, 255);"></span>
-                                                                <span style="font-size: medium; color: rgb(255, 238, 80);font-weight: 700;margin-left: 5px;">{{ course.rating }}</span>
-                                                            </div>
-                                                        </div>
-                                                        <div id="invite-pop" class="photo-like pop-button has-tooltip"
-                                                             data-title="Relationship" data-id="{{ course.id }}">
-                                                            <a href="#" class="inner">
-                                                                <i class="inactive-icon" data-feather="heart"></i>
-                                                            </a>
-                                                        </div>
-                                                        <a id="follow-pop" class="photo-time pop-button has-tooltip"
-                                                           data-title="Relationship">
-                                                            <i class="fa fa-shopping-cart checkit"
-                                                               style="font-size: 22px;color: #fff;"></i>
-                                                        </a>
-                                                    </div>
+                                                    
 
                                                     <div class="flex-1 has-background-image show-image"
                                                          data-background="{% static course.cover_img %}"
@@ -157,30 +156,41 @@
                                                             <div class="overlay"></div>
                                                         </a>
                                                         <div class="image-owner">
-                                                            <div class="name" style="display: flex; align-items: center;">
+                                                            <div class="name" style="display: flex; align-items: center;" style="font-size: 10px !important;">
                                                                 <form class="rating" data-rating="{{ course.rating }}" data-course="{{ course.id }}">
+
                                                                     <input type="radio" id="star10-{{ course.id }}" name="rating" value="5" disabled />
                                                                     <label class="full" for="star10-{{ course.id }}" title="Awesome - 5 stars"></label>
+
                                                                     <input type="radio" id="star9-{{ course.id }}" name="rating" value="4 and a half" disabled/>
                                                                     <label class="half" for="star9-{{ course.id }}" title="Pretty good - 4.5 stars"></label>
+
                                                                     <input type="radio" id="star8-{{ course.id }}" name="rating" value="4" disabled/>
                                                                     <label class="full" for="star8-{{ course.id }}" title="Pretty good - 4 stars"></label>
+
                                                                     <input type="radio" id="star7-{{ course.id }}" name="rating" value="3 and a half" disabled/>
                                                                     <label class="half" for="star7-{{ course.id }}" title="Meh - 3.5 stars"></label>
+
                                                                     <input type="radio" id="star6-{{ course.id }}" name="rating" value="3" disabled/>
                                                                     <label class="full" for="star6-{{ course.id }}" title="Meh - 3 stars"></label>
+
                                                                     <input type="radio" id="star5-{{ course.id }}" name="rating" value="2 and a half" disabled/>
                                                                     <label class="half" for="star5-{{ course.id }}" title="Kinda bad - 2.5 stars"></label>
+
                                                                     <input type="radio" id="star4-{{ course.id }}" name="rating" value="2" disabled/>
                                                                     <label class="full" for="star4-{{ course.id }}" title="Kinda bad - 2 stars"></label>
+
                                                                     <input type="radio" id="star3-{{ course.id }}" name="rating" value="1 and a half" disabled/>
                                                                     <label class="half" for="star3-{{ course.id }}" title="Meh - 1.5 stars"></label>
+
                                                                     <input type="radio" id="star2-{{ course.id }}" name="rating" value="1" disabled/>
                                                                     <label class="full" for="star2-{{ course.id }}" title="Sucks big time - 1 star"></label>
-                                                                    <input type="radio" id="star1-{{ course.id }}" name="rating" value="half" disabled/>    
-                                                                    <label class="half" for="star1-{{ course.id }}" title="Sucks big time - 0.5 stars" ></label>
+
+                                                                    <input type="radio" id="star1-{{ course.id }}" name="rating" value="half" disabled/>
+                                                                    <label class="half" for="star1-{{ course.id }}" title="Sucks big time - 0.5 stars"></label>
+
                                                                 </form>
-                                                                <span style="font-size: samll; color: rgb(255, 238, 80); cursor: default;">{{ course.rating|unlocalize }}&nbsp;({{ course.ratingCnt }})</span>
+                                                                <span style="font-size: small; color: rgb(255, 238, 80); cursor: default;">{{ course.rating|unlocalize }} &nbsp; ( {{ course.count }} )</span>
                                                             </div>
                                                         </div>
                                                         {% if user.is_authenticated %}

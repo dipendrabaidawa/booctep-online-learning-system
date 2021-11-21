@@ -673,6 +673,22 @@ margin: 0 auto;
   url('../img/1560.jpg') !important;
   clip-path: polygon(0 0, 100% 0%, 100% 87%, 0% 100%);
 }
+
+
+
+.cennnter{
+  width: 58.1% !important;
+  height: 90% !important;
+}
+
+
+@media (max-width: 624px) {
+.cennnter{
+  width: 90% !important;
+}
+
+}
+
 </style>
 
 <div class="aboutus aboutus-dark">
@@ -822,7 +838,7 @@ margin: 0 auto;
                         {% get_current_language as lang %}
                         {% if lang == "ar" %}
                         <h3 class=" mediabout-dark mediabout" style="margin-bottom: 30px !important;">عن منصة بوستيب</h3>
-                        <div class="cennnter cennnter-dark" style="width: 58.4% !important;" >
+                        <div class="cennnter cennnter-dark" style="" >
 
                           <video class="viddeo" poster="" id="player" playsinline controls>
                             <source src="{% static 'assets/videos/about.mp4' %}" style="width: 100% !important;" type="video/mp4" />
@@ -832,7 +848,7 @@ margin: 0 auto;
                         </div>
                         {% else %}
                         <h3 class=" mediabout-dark mediabout" style="margin-bottom: 30px !important;">About booctep</h3>
-                        <div class="cennnter cennnter-dark" style="width: 58.4% !important;" >
+                        <div class="cennnter cennnter-dark" style="" >
 
                           <video class="viddeo" poster="" id="player" playsinline controls>
                             <source src="{% static 'assets/videos/about.mp4' %}" style="width: 100% !important;" type="video/mp4" />
