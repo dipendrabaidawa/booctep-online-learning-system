@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Messages</title>
+    <title>Course content</title>
 
     <!-- Prevent the demo from appearing in search engines -->
     <meta name="robots" content="noindex">   
@@ -59,6 +59,7 @@
     <script src="https://cdn.plyr.io/3.5.10/plyr.js"></script>
     <script src="https://cdn.plyr.io/3.5.10/plyr.polyfilled.js"></script>
     <!-- Video Player And jQuery -->
+    
 
     <!-- Sweet Alert -->
     <link rel="stylesheet" href="{% static 'video/assets/css/sweetalert.css' %}">
@@ -615,218 +616,6 @@
 
 
 
-
-<script>
-    $(document).ready(function () {
-        var color = localStorage.getItem('mode');
-        if (color == "light") {
-            $(".getmodename").append("dark");
-        } else {
-            $(".getmodename").append("light");
-        }
-        console.log(color);
-        color_mode();
-        console.log("{{lang}}");
-    });
-
-    head = document.getElementsByTagName('HEAD')[0];
-
-    // Create new link Element
-    link = document.createElement('link');
-
-    // set the attributes for link element
-    link.rel = 'stylesheet';
-
-    link.type = 'text/css';
-
-    link.href = "/static/{{lang}}student/assets/css/dark.css";
-
-    $('.toggler').on('click', function () {
-        if (localStorage.getItem('mode') == 'light') {
-            localStorage.setItem('mode', 'dark');
-            $(".getmodename").empty();
-            $(".getmodename").append("light");
-
-        } else {
-            localStorage.setItem('mode', 'light');
-            $(".getmodename").empty();
-            $(".getmodename").append("dark");
-
-        }
-        color_mode();
-    });
-
-    function color_mode() {
-        if (localStorage.getItem('mode') == 'dark') {
-         //   head.appendChild(link);
-
-        } else {
-         //   head.removeChild(link);
-        }
-    }
-
-
-
-    function color_mode() {
-        if (localStorage.getItem('mode') == 'dark') {
-            $("body").addClass('body-dark');
-            $(".active").addClass('active-dark'); 
-            $(".nextt").addClass('nextt-dark'); 
-            $(".material-icons").addClass('material-icons-dark'); 
-            $(".btncheck").addClass('btncheck-dark'); 
-            $(".activve").addClass('activve-dark'); 
-            $(".icn").addClass('icn-dark'); 
-            $(".btn-light").addClass('btn-light-dark'); 
-            $(".navbar").addClass('navbar-dark'); 
-            $(".sidebar").addClass('sidebar-dark'); 
-            $(".border-left-2").addClass('border-left-2-dark'); 
-            $(".accordion").addClass('accordion-dark'); 
-            $(".backgg").addClass('backgg-dark'); 
-            $(".sidebar-secondary").addClass('sidebar-secondary-dark'); 
-            $(".btn-primary").addClass('btn-primary-dark');
-            $(".top").addClass('top-dark');
-            $(".top").addClass('top-dark');
-            $(".carousel-item").addClass('carousel-item-dark'); 
-            $(".message").addClass('message-dark');
-            $(".card").addClass('card-dark');
-            $(".active-a").addClass('active-a-dark'); 
-            $(".menu-icon").addClass('menu-icon-dark'); 
-            $(".nav-drop-header").addClass('nav-drop-header-dark');  
-            $(".disabled").addClass('disabled-dark'); 
-            $(".alert-soft-primary ").addClass('alert-soft-primary-dark'); 
-            $(".cnti").addClass('cnti-dark'); 
-            $(".sidebar-light-dodger-blue").addClass('sidebar-light-dodger-blue-dark'); 
-            $(".blllu").addClass('blllu-dark'); 
-            $(".bllu").addClass('bllu-dark'); 
-            $(".addbg").addClass('addbg-dark'); 
-            $(".progress").addClass('progress-dark'); 
-            $(".carddy").addClass('card-dark'); 
-            $(".accordion__item").addClass('accordion__item-dark'); 
-            $(".brd").addClass('brd-dark');
-            $(".card-footer").addClass('card-footer-dark');
-            $(".custom-file").addClass('custom-file-dark');
-            $(".accordion__menu").addClass('accordion__menu-dark'); 
-            $(".lineeeet").addClass('lineeeet-dark');
-            $(".app-messages__container").addClass('app-messages__container-dark'); 
-            $(".hrrrr").addClass('hrrrr-dark');
-            $(".sweet-alert").addClass('sweet-alert-dark'); 
-            $(".is-light").addClass('is-light-dark'); 
-            $(".page-num").addClass('page-num-dark'); 
-            $(".form-control").addClass('form-control-dark'); 
-            $(".bgg-primary").addClass('bgg-primary-dark'); 
-            $(".Quiz").addClass('Quiz-dark'); 
-            $(".accorddd").addClass('accorddd-dark'); 
-            $(".dropdown-menu-right").addClass('dropdown-menu-right-dark'); 
-            $(".track").addClass('track-dark'); 
-            $(".selecttt").addClass('selecttt-dark'); 
-            $(".tehead").addClass('tehead-dark'); 
-            $(".bgk").addClass('bgk-dark'); 
-            $(".bg-primary").addClass('bg-primary-dark'); 
-            $(".socig").addClass('socig-dark'); 
-            $(".couponbg").addClass('couponbg-dark'); 
-            $(".soci").addClass('soci-dark'); 
-            $(".card-support").addClass('card-support-dark'); 
-            $(".cennnter").addClass('cennnter-dark'); 
-            $(".mediabout").addClass('mediabout-dark'); 
-            // head.removeChild(link);
-
-        } else {
-            $("body").removeClass('body-dark');
-            $(".active").removeClass('active-dark'); 
-            $(".form-control").removeClass('form-control-dark'); 
-            $(".sweet-alert").removeClass('sweet-alert-dark'); 
-            $(".nextt").removeClass('nextt-dark'); 
-            $(".couponbg").removeClass('couponbg-dark'); 
-            $(".bgk").removeClass('bgk-dark'); 
-            $(".tehead").removeClass('tehead-dark'); 
-            $(".Quiz").removeClass('Quiz-dark'); 
-            $(".selecttt").removeClass('selecttt-dark'); 
-            $(".accordion__menu").removeClass('accordion__menu-dark'); 
-            $(".btncheck").removeClass('btncheck-dark'); 
-            $(".custom-file").removeClass('custom-file-dark');
-            $(".activve").removeClass('activve-dark'); 
-            $(".page-num").removeClass('page-num-dark'); 
-            $(".border-left-2").removeClass('border-left-2-dark'); 
-            $(".app-messages__container").removeClass('app-messages__container-dark'); 
-            $(".material-icons").removeClass('material-icons-dark'); 
-            $(".icn").removeClass('icn-dark'); 
-            $(".accordion").removeClass('accordion-dark'); 
-            $(".carddy").removeClass('card-dark'); 
-            $(".addbg").removeClass('addbg-dark'); 
-            $(".accordion__item").removeClass('accordion__item-dark'); 
-            $(".bgg-primary").removeClass('bgg-primary-dark'); 
-            $(".carousel-item").removeClass('carousel-item-dark'); 
-            $(".sidebar").removeClass('sidebar-dark'); 
-            $(".alert-soft-primary ").removeClass('alert-soft-primary-dark'); 
-            $(".navbar").removeClass('navbar-dark');  
-            $(".btn-light").removeClass('btn-light-dark'); 
-            $(".btn-primary").removeClass('btn-primary-dark');
-            $(".sidebar-secondary").removeClass('sidebar-secondary-dark'); 
-            $(".top").removeClass('top-dark');
-            $(".card-footer").removeClass('card-footer-dark');
-            $(".backgg").removeClass('backgg-dark'); 
-            $(".message").removeClass('message-dark');
-            $(".dropdown-menu-right").removeClass('dropdown-menu-right-dark'); 
-            $(".menu-icon").removeClass('menu-icon-dark'); 
-            $(".nav-drop-header").removeClass('nav-drop-header-dark');  
-            $(".disabled").removeClass('disabled-dark'); 
-            $(".sidebar-light-dodger-blue").removeClass('sidebar-light-dodger-blue-dark'); 
-            $(".cnti").removeClass('cnti-dark'); 
-            $(".card").removeClass('card-dark');
-            $(".progress").removeClass('progress-dark'); 
-            $(".blllu").removeClass('blllu-dark'); 
-            $(".bllu").removeClass('bllu-dark'); 
-            $(".active-a").removeClass('active-a-dark'); 
-            $(".card-header").removeClass('card-header-dark');
-            $(".brd").removeClass('brd-dark');
-            $(".lineeeet").removeClass('lineeeet-dark');
-            $(".hrrrr").removeClass('hrrrr-dark');
-            $(".is-light").removeClass('is-light-dark'); 
-            $(".accorddd").removeClass('accorddd-dark'); 
-            $(".track").removeClass('track-dark'); 
-            $(".socig").removeClass('socig-dark'); 
-            $(".bg-primary").removeClass('bg-primary-dark'); 
-            $(".soci").removeClass('soci-dark'); 
-            $(".card-support").removeClass('card-support-dark'); 
-            $(".cennnter").removeClass('cennnter-dark'); 
-            $(".mediabout").removeClass('mediabout-dark'); 
-            // head.removeChild(link);
-        }
-    }
-
-
-
-    function check_video(id) {
-        $.ajax({
-            method: "POST",
-            url: "/video_check/",
-            data: {
-                'id': id,
-            },
-            success: function (response) {
-                console.log(response)
-                if (response['msg'] == "success") {
-                    if(response['continous'] == 1){
-                        course_name = response['course_name']
-                        quiz_id = response['quiz_id']
-                        question_no = response['question_no']
-                        window.location = `/quiz/${course_name}/${quiz_id}/?question=${question_no}`
-                    } else{
-                        window.location = "/video/playground/" + response['id'];
-                    }
-
-                } else if (response['msg'] == "error") {
-                    swal("Course Video Not Found!", {
-                        icon: "info",
-                        button: "Ok",
-                        closeOnClickOutside: false,
-                    }).then(function () {
-                    });
-                }
-            }
-        });
-    }
-</script>
 <script>
 
     $(function () {
@@ -1129,6 +918,380 @@
 </script>
 
 
+
+
+<script>
+    $(document).ready(function () {
+        var color = localStorage.getItem('mode');
+        if (color == "light") {
+            $(".getmodename").append("dark");
+        } else {
+            $(".getmodename").append("light");
+        }
+        console.log(color);
+        color_mode();
+        console.log("{{lang}}");
+    });
+
+    head = document.getElementsByTagName('HEAD')[0];
+
+    // Create new link Element
+    link = document.createElement('link');
+
+    // set the attributes for link element
+    link.rel = 'stylesheet';
+
+    link.type = 'text/css';
+
+    link.href = "/static/{{lang}}student/assets/css/dark.css";
+
+    $('.toggler').on('click', function () {
+        if (localStorage.getItem('mode') == 'light') {
+            localStorage.setItem('mode', 'dark');
+            $(".getmodename").empty();
+            $(".getmodename").append("light");
+
+        } else {
+            localStorage.setItem('mode', 'light');
+            $(".getmodename").empty();
+            $(".getmodename").append("dark");
+
+        }
+        color_mode();
+    });
+
+    function color_mode() {
+        if (localStorage.getItem('mode') == 'dark') {
+            head.appendChild(link);
+
+        } else {
+            head.removeChild(link);
+        }
+    }
+
+    function color_mode() {
+        if (localStorage.getItem('mode') == 'dark') {
+            $("body").addClass('body-dark');
+            $(".active").addClass('active-dark'); 
+            $(".nextt").addClass('nextt-dark'); 
+            $(".material-icons").addClass('material-icons-dark'); 
+            $(".btncheck").addClass('btncheck-dark'); 
+            $(".activve").addClass('activve-dark'); 
+            $(".icn").addClass('icn-dark'); 
+            $(".btn-light").addClass('btn-light-dark'); 
+            $(".navbar").addClass('navbar-dark'); 
+            $(".sidebar").addClass('sidebar-dark'); 
+            $(".backgg").addClass('backgg-dark'); 
+            $(".sidebar-secondary").addClass('sidebar-secondary-dark'); 
+            $(".btn-primary").addClass('btn-primary-dark');
+            $(".top").addClass('top-dark');
+            $(".top").addClass('top-dark');
+            $(".dancin-bc").addClass('dancin-bc-dark');
+            $(".screen").addClass('screen-dark');
+            $(".message").addClass('message-dark');
+            $(".card").addClass('card-dark');
+            $(".active-a").addClass('active-a-dark'); 
+            $(".menu-icon").addClass('menu-icon-dark'); 
+            $(".nav-drop-header").addClass('nav-drop-header-dark');  
+            $(".disabled").addClass('disabled-dark'); 
+            $(".alert-soft-primary ").addClass('alert-soft-primary-dark'); 
+            $(".cnti").addClass('cnti-dark'); 
+            $(".sidebar-light-dodger-blue").addClass('sidebar-light-dodger-blue-dark'); 
+            $(".blllu").addClass('blllu-dark'); 
+            $(".progress").addClass('progress-dark'); 
+            $(".brd").addClass('brd-dark');
+            $(".card-footer").addClass('card-footer-dark');
+            $(".custom-file").addClass('custom-file-dark');
+            $(".lineeeet").addClass('lineeeet-dark');
+            $(".app-messages__container").addClass('app-messages__container-dark'); 
+            $(".hrrrr").addClass('hrrrr-dark');
+            $(".sweet-alert").addClass('sweet-alert-dark'); 
+            $(".is-light").addClass('is-light-dark'); 
+            $(".form-control").addClass('form-control-dark'); 
+            $(".accorddd").addClass('accorddd-dark'); 
+            $(".dropdown-menu-right").addClass('dropdown-menu-right-dark'); 
+            $(".track").addClass('track-dark'); 
+            $(".tehead").addClass('tehead-dark'); 
+            $(".bgk").addClass('bgk-dark'); 
+            $(".socig").addClass('socig-dark'); 
+            $(".soci").addClass('soci-dark'); 
+            $(".card-support").addClass('card-support-dark'); 
+            $(".cennnter").addClass('cennnter-dark'); 
+            $(".mediabout").addClass('mediabout-dark'); 
+            // head.removeChild(link);
+        } else {
+            $("body").removeClass('body-dark');
+            $(".active").removeClass('active-dark'); 
+            $(".form-control").removeClass('form-control-dark'); 
+            $(".sweet-alert").removeClass('sweet-alert-dark'); 
+            $(".nextt").removeClass('nextt-dark'); 
+            $(".bgk").removeClass('bgk-dark'); 
+            $(".tehead").removeClass('tehead-dark'); 
+            $(".btncheck").removeClass('btncheck-dark'); 
+            $(".custom-file").removeClass('custom-file-dark');
+            $(".activve").removeClass('activve-dark'); 
+            $(".app-messages__container").removeClass('app-messages__container-dark'); 
+            $(".material-icons").removeClass('material-icons-dark'); 
+            $(".icn").removeClass('icn-dark'); 
+            $(".dancin-bc").removeClass('dancin-bc-dark');
+            $(".screen").removeClass('screen-dark');
+            $(".sidebar").removeClass('sidebar-dark'); 
+            $(".alert-soft-primary ").removeClass('alert-soft-primary-dark'); 
+            $(".navbar").removeClass('navbar-dark');  
+            $(".btn-light").removeClass('btn-light-dark'); 
+            $(".btn-primary").removeClass('btn-primary-dark');
+            $(".sidebar-secondary").removeClass('sidebar-secondary-dark'); 
+            $(".top").removeClass('top-dark');
+            $(".card-footer").removeClass('card-footer-dark');
+            $(".backgg").removeClass('backgg-dark'); 
+            $(".message").removeClass('message-dark');
+            $(".dropdown-menu-right").removeClass('dropdown-menu-right-dark'); 
+            $(".menu-icon").removeClass('menu-icon-dark'); 
+            $(".nav-drop-header").removeClass('nav-drop-header-dark');  
+            $(".disabled").removeClass('disabled-dark'); 
+            $(".sidebar-light-dodger-blue").removeClass('sidebar-light-dodger-blue-dark'); 
+            $(".cnti").removeClass('cnti-dark'); 
+            $(".card").removeClass('card-dark');
+            $(".progress").removeClass('progress-dark'); 
+            $(".blllu").removeClass('blllu-dark'); 
+            $(".active-a").removeClass('active-a-dark'); 
+            $(".card-header").removeClass('card-header-dark');
+            $(".brd").removeClass('brd-dark');
+            $(".lineeeet").removeClass('lineeeet-dark');
+            $(".hrrrr").removeClass('hrrrr-dark');
+            $(".is-light").removeClass('is-light-dark'); 
+            $(".accorddd").removeClass('accorddd-dark'); 
+            $(".track").removeClass('track-dark'); 
+            $(".socig").removeClass('socig-dark'); 
+            $(".soci").removeClass('soci-dark'); 
+            $(".card-support").removeClass('card-support-dark'); 
+            $(".cennnter").removeClass('cennnter-dark'); 
+            $(".mediabout").removeClass('mediabout-dark'); 
+            // head.removeChild(link);
+        }
+    }
+</script>
+
+
+
+
+<script>
+    $(document).ready(function () {
+        var color = localStorage.getItem('mode');
+        if (color == "light") {
+            $(".getmodename").append("dark");
+        } else {
+            $(".getmodename").append("light");
+        }
+        console.log(color);
+        color_mode();
+        console.log("{{lang}}");
+    });
+
+    head = document.getElementsByTagName('HEAD')[0];
+
+    // Create new link Element
+    link = document.createElement('link');
+
+    // set the attributes for link element
+    link.rel = 'stylesheet';
+
+    link.type = 'text/css';
+
+    link.href = "/static/{{lang}}student/assets/css/dark.css";
+
+    $('.toggler').on('click', function () {
+        if (localStorage.getItem('mode') == 'light') {
+            localStorage.setItem('mode', 'dark');
+            $(".getmodename").empty();
+            $(".getmodename").append("light");
+
+        } else {
+            localStorage.setItem('mode', 'light');
+            $(".getmodename").empty();
+            $(".getmodename").append("dark");
+
+        }
+        color_mode();
+    });
+
+    function color_mode() {
+        if (localStorage.getItem('mode') == 'dark') {
+         //   head.appendChild(link);
+
+        } else {
+         //   head.removeChild(link);
+        }
+    }
+
+
+
+    function color_mode() {
+        if (localStorage.getItem('mode') == 'dark') {
+            $("body").addClass('body-dark');
+            $(".active").addClass('active-dark'); 
+            $(".nextt").addClass('nextt-dark'); 
+            $(".material-icons").addClass('material-icons-dark'); 
+            $(".btncheck").addClass('btncheck-dark'); 
+            $(".activve").addClass('activve-dark'); 
+            $(".icn").addClass('icn-dark'); 
+            $(".btn-light").addClass('btn-light-dark'); 
+            $(".navbar").addClass('navbar-dark'); 
+            $(".sidebar").addClass('sidebar-dark'); 
+            $(".border-left-2").addClass('border-left-2-dark'); 
+            $(".accordion").addClass('accordion-dark'); 
+            $(".accordion__bg").addClass('accordion__bg-dark');
+            $(".backgg").addClass('backgg-dark'); 
+            $(".sidebar-secondary").addClass('sidebar-secondary-dark'); 
+            $(".btn-primary").addClass('btn-primary-dark');
+            $(".top").addClass('top-dark');
+            $(".top").addClass('top-dark');
+            $(".carousel-item").addClass('carousel-item-dark'); 
+            $(".message").addClass('message-dark');
+            $(".card").addClass('card-dark');
+            $(".active-a").addClass('active-a-dark'); 
+            $(".menu-icon").addClass('menu-icon-dark'); 
+            $(".nav-drop-header").addClass('nav-drop-header-dark');  
+            $(".disabled").addClass('disabled-dark'); 
+            $(".alert-soft-primary ").addClass('alert-soft-primary-dark'); 
+            $(".cnti").addClass('cnti-dark'); 
+            $(".sidebar-light-dodger-blue").addClass('sidebar-light-dodger-blue-dark'); 
+            $(".blllu").addClass('blllu-dark'); 
+            $(".bllu").addClass('bllu-dark'); 
+            $(".addbg").addClass('addbg-dark'); 
+            $(".accordion__toggle").addClass('accordion__toggle-dark'); 
+            $(".progress").addClass('progress-dark'); 
+            $(".carddy").addClass('card-dark'); 
+            $(".accordion__item").addClass('accordion__item-dark'); 
+            $(".brd").addClass('brd-dark');
+            $(".card-footer").addClass('card-footer-dark');
+            $(".custom-file").addClass('custom-file-dark');
+            $(".accordion__menu").addClass('accordion__menu-dark'); 
+            $(".lineeeet").addClass('lineeeet-dark');
+            $(".app-messages__container").addClass('app-messages__container-dark'); 
+            $(".hrrrr").addClass('hrrrr-dark');
+            $(".sweet-alert").addClass('sweet-alert-dark'); 
+            $(".is-light").addClass('is-light-dark'); 
+            $(".page-num").addClass('page-num-dark'); 
+            $(".form-control").addClass('form-control-dark'); 
+            $(".bgg-primary").addClass('bgg-primary-dark'); 
+            $(".Quiz").addClass('Quiz-dark'); 
+            $(".accorddd").addClass('accorddd-dark'); 
+            $(".dropdown-menu-right").addClass('dropdown-menu-right-dark'); 
+            $(".track").addClass('track-dark'); 
+            $(".selecttt").addClass('selecttt-dark'); 
+            $(".tehead").addClass('tehead-dark'); 
+            $(".bgk").addClass('bgk-dark'); 
+            $(".bg-primary").addClass('bg-primary-dark'); 
+            $(".socig").addClass('socig-dark'); 
+            $(".couponbg").addClass('couponbg-dark'); 
+            $(".soci").addClass('soci-dark'); 
+            $(".card-support").addClass('card-support-dark'); 
+            $(".cennnter").addClass('cennnter-dark'); 
+            $(".mediabout").addClass('mediabout-dark'); 
+            // head.removeChild(link);
+
+        } else {
+            $("body").removeClass('body-dark');
+            $(".active").removeClass('active-dark'); 
+            $(".form-control").removeClass('form-control-dark'); 
+            $(".sweet-alert").removeClass('sweet-alert-dark'); 
+            $(".nextt").removeClass('nextt-dark'); 
+            $(".couponbg").removeClass('couponbg-dark'); 
+            $(".bgk").removeClass('bgk-dark'); 
+            $(".tehead").removeClass('tehead-dark'); 
+            $(".Quiz").removeClass('Quiz-dark'); 
+            $(".selecttt").removeClass('selecttt-dark'); 
+            $(".accordion__menu").removeClass('accordion__menu-dark'); 
+            $(".btncheck").removeClass('btncheck-dark'); 
+            $(".custom-file").removeClass('custom-file-dark');
+            $(".activve").removeClass('activve-dark'); 
+            $(".page-num").removeClass('page-num-dark'); 
+            $(".border-left-2").removeClass('border-left-2-dark'); 
+            $(".app-messages__container").removeClass('app-messages__container-dark'); 
+            $(".material-icons").removeClass('material-icons-dark'); 
+            $(".icn").removeClass('icn-dark'); 
+            $(".accordion").removeClass('accordion-dark'); 
+            $(".accordion__bg").removeClass('accordion__bg-dark'); 
+            $(".carddy").removeClass('card-dark'); 
+            $(".addbg").removeClass('addbg-dark'); 
+            $(".accordion__item").removeClass('accordion__item-dark'); 
+            $(".bgg-primary").removeClass('bgg-primary-dark'); 
+            $(".carousel-item").removeClass('carousel-item-dark'); 
+            $(".sidebar").removeClass('sidebar-dark'); 
+            $(".alert-soft-primary ").removeClass('alert-soft-primary-dark'); 
+            $(".navbar").removeClass('navbar-dark');  
+            $(".btn-light").removeClass('btn-light-dark'); 
+            $(".btn-primary").removeClass('btn-primary-dark');
+            $(".sidebar-secondary").removeClass('sidebar-secondary-dark'); 
+            $(".top").removeClass('top-dark');
+            $(".card-footer").removeClass('card-footer-dark');
+            $(".accordion__toggle").removeClass('accordion__toggle-dark'); 
+            $(".backgg").removeClass('backgg-dark'); 
+            $(".message").removeClass('message-dark');
+            $(".dropdown-menu-right").removeClass('dropdown-menu-right-dark'); 
+            $(".menu-icon").removeClass('menu-icon-dark'); 
+            $(".nav-drop-header").removeClass('nav-drop-header-dark');  
+            $(".disabled").removeClass('disabled-dark'); 
+            $(".sidebar-light-dodger-blue").removeClass('sidebar-light-dodger-blue-dark'); 
+            $(".cnti").removeClass('cnti-dark'); 
+            $(".card").removeClass('card-dark');
+            $(".progress").removeClass('progress-dark'); 
+            $(".blllu").removeClass('blllu-dark'); 
+            $(".bllu").removeClass('bllu-dark'); 
+            $(".active-a").removeClass('active-a-dark'); 
+            $(".card-header").removeClass('card-header-dark');
+            $(".brd").removeClass('brd-dark');
+            $(".lineeeet").removeClass('lineeeet-dark');
+            $(".hrrrr").removeClass('hrrrr-dark');
+            $(".is-light").removeClass('is-light-dark'); 
+            $(".accorddd").removeClass('accorddd-dark'); 
+            $(".track").removeClass('track-dark'); 
+            $(".socig").removeClass('socig-dark'); 
+            $(".bg-primary").removeClass('bg-primary-dark'); 
+            $(".soci").removeClass('soci-dark'); 
+            $(".card-support").removeClass('card-support-dark'); 
+            $(".cennnter").removeClass('cennnter-dark'); 
+            $(".mediabout").removeClass('mediabout-dark'); 
+            // head.removeChild(link);
+        }
+    }
+
+
+
+    function check_video(id) {
+        $.ajax({
+            method: "POST",
+            url: "/video_check/",
+            data: {
+                'id': id,
+            },
+            success: function (response) {
+                console.log(response)
+                if (response['msg'] == "success") {
+                    if(response['continous'] == 1){
+                        course_name = response['course_name']
+                        quiz_id = response['quiz_id']
+                        question_no = response['question_no']
+                        window.location = `/quiz/${course_name}/${quiz_id}/?question=${question_no}`
+                    } else{
+                        window.location = "/video/playground/" + response['id'];
+                    }
+
+                } else if (response['msg'] == "error") {
+                    swal("Course Video Not Found!", {
+                        icon: "info",
+                        button: "Ok",
+                        closeOnClickOutside: false,
+                    }).then(function () {
+                    });
+                }
+            }
+        });
+    }
+</script>
+
 </body>
+
 
 </html>

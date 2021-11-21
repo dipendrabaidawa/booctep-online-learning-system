@@ -17,36 +17,43 @@
 {% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{% static 'teacher/assets/css/sweetalert.css' %}" type="text/css">
-    <style>
 
-        .teacher {
-            float: right !important;
-        }
+<link rel="stylesheet" href="{% static 'assets/css/sweetalert.css' %}">
+<style>
+    .bluesky {
+        background: #61e076bf !important;
+    }
 
-        .bluesky {
-            background: #61e076bf !important;
-        }
+    .student {
+        float: right !important;
+    }
 
-        .message {
-            max-width: 300px;
-            clear: both;
-            text-decoration: none;
-            list-style-type: none;
-            margin: 5px 5px 0px 5px;
-            float: left;
-            margin-right: 20px;
-            padding: 0px 0px;
-            min-width: 160px;
-            min-height: 10px;
-            max-width: 350px;
-            border-radius: 5px;
-            line-height: 1.4;
-            word-wrap: break-word;
-            color: #444444;
-            text-align: left;
-        }
-    </style>
+    .message {
+        max-width: 300px;
+        clear: both;
+        text-decoration: none;
+        list-style-type: none;
+        margin-bottom: 0px;
+        float: left;
+        margin-right: 20px;
+        padding: 0px 0px;
+        min-width: 160px;
+        min-height: 10px;
+        max-width: 350px;
+        border-radius: 5px;
+        line-height: 1.4;
+        word-wrap: break-word;
+        color: #444444;
+        text-align: left;
+    }
+
+
+    .mdk-drawer-layout__content .app-messages__container{
+        margin:0 !important;
+        padding: 0 !important
+    }
+</style>
+
 {% endblock %}
 
 {% block content %}
@@ -54,317 +61,292 @@
 <style>
 
 
-    .mdk-drawer-layout__content .app-messages__container-dark{
-        background-color: #4c525e !important;
-    }
-    
-    .blllu{
-        color: rgb(11, 111, 241) !important;
-    } 
-    
-    .blllu-dark{
-        color: rgb(177, 197, 223) !important;
-        margin-right: 8px !important;
-    }
-    
-    
-    .card-footer{
-        background-color: rgb(255, 255, 255) !important;
-        border-bottom: 0.5px solid rgb(211, 228, 236)!important;
-    }
-    
-    
-    .bllu{
-        color: rgb(57, 137, 241) !important;
-    } 
-    .bllu-dark{
+.mdk-drawer-layout__content .app-messages__container-dark{
+background-color: #4c525e !important;
+}
 
-        color: rgb(177, 200, 230) !important;
-    }
-    .card-footer-dark{
-        background-color: rgb(26, 28, 34) !important;
-        border: 1px solid rgb(9, 10, 12) !important;
-    }
-    
-    .btn-light{
-        background-color: #3a76d1 !important;
-        color: rgb(199, 199, 199) !important;
-        
-        border: 1px solid  #2d62b3 !important;
-        box-shadow: none !important;
-    }
-    
-    
-    .btn-light-dark{
-        background-color: #323741 !important;
-        color: rgb(199, 199, 199) !important;
-        
-        border: 1px solid  #21242b !important;
-        box-shadow: none !important;
-    }
-    
-    
-    .brd{
-        border: 1px solid rgb(201, 201, 201);
-        color: #fff;
-    }
-    
-    .brd-dark{
-        border: 1px solid rgb(98, 112, 121);
-        color: rgb(202, 202, 202);
-    }
-    
-    
-    .avatar-offline:after,
-    .avatar-offline:before,
-    .avatar-online:after,
-    .avatar-online:before {
-        display: none !important;
-    }
-    
-    
-    .sidebar-dark{
-        background-color: #323741 !important;
-        border-left: 1px solid #323741 !important;
-    }
-    
-    
-    .sidebar-dark .divee{
-        background-color: #323741 !important;
-        border-left: 1px solid #1d1f22 !important;
-    }
-    
-    
-    .mediabout{
-        color: rgb(21, 43, 71) !important;
-    }
-      
-    .mediabout-dark{
-       color: rgb(219, 219, 219) !important;
-    }
-    
-    
-    .ptt{
-        padding-top: 80px !important;
-    }
-    .btn-primary{
-        background-color: rgb(33, 150, 243)!important;
-        color: rgb(254, 254, 255);
-        float: right !important;
-        margin-left: 15px !important;
-        border: 1px solid rgb(20, 71, 167) !important;
-    }
-    
-    .btn-primary-dark{
-        background-color: #323741 !important;
-        color: rgb(199, 199, 199) !important;
-        float: right !important;
-        border: 1px solid  #21242b !important;
-        margin-left: 15px !important;
-        box-shadow: none !important;
-    }
-    
-    
-    .message__body{
-        text-align: right !important;
-        width: 250px !important;
-    }
-    
-    .card-dark{
-            background-color: rgb(195, 211, 226) !important;
-            border: 1px solid rgb(196, 201, 211) !important;
-    }
-    
-    
-    .message__body .card{
-            background-color: rgb(235, 237, 240) !important;
-            border: 1px solid rgb(215, 220, 228) !important;
-        }
-    
-    .message{
-        background-color: transparent !important;
-    }
-    
-    .message-dark{
-        background-color: transparent !important;
-    }
-    
-    .teachername{
-        color: rgb(1, 36, 59) !important;
-        font-weight:700 !important;
-        text-decoration: none !important;
-        border: 0 !important;
-    }
-    
-    .teachermsg{
-        color: rgb(0, 77, 128);
-    }
-    
-    strong{
-        border-bottom: none !important;
-    }
-    
-    </style>
-    
+.blllu{
+color: rgb(11, 111, 241) !important;
+} 
 
-    {% get_current_language as lang %}
-    {% if lang == "ar" %}
-    <style>
-    
-    
-    /* Extra small devices (phones, 600px and down) */
-    @media only screen and (min-width: 800px) {
-    
-       .app-messages__container{
-           width: 600px !important;
-       }
-    
-    }
-    
-     Extra small devices (phones, 600px and down) 
-    @media only screen and (max-width: 500px) {
-    
-       .app-messages__container{
-           width: 100px !important;
-       }
-    
-    }
-    
-    
-    .app-messages__container{
-        width: 1150px !important;
-    }
-    
-    .mediabout{
-        color: rgb(255, 255, 255) !important;
-    }
-      
-    .mediabout-dark{
-       color: rgb(219, 219, 219) !important;
-    }
-    
-    </style>
-    {% endif %}
-    
-    {% get_current_language as lang %}
-    {% if lang == "en" %}
-    <style>
-    
-    
-    
-    .app-messages__container{
-        width: 1200px !important;
-    }
-    
-    .mediabout{
-        color: rgb(255, 255, 255) !important;
-    }
-      
-    .mediabout-dark{
-       color: rgb(219, 219, 219) !important;
-    }
-    
-    
-    /* Extra small devices (phones, 600px and down) */
-    @media only screen and (max-width: 768px) {
-    
-    /*.app-messages__container{
-        width: 200px !important;
-    }*/
-    
-    }
-
-    #toogle_drawer {
-        display: none;
-    }
-
-    @media only screen and (max-width: 768px) and (min-width: 440px) {
-        #toogle_drawer {
-            display: initial;
-        }
-        .sidebar.sidebar-right.sidebar-light.o-hidden.ptt {
-            display: none;
-            z-index: -11 !important;
-        }
-
-        .sidebar.sidebar-left.sidebar-light.o-hidden.ptt {
-            display: none;
-            z-index: -11 !important;
-        }
-
-        #content {
-            width: 70% !important;
-        }
-
-        #delete_history {
-            margin-left: 20px !important;
-            font-size: 7px;
-        }
-
-        .d-flex.flex-column {
-            /*width: 120px;*/
-            font-size: 10px;
-        }
-
-        #text {
-            font-size: 10px;
-        }
-
-        #send {
-            font-size: 9px;
-        }
-
-       /* .mr-3 {
-            width: 40px;
-        }*/
-
-        #info {
-            font-size: 9px !important;
-            width: 100px;
-        }
-
-        .app-messages__container {
-            width: 300px !important;
-        }
-
-        .mdk-drawer.js-mdk-drawer {
-            width: 0px !important;
-        }
-
-        #default-drawer {
-            width: 48px !important;
-        }
-
-        .message.message-dark {
-            width: 30px;
-        }
-
-        .message.message-dark.teacher {
-            width: 30px;
-        }
-
-        .card-body {
-            font-size: 10px;
-        }
-
-        b.mediabout {
-            font-size: 10px !important;
-        }
-
-        .mdk-drawer__content.top-0 {
-            width: 120px;
-        }
-
-    }
+.blllu-dark{
+color: rgb(177, 197, 223) !important;
+margin-right: 8px !important;
+}
 
 
-    
-    </style>
-    {% endif %}
+.card-footer{
+background-color: rgb(255, 255, 255) !important;
+border-bottom: 0.5px solid rgb(211, 228, 236)!important;
+}
+
+
+.card-footer-dark{
+background-color: rgb(26, 28, 34) !important;
+border: 1px solid rgb(9, 10, 12) !important;
+}
+
+.btn-light{
+background-color: #3a76d1 !important;
+color: rgb(199, 199, 199) !important;
+
+border: 1px solid  #2d62b3 !important;
+box-shadow: none !important;
+}
+
+
+.btn-light-dark{
+background-color: #323741 !important;
+color: rgb(199, 199, 199) !important;
+
+border: 1px solid  #21242b !important;
+box-shadow: none !important;
+}
+
+
+.brd{
+border: 1px solid rgb(201, 201, 201);
+color: #fff;
+}
+
+.brd-dark{
+border: 1px solid rgb(98, 112, 121);
+color: rgb(202, 202, 202);
+}
+
+
+.avatar-offline:after,
+.avatar-offline:before,
+.avatar-online:after,
+.avatar-online:before {
+display: none !important;
+}
+
+
+.sidebar-dark{
+background-color: #323741 !important;
+border-left: 1px solid #323741 !important;
+}
+
+
+.sidebar-dark .divee{
+background-color: #323741 !important;
+border-left: 1px solid #1d1f22 !important;
+}
+
+
+.mediabout{
+color: rgb(21, 43, 71) !important;
+}
+
+.mediabout-dark{
+color: rgb(219, 219, 219) !important;
+}
+
+
+.ptt{
+padding-top: 90px !important;
+}
+.btn-primary{
+background-color: rgb(33, 150, 243)!important;
+color: rgb(254, 254, 255);
+float: right !important;
+margin-left: 15px !important;
+border: 1px solid rgb(20, 71, 167) !important;
+}
+
+.btn-primary-dark{
+background-color: #323741 !important;
+color: rgb(199, 199, 199) !important;
+float: right !important;
+border: 1px solid  #21242b !important;
+margin-left: 15px !important;
+box-shadow: none !important;
+}
+
+
+.message__body{
+text-align: right !important;
+width: 250px !important;
+}
+
+.card-dark{
+    background-color: rgb(195, 211, 226) !important;
+    border: 1px solid rgb(196, 201, 211) !important;
+}
+
+
+.message__body .card{
+    background-color: rgb(235, 237, 240) !important;
+    border: 1px solid rgb(215, 220, 228) !important;
+}
+
+.message{
+background-color: transparent !important;
+}
+
+.message-dark{
+background-color: transparent !important;
+}
+
+.teachername{
+color: rgb(1, 36, 59) !important;
+font-weight:700 !important;
+text-decoration: none !important;
+border: 0 !important;
+}
+
+.teachermsg{
+color: rgb(0, 77, 128);
+}
+
+strong{
+border-bottom: none !important;
+}
+
+.mediabout{
+color: rgb(255, 255, 255) !important;
+}
+
+.mediabout-dark{
+color: rgb(219, 219, 219) !important;
+}
+
+
+.justify-content-center {
+justify-content: center !important;
+}
+
+</style>
+
+{% get_current_language as lang %}
+{% if lang == "ar" %}
+<style>
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (min-width: 800px) {
+
+.app-messages__container{
+   width: 600px !important;
+}
+
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 500px) {
+
+.app-messages__container{
+   width: 150px !important;
+}
+
+}
+
+
+.app-messages__container{
+width: 1150px !important;
+}
+
+.mediabout{
+color: rgb(255, 255, 255) !important;
+}
+
+.mediabout-dark{
+color: rgb(219, 219, 219) !important;
+}
+
+</style>
+{% endif %}
+
+{% get_current_language as lang %}
+{% if lang == "en" %}
+<style>
+
+
+
+.app-messages__container{
+width: 1200px !important;
+}
+
+.mediabout{
+color: rgb(255, 255, 255) !important;
+}
+
+.mediabout-dark{
+color: rgb(219, 219, 219) !important;
+}
+
+
+
+</style>
+{% endif %}
+
+<style>
+
+.content-to-hide{
+    display: none;
+}    
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+.app-messages__container{
+width: 500px !important;
+}
+.hide-on-phone{
+    color: rgb(30, 42, 53);
+}
+.hide-on-phone-dark{
+
+
+    color: #fff;
+}
+.pl-50{
+    padding-left: 50px;
+}
+
+.content-to-hide{
+    background-color: rgb(242, 245, 248) !important;
+    width: 100vw !important;
+    display: block;
+    height: 100vh !important;
+    color: rgb(30, 33, 39);
+}
+}
+</style>
+
+<div class="hide-on-phone">
+
+    <div class="content-to-hide">
+        <div class="container">
+            {% get_current_language as lang %}
+            {% if lang == "ar" %}
+            
+            <center>
+        <div class="mdk-drawer-layout__content " id="err" data-perfect-scrollbar>
+            
+            <h2 style="" class="pl-50 mt-5 mediabout mediabout-dark">من فضلك, يمكنك المراسلة عبر الجهاز المحمول </h2>
+            
+           
+        </div>
+    </center>
+        {% else %}
+        <center>
+        <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
+            
+            
+            <h2 style="" class="pl-50 mt-5 mediabout mediabout-dark">Please select the teacher to start</h2>
+           
+        </div>
+        {% endif %}
+        </center>
+         </div><!-- /.container -->
+     
+     </div>
 
 <div class=" page__container page-section"style="margin:0 !important;padding: 0 !important;height:100% !important">
-    <div data-push data-responsive-width="440px" data-has-scrollable-region data-fullbleed
-         class="mdk-drawer-layout js-mdk-drawer-layout">
+    <div data-push data-responsive-width="768px" data-has-scrollable-region data-fullbleed
+         class="mdk-drawer-layout js-mdk-drawer-layout" >
         <div class=" d-none" id="content" data-perfect-scrollbar>
             <div class="app-messages__container app-messages__container-dark d-flex flex-column h-100 pb-4">
                 <div class="navbar card-footer card-footer-dark navbar-expand-sm navbar-shadow z-1" id="messages-navbar">
@@ -418,15 +400,37 @@
                 </div>
             </div>
         </div>
-        <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
-            <h2 style="text-align: center;" class="mt-5 mediabout mediabout-dark">Please select the student to start</h2>
-            <div class="d-flex justify-content-center align-items-center">
-                <img src="{% static 'assets/img/no-messages.svg' %}" style="width: 40%; height: auto;" alt="">
-            </div>
+           
+        {% get_current_language as lang %}
+        {% if lang == "ar" %}
+        
+        <center>
+    <div class="mdk-drawer-layout__content " id="err" data-perfect-scrollbar>
+        
+        <h2 style="" class="mt-5 mediabout mediabout-dark">من فضلك قم بأختيار محادثة</h2>
+        
+       
+        <div class="d-flex justify-content-center align-items-center">
+            <img src="{% static 'assets/img/no-messages.svg' %}" style="width: 40%; height: auto;" alt="">
         </div>
-        <div class="mdk-drawer js-mdk-drawer" data-align="end" id="messages-drawer">
-            <div class="mdk-drawer__content top-0">
-                <div class="sidebar sidebar-dark sidebar-right sidebar-light o-hidden ptt">
+    </div>
+</center>
+    {% else %}
+    <center>
+    <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
+        
+        
+        <h2 style="" class="mt-5 mediabout mediabout-dark">Please select the teacher to start</h2>
+       
+        <div class="d-flex justify-content-center align-items-center">
+            <img src="{% static 'assets/img/no-messages.svg' %}" style="width: 40%; height: auto;" alt="">
+        </div>
+    </div>
+    {% endif %}
+    </center>
+        <div class="mdk-drawer js-mdk-drawer " data-align="end" id="messages-drawer">
+            <div class="mdk-drawer__content top-0 hide-phone">
+                <div class="sidebar sidebar-dark sidebar-right sidebar-light o-hidden  ptt">
                     <div class="d-flex flex-column h-100">
                         <div class="sidebar-heading" style="height: 40px;padding-top: 10px;">Students</div>
                         <div class="flex" data-perfect-scrollbar>
@@ -469,6 +473,11 @@
             </div>
         </div>
     </div>
+</div>
+
+
+
+
     <div class="sweet-alert showSweetAlert visible" id="delete_modal" data-custom-class="" data-has-cancel-button="true"
          data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="true"
          data-animation="pop" data-timer="null" style="display: none; margin-top: -169px;">
@@ -510,6 +519,7 @@
     </div>
     <div class="sweet-overlay" tabindex="-1" style="opacity: 1.09; display: none;" id="modal_back"></div>
 </div>  
+
 {% endblock %}
 
 {% block script %}

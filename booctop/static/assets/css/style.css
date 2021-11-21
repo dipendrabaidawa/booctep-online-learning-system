@@ -801,36 +801,12 @@ hr{
 
 /* line 496, src/assets/scss/layout/_layout-navbar.scss */
 
-.navbar .navbar-item.is-icon .icon-link {
-  position: relative;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 6px;
-  -webkit-transition: all .3s;
-  transition: all .3s
-}
-
 
 
 
 
 /* line 571, src/assets/scss/layout/_layout-navbar.scss */
 
-.navbar .navbar-item.is-icon .icon-link .mdi {
-  font-size: 20px;
-  color: #999;
-  -webkit-transition: all .3s;
-  transition: all .3s
-}
 
 
 /* line 580, src/assets/scss/layout/_layout-navbar.scss */

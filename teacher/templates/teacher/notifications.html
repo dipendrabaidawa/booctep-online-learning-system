@@ -193,7 +193,73 @@ div.navbar{
 
     </style>
 
+
+<style>
+
+    .content-to-hide{
+        display: none;
+    }    
+    
+    /* Extra small devices (phones, 600px and down) */
+    @media only screen and (max-width: 600px) {
+    
+    .app-messages__container{
+    width: 500px !important;
+    }
+    .hide-on-phone{
+        color: rgb(30, 42, 53);
+    }
+    .hide-on-phone-dark{
+    
+    
+        color: #fff;
+    }
+    .pl-50{
+        padding-left: 50px;
+    }
+    
+    .content-to-hide{
+        background-color: rgb(242, 245, 248) !important;
+        width: 100vw !important;
+        display: block;
+        height: 100vh !important;
+        color: rgb(30, 33, 39);
+    }
+    }
+    </style>
     {% load static %}
+
+
+<div class="hide-on-phone">
+
+        <div class="content-to-hide">
+            <div class="container">
+                {% get_current_language as lang %}
+                {% if lang == "ar" %}
+                
+                <center>
+            <div class="mdk-drawer-layout__content " id="err" data-perfect-scrollbar>
+                
+                <h2 style="" class="pl-50 mt-5 mediabout mediabout-dark">من فضلك, يمكنك المراسلة عبر الجهاز المحمول </h2>
+                
+               
+            </div>
+        </center>
+            {% else %}
+            <center>
+            <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
+                
+                
+                <h2 style="" class="pl-50 mt-5 mediabout mediabout-dark">Please select the teacher to start</h2>
+               
+            </div>
+            {% endif %}
+            </center>
+             </div><!-- /.container -->
+         
+         </div>
+
+         
     <div data-push data-responsive-width="768px" data-has-scrollable-region data-fullbleed
          class="mdk-drawer-layout js-mdk-drawer-layout">
         <div class="mdk-drawer-layout__content" data-perfect-scrollbar>
@@ -351,6 +417,7 @@ div.navbar{
             </div>
         </div>
     </div>
+</div>
 
     <div class="sweet-overlay" tabindex="-1" style="opacity: 1.09; display: none;" id="noti_modal_back"></div>
 

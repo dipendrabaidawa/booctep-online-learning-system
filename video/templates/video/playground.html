@@ -7,6 +7,95 @@
     {% load static %}
 
     <style>
+
+
+/*  VIDEO PLAYER CONTAINER
+############################### */
+.vid-container {
+  position: relative;
+  padding-bottom: 52%;
+  padding-top: 30px; 
+  height: 0; 
+width:70%;
+float:left;
+}
+
+.vid-container iframe,
+.vid-container object,
+.vid-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 360px;
+}
+
+
+/*  VIDEOS PLAYLIST 
+############################### */
+.vid-list-container {
+  width: 30%;
+height:360px;
+  overflow: hidden;
+float:right;
+}
+
+.vid-list-container:hover, .vid-list-container:focus {
+overflow-y: auto;
+}
+
+ol#vid-list {
+margin:0;
+padding:0;
+background: #222;
+}
+
+ol#vid-list li {
+list-style: none;
+}
+
+ol#vid-list li a {
+text-decoration: none;
+background-color: #222;
+height:55px;
+display:block;
+padding:10px;
+}
+
+ol#vid-list li a:hover {
+background-color:#666666
+}
+
+.vid-thumb {
+float:left;
+  margin-right: 8px;
+}
+
+.active-vid { 
+background:#3A3A3A;
+}
+
+#vid-list .desc {
+  color: #CACACA;
+  font-size: 13px;
+  margin-top:5px;
+}
+
+
+@media (max-width: 624px) {
+  body {
+      margin: 15px;
+  }
+  .caption {
+      margin-top: 40px;
+  }
+  .vid-list-container {
+      padding-bottom: 20px;
+  }
+
+}
+
+
         .teacher {
             float: right !important;
         }
@@ -204,16 +293,6 @@
             background-color: rgb(63, 0, 82) !important;
         }
         
-        .accordion{
-            background-color: lightgreen !important;
-            border: 0 !important;
-        }
-
-        .accordion-dark{
-            background-color: lightgreen !important;
-            border: 0 !important;
-        }
-
         .accordion__item{
             border-radius: 3px !important;
             border: 0 !important;
@@ -265,23 +344,34 @@
         }
         .accordion{
             margin: 0 !important;
-            padding: 0 !important
+            padding: 0 !important;
+            border: 0 !important;
+            color: #fff !important;
+            background-color: rgb(158, 172, 187) !important;
         }
         .accordion-dark{
-                background-color: rgb(59, 109, 216) !important;
-                border-bottom: 0!important;
+                background-color: rgb(56, 66, 87) !important;
+                color: #fff;
+                order: 0 !important;
+                color: #fff !important;
             }
 
-        .accordion__toggle.collapsed{
-            margin: 0 !important;
+     
+
+        .accordion__toggle{
+            background-color: rgb(215, 221, 226) !important;
         }
 
         .accordion__toggle-dark{
-            border-bottom: 0 !important;
+            background-color: rgb(24, 33, 49) !important;
         }
-        
+
         .sweet-alert-dark{
             background-color: rgb(158, 171, 179) !important;
+        }
+
+        .app-video{
+            height: 90% !important
         }
 
     </style>
@@ -373,7 +463,7 @@
                     </div>
                 </div>
                 <div id="show" class="">
-                    <div class="app-video" style="height: 92% !important">
+                    <div class="app-video" style="">
                         <video autoplay poster="{% static 'assets/img/setting.jpg' %}" id="player" playsinline controls>
                             <source type="video/webm" src="../../../../static{{ first_video.url }}"/>
                             <!-- Captions are optional -->
@@ -432,10 +522,10 @@
         <div class="mdk-drawer js-mdk-drawer" data-align="end" id="messages-drawer">
             <div class="mdk-drawer__content top-0">
                 <div class="sidebar sidebar-dark sidebar-right o-hidden">
-                    <div class="d-flex flex-column h-100">
-                        <div style="margin-top: 30px;" class="flex" data-perfect-scrollbar>
-                            <div class="sidebar-headig"
-                                 style="width: 100%;position: fixed;top: 0;right: 0;height: 50px !important; z-index: 99999;">
+                    <div class="d-flex flex-column">
+                        <div sclass="flex" data-perfect-scrollbar>
+                            <div class=""
+                                 style="width: 100%;position: fixed;top: 0;right: 0;height: 0px !important; z-index: 99999;">
                                  {% get_current_language as lang %}
                                  {% if lang == "ar" %}
                                 <b style="top:12px;position:absolute;right:20px;font-size: 20px;font-weight: 700;" class="mediabout mediabout-dark">محتوى الدورة</b>
@@ -445,11 +535,12 @@
                                 {% endif %}
                             </div>
                             <hr>
-                            <ul class="list-group mb-3" style="">
+                            <ul class="list-group" style="margin-top:30px">
                                     {% for ele in section_list %}
                                     <div class="accordion accordion-dark " id="parent">
-                                        <div class="accordion__item accordion__item-dark">
-                                            <a href="#" class="accordion__toggle accordion__toggle-dark collapsed" data-toggle="collapse"
+                                        <div class=" ">
+                                            
+                                            <a href="" class="accordion__toggle accordion__toggle-dark collapsed" data-toggle="collapse"
                                                data-target="#course-toc-{{ ele.id }}" data-parent="#parent">
                                                 <span class="flex mediabout mediabout-dark">{{ ele.name }}</span>
                                                 <span class="accordion__toggle-icon material-icons mediabout mediabout-dark">keyboard_arrow_down</span>
@@ -1297,3 +1388,8 @@
 
 
 
+<!-- Concatenated js plugins and jQuery -->
+<!-- Video player js -->
+
+<!-- jQuery -->
+<script src="/static/assets/vendor/jquery.min.js"></script>

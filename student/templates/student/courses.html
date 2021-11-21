@@ -12,9 +12,6 @@ Course
     {% include "./layout/header.html" %}
     {% endwith %}
     <style>
-        html {
-            overflow-y: auto;
-        }
         /* Ratings widget */
         .rate {
             display: inline-block;
@@ -250,6 +247,9 @@ Course
     font-weight: 900 !important;
 }
 
+.heigght{
+    height: auto !important;
+}
 </style>
 
 {% endif %}
@@ -275,11 +275,12 @@ Course
         </form>
     </div>
 
-{#    <div class="page__container ">#}
-    <div class="row card-group-row mb-lg-8pt">
+    <div class="layout-mini backgg backgg-dark" style="height: 100vh;">
+        
+    <div class="row card-group-row mb-lg-8pt" >
         {% for i in course_list %}
         <div class="col-sm-3 card-group-row-col">
-            <div class="card card-dark overlay-show card-lg overlay-primary-dodger-blue stack-1 card-group-row-card" style="max-height: 300px; margin-left: 10px; margin-right:10px;position: relative !important;" style="">
+            <div class="card card-dark overlay-show card-lg overlay-primary-dodger-blue stack-1 card-group-row-card" style="max-height: auto !important;height: auto; margin-left: 10px; margin-right:10px;position: relative !important;" style="">
                 <div class="card-body d-flex flex-column">
                     <div class="d-flex align-items-center">
                         <div class="flex">
@@ -328,7 +329,7 @@ Course
                         <small class="ml-8pt mediabout mediabout-dark" style="color: rgb(240, 127, 75) !important;">{{ i.rating|unlocalize  }}</small>
                     </div>
 {#                    <p class="mt-16pt text-black-70 flex" style="overflow: hidden;">{{ i.course_id.description }}</p>#}
-                    <div class="mt-16pt mediabout mediabout-dark rigggt" style="font-size: 15px; height: 100px;"> {{ i.course_id.description | safe | truncatechars:200 }} </div>
+                    <div class="mt-16pt mediabout mediabout-dark rigggt" style="font-size: 15px; height: 70px;"> {{ i.course_id.description | safe | truncatechars:200 }} </div>
                     <div class="d-flex align-items-center justify-content-center" style="margin-top:20px;">
                         {% get_current_language as lang %}
                         {% if lang == "ar" %}
@@ -344,6 +345,8 @@ Course
             </div>
         </div>
         {% endfor %}
+    </div>
+
     </div>
     <center style="margin-top: 50px;">
         {% if course_list.has_other_pages %}
