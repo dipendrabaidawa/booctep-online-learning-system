@@ -155,7 +155,7 @@ def dashboard(request):
         sum += getRatingFunc(rating_list)
         if len(rating_list) > 0:
             cnt += 1
-    if cnt is 0:
+    if cnt == 0:
         total_rating = 0
     else:
         total_rating = round(sum / cnt, 1)
