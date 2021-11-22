@@ -1,4 +1,4 @@
-from teacher.models import TestVideo
+from teacher.models import VideoUploads
 from django.conf import settings
 import vimeo
 import os
@@ -13,7 +13,7 @@ def my_jobs():
     )
     
     path = '/uploads/courses/videos/'
-    to_upload = TestVideo.objects.filter(vimeo_url='')
+    to_upload = VideoUploads.objects.filter(vimeo_url='')
     for v in to_upload:
         full_path = settings.STATICFILES_DIRS[0] + '/' + v.url
         
