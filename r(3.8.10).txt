@@ -23,6 +23,7 @@ django-widget-tweaks==1.4.9
 djangorestframework==3.12.4
 future==0.18.2
 idna==3.3
+image==1.5.33
 img2pdf==0.4.3
 joblib==1.1.0
 lxml==4.6.4
