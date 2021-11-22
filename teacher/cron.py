@@ -8,7 +8,7 @@ def my_jobs():
     client = vimeo.VimeoClient(
         key=settings.VIMEO_KEY,  
         token=settings.VIMEO_TOKEN,
-        user="web.mobile@hotmail.com"
+        # user="web.mobile@hotmail.com"
         secret=settings.VIMEO_SECRET
     )
     
