@@ -140,7 +140,7 @@ DATABASES = {
     # }
    'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'booctep',
+        'NAME': 'booctop',
         'USER': 'root', # 'root',
         'PASSWORD': '',
         'HOST': 'localhost', #'localhost',   # Or an IP Address that your DB is hosted on
