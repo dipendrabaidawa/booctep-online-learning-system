@@ -9,6 +9,65 @@
     <style>
 
 
+.dropbtn {
+  background-color: #5d6164;
+  color: white;
+  padding: 5px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #373a3d;
+}
+.dropbtn-dark {
+  background-color: #dce0e2;
+  color: rgb(54, 53, 53);
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #ced2d4;
+}
+
+.dropdown {
+  margin-top: 10px;
+  margin-left: 10px;
+  position: relative;
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 100px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+
+.dropdown-content-dark {
+  background-color: #272d36;
+}
+
+.dropdown-content-dark a {
+  color: rgb(230, 227, 227);
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+
 /*  VIDEO PLAYER CONTAINER
 ############################### */
 .vid-container {
@@ -19,6 +78,17 @@
 width:70%;
 float:left;
 }
+
+.troph-2{
+    color: #808aa5;
+    cursor: pointer;
+}
+
+.troph-2-dark{
+    color: #202a46;
+    cursor: pointer;
+}
+
 
 .vid-container iframe,
 .vid-container object,
@@ -192,6 +262,13 @@ background:#3A3A3A;
         }
         
         
+        .sidebar{
+            background-color: #f0f0f3 !important;
+            border-left: 1px solid #dededf !important;
+        }
+        
+        
+        
         .sidebar-dark{
             background-color: #22252c !important;
             border-left: 1px solid #323741 !important;
@@ -339,7 +416,7 @@ background:#3A3A3A;
 
         .crrct{
             position: absolute !important;
-            left: 810px !important;
+            left: 80px !important;
             top: 50px !important;
         }
         .accordion{
@@ -347,7 +424,7 @@ background:#3A3A3A;
             padding: 0 !important;
             border: 0 !important;
             color: #fff !important;
-            background-color: rgb(158, 172, 187) !important;
+            background-color: rgb(214, 223, 233) !important;
         }
         .accordion-dark{
                 background-color: rgb(56, 66, 87) !important;
@@ -359,7 +436,7 @@ background:#3A3A3A;
      
 
         .accordion__toggle{
-            background-color: rgb(215, 221, 226) !important;
+            background-color: rgb(192, 219, 243) !important;
         }
 
         .accordion__toggle-dark{
@@ -374,6 +451,15 @@ background:#3A3A3A;
             height: 90% !important
         }
 
+        .more-info{
+            background-color: #d9ddeb !important;
+        }
+        .more-info-dark{
+            background-color: #25262b !important;
+        }
+        [dir=ltr] hr{
+            border-top: 0 !important;
+        }
     </style>
 
     <div data-push data-responsive-width="768px" data-has-scrollable-region data-fullbleed
@@ -415,41 +501,23 @@ background:#3A3A3A;
                                     </nav> 
                                     {% get_current_language as lang %}
                                     {% if lang == "ar" %}
-                                    <div class="fleeex">
+                                    <div class="fleeex ">
                                         <a class="troph-2 mediabout mediabout-dark" href="#" style="margin-right: 30px;"
                                         onclick="openRatingModal()"><b style="font-size: 17px;">أضف تقييم</b> <i class="fa fa-star troph-i mediabout mediabout-dark"></i></a>
-                                        <a data-toggle="dropdown" class="troph-2" style="color: rgb(226, 224, 224);font: xx-large;margin-right: 150px;margin-top: 3px;">
-                                            <i class="fa fa-bars"></i>
-                                        </a>
-                                        <!-- <span class="glyphicon glyphicon-option-vertical"> </span>-->
-                                        <ul class="dropdown-menu crrct" style="background-color: #afb0b4;">
-                                            <li><a href="#" onclick="openSpamModal()"><i class="fa fa-pencil"></i> تبليغ عن محتوى</a></li>
-                                            {% if interval < 30 and course.type == 0 %}
-                                            <li><a href="#" onclick="openRefundModal()" ><i class="fa fa-pencil"></i> طلب إسترداد</a></li>
-                                            {% endif %}
-                                        </ul>
-                                        {% if course.type == 0 %}
+
+                                        
+                                        
                                         <p class="troph mediabout mediabout-dark" id="cert" style="cursor:not-allowed !important;" onclick="gotoQuiz()"><b style="font-size: 17px;" >أختبار الحصول على الشهادة</b>  <i
                                                 class="fa fa-trophy troph-i"></i></p>
-                                        {% endif %}
+                                        
                                     </div>
                                     {% else %}
                                     <a class="troph-2 mediabout mediabout-dark" href="#" style="margin-left: 45px !important;"
                                        onclick="openRatingModal()">Leave your ratings <i class="fa fa-star troph-i mediabout mediabout-dark"></i></a>
-                                    <a href="#"
-                                       style="margin-left: 45px !important; position: absolute;top: 20px;font-size: small;right: 360px;"
-                                       onclick="openSpamModal()" class="mediabout mediabout-dark">Report Spam <i class="fa fa-file troph-i"
-                                                                                style="color: rgb(219, 135, 135)"></i></a>
-                                    {% if interval < 30 and course.type == 0 %}
-                                        <a href="#"
-                                           style="margin-left: 45px !important; position: absolute;top: 20px;font-size: small;right: 500px;"
-                                           onclick="openRefundModal()" class="mediabout mediabout-dark">Refund Money <i class="fa fa-money-bill troph-i"
-                                                                                       style="color: rgb(147, 231, 185)"></i></a>
-                                    {% endif %}
-                                    {% if course.type == 0 %}
+                                    
                                     <p class="troph mediabout mediabout-dark" id="cert" style="cursor:not-allowed !important;" onclick="gotoQuiz()">Get your certificate <i
                                             class="fa fa-trophy troph-i"></i></p>
-                                    {% endif %}
+                                    
                                     {% endif %}
                                 </div>
                             </div>
@@ -529,13 +597,37 @@ background:#3A3A3A;
                                  {% get_current_language as lang %}
                                  {% if lang == "ar" %}
                                 <b style="top:12px;position:absolute;right:20px;font-size: 20px;font-weight: 700;" class="mediabout mediabout-dark">محتوى الدورة</b>
+                                <span class="dropdown">
+                                    <button onclick="myFunction()" class="dropbtn">&#9776;</button>
+                                    <div id="myDropdown" class="dropdown-content">
+                                      <a href="#" onclick="openSpamModal()">تبليغ عن محتوى</a>
+                                      {% if interval < 30 and course.type == 0 %}
+                                        <a href="#" onclick="openRefundModal()" > طلب إسترداد</a>
+                                        {% endif %}
+                                    </div>
+                                </span>
                                 {% else %}
                                 <b style="top:12px;position:absolute;left:20px">Course curriculum</b>
 
+                                <span class="dropdown">
+                                    <button onclick="myFunction()" class="dropbtn">&#9776;</button>
+                                    <div id="myDropdown" class="dropdown-content">
+                                        <a href="#"
+                                        style="margin-left: 45px !important; position: absolute;top: 20px;font-size: small;right: 360px;"
+                                        onclick="openSpamModal()" class="mediabout mediabout-dark">Report Spam <i class="fa fa-file troph-i"
+                                                                                 style="color: rgb(219, 135, 135)"></i></a>
+                                      {% if interval < 30 and course.type == 0 %}
+                                      <a href="#"
+                                      style="margin-left: 45px !important; position: absolute;top: 20px;font-size: small;right: 500px;"
+                                      onclick="openRefundModal()" class="mediabout mediabout-dark">Refund Money <i class="fa fa-money-bill troph-i"
+                                                                                  style="color: rgb(147, 231, 185)"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </span>
                                 {% endif %}
                             </div>
                             <hr>
-                            <ul class="list-group" style="margin-top:30px">
+                            <ul class="list-group" style="margin-top:50px">
                                     {% for ele in section_list %}
                                     <div class="accordion accordion-dark " id="parent">
                                         <div class=" ">
@@ -1382,6 +1474,28 @@ background:#3A3A3A;
                 nextinlist()
             }
         }
+        
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+
 
     </script>
 {% endblock %}
