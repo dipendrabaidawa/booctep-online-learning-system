@@ -55,9 +55,10 @@ class TestVideo(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
     url = models.CharField(max_length=200)
+    vimeo_url = models.CharField(max_length=25,default='')
     user_id = models.IntegerField(max_length=11)
     review = models.IntegerField(max_length=11)
-
+    
 class Sections(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
