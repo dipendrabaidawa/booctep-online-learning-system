@@ -1652,13 +1652,13 @@
                                                             {% endif %}
                                                             {% get_current_language as lang %}
                                                             {% if lang == "ar" %}
-                                                            <a href="javascript:void(0)"
+                                                            <a href="javascript:doBuyCourse()"
                                                                class="button is-fullwidth buy-button is-raised checkouttest grree grree-dark">
                                                                 <p style="color: #fff;">شـراء  $<span
                                                                         class="totalsum">{{ course.discount_price|unlocalize }}</span></p>
                                                             </a>
                                                             {% else %}
-                                                            <a href="javascript:void(0)"
+                                                            <a href="javascript:doBuyCourse()"
                                                                class="button is-fullwidth buy-button is-raised checkouttest grree grree-dark">
                                                                 <p style="color: #fff;">Buy now! $<span
                                                                         class="totalsum">{{ course.discount_price }}</span></p>
@@ -1672,7 +1672,7 @@
                                                                style="margin-bottom: 10px;">
                                                                 <p style="color: rgb(82, 82, 82);">أَضف للمفضلة
                                                                     <i class="fa fa-heart"></i></p></a>
-                                                            <a href="/student/enrollment/{{ course.id }}"
+                                                            <a href="javascript:doEnroll({{course.id}})"
                                                                class="button is-fullwidth buy-button is-raised"><p
                                                                     style="color: #fff;">أنضم الان</p></a>
                                                           {% else %}        
@@ -1681,7 +1681,7 @@
                                                              style="margin-bottom: 10px;">
                                                               <p style="color: rgb(82, 82, 82);">Add to Fav
                                                                   <i class="fa fa-heart"></i></p></a>
-                                                          <a href="/en/student/enrollment/{{ course.id }}"
+                                                          <a href="javascript:doEnroll({{course.id}})"
                                                              class="button is-fullwidth buy-button is-raised"><p
                                                                   style="color: #fff;">Enrolled now </p></a>  
                                                           {% endif %}          
@@ -2109,13 +2109,13 @@
                                                             {% endif %}
                                                             {% get_current_language as lang %}
                                                             {% if lang == "ar" %}
-                                                            <a href="javascript:void(0)"
+                                                            <a href="javascript:doBuyCourse()"
                                                                class="button is-fullwidth buy-button is-raised checkouttest grree grree-dark">
                                                                 <p style="color: #fff;">شـراء  $<span
                                                                         class="totalsum">{{ course.discount_price|unlocalize }}</span></p>
                                                             </a>
                                                             {% else %}
-                                                            <a href="javascript:void(0)"
+                                                            <a href="javascript:doBuyCourse()"
                                                                class="button is-fullwidth buy-button is-raised checkouttest grree grree-dark">
                                                                 <p style="color: #fff;">Buy now! $<span
                                                                         class="totalsum">{{ course.discount_price }}</span></p>
@@ -2129,7 +2129,7 @@
                                                                style="margin-bottom: 10px;">
                                                                 <p style="color: rgb(180, 180, 180);">أَضف للمفضلة
                                                                     <i class="fa fa-heart"></i></p></a>
-                                                            <a href="/student/enrollment/{{ course.id }}"
+                                                            <a href="javascript:doEnroll({{course.id}})"
                                                                class="button is-fullwidth buy-button is-raised"><p
                                                                     style="color: #fff;">أنضم الان</p></a>
                                                           {% else %}        
@@ -2138,7 +2138,7 @@
                                                              style="margin-bottom: 10px;">
                                                               <p style="color: rgb(131, 131, 131);">Add to Fav
                                                                   <i class="fa fa-heart"></i></p></a>
-                                                          <a href="/student/enrollment/{{ course.id }}"
+                                                          <a href="javascript:doEnroll({{course.id}})"
                                                              class="button is-fullwidth buy-button is-raised"><p
                                                                   style="color: #fff;">Enrolled now </p></a>  
                                                           {% endif %}          
@@ -2349,6 +2349,7 @@
 {% endblock %}
 
 {% block script %}
+    {% get_current_language as lang %}
     <script>
         var total = "{{course.price}}";
         var discount = "{{course.discount}}";
@@ -2483,22 +2484,6 @@
                 
                 $(".cancelpromobutton").css("display", "none");
                 $(".cancelpromobutton").prop("disabled", true);
-            });
-
-
-            $(".checkouttest").click(function (event) {
-                // event.preventDefault();
-                // var stm = parseInt($(".subtotalprice").text())
-                // var dam = parseInt($(".discountamount").text())
-                // var tot = parseInt($("#totalsumid").text())
-
-                var stm = parseFloat(document.getElementsByClassName("subtotalprice")[0].innerHTML);
-                var dam = parseFloat(document.getElementsByClassName("discountamount")[0].innerHTML);
-                var tot = parseFloat(document.getElementById("totalsumid").innerHTML);
-                $("#subtotalmoney").val(stm);
-                $("#discomontmoney").val(dam);
-                $("#totalmoney").val(tot);
-                $("#buyformsubmit").click();
             });
         });
 
@@ -2725,10 +2710,42 @@
             $(".app-video #videoplayer")[0].pause()
         }
 
+        function doBuyCourse() {
+            var user_id = '{{ request.user.id }}';
+
+            if (user_id === "None")
+                $('.quickview-trigger').click()
+            else {
+                event.preventDefault();
+                var stm = parseInt($(".subtotalprice").text())
+                var dam = parseInt($(".discountamount").text())
+                var tot = parseInt($("#totalsumid").text())
+
+                var stm = parseFloat(document.getElementsByClassName("subtotalprice")[0].innerHTML);
+                var dam = parseFloat(document.getElementsByClassName("discountamount")[0].innerHTML);
+                var tot = parseFloat(document.getElementById("totalsumid").innerHTML);
+                $("#subtotalmoney").val(stm);
+                $("#discomontmoney").val(dam);
+                $("#totalmoney").val(tot);
+                $("#buyformsubmit").click();    
+            }
+        }
+
+        function doEnroll(course_id) {
+            var user_id = '{{ request.user.id }}';
+
+            if (user_id === "None")
+                $('.quickview-trigger').click()
+            else {
+                var lang = "{{lang}}";
+                location.href = `/${lang}/student/enrollment/${course_id}`; 
+            }
+        }
+
         var h = document.getElementById("tipue_drop_input");
-    h.oninvalid = function(e) {
-        e.target.setCustomValidity('{% trans "Write a course name please!" %}');
-    };
+        h.oninvalid = function(e) {
+            e.target.setCustomValidity('{% trans "Write a course name please!" %}');
+        };
 
     </script>
     <script src="{% static 'assets/js/sideb.js' %}"></script>

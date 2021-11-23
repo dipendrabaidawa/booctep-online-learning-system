@@ -10,12 +10,12 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.DeleteModel(
-            name='Invoice_lines',
-        ),
-        migrations.DeleteModel(
-            name='Invoices',
-        ),
+        # migrations.DeleteModel(
+        #     name='Invoice_lines',
+        # ),
+        # migrations.DeleteModel(
+        #     name='Invoices',
+        # ),
         migrations.AddField(
             model_name='videouploads',
             name='vimeo_url',
