@@ -1205,10 +1205,11 @@ def single_course(request, teacher_id, course_url):
 
     data = get_courseDetails(id)
 
-    if user_type == 'teacher' or user_type == 'stuteach':
-        obj_comment = course_comments.objects.filter(course_id_id=id)
-    else:
-        obj_comment = course_comments.objects.filter(course_id_id=id).filter(user_id=user_id)
+    # if user_type == 'teacher' or user_type == 'stuteach':
+    #     obj_comment = course_comments.objects.filter(course_id_id=id)
+    # else:
+    #     obj_comment = course_comments.objects.filter(course_id_id=id).filter(user_id=user_id)
+    obj_comment = course_comments.objects.filter(course_id_id=id)
     for comment in obj_comment:
         if Courses.objects.filter(id=comment.course_id_id).exists():
             course_tmp = Courses.objects.get(pk=comment.course_id_id)

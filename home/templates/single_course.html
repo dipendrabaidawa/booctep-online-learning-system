@@ -1077,7 +1077,7 @@
                                                                                             &nbsp
                                                                                             <small>{{ i.date | date:'D d-m-Y' }}</small>
                                                                                             &nbsp
-                                                                                            <i class="fa fa-star" style="color: #f1c677;"></i>{{ i.rating }}
+                                                                                            <i class="fa fa-star" style="color: #f1c677;"></i>{{ i.rating|unlocalize }}
                                                                                         </h4>
                                                                                         <p>{{ i.comment }}</p>
                                                                                     </div>
@@ -1741,7 +1741,7 @@
                                                         <div class="colmn">
                                                             <label class="mediabout mediabout-dark">Rating</label>
                                                             <div class="num mediabout mediabout-dark">
-                                                                {{ course.rating }} <i class="fa fa-star"
+                                                                {{ course.rating|unlocalize }} <i class="fa fa-star"
                                                                                        style="color: rgb(243, 191, 95);"></i>
                                                             </div>
                                                         </div>
@@ -2176,7 +2176,7 @@
                                                         <div class="colmn">
                                                             <label class="mediabout mediabout-dark">التقييم</label>
                                                             <div class="num mediabout mediabout-dark">
-                                                                {{ course.rating }} <i class="fa fa-star"
+                                                                {{ course.rating|unlocalize }} <i class="fa fa-star"
                                                                                        style="color: rgb(236, 201, 135);"></i>
                                                             </div>
                                                         </div>
