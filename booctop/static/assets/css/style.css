@@ -10881,3 +10881,17 @@ box-sizing: border-box;
   position: absolute;
   top: 0;
 }
+
+
+/* Dark mode */
+
+body div.darkmode {
+  display: inline-block;
+  font-size: 15px;
+  padding: 0;
+  cursor: pointer;
+}
+body.dark .darkmode .light, body:not(.dark) .darkmode .dark {
+  display: none;
+}
+

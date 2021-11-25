@@ -16,7 +16,15 @@
                                         
                                             <nav class="nav navbar-nav">
                                                 <div class="nav-item navbar-list__item">
-                                                    <a href="/courses" class="nav-link h-auto"><i class="material-icons icon--left">keyboard_backspace</i> Back to Dashboard</a>
+                                                    {% get_current_language as lang %}
+                                                    {% if lang == "ar" %}
+                                                    <a href="/ar/courses" class="nav-link h-auto mediabout mediabout-dark"><i
+                                                            class="material-icons icon--left mediabout mediabout-dark">keyboard_backspace</i> الرجوع إلى لوحة التحكم</a>
+                                                    {% else %}
+                                                    <a href="/en/courses" class="nav-link h-auto mediabout mediabout-dark"><i
+                                                            class="material-icons icon--left mediabout mediabout-dark">keyboard_backspace</i> Back to
+                                                        Dashboard</a>
+                                                    {% endif %}  
                                                 </div>
                                                 <div class="nav-item navbar-list__item">
                                                     <div class="d-flex align-items-center flex-nowrap">

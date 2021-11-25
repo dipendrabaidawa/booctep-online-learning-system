@@ -141,14 +141,24 @@
 
 				<a class="explore-item explore-item-dark" href = "/category/1" >
                     <img src="{% static 'assets/img/icons/explore/coding.svg' %}" alt="">
-                    <h4>{% trans 'Web Development' %}</h4>
+                    {% get_current_language as lang %}
+                    {% if lang == "ar" %}
+                    <h4>بايثون</h4>
+                    {% else %}
+                    <h4>Python</h4>
+                    {% endif %}
                 </a>
 
 
                 <a class="explore-item explore-item-dark" href = "/category/2" >
 
                     <img src="{% static 'assets/img/icons/explore/business.svg' %}" alt="">
-                    <h4>{% trans 'Business' %}</h4>
+                    {% get_current_language as lang %}
+                    {% if lang == "ar" %}
+                    <h4>الذكاء الإصطناعي</h4>
+                    {% else %}
+                    <h4>Artificial intelligence</h4>
+                    {% endif %}
                 </a>
 
 
@@ -156,9 +166,9 @@
                     <img src="{% static 'assets/img/icons/explore/aviation.svg' %}" alt="">
                     {% get_current_language as lang %}
                     {% if lang == "ar" %}
-                    <h4>صحة</h4>
+                    <h4>علوم البيانات</h4>
                     {% else %}
-                    <h4>Health</h4>
+                    <h4>Data Science</h4>
                     {% endif %}
                 </a>
 
@@ -167,9 +177,9 @@
                     <img src="{% static 'assets/img/icons/explore/controller.svg' %}" alt="">
                     {% get_current_language as lang %}
                     {% if lang == "ar" %}
-                    <h4>هندسة </h4>
+                    <h4>الأمن السيبراني </h4>
                     {% else %}
-                    <h4>Engineering</h4>
+                    <h4>Cyber security</h4>
                     {% endif %}
                 </a>
 
@@ -178,22 +188,32 @@
                     <img src="{% static 'assets/img/icons/explore/math.svg' %}" alt="">
                     {% get_current_language as lang %}
                     {% if lang == "ar" %}
-                    <h4>علوم</h4>
+                    <h4>ادارة اعمال</h4>
                     {% else %}
-                    <h4>Sciences</h4>
+                    <h4>Business</h4>
                     {% endif %}                
                 </a>
 
 
                 <a class="explore-item explore-item-dark"  href = "/category/6"  >
                     <img src="{% static 'assets/img/icons/explore/lifestyle.svg' %}" alt="">
-                    <h4>{% trans 'life Style' %}</h4>
+                    {% get_current_language as lang %}
+                    {% if lang == "ar" %}
+                    <h4>تطبيقات اندرويد</h4>
+                    {% else %}
+                    <h4>Android apps</h4>
+                    {% endif %}
                 </a>
 
 
                 <a class="explore-item explore-item-dark" href = "/category/7"  >
                     <img src="{% static 'assets/img/icons/explore/arts.svg' %}" alt="">
-                    <h4>{% trans 'Arts' %}</h4>
+                    {% get_current_language as lang %}
+                    {% if lang == "ar" %}
+                    <h4>تطبيقات اي او اس</h4>
+                    {% else %}
+                    <h4>Ios apps</h4>
+                    {% endif %}
                 </a>
 
 
@@ -201,9 +221,9 @@
                     <img src="{% static 'assets/img/icons/explore/It.svg' %}" alt="">
                     {% get_current_language as lang %}
                     {% if lang == "ar" %}
-                    <h4>أمن المعلومات والذكاء الإصطناعي</h4>
+                    <h4>تطبيقات هايبرد</h4>
                     {% else %}
-                    <h4>Cyber security & AI</h4>
+                    <h4>Hypered apps</h4>
                     {% endif %}   
                 </a>
 
@@ -212,9 +232,9 @@
                     <img src="{% static 'assets/img/icons/explore/drama.svg' %}" alt="">
                     {% get_current_language as lang %}
                     {% if lang == "ar" %}
-                    <h4>تصوير وإخراج</h4>
+                    <h4>تصميم مواقع</h4>
                     {% else %}
-                    <h4>Photograph & cinema directing</h4>
+                    <h4>Web design</h4>
                     {% endif %}   
                 </a>
 
@@ -223,16 +243,21 @@
                     <img src="{% static 'assets/img/icons/explore/software.svg' %}" alt="">
                     {% get_current_language as lang %}
                     {% if lang == "ar" %}
-                    <h4>تصميم</h4>
+                    <h4>برمجة مواقع</h4>
                     {% else %}
-                    <h4>Design</h4>
+                    <h4>Web development</h4>
                     {% endif %}   
                 </a>
 
 
                 <a class="explore-item explore-item-dark" href = "/category/11" >
                     <img src="{% static 'assets/img/icons/explore/languages.svg' %}" alt="">
-                    <h4>{% trans 'Languages' %}</h4>
+                    {% get_current_language as lang %}
+                    {% if lang == "ar" %}
+                    <h4>تصميم</h4>
+                    {% else %}
+                    <h4>Design</h4>
+                    {% endif %}
                 </a>
 
 
@@ -240,9 +265,9 @@
                     <img src="{% static 'assets/img/icons/explore/coock.svg' %}" alt="">
                     {% get_current_language as lang %}
                     {% if lang == "ar" %}
-                    <h4>مهارات يدوية</h4>
+                    <h4>قياس</h4>
                     {% else %}
-                    <h4>Hard skills</h4>
+                    <h4>Qias</h4>
                     {% endif %}      
                 </a>
 
@@ -250,7 +275,12 @@
 
                 <a class="explore-item explore-item-dark" href = "/category/13" >
                     <img src="{% static 'assets/img/icons/explore/maintanece.svg' %}" alt="">
-                    <h4>{% trans 'Repare & Maintaince' %}</h4>
+                    {% get_current_language as lang %}
+                    {% if lang == "ar" %}
+                    <h4>لغات</h4>
+                    {% else %}
+                    <h4>Languages</h4>
+                    {% endif %}
                 </a>
 
 
@@ -259,9 +289,9 @@
                     <img src="{% static 'assets/img/icons/explore/skills.svg' %}" alt="">
                     {% get_current_language as lang %}
                     {% if lang == "ar" %}
-                    <h4>مهارات شخصية</h4>
+                    <h4>تطوير الذات</h4>
                     {% else %}
-                    <h4>Soft skills</h4>
+                    <h4>Self development</h4>
                     {% endif %}   
                 </a>
 

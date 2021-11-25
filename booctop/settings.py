@@ -142,9 +142,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'booctep',
         'USER': 'root', # 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'root',
         'HOST': 'localhost', #'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+        'PORT': '8889',
     }
   # 'default': {
   #       'ENGINE': 'django.db.backends.mysql',

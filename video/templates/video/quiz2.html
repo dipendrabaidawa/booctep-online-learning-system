@@ -2,6 +2,9 @@
 {% block content %}
 
 
+{% load i18n %}
+{% load static %}
+
 <style>
 
     .teacher {
@@ -33,6 +36,17 @@
 </style>
 
 <style>
+
+
+.sidebar{
+    background-color: #ebedf0 !important;
+    border-left: 1px solid #ebedf0 !important;
+}
+
+.sidebar-dark{
+    background-color: #22252c !important;
+    border-left: 1px solid #323741 !important;
+}
 
 
 .mdk-drawer-layout__content .app-messages__container-dark{
@@ -228,6 +242,23 @@ strong{
 .accordion__item-dark:last-child{
     overflow: hidden !important;
 }
+.btn--light{
+    background-color: #abafb8 !important;
+    border:1px solid #848791 !important
+}
+
+
+@media (max-width: 624px) {
+
+.quiz-a{
+    width: 70% !important;
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+}
+
 
 </style>
 
@@ -242,7 +273,15 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                                 <div class="d-flex flex-column" style=" font-size: 21px">
                                     <nav class="nav navbar-nav">
                                         <div class="nav-item navbar-list__item">
-                                            <a href="/video/playground/{{ course.id }}" class="nav-link h-auto mediabout mediabout-dark"><i class="material-icons icon--left mediabout mediabout-dark">keyboard_backspace</i> Back to Dashboard</a>
+                                            {% get_current_language as lang %}
+                                            {% if lang == "ar" %}
+                                            <a href="/ar/courses" class="nav-link h-auto mediabout mediabout-dark"><i
+                                                    class="material-icons icon--left mediabout mediabout-dark">keyboard_backspace</i> الرجوع إلى لوحة التحكم</a>
+                                            {% else %}
+                                            <a href="/en/courses" class="nav-link h-auto mediabout mediabout-dark"><i
+                                                    class="material-icons icon--left mediabout mediabout-dark">keyboard_backspace</i> Back to
+                                                Dashboard</a>
+                                            {% endif %}  
                                         </div>
                                         <div class="nav-item navbar-list__item">
                                             <div class="d-flex align-items-center flex-nowrap">
@@ -268,7 +307,7 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                         <div class="py-2 flex d-flex align-items-center">
                             <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0"
                                     data-toggle="sidebar" type="button">
-                                <i class="material-icons">people_outline</i>
+                                <i class="material-icons">swipe</i>
                             </button>
                         </div>
                     </div>
@@ -289,15 +328,15 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                 </div>
                 <div class=" page__container page__container page__container-2 card-footer card-footer-dark" style="width: 100%;height: 70px !important;border-radius: 0 !important;">
                     <div id="message-reply" class="form-down-2">
-                        <button class="btn flex" {% if end_flag == 0 %}onclick="skipFunc()"{% endif %}
-                                style="width: 40%;margin:0 auto;margin-top: 30px;{% if end_flag == 1 %}cursor:not-allowed;{% endif %}">Skip
+                        <button class="btn btn--light btn-dark flex" onclick="checkAnswer()" 
+                                style="width: 40%;margin:0 auto;margin-top: 30px;">Skip
                         </button>
-                        <button class="btn flex showhint" style="color: rgb(87, 185, 185);" data-toggle="toastr" data-toastr-type="info"
+                        <!-- <button class="btn flex showhint" style="color: rgb(87, 185, 185);" data-toggle="toastr" data-toastr-type="info"
                                 data-toastr-title="null" style="cursor: not-allowed;"
                                 data-toastr-show-method="slideDown" data-toastr-hide-method="slideUp"
                                 data-toastr-close-method="slideUp">Hint
                             <i class="fa fa-lightbulb" style="margin-left: 5px;"></i>
-                        </button>
+                        </button> -->
                         <button class="btn flex" id="checkbtn"
                                 style="background: rgb(135, 226, 135);color: #fff; width: 40%;margin:0 auto;margin-top: 30px;"
                                 onclick="checkAnswer()">

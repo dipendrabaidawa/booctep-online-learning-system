@@ -534,16 +534,21 @@
                                 <div class="box-content ">
                                     {% get_current_language as lang %}
                                     {% if lang == "ar" %}
-                                    <h3 class="title is-6 "> تطوير الويب</h3>
+                                    <h3 class="title is-6 "> بايثون</h3>
                                     {% else %}
-                                    <h3 class="title is-6 "> {% trans category_obj.0.name %}</h3>
+                                    <h3 class="title is-6 "> Python</h3>
                                     {% endif %}
                                 </div>
                             </a>
                             <a href="/{{ lang }}/category/{{category_obj.4.id}}" class="tile is-child category-box category-dark-box is-accent ">
                                 <img src="{% static 'assets/img/categories/aviation.svg' %} " alt=" ">
                                 <div class="box-content ">
-                                    <h3 class="title is-6 ">{% trans category_obj.4.name %}</h3>
+                                    {% get_current_language as lang %}
+                                    {% if lang == "ar" %}
+                                    <h3 class="title is-6 "> الذكاء الإصطناعي</h3>
+                                    {% else %}
+                                    <h3 class="title is-6 "> Artificial intelligence</h3>
+                                    {% endif %}
                                 </div>
                             </a>
                         </div>
@@ -556,9 +561,9 @@
                                         <div class="box-content ">
                                             {% get_current_language as lang %}
                                             {% if lang == "ar" %}
-                                            <h3 class="title is-6 ">ريادة أعمال</h3>
+                                            <h3 class="title is-6 ">علوم البيانات</h3>
                                             {% else %}
-                                            <h3 class="title is-6 ">{% trans 'Business' %}</h3>
+                                            <h3 class="title is-6 ">Data Science</h3>
                                             {% endif %}    
                                         </div>
                                     </a>
@@ -566,8 +571,12 @@
                                        class="tile is-child category-box category-dark-box is-primary ">
                                         <img src="{% static 'assets/img/categories/physical.svg' %} " alt=" ">
                                         <div class="box-content ">
-                                            <h3 class="title is-6 ">Physical</h3>
-                                           
+                                            {% get_current_language as lang %}
+                                            {% if lang == "ar" %}
+                                            <h3 class="title is-6 "> الأمن السيبراني</h3>
+                                            {% else %}
+                                            <h3 class="title is-6 "> Cyber security</h3>
+                                            {% endif %}
                                         </div>
                                     </a>
                                 </div>
@@ -578,9 +587,9 @@
                                         <div class="box-content ">
                                             {% get_current_language as lang %}
                                             {% if lang == "ar" %}
-                                            <h3 class="title is-6 ">صحة</h3>
+                                            <h3 class="title is-6 ">إدارة الأعمال</h3>
                                             {% else %}
-                                            <h3 class="title is-6 ">Health</h3>
+                                            <h3 class="title is-6 ">Business</h3>
                                             {% endif %}
                                         </div>
                                     </a>
@@ -589,7 +598,12 @@
                                        class="tile is-child category-box category-dark-box is-accent is-taller ">
                                         <img src="{% static 'assets/img/categories/Engineer.svg' %} " alt=" ">
                                         <div class="box-content ">
-                                            <h3 class="title is-6 ">{% trans category_obj.5.name %}</h3>
+                                            {% get_current_language as lang %}
+                                            {% if lang == "ar" %}
+                                            <h3 class="title is-6 "> تطبيقات الأندرويد</h3>
+                                            {% else %}
+                                            <h3 class="title is-6 "> Android Apps</h3>
+                                            {% endif %}
                                         </div>
                                     </a>
                                 </div>
@@ -601,9 +615,9 @@
                                     <div class="box-content ">
                                         {% get_current_language as lang %}
                                         {% if lang == "ar" %}
-                                        <h3 class="title is-6 ">تصوير وإخراج</h3>
+                                        <h3 class="title is-6 ">تطبيقات الأي أو اس</h3>
                                         {% else %}
-                                        <h3 class="title is-6 ">{% trans category_obj.3.name %}</h3>
+                                        <h3 class="title is-6 ">ios Apps</h3>
                                         {% endif %}
                                     </div>
                                 </a>
@@ -618,18 +632,22 @@
                                 <div class="box-content ">
                                     {% get_current_language as lang %}
                                     {% if lang == "ar" %}
-                                    <h3 class="title is-6 ">مهارات شخصية</h3>
+                                    <h3 class="title is-6 ">تطبيقات هايبرد </h3>
                                     {% else %}
-                                    <h3 class="title is-6 ">{% trans category_obj.9.name %}</h3>
+                                    <h3 class="title is-6 ">Hypered Apps</h3>
                                     {% endif %}
-                                    </p>
                                 </div>
                             </a>
                             <a href="/{{ lang }}/category/{{category_obj.2.id}}"
                                class="tile is-child category-box category-dark-box is-primary is-taller ">
                                 <img src="{% static 'assets/img/categories/repare.svg' %} " alt=" ">
                                 <div class="box-content ">
-                                    <h3 class="title is-6 ">{% trans category_obj.2.name %}</h3>
+                                    {% get_current_language as lang %}
+                                    {% if lang == "ar" %}
+                                    <h3 class="title is-6 ">تصميم مواقع</h3>
+                                    {% else %}
+                                    <h3 class="title is-6 ">Web design</h3>
+                                    {% endif %}
                                 </div>
                             </a>
                         </div>
@@ -640,7 +658,12 @@
                                        class="tile is-child category-box category-dark-box is-primary ">
                                         <img src="{% static 'assets/img/categories/hospitality.svg' %} " alt=" ">
                                         <div class="box-content ">
-                                            <h3 class="title is-6 ">{% trans 'Hospitality & Tourism' %}</h3>
+                                            {% get_current_language as lang %}
+                                            {% if lang == "ar" %}
+                                            <h3 class="title is-6 ">برمجة مواقع</h3>
+                                            {% else %}
+                                            <h3 class="title is-6 ">Web development</h3>
+                                            {% endif %}
                                         </div>
                                     </a>
                                     <a href="/{{ lang }}/category/{{ category_obj.12.id }}"
@@ -649,9 +672,9 @@
                                         <div class="box-content ">
                                             {% get_current_language as lang %}
                                             {% if lang == "ar" %}
-                                            <h3 class="title is-6 ">طبخ</h3>
+                                            <h3 class="title is-6 ">تصميم</h3>
                                             {% else %}
-                                            <h3 class="title is-6 ">{% trans category_obj.12.name %}</h3>
+                                            <h3 class="title is-6 ">Design</h3>
                                             {% endif %}
                                         </div>
                                     </a>
@@ -663,9 +686,9 @@
                                         <div class="box-content ">
                                             {% get_current_language as lang %}
                                             {% if lang == "ar" %}
-                                            <h3 class="title is-6 ">أسلوب حياة</h3>
+                                            <h3 class="title is-6 ">قياس وقدرات</h3>
                                             {% else %}
-                                            <h3 class="title is-6 ">{% trans 'Life style' %}</h3>
+                                            <h3 class="title is-6 ">Qias</h3>
                                             {% endif %}
                                         </div>
                                     </a>
@@ -673,7 +696,12 @@
                                        class="tile is-child category-box category-dark-box is-primary ">
                                         <img src="{% static 'assets/img/categories/self-dev.svg' %} " alt=" ">
                                         <div class="box-content ">
-                                            <h3 class="title is-6 ">{% trans category_obj.11.name %}</h3>
+                                            {% get_current_language as lang %}
+                                            {% if lang == "ar" %}
+                                            <h3 class="title is-6 ">لغات </h3>
+                                            {% else %}
+                                            <h3 class="title is-6 ">Languages</h3>
+                                            {% endif %}
                                         </div>
                                     </a>
                                 </div>
@@ -684,7 +712,11 @@
                                     <img src="{% static 'assets/img/categories/art.svg' %} " alt=" ">
                                     <div class="box-content ">
                                         {% get_current_language as lang %}
-                                        <h3 class="title is-6 ">{% trans category_obj.6.name %}</h3>
+                                        {% if lang == "ar" %}
+                                        <h3 class="title is-6 ">تطوير الذات</h3>
+                                        {% else %}
+                                        <h3 class="title is-6 ">Self development</h3>
+                                        {% endif %}
                                     </div>
                                 </a>
                             </div>
@@ -696,19 +728,24 @@
                                class="tile is-child category-box category-dark-box is-accent is-taller ">
                                 <img src="{% static 'assets/img/categories/laguage.svg' %} " alt=" ">
                                 <div class="box-content ">
-                                    <h3 class="title is-6 ">{% trans 'Languages' %}</h3>
+                                    {% get_current_language as lang %}
+                                    {% if lang == "ar" %}
+                                    <h3 class="title is-6 ">أخرى</h3>
+                                    {% else %}
+                                    <h3 class="title is-6 ">Others</h3>
+                                    {% endif %}
                                 </div>
                             </a>
-                            <a href="/{{ lang }}/category/15"
-                               class="tile is-child category-box category-dark-box is-primary is-taller ">
-                                <img src="{% static 'assets/img/categories/other.svg' %} " alt=" ">
+                            <a
+                               class="tile is-child category-box category-dark-box is-primary is-taller "style="cursor:not-allowed">
+                                <img src="{% static 'assets/img/categories/other.svg' %} " alt=" " >
                                 <div class="box-content ">
 
                                     {% get_current_language as lang %}
                                     {% if lang == "ar" %}
-                                    <h3 class="title is-6 ">أمن المعلومات والذكاء الإصطناعي</h3>
+                                    <h3 class="title is-6 ">هندسة ( قريبا )</h3>
                                     {% else %}
-                                    <h3 class="title is-6 ">Cyber security & AI</h3>
+                                    <h3 class="title is-6 ">Engineering ( soon )</h3>
                                     {% endif %}
                                                                 
                                 </div>
@@ -717,58 +754,68 @@
                         <div class="tile is-vertical is-8 ">
                             <div class="tile ">
                                 <div class="tile is-parent is-vertical ">
-                                    <a href="/{{ lang }}/category/9"
-                                       class="tile is-child category-box category-dark-box is-primary ">
+                                    <a
+                                       class="tile is-child category-box category-dark-box is-primary "style="cursor:not-allowed">
                                         <img src="{% static 'assets/img/categories/dramaa.svg' %} " alt=" ">
                                         <div class="box-content ">
                                             {% get_current_language as lang %}
                                             {% if lang == "ar" %}
-                                            <h3 class="title is-6 ">الصيانة والإصلاح</h3>
+                                            <h3 class="title is-6 ">الصيانة والإصلاح ( قريبا )</h3>
                                             {% else %}
-                                            <h3 class="title is-6 ">Maintenance and Repair</h3>
+                                            <h3 class="title is-6 ">Maintenance and Repair ( soon )</h3>
                                             {% endif %}
                                         </div>
                                     </a>
-                                    <a href="/{{ lang }}/category/{{ category_obj.10.id }}"
-                                       class="tile is-child category-box category-dark-box is-accent ">
+                                    <a
+                                       class="tile is-child category-box category-dark-box is-accent "style="cursor:not-allowed">
                                         <img src="{% static 'assets/img/categories/sewiing.svg' %} " alt=" ">
                                         <div class="box-content ">
-                                            <h3 class="title is-6 ">{% trans category_obj.10.name %}</h3>
+                                            {% get_current_language as lang %}
+                                            {% if lang == "ar" %}
+                                            <h3 class="title is-6 ">طبخ ( قريبا )</h3>
+                                            {% else %}
+                                            <h3 class="title is-6 ">Cooking ( soon )</h3>
+                                            {% endif %}
                                         </div>
                                     </a>
                                 </div>
                                 <div class="tile is-parent is-vertical ">
-                                    <a href="/{{ lang }}/category/{{ category_obj.7.id }}"
-                                       class="tile is-child category-box category-dark-box is-accent ">
+                                    <a
+                                       class="tile is-child category-box category-dark-box is-accent "style="cursor:not-allowed">
                                         <img src="{% static 'assets/img/categories/food.svg' %} " alt=" ">
                                         <div class="box-content ">
                                             {% get_current_language as lang %}
                                             {% if lang == "ar" %}
-                                            <h3 class="title is-6 ">الأعمال اليدوية</h3>
+                                            <h3 class="title is-6 ">الخياطة ( قريبا )</h3>
                                             {% else %}
-                                            <h3 class="title is-6 ">{% trans category_obj.7.name %}</h3>
+                                            <h3 class="title is-6 ">Sweing ( soon )</h3>
                                             {% endif %}
                                         </div>
                                     </a>
-                                    <a href="/{{ lang }}/category/{{ category_obj.1.id }}"
-                                       class="tile is-child category-box category-dark-box is-primary ">
+                                    <a
+                                       class="tile is-child category-box category-dark-box is-primary "style="cursor:not-allowed">
                                         <img src="{% static 'assets/img/categories/design.svg' %} " alt=" ">
                                         <div class="box-content ">
-                                            <h3 class="title is-6 ">{% trans category_obj.1.name %}</h3>
+                                            {% get_current_language as lang %}
+                                            {% if lang == "ar" %}
+                                            <h3 class="title is-6 ">رسم ( قريبا )</h3>
+                                            {% else %}
+                                            <h3 class="title is-6 ">ِArt ( soon )</h3>
+                                            {% endif %}
                                         </div>
                                     </a>
                                 </div>
                             </div>
                             <div class="tile is-parent ">
-                                <a href="/{{ lang }}/category/{{ category_obj.8.id }}"
-                                   class="tile is-child category-box category-dark-box is-accent is-row ">
+                                <a
+                                   class="tile is-child category-box category-dark-box is-accent is-row "style="cursor:not-allowed">
                                     <img src="{% static 'assets/img/categories/softwares.svg' %} " alt=" ">
                                     <div class="box-content ">
                                         {% get_current_language as lang %}
                                         {% if lang == "ar" %}
-                                        <h3 class="title is-6 ">العلوم</h3>
+                                        <h3 class="title is-6 ">تصوير وإخراج ( قريبا )</h3>
                                         {% else %}
-                                        <h3 class="title is-6 ">{% trans category_obj.8.name %}</h3>
+                                        <h3 class="title is-6 ">Photography & direction ( soon )</h3>
                                         {% endif %}
                                     </div>
                                 </a>

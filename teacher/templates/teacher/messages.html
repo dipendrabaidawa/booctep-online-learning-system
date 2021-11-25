@@ -315,35 +315,7 @@ width: 500px !important;
 }
 </style>
 
-<div class="hide-on-phone">
-
-    <div class="content-to-hide">
-        <div class="container">
-            {% get_current_language as lang %}
-            {% if lang == "ar" %}
-            
-            <center>
-        <div class="mdk-drawer-layout__content " id="err" data-perfect-scrollbar>
-            
-            <h2 style="" class="pl-50 mt-5 mediabout mediabout-dark">من فضلك, يمكنك المراسلة عبر الجهاز المحمول </h2>
-            
-           
-        </div>
-    </center>
-        {% else %}
-        <center>
-        <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
-            
-            
-            <h2 style="" class="pl-50 mt-5 mediabout mediabout-dark">Please select the teacher to start</h2>
-           
-        </div>
-        {% endif %}
-        </center>
-         </div><!-- /.container -->
-     
-     </div>
-
+  
 <div class=" page__container page-section"style="margin:0 !important;padding: 0 !important;height:100% !important">
     <div data-push data-responsive-width="768px" data-has-scrollable-region data-fullbleed
          class="mdk-drawer-layout js-mdk-drawer-layout" >
@@ -370,9 +342,6 @@ width: 500px !important;
                                     </strong>
                                     <span class="text-50 text-ellipsis"><div id="name_course" class="blllu blllu-dark"></div></span>
                                 </div>
-                                <button type="button" id="delete_history" class="btn btn-sm btn-light btn-light-dark" style="margin-left:100px;" onclick="deleteHistory()">
-                                    DELETE HISTORY
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -399,13 +368,23 @@ width: 500px !important;
                     </div>
                 </div>
             </div>
+            <div class="py-2 flex d-flex align-items-center">
+                <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0"
+                        data-toggle="sidebar" type="button">
+                    <i class="material-icons">swipe</i>
+                </button>
+            </div>
         </div>
            
+
         {% get_current_language as lang %}
         {% if lang == "ar" %}
-        
         <center>
-    <div class="mdk-drawer-layout__content " id="err" data-perfect-scrollbar>
+            <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0"
+                    data-toggle="sidebar" type="button">
+                <i class="material-icons">swipe</i> <b>اختر محادثة</b>
+            </button>
+    <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
         
         <h2 style="" class="mt-5 mediabout mediabout-dark">من فضلك قم بأختيار محادثة</h2>
         
@@ -417,6 +396,10 @@ width: 500px !important;
 </center>
     {% else %}
     <center>
+        <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0"
+                data-toggle="sidebar" type="button">
+            <i class="material-icons">swipe</i> <b>Choose a chat</b>
+        </button>
     <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
         
         
@@ -427,7 +410,8 @@ width: 500px !important;
         </div>
     </div>
     {% endif %}
-    </center>
+    </center>      
+
         <div class="mdk-drawer js-mdk-drawer " data-align="end" id="messages-drawer">
             <div class="mdk-drawer__content top-0 hide-phone">
                 <div class="sidebar sidebar-dark sidebar-right sidebar-light o-hidden  ptt">

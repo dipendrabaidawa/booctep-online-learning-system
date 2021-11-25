@@ -114,6 +114,9 @@
     /* Extra small devices (phones, 600px and down) */
     @media only screen and (max-width: 600px) {
     
+    .course_name{
+        display: none !important;
+    }
     .app-messages__container{
     width: 500px !important;
     }
@@ -139,38 +142,10 @@
     }
     </style>
 
-<div class="hide-on-phone">
-
-    <div class="content-to-hide">
-        <div class="container">
-            {% get_current_language as lang %}
-            {% if lang == "ar" %}
-            
-            <center>
-        <div class="mdk-drawer-layout__content " id="err" data-perfect-scrollbar>
-            
-            <h2 style="" class="pl-50 mt-5 mediabout mediabout-dark">من فضلك, يمكنك المراسلة عبر الجهاز المحمول </h2>
-            
-           
-        </div>
-    </center>
-        {% else %}
-        <center>
-        <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
-            
-            
-            <h2 style="" class="pl-50 mt-5 mediabout mediabout-dark">Please select the teacher to start</h2>
-           
-        </div>
-        {% endif %}
-        </center>
-         </div><!-- /.container -->
-     
-     </div>
 
     <div data-push data-responsive-width="768px" data-has-scrollable-region data-fullbleed
          class="mdk-drawer-layout js-mdk-drawer-layout" style="height: 100% !important;">
-        <div class="mdk-drawer-layout__content" style="" data-perfect-scrollbar>
+        <div class="mdk-drawer-layout__content"  style="" data-perfect-scrollbar>
             <div class="app-messages__container d-flex flex-column h-100 pb-4" style="">
                 <div class="flex pt-4" style="">
                     <div class="container page__container page__section" style="max-width: 90% !important; margin-top: 40px;">
@@ -188,7 +163,7 @@
                                 <th>
                                     <a href="javascript:void(0)" class="mediabout mediabout-dark" >الرسالة</a>
                                 </th>
-                                <th style="">
+                                <th style="" class="course_name">
                                     <a href="javascript:void(0)" 
                                        style="" class="mediabout mediabout-dark">أسم الدورة</a>
                                 </th>
@@ -204,7 +179,7 @@
                                 <th>
                                     <a href="javascript:void(0)" class="mediabout mediabout-dark" >Message</a>
                                 </th>
-                                <th style="">
+                                <th style="" class="course_name">
                                     <a href="javascript:void(0)" 
                                        style="" class="mediabout mediabout-dark">course name</a>
                                 </th>
@@ -242,8 +217,8 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
-                                       <b>{{ noti.title }}</b> 
+                                    <td class="course_name">
+                                       <b >{{ noti.title }}</b> 
                                     </td>
                                     <td>
                                        <b>{{ noti.text | truncatechars:70 }}</b> 
@@ -280,7 +255,6 @@
             </div>
         </div>
     </div>
-</div>
 
     <div class="sweet-overlay" tabindex="-1" style="opacity: 1.09; display: none;" id="noti_modal_back"></div>
     <div class="sweet-alert sweet-alert-dark showSweetAlert visible" data-custom-class="" data-has-cancel-button="false" id="show_modal"

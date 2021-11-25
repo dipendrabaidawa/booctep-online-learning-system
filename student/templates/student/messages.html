@@ -1,51 +1,58 @@
 {% extends "student/base.html" %}
-{% load static %}
-{% load i18n %}
 
-{% block title %}
-    Messages
-{% endblock %}
+{% load i18n %}
+{% load static %}
 
 {% block headercontent %}
+{% get_current_language as lang %}
+{% if lang == "ar" %}
+    {% with title="الرسائل" %}
+        {% include "./layout/header.html" %}
+    {% endwith %}
+{% else %}
 {% with title="Messages" %}
     {% include "./layout/header.html" %}
 {% endwith %}
+{% endif %}    
+{% endblock %}
 
-    <link rel="stylesheet" href="{% static 'assets/css/sweetalert.css' %}">
-    <style>
-        .bluesky {
-            background: #61e076bf !important;
-        }
+{% block head %}
 
-        .student {
-            float: right !important;
-        }
+<link rel="stylesheet" href="{% static 'assets/css/sweetalert.css' %}">
+<style>
+    .bluesky {
+        background: #61e076bf !important;
+    }
 
-        .message {
-            max-width: 300px;
-            clear: both;
-            text-decoration: none;
-            list-style-type: none;
-            margin-bottom: 0px;
-            float: left;
-            margin-right: 20px;
-            padding: 0px 0px;
-            min-width: 160px;
-            min-height: 10px;
-            max-width: 350px;
-            border-radius: 5px;
-            line-height: 1.4;
-            word-wrap: break-word;
-            color: #444444;
-            text-align: left;
-        }
+    .student {
+        float: right !important;
+    }
+
+    .message {
+        max-width: 300px;
+        clear: both;
+        text-decoration: none;
+        list-style-type: none;
+        margin-bottom: 0px;
+        float: left;
+        margin-right: 20px;
+        padding: 0px 0px;
+        min-width: 160px;
+        min-height: 10px;
+        max-width: 350px;
+        border-radius: 5px;
+        line-height: 1.4;
+        word-wrap: break-word;
+        color: #444444;
+        text-align: left;
+    }
 
 
-        .mdk-drawer-layout__content .app-messages__container{
-            margin:0 !important;
-            padding: 0 !important
-        }
-    </style>
+    .mdk-drawer-layout__content .app-messages__container{
+        margin:0 !important;
+        padding: 0 !important
+    }
+</style>
 
 {% endblock %}
 
@@ -55,56 +62,56 @@
 
 
 .mdk-drawer-layout__content .app-messages__container-dark{
-    background-color: #4c525e !important;
+background-color: #4c525e !important;
 }
 
 .blllu{
-    color: rgb(11, 111, 241) !important;
+color: rgb(11, 111, 241) !important;
 } 
 
 .blllu-dark{
-    color: rgb(177, 197, 223) !important;
-    margin-right: 8px !important;
+color: rgb(177, 197, 223) !important;
+margin-right: 8px !important;
 }
 
 
 .card-footer{
-    background-color: rgb(255, 255, 255) !important;
-    border-bottom: 0.5px solid rgb(211, 228, 236)!important;
+background-color: rgb(255, 255, 255) !important;
+border-bottom: 0.5px solid rgb(211, 228, 236)!important;
 }
 
 
 .card-footer-dark{
-    background-color: rgb(26, 28, 34) !important;
-    border: 1px solid rgb(9, 10, 12) !important;
+background-color: rgb(26, 28, 34) !important;
+border: 1px solid rgb(9, 10, 12) !important;
 }
 
 .btn-light{
-    background-color: #3a76d1 !important;
-    color: rgb(199, 199, 199) !important;
-    
-    border: 1px solid  #2d62b3 !important;
-    box-shadow: none !important;
+background-color: #3a76d1 !important;
+color: rgb(199, 199, 199) !important;
+
+border: 1px solid  #2d62b3 !important;
+box-shadow: none !important;
 }
 
 
 .btn-light-dark{
-    background-color: #323741 !important;
-    color: rgb(199, 199, 199) !important;
-    
-    border: 1px solid  #21242b !important;
-    box-shadow: none !important;
+background-color: #323741 !important;
+color: rgb(199, 199, 199) !important;
+
+border: 1px solid  #21242b !important;
+box-shadow: none !important;
 }
 
 
 .brd{
-    border: 1px solid rgb(201, 201, 201);
-    color: #fff;
+border: 1px solid rgb(201, 201, 201);
+color: #fff;
 }
 
 .brd-dark{
-    border: 1px solid rgb(98, 112, 121);
-    color: rgb(202, 202, 202);
+border: 1px solid rgb(98, 112, 121);
+color: rgb(202, 202, 202);
 }
 
 
@@ -112,102 +119,102 @@
 .avatar-offline:before,
 .avatar-online:after,
 .avatar-online:before {
-    display: none !important;
+display: none !important;
 }
 
 
 .sidebar-dark{
-    background-color: #323741 !important;
-    border-left: 1px solid #323741 !important;
+background-color: #323741 !important;
+border-left: 1px solid #323741 !important;
 }
 
 
 .sidebar-dark .divee{
-    background-color: #323741 !important;
-    border-left: 1px solid #1d1f22 !important;
+background-color: #323741 !important;
+border-left: 1px solid #1d1f22 !important;
 }
 
 
 .mediabout{
-    color: rgb(21, 43, 71) !important;
+color: rgb(21, 43, 71) !important;
 }
-  
+
 .mediabout-dark{
-   color: rgb(219, 219, 219) !important;
+color: rgb(219, 219, 219) !important;
 }
 
 
 .ptt{
-    padding-top: 90px !important;
+padding-top: 90px !important;
 }
 .btn-primary{
-    background-color: rgb(33, 150, 243)!important;
-    color: rgb(254, 254, 255);
-    float: right !important;
-    margin-left: 15px !important;
-    border: 1px solid rgb(20, 71, 167) !important;
+background-color: rgb(33, 150, 243)!important;
+color: rgb(254, 254, 255);
+float: right !important;
+margin-left: 15px !important;
+border: 1px solid rgb(20, 71, 167) !important;
 }
 
 .btn-primary-dark{
-    background-color: #323741 !important;
-    color: rgb(199, 199, 199) !important;
-    float: right !important;
-    border: 1px solid  #21242b !important;
-    margin-left: 15px !important;
-    box-shadow: none !important;
+background-color: #323741 !important;
+color: rgb(199, 199, 199) !important;
+float: right !important;
+border: 1px solid  #21242b !important;
+margin-left: 15px !important;
+box-shadow: none !important;
 }
 
 
 .message__body{
-    text-align: right !important;
-    width: 250px !important;
+text-align: right !important;
+width: 250px !important;
 }
 
 .card-dark{
-        background-color: rgb(195, 211, 226) !important;
-        border: 1px solid rgb(196, 201, 211) !important;
+    background-color: rgb(195, 211, 226) !important;
+    border: 1px solid rgb(196, 201, 211) !important;
 }
 
 
 .message__body .card{
-        background-color: rgb(235, 237, 240) !important;
-        border: 1px solid rgb(215, 220, 228) !important;
-    }
+    background-color: rgb(235, 237, 240) !important;
+    border: 1px solid rgb(215, 220, 228) !important;
+}
 
 .message{
-    background-color: transparent !important;
+background-color: transparent !important;
 }
 
 .message-dark{
-    background-color: transparent !important;
+background-color: transparent !important;
 }
 
 .teachername{
-    color: rgb(1, 36, 59) !important;
-    font-weight:700 !important;
-    text-decoration: none !important;
-    border: 0 !important;
+color: rgb(1, 36, 59) !important;
+font-weight:700 !important;
+text-decoration: none !important;
+border: 0 !important;
 }
 
 .teachermsg{
-    color: rgb(0, 77, 128);
+color: rgb(0, 77, 128);
 }
 
 strong{
-    border-bottom: none !important;
+border-bottom: none !important;
 }
 
 .mediabout{
-    color: rgb(255, 255, 255) !important;
+color: rgb(255, 255, 255) !important;
 }
-  
+
 .mediabout-dark{
-   color: rgb(219, 219, 219) !important;
+color: rgb(219, 219, 219) !important;
 }
 
 
 .justify-content-center {
-    justify-content: center !important;
+justify-content: center !important;
 }
 
 </style>
@@ -220,32 +227,32 @@ strong{
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (min-width: 800px) {
 
-   .app-messages__container{
-       width: 600px !important;
-   }
+.app-messages__container{
+   width: 600px !important;
+}
 
 }
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 500px) {
 
-   .app-messages__container{
-       width: 150px !important;
-   }
+.app-messages__container{
+   width: 150px !important;
+}
 
 }
 
 
 .app-messages__container{
-    width: 1150px !important;
+width: 1150px !important;
 }
 
 .mediabout{
-    color: rgb(255, 255, 255) !important;
+color: rgb(255, 255, 255) !important;
 }
-  
+
 .mediabout-dark{
-   color: rgb(219, 219, 219) !important;
+color: rgb(219, 219, 219) !important;
 }
 
 </style>
@@ -258,91 +265,59 @@ strong{
 
 
 .app-messages__container{
-    width: 1200px !important;
+width: 1200px !important;
 }
 
 .mediabout{
-    color: rgb(255, 255, 255) !important;
+color: rgb(255, 255, 255) !important;
 }
-  
+
 .mediabout-dark{
-   color: rgb(219, 219, 219) !important;
+color: rgb(219, 219, 219) !important;
 }
 
 
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 800px) {
-
-.app-messages__container{
-    width: 500px !important;
-}
-
-}
 
 </style>
 {% endif %}
 
 <style>
 
-    .content-to-hide{
-        display: none;
-    }    
-    
-    /* Extra small devices (phones, 600px and down) */
-    @media only screen and (max-width: 600px) {
-    
-    .app-messages__container{
-    width: 500px !important;
-    }
-    .hide-on-phone{
-        color: rgb(30, 42, 53);
-    }
-    .hide-on-phone-dark{
-    
-    
-        color: #fff;
-    }
-    .pl-50{
-        padding-left: 50px;
-    }
-    
-    .content-to-hide{
-        background-color: rgb(242, 245, 248) !important;
-        width: 100vw !important;
-        display: block;
-        height: 100vh !important;
-        color: rgb(30, 33, 39);
-    }
-    }
-    </style>
-<div class="hide-on-phone">
+.content-to-hide{
+    display: none;
+}    
 
-    <div class="content-to-hide">
-        <div class="container">
-            {% get_current_language as lang %}
-            {% if lang == "ar" %}
-            
-            <center>
-        <div class="mdk-drawer-layout__content " id="err" data-perfect-scrollbar>
-            
-            <h2 style="" class="pl-50 mt-5 mediabout mediabout-dark">من فضلك, يمكنك المراسلة عبر الجهاز المحمول </h2>
-            
-           
-        </div>
-    </center>
-        {% else %}
-        <center>
-        <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
-            
-            
-            <h2 style="" class="pl-50 mt-5 mediabout mediabout-dark">Please select the teacher to start</h2>
-           
-        </div>
-        {% endif %}
-        </center>
-         </div><!-- /.container -->
-     
-     </div>
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+.app-messages__container{
+width: 500px !important;
+}
+.hide-on-phone{
+    color: rgb(30, 42, 53);
+}
+.hide-on-phone-dark{
+
+
+    color: #fff;
+}
+.pl-50{
+    padding-left: 50px;
+}
+
+.content-to-hide{
+    background-color: rgb(242, 245, 248) !important;
+    width: 100vw !important;
+    display: block;
+    height: 100vh !important;
+    color: rgb(30, 33, 39);
+}
+}
+</style>
+
+<div class="hide-on-phon">
+
+
 
 
 <div class=" page__container page-section"style="margin:0 !important;padding: 0 !important;height:100% !important">
@@ -418,11 +393,21 @@ strong{
                     </div>
                 </div>
             </div>
+            <div class="py-2 flex d-flex align-items-center">
+                <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0"
+                        data-toggle="sidebar" type="button">
+                    <i class="material-icons">swipe</i>
+                </button>
+            </div>
         </div>
         
             {% get_current_language as lang %}
             {% if lang == "ar" %}
             <center>
+                <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0"
+                        data-toggle="sidebar" type="button">
+                    <i class="material-icons">swipe</i> <b>اختر محادثة</b>
+                </button>
         <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
             
             <h2 style="" class="mt-5 mediabout mediabout-dark">من فضلك قم بأختيار محادثة</h2>
@@ -435,6 +420,10 @@ strong{
     </center>
         {% else %}
         <center>
+            <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0"
+                    data-toggle="sidebar" type="button">
+                <i class="material-icons">swipe</i> <b>Choose a chat</b>
+            </button>
         <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
             
             

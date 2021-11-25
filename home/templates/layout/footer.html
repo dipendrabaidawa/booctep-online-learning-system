@@ -278,12 +278,12 @@
                 {% if lang == "ar" %}
                 <div class="logo-footer">
                     <img src="{% static 'ar/assets/img/logo/booctep.png' %}" alt="Booctep Logo - Arabic">
-                    <img src="{% static 'assets/img/payments.png' %}" alt="Payment method - Arabic" style="width: 140px;margin-right: 20px;">
+                    <img src="{% static 'assets/img/payments.png' %}" alt="Booctep Payments - Arabic" style="width: 140px">
                 </div>
                 {% else %}
                 <div class="logo-footer" style="margin-right: 50px;">
                     <img src="{% static 'assets/img/logo/logo-booctep.png' %}" alt="Booctep Logo - English">
-                    <img src="{% static 'assets/img/payments.png' %}" alt="Payment method - English" style="width: 140px;margin-left: 20px;">
+                    <img src="{% static 'assets/img/payments.png' %}" alt="Booctep Payments - English" style="width: 140px">
                 </div>
                 {% endif %}
             </div>
@@ -524,3 +524,32 @@
         $(".switch-lang").attr('href', switch_url);
     });
 </script>
+
+<script>
+    $(".darkmode").click(function(){ //1
+        $("body").toggleClass("dark")//2
+          .css( //3
+            $("body").hasClass("dark") ? //4
+              {background:"#010508", color:"#f9f9f9"} : {background:"#f9f9f9", color:"#202225"} //5
+          );
+    
+        $(".bg-white").toggleClass("dark")//2
+          .css( //3
+            $(".bg-white").hasClass("dark") ? //4
+              {background:"#344258", color:"#f9f9f9"} : {background:"#f9f9f9", color:"#202225"} //5
+          );
+    
+          $(".border-top").toggleClass("dark")//2
+            .css( //3
+              $(".border-top").hasClass("dark") ? //4
+                {borderTop:"1px solid #000"} : {borderTop:"1px solid #eaebec"} //5
+          );
+    
+    
+      });
+      
+    
+      
+      // It's not clear if the ternary counts as 2 lines or 1 when I'm trying to minimise line count, but I'm counting it as 2
+      
+    </script>

@@ -506,9 +506,12 @@ background:#3A3A3A;
                                         onclick="openRatingModal()"><b style="font-size: 17px;">أضف تقييم</b> <i class="fa fa-star troph-i mediabout mediabout-dark"></i></a>
 
                                         
-                                        
+                                        {% if course.price > 0 %}
                                         <p class="troph mediabout mediabout-dark" id="cert" style="cursor:not-allowed !important;" onclick="gotoQuiz()"><b style="font-size: 17px;" >أختبار الحصول على الشهادة</b>  <i
                                                 class="fa fa-trophy troph-i"></i></p>
+
+                                        {% endif %}
+
                                         
                                     </div>
                                     {% else %}
@@ -525,7 +528,7 @@ background:#3A3A3A;
                         <div class="py-2 flex d-flex align-items-center">
                             <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0"
                                     data-toggle="sidebar" type="button">
-                                <i class="material-icons">people_outline</i>
+                                <i class="material-icons">swipe</i>
                             </button>
                         </div>
                     </div>
