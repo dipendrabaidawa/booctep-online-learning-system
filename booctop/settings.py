@@ -140,7 +140,7 @@ DATABASES = {
     # }
    'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'booctep',
+        'NAME': 'booctop',
         'USER': 'root', # 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost', #'localhost',   # Or an IP Address that your DB is hosted on
@@ -280,4 +280,4 @@ VIMEO_TOKEN = '219cb1675d7cffd2eca82a6c9ca86dbb'
 VIMEO_KEY = '252b44a621d7c1212a01e13f5737bfe9eb912b83'
 VIMEO_SECRET = 'jffm+bdiKCgVh1vVcWwOEwQzX7U+J6e/J1ecHdltMtM4Qgg6KAB4hf4W2oA/b5KPC0V0l65sryTYror1ZHDkSRT+Vxw709RJgyAwkCRQWPEd44qp7ymBDbDRVfF6SGLj'
 
-CRONJOBS = [('*/1 * * * *', 'teacher.cron.my_jobs')]
+CRONJOBS = [('*/10 * * * *', 'teacher.cron.my_jobs')]

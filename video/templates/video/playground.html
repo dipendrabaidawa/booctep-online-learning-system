@@ -634,7 +634,6 @@ background:#3A3A3A;
                                     {% for ele in section_list %}
                                     <div class="accordion accordion-dark " id="parent">
                                         <div class=" ">
-                                            
                                             <a href="" class="accordion__toggle accordion__toggle-dark collapsed" data-toggle="collapse"
                                                data-target="#course-toc-{{ ele.id }}" data-parent="#parent">
                                                 <span class="flex mediabout mediabout-dark">{{ ele.name }}</span>
@@ -645,11 +644,11 @@ background:#3A3A3A;
                                                     {% for i in ele.videoList %}
                                                         <div class="accordion__menu-link" style="cursor: pointer;">
                                                             <i class="material-icons icon-16pt tick{{ i.id }}"
-                                                               data-lock="{{ i.lock }}"
+                                                               data-lock="0"
                                                                onclick="checkThis(this)" data-sr_no="{{ i.sr_no }}"
                                                                id="icon_first">check_circle</i> &nbsp
                                                             <div data-id="{{ i.id }}" data-srno="{{ i.sr_no }}"
-                                                                 data-lock="{{ i.lock }}" data-left="{{ i.count_left }}"
+                                                                 data-lock="0" data-left="{{ i.count_left }}"
                                                                  data-url="{{ i.url }}"
                                                                  class="flex videourl v{{ forloop.parentloop.counter }}"
                                                                  onclick="playmyvideo(this)"

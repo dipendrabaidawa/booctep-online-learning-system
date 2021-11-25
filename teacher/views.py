@@ -155,7 +155,7 @@ def dashboard(request):
         sum += getRatingFunc(rating_list)
         if len(rating_list) > 0:
             cnt += 1
-    if cnt is 0:
+    if cnt == 0:
         total_rating = 0
     else:
         total_rating = round(sum / cnt, 1)
@@ -923,7 +923,7 @@ def store_course_2(request):
         section_list = data.get("section_list")
         section_list = json.loads(section_list)
         json_video_list = json.loads(data.get("video_list"))
-        json_video_list[0]['isPromo'] = 1
+        # json_video_list[0]['isPromo'] = 1
 
         if (len(json_video_list) > 0):
             ## store section in DB

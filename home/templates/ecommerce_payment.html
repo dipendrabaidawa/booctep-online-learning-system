@@ -842,59 +842,44 @@ textarea {
         </div>
 <script>
 
-
-$(document).ready(function(){
-
-console.log("check")
-
-})
-
 function save_course_to_cart(){
 
-course_id = "{{course.id}}"
-student_id = "{{user_id}}"
-console.log(course_id)
-console.log(student_id)
+    // course_id = "{{course.id}}"
+    // student_id = "{{user_id}}"
 
-$.ajax({
-	method : "POST",
-	url : "/student_courses/",
-	data : {
-		'course':course_id,
-		'student':student_id
-		},
-		success : function(response){
-		if (response == "success"){
-			swal("Course Added!", {
-			icon: "success",
-			button: "Ok",
-			closeOnClickOutside: false,
-			}).then(function() {
-				location.href = "/courses/"
-			});
-			}
-		else{
+    // $.ajax({
+    // 	method : "POST",
+    // 	url : "/student_courses/",
+    // 	data : {
+    // 		'course':course_id,
+    // 		'student':student_id
+    // 		},
+    // 		success : function(response){
+    // 		if (response == "success"){
+    // 			swal("Course Added!", {
+    // 			icon: "success",
+    // 			button: "Ok",
+    // 			closeOnClickOutside: false,
+    // 			}).then(function() {
+    // 				location.href = "/courses/"
+    // 			});
+    // 			}
+    // 		else{
 
-			swal("Course Already Added In My Courses!", {
-			icon: "info",
-			button: "Ok",
-			closeOnClickOutside: false,
-			}).then(function() {
+    // 			swal("Course Already Added In My Courses!", {
+    // 			icon: "info",
+    // 			button: "Ok",
+    // 			closeOnClickOutside: false,
+    // 			}).then(function() {
 
-			});
+    // 			});
 
-		}
-	}
-});
+    // 		}
+    // 	}
+    // });
 
 }
 
-
-
-$(document).ready(function(){
-
-
-});
 function model_open(obj){
 
     var type = $(obj).attr('data-type');
@@ -982,14 +967,6 @@ function addToCartList(){
     $.post(url,{student:user_id,course:course_id},function (res) {
     });
 }
-
-
-
-
-
-
-
-
 
 
 // Payment

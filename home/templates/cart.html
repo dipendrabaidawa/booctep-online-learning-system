@@ -228,7 +228,6 @@
 
 {% endblock %} {% block content %}
 
-
     <div class="view-wrapper" style="padding-top: 80px;">
         <div class="shop-wrapper">
             <div class="cart-container">
@@ -251,7 +250,7 @@
                                         {% if cartList1 %}
                                             {% for cart in cartList1 %}
                                                 <div class="notifications__item cartitem cartitempage"
-                                                     data-id="{{ cart.course_id.id }}" style="  overflow: hidden;">
+                                                     data-id="{{ cart.course_id.id }}" style="overflow: hidden;">
                                                     <div class="notifications__item__avatar">
                                                         <img src="{% static cart.course_id.cover_img %}"/>
                                                     </div>
@@ -434,14 +433,14 @@
                                         <input type="hidden" id="h_total" value="{{ cartTotalSum|unlocalize }}">
                                     </div>
                                     {% if cartCnt > 0 %}
-                                        <a href="#" class="button is-fullwidth primary-button is-raised checkoutbutton">
-                                            <p style="">Checkout</p></a>
+                                        <a href="javascript:doBuyCourses()" class="button is-fullwidth primary-button is-raised checkoutbutton">
+                                            <p style="color:white">Checkout</p>
+                                        </a>
                                     {% else %}
-                                        <a class="button btncheck btncheck-dark is-fullwidth is-raised checkoutbutton"
-                                           style=""><p
-                                                style="">Checkout</p></a>
+                                        <a class="button btncheck btncheck-dark is-fullwidth is-raised checkoutbutton">
+                                            <p>Checkout</p>
+                                        </a>
                                     {% endif %}
-
                                     
                                 </div>
                                 <!--card-->
@@ -465,9 +464,7 @@
         <input type="hidden" id="subtotalmoney" name="subtotalmoney">
         <input type="hidden" id="discomontmoney" name="discomontmoney">
         <input type="hidden" id="totalmoney" name="totalmoney">
-
         <input type="submit" name="cartformsubmit" id="cartformsubmit">
-
     </form>
     <form method="post" action="" id="cart_form" style="display: none">
         {% csrf_token %}
@@ -653,24 +650,20 @@
 
             });
 
-            $(".checkoutbutton").click(function (event) {
-
-                event.preventDefault();
-                var stm = parseInt($(".cartsubtotal").text())
-                var dam = parseInt($(".discountamount").text())
-                var tot = parseInt($(".totalsum").text())
-
-                $("#subtotalmoney").val(stm);
-                $("#discomontmoney").val(dam);
-                $("#totalmoney").val(tot);
-
-                $("#cartformsubmit").click();
-            })
-
             $(".combo-box").click(function() {
                 $(this).addClass("is-active");
             })
         });
+
+        function doBuyCourses() {
+            var stm = parseFloat(document.getElementsByClassName("cartsubtotal")[0].innerHTML);
+            var dam = parseFloat(document.getElementsByClassName("discountamount")[0].innerHTML);
+            var tot = parseFloat(document.getElementsByClassName("totalsum")[0].innerHTML);
+            $("#subtotalmoney").val(stm);
+            $("#discomontmoney").val(dam);
+            $("#totalmoney").val(tot);
+            $("#cartformsubmit").click();
+        }
 
         function addFav(obj) {
             course_id = $(obj).data('course-id')
