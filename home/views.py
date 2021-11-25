@@ -1152,6 +1152,12 @@ def single_course(request, teacher_id, course_url):
     if Courses.objects.filter(user_id=teacher_id, course_url=course_url).exists():
         course = Courses.objects.filter(user_id=teacher_id, course_url=course_url)[0]
     id = course.id
+
+    # if this course is in user's registered courses, then redirecting user to home
+    register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
+    if id in register_course_ids:
+        return redirect(home_view)
+
     course = Courses.objects.get(id=id)
     if discount.count() == 0:
         discount_percent = 0
@@ -1171,7 +1177,6 @@ def single_course(request, teacher_id, course_url):
     similar_cat = course.subcat_id
     similar_parent_cat = course.scat_id
 
-    register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
     similar_courses = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).filter(approval_status=2).exclude(id=id).exclude(id__in=register_course_ids).order_by('scat_id')                               
     for i in similar_courses:
         rating_list = course_comments.objects.filter(course_id_id=i.id)
@@ -1200,10 +1205,11 @@ def single_course(request, teacher_id, course_url):
 
     data = get_courseDetails(id)
 
-    if user_type == 'teacher' or user_type == 'stuteach':
-        obj_comment = course_comments.objects.filter(course_id_id=id)
-    else:
-        obj_comment = course_comments.objects.filter(course_id_id=id).filter(user_id=user_id)
+    # if user_type == 'teacher' or user_type == 'stuteach':
+    #     obj_comment = course_comments.objects.filter(course_id_id=id)
+    # else:
+    #     obj_comment = course_comments.objects.filter(course_id_id=id).filter(user_id=user_id)
+    obj_comment = course_comments.objects.filter(course_id_id=id)
     for comment in obj_comment:
         if Courses.objects.filter(id=comment.course_id_id).exists():
             course_tmp = Courses.objects.get(pk=comment.course_id_id)
@@ -3209,8 +3215,6 @@ def showCartList(request):
         if Admincontrol.objects.filter(id=1).exists():
             tax = Admincontrol.objects.get(pk=1).teacher_tax
 
-    # cartList = student_cart_courses.objects.filter(student_id_id=request.user.id)
-
     discount = 0
     not_list = []
     expire_date = datetime.today() - timedelta(days=1)
@@ -3224,9 +3228,10 @@ def showCartList(request):
     subTotal = 0
     subDiscount = 0
     subTax = 0
-
+    # cartCourseIds = []
     now = datetime.now().strftime('%Y-%m-%d')
     for cart in cartList:
+        # cartCourseIds.append(cart.course_id.id)
         subTotal += cart.course_id.price
         if student_favourite_courses.objects.filter(course_id_id=cart.course_id_id, student_id_id=user_id).exists():
             cart.is_fav = 1
@@ -3420,18 +3425,19 @@ def generateRandomChar():
 
 @csrf_exempt
 def checkout(request):
-    # print("totalmoney is ",request.POST.get('totalmoney'))
+    # cartcourseids = request.POST.get('cartcourseids')
     subtotalmoney = request.POST.get('subtotalmoney')
     discountmoney = request.POST.get('discountmoney')
     totalmoney = request.POST.get('totalmoney')
     orderid = generateRandomChar()
     request.session['order_id'] = orderid,
     request.session['amount'] = float(totalmoney or 0)
-    data = findheader(request.user.id)
-    
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt= findheader(request.user.id)
 
-    # payment
+    user_id = request.session.get("user_id")
+    savedcard = payment.objects.filter(student_id=user_id)
+
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+        request.user.id)
 
     orderid = generateRandomChar()
     host = request.get_host()
@@ -3454,12 +3460,13 @@ def checkout(request):
 
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
-    return render(request, 'checkout.html',
-                  {'form':form, 'lang': getLanguage(request)[0], 'orderid': orderid, 'subtotalmoney': subtotalmoney,
-                   'discountmoney': discountmoney, 'totalmoney': totalmoney, 'favList': x1, 'favCnt': x2,
-                   'alreadyinFav': x3, 'cartList': y1, 'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4,
-                   'noti_list': z1, 'noti_cnt': z2, 'stu_courses': stu_courses})
 
+    return render(request, 'ecommerce_payment.html',
+                  {'form': form, 'orderid': orderid, 'totalmoney': totalmoney, 'subtotalmoney': subtotalmoney,
+                   'discountmoney': discountmoney, 'lang': getLanguage(request)[0], 'savedcard': list(savedcard),
+                   "user_id": user_id, 'favList': favListShow, 'favCnt': favCnt, 'alreadyinFav': alreadyinFavView,
+                   'cartList': cartListShow, 'cartCnt': cartCnt, 'alreadyinCart': alreadyinCartView, 'cartTotalSum': cartTotalSum, 'noti_list': noti_list,
+                   'noti_cnt': noti_cnt, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_courses': stu_courses})
 
 @csrf_exempt
 def process_payment(request):
