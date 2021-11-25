@@ -1197,6 +1197,7 @@
             form_data.append("section_list", JSON.stringify(section_list));
             form_data.append("pending", 2);
 
+            console.log(videoList);
             $.ajax({
                 url: url,
                 type: 'POST',
