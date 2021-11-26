@@ -29,7 +29,7 @@ def getVideoCnt(course):
     return videoListCnt
 
 
-def playground(request, id):
+def playground(request, course_name, id):
     if request.session.get('user_id') == None:
         return redirect('/')
 

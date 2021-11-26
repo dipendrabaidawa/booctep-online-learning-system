@@ -167,7 +167,7 @@ urlpatterns += i18n.i18n_patterns(
     # url(r'^getQuiz/$', getQuiz, name='show cart list'),
     url(r'^getQuiz/$', getQuiz, name='get Quiz'),
 
-    url(r'^video/playground/(?P<id>[0-9]+)/$', playground, name='video playground'),
+    url(r'^video/(?P<course_name>\w+)/(?P<id>[0-9]+)/$', playground, name='video playground'),
     )
 
 # urlpatterns =[url('', viewcertificates, name='viewcertificates'),url(r'^pdf', pdf, name='pdf'),]

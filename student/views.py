@@ -104,10 +104,10 @@ def courses(request):
 def video_check(request):
     cousre_id = request.POST.get('id')
     if Sections.objects.filter(course_id=cousre_id).exists():
+        course_name = Courses.objects.get(pk=cousre_id).course_url
         key = str(request.user.id) + "-" + str(cousre_id)
         cache_str = ''
         continuous = 0
-        course_name = ''
         quiz_id = ''
         question_no = ''
         if Cache.objects.filter(key=key).exists():
@@ -116,7 +116,6 @@ def video_check(request):
             print("cache::", cache.get('question_no'))
             if cache.get('question_no') != None:
                 continuous = 1
-                course_name = Courses.objects.get(pk=cousre_id).course_url
                 quiz_id = Sections.objects.filter(course_id=cousre_id, type='question')[0].id
                 question_no = cache['question_no']
         return JsonResponse({"msg": "success", "id": cousre_id, "continous": continuous, 'course_name': course_name, 'quiz_id': quiz_id, 'question_no': question_no})
