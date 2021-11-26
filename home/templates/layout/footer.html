@@ -278,12 +278,12 @@
                 {% if lang == "ar" %}
                 <div class="logo-footer">
                     <img src="{% static 'ar/assets/img/logo/booctep.png' %}" alt="Booctep Logo - Arabic">
-                    <img src="{% static 'assets/img/payments.png' %}" alt="Booctep Payments - Arabic" style="width: 140px">
+                    <img src="{% static 'assets/img/payment.png' %}" alt="Booctep Payments - Arabic" style="width: 180px">
                 </div>
                 {% else %}
                 <div class="logo-footer" style="margin-right: 50px;">
                     <img src="{% static 'assets/img/logo/logo-booctep.png' %}" alt="Booctep Logo - English">
-                    <img src="{% static 'assets/img/payments.png' %}" alt="Booctep Payments - English" style="width: 140px">
+                    <img src="{% static 'assets/img/payment.png' %}" alt="Booctep Payments - English" style="width: 180px">
                 </div>
                 {% endif %}
             </div>
@@ -466,13 +466,16 @@
                 <div class="social">
                     {% get_current_language as lang %}
                     {% if lang == "ar" %}
-                    <b class="social-follow social-follow-dark">{% trans 'نتشرف بمتابعتك' %}</b><br>
+                    <b class="social-follow social-follow-dark" style="margin-top: 10px;">نتشرف بمتابعتك</b><br>
                     {% else %}
-                    <p class="social-follow social-follow-dark">{% trans 'Follow us' %}</p><br>
+                    <p class="social-follow social-follow-dark" style="margin-top: 10px;">Follow us</p><br>
                     {% endif %}
                     <a href="https://www.instagram.com/booctep/" target="_blank">
-                        <img style="margin-top:10px;" src="{% static 'assets/img/instagram.png' %}" width="25"
+                        <img style="" src="{% static 'assets/img/instagram.png' %}" width="25"
                              height="25" style="cursor:pointer" alt="instagram.com/booctep" /></a>
+                             <a href="https://www.twitter.com/booctep/" target="_blank">
+                                 <img style="" src="{% static 'assets/img/twitter.png' %}" width="25"
+                                      height="25" style="cursor:pointer" alt="instagram.com/booctep" alt="Follow us Twitter" /></a>
                 </div>
 
             </div>
