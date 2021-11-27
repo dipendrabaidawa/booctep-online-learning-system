@@ -5,3 +5,4 @@ django
 *.mp4
 env
 booctop/static/user_images
+booctop/static/certificates

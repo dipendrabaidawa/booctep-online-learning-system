@@ -15,6 +15,8 @@ from django.conf import settings
 import img2pdf
 from datetime import datetime
 import random, string
+import arabic_reshaper
+from bidi.algorithm import get_display
 from random import randint
 
 from tempfile import *
@@ -332,6 +334,12 @@ def generateRandomChar():
     x = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(8))
     return x
 
+def isArabic(string):
+    for i in range(len(string)):
+        char = ord(string[i])
+        if char >= 0x0600 and char <= 0x06E0:
+            return True
+    return False
 
 def getCertificate(request):
     user_id = request.user.id
@@ -340,29 +348,39 @@ def getCertificate(request):
     url = settings.STATICFILES_DIRS[0] + '/certificates/en.jpg'
     img = Image.open(url)
     draw = ImageDraw.Draw(img)
-    fonturl = settings.STATICFILES_DIRS[0] + '/certificates/font.ttf'
-    font = ImageFont.truetype(fonturl, 80)
+    en_fonturl = settings.STATICFILES_DIRS[0] + '/fonts/font.ttf'
+    en_font = ImageFont.truetype(en_fonturl, 80)
+    ar_fonturl = settings.STATICFILES_DIRS[0] + '/fonts/Cairo-Medium.ttf'
+    ar_font = ImageFont.truetype(ar_fonturl, 80)
+
+    # drawing student's name to the img...
     name = request.user.first_name + " " + request.user.last_name
     studentfullname = request.user.first_name + "_" + request.user.last_name
-
-    # drawing name to the img...
     length = len(name)
     dif = 12 - length
-    namePos = [1250 + dif * 15, 715]
-
+    if isArabic(name):
+        reshaped_name = arabic_reshaper.reshape(name)
+        name = get_display(reshaped_name)
+        font = ar_font
+        namePos = [1250 + dif * 15, 655]
+    else:
+        font = en_font
+        namePos = [1250 + dif * 15, 715]
     draw.text(namePos, name, (255, 0, 255), font=font)  # this will draw text with Blackcolor and 16 size
 
     # drawing time to the img
-
     videotime = 0
     secList = Sections.objects.filter(course_id=id, type='video').values_list('id', flat=True)
     secList = map(str, secList)
     secStr = ','.join(secList)
     videos = VideoUploads.objects.extra(where=['find_in_set(section_id, "'+ secStr +'")']).values_list('duration', flat=True)
     for video in videos:
+        video = 1 if video == 0 else video
         videotime += video
     hr = int(videotime / 60)
     name = str(hr) + 'hours'
+    if hr == 0:
+        name = str(videotime) + 'minutes'
     length = len(name)
     namePos = [770, 845]
 
@@ -373,8 +391,14 @@ def getCertificate(request):
     name = course.name
     length = len(name)
     dif = 12 - length
-    namePos = [1300 + dif * 15, 845]
-
+    if isArabic(name):
+        reshaped_name = arabic_reshaper.reshape(name)
+        name = get_display(reshaped_name)
+        font = ar_font
+        namePos = [1300 + dif * 15, 785]
+    else:
+        font = en_font
+        namePos = [1300 + dif * 15, 845]
     draw.text(namePos, name, (255, 0, 255), font=font)  # this will draw text with Blackcolor and 16 size
 
     # drawing date to the img
@@ -383,7 +407,6 @@ def getCertificate(request):
     length = len(name)
     dif = 12 - length
     namePos = [2000, 845]
-
     draw.text(namePos, name, (255, 0, 255), font=font)  # this will draw text with Blackcolor and 16 size
 
     # drawing teacher's name to the img
@@ -391,12 +414,18 @@ def getCertificate(request):
     name = teacher.first_name + " " + teacher.last_name
     length = len(name)
     dif = 12 - length
-    namePos = [1250 + dif * 15, 1210]
-
+    if isArabic(name):
+        reshaped_name = arabic_reshaper.reshape(name)
+        name = get_display(reshaped_name)
+        font = ar_font
+        namePos = [1250 + dif * 15, 1150]
+    else:
+        font = en_font
+        namePos = [1250 + dif * 15, 1210]
+    
     draw.text(namePos, name, (255, 0, 255), font=font)  # this will draw text with Blackcolor and 16 size
 
     # drawing teacher's category name to the img
-
     name = categories.objects.get(pk=course.scat_id).name
     length = len(name)
     dif = 12 - length
@@ -408,7 +437,7 @@ def getCertificate(request):
 
     # drawing certificate no to the img
 
-    font1 = ImageFont.truetype(fonturl, 60)
+    font1 = ImageFont.truetype(en_fonturl, 60)
     namePos = [700, 1620]
     draw.text(namePos, no, (255, 0, 255), font=font1)  # this will draw text with Blackcolor and 16 size
 
