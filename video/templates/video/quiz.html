@@ -346,6 +346,7 @@ function startQuiz() {
     localStorage.setItem('right', 0)
     localStorage.setItem('wrong', 0)
     localStorage.setItem('skip', 0)
+    localStorage.setItem('last_question', 1)
     location = '/quiz/{{ course.course_url }}/{{ quiz_id }}/?question=1'
 }
 

@@ -34,7 +34,7 @@ def playground(request, course_name, id):
         return redirect('/')
 
     course = Courses.objects.get(pk=id)
-    is_dripping = course.dripping
+    # is_dripping = course.dripping
     teacher_id = course.user_id
     student_for_video = request.session.get('user_id')
     first_list = []
@@ -137,12 +137,12 @@ def playground(request, course_name, id):
                     second_list.pop(e)
             return render(request, 'video/playground.html',
                           {'section_continue': section_continue, "video_list": video_obj, "course": course, 'cache_str': cache_str, 'count_down': count_down,
-                           "first_video": first_list, "second_video": second_list, "course_id": id, 'dripping':is_dripping, 'quiz_id':quiz_id,
+                           "first_video": first_list, "second_video": second_list, "course_id": id, 'quiz_id':quiz_id,
                            "id_course": id_course, 'section_list': _obj, 'teacher_id': teacher_id, 'interval':interval})
         else:
             return render(request, 'video/playground.html',
                           {'section_continue': section_continue, "video_list": video_obj, "course": course, 'cache_str': cache_str, 'count_down': count_down,
-                           "first_video": first_list, "course_id": id, 'dripping':is_dripping, "id_course": id_course, 'section_list': _obj, 'quiz_id': quiz_id,
+                           "first_video": first_list, "course_id": id, "id_course": id_course, 'section_list': _obj, 'quiz_id': quiz_id,
                            'teacher_id': teacher_id, 'interval':interval})
     else:
         return render(request, 'video/playground.html', {})

@@ -314,7 +314,7 @@
                                 <small class=" bllu bllu-light">For Example: <b href="" class=" mediabout mediabout-light">Learn photoshop with
                                 css..</b></small>
                             </div>
-    {% comment %} 
+                            {% comment %} 
                             <label class="form-label mediabout-light">Course Requirments
                                 <b style="color: rgb(240, 100, 100);font-size: large;">*</b>
                             </label>
@@ -724,7 +724,7 @@
                                         </div>
                                         <small class="blllu blllu-light flllot" style="margin-bottom: 10px !important;">السعر الموصى به بين 10 و 15 دولاراً</small>
                                     </div>
-                                    <div class="form-group">
+                                    <!-- <div class="form-group">
                                         <label class="form-label mediabout mediabout-light">أسلوب الدورة</label>
                                         <select id="dripping" name="dripping" class="form-control selecttt selecttt-light">
                                             <option value="0" {% if course.dripping == 0 %} selected {% endif %}>طبيعي
@@ -733,7 +733,7 @@
                                             </option>
                                         </select>
                                         <small class="form-text text-muted">للدورات المعقدة يوصى باستخدام أسلوب تقطير.</small>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -842,11 +842,11 @@
              *  to set dripping , if is only enable when web development,
              */
 
-            if ($('#category').val() * 1 === 1) { //web development case
-                $('#dripping').prop('disabled', false)
-            } else {
-                $('#dripping').prop('disabled', true)
-            }
+            // if ($('#category').val() * 1 === 1) { //web development case
+            //     $('#dripping').prop('disabled', false)
+            // } else {
+            //     $('#dripping').prop('disabled', true)
+            // }
 
             
 
@@ -854,14 +854,14 @@
             $('#course_requirements').val("{{ course.requirements }}".replace("&lt;/p&gt;","").replace("&lt;p&gt;",""))
             $('#course_grains').val("{{ course.gains }}".replace("&lt;/p&gt;","").replace("&lt;p&gt;",""))
 
-            $('#category').change(() => {
-                if ($('#category').val() * 1 === 1) {
-                    $('#dripping').prop('disabled', false)
-                } else {
-                    $('#dripping').prop('disabled', true)
-                    $('#dripping option[value=0]').prop('selected', true)
-                }
-            })
+            // $('#category').change(() => {
+            //     if ($('#category').val() * 1 === 1) {
+            //         $('#dripping').prop('disabled', false)
+            //     } else {
+            //         $('#dripping').prop('disabled', true)
+            //         $('#dripping option[value=0]').prop('selected', true)
+            //     }
+            // })
 
             new Quill('#course_requirements').root.innerHTML = convertSpec('{{ course.requirements }}')
             new Quill('#course_grains').root.innerHTML = convertSpec('{{ course.gains }}')
@@ -965,7 +965,7 @@
             let courseUrl = $("#courseUrl").val();
             let price = $('input[name="course_price"]').val()
             let course_level = $('#level').val()
-            let dripping = $('#dripping').val()
+            // let dripping = $('#dripping').val()
 
             id = $('#course_id').val();
 
@@ -982,7 +982,7 @@
             data.append('headerImg', headerImg);
             data.append('courseUrl', '');
             data.append('course_level', course_level);
-            data.append('dripping', dripping);
+            // data.append('dripping', dripping);
             data.append('user_id', '{{ request.user.id }}');
             data.append('pending', 1);
             price = $('input[name="course_price"]').val();
@@ -1024,7 +1024,7 @@
             let courseUrl = $("#courseUrl").val();
             let price = $('input[name="course_price"]').val()
             let course_level = $('#level').val()
-            let dripping = $('#dripping').val()
+            // let dripping = $('#dripping').val()
 
             id = $('#course_id').val();
             data = new FormData();
@@ -1039,7 +1039,7 @@
             data.append('coverImg', coverImg);
             data.append('headerImg', headerImg);
             data.append('course_level', course_level);
-            data.append('dripping', dripping);
+            // data.append('dripping', dripping);
             data.append('pending', 0);
             price = $('input[name="course_price"]').val();
             let type = $('#price').val() * 1
