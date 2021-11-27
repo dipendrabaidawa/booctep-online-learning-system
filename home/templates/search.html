@@ -162,11 +162,21 @@
     <div class="single_category"
          style="background-image: url('{% static 'assets/img/categories/single_categories/no-found.svg' %}') !important">
         <div class="container single_category-c">
+            {% get_current_language as lang %}
+            {% if lang == "ar" %}
+            {% if searchstatus == 0 %}
+                <h3>عذرا لا يوجد دورات تشابه بحثك “{{ searchkeyword }}”</h3>
+                <p>من فضلك, قم بالبحث بشكل أدق.</p>
+            {% else %}
+                <h3> هناك عدد {{ totalsearchresult }} دورات تشابه بحثك "{{ searchkeyword }}"</h3>
+            {% endif %}
+            {% else %}
             {% if searchstatus == 0 %}
                 <h3>OPPS! there are no courses in “{{ searchkeyword }}”</h3>
                 <p>If you don't find what you want, please be more specific..</p>
             {% else %}
                 <h3>{{ totalsearchresult }} search results found for "{{ searchkeyword }}"</h3>
+            {% endif %}
             {% endif %}
         </div>
     </div>

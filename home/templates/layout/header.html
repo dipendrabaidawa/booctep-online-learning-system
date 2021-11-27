@@ -468,6 +468,13 @@ body .container .content .studentnot-cont {
 
 
 </style>
+
+<style>
+    a.icon-link.is-primary::before{
+        display: none !important;
+        color: transparent !important;
+    }
+</style>
 {#<div class="banner">#}
 {#    <div class="container ">#}
 {#        <div class="banner__content">#}
@@ -1410,10 +1417,10 @@ body .container .content .studentnot-cont {
                                 <a class="account-item" href="{% url 'logout' %}">
                                     <div class="media media1">
                                         <div class="icon-wrap">
-                                            <i class="fas fa-sign-out-alt" style="color: rgb(223, 186, 180);"></i>
+                                            <i class="fas fa-sign-out-alt" style="color: rgb(216, 78, 78);"></i>
                                         </div>
                                         <div class="media-content">
-                                            <h3 style="color: rgb(226, 181, 181);">{% trans 'Log out' %}</h3>
+                                            <h3 style="color: rgb(216, 78, 78);">{% trans 'Log out' %}</h3>
                                         </div>
                                     </div>
                                 </a>

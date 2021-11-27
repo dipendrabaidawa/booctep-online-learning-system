@@ -186,8 +186,14 @@
     <!-- Start Carousel -->
     <div class="single_category-4">
         <div class="container">
+            {% get_current_language as lang %}
+            {% if lang == "ar" %}
+            <h3 style="">المفضلة</h3>
+            <p>مرحبا بك في المفضلة, يمكنك إضافة المزيد بأي وقت.</p>
+            {% else %}
             <h3 style="">Wishlist</h3>
-            <p>Welcome to wishlist page. You can remove any course anytime..</p>
+            <p>Welcome to wishlist page. You can add courses anytime..</p>
+            {% endif %}
         </div>
     </div>
     <!-- End Carousel -->

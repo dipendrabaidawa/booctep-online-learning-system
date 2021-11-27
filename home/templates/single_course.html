@@ -423,6 +423,21 @@
 
     </style>
 
+
+<style>
+    .hideondesktop{
+        display: none; 
+    }
+    @media only screen and (max-width: 600px) {
+        .hideondesktop{
+            display: block; 
+        }
+        .hideonphone{
+            display: none;
+        }
+    }
+</style>
+
 {% endblock %}
 
 {% block content %}
@@ -1420,9 +1435,16 @@
                                                             واصل التسوق &nbsp;<span
                                                                 class="fa fa-shopping-cart"></span>
                                                         </a>
+                                                       {% if user.is_authenticated %}
                                                         <a href="{% url 'show fav list' %}" class="button process-button" style="">
                                                             أذهب إلى المفضلة &nbsp;<span class="fa fa-heart"></span>
                                                         </a>
+                                                        {% else %}
+                                                        <a href="/{{ lang }}/become" class="button process-button" style="">
+                                                            أصبح معلم &nbsp;<span class="fa fa-tv"></span>
+                                                        </a>
+
+                                                        {% endif %}
                                                         {% else %}
                                                         <div class="categories-header categories-header-dark">
                                                             <h2>Quick Access</h2>
@@ -1432,9 +1454,16 @@
                                                             Continue shopping &nbsp;<span
                                                                 class="fa fa-shopping-cart"></span>
                                                         </a>
+                                                       {% if user.is_authenticated %}
                                                         <a href="{% url 'show fav list' %}" class="button process-button" style="">
-                                                            Go to Fav courses &nbsp;<span class="fa fa-heart"></span>
+                                                            Go to Fav courses &nbsp; &nbsp;<span class="fa fa-heart"></span>
                                                         </a>
+                                                        {% else %}
+                                                        <a href="/{{ lang }}/become" class="button process-button" style="">
+                                                            Become a teacher &nbsp;<span class="fa fa-tv"></span>
+                                                        </a>
+
+                                                        {% endif %}
                                                         {% endif %}
                                                     </div>
                                                 </div>
@@ -1743,11 +1772,18 @@
                                                              data-demo-src="">
                                                         {% endif %}
                                                         <div class="teacher-card-info">
+                                                            <div class="hideonphone">
                                                             <a href="/{{ lang }}/profile/{{ user_info.id }}/{{ user_info.url_name }}" >
                                                             <h3 class="mediabout mediabout-dark">
                                                                 {{ user_info.first_name }}{{ user_info.last_name }}
                                                             </h3>
                                                             </a>
+                                                            </div>
+                                                            <div class="hideondesktop">
+                                                            <h3 class="mediabout mediabout-dark">
+                                                                {{ user_info.first_name }}{{ user_info.last_name }}
+                                                            </h3>
+                                                            </div>
                                                         </div>
                                                     </div>
 
