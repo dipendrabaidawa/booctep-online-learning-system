@@ -50,6 +50,80 @@
 
 <style>
     
+    body .container .tabs {
+  width: 100%;
+  margin-bottom: 29px;
+  margin-top: -30px !important;
+  text-decoration: none;
+  border-bottom: 1px solid #ebe9e9;
+}
+body .container .tabs .tab {
+  display: inline-block;
+  text-decoration: none;
+  margin-bottom: -1px;
+  padding: 20px 15px 10px;
+  cursor: pointer;
+  letter-spacing: 0;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  transition: all 0.1s ease-in-out;
+}
+body .container .tabs .tab a {
+  font-size: 15px;
+  text-decoration: none;
+  border-bottom: 0 !important;
+  color: #d9d9d9;
+  transition: all 0.1s ease-in-out;
+}
+body .container .tabs .tab.active a, body .container .tabs .tab:hover a {
+  color: #109fd8;
+  text-decoration: none;
+  font-weight: 700;
+  border-bottom: 0 !important;
+  font-weight: bold !important;
+}
+body .container .content .submit-wrap {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+body .container .content .student-cont {
+  display: none;
+}
+
+@keyframes slideIn {
+  0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    margin-left: -320px;
+  }
+  100% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+    margin-left: 0px;
+  }
+}
+@-webkit-keyframes slideIn {
+  0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    margin-left: -320px;
+  }
+  100% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+    margin-left: 0px;
+  }
+}
+
+
+
+
+body .container .content .studentnot-cont {
+  display: none;
+}
 
 
     element.style {
@@ -392,6 +466,7 @@
 
 
 
+
 </style>
 {#<div class="banner">#}
 {#    <div class="container ">#}
@@ -584,6 +659,161 @@
         </div>
         {% if user.is_authenticated %}
             <div class="navbar-end">
+
+                {% if user.group_id == 1 %}
+                <div class="navbar-item is-cart is-dark-cart" style="margin-left: -20px;">
+                    {#                    {% if noti_cnt > 0 %}#}
+                    <div class="cart-button cart-button-dark">
+                        <i class="fa fa-bell"></i>
+                        <div class="cart-count cart-count-dark">
+                            <span class="notifications" id="notificationsid">{{ noti_cnt }}</span>
+                        </div>
+                    </div>
+                    {#                    {% else %}#}
+                    {#                        <div class="cart-button">#}
+                    {#                            <i class="fa fa-bell"></i>#}
+                    {#                        </div>#}
+                    {#                    {% endif %}#}
+
+                    <!-- Cart dropdown -->
+                    <div class="shopping-cart dropdownnotdisplay">
+                        <div class="cart-inner" id="noti-parent">
+                            <!--Loader-->
+                            <div class="navbar-cart-loader is-active">
+                                <div class="loader is-loading"></div>
+                            </div>
+                            <div class="tabs">
+                                {% get_current_language as lang %}
+                                {% if lang == "ar" %}
+                                <span class="tab teachernot active"><a href="#">معلم &nbsp;<i class="fa fa-tv"></i></a></span>
+                                <span class="tab studentnot"><a href="#">طالب &nbsp;<i class="fa fa-user"></i></a></span>
+                                {% else %}
+                                <span class="tab teachernot active"><a href="#">Teacher &nbsp;<i class="fa fa-tv"></i></a></span>
+                                <span class="tab studentnot"><a href="#">Student &nbsp;<i class="fa fa-user"></i></a></span>
+                                {% endif %}
+                            </div>
+                            <div class="content">
+                                <div class="teachernot-cont cont">
+                                    {% if noti_cnt > 0 %}
+                                        <div class="shopping-cart-header ">
+                                            <div class="shopping-cart-total shopping-cart-total-dark" style="color: rgb(241, 127, 162);cursor:not-allowed;">
+                                                <span class="lighter-text mediabout mediabout-dark">{% trans 'Total:' %}</span>
+                                                <span class="main-color-text blllu blllu-dark"><b class="notifications">{{ noti_cnt }}</b> Notifications</span>
+                                            </div>
+                                        </div>
+                                        <ul class="shopping-cart-items">
+                                            {% for noti in noti_list %}
+                                                <li class="cart-row cart-row-dark notiitem" data-id="{{ noti.id }}" style="position: relative;">
+                                                    <img src="{% static noti.sender.image %}" style="border-radius: 50% !important;"alt=""/>
+                                                    <span class="item-meta">
+                                                    {% if user.group_id == 2 %}
+                                                    <a href="/{{ lang }}/student/notifications" class="mediabout mediabout-dark">
+                                                    {% else %}
+                                                    <a href="/{{ lang }}/teacher/notifications" class="mediabout mediabout-dark">
+                                                    {% endif %}    
+                                                        <span class="item-name">{{ noti.sender.first_name }} {{ noti.sender.last_name }}</span>
+                                                        <span class="meta-info">
+                                                            <span class="item-price " style="">{{ noti.title }}</span>
+                                                         </span>
+                                                    </a>
+                                                    </span>
+                                                    <span class="item-meta" style="margin-left:auto !important">
+                                                        <span class="meta-info">
+                                                        </span>
+                                                    </span>
+                                                    <span style="cursor: pointer;" data-id="{{ noti.id }}" onclick="deleteFromNotiDropDown(this)"><i class="fa fa-trash mr-auto" aria-hidden="true"></i>
+                                                    </span>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        <div class="shopping-cart-header " style="border-top: 0 !important;">
+                                            <div class="shopping-cart-total " style="border-top: 0 !important;">
+                                                <span class="lighter-text"
+                                                      style="cursor:not-allowed;">{% trans 'Total:' %}</span>
+                                                <span class="main-color-text"
+                                                      style="color: #c0c0c0;cursor:not-allowed;">{% trans '0 Notifications' %}</span>
+                                            </div>
+                                        </div>
+                                        <ul class="shopping-cart-items-2">
+                                            <li class="cart-row-2">
+                                                <img src="{% static 'assets/img/illstrators/no-not.png' %}" alt=""/>
+                                                <span class="item-name"
+                                                      style="color: grey;">There are no notifications yet.</span>
+                                            </li>
+                                        </ul>
+                                    {% endif %}
+                                    {% if user.group_id == 3 %}
+                                        <a href="/{{ lang }}/teacher/notifications"
+                                           class="button primary-button is-raised">{% trans 'View all Notifications' %}</a>
+                                    {% elif user.group_id == 2 %}
+                                        <a href="/{{ lang }}/student/notifications"
+                                           class="button primary-button is-raised">{% trans 'View all Notifications' %}</a>
+                                    {% endif %}
+                                </div>
+                                <div class="studentnot-cont cont">
+                                    {% if noti_cnt > 0 %}
+                                        <div class="shopping-cart-header ">
+                                            <div class="shopping-cart-total shopping-cart-total-dark" style="color: rgb(241, 127, 162);cursor:not-allowed;">
+                                                <span class="lighter-text mediabout mediabout-dark">{% trans 'Total:' %}</span>
+                                                <span class="main-color-text blllu blllu-dark"><b class="notifications">{{ noti_cnt }}</b> Notifications</span>
+                                            </div>
+                                        </div>
+                                        <ul class="shopping-cart-items">
+                                            {% for noti in noti_list %}
+                                                <li class="cart-row cart-row-dark notiitem" data-id="{{ noti.id }}" style="position: relative;">
+                                                    <img src="{% static noti.sender.image %}" style="border-radius: 50% !important;"alt=""/>
+                                                    <span class="item-meta">
+                                                    {% if user.group_id == 2 %}
+                                                    <a href="/{{ lang }}/student/notifications" class="mediabout mediabout-dark">
+                                                    {% else %}
+                                                    <a href="/{{ lang }}/teacher/notifications" class="mediabout mediabout-dark">
+                                                    {% endif %}    
+                                                        <span class="item-name">{{ noti.sender.first_name }} {{ noti.sender.last_name }}</span>
+                                                        <span class="meta-info">
+                                                            <span class="item-price " style="">{{ noti.title }}</span>
+                                                         </span>
+                                                    </a>
+                                                    </span>
+                                                    <span class="item-meta" style="margin-left:auto !important">
+                                                        <span class="meta-info">
+                                                        </span>
+                                                    </span>
+                                                    <span style="cursor: pointer;" data-id="{{ noti.id }}" onclick="deleteFromNotiDropDown(this)"><i class="fa fa-trash mr-auto" aria-hidden="true"></i>
+                                                    </span>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        <div class="shopping-cart-header " style="border-top: 0 !important;">
+                                            <div class="shopping-cart-total " style="border-top: 0 !important;">
+                                                <span class="lighter-text"
+                                                      style="cursor:not-allowed;">{% trans 'Total:' %}</span>
+                                                <span class="main-color-text"
+                                                      style="color: #c0c0c0;cursor:not-allowed;">{% trans '0 Notifications' %}</span>
+                                            </div>
+                                        </div>
+                                        <ul class="shopping-cart-items-2">
+                                            <li class="cart-row-2">
+                                                <img src="{% static 'assets/img/illstrators/no-not.png' %}" alt=""/>
+                                                <span class="item-name"
+                                                      style="color: grey;">There are no notifications yet.</span>
+                                            </li>
+                                        </ul>
+                                    {% endif %}
+                                    {% if user.group_id == 3 %}
+                                        <a href="/{{ lang }}/teacher/notifications"
+                                           class="button primary-button is-raised">{% trans 'View all Notifications' %}</a>
+                                    {% elif user.group_id == 2 %}
+                                        <a href="/{{ lang }}/student/notifications"
+                                           class="button primary-button is-raised">{% trans 'View all Notifications' %}</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% else %}
                 <div class="navbar-item is-cart is-dark-cart" style="margin-left: -20px;">
                     {#                    {% if noti_cnt > 0 %}#}
                     <div class="cart-button cart-button-dark">
@@ -664,6 +894,164 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
+
+
+                {% if user.group_id == 1 %}
+                <div class="navbar-item is-cart is-dark-cart" style="margin-left: -20px;">
+                    {#                    {% if noti_cnt > 0 %}#}
+                    <div class="cart-button cart-button-dark">
+                        <i class="fa fa-comment-alt"></i>
+                        <div class="cart-count cart-count-dark">
+                            <span class="messagescnt" id="messagesid">{{ msg_cnt }}</span>
+                        </div>
+                    </div>
+                    {#                    {% else %}#}
+                    {#                        <div class="cart-button">#}
+                    {#                            <i class="fa fa-comment-alt"></i>#}
+                    {#                        </div>#}
+                    {#                    {% endif %}#}
+                    <!-- Cart dropdown -->
+                    <div class="shopping-cart">
+                        <div class="cart-inner" id="msg-parent">
+                            <!--Loader-->
+                            <div class="navbar-cart-loader is-active">
+                                <div class="loader is-loading"></div>
+                            </div>
+                            <div class="tabs">
+                                {% get_current_language as lang %}
+                                {% if lang == "ar" %}
+                                <span class="tab teacher active"><a href="#">معلم &nbsp;<i class="fa fa-tv"></i></a></span>
+                                <span class="tab student"><a href="#">طالب &nbsp;<i class="fa fa-user"></i></a></span>
+                                {% else %}
+                                <span class="tab teacher active"><a href="#teacher">Teacher &nbsp;<i class="fa fa-tv"></i></a></span>
+                                <span class="tab student"><a href="#student">Student &nbsp;<i class="fa fa-user"></i></a></span>
+                                {% endif %}
+                          </div>
+                          <div class="content">
+                                <div class="teacher-cont cont">
+                                    {% if msg_cnt > 0 %}
+                                        <div class="shopping-cart-header">
+                                            <div class="shopping-cart-total">
+                                                <span class="lighter-text mediabout mediabout-dark">{% trans 'Total:' %}</span>
+                                                <span class="main-color-text blllu blllu-dark"><b class="messagescnt">{{ msg_cnt }}</b> {% trans ' Senders' %}</span>
+                                            </div>
+                                        </div>
+                                        <ul class="shopping-cart-items">
+                                            {% for msg in msg_list %}
+                                                <li class="cart-row msgitem" data-id="{{ msg.id }}">
+                                                    <img src="{% static msg.sender.image %}" alt=""/>
+                                                    <span class="item-meta">
+                                                    {% if user.group_id == 2 %}
+                                                    <a href="/{{ lang }}/student/messages">
+                                                    {% else %}
+                                                    <a href="/{{ lang }}/teacher/messages">
+                                                    {% endif %}  
+                                                        <span class="item-name">{{ msg.sender.first_name }} {{ msg.sender.last_name }}</span>
+                                                        <span class="meta-info">
+                                                            <span class="item-price" style="color:black">{{ msg.text }}</span>
+                                                        </span>
+                                                    </a>
+                                                    </span>
+                                                    <span class="item-meta" style="margin-left:auto !important">
+                                                        <span class="meta-info">
+                                                        </span>
+                                                    </span>
+                                                    <span style="cursor: pointer;" data-id="{{ msg.sender.id }}" onclick="deleteFromMsgDropDown(this)">
+                                                        <i class="fa fa-trash mr-auto" aria-hidden="true"></i>
+                                                    </span>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        <div class="shopping-cart-header">
+                                            <div class="shopping-cart-total">
+                                                <span class="lighter-text"
+                                                      style="color: #c0c0c0;cursor:not-allowed;">{% trans 'Total:' %}</span>
+                                                <span class="main-color-text blllu blllu-dark"
+                                                      style="cursor:not-allowed;" >{% trans '0 Senders' %}</span>
+                                            </div>
+                                        </div>
+                                        <ul class="shopping-cart-items-2">
+                                            <li class="cart-row-2 cart-row cart-row-dark">
+                                                <img src="{% static 'assets/img/illstrators/no-msg.png' %}" alt=""/>
+                                                <span class="item-name mediabout mediabout-dark" style="">There are no Messages yet from students.</span>
+                                            </li>
+                                        </ul>
+                                    {% endif %}
+                                    {% if user.group_id == 2 %}
+                                        <a href="/{{ lang }}/student/messages" class="button primary-button is-raised"
+                                           onclick="set_count_zero()">{% trans 'View all Messages' %}</a>
+                                    {% else %}
+                                        <a href="/{{ lang }}/teacher/messages" class="button primary-button is-raised"
+                                           onclick="set_count_zero()">{% trans 'View all Messages' %}</a>
+                                    {% endif %}
+                                </div>
+                                <div class="student-cont cont">
+                                    {% if msg_cnt > 0 %}
+                                        <div class="shopping-cart-header">
+                                            <div class="shopping-cart-total">
+                                                <span class="lighter-text mediabout mediabout-dark">{% trans 'Total:' %}</span>
+                                                <span class="main-color-text blllu blllu-dark"><b class="messagescnt">{{ msg_cnt }}</b> {% trans ' Senders' %}</span>
+                                            </div>
+                                        </div>
+                                        <ul class="shopping-cart-items">
+                                            {% for msg in msg_list %}
+                                                <li class="cart-row msgitem" data-id="{{ msg.id }}">
+                                                    <img src="{% static msg.sender.image %}" alt=""/>
+                                                    <span class="item-meta">
+                                                    {% if user.group_id == 2 %}
+                                                    <a href="/{{ lang }}/student/messages">
+                                                    {% else %}
+                                                    <a href="/{{ lang }}/teacher/messages">
+                                                    {% endif %}  
+                                                        <span class="item-name">{{ msg.sender.first_name }} {{ msg.sender.last_name }}</span>
+                                                        <span class="meta-info">
+                                                            <span class="item-price" style="color:black">{{ msg.text }}</span>
+                                                        </span>
+                                                    </a>
+                                                    </span>
+                                                    <span class="item-meta" style="margin-left:auto !important">
+                                                        <span class="meta-info">
+                                                        </span>
+                                                    </span>
+                                                    <span style="cursor: pointer;" data-id="{{ msg.sender.id }}" onclick="deleteFromMsgDropDown(this)">
+                                                        <i class="fa fa-trash mr-auto" aria-hidden="true"></i>
+                                                    </span>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    {% else %}
+                                        <div class="shopping-cart-header">
+                                            <div class="shopping-cart-total">
+                                                <span class="lighter-text"
+                                                      style="color: #c0c0c0;cursor:not-allowed;">{% trans 'Total:' %}</span>
+                                                <span class="main-color-text blllu blllu-dark"
+                                                      style="cursor:not-allowed;" >{% trans '0 Senders' %}</span>
+                                            </div>
+                                        </div>
+                                        <ul class="shopping-cart-items-2">
+                                            <li class="cart-row-2 cart-row cart-row-dark">
+                                                <img src="{% static 'assets/img/illstrators/no-msg.png' %}" alt=""/>
+                                                <span class="item-name mediabout mediabout-dark" style="">There are no Messages yet from Teachers.</span>
+                                            </li>
+                                        </ul>
+                                    {% endif %}
+                                    {% if user.group_id == 2 %}
+                                        <a href="/{{ lang }}/student/messages" class="button primary-button is-raised"
+                                           onclick="set_count_zero()">{% trans 'View all Messages' %}</a>
+                                    {% else %}
+                                        <a href="/{{ lang }}/teacher/messages" class="button primary-button is-raised"
+                                           onclick="set_count_zero()">{% trans 'View all Messages' %}</a>
+                                    {% endif %}
+                                </div>
+                          </div>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                {% else %}
 
                 <div class="navbar-item is-cart is-dark-cart" style="margin-left: -20px;">
                     {#                    {% if noti_cnt > 0 %}#}
@@ -744,6 +1132,7 @@
                         </div>
                     </div>
                 </div>
+                {% endif %}
 
                 <div class="navbar-item is-cart is-dark-cart" style="margin-left: -20px;">
                     {#                    {% if favCnt > 0 %}#}
