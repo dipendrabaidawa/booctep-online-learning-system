@@ -429,27 +429,27 @@ a.disabled{
                                         </div>
                                     </td>
                                     <td class="text-center text-black-70">
-                                        &dollar;<span class="js-lists-values-fees">{{ course.price }}</span> ريال سعودي
+                                        &dollar;<span class="js-lists-values-fees">{{ course.price|unlocalize }}</span> ريال سعودي
                                     </td>
                                     <td class="text-center text-black-70">
                                         <span class="js-lists-values-discount">0%</span>
                                     </td>
                                     <td class="text-center text-black-70">
-                                        <span class="js-lists-values-tax">{{ teacher_tax }}</span> %
+                                        <span class="js-lists-values-tax">{{ teacher_tax|unlocalize }}</span> %
                                     </td>
                                     <td class="text-center text-black-70">
-                                        &dollar;<span class="js-lists-values-hold">{{ course.hold_money }}</span> ريال سعودي
+                                        &dollar;<span class="js-lists-values-hold">{{ course.hold_money|unlocalize }}</span> ريال سعودي
                                     </td>
                                     <td class="text-center text-black-70">
-                                        &dollar;<span class="js-lists-values-refund">{{ course.refund_money }}</span>
+                                        &dollar;<span class="js-lists-values-refund">{{ course.refund_money|unlocalize }}</span>
                                     </td>
                                     <td class="text-center text-black-70">
-                                        &dollar;<span class="js-lists-values-collect">{{ course.ready_money }}</span>
+                                        &dollar;<span class="js-lists-values-collect">{{ course.ready_money|unlocalize }}</span>
                                         USD
                                     </td>
                                     <td class="text-center text-black-70">
                                         &dollar;<span
-                                            class="js-lists-values-transferred">{{ course.transfer_money }}</span> ريال سعودي
+                                            class="js-lists-values-transferred">{{ course.transfer_money|unlocalize }}</span> ريال سعودي
                                     </td>
                                 </tr>
                             {% endfor %}

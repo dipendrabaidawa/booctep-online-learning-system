@@ -335,7 +335,7 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                 </div>
                 <div class=" page__container page__container page__container-2 card-footer card-footer-dark" style="width: 100%;height: 70px !important;border-radius: 0 !important;">
                     <div id="message-reply" class="form-down-2">
-                        <button class="btn btn--light btn-dark flex" onclick="checkAnswer()" 
+                        <button class="btn btn--light btn-dark flex" onclick="skipAnswer()" 
                                 style="width: 40%;margin:0 auto;margin-top: 30px;">Skip
                         </button>
                         <!-- <button class="btn flex showhint" style="color: rgb(87, 185, 185);" data-toggle="toastr" data-toastr-type="info"
@@ -372,25 +372,31 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                             <div class="sidebar-heading">Quiz Timeline</div>
 
                             <ul class="list-group list-group-flush mb-3">
-                                <div class="chart chart-2" style="height: 262px;">
+                                <div class="chart chart-2" style="height: 232px; width: 180px;">
                                     <div class="text-center fullbleed d-flex align-items-center justify-content-center flex-column z-0">
                                         <h2 class="m-0">{{ question_no }} / {{ question_count }}</h2>
                                         <strong>{{ left }} To go</strong>
                                     </div>
                                     <canvas class="chart-canvas position-relative z-1" id="attendanceDoughnutChart"
                                             data-chart-legend="#attendanceDoughnutChartLegend"
-                                            data-chart-line-background-color="primary;accent;gray.700;gray">
+                                            data-chart-line-background-color="primary;accent;gray.700;gray" width="10" height="10" style="margin-top:25px">
                                         <span style="font-size: 1rem;" class="text-muted"><strong>Attendance</strong> doughnut chart goes here.</span>
                                     </canvas>
                                 </div>
                                 <div class="col-6">
                                     <div class="nav border-0">
                                     </div>
-                                    <div id="attendanceDoughnutChartLegend"
-                                         class="chart-legend chart-legend--vertical mt-24pt"></div>
+                                    <div id="attendanceDoughnutChartLegend" class="chart-legend chart-legend--vertical mt-24pt">
+                                        <sapn class="chart-legend-item">
+                                        </sapn>
+                                        <sapn class="chart-legend-item">
+                                        </sapn>
+                                        <sapn class="chart-legend-item">
+                                        </sapn>
+                                    </div>
                                 </div>
                                 <button type="submit" class="btn btn-accent flex" onclick="continueLater()"
-                                        style="width: 90%;margin:0 auto;margin-top: 30px;">continue later
+                                        style="width: 90%;margin:0 auto;margin-top: 90px;">continue later
                                 </button>
                             </ul>
                         </div>
@@ -449,14 +455,23 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
 
         let end_flag = '{{ end_flag }}'
         let cache_str = '{{ cache_str }}'
+        let question_count = '{{ question_count }}'
+
         $(document).ready(function () {
-            localStorage.setItem('totalQuizCount', '{{ count }}')
+            question_no = '{{ question_no }}'
+            console.log(question_no)
+
+            // preventing the redirect back via browswer back button in quiz process
+            last_question = localStorage.getItem('last_question');
+            let end_flag = "{{ end_flag }}"
+            if ((end_flag !== "1") && (parseInt(question_no) < parseInt(last_question))) {
+                window.location.href = '/quiz/{{ course.course_url }}/{{ quiz_id }}/?question='+last_question
+            }
+
+            localStorage.setItem('totalQuizCount', question_count)
             right = localStorage.getItem('right');
             wrong = localStorage.getItem('wrong');
             skip = localStorage.getItem('skip');
-            console.log("test:::", right)
-            console.log("test:::", wrong)
-            console.log("test:::", skip)
 
             rightdiv = $('#attendanceDoughnutChartLegend').children().eq(0);
             skipdiv = $('#attendanceDoughnutChartLegend').children().eq(1);
@@ -467,8 +482,8 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
             wrongdiv.html('');
 
             rightdiv.html('<i class="chart-legend-indicator" style="background-color: rgba(85, 103, 255, 1)"></i>right  :  ' + right)
-            skipdiv.html('<i class="chart-legend-indicator" style="background-color: rgba(237, 11, 75, 1)"></i>skip  :  ' + skip)
-            wrongdiv.html('<i class="chart-legend-indicator" style="background-color: #B1BBC9"></i>wrong  :  ' + wrong);
+            skipdiv.html('<i class="chart-legend-indicator" style="background-color: rgba(242, 240, 124, 1)"></i>skip  :  ' + skip)
+            wrongdiv.html('<i class="chart-legend-indicator" style="background-color: rgba(247, 94, 104, 1)"></i>wrong  :  ' + wrong);
 
             $(".quiz-a").click(function(){
 
@@ -481,13 +496,74 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                 $(this).next().prop( "checked", true );
                 $(this).attr("id","thisisselected");
             });
-        });
 
-        function skipFunc() {
-            question_no = '{{ question_no }}'
-            question_no = question_no * 1 + 1
-            location = '/quiz/{{ course.name }}/{{ quiz_id }}/?question='+question_no
-        }
+            let right_percent = 0;
+            if (question_count !== "0" && right !== "0")
+                right_percent = Math.round(parseInt(right) / parseInt(question_count) * 100)
+
+            let skip_percent = 0;
+            if (question_count !== "0" && skip !== "0")
+                skip_percent = Math.round(parseInt(skip) / parseInt(question_count) * 100)
+
+            let wrong_percent = 0;
+            if (question_count !== "0" && wrong !== "0")
+                wrong_percent = Math.round(parseInt(wrong) / parseInt(question_count) * 100)
+
+            let left_percent = 100 - right_percent - skip_percent - wrong_percent;
+
+            const data = {
+                labels: [
+                    'Right',
+                    'Skip',
+                    'Wrong',
+                    'Left'
+                ],
+                datasets: [{
+                    label: 'My First Dataset',
+                    data: [right_percent, skip_percent, wrong_percent, left_percent],
+                    backgroundColor: [
+                        "rgba(85, 103, 255, 1)",
+                        "rgba(242, 240, 124, 1)",
+                        "rgba(247, 94, 104, 1)",
+                        "rgb(227, 235, 246, 1)"
+                    ],
+                    borderColor: "#FFFFFF",
+                    borderWidth: 4,
+                    weight: 1
+                    // hoverOffset: 4
+                }]
+            };
+
+            const options = {
+                aspectRatio: 1,
+                responsive: true,
+                cutout: 60,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return context.label + ":" + context.parsed + "%";;
+                            }
+                        }
+                    },
+                    legend: {
+                        display: false
+                    },
+                }
+            }
+
+            const config = {
+                type: 'doughnut',
+                data: data,
+                options: options,
+            };
+
+            const myChart = new Chart(
+                document.getElementById('attendanceDoughnutChart'),
+                config
+            );
+
+        });
 
         function hideAlertModal() {
             $("#alert_modal").css({
@@ -519,6 +595,21 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
             }).then(response =>{
                 window.open('/static' + response.src, '_blank')
             })
+        }
+
+        function skipAnswer() {
+            skip = localStorage.getItem('skip');
+            skip = skip*1 + 1
+            localStorage.setItem('skip', skip)
+
+            question_no = '{{ question_no }}'
+            question_no = question_no * 1 + 1
+            localStorage.setItem('last_question', question_no)
+
+            // if ((question_no - 1) === parseInt(question_count))
+            //     localStorage.setItem('last_question', question_no-1)
+
+            location = '/quiz/{{ course.course_url }}/{{ quiz_id }}/?question='+question_no
         }
 
         function checkAnswer() {
@@ -592,11 +683,10 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                     'cursor': 'not-allowed'
                 })
             } else {*/
-                question_no = '{{ question_no }}'
-                question_no = question_no * 1 + 1
-                setTimeout(() =>{
-                    location = '/quiz/{{ course.course_url }}/{{ quiz_id }}/?question='+question_no
-                }, 3000)
+            question_no = '{{ question_no }}'
+            question_no = question_no * 1 + 1
+            localStorage.setItem('last_question', question_no)
+            location = '/quiz/{{ course.course_url }}/{{ quiz_id }}/?question='+question_no
             /*}*/
         }
 

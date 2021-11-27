@@ -716,7 +716,7 @@ def store_course(request):
     pending = request.POST.get('pending')
     type = request.POST.get('type')
     course_level = request.POST.get('course_level')
-    dripping = request.POST.get('dripping')
+    # dripping = request.POST.get('dripping')
     user_name = request.user.first_name + " " + request.user.last_name
 
     full_path = ''
@@ -770,7 +770,7 @@ def store_course(request):
             pending=pending,
             type=type,
             course_level=course_level,
-            dripping=dripping,
+            dripping=0,
             approval_status=0
         )
         objCourse.save()
@@ -795,7 +795,7 @@ def store_course(request):
         objCourse.course_url = courseUrl
         objCourse.type = type
         objCourse.course_level = course_level
-        objCourse.dripping = dripping
+        # objCourse.dripping = dripping
         objCourse.save()
         msg = "successs"
         id = objCourse.id
