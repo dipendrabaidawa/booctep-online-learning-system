@@ -264,6 +264,7 @@
 
 </style>
 
+
 <div class="cookiees">
   <img class="cookiees-icon" src="https://raw.githubusercontent.com/s1mpson/-/master/codepen/we-use-cookies/cookie.png">
   <span class="cookiees-message">We are using cookies to give you best experience.</span>
@@ -278,12 +279,12 @@
                 {% if lang == "ar" %}
                 <div class="logo-footer">
                     <img src="{% static 'ar/assets/img/logo/booctep.png' %}" alt="Booctep Logo - Arabic">
-                    <img src="{% static 'assets/img/payment.png' %}" alt="Booctep Payments - Arabic" style="width: 180px">
+                    <!-- <img src="{% static 'assets/img/payment.png' %}" alt="Booctep Payments - Arabic" style="width: 180px"> -->
                 </div>
                 {% else %}
                 <div class="logo-footer" style="margin-right: 50px;">
                     <img src="{% static 'assets/img/logo/logo-booctep.png' %}" alt="Booctep Logo - English">
-                    <img src="{% static 'assets/img/payment.png' %}" alt="Booctep Payments - English" style="width: 180px">
+                    <!-- <img src="{% static 'assets/img/payment.png' %}" alt="Booctep Payments - English" style="width: 180px"> -->
                 </div>
                 {% endif %}
             </div>
@@ -555,4 +556,52 @@
       
       // It's not clear if the ternary counts as 2 lines or 1 when I'm trying to minimise line count, but I'm counting it as 2
       
+    </script>
+
+    <script>
+$('.tabs .tab').click(function(){
+    if ($(this).hasClass('teacher')) {
+        $('.tabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.teacher-cont').show();
+        window.location.hash = '';
+    } 
+    if ($(this).hasClass('student')) {
+        $('.tabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.student-cont').show();
+        window.location.hash = '';
+    }
+});
+
+
+$('.tabs .tab').click(function(){
+    if ($(this).hasClass('teachernot')) {
+        $('.tabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.teachernot-cont').show();
+        window.location.hash = '';
+    }
+    if ($(this).hasClass('studentnot')) {
+        $('.tabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.studentnot-cont').show();
+        window.location.hash = '';
+    }
+});
+
+
+$('.container .bg').mousemove(function(e){
+    var amountMovedX = (e.pageX * -1 / 30);
+    var amountMovedY = (e.pageY * -1 / 9);
+    $(this).css('background-position', amountMovedX + 'px ' + amountMovedY + 'px');
+});
+
+
+
+
     </script>

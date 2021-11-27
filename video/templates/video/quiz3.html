@@ -32,11 +32,16 @@
                                                             <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">dvr</span>
                                                         </div>
                                                         <div class="flex">
-                                                            <a href="mini-student-take-course.html" class="card-title text-body mb-0">Learn HTML5 and sass with css</a>
+                                                            {% get_current_language as lang %}
+                                                            {% if lang == "ar" %}
+                                                            <a href="/ar/courses" class="card-title text-body mb-0"><b class="blllu blllu-dark">{{ course.name }}</b></a>
                                                             <p class="lh-1 d-flex align-items-center mb-0">
-                                                                <span class="text-50 small font-weight-bold mr-8pt">Video number 2 : </span>
-                                                                <span class="text-50 small">Intro to HTML5</span>
                                                             </p>
+                                                            {% else %}
+                                                            <a href="/en/courses" class="card-title text-body mb-0"><b class="blllu blllu-dark">{{ course.name }}</b></a>
+                                                            <p class="lh-1 d-flex align-items-center mb-0">
+                                                            </p>
+                                                            {% endif %}  
                                                         </div>
                                                     </div>
                                                 </div>

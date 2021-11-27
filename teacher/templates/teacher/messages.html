@@ -342,6 +342,9 @@ width: 500px !important;
                                     </strong>
                                     <span class="text-50 text-ellipsis"><div id="name_course" class="blllu blllu-dark"></div></span>
                                 </div>
+                                <button type="button" id="delete_history" class="btn btn-sm btn-light btn-light-dark" style="margin-left:100px;" onclick="deleteHistory()">
+                                    DELETE HISTORY
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -377,40 +380,40 @@ width: 500px !important;
         </div>
            
 
-        {% get_current_language as lang %}
-        {% if lang == "ar" %}
+            {% get_current_language as lang %}
+            {% if lang == "ar" %}
+            <center>
+                <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0"
+                        data-toggle="sidebar" type="button">
+                    <i class="material-icons">swipe</i> <b>اختر محادثة</b>
+                </button>
+        <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
+            
+            <h2 style="" class="mt-5 mediabout mediabout-dark">من فضلك قم بأختيار محادثة</h2>
+            
+           
+            <div class="d-flex justify-content-center align-items-center">
+                <img src="{% static 'assets/img/no-messages.svg' %}" style="width: 40%; height: auto;" alt="">
+            </div>
+        </div>
+    </center>
+        {% else %}
         <center>
             <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0"
                     data-toggle="sidebar" type="button">
-                <i class="material-icons">swipe</i> <b>اختر محادثة</b>
+                <i class="material-icons">swipe</i> <b>Choose a chat</b>
             </button>
-    <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
-        
-        <h2 style="" class="mt-5 mediabout mediabout-dark">من فضلك قم بأختيار محادثة</h2>
-        
-       
-        <div class="d-flex justify-content-center align-items-center">
-            <img src="{% static 'assets/img/no-messages.svg' %}" style="width: 40%; height: auto;" alt="">
+        <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
+            
+            
+            <h2 style="" class="mt-5 mediabout mediabout-dark">Please select the teacher to start</h2>
+           
+            <div class="d-flex justify-content-center align-items-center">
+                <img src="{% static 'assets/img/no-messages.svg' %}" style="width: 40%; height: auto;" alt="">
+            </div>
         </div>
-    </div>
-</center>
-    {% else %}
-    <center>
-        <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0"
-                data-toggle="sidebar" type="button">
-            <i class="material-icons">swipe</i> <b>Choose a chat</b>
-        </button>
-    <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
-        
-        
-        <h2 style="" class="mt-5 mediabout mediabout-dark">Please select the teacher to start</h2>
-       
-        <div class="d-flex justify-content-center align-items-center">
-            <img src="{% static 'assets/img/no-messages.svg' %}" style="width: 40%; height: auto;" alt="">
-        </div>
-    </div>
-    {% endif %}
-    </center>      
+        {% endif %}
+        </center>      
 
         <div class="mdk-drawer js-mdk-drawer " data-align="end" id="messages-drawer">
             <div class="mdk-drawer__content top-0 hide-phone">
@@ -502,7 +505,7 @@ width: 500px !important;
         </div>
     </div>
     <div class="sweet-overlay" tabindex="-1" style="opacity: 1.09; display: none;" id="modal_back"></div>
-</div>  
+ 
 
 {% endblock %}
 
