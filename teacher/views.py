@@ -339,10 +339,14 @@ def course_engagement(request):
             coupon = discount.objects.filter(course_id=cur_course_id)[0]
         else:
             coupon = ''
+    
+         
 
     else:
         course = ''
         reviewList = ''
+ 
+
     return render(request, 'teacher/course-engagement.html',
                   {'lang': getLanguage(request)[0], 'courses': courses, 'course': course, 'reviewList': reviewList,
                    'cur_course_id': cur_course_id, 'page': page, 'coupon': coupon, 'review_type': review_type})

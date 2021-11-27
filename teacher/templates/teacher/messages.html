@@ -227,9 +227,11 @@ justify-content: center !important;
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (min-width: 800px) {
 
-.app-messages__container{
-   width: 600px !important;
+
+    .app-messages__container{
+width: 1200px !important;
 }
+
 
 }
 
@@ -237,15 +239,11 @@ justify-content: center !important;
 @media only screen and (max-width: 500px) {
 
 .app-messages__container{
-   width: 150px !important;
+   width: 100px !important;
 }
 
 }
 
-
-.app-messages__container{
-width: 1150px !important;
-}
 
 .mediabout{
 color: rgb(255, 255, 255) !important;
@@ -263,10 +261,6 @@ color: rgb(219, 219, 219) !important;
 <style>
 
 
-
-.app-messages__container{
-width: 1200px !important;
-}
 
 .mediabout{
 color: rgb(255, 255, 255) !important;
@@ -291,7 +285,7 @@ color: rgb(219, 219, 219) !important;
 @media only screen and (max-width: 600px) {
 
 .app-messages__container{
-width: 500px !important;
+width: 400px !important;
 }
 .hide-on-phone{
     color: rgb(30, 42, 53);
@@ -342,9 +336,6 @@ width: 500px !important;
                                     </strong>
                                     <span class="text-50 text-ellipsis"><div id="name_course" class="blllu blllu-dark"></div></span>
                                 </div>
-                                <button type="button" id="delete_history" class="btn btn-sm btn-light btn-light-dark" style="margin-left:100px;" onclick="deleteHistory()">
-                                    DELETE HISTORY
-                                </button>
                             </div>
                         </div>
                     </div>
@@ -357,16 +348,26 @@ width: 500px !important;
                         </div>
                     </div>
                 </div>
-                <div class="container page__container page__container"
+                <div class="container page__container"
                      style=" bottom: 90px; position: absolute; height: 40px;overflow: hidden !important;">
                      <div class="hiddd" style="">
                     <div class="input-group input-group-merge">
+                        {% get_current_language as lang %}
+                        {% if lang == "ar" %}
                         <input type="text" id="text" class="form-control form-control-appended"
-                               placeholder="Type message">
+                               placeholder="أكتب رسالتك">
                         <button id="send" type="button" class="btn btn-primary btn-primary-dark btn-lr " style=""
                                 onclick="message_teacher_to_student()">
                             Send
                         </button>
+                        {% else %}
+                        <input type="text" id="text" class="form-control form-control-appended"
+                               placeholder="Type message">&nbsp;	
+                        <button id="send" type="button" class="btn btn-primary btn-primary-dark btn-lr " style=""
+                                onclick="message_teacher_to_student()">
+                            Send
+                        </button>
+                        {% endif %}
                     </div>
                     </div>
                 </div>

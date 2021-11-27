@@ -54,6 +54,12 @@
             color: #fff;
         }
 
+        .shrt:hover{
+            background-color: #2581ac;
+            border: 1px solid #174e68;
+            color: #fff !important;
+        }
+
         .shrt-dark{
             background-color: #91c2d8;
             border: 1px solid #233c47;
@@ -63,6 +69,11 @@
 
         .shrl{
             background-color: #145f91;
+            border: 1px solid #124c74;
+            color: #fff;
+        }
+        .shrl:hover{
+            background-color: #0f4e77;
             border: 1px solid #124c74;
             color: #fff;
         }
@@ -76,6 +87,11 @@
 
         .shrf{
             background-color: #102249;
+            border: 1px solid #08142e;
+            color: #fff;
+        }
+        .shrf:hover{
+            background-color: #0c1b3a;
             border: 1px solid #08142e;
             color: #fff;
         }
@@ -906,7 +922,13 @@
                         
                     </div>
                     
-                    <img src="/static{{ user_info.image }}" alt="" class="brd brd-dark" style="margin-top: 0px;">
+                    {% if user.profile.image %}
+                    <img src="/static{{ user.image }}" alt="" class="brd brd-dark" style="margin-top: 0px;">
+                    {% else %}
+                    <img  class="brd brd-dark" style="margin-top: 0px;"src="{% static 'assets/img/userdefault.png' %}"
+                         data-demo-src="">
+                    {% endif %}
+
 
                     {% get_current_language as lang %}
                     {% if lang == "en" %}
@@ -1067,7 +1089,12 @@
                                                                             <div>
                                                                                 <div class="media-left">
                                                                                     <div class="avatar-wrap is-smaller is-rounded">
-                                                                                        <img src="{% static i.user.image %}">
+                                                                                        {% if i.user.image  %}
+                                                                                        <img src="/static{{ i.user.image }}" alt="" style="margin-top: 0px;">
+                                                                                        {% else %}
+                                                                                        <img  style="margin-top: 0px;"src="{% static 'assets/img/userdefault.png' %}"
+                                                                                             data-demo-src="">
+                                                                                        {% endif %}
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="media-content">
@@ -1134,6 +1161,7 @@
                                                         </div>
                                                         <div id="products-tab" class="store-tab-pane is-active">
                                                             <div class="columns is-multiline">
+                                                                {% if similar_courses %}
                                                                 {% for course in similar_courses %}
                                                                     <div class="column is-one-third is-one-third-widescreen is-one-third-desktop is-half-tablet is-full-mobile coursecard"
                                                                          data-cat-id="{{ course.scat_id }}"
@@ -1358,8 +1386,24 @@
                                                                          </div>
                                                                     </div>
                                                                 {% endfor %}
+                                                                {% else %}
                                                             </div>
                                                         </div>
+                                                                {% get_current_language as lang %}
+                                                                {% if lang == "ar" %}
+                                                                <div class="videos-wrapper has-player">
+                                                                    <div class="comments-wrap comments-wrap-dark">
+                                                                    <b class="mediabout mediabout-dark"> لا يوجد دورات مشابهه متاحة </b>
+                                                                    </div>
+                                                                </div>
+                                                                    {% else %}
+                                                                <div class="videos-wrapper has-player">
+                                                                    <div class="comments-wrap comments-wrap-dark">
+                                                                    <p class="mediabout mediabout-dark"> There are no similar courses to be found </p>
+                                                                    </div>
+                                                                    </div>
+                                                                    {% endif %}
+                                                                {% endif %}
                                                     </div>
                                                 </div>
                                             </section>
@@ -1691,8 +1735,13 @@
                                                 </div>
                                                 <div class="summary-card summary-card-dark" style="margin-top:25px">
                                                     <div class="teacher-card">
-                                                        <img src="/static{{ user_info.image }}"
-                                                             style="width: 65px;height:65px" data-demo-src="" alt="">
+                                                        
+                                                        {% if user.profile.image %}
+                                                        <img src="/static{{ user.image }}" alt="" class="brd brd-dark" style="margin-top: 0px;">
+                                                        {% else %}
+                                                        <img  class="brd brd-dark" style="margin-top: 0px;"src="{% static 'assets/img/userdefault.png' %}"
+                                                             data-demo-src="">
+                                                        {% endif %}
                                                         <div class="teacher-card-info">
                                                             <a href="/{{ lang }}/profile/{{ user_info.id }}/{{ user_info.url_name }}" >
                                                             <h3 class="mediabout mediabout-dark">

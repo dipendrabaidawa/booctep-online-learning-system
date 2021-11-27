@@ -185,6 +185,7 @@
      .cover-bg {
             max-width: 100% !important;
             height: 100%;
+            background-size: cover !important;
             padding-top: 40px !important;
         }
 .cover-bg:hover .cover-edit {
@@ -459,6 +460,7 @@
     
     </style>
 {% endif %}
+
 <div id="shop-page" class="shop-wrapper">
     <form id="profile_form" action="" method="post" style="display: none;">
         {% csrf_token %}
@@ -468,23 +470,38 @@
         <input type="hidden" name="tab" id="tab" value="{{ tab }}">
     </form>
     <div class=" is-paddingless" style="">
-        {% if user.group_id == 3 %}
+        {% if user.group_id == 3 and user.group_id == 4 %}
             <div class="cover-bg" style="">
-                <img class="cover-image" src="{% if teacher.profile.header_img == '' %}{% static 'assets/img/free.jpg' %}{% else %}{% static teacher.profile.header_img %}{% endif %}"
-                     data-demo-src="assets/img/demo/bg/4.png"
-                     alt="" style="">
+                {% if teacher.profile.header_img %}
+                <img class="avatar brd brd-dark" src="{% static teacher.profile.header_img %}" style=""
+                     data-demo-src="">
+                {% else %}
+                <img class="avatar brd brd-dark" src="{% static 'assets/img/defaultprofileheader.jpg' %}" style=""
+                     data-demo-src="">
+                {% endif %}
+
+                {% if user.profile.image %}
                 <div class="avatar">
-                    <img id="user-avatar" style="height: 100% !important;" class="avatar-image hero-single-course hero-single-course-dark" src="{% static teacher.image %}"
-                         data-demo-src="assets/img/avatars/jenna.png" alt="" style="">
-                </div>
+                    <img id="user-avatar" style="height: 100% !important;" class="avatar-image hero-single-course hero-single-course-dark" src="/static{{ user.image }}" style=""
+                     data-demo-src="">
+                {% else %}
+                <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style=""
+                     data-demo-src="">
+                {% endif %}
+
             </div>
         {% else %}
             <div class="cover-bg" style="">
                 <img class="cover-image hero-single-course hero-single-course-dark" src=""
-                     data-demo-src="assets/img/demo/bg/4.png" alt="" style="">
+                     data-demo-src="" alt="" style="">
                 <div class="avatar">
+                    {% if user.profile.image %}
                     <img id="user-avatar" class="avatar-image hero-single-course hero-single-course-dark" src="{% static teacher.image %}"
                          data-demo-src="assets/img/avatars/jenna.png" alt=""  style="height: 100% !important;">
+                    {% else %}
+                         <img id="user-avatar" class="avatar-image hero-single-course hero-single-course-dark"  src="{% static 'assets/img/userdefault.png' %}" style="height: 100% !important;"
+                              data-demo-src="">
+                    {% endif %}          
                 </div>
             </div>
         {% endif %}
@@ -666,29 +683,12 @@
                                     <center>
                                             {% if teacher.courses.has_other_pages %}
                                                 <ul class="pagination">
-                                                    {% if teacher.courses.has_previous %}
-                                                        <li ><a onclick="page_prev()" >
-                                                            <i class="fa fa-angle-left" aria-hidden="true"></i>
-                                                        </a></li>
-                                                    {% else %}
-                                                        <li class="disabled disabled-dark">
-                                                            <i class="fa fa-angle-left" aria-hidden="true"></i></li>
-                                                    {% endif %}
-                                                    {% for i in teacher.courses.paginator.page_range %}
-                                                        {% if teacher.courses.number == i %}
-                                                            <li class="active active-dark"
-                                                                style="background: #0d79df; color: white; cursor: pointer;"
-                                                                onclick="page_set({{ i }})"><span>{{ i }}</span>
-                                                            </li>
-                                                        {% else %}
-                                                            <li class="activve activv-dark"><a onclick="page_set({{ i }})">{{ i }}</a></li>
-                                                        {% endif %}
-                                                    {% endfor %}
+
                                                     {% if teacher.courses.has_next %}
                                                       {% get_current_language as lang %}
                                                       {% if lang == "ar" %}
                                                         <li class="nextt nextt-dark"><a onclick="page_next()">
-                                                            <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                                            <i class="fa fa-angle-right" aria-hidden="true"></i>
                                                         </a></li>
                                                       {% else %}
                                                       <li class="nextt nextt-dark"><a onclick="page_next()">
@@ -699,6 +699,25 @@
                                                         <li class="disabled disabled-dark">
                                                             <i class="fa fa-angle-right" aria-hidden="true"></i>
                                                         </li>
+                                                    {% endif %}
+                                                    {% for i in teacher.courses.paginator.page_range %}
+                                                        {% if teacher.courses.number != i %}
+                                                        <li class="activve activv-dark"><a onclick="page_set({{ i }})">{{ i }}</a></li>
+                                                            </li>
+                                                        {% else %}
+                                                        <li class="active active-dark"
+                                                            style="background: #0d79df; color: white; cursor: pointer;"
+                                                            onclick="page_set({{ i }})"><span>{{ i }}</span>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                    
+                                                    {% if teacher.courses.has_previous %}
+                                                        <li ><a onclick="page_prev()" >
+                                                            <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                                        </a></li>
+                                                    {% else %}
+                                                        <li class="disabled disabled-dark">
+                                                            <i class="fa fa-angle-left" aria-hidden="true"></i></li>
                                                     {% endif %}
                                                 </ul>
                                             {% endif %}
@@ -758,8 +777,17 @@
                                             <div class="column is-6">
                                                 <div class="card" style="margin-bottom: 15px !important;width: 95%;margin:0 auto;">
                                                     <div class="card-body card-body-dark" style="display:flex;flex-direction:row;align-items:center">
-                                                        <img style="border-radius: 50%;margin-right: 10px;height: 40px !important;width: 40px !important; "
-                                                             src="{% static i.user.image %}" class="brd brd-dark">
+                                                             {% if user.profile.image %}
+                                                             <img class="avatar brd brd-dark" src="/static{{ user.image }}" style=""
+                                                                  data-demo-src="">
+                                                             {% else %}
+                                                             <img style="border-radius: 50%;margin-right: 10px;height: 40px !important;width: 40px !important; "
+                                                                  src="assets/img/userdefault.png" class="brd brd-dark">
+                                                             <!-- <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style=""
+                                                                  data-demo-src=""> -->
+                                                             {% endif %}
+
+                                                             
                                                         <h3 class="mediabout mediabout-dark">{{ i.user.first_name }} {{ i.user.last_name }}</h3>
                                                         <b style="color: rgb(223, 168, 117);margin-left: 10px;">{{ i.rating|unlocalize }}<span
                                                                 class="fa fa-star"></span></b>

@@ -660,7 +660,7 @@ body .container .content .studentnot-cont {
         {% if user.is_authenticated %}
             <div class="navbar-end">
 
-                {% if user.group_id == 1 %}
+                {% if user.group_id == 4 %}
                 <div class="navbar-item is-cart is-dark-cart" style="margin-left: -20px;">
                     {#                    {% if noti_cnt > 0 %}#}
                     <div class="cart-button cart-button-dark">
@@ -897,7 +897,7 @@ body .container .content .studentnot-cont {
                 {% endif %}
 
 
-                {% if user.group_id == 1 %}
+                {% if user.group_id == 4 %}
                 <div class="navbar-item is-cart is-dark-cart" style="margin-left: -20px;">
                     {#                    {% if noti_cnt > 0 %}#}
                     <div class="cart-button cart-button-dark">
@@ -1283,8 +1283,13 @@ body .container .content .studentnot-cont {
                 <div id="account-dropdown" class="navbar-item is-account drop-trigger has-caret" style="
                 margin-left: -10px !important;">
                     <div class="small-avatar1">
+                        {% if user.profile.image %}
                         <img class="avatar brd brd-dark" src="/static{{ user.image }}" style=""
-                             data-demo-src="{% static 'assets/img/avatars/jenna.png' %}">
+                             data-demo-src="">
+                        {% else %}
+                        <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style=""
+                             data-demo-src="">
+                        {% endif %}
                     </div>
                     <div class="nav-drop nav-drop-dark is-account-dropdown dropdownnotdisplay">
                         <div class="inner">
@@ -1461,8 +1466,13 @@ body .container .content .studentnot-cont {
             <!-- Account -->
             <div class="navbar-item has-dropdown ">
                 <div class="navmobile">
-                  <img src="/static{{ user.image }}" data-demo-src="{% static 'assets/img/avatars/jenna.png' %}"
-                       alt="">
+                    {% if user.profile.image %}
+                    <img class="avatar brd brd-dark" src="/static{{ user.image }}" style=""
+                         data-demo-src="">
+                    {% else %}
+                    <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style=""
+                         data-demo-src="">
+                    {% endif %}
                   <span class="is-heading mediabout mediabout-dark">{{ user.first_name }} {{ user.last_name }}</span>
                 </div>
 

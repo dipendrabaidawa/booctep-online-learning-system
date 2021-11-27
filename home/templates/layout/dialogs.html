@@ -372,7 +372,11 @@
                         </div>
                         <p> {% trans 'Already have an account ?' %} <a href="/signup">{% trans 'Sign up' %}</a></p>
                         <div class="has-text-centered" style="margin-top: 10px;">
-                            <a class="modal-trigger" data-modal="albums-help-modal">{% trans 'Forget Password' %}</a>
+                            {% if lang == "ar" %}
+                            <a class="modal-trigger" data-modal="albums-help-modal">هل نسيت كلمة المرور؟</a>
+                            {% else %}
+                            <a class="modal-trigger" data-modal="albums-help-modal">{% trans 'Forget Password' %}?</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
