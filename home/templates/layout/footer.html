@@ -400,10 +400,10 @@
                                
                                 {% get_current_language as lang %}
                                 {% if lang == "ar" %}
-                                <a href="{% url 'student courses' %}"
+                                <a href="{% url 'teacher courses' %}"
                                    style="font-weight: 400;margin: 0 auto;" class="footcolor footcolor-dark"><b>{% trans 'Become a teacher' %}</b></a>
                                 {% else %}
-                                <a href="{% url 'student courses' %}"
+                                <a href="{% url 'teacher courses' %}"
                                    style="font-weight: 400;margin: 0 auto;" class="footcolor footcolor-dark">{% trans 'Become a teacher' %}</a>
                                 {% endif %}
                                 {% endif %}
