@@ -3544,13 +3544,13 @@ def payment_done(request, course_id, student_id):
     user_id = request.session.get("user_id")
     user_type = request.session.get("user_type")
     if user_type == "teacher":
-        user = User.objects.get(pk=user_id)
+        user = User.objects.get(id=user_id)
         user.group_id = 4
         user.save()
         request.session['user_type'] = "stuteach"
 
     # Sending to the creator of this course
-    teacher_id = Courses.objects.get(pk=id).user_id
+    teacher_id = Courses.objects.get(pk=course_id).user_id
     teacher = User.objects.get(pk=teacher_id)
     to = teacher.email
     student = User.objects.get(pk=student_id)
