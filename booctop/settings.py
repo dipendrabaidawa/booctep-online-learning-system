@@ -127,35 +127,17 @@ WSGI_APPLICATION = 'booctop.wsgi.application'
 #       'PORT': '3306',
 #   }
 
+# Never change db config and commit.
+# If you want to use local db, change this config and don't commit to repo.
 DATABASES = {
-    # 'default': {
-    #   'ENGINE': 'django.db.backends.mysql',
-    #   'NAME': 'booctop',
-    #   'USER': 'root',
-    #   'PASSWORD': '',
-    #   'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-    #   'PORT': '3306',
-    # }
    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'booctop',
-        'USER': 'root', # 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost', #'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '8889',
+      'ENGINE': 'django.db.backends.mysql',
+      'NAME': 'dzjq9t85dqv8kckj',
+      'USER': 'otp2j74kv3w9g03y', # 'root',
+      'PASSWORD': 'ow5vd8s2bue9y9xt',
+      'HOST': 'x8autxobia7sgh74.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', #'localhost',   # Or an IP Address that your DB is hosted on
+      'PORT': '3306',
     }
-  # 'default': {
-  #       'ENGINE': 'django.db.backends.mysql',
-  #       'NAME': 'booctop',
-  #       'USER':'root',
-  #       'PASSWORD':'root',
-  #       'HOST':'127.0.0.1',
-  #       'PORT':'8889',
-  #   'OPTIONS': {
-  #       'charset': 'utf8mb4',
-  #       'use_unicode': True,
-  #     }
-  # }
 }
 
 # Password validation
