@@ -134,6 +134,8 @@ def home_view(request):
         order = int(order)
 
     category_obj = categories.objects.all()
+    for c in category_obj:
+        c.urlname = re.sub(r'[^\w]', '', c.name)
 
     if user_id == None:    
         if type == -1:
@@ -2910,7 +2912,7 @@ def searching(request):
     #                    'msg_cnt': msg_cnt})
 
 
-def single_category(request, id):
+def single_category(request, category_name, id):
     user_id = request.session.get("user_id")
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)

@@ -87,7 +87,7 @@ urlpatterns += i18n.i18n_patterns(
     # url(r'^search/search/$', searching, name='searchfromanywhere'),
     
     
-	url(r'^category/(?P<id>[0-9]+)/$', single_category, name='single category'),
+	url(r'^category/(?P<category_name>\w+)/(?P<id>[0-9]+)/$', single_category, name='single category'),
 	
 	
 	# url(r'^single_course/(?P<id>[0-9]+)/$', single_course, name='single_course'), 

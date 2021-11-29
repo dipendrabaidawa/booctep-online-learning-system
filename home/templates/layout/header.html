@@ -669,18 +669,12 @@ body .container .content .studentnot-cont {
 
                 {% if user.group_id == 4 %}
                 <div class="navbar-item is-cart is-dark-cart" style="margin-left: -20px;">
-                    {#                    {% if noti_cnt > 0 %}#}
                     <div class="cart-button cart-button-dark">
                         <i class="fa fa-bell"></i>
                         <div class="cart-count cart-count-dark">
                             <span class="notifications" id="notificationsid">{{ noti_cnt }}</span>
                         </div>
                     </div>
-                    {#                    {% else %}#}
-                    {#                        <div class="cart-button">#}
-                    {#                            <i class="fa fa-bell"></i>#}
-                    {#                        </div>#}
-                    {#                    {% endif %}#}
 
                     <!-- Cart dropdown -->
                     <div class="shopping-cart dropdownnotdisplay">
@@ -746,16 +740,9 @@ body .container .content .studentnot-cont {
                                             <li class="cart-row-2">
                                                 <img src="{% static 'assets/img/illstrators/no-not.png' %}" alt=""/>
                                                 <span class="item-name"
-                                                      style="color: grey;">There are no notifications yet.</span>
+                                                      style="color: grey;">There are no notifications from students yet.</span>
                                             </li>
                                         </ul>
-                                    {% endif %}
-                                    {% if user.group_id == 3 %}
-                                        <a href="/{{ lang }}/teacher/notifications"
-                                           class="button primary-button is-raised">{% trans 'View all Notifications' %}</a>
-                                    {% elif user.group_id == 2 %}
-                                        <a href="/{{ lang }}/student/notifications"
-                                           class="button primary-button is-raised">{% trans 'View all Notifications' %}</a>
                                     {% endif %}
                                 </div>
                                 <div class="studentnot-cont cont">
@@ -804,36 +791,25 @@ body .container .content .studentnot-cont {
                                             <li class="cart-row-2">
                                                 <img src="{% static 'assets/img/illstrators/no-not.png' %}" alt=""/>
                                                 <span class="item-name"
-                                                      style="color: grey;">There are no notifications yet.</span>
+                                                      style="color: grey;">There are no notifications from teachers yet.</span>
                                             </li>
                                         </ul>
                                     {% endif %}
-                                    {% if user.group_id == 3 %}
-                                        <a href="/{{ lang }}/teacher/notifications"
-                                           class="button primary-button is-raised">{% trans 'View all Notifications' %}</a>
-                                    {% elif user.group_id == 2 %}
-                                        <a href="/{{ lang }}/student/notifications"
-                                           class="button primary-button is-raised">{% trans 'View all Notifications' %}</a>
-                                    {% endif %}
                                 </div>
+                                <a href="javascript:void(0)" onclick="goToNotifications()"
+                                       class="button primary-button is-raised">{% trans 'View all Notifications' %}</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 {% else %}
                 <div class="navbar-item is-cart is-dark-cart" style="margin-left: -20px;">
-                    {#                    {% if noti_cnt > 0 %}#}
                     <div class="cart-button cart-button-dark">
                         <i class="fa fa-bell"></i>
                         <div class="cart-count cart-count-dark">
                             <span class="notifications" id="notificationsid">{{ noti_cnt }}</span>
                         </div>
                     </div>
-                    {#                    {% else %}#}
-                    {#                        <div class="cart-button">#}
-                    {#                            <i class="fa fa-bell"></i>#}
-                    {#                        </div>#}
-                    {#                    {% endif %}#}
 
                     <!-- Cart dropdown -->
                     <div class="shopping-cart dropdownnotdisplay">
@@ -906,18 +882,12 @@ body .container .content .studentnot-cont {
 
                 {% if user.group_id == 4 %}
                 <div class="navbar-item is-cart is-dark-cart" style="margin-left: -20px;">
-                    {#                    {% if noti_cnt > 0 %}#}
                     <div class="cart-button cart-button-dark">
                         <i class="fa fa-comment-alt"></i>
                         <div class="cart-count cart-count-dark">
                             <span class="messagescnt" id="messagesid">{{ msg_cnt }}</span>
                         </div>
                     </div>
-                    {#                    {% else %}#}
-                    {#                        <div class="cart-button">#}
-                    {#                            <i class="fa fa-comment-alt"></i>#}
-                    {#                        </div>#}
-                    {#                    {% endif %}#}
                     <!-- Cart dropdown -->
                     <div class="shopping-cart">
                         <div class="cart-inner" id="msg-parent">
@@ -931,8 +901,8 @@ body .container .content .studentnot-cont {
                                 <span class="tab teacher active"><a href="#">معلم &nbsp;<i class="fa fa-tv"></i></a></span>
                                 <span class="tab student"><a href="#">طالب &nbsp;<i class="fa fa-user"></i></a></span>
                                 {% else %}
-                                <span class="tab teacher active"><a href="#teacher">Teacher &nbsp;<i class="fa fa-tv"></i></a></span>
-                                <span class="tab student"><a href="#student">Student &nbsp;<i class="fa fa-user"></i></a></span>
+                                <span class="tab teacher active"><a href="#">Teacher &nbsp;<i class="fa fa-tv"></i></a></span>
+                                <span class="tab student"><a href="#">Student &nbsp;<i class="fa fa-user"></i></a></span>
                                 {% endif %}
                           </div>
                           <div class="content">
@@ -1053,8 +1023,6 @@ body .container .content .studentnot-cont {
                                     {% endif %}
                                 </div>
                           </div>
-                            
-                            
                         </div>
                     </div>
                 </div>
@@ -1825,6 +1793,10 @@ body .container .content .studentnot-cont {
 
             }
         })
+    }
+
+    function goToNotifications() {
+        console.log($('span.tab'))
     }
 
     var h = document.getElementById("tipue_drop_input");
