@@ -537,15 +537,22 @@ background:#3A3A3A;
                     </div>
                 </div>
                 <div id="show" class="">
-                    <div class="app-video" style="">
+                    <!-- <div class="app-video" style="">
                         <video autoplay poster="{% static 'assets/img/setting.jpg' %}" id="player" playsinline controls>
                             <source type="video/webm" src="../../../../static{{ first_video.url }}"/>
-                            <!-- Captions are optional -->
                             <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en"
                                    default/>
                         </video>
+                    </div> -->
+                    <div class="schedule-header">
+                        <video autoplay poster="{% static 'assets/img/setting.png' %}" id="videoplayer" playsinline controls style="width: 75%; margin-left: 100px;">
+                            <source src="../../../../static{{ first_video.url }}"
+                                    type="video/webm"/>
+                            <track kind="captions" label="English captions"
+                                   src="/path/to/captions.vtt" srclang="en" default/>
+                        </video>
                     </div>
-                    <div class=" page__container page__container page__container-2 card-footer card-footer-dark" style="width: 100%;height: 100px !important;border-radius: 0 !important;">
+                    <div class=" page__container page__container page__container-2 card-footer card-footer-dark" style="width: 100%;height: 75px !important;border-radius: 0 !important;">
                         <form action="#" id="message-reply" class="form-down-2 ">
                             <div class="progress"
                                  style="height: 10px;margin-top: 25px; width: 50%;border-radius: 10px;">
@@ -943,7 +950,7 @@ background:#3A3A3A;
     <script>
 
         let memory;
-        let video = $(".app-video video")[0]
+        let video = $(".schedule-header video")[0]
         let user_id = '{{ request.user.id }}'
         let course_id = '{{ course_id }}'
         let key = user_id + '-' + course_id
@@ -1039,6 +1046,26 @@ background:#3A3A3A;
         }
 
         $(document).ready(function () {
+            const controls = [
+                'restart', // Restart playback
+                'rewind', // Rewind by the seek time (default 10 seconds)
+                'play', // Play/pause playback
+                'fast-forward', // Fast forward by the seek time (default 10 seconds)
+                'progress', // The progress bar and scrubber for playback and buffering
+                'current-time', // The current time of playback
+                'duration', // The full duration of the media
+                'mute', // Toggle mute
+                'volume', // Volume control
+                'airplay', // Airplay (currently Safari only)
+            ];
+
+            const player = Plyr.setup('#videoplayer', {controls});
+
+            $("#videoplayer")[0].load();
+            
+            const plyrcontrols = document.getElementsByClassName("plyr__controls")[0];
+            plyrcontrols.setAttribute("style", "width:75%; margin-left:100px");
+
             if (cache_str == '') {
                 len = $(".accordion__menu-link").length
                 checkList = new Array(len)
@@ -1348,10 +1375,8 @@ background:#3A3A3A;
             let cur_video_name = $(cname).html().split('.')
             cur_video_name.pop()
             $("#cur_video_name").html(cur_video_name.toString())
-            $(".app-video video source").attr("src", "../../../../static" + dataurl)
-            console.log("here")
-            $(".app-video video")[0].load();
-            console.log("here1")
+            $(".schedule-header video source").attr("src", "../../../../static" + dataurl)
+            $(".schedule-header video")[0].load();
             $(".list-group .flex").removeAttr("style")
             $(cname).css({"color": "rgb(1, 100, 192)"});
 

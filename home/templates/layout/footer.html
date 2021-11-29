@@ -545,7 +545,13 @@
         let cur_paths = cur_path.split("/");
         let cur_lang = cur_paths[1];
         let toggle_lang = cur_lang === "ar" ? "en" : "ar";
-        let switch_url = window.location.protocol + '//' + cur_domain + "/" + toggle_lang + cur_subpath;
+
+        let params_str = "";
+        if (cur_url.indexOf("?") !== -1) {
+            params_str = cur_url.substr(cur_url.indexOf("?"), cur_url.length);
+        }
+
+        let switch_url = window.location.protocol + '//' + cur_domain + "/" + toggle_lang + cur_subpath + params_str;
 
         $(".switch-lang").attr('href', switch_url);
     });

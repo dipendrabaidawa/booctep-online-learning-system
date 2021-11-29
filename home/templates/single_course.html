@@ -1024,9 +1024,7 @@
                                         <div class="column is-8">
                                             <div class="schedule schedule-dark " style="margin-top: -3px; ">
                                                 <div class="schedule-header">
-                                                    <video autoplay poster="{% static 'assets/img/setting.png' %}"
-                                                           id="videoplayer"
-                                                           playsinline controls style="width: 100%;">
+                                                    <video autoplay poster="{% static 'assets/img/setting.png' %}" id="videoplayer" playsinline controls style="width: 100%;">
                                                         <source src="../../../../static{{ promo_video }}"
                                                                 type="video/webm"/>
                                                         <track kind="captions" label="English captions"
@@ -2554,7 +2552,7 @@
                 }
             });            
 
-             $(".cancelpromobutton").click(function () {
+            $(".cancelpromobutton").click(function () {
                 $(".discountamount").empty();
                 $(".discountamount").append(discount);
 
