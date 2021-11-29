@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_crontab',
     'teacher',
     'student',
     'video',
@@ -131,10 +132,10 @@ WSGI_APPLICATION = 'booctop.wsgi.application'
 DATABASES = {
    'default': {
       'ENGINE': 'django.db.backends.mysql',
-      'NAME': 'dzjq9t85dqv8kckj',
-      'USER': 'otp2j74kv3w9g03y', # 'root',
-      'PASSWORD': 'ow5vd8s2bue9y9xt',
-      'HOST': 'x8autxobia7sgh74.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', #'localhost',   # Or an IP Address that your DB is hosted on
+      'NAME': 'kvtest',
+      'USER': 'root',
+      'PASSWORD': '',
+      'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
       'PORT': '3306',
   }
   # 'default': {
@@ -267,7 +268,10 @@ SOCIAL_AUTH_INSTAGRAM_SECRET = '95c0b482253e9eb434b35acfcdb106b5'  #Client SECRE
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
-VIMEO_TOKEN = 'a3635b84742cb87e72d7099f18672ad1'
+VIMEO_TOKEN = '219cb1675d7cffd2eca82a6c9ca86dbb'
 VIMEO_KEY = '252b44a621d7c1212a01e13f5737bfe9eb912b83'
 VIMEO_SECRET = 'jffm+bdiKCgVh1vVcWwOEwQzX7U+J6e/J1ecHdltMtM4Qgg6KAB4hf4W2oA/b5KPC0V0l65sryTYror1ZHDkSRT+Vxw709RJgyAwkCRQWPEd44qp7ymBDbDRVfF6SGLj'
 
+CRONJOBS = [
+    ('*/5 * * * *', 'teacher.cron.my_scheduled_job')
+]
