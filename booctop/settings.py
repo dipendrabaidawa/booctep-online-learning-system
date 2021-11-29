@@ -37,17 +37,15 @@ SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = ['*']
 
+# This SMTP config is given from the client directly. Never change it.
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtpout.secureserver.net'
 EMAIL_HOST_USER = 'support@booctep.com'
-EMAIL_HOST_PASSWORD = 'BooctepSupport'
+EMAIL_HOST_PASSWORD = 'BooctepSupportCom'
 EMAIL_USE_TLS = False
 EMAIL_PORT = 465
-EMAIL_USE_SSL=True 
-# EMAIL_HOST_USER = 'booctepdotcom2030@gmail.com'
-# EMAIL_HOST_USER = 'parshotam.kumar32@gmail.com'
-# EMAIL_HOST_PASSWORD = 'booctepgmailcom1011'
-# EMAIL_HOST_PASSWORD = 'parshotam@g'
+EMAIL_USE_SSL=True
+
 
 # Application definition
 
