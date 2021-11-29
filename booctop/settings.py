@@ -37,17 +37,15 @@ SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = ['*']
 
+# This SMTP config is given from the client directly. Never change it.
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtpout.secureserver.net'
 EMAIL_HOST_USER = 'support@booctep.com'
-EMAIL_HOST_PASSWORD = 'BooctepSupport'
+EMAIL_HOST_PASSWORD = 'BooctepSupportCom'
 EMAIL_USE_TLS = False
 EMAIL_PORT = 465
-EMAIL_USE_SSL=True 
-# EMAIL_HOST_USER = 'booctepdotcom2030@gmail.com'
-# EMAIL_HOST_USER = 'parshotam.kumar32@gmail.com'
-# EMAIL_HOST_PASSWORD = 'booctepgmailcom1011'
-# EMAIL_HOST_PASSWORD = 'parshotam@g'
+EMAIL_USE_SSL=True
+
 
 # Application definition
 
@@ -129,35 +127,17 @@ WSGI_APPLICATION = 'booctop.wsgi.application'
 #       'PORT': '3306',
 #   }
 
+# Never change db config and commit.
+# If you want to use local db, change this config and don't commit to repo.
 DATABASES = {
-    # 'default': {
-    #   'ENGINE': 'django.db.backends.mysql',
-    #   'NAME': 'booctop',
-    #   'USER': 'root',
-    #   'PASSWORD': '',
-    #   'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-    #   'PORT': '3306',
-    # }
    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'booctop',
-        'USER': 'root', # 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost', #'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '8889',
+      'ENGINE': 'django.db.backends.mysql',
+      'NAME': 'dzjq9t85dqv8kckj',
+      'USER': 'otp2j74kv3w9g03y', # 'root',
+      'PASSWORD': 'ow5vd8s2bue9y9xt',
+      'HOST': 'x8autxobia7sgh74.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', #'localhost',   # Or an IP Address that your DB is hosted on
+      'PORT': '3306',
     }
-  # 'default': {
-  #       'ENGINE': 'django.db.backends.mysql',
-  #       'NAME': 'booctop',
-  #       'USER':'root',
-  #       'PASSWORD':'root',
-  #       'HOST':'127.0.0.1',
-  #       'PORT':'8889',
-  #   'OPTIONS': {
-  #       'charset': 'utf8mb4',
-  #       'use_unicode': True,
-  #     }
-  # }
 }
 
 # Password validation
