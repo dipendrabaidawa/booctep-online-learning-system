@@ -440,7 +440,13 @@
             <div class="card">
                 <div class="card-heading">
                     <div class="user-meta">
-                        <img id="modal-img" src="/static/assets/img/man.jpg">
+                        {% if user.profile.image %}
+                        <img class="avatar brd brd-dark" src="/static{{ user.image }}" style=""
+                             data-demo-src="">
+                        {% else %}
+                        <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style=""
+                             data-demo-src="">
+                        {% endif %}
                     </div>
                     <span class="user-meta-span"
                           id="modal-user-name">{{ course.user.first_name }}{{ course.user.last_name }} </span>

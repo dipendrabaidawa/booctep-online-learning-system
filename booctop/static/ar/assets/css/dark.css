@@ -1089,3 +1089,14 @@
     border: 1px solid #000;
     background: #222831
 }
+
+
+.dark-homepage-2{
+    background-image: url('../img/bg-dark-2.svg');
+    background-size: cover;
+}
+  
+.dark-homepage-2 .title{
+  color: #dce3ee;
+}
+

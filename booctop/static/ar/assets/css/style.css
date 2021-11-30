@@ -2016,9 +2016,15 @@ hr{
 
 
 
+.typewritter-title-white{
+  color: #e8ecee !important;
+  
+}
+
+
 .secondary__title{
   position: relative;  
-  color: #fafafa;
+  color: #e8ecee !important;
 }
 
 .secondary__title::after{
@@ -5234,10 +5240,6 @@ img {
   margin-top: -2px;
   float: left !important;
   border: 0;
-}
-
-.second-button{
-  background-color: #efecec;
 }
 
 .checkbox {
@@ -10694,15 +10696,16 @@ box-sizing: border-box;
 
 
 
-/* Dark mode */
 
-body div.darkmode {
-  display: inline-block;
-  font-size: 15px;
-  padding: 0;
-  cursor: pointer;
-}
-body.dark .darkmode .light, body:not(.dark) .darkmode .dark {
-  display: none;
+
+.hero-homepage-2{
+  background-image: url('../img/Boocteep-light-ar.svg');
+  background-size: cover;
 }
 
+.hero-homepage-2 .title{
+  color: #fff !important;
+  margin-bottom: 0;
+  font-weight: 600;
+  font-size: 35px;
+}
