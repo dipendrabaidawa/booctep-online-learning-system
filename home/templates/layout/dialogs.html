@@ -1,6 +1,16 @@
 {% load static %}
 {% load i18n %}
 <!-- Categories -->
+{% get_current_language as lang %}
+{% if lang == "ar" %}
+
+<style>
+    .control p{
+        text-align: right !important;
+    }
+</style>
+{% endif %}
+
 <style>
     .explore-item-dark:hover{
         border: 1px solid #060808 !important;
@@ -322,7 +332,7 @@
                 </span>
                 <div class="header">
                     <div class="product-info">
-                        <img class="Loginmodal-img Loginmodal-img-dark" src="{% static 'assets/img/favicon.png' %}" alt="">
+                        <img class="Loginmodal-img Loginmodal-img-dark mobile_logo" src="{% static 'assets/img/favicon.png' %}" alt="">
                         <h3 id="quickview-name">{% trans 'Login' %}</h3>
                         <p style="margin-bottom: 10px;">{% trans 'Welcome Back' %}</p>
                         <a href="{% url 'social:begin' 'google-oauth2' %}" class="button is-fullwidth socig socig-dark"

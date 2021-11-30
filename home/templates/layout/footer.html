@@ -44,6 +44,12 @@
             margin-top: 0px !important;
         }
 
+        .social {
+            margin-top: -30px;
+            margin-left: auto !important;
+            margin-right: auto !important;
+        }
+
     }
 
     .social {
@@ -263,7 +269,7 @@
 @media (max-width: 624px) {
 
 .logo-footer{
-    margin-top: 50px;
+    display: none !important;
 }
 }
 
@@ -294,12 +300,12 @@
                 {% get_current_language as lang %}
                 {% if lang == "ar" %}
                 <div class="logo-footer">
-                    <img src="{% static 'ar/assets/img/logo/booctep.png' %}" alt="Booctep Logo - Arabic">
+                    <img src="{% static 'ar/assets/img/logo/booctep.png' %}" alt="Booctep Logo - Arabic" class="logo-footer-ar">
                     <!-- <img src="{% static 'assets/img/payment.png' %}" alt="Booctep Payments - Arabic" style="width: 180px"> -->
                 </div>
                 {% else %}
                 <div class="logo-footer" style="margin-right: 50px;">
-                    <img src="{% static 'assets/img/logo/logo-booctep.png' %}" alt="Booctep Logo - English">
+                    <img src="{% static 'assets/img/logo/booctep-tran.png' %}" alt="Booctep Logo - English" class="logo-footer">
                     <!-- <img src="{% static 'assets/img/payment.png' %}" alt="Booctep Payments - English" style="width: 180px"> -->
                 </div>
                 {% endif %}
