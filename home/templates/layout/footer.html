@@ -537,17 +537,31 @@
         $(".cookiees").css({
             'display': 'none'
         })
+        document.cookie = "username=support@booctop.com";
     }
 
-    ip = '{{ ip }}'
-    ip_str = localStorage.getItem(ip)
-    console.log("ip_str", ip_str)
-    if (ip_str == null || ip_str == undefined || ip_str == '') {
-        showCookie()
-        localStorage.setItem(ip, 'yes')
-    }
+    // ip = '{{ ip }}'
+    // ip_str = localStorage.getItem(ip)
+    // console.log("ip_str", ip_str)
+    // if (ip_str == null || ip_str == undefined || ip_str == '') {
+    //     showCookie()
+    //     localStorage.setItem(ip, 'yes')
+    // }
 
     $(document).ready(function () {
+        let isShowCookie = true;
+        let cookies = document.cookie;
+        let cookie_arrs = cookies.split(";");
+        for (let item of cookie_arrs) {
+            let key_value = item.split("=");
+            if ((key_value[0] == "username") && (key_value[1] == "support@booctop.com")) {
+                isShowCookie = false;
+            }
+        }
+        if (isShowCookie == true) {
+            showCookie();
+        }
+
         let cur_url = window.location.href;
         let arr = cur_url.split("/");
         let cur_domain = arr[2];
