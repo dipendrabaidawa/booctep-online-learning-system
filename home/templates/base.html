@@ -375,6 +375,18 @@ Page loader
         z-index: 9999;
         opacity: 1;
       }
+
+      .sweet-alert .sa-icon.sa-success:after {
+            opacity: 0.0;
+        }
+
+        .sweet-alert .sa-icon.sa-success:before {
+            opacity: 0.0;
+        }
+
+        .sweet-alert .sa-icon.sa-success .sa-fix {
+            opacity: 0.0;
+        }
     </style>
 
     <head>
@@ -621,6 +633,7 @@ Page loader
             $(".top").addClass("top-dark");
             $(".hero-about").addClass("hero-about-dark");
             $(".slide").addClass("slide-dark");
+            $(".logo-photo").addClass("logo-photo-dark");
             $(".aboutus").addClass("aboutus-dark");
             $(".clicck").addClass("clicck-dark");
             $(".cennnter").addClass("cennnter-dark");
@@ -643,6 +656,7 @@ Page loader
             $(".nav-link").addClass("nav-link-dark");
             $(".card-support").addClass("card-support-dark");
             $(".footcolor").addClass("footcolor-dark");
+            $(".is-comment").addClass("is-comment-dark");
             $(".ordd").addClass("ordd-dark");
             $(".liness").addClass("liness-dark");
             $(".tab-content").addClass("tab-content-dark");
@@ -710,6 +724,7 @@ Page loader
             $(".hero-become").addClass("hero-become-dark");
             $(".btncheck").addClass("btncheck-dark");
             $(".shrf").addClass("shrf-dark");
+            $(".is-primary").addClass("is-primary-dark");
             $(".card-body").addClass("card-body-dark");
             $(".card-footter").addClass("card-footter-dark");
             $(".prcg").addClass("prcg-dark");
@@ -719,6 +734,10 @@ Page loader
             $(".mode_images").attr(
               "src",
               "/static/{{ lang }}assets/img/logo/dark-logo.png"
+            );
+            $(".about-img-1").attr(
+              "src",
+              "/static/{{ lang }}assets/img/about/work.png"
             );
             $(".primary__title").attr(
               "style",
@@ -747,9 +766,12 @@ Page loader
             $(".cookiees").removeClass("cookiees-dark");
             $(".hero-become-4").removeClass("hero-become-4-dark");
             $(".clicck").removeClass("clicck-dark");
+            $(".is-primary").removeClass("is-primary-dark");
             $(".cart-summary").removeClass("cart-summary-dark");
             $(".screen").removeClass("screen-dark");
+            $(".logo-photo").removeClass("logo-photo-dark");
             $(".hidden").removeClass("hidden-dark");
+            $(".is-comment").removeClass("is-comment-dark");
             $(".hero-about").removeClass("hero-about-dark");
             $(".hero-become").removeClass("hero-become-dark");
             $(".accordion__toggle").removeClass("accordion__toggle-dark");
@@ -861,7 +883,7 @@ Page loader
               "style",
               "border-bottom: 1px solid rgb(226, 226, 226);"
             );
-            head.removeChild(link);
+            // head.removeChild(link);
           }
         }
 

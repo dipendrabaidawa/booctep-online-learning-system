@@ -16,7 +16,15 @@
                                         
                                             <nav class="nav navbar-nav">
                                                 <div class="nav-item navbar-list__item">
-                                                    <a href="/courses" class="nav-link h-auto"><i class="material-icons icon--left">keyboard_backspace</i> Back to Dashboard</a>
+                                                    {% get_current_language as lang %}
+                                                    {% if lang == "ar" %}
+                                                    <a href="/ar/courses" class="nav-link h-auto mediabout mediabout-dark"><i
+                                                            class="material-icons icon--left mediabout mediabout-dark">keyboard_backspace</i> الرجوع إلى لوحة التحكم</a>
+                                                    {% else %}
+                                                    <a href="/en/courses" class="nav-link h-auto mediabout mediabout-dark"><i
+                                                            class="material-icons icon--left mediabout mediabout-dark">keyboard_backspace</i> Back to
+                                                        Dashboard</a>
+                                                    {% endif %}  
                                                 </div>
                                                 <div class="nav-item navbar-list__item">
                                                     <div class="d-flex align-items-center flex-nowrap">
@@ -24,11 +32,16 @@
                                                             <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left">dvr</span>
                                                         </div>
                                                         <div class="flex">
-                                                            <a href="mini-student-take-course.html" class="card-title text-body mb-0">Learn HTML5 and sass with css</a>
+                                                            {% get_current_language as lang %}
+                                                            {% if lang == "ar" %}
+                                                            <a href="/ar/courses" class="card-title text-body mb-0"><b class="blllu blllu-dark">{{ course.name }}</b></a>
                                                             <p class="lh-1 d-flex align-items-center mb-0">
-                                                                <span class="text-50 small font-weight-bold mr-8pt">Video number 2 : </span>
-                                                                <span class="text-50 small">Intro to HTML5</span>
                                                             </p>
+                                                            {% else %}
+                                                            <a href="/en/courses" class="card-title text-body mb-0"><b class="blllu blllu-dark">{{ course.name }}</b></a>
+                                                            <p class="lh-1 d-flex align-items-center mb-0">
+                                                            </p>
+                                                            {% endif %}  
                                                         </div>
                                                     </div>
                                                 </div>

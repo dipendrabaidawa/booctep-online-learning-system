@@ -62,8 +62,54 @@
         .checked {
             color: #f7ff00 !important;
         }
+    </style>
 
-  
+    {% get_current_language as lang %}
+    {% if lang == "ar" %}
+    <style>
+        .image-owner{
+            direction: ltr;
+            float: left;
+        }
+        .full{
+            direction: ltr;
+            float: left;
+        }
+        .rating{
+            direction: ltr;
+            float: left;
+        }
+        .name{
+            direction: ltr;
+            float: left;
+        }
+        .accordion__menu{
+            background-color: none !important;
+
+        }
+        .accordion__menu-dark{
+            background-color: rgb(241, 241, 241) !important;
+        }
+    </style>
+    {% endif %}
+
+    <style>
+        .in-blk {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .goldstardiv {
+            color: gold;
+            position: relative;
+        }
+
+        .nocourseavailable {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bolder;
+        }
+
         /****** Style Star Rating Widget *****/
         @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
@@ -76,33 +122,6 @@
             display: none;
         }
 
-        {% get_current_language as lang %}
-        {% if lang == "en" %}
-        .rating > label {
-            color: #ddd;
-            float: right;
-        }
-        .rating > .half:before {
-            content: "\f089";
-            position: absolute;
-        }
-        .rating > label:before {
-            margin: 2px;
-            font-size: 1.25em;
-            font-family: FontAwesome;
-            display: inline-block;
-            content: "\f005";
-        }
-        {% else %}
-        .rating > label {
-            color: #ddd;
-            float: left;
-        }
-        .rating > .half:before {
-            content: "\f089";
-            position: absolute;
-            margin-right: 14px;
-        }
         .rating > label:before {
             margin: 5px;
             font-size: 1.25em;
@@ -110,96 +129,55 @@
             display: inline-block;
             content: "\f005";
         }
-        {% endif %}
+
+        .rating > .half:before {
+            content: "\f089";
+            position: absolute;
+        }
+
+        .rating > label {
+            color: #ddd;
+            float: right;
+        }
 
         /***** CSS Magic to Highlight Stars on Hover *****/
-
         .rating > input:checked ~ label
         {
             color: #FFD700;
         }
 
+        .is-comboe{
+            background-color: #fff;
+        }
+
+        .is-comboe-dark{
+            background: #adadad !important; 
+            border: 1px solid #707070 !important;
+            color: #616B75 ;
+        }
+
+        .prcgr{
+            color: rgb(25, 139, 82) !important;
+        }
+
+        .prcgr-dark{
+            color: rgb(177, 241, 209) !important;
+        }
+
+        .prcg{
+            color: rgb(204, 29, 29) !important;
+        }
+
+        .prcg-dark{
+            color: rgb(214, 169, 169) !important;
+        }
     </style>
 
 
 {% endblock %}
 {% block content %}
 
-    <!-- Mobile Navbar -->
-    <nav class="navbar mobile-navbar is-hidden-desktop" aria-label="main navigation">
-        <!-- Brand -->
-        <div class="navbar-brand">
-            <a class="navbar-item2" href="/">
-                <img class="mobile-logo" src="/static/assets/img/favicon.png" alt="">
-            </a>
-
-            <div id="mobile-explorer-trigger" class="navbar-item is-icon">
-                <a class="icon-link is-primary">
-                    <i class="mdi mdi-apps"></i>
-                </a>
-            </div>
-
-            <!-- Mobile menu toggler icon -->
-            <div class="navbar-burger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-        <!-- Navbar mobile menu -->
-        <div class="navbar-menu">
-            <!-- Account -->
-            <div class="navbar-item has-dropdown ">
-                <div class="navbar-link">
-                    <img src="/static/assets/img/man.jpg" data-demo-src="/static/assets/img/avatars/jenna.png" alt="">
-                    <span class="is-heading"> </span>
-                </div>
-
-                <div class="navbar-item">
-                    <div id="global-search" class="control">
-                        <input id="tipue_drop_input" class="input " type="text" placeholder="Search" required>
-                        <span id="clear-search" class="reset-search">
-                            <i data-feather="x"></i>
-                        </span>
-                        <span class="search-icon">
-                            <i data-feather="search"></i>
-                        </span>
-                    </div>
-                </div>
-                <!-- Mobile Dropdown -->
-                <div class="navbar-dropdown">
-                    <a href="#" class="navbar-item is-flex is-mobile-icon">
-                        <span><i data-feather="user"></i>Profile</span>
-                    </a>
-                    <a href="#" class="navbar-item is-flex is-mobile-icon">
-                        <span><i data-feather="shopping-cart"></i>Cart</span>
-                        <span class="menu-badge">3</span>
-                    </a>
-                    <a href="#" class="navbar-item is-flex is-mobile-icon">
-                        <span><i data-feather="activity"></i>Feed</span>
-                        <span class="menu-badge">87</span>
-                    </a>
-                    <a href="#" class="navbar-item is-flex is-mobile-icon">
-                        <span><i data-feather="settings"></i>Settings</span>
-                    </a>
-                    <a href="#" class="navbar-item is-flex is-mobile-icon">
-                        <span><i data-feather="hexagon"></i>Logout</span>
-                    </a>
-
-                    <div class="buttons">
-                        <a class="button second-button">
-                            <p>Sign up</p>
-                        </a>
-                        <a class="button primary-button raised quickview-trigger process-button">
-                            <p>Log in</p>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-
+   
     <!-- Filters and courses -->
     <div id="shop-page" class="shop-wrapper">
 
@@ -208,8 +186,14 @@
     <!-- Start Carousel -->
     <div class="single_category-4">
         <div class="container">
+            {% get_current_language as lang %}
+            {% if lang == "ar" %}
+            <h3 style="">المفضلة</h3>
+            <p>مرحبا بك في المفضلة, يمكنك إضافة المزيد بأي وقت.</p>
+            {% else %}
             <h3 style="">Wishlist</h3>
-            <p>Welcome to wishlist page. You can remove any course anytime..</p>
+            <p>Welcome to wishlist page. You can add courses anytime..</p>
+            {% endif %}
         </div>
     </div>
     <!-- End Carousel -->
@@ -295,42 +279,27 @@
                                                          data-demo-background="/static/assets/img/courses/pc.jpg">
                                                         <div class="overlay"></div>
                                                         <div class="image-owner">
-                                                            <div class="" style="display: flex; align-items: center;">
+                                                            <div class="name" style="display: flex; align-items: center;">
                                                                 <form class="rating" data-rating="{{ course.rating }}" data-course="{{ course.id }}">
-                                                                    <input type="radio" id="star10-{{ course.id }}" name="rating" value="5"/><label
-                                                                        class="full" for="star10-{{ course.id }}"
-                                                                        title="Awesome - 5 stars"></label>
-                                                                    <input type="radio" id="star9-{{ course.id }}" name="rating"
-                                                                           value="4 and a half"/><label class="half"
-                                                                                                        for="star9-{{ course.id }}"
-                                                                                                        title="Pretty good - 4.5 stars"></label>
-                                                                    <input type="radio" id="star8-{{ course.id }}" name="rating" value="4"/><label
-                                                                        class="full" for="star8-{{ course.id }}"
-                                                                        title="Pretty good - 4 stars"></label>
-                                                                    <input type="radio" id="star7-{{ course.id }}" name="rating"
-                                                                           value="3 and a half"/><label class="half"
-                                                                                                        for="star7-{{ course.id }}"
-                                                                                                        title="Meh - 3.5 stars"></label>
-                                                                    <input type="radio" id="star6-{{ course.id }}" name="rating" value="3"/><label
-                                                                        class="full" for="star6-{{ course.id }}"
-                                                                        title="Meh - 3 stars"></label>
-                                                                    <input type="radio" id="star5-{{ course.id }}" name="rating"
-                                                                           value="2 and a half"/><label class="half"
-                                                                                                        for="star5-{{ course.id }}"
-                                                                                                        title="Kinda bad - 2.5 stars"></label>
-                                                                    <input type="radio" id="star4-{{ course.id }}" name="rating" value="2"/><label
-                                                                        class="full" for="star4-{{ course.id }}"
-                                                                        title="Kinda bad - 2 stars"></label>
-                                                                    <input type="radio" id="star3-{{ course.id }}" name="rating"
-                                                                           value="1 and a half"/><label class="half"
-                                                                                                        for="star3-{{ course.id }}"
-                                                                                                        title="Meh - 1.5 stars"></label>
-                                                                    <input type="radio" id="star2-{{ course.id }}" name="rating" value="1"/><label
-                                                                        class="full" for="star2-{{ course.id }}"
-                                                                        title="Sucks big time - 1 star"></label>
-                                                                    <input type="radio" id="star1-{{ course.id }}" name="rating"
-                                                                           value="half"/><label class="half" for="star1-{{ course.id }}"
-                                                                                                title="Sucks big time - 0.5 stars"></label>
+                                                                    <input type="radio" id="star10-{{ course.id }}" name="rating" value="5"/>
+                                                                    <label class="full" for="star10-{{ course.id }}"title="Awesome - 5 stars"></label>
+                                                                    <input type="radio" id="star9-{{ course.id }}" name="rating" value="4 and a half"/>
+                                                                    <label class="half" for="star9-{{ course.id }}" title="Pretty good - 4.5 stars"></label>
+                                                                    <input type="radio" id="star8-{{ course.id }}" name="rating" value="4"/>
+                                                                    <label class="full" for="star8-{{ course.id }}"title="Pretty good - 4 stars"></label>
+                                                                    <input type="radio" id="star7-{{ course.id }}" name="rating" value="3 and a half"/>
+                                                                    <label class="half" for="star7-{{ course.id }}"title="Meh - 3.5 stars"></label>
+                                                                    <input type="radio" id="star6-{{ course.id }}" name="rating" value="3"/>
+                                                                    <label class="full" for="star6-{{ course.id }}"title="Meh - 3 stars"></label>
+                                                                    <input type="radio" id="star5-{{ course.id }}" name="rating" value="2 and a half"/>
+                                                                    <label class="half" for="star5-{{ course.id }}" title="Kinda bad - 2.5 stars"></label>
+                                                                    <input type="radio" id="star4-{{ course.id }}" name="rating" value="2"/>
+                                                                    <label class="full" for="star4-{{ course.id }}"title="Kinda bad - 2 stars"></label>
+                                                                    <input type="radio" id="star3-{{ course.id }}" name="rating" value="1 and a half"/>
+                                                                    <label class="half" for="star3-{{ course.id }}" title="Meh - 1.5 stars"></label>
+                                                                    <input type="radio" id="star2-{{ course.id }}" name="rating" value="1"/>
+                                                                    <label class="full" for="star2-{{ course.id }}" title="Sucks big time - 1 star"></label>
+                                                                    <input type="radio" id="star1-{{ course.id }}" name="rating" value="half"/><label class="half" for="star1-{{ course.id }}" title="Sucks big time - 0.5 stars"></label>
                                                                 </form>
                                                                 <span style="font-size: medium; color: rgb(255, 238, 80);font-weight: 700;margin-left: 5px;">{{ course.rating|unlocalize }} &nbsp; ( {{ course.stuCnt }} )</span>
                                                             </div>

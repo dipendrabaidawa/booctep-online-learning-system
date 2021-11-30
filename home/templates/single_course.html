@@ -54,6 +54,12 @@
             color: #fff;
         }
 
+        .shrt:hover{
+            background-color: #2581ac;
+            border: 1px solid #174e68;
+            color: #fff !important;
+        }
+
         .shrt-dark{
             background-color: #91c2d8;
             border: 1px solid #233c47;
@@ -63,6 +69,11 @@
 
         .shrl{
             background-color: #145f91;
+            border: 1px solid #124c74;
+            color: #fff;
+        }
+        .shrl:hover{
+            background-color: #0f4e77;
             border: 1px solid #124c74;
             color: #fff;
         }
@@ -76,6 +87,11 @@
 
         .shrf{
             background-color: #102249;
+            border: 1px solid #08142e;
+            color: #fff;
+        }
+        .shrf:hover{
+            background-color: #0c1b3a;
             border: 1px solid #08142e;
             color: #fff;
         }
@@ -407,6 +423,21 @@
 
     </style>
 
+
+<style>
+    .hideondesktop{
+        display: none; 
+    }
+    @media only screen and (max-width: 600px) {
+        .hideondesktop{
+            display: block; 
+        }
+        .hideonphone{
+            display: none;
+        }
+    }
+</style>
+
 {% endblock %}
 
 {% block content %}
@@ -415,14 +446,11 @@
 {% get_current_language as lang %}
 {% if lang == "ar" %}
 <style>
-
-
-.blllu{
+    .blllu{
         color: rgb(11, 111, 241) !important;
         margin-right: 8px !important; 
     } 
     .blllu-dark{
-
         color: rgb(115, 147, 189) !important;
         margin-right: 8px !important;
     }
@@ -437,21 +465,14 @@
     }
 
     .is-combo .combo-box,
-.is-combo .image-combo-box,
-.is-combo .stacked-combo-box,
-.is-combo .user-combo-box {
-        direction: ltr !important;
-}
-
-.control-language-parent{
-    float: left !important;
-}
-
-
-
-
-
-
+    .is-combo .image-combo-box,
+    .is-combo .stacked-combo-box,
+    .is-combo .user-combo-box {
+            direction: ltr !important;
+    }
+    .control-language-parent{
+        float: left !important;
+    }
     .control-language{
     }
     .product-info{
@@ -459,201 +480,186 @@
         right: 10px !important;
     
     }
-.product-info-h{
-    direction: rtl;
-    right: 10px !important;
+    .product-info-h{
+        direction: rtl;
+        right: 10px !important;
 
-}
+    }
+    .store-sections .product-card .product-actions .right{
+        left: 30px !important;
+        float: left !important;
+        direction: ltr !important;
+    }
+    .image-owner{
+        direction: ltr;
+        float: left;
+    }
+    .full{
+        direction: ltr;
+        float: left;
+    }
+    .rating{
+        direction: ltr;
+        float: left;
+    }
+    .name{
+        direction: ltr;
+        float: left;
+    }
 
-.store-sections .product-card .product-actions .right{
-    left: 30px !important;
-    float: left !important;
-    direction: ltr !important;
-}
+    .product-card{
+        direction: rtl;
+        margin-right: 0px !important;
+    }
+    .hero-body{
+        direction: rtl;
+        margin-right: 40px; 
+        width: 93% !important;
+    }
+    .content-hero-single-course{
+        right: 0 !important;
+        margin-right: -15px !important;
+    }
+    .brd{
+        direction: rtl !important;
+        float: right !important;
+        margin-left: 10px;
+    }
+    .brd-dark{
+        direction: rtl !important;
+        float: right !important;
+        margin-left: 10px;
+    }
 
-.image-owner{
-            direction: ltr;
-            float: left;
-        }
-        .full{
-            direction: ltr;
-            float: left;
-        }
-        .rating{
-            direction: ltr;
-            float: left;
-        }
-        .name{
-            direction: ltr;
-            float: left;
-        }
-
-.product-card{
-    direction: rtl;
-    margin-right: 0px !important;
-}
-.hero-body{
-    direction: rtl;
-    margin-right: 40px; 
-    width: 93% !important;
-}
-.content-hero-single-course{
-    right: 0 !important;
-    margin-right: -15px !important;
-}
-.brd{
-    direction: rtl !important;
-    float: right !important;
-    margin-left: 10px;
-}
-.brd-dark{
-    direction: rtl !important;
-    float: right !important;
-    margin-left: 10px;
-}
-
-.shop-wrapper{
-    direction: rtl;
-}
-.shop-header .store-tabs .tab-control.is-active {
-    color: none ;
-}
-.shop-header .store-tabs .tab-control {
-    margin-left: 0px !important;
-}
-
-.shop-header .store-tabs .store-naver{
-    background: rgb(86, 107, 134) !important;
-}
-
-
-/* line 176, src/assets/scss/pages/_app-commerce.scss */
-
-.shop-header .store-tabs .tab-control.is-active:first-child ~ .store-naver {
-    margin-right: 0
-}
-
-
-/* line 182, src/assets/scss/pages/_app-commerce.scss */
-
-.shop-header .store-tabs .tab-control.is-active:nth-child(2) ~ .store-naver {
-    margin-right: 33.33% !important
-}
-
-
-/* line 188, src/assets/scss/pages/_app-commerce.scss */
-
-.shop-header .store-tabs .tab-control.is-active:nth-child(3) ~ .store-naver {
-    margin-right: 66.66% !important
-}
-
-
-/* line 195, src/assets/scss/pages/_app-commerce.scss */
-
-.shop-header .store-tabs .store-naver {
-    position: absolute;
-    bottom: 0;
-    right: 0 !important;
-    height: 2.8px;
-    width: 33.33%;
-    border-radius: 50px;
-    background: #0062ff;
-    -webkit-transition: all .3s;
-    transition: all .3s
-}
-
-
-
-
-.shop-header .store-tabs {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    max-width: 260px;
-}
-
-
-/* line 161, src/assets/scss/pages/_app-commerce.scss */
-
-.shop-header .store-tabs .tab-control {
-    display: block;
-    font-size: 1rem;
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 600;
-    text-align: center;
-    width: 33.33%;
-    color: #ABB0BE;
-    padding-bottom: 10px;
-    padding-top: 10px;
-    -webkit-transition: color .3s;
-    transition: color .3s
-}
-
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+    .shop-wrapper{
+        direction: rtl;
+    }
     .shop-header .store-tabs .tab-control.is-active {
-    color: none ;
-}
-.shop-header .store-tabs .tab-control {
-    margin-right: 80px !important;
-}
+        color: none ;
+    }
+    .shop-header .store-tabs .tab-control {
+        margin-left: 0px !important;
+    }
 
-.shop-header .store-tabs .store-naver{
-    background: none !important;
-}
-
-
-.accordion{
-    width: 350px !important;
-}
-
-/* line 176, src/assets/scss/pages/_app-commerce.scss */
-
-.shop-header .store-tabs .tab-control.is-active:first-child ~ .store-naver {
-    margin-right: 60px
-}
+    .shop-header .store-tabs .store-naver{
+        background: rgb(86, 107, 134) !important;
+    }
 
 
-/* line 182, src/assets/scss/pages/_app-commerce.scss */
+    /* line 176, src/assets/scss/pages/_app-commerce.scss */
 
-.shop-header .store-tabs .tab-control.is-active:nth-child(2) ~ .store-naver {
-    margin-right: 33.33% !important
-}
-
-
-/* line 188, src/assets/scss/pages/_app-commerce.scss */
-
-.shop-header .store-tabs .tab-control.is-active:nth-child(3) ~ .store-naver {
-    margin-right: 66.66% !important
-}
+    .shop-header .store-tabs .tab-control.is-active:first-child ~ .store-naver {
+        margin-right: 0
+    }
 
 
-/* line 195, src/assets/scss/pages/_app-commerce.scss */
+    /* line 182, src/assets/scss/pages/_app-commerce.scss */
 
-.shop-header .store-tabs .store-naver {
-    position: absolute;
-    bottom: 0;
-    right: 20px !important;
-    height: 2.8px;
-    width: 33.33%;
-}
+    .shop-header .store-tabs .tab-control.is-active:nth-child(2) ~ .store-naver {
+        margin-right: 33.33% !important
+    }
 
 
+    /* line 188, src/assets/scss/pages/_app-commerce.scss */
+
+    .shop-header .store-tabs .tab-control.is-active:nth-child(3) ~ .store-naver {
+        margin-right: 66.66% !important
+    }
 
 
-.shop-header .store-tabs {
-    position: relative;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    max-width: 460px;
-}
+    /* line 195, src/assets/scss/pages/_app-commerce.scss */
 
-}
+    .shop-header .store-tabs .store-naver {
+        position: absolute;
+        bottom: 0;
+        right: 0 !important;
+        height: 2.8px;
+        width: 33%;
+        border-radius: 50px;
+        background: #0062ff;
+        -webkit-transition: all .3s;
+        transition: all .3s
+    }
+    .shop-header .store-tabs {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        max-width: 360px;
+    }
+    /* line 161, src/assets/scss/pages/_app-commerce.scss */
+
+    .shop-header .store-tabs .tab-control {
+        display: block;
+        font-size: 1rem;
+        font-family: 'Open Sans', sans-serif;
+        font-weight: 600;
+        text-align: center;
+        width: 33.33%;
+        color: #ABB0BE;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        -webkit-transition: color .3s;
+        transition: color .3s
+    }
+
+
+    /* Extra small devices (phones, 600px and down) */
+    @media only screen and (max-width: 600px) {
+        .shop-header .store-tabs .tab-control.is-active {
+        color: none ;
+    }
+    .shop-header .store-tabs .tab-control {
+        margin-right: 80px !important;
+    }
+
+    .shop-header .store-tabs .store-naver{
+        background: none !important;
+    }
+
+
+    .accordion{
+        width: 350px !important;
+    }
+
+    /* line 176, src/assets/scss/pages/_app-commerce.scss */
+
+    .shop-header .store-tabs .tab-control.is-active:first-child ~ .store-naver {
+        margin-right: 60px
+    }
+
+
+    /* line 182, src/assets/scss/pages/_app-commerce.scss */
+
+    .shop-header .store-tabs .tab-control.is-active:nth-child(2) ~ .store-naver {
+        margin-right: 33.33% !important
+    }
+
+
+    /* line 188, src/assets/scss/pages/_app-commerce.scss */
+
+    .shop-header .store-tabs .tab-control.is-active:nth-child(3) ~ .store-naver {
+        margin-right: 66.66% !important
+    }
+
+
+    /* line 195, src/assets/scss/pages/_app-commerce.scss */
+
+    .shop-header .store-tabs .store-naver {
+        position: absolute;
+        bottom: 0;
+        right: 20px !important;
+        height: 2.8px;
+        width: 33.33%;
+    }
+    .shop-header .store-tabs {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        max-width: 460px;
+    }
 </style>
-
 {% else %}
 <style>
     .blllu{
@@ -679,106 +685,98 @@
 {% endif %}
 
 <style>
+    .prcg{
+        color: rgb(204, 29, 29) !important;
+    }
+
+    .prcg-dark{
+        color: rgb(214, 169, 169) !important;
+    }
 
 
-.prcg{
-    color: rgb(204, 29, 29) !important;
-}
+    .prcgr{
+        color: rgb(25, 139, 82) !important;
+    }
 
-.prcg-dark{
-    color: rgb(214, 169, 169) !important;
-}
+    .prcgr-dark{
+        color: rgb(177, 241, 209) !important;
+    }
 
 
-.prcgr{
-    color: rgb(25, 139, 82) !important;
-}
+        .explore-item-dark:hover{
+            border: 1px solid #060808 !important;
+            background-color: #050607;
+            transition: 1ms;
+        }
+        
+    .field input{
+        background-color: inherit;
+    }
+    .field-dark input{
+        background: #cbd6df !important;
+        border: 1px solid #222831 !important;
+        color: #030303 !important;
+    }
 
-.prcgr-dark{
-    color: rgb(177, 241, 209) !important;
-}
+    .grree{
+        background-color: #04a04a !important;
+    }
 
+    .grree-dark{
+        background-color: #527961 !important;
+        color: #ddd;
+    }
+    .grree-dark{
+        background-color: #527961 !important;
+        color: #ddd;
+    }
+
+    .cnti{
+        background-color: rgb(139, 189, 189);
+        color:rgb(28, 59, 59);
+    }
+
+    .cnti-dark{
+        background-color: rgb(139, 189, 189);
+        color: rgb(13, 22, 22);
+    }
+
+    .vidddd{
+        background-color: #ABB0BE;
+    }
+
+    .vidddd-dark{
+        background-color: #c7c7c7;
+        border: 1px solid #a3a3a3;
+    }
 
     .explore-item-dark:hover{
         border: 1px solid #060808 !important;
         background-color: #050607;
         transition: 1ms;
     }
-    
-.field input{
-    background-color: inherit;
-}
-.field-dark input{
-    background: #cbd6df !important;
-    border: 1px solid #222831 !important;
-    color: #030303 !important;
-}
-
-.grree{
-    background-color: #04a04a !important;
-}
-
-.grree-dark{
-    background-color: #527961 !important;
-    color: #ddd;
-}
-.grree-dark{
-    background-color: #527961 !important;
-    color: #ddd;
-}
-
-.cnti{
-    background-color: rgb(139, 189, 189);
-    color:rgb(28, 59, 59);
-}
-
-.cnti-dark{
-    background-color: rgb(139, 189, 189);
-    color: rgb(13, 22, 22);
-}
-
-.vidddd{
-    background-color: #ABB0BE;
-}
-
-.vidddd-dark{
-    background-color: #c7c7c7;
-    border: 1px solid #a3a3a3;
-}
-
-</style>
-<style>
-    .explore-item-dark:hover{
-        border: 1px solid #060808 !important;
-        background-color: #050607;
-        transition: 1ms;
-    }
 
 
-.blllu{
+    .blllu{
         color: rgb(11, 111, 241) !important;
     } 
     .blllu-dark{
 
         color: rgb(115, 147, 189) !important;
     }
-
-
 </style>
-
 
 {% get_current_language as lang %}
 {% if lang == "en" %}
 <style>
     .liffft{
-    position: absolute;
-    right: 20px !important;
-    top: 15px !important;
-}
+        position: absolute;
+        right: 20px !important;
+        top: 15px !important;
+    }
 
 </style>
 {% endif %}
-
 
 {% get_current_language as lang %}
 {% if lang == "ar" %}
@@ -851,162 +849,52 @@
 
             color: rgb(115, 147, 189) !important;
         }
+
+
+.comments-wrap{
+    background: #fff;
+    border-radius: 6px;
+    border: 1px solid rgb(230, 230, 230)
+}
+
+.is-comment{
+ 
+    background: rgb(241, 239, 239);
+    border-radius: 6px;
+    border: 1px solid rgb(241, 239, 239)   
+}
+
+.is-comment-dark{
+    background: rgb(68, 71, 78);
+    border-radius: 6px;
+    border: 1px solid rgb(230, 230, 230)
+}
+
+.media-content{
+    text-align: right;
+    margin-top: -40px;
+    margin-right: 80px;
+}
+
     </style>
 {% endif %}
 
     <div id="fb-root"></div>
-    <script>(function (d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
+    <script>
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
     <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
     <script type="IN/Share" data-url="http://localhost:8000/en/single_course/49/"></script>
     
-    
-    <!-- Main Navbar -->
-    {% if user.is_active == True %}
-        <!-- Mobile Navbar -->
-        <h1>You are my everything</h1>
-        <nav class="navbar mobile-navbar navbar-dark is-hidden-desktop" aria-label="main navigation">
-            <!-- Brand -->
-            <div class="navbar-brand">
-                <a class="navbar-item2" href="/{{ lang }}">
-                    <img class="mobile-logo" src="{% static 'assets/img/favicon.png' %}" alt="">
-                </a>
-                <div id="mobile-explorer-trigger" class="navbar-item is-icon">
-                    <a class="icon-link is-primary">
-                        <i class="mdi mdi-apps"></i>
-                    </a>
-                </div>
-                <!-- Mobile menu toggler icon -->
-                <div class="navbar-burger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-            <!-- Navbar mobile menu -->
-            <div class="navbar-menu">
-                <!-- Account -->
-                <div class="navbar-item has-dropdown ">
-                    <div class="navbar-link">
-                        <img src="/static{{ user.image }}" data-demo-src="{% static 'assets/img/avatars/jenna.png' %}"
-                             alt="">
-                        <span class="is-heading">{{ user.first_name }} {{ user.last_name }}</span>
-                    </div>
-    
-                    <div class="navbar-item">
-                        <div id="global-search" class="control">
-                            <input id="tipue_drop_input" class="input " type="text" placeholder="{% trans 'Search course' %}" required>
-                            <span id="clear-search" class="reset-search d-none">
-                                <i data-feather="x"></i>
-                            </span>
-                            <span class="search-icon">
-                                <i data-feather="search"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <!-- Mobile Dropdown -->
-                    <div class="navbar-dropdown">
-                        <a href="#" class="navbar-item is-flex is-mobile-icon">
-                            <span><i data-feather="user"></i>Profile</span>
-                        </a>
-                        <a href="#" class="navbar-item is-flex is-mobile-icon">
-                            <span><i data-feather="shopping-cart"></i>Cart</span>
-                            <span class="menu-badge">{{ cartCnt }}</span>
-                        </a>
-                        <a href="#" class="navbar-item is-flex is-mobile-icon">
-                            <span><i data-feather="heart"></i>Favorites</span>
-                            <span class="menu-badge">{{ favCnt }}</span>
-                        </a>
-                        <a href="#" class="navbar-item is-flex is-mobile-icon">
-                            <span><i data-feather="heart"></i>Notifications</span>
-                            <span class="menu-badge">{{ noti_cnt }}</span>
-                        </a>
-                        <a href="#" class="navbar-item is-flex is-mobile-icon">
-                            <span><i data-feather="heart"></i>Messages</span>
-                            <span class="menu-badge">{{ noti_cnt }}</span>
-                        </a>
-                        <a href="#" class="navbar-item is-flex is-mobile-icon">
-                            <span><i data-feather="settings"></i>Settings</span>
-                        </a>
-                        <a href="/logoutfromhere" class="navbar-item is-flex is-mobile-icon">
-                            <span style="color:red !important"><i data-feather="hexagon"></i>Logout</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <!-- Mobile Navbar -->
-    {% else %}
-        <!-- Mobile Navbar -->
-        <nav class="navbar mobile-navbar navbar-dark is-hidden-desktop" aria-label="main navigation">
-            <!-- Brand -->
-            <div class="navbar-brand">
-                <a class="navbar-item2" href="/{{ lang }}">
-                    <img class="mobile-logo" src="{% static 'assets/img/favicon.png' %}" alt="">
-                </a>
-                <div id="mobile-explorer-trigger" class="navbar-item is-icon">
-                    <a class="icon-link is-primary">
-                        <i class="mdi mdi-apps"></i>
-                    </a>
-                </div>
-                <!-- Mobile menu toggler icon -->
-                <div class="navbar-burger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-            <!-- Navbar mobile menu -->
-            <div class="navbar-menu">
-                <div class="navbar-item has-dropdown ">
-                    <div class="navbar-item " id="">
-                        <div id="global-search " class="control">
-                            <!-- <input id="tipue_drop_input" class="input " type="text" placeholder="Search" required> -->
-                            <input id="tipue_drop_input " class="input input-2"   novalidate formnovalidate type="text" placeholder="{% trans 'Search course' %}" >
-                            <span id="clear-search" class="reset-search d-none">
-                                <i data-feather="x"></i>
-                            </span>
-                        </div>
-                    </div>
-                    <!-- Mobile Dropdown -->
-                    <div class="navbar-dropdown">
-                        <a href="#" class="navbar-item is-flex is-mobile-icon">
-                            <span><i data-feather="user"></i>{% trans 'About us' %}</span>
-                        </a>
-                        <a href="#" class="navbar-item is-flex is-mobile-icon">
-                            <span><i data-feather="settings"></i>{% trans 'FAQs' %}</span>
-                        </a>
-                        <a href="#" class="navbar-item is-flex is-mobile-icon">
-                            <span><i data-feather="settings"></i>{% trans 'Support' %}</span>
-                        </a>
-                        <a href="#" class="navbar-item is-flex is-mobile-icon">
-                            <span><i data-feather="settings"></i>{% trans 'Become a teacher' %}</span>
-                        </a>
-    
-                        <div class="buttons">
-                            <a class="button second-button" href="/{{ lang }}signup">
-                                <p>{% trans 'Sign up' %}</p>
-                            </a>
-                            <a id="login_btn" class="button primary-button raised quickview-trigger process-button">
-                                <p>{% trans 'Log in' %}</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <!-- Mobile Navbar -->
-    {% endif %}
-    
-
 
 
 
@@ -1049,7 +937,13 @@
                         
                     </div>
                     
-                    <img src="/static{{ user_info.image }}" alt="" class="brd brd-dark" style="margin-top: 0px;">
+                    {% if user.profile.image %}
+                    <img src="/static{{ user.image }}" alt="" class="brd brd-dark" style="margin-top: 0px;">
+                    {% else %}
+                    <img  class="brd brd-dark" style="margin-top: 0px;"src="{% static 'assets/img/userdefault.png' %}"
+                         data-demo-src="">
+                    {% endif %}
+
 
                     {% get_current_language as lang %}
                     {% if lang == "en" %}
@@ -1130,9 +1024,7 @@
                                         <div class="column is-8">
                                             <div class="schedule schedule-dark " style="margin-top: -3px; ">
                                                 <div class="schedule-header">
-                                                    <video autoplay poster="{% static 'assets/img/setting.png' %}"
-                                                           id="videoplayer"
-                                                           playsinline controls style="width: 100%;">
+                                                    <video autoplay poster="{% static 'assets/img/setting.png' %}" id="videoplayer" playsinline controls style="width: 100%;">
                                                         <source src="../../../../static{{ promo_video }}"
                                                                 type="video/webm"/>
                                                         <track kind="captions" label="English captions"
@@ -1206,11 +1098,16 @@
                                                             <div class="comments-wrap comments-wrap-dark">
                                                                 {% if comment_list %}
                                                                     {% for i in comment_list %}
-                                                                        <div class="is-comment">
+                                                                        <div class="is-comment is-comment-dark">
                                                                             <div>
                                                                                 <div class="media-left">
                                                                                     <div class="avatar-wrap is-smaller is-rounded">
-                                                                                        <img src="{% static i.user.image %}">
+                                                                                        {% if i.user.image  %}
+                                                                                        <img src="/static{{ i.user.image }}" alt="" style="margin-top: 0px;">
+                                                                                        {% else %}
+                                                                                        <img  style="margin-top: 0px;"src="{% static 'assets/img/userdefault.png' %}"
+                                                                                             data-demo-src="">
+                                                                                        {% endif %}
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="media-content">
@@ -1219,6 +1116,8 @@
                                                                                             <a>{{ i.user.first_name }} {{ i.user.last_name }}</a>
                                                                                             &nbsp
                                                                                             <small>{{ i.date | date:'D d-m-Y' }}</small>
+                                                                                            &nbsp
+                                                                                            <i class="fa fa-star" style="color: #f1c677;"></i>{{ i.rating|unlocalize }}
                                                                                         </h4>
                                                                                         <p>{{ i.comment }}</p>
                                                                                     </div>
@@ -1275,6 +1174,7 @@
                                                         </div>
                                                         <div id="products-tab" class="store-tab-pane is-active">
                                                             <div class="columns is-multiline">
+                                                                {% if similar_courses %}
                                                                 {% for course in similar_courses %}
                                                                     <div class="column is-one-third is-one-third-widescreen is-one-third-desktop is-half-tablet is-full-mobile coursecard"
                                                                          data-cat-id="{{ course.scat_id }}"
@@ -1454,7 +1354,7 @@
                                         </h3>
                                         <div class="product-info-h" style="line-height: 1.5em; height: 3em; overflow: hidden; text-overflow: ellipsis;">{{ course.description | safe | truncatechars:30 }}</div>
                                         <i class="fa fa-users "></i>
-                                        <span style="font-size: small; ">{{ course.student_num }}</span>
+                                        <span style="font-size: small; ">{{ course.stuCnt }}</span>
                                         <i class="fa fa-video "></i>
                                         <span style="font-size: small; ">{{ course.video }} Videos</span>
                                         {% if course.booctep_choice %}
@@ -1499,8 +1399,24 @@
                                                                          </div>
                                                                     </div>
                                                                 {% endfor %}
+                                                                {% else %}
                                                             </div>
                                                         </div>
+                                                                {% get_current_language as lang %}
+                                                                {% if lang == "ar" %}
+                                                                <div class="videos-wrapper has-player">
+                                                                    <div class="comments-wrap comments-wrap-dark">
+                                                                    <b class="mediabout mediabout-dark"> لا يوجد دورات مشابهه متاحة </b>
+                                                                    </div>
+                                                                </div>
+                                                                    {% else %}
+                                                                <div class="videos-wrapper has-player">
+                                                                    <div class="comments-wrap comments-wrap-dark">
+                                                                    <p class="mediabout mediabout-dark"> There are no similar courses to be found </p>
+                                                                    </div>
+                                                                    </div>
+                                                                    {% endif %}
+                                                                {% endif %}
                                                     </div>
                                                 </div>
                                             </section>
@@ -1517,9 +1433,16 @@
                                                             واصل التسوق &nbsp;<span
                                                                 class="fa fa-shopping-cart"></span>
                                                         </a>
+                                                       {% if user.is_authenticated %}
                                                         <a href="{% url 'show fav list' %}" class="button process-button" style="">
                                                             أذهب إلى المفضلة &nbsp;<span class="fa fa-heart"></span>
                                                         </a>
+                                                        {% else %}
+                                                        <a href="/{{ lang }}/become" class="button process-button" style="">
+                                                            أصبح معلم &nbsp;<span class="fa fa-tv"></span>
+                                                        </a>
+
+                                                        {% endif %}
                                                         {% else %}
                                                         <div class="categories-header categories-header-dark">
                                                             <h2>Quick Access</h2>
@@ -1529,9 +1452,16 @@
                                                             Continue shopping &nbsp;<span
                                                                 class="fa fa-shopping-cart"></span>
                                                         </a>
+                                                       {% if user.is_authenticated %}
                                                         <a href="{% url 'show fav list' %}" class="button process-button" style="">
-                                                            Go to Fav courses &nbsp;<span class="fa fa-heart"></span>
+                                                            Go to Fav courses &nbsp; &nbsp;<span class="fa fa-heart"></span>
                                                         </a>
+                                                        {% else %}
+                                                        <a href="/{{ lang }}/become" class="button process-button" style="">
+                                                            Become a teacher &nbsp;<span class="fa fa-tv"></span>
+                                                        </a>
+
+                                                        {% endif %}
                                                         {% endif %}
                                                     </div>
                                                 </div>
@@ -1622,11 +1552,11 @@
                                                             <div class="order-line">
                                                                 <span class="is-total  mediabout mediabout-dark">المجموع</span>
                                                                 <span class="is-total subtotalprice prcg prcg-dark"
-                                                                      style="">{{ course.price }}</span>
+                                                                      style="">{{ course.price|unlocalize }}</span>
                                                             </div>
                                                             <div class="order-line discountamountparent">
                                                                 <span class=" mediabout mediabout-dark">الخصم</span>
-                                                                <span class="discountamount prcg prcg-dark">{{ course.discount }}</span>
+                                                                <span class="discountamount prcg prcg-dark">{{ course.discount|unlocalize }}</span>
                                                             </div>
                                                             <div class="order-line">
                                                                 <span class=" mediabout mediabout-dark">تملك قسيمة شرائية؟</span>
@@ -1635,11 +1565,11 @@
                                                             <div class="order-line">
                                                                 <span class="is-total  mediabout mediabout-dark">Total</span>
                                                                 <span class="is-total subtotalprice prcg prcg-dark"
-                                                                      style="">{{ course.price }}</span>
+                                                                      style="">{{ course.price|unlocalize }}</span>
                                                             </div>
                                                             <div class="order-line discountamountparent">
                                                                 <span class=" mediabout mediabout-dark">Discount</span>
-                                                                <span class="discountamount prcg prcg-dark">{{ course.discount }}</span>
+                                                                <span class="discountamount prcg prcg-dark">{{ course.discount|unlocalize }}</span>
                                                             </div>
                                                             <div class="order-line">
                                                                 <span class=" mediabout mediabout-dark">Promo code?</span>
@@ -1749,14 +1679,14 @@
                                                             <div class="order-line">
                                                                 <span class="is-total mediabout mediabout-dark">السعر بعد الخصم</span>
                                                                 <span class="is-total totalsum prcgr prcgr-dark" id="totalsumid"
-                                                                      style="">{{ course.discount_price }}
+                                                                      style="">{{ course.discount_price|unlocalize|unlocalize }}
                                                                 </span>
                                                             </div>
                                                             {% else %}
                                                             <div class="order-line">
                                                                 <span class="is-total mediabout mediabout-dark">Total after discount</span>
                                                                 <span class="is-total totalsum prcgr prcgr-dark" id="totalsumid"
-                                                                      style="">{{ course.discount_price }}</span>
+                                                                      style="">{{ course.discount_price|unlocalize }}</span>
                                                             </div>
 
                                                             {% endif %}
@@ -1793,13 +1723,13 @@
                                                             {% endif %}
                                                             {% get_current_language as lang %}
                                                             {% if lang == "ar" %}
-                                                            <a href="javascript:void(0)"
+                                                            <a href="javascript:doBuyCourse()"
                                                                class="button is-fullwidth buy-button is-raised checkouttest grree grree-dark">
                                                                 <p style="color: #fff;">شـراء  $<span
-                                                                        class="totalsum">{{ course.discount_price }}</span></p>
+                                                                        class="totalsum">{{ course.discount_price|unlocalize }}</span></p>
                                                             </a>
                                                             {% else %}
-                                                            <a href="javascript:void(0)"
+                                                            <a href="javascript:doBuyCourse()"
                                                                class="button is-fullwidth buy-button is-raised checkouttest grree grree-dark">
                                                                 <p style="color: #fff;">Buy now! $<span
                                                                         class="totalsum">{{ course.discount_price }}</span></p>
@@ -1813,7 +1743,7 @@
                                                                style="margin-bottom: 10px;">
                                                                 <p style="color: rgb(82, 82, 82);">أَضف للمفضلة
                                                                     <i class="fa fa-heart"></i></p></a>
-                                                            <a href="/student/enrollment/{{ course.id }}"
+                                                            <a href="javascript:doEnroll({{course.id}})"
                                                                class="button is-fullwidth buy-button is-raised"><p
                                                                     style="color: #fff;">أنضم الان</p></a>
                                                           {% else %}        
@@ -1822,7 +1752,7 @@
                                                              style="margin-bottom: 10px;">
                                                               <p style="color: rgb(82, 82, 82);">Add to Fav
                                                                   <i class="fa fa-heart"></i></p></a>
-                                                          <a href="/student/enrollment/{{ course.id }}"
+                                                          <a href="javascript:doEnroll({{course.id}})"
                                                              class="button is-fullwidth buy-button is-raised"><p
                                                                   style="color: #fff;">Enrolled now </p></a>  
                                                           {% endif %}          
@@ -1832,14 +1762,26 @@
                                                 </div>
                                                 <div class="summary-card summary-card-dark" style="margin-top:25px">
                                                     <div class="teacher-card">
-                                                        <img src="/static{{ user_info.image }}"
-                                                             style="width: 65px;height:65px" data-demo-src="" alt="">
+                                                        
+                                                        {% if user.profile.image %}
+                                                        <img src="/static{{ user.image }}" alt="" class="brd brd-dark" style="margin-top: 0px;">
+                                                        {% else %}
+                                                        <img  class="brd brd-dark" style="margin-top: 0px;"src="{% static 'assets/img/userdefault.png' %}"
+                                                             data-demo-src="">
+                                                        {% endif %}
                                                         <div class="teacher-card-info">
+                                                            <div class="hideonphone">
                                                             <a href="/{{ lang }}/profile/{{ user_info.id }}/{{ user_info.url_name }}" >
                                                             <h3 class="mediabout mediabout-dark">
                                                                 {{ user_info.first_name }}{{ user_info.last_name }}
                                                             </h3>
                                                             </a>
+                                                            </div>
+                                                            <div class="hideondesktop">
+                                                            <h3 class="mediabout mediabout-dark">
+                                                                {{ user_info.first_name }}{{ user_info.last_name }}
+                                                            </h3>
+                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -1882,7 +1824,7 @@
                                                         <div class="colmn">
                                                             <label class="mediabout mediabout-dark">Rating</label>
                                                             <div class="num mediabout mediabout-dark">
-                                                                {{ course.rating }} <i class="fa fa-star"
+                                                                {{ course.rating|unlocalize }} <i class="fa fa-star"
                                                                                        style="color: rgb(243, 191, 95);"></i>
                                                             </div>
                                                         </div>
@@ -1968,10 +1910,8 @@
                                                                 {% for listing in includeList %}
                                                                     <div class="accordion accordion-dark js-accordion accordion--boxed list-group-flush"
                                                                          id="parent"
-                                                                         style="
-                                                                         width: 500px;margin-left: 25px;margin-bottom: 10px;;">
-                                                                        <div class="accordion__item accordion__item-dark  vidddd vidddd-dark"
-                                                                             style="height: 100% !important;margin-bottom: 10px;">
+                                                                         style="width: 500px;margin-left: 25px;margin-bottom: 10px;;">
+                                                                        <div class="accordion__item accordion__item-dark  vidddd vidddd-dark" style="height: 100% !important;margin-bottom: 10px;">
                                                                             <a href="#"
                                                                                style=""
                                                                                class="accordion__toggle collapsed accordion__toggle-dark"
@@ -2029,24 +1969,24 @@
                                                         <div class="categories-header categories-header-dark">
                                                             <h2>وصول سريع</h2>
                                                         </div>
-                                                        <a class="button process-button cnti cnti-dark" href="index.html"
+                                                        <a class="button process-button cnti cnti-dark" href="{% url 'home' %}"
                                                            style="border: 1px solid rgb(139, 189, 189);">
                                                             واصل التسوق &nbsp;<span
                                                                 class="fa fa-shopping-cart"></span>
                                                         </a>
-                                                        <a href="wishlist.html" class="button process-button" style="">
+                                                        <a href="{% url 'show fav list' %}" class="button process-button" style="">
                                                             أذهب إلى المفضلة &nbsp;<span class="fa fa-heart"></span>
                                                         </a>
                                                         {% else %}
                                                         <div class="categories-header categories-header-dark">
                                                             <h2>Quick Access</h2>
                                                         </div>
-                                                        <a class="button process-button cnti cnti-dark" href="index.html"
+                                                        <a class="button process-button cnti cnti-dark" href="{% url 'home' %}"
                                                            style="border: 1px solid rgb(139, 189, 189);">
                                                             Continue shopping &nbsp;<span
                                                                 class="fa fa-shopping-cart"></span>
                                                         </a>
-                                                        <a href="wishlist.html" class="button process-button" style="">
+                                                        <a href="{% url 'show fav list' %}" class="button process-button" style="">
                                                             Go to Fav courses &nbsp;<span class="fa fa-heart"></span>
                                                         </a>
                                                         {% endif %}
@@ -2080,7 +2020,7 @@
                                                             <div class="order-line">
                                                                 <span class="is-total  mediabout mediabout-dark">المجموع</span>
                                                                 <span class="is-total subtotalprice prcg prcg-dark"
-                                                                      style="">{{ course.price }}</span>
+                                                                      style="">{{ course.price|unlocalize }}</span>
                                                             </div>
                                                             <div class="order-line">
                                                                 <span class=" mediabout mediabout-dark">تملك قسيمة شرائية؟</span>
@@ -2089,7 +2029,7 @@
                                                             <div class="order-line">
                                                                 <span class="is-total  mediabout mediabout-dark">Total</span>
                                                                 <span class="is-total subtotalprice prcg prcg-dark"
-                                                                      style="">{{ course.price }}</span>
+                                                                      style="">{{ course.price|unlocalize }}</span>
                                                             </div>
                                                             <div class="order-line">
                                                                 <span class=" mediabout mediabout-dark">Promo code?</span>
@@ -2204,7 +2144,7 @@
                                                             <div class="order-line">
                                                                 <span class="is-total mediabout mediabout-dark">السعر بعد الخصم</span>
                                                                 <span class="is-total totalsum prcgr prcgr-dark" id="totalsumid"
-                                                                      style="">{{ course.discount_price }}</span>
+                                                                      style="">{{ course.discount_price|unlocalize }}</span>
                                                             </div>
                                                             {% else %}
                                                             <div class="order-line discountamountparent">
@@ -2215,7 +2155,7 @@
                                                             <div class="order-line">
                                                                 <span class="is-total mediabout mediabout-dark">Total after discount</span>
                                                                 <span class="is-total totalsum prcgr prcgr-dark" id="totalsumid"
-                                                                      style="">{{ course.discount_price }}</span>
+                                                                      style="">{{ course.discount_price|unlocalize }}</span>
                                                             </div>
 
                                                             {% endif %}
@@ -2252,13 +2192,13 @@
                                                             {% endif %}
                                                             {% get_current_language as lang %}
                                                             {% if lang == "ar" %}
-                                                            <a href="javascript:void(0)"
+                                                            <a href="javascript:doBuyCourse()"
                                                                class="button is-fullwidth buy-button is-raised checkouttest grree grree-dark">
                                                                 <p style="color: #fff;">شـراء  $<span
-                                                                        class="totalsum">{{ course.discount_price }}</span></p>
+                                                                        class="totalsum">{{ course.discount_price|unlocalize }}</span></p>
                                                             </a>
                                                             {% else %}
-                                                            <a href="javascript:void(0)"
+                                                            <a href="javascript:doBuyCourse()"
                                                                class="button is-fullwidth buy-button is-raised checkouttest grree grree-dark">
                                                                 <p style="color: #fff;">Buy now! $<span
                                                                         class="totalsum">{{ course.discount_price }}</span></p>
@@ -2272,7 +2212,7 @@
                                                                style="margin-bottom: 10px;">
                                                                 <p style="color: rgb(180, 180, 180);">أَضف للمفضلة
                                                                     <i class="fa fa-heart"></i></p></a>
-                                                            <a href="/student/enrollment/{{ course.id }}"
+                                                            <a href="javascript:doEnroll({{course.id}})"
                                                                class="button is-fullwidth buy-button is-raised"><p
                                                                     style="color: #fff;">أنضم الان</p></a>
                                                           {% else %}        
@@ -2281,7 +2221,7 @@
                                                              style="margin-bottom: 10px;">
                                                               <p style="color: rgb(131, 131, 131);">Add to Fav
                                                                   <i class="fa fa-heart"></i></p></a>
-                                                          <a href="/student/enrollment/{{ course.id }}"
+                                                          <a href="javascript:doEnroll({{course.id}})"
                                                              class="button is-fullwidth buy-button is-raised"><p
                                                                   style="color: #fff;">Enrolled now </p></a>  
                                                           {% endif %}          
@@ -2319,7 +2259,7 @@
                                                         <div class="colmn">
                                                             <label class="mediabout mediabout-dark">التقييم</label>
                                                             <div class="num mediabout mediabout-dark">
-                                                                {{ course.rating }} <i class="fa fa-star"
+                                                                {{ course.rating|unlocalize }} <i class="fa fa-star"
                                                                                        style="color: rgb(236, 201, 135);"></i>
                                                             </div>
                                                         </div>
@@ -2420,14 +2360,7 @@
                           id="modal-user-name">{{ course.user.first_name }}{{ course.user.last_name }} </span>
                     <span class="user-meta-span"
                           id="modal-course-name">&nbsp; &nbsp; |   {{ course.name }}&nbsp; &nbsp;</span>
-                          {% get_current_language as lang %}
-                          {% if lang == "ar" %}
-                    <a type="button" class="button" style="">أضف للمفضلة
-                        &nbsp;<i class="fa fa-heart"></i></a>
-                        {% else %}
-                        <a type="button" class="button" style="">{% trans 'Add to Fav' %}
-                            &nbsp;<i class="fa fa-heart"></i></a>
-                        {% endif %}
+                        
                     <!-- Close X button -->
                     <div class="close-wrap" >
                         <span class="close-modal" onclick="closeModal()" style="background-color: #e9e9e9 !important;">
@@ -2435,9 +2368,9 @@
                         </span>
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="inner">
-                        <div class="app-video left-section">
+                <div class="card-body"style="width: 100%;">
+                    <div class="inner" >
+                        <div class="app-video " style="width: 100%;">
                             <video autoplay poster="/static/assets/img/setting.png" class="special" style="" id="videoplayer" playsinline controls>
                                 <source id="modal-video-src" src="" type="video/webm"/>
 
@@ -2445,55 +2378,6 @@
                                 <!-- <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default/> -->
                                 <track kind="captions" label="English captions" src="" srclang="en" default/>
                             </video>
-                        </div>
-                        <div class="right-section">
-                            <div class="inner-content">
-                                <div class="live-stats">
-                                    <div class="social-count-2">
-                                        <div class="likes-count">
-                                            <i class="fa fa-users"></i>
-                                            <span id="modal-users">140,440</span>
-                                        </div>
-                                        <div class="shares-count">
-                                            <i class="fa fa-star" style="color: rgb(212, 173, 0);"></i>
-                                            <span id="modal-rating">4.8</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tabs-wrapper">
-                                <div class="tabs is-fullwidth">
-                                    <ul>
-                                        <li class="is-active">
-                                            {% get_current_language as lang %}
-                                            {% if lang == "ar" %}
-                                            <a> مواد الدورة </a>
-                                            {% else %}
-                                            <a> Course curriculum </a>
-                                            {% endif %}
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="tab-content ">
-                                    <div class="accordion accordion-dark js-accordion accordion--boxed list-group-flush"
-                                         id="modal-parent">
-                                        <div class="accordion__item accordion__item-dark">
-                                            
-                                            <div class="accordion__menu accordion__menu-dark collapse" id="course-toc-{{ ele.id }}">
-                                                <div class="accordion__menu-link accordion__menu-link-dark" style="cursor: pointer;">
-                                                    <i class="material-icons icon-16pt tick{{ i.id }}"
-                                                       onclick="checkThis(this)"
-                                                       data-sr_no="{{ i.sr_no }}"></i> &nbsp
-                                                    <div data-id="{{ i.id }}" data-srno="{{ i.sr_no }}"
-                                                         data-url="{{ i.url }}"
-                                                         onclick="playmyvideo(this)">{{ i.video_name }}</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -2521,9 +2405,15 @@
             <footer class="modal-card-foot">
 {#                <div class="button is-success sharecoursebutton" style="background-color: rgb(22,102,197);color: #fff;">#}
 {#                </div>#}
-                {% post_to_twitter 'this is my test' course.url 'hello' '' %}
-                {% post_to_facebook 'this is my test' course.url 'hello' %}
-                {% post_to_linkedin  course.url %}
+                {% post_to_twitter 'this is my test' course.url 'Twitter' 'post-twitter' %}
+                {% post_to_facebook course.url 'Facebook' 'post-facebook' %}
+                {% comment %} {% post_to_linkedin course.url 'post-linkedin' %} {% endcomment %}
+                <div class="linkedin-this">
+                    <a href="http://www.linkedin.com/shareArticle?url={{request.get_host}}{{request.get_full_path}}" target="_blank" class="post-linkedin">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+
                 <button class="button sharecoursemodalclose">Cancel</button>
             </footer>
         </div>
@@ -2542,6 +2432,7 @@
 {% endblock %}
 
 {% block script %}
+    {% get_current_language as lang %}
     <script>
         var total = "{{course.price}}";
         var discount = "{{course.discount}}";
@@ -2596,6 +2487,7 @@
                     $(".sharecoursebutton").empty();
                     //$(".sharecoursebutton").append("<a target='_blank' href='https://twitter.com/share?ref_src=twsrc%5Etfw' class='twitter-share-button' data-size='large' data-url='http://localhost:8000/en/single_course/49/' data-show-count='false' style='color: white;'>Share to Twitter</a>");
                     $(".sharecoursebutton").addClass("mdi mdi-twitter");
+                    $(".post-twitter").get(0).click();
                 }
 
                 if ($(this).attr("id") == "fb") {
@@ -2610,6 +2502,7 @@
                     $(".sharecoursebutton").attr("data-layout", "button");
                     $(".sharecoursebutton").attr("data-size", "large");
                     //$(".sharecoursebutton").append("<a target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpencilerkali.com%2F&amp;src=sdkpreparse' class='fb-xfbml-parse-ignore' style='color: white;'>Share to Facebook</a>");
+                    $(".post-facebook").get(0).click();
                 }
 
                 if ($(this).attr("id") == "lin") {
@@ -2618,13 +2511,14 @@
                     $(".sharecoursebutton").empty();
                     $(".sharecoursebutton").append("Share to LinkedIn");
                     $(".sharecoursebutton").addClass("mdi mdi-linkedin");
+                    $(".post-linkedin").get(0).click();
                 }
-                $("#bulmamodal").addClass("is-active");
+                // $("#bulmamodal").addClass("is-active");
             });
 
-            $(".sharecoursemodalclose").click(function () {
-                $("#bulmamodal").removeClass("is-active");
-            });
+            // $(".sharecoursemodalclose").click(function () {
+            //     $("#bulmamodal").removeClass("is-active");
+            // });
 
             $(".applypromobutton").click(function () {
                 var course_id = '{{ course.id }}';
@@ -2658,7 +2552,7 @@
                 }
             });            
 
-             $(".cancelpromobutton").click(function () {
+            $(".cancelpromobutton").click(function () {
                 $(".discountamount").empty();
                 $(".discountamount").append(discount);
 
@@ -2673,22 +2567,6 @@
                 
                 $(".cancelpromobutton").css("display", "none");
                 $(".cancelpromobutton").prop("disabled", true);
-            });
-
-
-            $(".checkouttest").click(function (event) {
-                // event.preventDefault();
-                // var stm = parseInt($(".subtotalprice").text())
-                // var dam = parseInt($(".discountamount").text())
-                // var tot = parseInt($("#totalsumid").text())
-
-                var stm = parseFloat(document.getElementsByClassName("subtotalprice")[0].innerHTML);
-                var dam = parseFloat(document.getElementsByClassName("discountamount")[0].innerHTML);
-                var tot = parseFloat(document.getElementById("totalsumid").innerHTML);
-                $("#subtotalmoney").val(stm);
-                $("#discomontmoney").val(dam);
-                $("#totalmoney").val(tot);
-                $("#buyformsubmit").click();
             });
         });
 
@@ -2915,10 +2793,37 @@
             $(".app-video #videoplayer")[0].pause()
         }
 
+        function doBuyCourse() {
+            var user_id = '{{ request.user.id }}';
+
+            if (user_id === "None")
+                $('.quickview-trigger').click()
+            else {
+                var stm = parseFloat(document.getElementsByClassName("subtotalprice")[0].innerHTML);
+                var dam = parseFloat(document.getElementsByClassName("discountamount")[0].innerHTML);
+                var tot = parseFloat(document.getElementById("totalsumid").innerHTML);
+                $("#subtotalmoney").val(stm);
+                $("#discomontmoney").val(dam);
+                $("#totalmoney").val(tot);
+                $("#buyformsubmit").click();    
+            }
+        }
+
+        function doEnroll(course_id) {
+            var user_id = '{{ request.user.id }}';
+
+            if (user_id === "None")
+                $('.quickview-trigger').click()
+            else {
+                var lang = "{{lang}}";
+                location.href = `/${lang}/student/enrollment/${course_id}`; 
+            }
+        }
+
         var h = document.getElementById("tipue_drop_input");
-    h.oninvalid = function(e) {
-        e.target.setCustomValidity('{% trans "Write a course name please!" %}');
-    };
+        h.oninvalid = function(e) {
+            e.target.setCustomValidity('{% trans "Write a course name please!" %}');
+        };
 
     </script>
     <script src="{% static 'assets/js/sideb.js' %}"></script>

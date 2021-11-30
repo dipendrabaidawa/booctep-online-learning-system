@@ -3,3 +3,6 @@ pycharm+all
 django
 **/__pycache__
 *.mp4
+env
+booctop/static/user_images
+booctop/static/certificates

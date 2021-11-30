@@ -31,19 +31,17 @@ def courses(request):
     user_type = request.session.get("user_type")
     filter_type = request.POST.get("type")
     page = request.POST.get("page")
-    print("type::", filter_type)
     if filter_type == None or filter_type == '':
         filter_type = -1
     else:
         filter_type = int(filter_type)
-    print("page::", page)
 
     if page == None or page == '':
         page = 1
     else:
         page = int(page)
 
-    if user_type == "student":
+    if user_type == "student" or user_type == "stuteach":
         if int(filter_type) == -1:
             course_obj = student_register_courses.objects.filter(student_id=user_id)
             filter_type = -1
@@ -106,10 +104,10 @@ def courses(request):
 def video_check(request):
     cousre_id = request.POST.get('id')
     if Sections.objects.filter(course_id=cousre_id).exists():
+        course_name = Courses.objects.get(pk=cousre_id).course_url
         key = str(request.user.id) + "-" + str(cousre_id)
         cache_str = ''
         continuous = 0
-        course_name = ''
         quiz_id = ''
         question_no = ''
         if Cache.objects.filter(key=key).exists():
@@ -118,7 +116,6 @@ def video_check(request):
             print("cache::", cache.get('question_no'))
             if cache.get('question_no') != None:
                 continuous = 1
-                course_name = Courses.objects.get(pk=cousre_id).course_url
                 quiz_id = Sections.objects.filter(course_id=cousre_id, type='question')[0].id
                 question_no = cache['question_no']
         return JsonResponse({"msg": "success", "id": cousre_id, "continous": continuous, 'course_name': course_name, 'quiz_id': quiz_id, 'question_no': question_no})
@@ -292,7 +289,7 @@ def student_messages(request):
         profile = User.objects.get(id=user_id)
         user_name = profile.first_name + " " + profile.last_name
 
-    if user_type == "student":
+    if user_type == "student" or user_type == "stuteach":
         if student_register_courses.objects.filter(student_id_id=user_id).exists():
             obj = student_register_courses.objects.filter(student_id_id=user_id)
             for i in obj:

@@ -197,8 +197,14 @@
 
                 <span class="avatar avatar-sm mr-8pt2" style="border: 0 !important;">
 
-                    <span class="avatar-title   " style="border: 0 !important;background: none !important;">
-                        <img src="/static{{user.image}}" alt="" style="border-radius: 50%;width: 50px !important;height: 40px !important;" class="brd brd-dark">
+                    <span class="avatar-title" style="border: 0 !important;background: none !important;">
+                        {% if user.profile.image %}
+                        <img   style="border-radius: 50%;width: 50px !important;height: 40px !important;" class="avatar brd brd-dark"src="/static{{ user.image }}"
+                             data-demo-src="">
+                        {% else %}
+                        <img src="{% static 'assets/img/userdefault.png' %}"  style="border-radius: 50%;width: 50px !important;height: 40px !important;" class="avatar brd brd-dark"
+                             data-demo-src="">
+                        {% endif %}
                     </span>
 
                 </span>

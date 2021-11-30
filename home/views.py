@@ -11,6 +11,7 @@ from django.template.loader import render_to_string
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth.decorators import login_required
 # import json
 import os, sys, shutil
 import traceback
@@ -133,11 +134,20 @@ def home_view(request):
         order = int(order)
 
     category_obj = categories.objects.all()
+    for c in category_obj:
+        c.urlname = re.sub(r'[^\w]', '', c.name)
 
-    if type == -1:
-        course_list = Courses.objects.filter(approval_status=2).order_by('created_at')
+    if user_id == None:    
+        if type == -1:
+            course_list = Courses.objects.filter(approval_status=2).order_by('created_at')
+        else:
+            course_list = Courses.objects.filter(approval_status=2).filter(type=type).order_by('created_at')
     else:
-        course_list = Courses.objects.filter(approval_status=2).filter(type=type).order_by('created_at')
+        register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
+        if type == -1:
+            course_list = Courses.objects.filter(approval_status=2).exclude(id__in=register_course_ids).order_by('created_at')
+        else:
+            course_list = Courses.objects.filter(approval_status=2).filter(type=type).exclude(id__in=register_course_ids).order_by('created_at')
     
     # get discount information
     discount = Discount.objects.all()
@@ -160,7 +170,7 @@ def home_view(request):
                     discount_percent = 1
                 else:
                     discount_percent = (100 - discount[0].discount) / 100
-        course.discount_price = course.price * discount_percent
+        course.discount_price = round(course.price * discount_percent, 2)
 
     # new part with admin... (05-17)
     ele = Admincontrol.objects.get(pk=1)
@@ -217,7 +227,7 @@ def home_view(request):
 
     if getLanguage(request)[1] == None:
         if user_type == "student":
-            stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id).order_by("-id")[:10]
+            stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
             for course in stu_courses:
                 courses = Courses.objects.get(pk=course.course_id_id)
                 course.videoCnt = getVideoCnt(courses)
@@ -230,6 +240,30 @@ def home_view(request):
                            'msg_list': msg_list, 'msg_cnt': msg_cnt,
                            'stu_courses': stu_courses, 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
                            'noti_list': noti_list, 'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
+        elif user_type == "stuteach":
+            stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
+            for course in stu_courses:
+                courses = Courses.objects.get(pk=course.course_id_id)
+                course.videoCnt = getVideoCnt(courses)
+            if user_id:
+                return render(request, 'index.html', {'course_list': course_list, 'page': page, 'type': type,
+                                                      'lang': getLanguage(request)[0], "category_obj": category_obj,
+                                                      "user_id": user_id, 'stu_courses': stu_courses, 'favList': favListShow,
+                                                      'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
+                                                      'alreadyinCart': alreadyinCartView, 'favCnt': favCnt,
+                                                      'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum,
+                                                      'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                                      'noti_cnt': noti_cnt, 'noti_list': noti_list, 'cat_id': cat_id,
+                                                      'ip': ip, 'order': order, 'host_url': host_url})
+            else:
+                return render(request, 'index.html', {'course_list': course_list, 'page': page, 'type': type,
+                                                      'lang': getLanguage(request)[0], "category_obj": category_obj, 'stu_courses': stu_courses,
+                                                      'favList': favListShow, 'cartList': cartListShow,
+                                                      'favCnt': favCnt, 'cartCnt': cartCnt,
+                                                      'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
+                                                      'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                                      'noti_list': noti_list, 'cat_id': cat_id, 'ip': ip,
+                                                      'order': order, 'host_url': host_url})
         else:
             if user_id:
                 return render(request, 'index.html', {'course_list': course_list, 'page': page, 'type': type,
@@ -264,8 +298,7 @@ def home_view(request):
             la = ur[3]
         if la == ln:
             if user_type == "student":
-                stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id).order_by("-id")[
-                              :10]
+                stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
                 return render(request, 'index.html',
                               {'stu_courses': stu_courses,
                                'course_list': course_list, 'page': page, 'type': type, 'lang': getLanguage(request)[0],
@@ -275,6 +308,27 @@ def home_view(request):
                                'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
                                'msg_list': msg_list, 'msg_cnt': msg_cnt,
                                'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
+            elif user_type == "stuteach":
+                stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
+                if user_id:
+                    return render(request, 'index.html',
+                                  {'stu_courses': stu_courses, 'course_list': course_list, 'page': page, 'type': type,
+                                   'lang': getLanguage(request)[0],
+                                   "category_obj": category_obj, "user_id": user_id, 'favList': favListShow,
+                                   'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
+                                   'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt,
+                                   'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
+                                   'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                   'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
+                else:
+                    return render(request, 'index.html',
+                                  {'stu_courses': stu_courses, 'course_list': course_list, 'page': page, 'type': type,
+                                   'lang': getLanguage(request)[0],
+                                   "category_obj": category_obj, 'favList': favListShow, 'cartList': cartListShow,
+                                   'favCnt': favCnt, 'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum,
+                                   'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                   'noti_cnt': noti_cnt, 'noti_list': noti_list, 'cat_id': cat_id, 'ip': ip,
+                                   'order': order, 'host_url': host_url})
             else:
                 if user_id:
                     return render(request, 'index.html',
@@ -303,8 +357,7 @@ def home_view(request):
                 if ur[5] == "":
                     u = u[:len(u) - 1]
                     if user_type == "student":
-                        stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id).order_by(
-                            "-id")[:10]
+                        stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
                         return render(request, 'index.html',
                                       {'course_list': course_list, 'page': page, 'type': type,
                                        'lang': getLanguage(request)[0], "category_obj": category_obj,
@@ -314,6 +367,27 @@ def home_view(request):
                                        'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
                                        'msg_list': msg_list, 'msg_cnt': msg_cnt,
                                        'stu_courses': stu_courses, 'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
+                    elif user_type == "stuteacher":
+                        stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
+                        if user_id:
+                            return render(request, 'index.html',
+                                          {'stu_courses': stu_courses, 'course_list': course_list, 'page': page, 'type': type,
+                                           'lang': getLanguage(request)[0],
+                                           "category_obj": category_obj, "user_id": user_id, 'favList': favListShow,
+                                           'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
+                                           'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt,
+                                           'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
+                                           'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                           'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
+                        else:
+                            return render(request, 'index.html',
+                                          {'stu_courses': stu_courses, 'course_list': course_list, 'page': page, 'type': type,
+                                           'lang': getLanguage(request)[0],
+                                           "category_obj": category_obj, 'favList': favListShow,
+                                           'cartList': cartListShow, 'favCnt': favCnt, 'cartCnt': cartCnt,
+                                           'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
+                                           'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                           'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
                     else:
                         if user_id:
                             return render(request, 'index.html',
@@ -342,8 +416,7 @@ def home_view(request):
                 # if ur[4] == "":
                 #     u = u[:len(u) - 1]
                 if user_type == "student":
-                    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id).order_by(
-                        "-id")[:10]
+                    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
                     return render(request, 'index.html',
                                   {'course_list': course_list, 'page': page, 'type': type,
                                    'lang': getLanguage(request)[0], "category_obj": category_obj,
@@ -353,6 +426,27 @@ def home_view(request):
                                    'msg_list': msg_list, 'msg_cnt': msg_cnt,
                                    'noti_list': noti_list, 'stu_courses': stu_courses, 'cat_id': cat_id, 'ip': ip,
                                    'order': order, 'host_url': host_url})
+                elif user_type == "stuteach":
+                    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
+                    if user_id:
+                        return render(request, 'index.html',
+                                      {'stu_courses': stu_courses, 'course_list': course_list, 'page': page, 'type': type,
+                                       'lang': getLanguage(request)[0],
+                                       "category_obj": category_obj, 'favList': favListShow,
+                                       'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
+                                       'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt,
+                                       'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
+                                       'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                       'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
+                    else:
+                        return render(request, 'index.html',
+                                      {'stu_courses': stu_courses, 'course_list': course_list, 'page': page, 'type': type,
+                                       'lang': getLanguage(request)[0],
+                                       "category_obj": category_obj, 'favList': favListShow,
+                                       'cartList': cartListShow, "user_id": user_id, 'favCnt': favCnt,
+                                       'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
+                                       'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                       'noti_list': noti_list, 'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
                 else:
                     if user_id:
                         return render(request, 'index.html',
@@ -507,7 +601,7 @@ def home_view1(request):
     if getLanguage(request)[1] == None:
 
         if user_type == "student":
-            stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id).order_by("-id")[:10]
+            stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
             for course in stu_courses:
                 courses = Courses.objects.get(pk=course.course_id_id)
                 course.videoCnt = getVideoCnt(courses)
@@ -552,8 +646,7 @@ def home_view1(request):
             la = ur[3]
         if la == ln:
             if user_type == "student":
-                stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id).order_by("-id")[
-                              :10]
+                stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
                 return render(request, 'index.html',
                               {'stu_courses': stu_courses, 'enrolled_course_list': enrolled_course_list,
                                'course_list': course_list, 'course_free_list': course_free_list,
@@ -588,8 +681,7 @@ def home_view1(request):
                 if ur[5] == "":
                     u = u[:len(u) - 1]
                     if user_type == "student":
-                        stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id).order_by(
-                            "-id")[:10]
+                        stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
                         return render(request, 'index.html',
                                       {'enrolled_course_list': enrolled_course_list, 'course_list': course_list,
                                        'course_free_list': course_free_list, 'course_paid_list': course_paid_list,
@@ -624,8 +716,7 @@ def home_view1(request):
                 if ur[4] == "":
                     u = u[:len(u) - 1]
                     if user_type == "student":
-                        stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id).order_by(
-                            "-id")[:10]
+                        stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
                         return render(request, 'index.html',
                                       {'enrolled_course_list': enrolled_course_list, 'course_list': course_list,
                                        'course_free_list': course_free_list, 'course_paid_list': course_paid_list,
@@ -655,7 +746,24 @@ def home_view1(request):
                 else:
                     return redirect(u)
 
-
+"""
+(
+    <QuerySet []>,
+    0, 
+    [], 
+    <QuerySet [<student_cart_courses: student_cart_courses object (170)>, 
+    <student_cart_courses: student_cart_courses object (169)>, 
+    <student_cart_courses: student_cart_courses object (168)>]>, 
+    4, 
+    [48, 65, 64, 46], 
+    262.0, 
+    <QuerySet [<notifications: notifications object (102)>, 
+    <notifications: notifications object (76)>]>, 
+    2, 
+    [], 
+    0
+)
+"""
 def findheader(userid):
     # show fav page.., cart page...
     favList = student_favourite_courses.objects.filter(student_id_id=userid)
@@ -706,63 +814,81 @@ def signup(request):
         item = {'name': cat.name, 'namear': cat.namear, 'id': cat.id}
         cat_list.append(item)
     print(cat_list)
-    return render(request, 'signup.html', {"objC": cat_list, 'lang': getLanguage(request)[0]})
+    user_id = request.session.get("user_id")
+    if user_id == None:
+        return render(request, 'signup.html', {"objC": cat_list, 'lang': getLanguage(request)[0]})
+    else:
+        return redirect('/')
 
 
 def loginn(request):
-    return render(request, 'login.html', {'lang': getLanguage(request)[0]})
+    user_id = request.session.get("user_id")
+    if user_id == None:
+        return render(request, 'login.html', {'lang': getLanguage(request)[0]})
+    else:
+        return redirect('/')    
 
 
 def about(request):
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'about.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
 
 
 def faqs(request):
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'faqs.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
 
 
 def help(request):
     user_id = request.session.get("user_id")
     user_type = request.session.get("user_type")
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
-
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'support.html',
                   {'lang': getLanguage(request)[0], 'user_type': user_type, "user_id": user_id, 'favList': x1,
                    'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
 
 
 def terms(request):
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'terms.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
 
 
 def policy(request):
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'privacy.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
 
 
 def contact(request):
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'contact.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
 
 
 def become(request):
@@ -777,10 +903,12 @@ def become(request):
     noti_list = notifications.objects.filter(user_id=request.user.id, is_read=0).order_by("-id")[:3]
     noti_cnt = notifications.objects.filter(user_id=request.user.id, is_read=0).count()
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'become.html',
                   {'lang': getLanguage(request)[0], 'catList': objC, 'favList': favListShow, 'cartList': cartListShow,
                    'favCnt': len(favList), 'cartCnt': len(cartList), 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
 
 
 def become_a_teacher(request):
@@ -794,9 +922,11 @@ def become_a_teacher(request):
     noti_list = notifications.objects.filter(user_id=request.user.id, is_read=0).order_by("-id")[:3]
     noti_cnt = notifications.objects.filter(user_id=request.user.id, is_read=0).count()
     x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'become-teacher.html', {'lang': getLanguage(request)[0], 'categories': categoryList, 'favList': favListShow, 'cartList': cartListShow,
                    'favCnt': len(favList), 'cartCnt': len(cartList), 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
 
 
 def save_become_teacher(request):
@@ -807,7 +937,8 @@ def save_become_teacher(request):
     status = 1
     try:
         user = User.objects.get(pk=user_id)
-        user.group_id = 3
+        # user.group_id = 3
+        user.group_id = 4
         user.save()
     except:
         status = 0
@@ -1032,6 +1163,12 @@ def single_course(request, teacher_id, course_url):
     if Courses.objects.filter(user_id=teacher_id, course_url=course_url).exists():
         course = Courses.objects.filter(user_id=teacher_id, course_url=course_url)[0]
     id = course.id
+
+    # if this course is in user's registered courses, then redirecting user to home
+    register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
+    if id in register_course_ids:
+        return redirect(home_view)
+
     course = Courses.objects.get(id=id)
     if discount.count() == 0:
         discount_percent = 0
@@ -1051,9 +1188,7 @@ def single_course(request, teacher_id, course_url):
     similar_cat = course.subcat_id
     similar_parent_cat = course.scat_id
 
-    # similar_courses = Courses.objects.filter(subcat_id=similar_cat).exclude(id=id)
-    similar_courses = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).order_by('scat_id').exclude(id=id)
-
+    similar_courses = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).filter(approval_status=2).exclude(id=id).exclude(id__in=register_course_ids).order_by('scat_id')                               
     for i in similar_courses:
         rating_list = course_comments.objects.filter(course_id_id=i.id)
         i.rating = getRatingFunc(rating_list)
@@ -1081,10 +1216,11 @@ def single_course(request, teacher_id, course_url):
 
     data = get_courseDetails(id)
 
-    if user_type == 'teacher':
-        obj_comment = course_comments.objects.filter(course_id_id=id)
-    else:
-        obj_comment = course_comments.objects.filter(course_id_id=id).filter(user_id=user_id)
+    # if user_type == 'teacher' or user_type == 'stuteach':
+    #     obj_comment = course_comments.objects.filter(course_id_id=id)
+    # else:
+    #     obj_comment = course_comments.objects.filter(course_id_id=id).filter(user_id=user_id)
+    obj_comment = course_comments.objects.filter(course_id_id=id)
     for comment in obj_comment:
         if Courses.objects.filter(id=comment.course_id_id).exists():
             course_tmp = Courses.objects.get(pk=comment.course_id_id)
@@ -1125,8 +1261,8 @@ def single_course(request, teacher_id, course_url):
     user_info.url_name = user_info.first_name+ " " + user_info.last_name
     user_info.url_name = re.sub(r"\s+", '-', user_info.url_name)
 
-    free_course = Courses.objects.filter(user_id=teacher_id).filter(type=1).count()
-    paid_course = Courses.objects.filter(user_id=teacher_id).filter(type=0).count()
+    free_course = Courses.objects.filter(user_id=teacher_id).filter(type=1).filter(approval_status=2).count()
+    paid_course = Courses.objects.filter(user_id=teacher_id).filter(type=0).filter(approval_status=2).count()
 
     rating_list = course_comments.objects.filter(course_id_id=course.id)
 
@@ -1179,11 +1315,12 @@ def single_course(request, teacher_id, course_url):
     if student_cart_courses.objects.filter(student_id_id=user_id, course_id_id=course.id).exists():
         cart_exist = 1
 
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'single_course.html',
                   {'videocount': videocounter, "lang": getLanguage(request)[0], 'question_list': data['question_list'],
                    'course': course, 'similar_courses': similar_courses, 'user_type': user_type, "user_id": user_id,
                    "comment_list": obj_comment, 'id': id, 'user_info': user_info, 'free_course': free_course,
-                   'teacher_id': teacher_id,
+                   'teacher_id': teacher_id, 'stu_courses':stu_courses,
                    'paid_course': paid_course, 'includeList': _obj, 'favList': favListShow, 'promo_video': promo_video,
                    'alreadyinFav': alreadyinFavView, 'cartList': cartListShow, 'alreadyinCart': alreadyinCartView,
                    'favCnt': len(favList), 'cartCnt': len(cartList), 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
@@ -1197,7 +1334,7 @@ def add_comment(request):
     comment = request.POST.get("comment")
     # comment_id = request.POST.get("comment_id")
     rating = request.POST.get("rating")
-    rating = float(rating)
+    rating = float(rating or 0)
     user_id = request.POST.get("user_id")
     # dt = datetime.datetime.now()
     dt = datetime.now()
@@ -1607,11 +1744,10 @@ def update_user(request):
 
         # update user profile
         user_type = request.session['user_type']
-        print("here::", user_type)
         if user_type == 'teacher':
             updateUserProfile(request)
         try:
-            myfile = request.FILES['file1']
+            myfile = request.FILES['file']
             filename = myfile._get_name()
             ext = filename[filename.rfind('.'):]
             file_name = str(uuid.uuid4()) + ext
@@ -1657,7 +1793,7 @@ def sendConfirmationMail(objUA, domain, user_group_id, request):
         text += '<!--[if !mso]><!--><link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet" type="text/css"><!--<![endif]--></head>'
         text += '<body class="clean-body" style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;background-color: #efefef;color: #000000"><!--[if IE]><div class="ie-container"><![endif]--><!--[if mso]><div class="mso-container"><![endif]--><table style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;min-width: 320px;Margin: 0 auto;background-color: #efefef;width:100%" cellpadding="0" cellspacing="0"><tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color: #efefef;"><![endif]--><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color:   #d7dbf5;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #0000ff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->'
         text += '<table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:Open Sans,sans-serif;" align="left"><table width="100%" cellpadding="0" cellspacing="0" border="0" ><tr>'
-        text += '<td style="padding-right: 0px;padding-left: 0px;" align="center"><img align="center" border="0" src="images/image-1.png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 80px;" width="80">'
+        text += '<td style="padding-right: 0px;padding-left: 0px;" align="center"><img align="center" border="0" src="assets/img/logo/booctep1.png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 80px;" width="80">'
         text += '</td></tr></table></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div>'
         text += '<div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">'
         text += '<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]--><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" >'
@@ -1747,9 +1883,12 @@ def ajaxlogin(request):
                 if id == 2:
                     request.session['user_id'] = str(user_id)
                     request.session['user_type'] = "student"
-                else:
+                elif id == 3:
                     request.session['user_id'] = str(user_id)
                     request.session['user_type'] = "teacher"
+                else:
+                    request.session['user_id'] = str(user_id)
+                    request.session['user_type'] = "stuteach"
                 request.session['password'] = request.POST.get('password')
                 msg = 'success'
             else:
@@ -1820,6 +1959,13 @@ def forgotChangepassword(request):
 
 def logout_(request):
     logout(request)
+    url_parts = request.META['HTTP_REFERER'].split('/')
+
+    for url_part in url_parts:
+        if 'teacher' in url_part or 'student' in url_part:
+            redirect_url = url_parts[0] + "//" + url_parts[2] + "/" + url_parts[3]
+            return HttpResponseRedirect(redirect_url)
+                
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
 
@@ -2012,7 +2158,7 @@ def getVideoDuration(filename):
                              "default=noprint_wrappers=1:nokey=1", filename],
                             stdout=subprocess.PIPE,
                             stderr=subprocess.STDOUT)
-    x = float(result.stdout)
+    x = float(result.stdout or 0)
     y = convertToTimeFormat(x)
     return y
 
@@ -2576,10 +2722,18 @@ def searching(request):
 
     totalsearchresult = Courses.objects.filter(name__icontains=searchkeyword).count()
     sehList = []
-    if type == -1:
-        sehList = Courses.objects.filter(name__icontains=searchkeyword)
+
+    if user_id == None:
+        if type == -1:
+            sehList = Courses.objects.filter(name__icontains=searchkeyword).filter(approval_status=2)
+        else:
+            sehList = Courses.objects.filter(name__icontains=searchkeyword).filter(approval_status=2).filter(type=type)
     else:
-        sehList = Courses.objects.filter(name__icontains=searchkeyword).filter(type=type)
+        register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
+        if type == -1:
+            sehList = Courses.objects.filter(name__icontains=searchkeyword).filter(approval_status=2).exclude(id__in=register_course_ids)
+        else:
+            sehList = Courses.objects.filter(name__icontains=searchkeyword).filter(approval_status=2).filter(type=type).exclude(id__in=register_course_ids)
 
     discount = Discount.objects.all()
     now = datetime.now().strftime('%Y-%m-%d')
@@ -2637,8 +2791,9 @@ def searching(request):
     except EmptyPage:
         sehList = seh_list_paginator.page(seh_list_paginator.num_pages)
 
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'search.html', {'lang': getLanguage(request)[0],
-                                           'searchkeyword': searchkeyword,
+                                           'searchkeyword': searchkeyword, 'stu_courses':stu_courses,
                                            'totalsearchresult': totalsearchresult, "category_obj": category_obj,
                                            'course_list': sehList, 'favList': favListShow,
                                            'cartList': cartListShow, 'favCnt': favCnt, 'cartCnt': cartCnt,
@@ -2757,13 +2912,13 @@ def searching(request):
     #                    'msg_cnt': msg_cnt})
 
 
-def single_category(request, id):
+def single_category(request, category_name, id):
     user_id = request.session.get("user_id")
     user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     type = request.POST.get('type')
     page = request.POST.get('page')
     order = request.POST.get('order')
-    # print('--------------type---------------------------',type, page, order)
 
     if page == None or page == '':
         page = 1
@@ -2848,7 +3003,7 @@ def single_category(request, id):
     else:
         return render(request, 'filter_404_page.html', {'lang': getLanguage(request)[0], 'favList': favListShow,
                                                         'cartList': cartListShow, 'favCnt': len(favList),
-                                                        'cartCnt': len(cartList),
+                                                        'cartCnt': len(cartList), 'stu_courses':stu_courses,
                                                         'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
                                                         'noti_list': noti_list, 'msg_list': msg_list,
                                                         'msg_cnt': msg_cnt, 'type': type, 'order': order})
@@ -2867,10 +3022,17 @@ def single_category(request, id):
         sub_obj = subcategories.objects.filter(categories_id=category_id)
         for i in sub_obj:
             if Courses.objects.filter(subcat_id=i.id).exists():
-                if type == -1:
-                    course_list = Courses.objects.filter(subcat_id=i.id).filter(approval_status=2).order_by('-created_at')
+                if user_id == None:
+                    if type == -1:
+                        course_list = Courses.objects.filter(subcat_id=i.id).filter(approval_status=2).order_by('-created_at')
+                    else:
+                        course_list = Courses.objects.filter(subcat_id=i.id).filter(type=type).filter(approval_status=2).order_by('created_at')
                 else:
-                    course_list = Courses.objects.filter(subcat_id=i.id).filter(type=type).filter(approval_status=2).order_by('created_at')
+                    register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
+                    if type == -1:
+                        course_list = Courses.objects.filter(subcat_id=i.id).filter(approval_status=2).exclude(id__in=register_course_ids).order_by('-created_at')
+                    else:
+                        course_list = Courses.objects.filter(subcat_id=i.id).filter(type=type).filter(approval_status=2).exclude(id__in=register_course_ids).order_by('created_at')
 
                 for course in course_list:
                     rating_list = course_comments.objects.filter(course_id_id=course.id)
@@ -2894,14 +3056,14 @@ def single_category(request, id):
                     course_list = course_list_paginator.page(course_list_paginator.num_pages)
                 for course in course_list:
                     course.link = courseUrlGenerator(course)
-                print('------------course list-----------------------', course_list)
+
                 if l != getLanguage(request)[0]:
                     rl = getLanguage(request)[0].split('/')
                     return render(request, 'single_category.html',
                                   {'lang': getLanguage(request)[0], 'course_list': course_list,
                                    "course_cnt": str(count), "course_name": categorie, "user_id": user_id,
                                    'category': category, 'favList': favListShow, 'alreadyinFav': alreadyinFavView,
-                                   'alreadyinCart': alreadyinCartView,
+                                   'alreadyinCart': alreadyinCartView, 'stu_courses':stu_courses,
                                    'cartList': cartListShow, 'favCnt': len(favList), 'cartCnt': len(cartList),
                                    'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
                                    'msg_list': msg_list, 'msg_cnt': msg_cnt, 'type': type, 'page': page,
@@ -2912,7 +3074,7 @@ def single_category(request, id):
                                   {'lang': getLanguage(request)[0], 'course_list': course_list,
                                    "course_cnt": str(count), "course_name": categorie, "user_id": user_id,
                                    'category': category, 'favList': favListShow, 'alreadyinFav': alreadyinFavView,
-                                   'alreadyinCart': alreadyinCartView,
+                                   'alreadyinCart': alreadyinCartView, 'stu_courses':stu_courses,
                                    'cartList': cartListShow, 'favCnt': len(favList), 'cartCnt': len(cartList),
                                    'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
                                    'msg_list': msg_list, 'msg_cnt': msg_cnt, 'type': type, 'page': page,
@@ -2921,7 +3083,7 @@ def single_category(request, id):
             else:
                 return render(request, 'filter_404_page.html', {'lang': getLanguage(request)[0], 'favList': favListShow,
                                                                 'cartList': cartListShow, 'favCnt': len(favList),
-                                                                'cartCnt': len(cartList),
+                                                                'cartCnt': len(cartList), 'stu_courses':stu_courses,
                                                                 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
                                                                 'noti_list': noti_list, 'msg_list': msg_list,
                                                                 'msg_cnt': msg_cnt, 'type': type, 'page': page,
@@ -2929,7 +3091,7 @@ def single_category(request, id):
     else:
         return render(request, 'filter_404_page.html', {'lang': getLanguage(request)[0], 'favList': favListShow,
                                                         'cartList': cartListShow, 'favCnt': len(favList),
-                                                        'cartCnt': len(cartList),
+                                                        'cartCnt': len(cartList), 'stu_courses':stu_courses,
                                                         'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
                                                         'noti_list': noti_list, 'msg_list': msg_list,
                                                         'msg_cnt': msg_cnt, 'type': type, 'page': page, 'order': order})
@@ -3064,8 +3226,6 @@ def showCartList(request):
         if Admincontrol.objects.filter(id=1).exists():
             tax = Admincontrol.objects.get(pk=1).teacher_tax
 
-    # cartList = student_cart_courses.objects.filter(student_id_id=request.user.id)
-
     discount = 0
     not_list = []
     expire_date = datetime.today() - timedelta(days=1)
@@ -3079,9 +3239,10 @@ def showCartList(request):
     subTotal = 0
     subDiscount = 0
     subTax = 0
-
+    # cartCourseIds = []
     now = datetime.now().strftime('%Y-%m-%d')
     for cart in cartList:
+        # cartCourseIds.append(cart.course_id.id)
         subTotal += cart.course_id.price
         if student_favourite_courses.objects.filter(course_id_id=cart.course_id_id, student_id_id=user_id).exists():
             cart.is_fav = 1
@@ -3094,7 +3255,9 @@ def showCartList(request):
                 subDiscount += cart.course_id.price * (discount / 100)
 
         subTax += cart.course_id.price * (tax / 100)
-
+    
+    subDiscount = round(subDiscount, 2)
+        
     cartListTmp = Paginator(cartList, 2)
 
     try:
@@ -3104,14 +3267,16 @@ def showCartList(request):
     except EmptyPage:
         cartList = cartListTmp.page(cartListTmp.num_pages)
 
-    cartTotalSumPrice = subTotal - subTax - subDiscount
+    cartTotalSumPrice = round(subTotal - subTax - subDiscount, 2)
 
     favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
         request.user.id)
 
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'cart.html',
                   {'cartList': cartListShow, 'lang': getLanguage(request)[0], 'favList': favListShow,
-                   'cartList1': cartList, 'favCnt': favCnt,
+                   'cartList1': cartList, 'favCnt': favCnt, 'stu_courses':stu_courses,
                    'cartCnt': cartCnt, 'subtotal': subTotal, 'subDiscount': subDiscount,'cartTotalSum': cartTotalSumPrice,
                    'noti_cnt': noti_cnt, 'page': page, 'tax': subTax,
                    'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt})
@@ -3147,20 +3312,20 @@ def ecommerce_payment(request, teacher_id, id, course_url):
     orderid = generateRandomChar()
 
     request.session['order_id'] = orderid,
-    request.session['amount'] = float(totalmoney)
+    request.session['amount'] = float(totalmoney or 0)
     favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
         request.user.id)
 
     # if user_type == "student":
     savedcard = payment.objects.filter(student_id=user_id)
-    counter = 0;
+    counter = 0
     for i in savedcard:
         i.cardnoending = i.card_no[-4:]
         i.cardssr = counter
         counter += 1
 
     order_id = orderid
-    amount = float(totalmoney)
+    amount = float(totalmoney or 0)
     host = request.get_host()
     paypal_dict = {
         'business': settings.PAYPAL_RECEIVER_EMAIL,
@@ -3171,19 +3336,20 @@ def ecommerce_payment(request, teacher_id, id, course_url):
         'notify_url': 'http://{}{}'.format(host,
                                            reverse('paypal-ipn')),
         'return_url': 'http://{}{}'.format(host,
-                                           reverse('payment_done')),
+                                           reverse('payment_done', args=[course.id, request.user.id])),
         'cancel_return': 'http://{}{}'.format(host,
                                               reverse('payment_cancelled')),
     }
 
     form = PayPalPaymentsForm(initial=paypal_dict)
 
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'ecommerce_payment.html',
                   {'form': form, 'orderid': orderid, 'totalmoney': totalmoney, 'subtotalmoney': subtotalmoney,
                    'discountmoney': discountmoney, 'lang': getLanguage(request)[0], 'savedcard': list(savedcard),
                    "course": course, "user_id": user_id, 'favList': favListShow, 'favCnt': favCnt, 'alreadyinFav': alreadyinFavView,
                    'cartList': cartListShow, 'cartCnt': cartCnt, 'alreadyinCart': alreadyinCartView, 'cartTotalSum': cartTotalSum, 'noti_list': noti_list,
-                   'noti_cnt': noti_cnt, 'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'noti_cnt': noti_cnt, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_courses': stu_courses})
     # else:
     #     return redirect("/")
 
@@ -3270,25 +3436,121 @@ def generateRandomChar():
 
 @csrf_exempt
 def checkout(request):
-    # print("totalmoney is ",request.POST.get('totalmoney'))
+    # cartcourseids = request.POST.get('cartcourseids')
     subtotalmoney = request.POST.get('subtotalmoney')
     discountmoney = request.POST.get('discountmoney')
     totalmoney = request.POST.get('totalmoney')
     orderid = generateRandomChar()
     request.session['order_id'] = orderid,
-    request.session['amount'] = float(totalmoney)
-    x1, x2, x3, y1, y2, y3, y4, z1, z2 = findheader(request.user.id)
+    request.session['amount'] = float(totalmoney or 0)
 
-    return render(request, 'checkout.html',
-                  {'lang': getLanguage(request)[0], 'orderid': orderid, 'subtotalmoney': subtotalmoney,
-                   'discountmoney': discountmoney, 'totalmoney': totalmoney, 'favList': x1, 'favCnt': x2,
-                   'alreadyinFav': x3, 'cartList': y1, 'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4,
-                   'noti_list': z1, 'noti_cnt': z2})
+    user_id = request.session.get("user_id")
+    savedcard = payment.objects.filter(student_id=user_id)
 
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+        request.user.id)
+
+    orderid = generateRandomChar()
+    host = request.get_host()
+
+    paypal_dict = {
+        'business': settings.PAYPAL_RECEIVER_EMAIL,
+        'amount': '%.2f' % float(totalmoney or 0),
+        'item_name': 'Order {}',
+        'invoice': str(orderid),
+        'currency_code': 'USD',
+        'notify_url': 'http://{}{}'.format(host,
+                                           reverse('paypal-ipn')),
+        'return_url': 'http://{}{}'.format(host,
+                                           reverse('process_payment')),
+        'cancel_return': 'http://{}{}'.format(host,
+                                              reverse('payment_cancelled')),
+    }
+
+    form = PayPalPaymentsForm(initial=paypal_dict)
+
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
+
+    return render(request, 'ecommerce_payment.html',
+                  {'form': form, 'orderid': orderid, 'totalmoney': totalmoney, 'subtotalmoney': subtotalmoney,
+                   'discountmoney': discountmoney, 'lang': getLanguage(request)[0], 'savedcard': list(savedcard),
+                   "user_id": user_id, 'favList': favListShow, 'favCnt': favCnt, 'alreadyinFav': alreadyinFavView,
+                   'cartList': cartListShow, 'cartCnt': cartCnt, 'alreadyinCart': alreadyinCartView, 'cartTotalSum': cartTotalSum, 'noti_list': noti_list,
+                   'noti_cnt': noti_cnt, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_courses': stu_courses})
 
 @csrf_exempt
-def payment_done(request):
-    return render(request, 'payment_done.html')
+def process_payment(request):
+    x1, x2, x3, y1, y2, purchase_course_ids, y4, z1, z2, msg_list, msg_cnt= findheader(request.user.id)
+    student_cart_courses.objects.filter(student_id_id=request.user.id).delete()
+    purchase_courses = []
+    for course_id in purchase_course_ids:
+        course = Courses.objects.get(id=course_id)
+        purchase_courses.append(course)
+
+    for course_id in purchase_course_ids:
+        import uuid
+        import datetime
+        invoice_time = datetime.datetime.now()
+        invoice_number = f"{uuid.uuid4()}-{str(invoice_time)}"
+
+        register_course = student_register_courses.objects.filter(student_id_id=request.user.id).filter(course_id_id=course_id)
+        if not register_course:
+            invoice = Invoices(invoice_number=invoice_number, course_id=course_id, student_id=request.user.id)
+            invoice.save()
+
+            obj = student_register_courses(student_id_id=request.user.id, course_id_id=course_id, date_created=invoice_time.strftime("%Y-%m-%d %H:%M:%S"))
+            obj.save()
+
+    # removing favorite courses if payed courses are in favorite list
+    register_course_ids = student_register_courses.objects.filter(student_id_id=request.user.id).values_list('course_id_id', flat=True)
+    student_favourite_courses.objects.filter(student_id_id=request.user.id, course_id_id__in=register_course_ids).delete()
+
+    # if user's type is teacher then change his account to stu&teach
+    user_id = request.session.get("user_id")
+    user_type = request.session.get("user_type")
+    if user_type == "teacher":
+        user = User.objects.get(id=user_id)
+        user.group_id = 4
+        user.save()
+        request.session['user_type'] = "stuteach"
+        
+    course_ids = json.dumps(purchase_course_ids)
+    return redirect(reverse('student enrollments', kwargs={"course_ids": course_ids}))
+    # return render(request, 'payment_done.html', {'purchase_courses': purchase_courses, 'student_id': request.user.id})
+
+@csrf_exempt
+def payment_done(request, course_id, student_id):
+    import uuid
+    import datetime
+    invoice_time = datetime.datetime.now()
+    invoice_number = f"{uuid.uuid4()}-{str(invoice_time)}"
+
+    register_course = student_register_courses.objects.filter(student_id_id=student_id).filter(course_id_id=course_id)
+    if not register_course:
+        invoice = Invoices(invoice_number=invoice_number, course_id=course_id, student_id=student_id)
+        invoice.save()
+
+        obj = student_register_courses(student_id_id=student_id, course_id_id=course_id, date_created=invoice_time.strftime("%Y-%m-%d %H:%M:%S"))
+        obj.save()
+
+    # if course is in favorite list, then remove it from favorite list
+    student_favourite_courses.objects.filter(course_id_id=course_id, student_id_id=student_id).delete()
+    student_cart_courses.objects.filter(course_id_id=course_id, student_id_id=student_id).delete()
+    # if student_favourite_courses.objects.filter(course_id_id=course_id, student_id_id=student_id).exists():
+    #     favorite_course.delete()
+
+    # if user's type is teacher then change his account to stu&teach
+    user_id = request.session.get("user_id")
+    user_type = request.session.get("user_type")
+    if user_type == "teacher":
+        user = User.objects.get(id=user_id)
+        user.group_id = 4
+        user.save()
+        request.session['user_type'] = "stuteach"
+
+    return redirect(reverse('student enrollment', kwargs={"course_id": course_id}))
+    # return render(request, 'payment_done.html')
 
 
 @csrf_exempt
@@ -3466,8 +3728,10 @@ def showFavList(request):
     except EmptyPage:
         favList = wish_list_paginator.page(wish_list_paginator.num_pages)
 
+    user_type = request.session.get("user_type")
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'wishlist.html',
-                  {'category_obj': category_obj, 'lang': getLanguage(request)[0], 'favList1': favList,
+                  {'stu_courses': stu_courses, 'category_obj': category_obj, 'lang': getLanguage(request)[0], 'favList1': favList,
                    'cartList': cartListShow, 'favCnt': favCnt, 'favList': favListShow,
                    'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'page': page, 'type': type,
                    'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'order': order})
@@ -3572,10 +3836,10 @@ def viewProfile(request, id, pname):
     else:
         user.total_rating = round((sum / count), 2)
     user.reviewCnt = count
-    print("test::", user.profile.header_img)
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'profile.html',
                   {'teacher': user, 'favList': favListShow, 'lang': getLanguage(request)[0], 'cartList': cartListShow,
-                   'favCnt': len(favList),
+                   'favCnt': len(favList), "stu_courses": stu_courses,
                    'cartCnt': len(cartList), 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'page': page,
                    'page1': page1,
                    'noti_list': noti_list, 'order': order, 'tab': tab, 'msg_list': msg_list, 'msg_cnt': msg_cnt})
@@ -3606,10 +3870,10 @@ def deleteCourse(request):
 
 def sendResetPasswordEmail(request):
     email = request.POST.get('email')
-
+    
     connection = get_connection()  # uses SMTP server specified in settings.py
     connection.open()  # If you don't open the connection manually, Django will automatically open, then tear down the connection in msg.send()
-
+    
     text = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'
     text += '<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">'
     text += '<head><!--[if gte mso 9]><xml><o:OfficeDocumentSettings><o:AllowPNG/><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml><![endif]--><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="x-apple-disable-message-reformatting"><!--[if !mso]><!-->'
@@ -3621,7 +3885,7 @@ def sendResetPasswordEmail(request):
     text += '<!--[if !mso]><!--><link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet" type="text/css"><!--<![endif]--></head>'
     text += '<body class="clean-body" style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;background-color: #efefef;color: #000000"><!--[if IE]><div class="ie-container"><![endif]--><!--[if mso]><div class="mso-container"><![endif]--><table style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;min-width: 320px;Margin: 0 auto;background-color: #efefef;width:100%" cellpadding="0" cellspacing="0"><tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color: #efefef;"><![endif]--><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color:   #d7dbf5;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #0000ff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->'
     text += '<table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:Open Sans,sans-serif;" align="left"><table width="100%" cellpadding="0" cellspacing="0" border="0" ><tr>'
-    text += '<td style="padding-right: 0px;padding-left: 0px;" align="center"><img align="center" border="0" src="images/image-1.png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 80px;" width="80">'
+    text += '<td style="padding-right: 0px;padding-left: 0px;" align="center"><img align="center" border="0" src="assets/img/logo/booctep1.png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 80px;" width="80">'
     text += '</td></tr></table></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div>'
     text += '<div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">'
     text += '<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]--><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" >'
@@ -3663,10 +3927,11 @@ def resetPassword(request):
     hashval = hashlib.md5(email.encode())
     hashString = str(hashval.hexdigest())
     lang = getLanguage(request)[0]
+    domain = request.META['HTTP_HOST']
     if lang == 'ar/':
-        link = settings.BASE_URL + "/" + lang + "forgot_password/?param=" + hashString
+        link = "http://" + domain + "/" + lang + "forgot_password/?param=" + hashString
     else:
-        link = settings.BASE_URL + "/en/forgot_password/?param=" + hashString
+        link = "http://" + domain + "/en/forgot_password/?param=" + hashString
     print("lang link ----------------------------------------------------------------------------- ", link)
     try:
         obj = User.objects.get(email=email)
@@ -3688,7 +3953,7 @@ def resetPassword(request):
             text += '<!--[if !mso]><!--><link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet" type="text/css"><!--<![endif]--></head>'
             text += '<body class="clean-body" style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;background-color: #efefef;color: #000000"><!--[if IE]><div class="ie-container"><![endif]--><!--[if mso]><div class="mso-container"><![endif]--><table style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;min-width: 320px;Margin: 0 auto;background-color: #efefef;width:100%" cellpadding="0" cellspacing="0"><tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color: #efefef;"><![endif]--><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color:   #d7dbf5;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #0000ff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->'
             text += '<table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:Open Sans,sans-serif;" align="left"><table width="100%" cellpadding="0" cellspacing="0" border="0" ><tr>'
-            text += '<td style="padding-right: 0px;padding-left: 0px;" align="center"><img align="center" border="0" src="images/image-1.png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 80px;" width="80">'
+            text += '<td style="padding-right: 0px;padding-left: 0px;" align="center"><img align="center" border="0" src="assets/img/logo/booctep1.png" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 80px;" width="80">'
             text += '</td></tr></table></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div>'
             text += '<div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">'
             text += '<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]--><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" >'
@@ -3746,17 +4011,140 @@ def postResetPassword(request):
 
 
 def enrollment(request, course_id):
+    if request.session.get('user_id') == None:
+        return redirect('/')
+    user_id = request.session.get("user_id")
+    user_type = request.session.get("user_type")
+
+    register_courses = student_register_courses.objects.filter(course_id_id=course_id).filter(student_id_id=user_id)
+    if register_courses.count() == 0:
+        time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        register_course = student_register_courses(
+            course_id_id=course_id,
+            student_id_id=user_id,
+            last_completed_section_id=0,
+            date_created=time,
+            withdraw=0
+        )
+        register_course.save()
+
     course = Courses.objects.get(pk=course_id)
-    similar_course = Courses.objects.filter(scat_id=course.scat_id).filter(~Q(id=course.id))
+    course.category = categories.objects.get(pk=course.scat_id)
+    
+    similar_cat = course.subcat_id
+    similar_parent_cat = course.scat_id
+
+    register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
+    similar_course = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).filter(approval_status=2).exclude(id=course_id).exclude(id__in=register_course_ids).order_by('scat_id')
+
+    discount = Discount.objects.all()
+    now = datetime.now().strftime('%Y-%m-%d')
+    for i in similar_course:
+        if discount.count() == 0:
+            discount_percent = 1
+        else:
+            if now > discount[0].expire_date:
+                discount_percent = 1
+            else:
+                not_str = discount[0].not_apply_course
+                not_list = not_str.split('.')
+                if str(i.id) in not_list:
+                    discount_percent = 1
+                else:
+                    discount_percent = (100 - discount[0].discount) / 100
+        i.discount_price = round(i.price * discount_percent, 2)
+
+    for c in similar_course:
+        c.link = courseUrlGenerator(c)
+        rate_list = course_comments.objects.filter(course_id_id=c.id)
+        c.rating = getRatingFunc(rate_list)
+        c.ratingCnt = course_comments.objects.filter(course_id_id=c.id).count()
+        c.stuCnt = len(rate_list)
+        c.videoCnt = getVideoCnt(c)
+
+    similar_course = sorted(similar_course, key=attrgetter('rating'), reverse=True)[:5]
+
     favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
         request.user.id)
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'enrollment.html',
-                  {'course': course, 'similar_courses': similar_course, 'favList': favListShow,
-                   'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
+                  {'course': course, 'similar_courses': similar_course, 'favList': favListShow,'lang': getLanguage(request)[0],
+                   'alreadyinFav': alreadyinFavView, 'cartList': cartListShow, 'stu_courses': stu_courses,
                    'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt, 'msg_list': msg_list,
                    'msg_cnt': msg_cnt,
                    'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt})
 
+@csrf_exempt
+def enrollments(request, course_ids):
+    if request.session.get('user_id') == None:
+        return redirect('/')
+    user_id = request.session.get("user_id")
+    user_type = request.session.get("user_type")
+
+    course_ids = json.loads(course_ids)
+
+    courses = [];
+    for course_id in course_ids:
+        course = Courses.objects.get(pk=course_id)
+        courses.append(course) 
+
+        register_courses = student_register_courses.objects.filter(course_id_id=course_id).filter(student_id_id=user_id)
+        if register_courses.count() == 0:
+            time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            register_course = student_register_courses(
+                course_id_id=course_id,
+                student_id_id=user_id,
+                last_completed_section_id=0,
+                date_created=time,
+                withdraw=0
+            )
+            register_course.save()
+            
+    course = Courses.objects.get(pk=course_ids[0])
+    course.category = categories.objects.get(pk=course.scat_id)
+    
+    similar_cat = course.subcat_id
+    similar_parent_cat = course.scat_id
+    register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
+    similar_course = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).filter(approval_status=2).exclude(id=course.id).exclude(id__in=register_course_ids).order_by('scat_id')
+
+    discount = Discount.objects.all()
+    now = datetime.now().strftime('%Y-%m-%d')
+    for i in similar_course:
+        if discount.count() == 0:
+            discount_percent = 1
+        else:
+            if now > discount[0].expire_date:
+                discount_percent = 1
+            else:
+                not_str = discount[0].not_apply_course
+                not_list = not_str.split('.')
+                if str(i.id) in not_list:
+                    discount_percent = 1
+                else:
+                    discount_percent = (100 - discount[0].discount) / 100
+        i.discount_price = round(i.price * discount_percent, 2)
+
+    for c in similar_course:
+        c.link = courseUrlGenerator(c)
+        rate_list = course_comments.objects.filter(course_id_id=c.id)
+        c.rating = getRatingFunc(rate_list)
+        c.ratingCnt = course_comments.objects.filter(course_id_id=c.id).count()
+        c.stuCnt = len(rate_list)
+        c.videoCnt = getVideoCnt(c)
+
+    similar_course = sorted(similar_course, key=attrgetter('rating'), reverse=True)[:5]
+
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+        request.user.id)
+    stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
+
+    return render(request, 'enrollments.html',
+                  {'courses': courses, 'similar_courses': similar_course, 'favList': favListShow,'lang': getLanguage(request)[0],
+                   'alreadyinFav': alreadyinFavView, 'cartList': cartListShow, 'stu_courses': stu_courses,
+                   'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt, 'msg_list': msg_list,
+                   'msg_cnt': msg_cnt,
+                   'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt})
 
 @csrf_exempt
 def searchCourseName(request):

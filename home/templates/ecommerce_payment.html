@@ -478,9 +478,6 @@ textarea {
 
 </style>
 
-
-
-
 <style>
   
 .cart-container{
@@ -640,87 +637,7 @@ textarea {
 
 </style>
 
-
 {% endblock %} {% block content %}
-    <nav class="navbar mobile-navbar is-hidden-desktop" aria-label="main navigation">
-        <!-- Brand -->
-        <div class="navbar-brand">
-            <a class="navbar-item2" href="/">
-                <img class="mobile-logo" src="/static/assets/img/favicon.png" alt="">
-            </a>
-
-
-            <div id="mobile-explorer-trigger" class="navbar-item is-icon">
-                <a class="icon-link is-primary">
-                    <i class="mdi mdi-apps"></i>
-                </a>
-            </div>
-
-            <!-- Mobile menu toggler icon -->
-            <div class="navbar-burger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-        <!-- Navbar mobile menu -->
-        <div class="navbar-menu">
-            <!-- Account -->
-            <div class="navbar-item has-dropdown ">
-                <div class="navbar-link">
-                    <img src="/static/assets/img/man.jpg" data-demo-src="assets/img/avatars/jenna.png" alt="">
-                    <span class="is-heading">Elzubair Mohammed</span>
-                </div>
-
-                <div class="navbar-item">
-                    <div id="global-search" class="control">
-                        <input id="tipue_drop_input" class="input " type="text" placeholder="Search" required>
-                        <span id="clear-search" class="reset-search">
-                            <i data-feather="x"></i>
-                        </span>
-                        <span class="search-icon">
-                            <i data-feather="search"></i>
-                        </span>
-
-
-                    </div>
-
-                </div>
-
-                <!-- Mobile Dropdown -->
-                <div class="navbar-dropdown">
-                    <a href="#" class="navbar-item is-flex is-mobile-icon">
-                        <span><i data-feather="user"></i>Profile</span>
-                    </a>
-                    <a href="#" class="navbar-item is-flex is-mobile-icon">
-                        <span><i data-feather="shopping-cart"></i>Cart</span>
-                        <span class="menu-badge">3</span>
-                    </a>
-                    <a href="#" class="navbar-item is-flex is-mobile-icon">
-                        <span><i data-feather="activity"></i>Feed</span>
-                        <span class="menu-badge">87</span>
-                    </a>
-                    <a href="#" class="navbar-item is-flex is-mobile-icon">
-                        <span><i data-feather="settings"></i>Settings</span>
-                    </a>
-                    <a href="#" class="navbar-item is-flex is-mobile-icon">
-                        <span><i data-feather="hexagon"></i>Logout</span>
-                    </a>
-
-                        <div class="buttons">
-                          <a class="button second-button">
-                            <p>Sign up</p>
-                          </a>
-                          <a class="button primary-button raised quickview-trigger process-button">
-                            <p>Log in</p>
-                          </a>
-                        </div>
-
-
-                </div>
-            </div>
-        </div>
-    </nav>
 
 
 
@@ -860,7 +777,7 @@ textarea {
                             </div>
                             <div class="order-line">
                                 <div class="item">
-                                    <span>Shipping</span>
+                                    <span>Taxes</span>
                                 </div>
                                 <div class="amount">
                                     <span data-currency="USD">$0</span>
@@ -868,7 +785,7 @@ textarea {
                             </div>
                             <div class="order-line">
                                 <div class="item">
-                                    <span>Taxes</span>
+                                    <span>Discount</span>
                                 </div>
                                 <div class="amount">
                                     <span data-currency="USD">$0</span>
@@ -925,59 +842,44 @@ textarea {
         </div>
 <script>
 
-
-$(document).ready(function(){
-
-console.log("check")
-
-})
-
 function save_course_to_cart(){
 
-course_id = "{{course.id}}"
-student_id = "{{user_id}}"
-console.log(course_id)
-console.log(student_id)
+    // course_id = "{{course.id}}"
+    // student_id = "{{user_id}}"
 
-$.ajax({
-	method : "POST",
-	url : "/student_courses/",
-	data : {
-		'course':course_id,
-		'student':student_id
-		},
-		success : function(response){
-		if (response == "success"){
-			swal("Course Added!", {
-			icon: "success",
-			button: "Ok",
-			closeOnClickOutside: false,
-			}).then(function() {
-				location.href = "/courses/"
-			});
-			}
-		else{
+    // $.ajax({
+    // 	method : "POST",
+    // 	url : "/student_courses/",
+    // 	data : {
+    // 		'course':course_id,
+    // 		'student':student_id
+    // 		},
+    // 		success : function(response){
+    // 		if (response == "success"){
+    // 			swal("Course Added!", {
+    // 			icon: "success",
+    // 			button: "Ok",
+    // 			closeOnClickOutside: false,
+    // 			}).then(function() {
+    // 				location.href = "/courses/"
+    // 			});
+    // 			}
+    // 		else{
 
-			swal("Course Already Added In My Courses!", {
-			icon: "info",
-			button: "Ok",
-			closeOnClickOutside: false,
-			}).then(function() {
+    // 			swal("Course Already Added In My Courses!", {
+    // 			icon: "info",
+    // 			button: "Ok",
+    // 			closeOnClickOutside: false,
+    // 			}).then(function() {
 
-			});
+    // 			});
 
-		}
-	}
-});
+    // 		}
+    // 	}
+    // });
 
 }
 
-
-
-$(document).ready(function(){
-
-
-});
 function model_open(obj){
 
     var type = $(obj).attr('data-type');
@@ -1065,14 +967,6 @@ function addToCartList(){
     $.post(url,{student:user_id,course:course_id},function (res) {
     });
 }
-
-
-
-
-
-
-
-
 
 
 // Payment

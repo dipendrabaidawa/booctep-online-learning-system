@@ -225,6 +225,20 @@
     color: #030303 !important;
 }
 
+.account-type img{
+    width: 142px !important; 
+    height:300px !important;
+}
+
+@media (max-width: 624px) {
+
+
+.account-type .mediabout{
+    width: 100% !important; 
+    height:30px !important;   
+}
+
+}
     </style>
 
     <div class="products-navigation" style="display: none;">
@@ -271,40 +285,54 @@
                                 <div class="columns">
                                     <!-- is-offset-3 -->
                                     {% if lang == 'ar/' %}
-                                        <div class="column is-3 mar-ri">
+                                        <div class="column is-3 ">
+                                        </div>
+                                        <div class="column is-3 ">
                                             <div class="account-type account-type-dark">
                                                 <img src="{% static 'assets/img/student.svg' %}"
-                                                     style="width: 142px; height:auto;" alt="">
-                                                <h3 class="mediabout mediabout-dark">{% trans 'Student' %} </h3>
+                                                     style="" alt="">
+                                                <h3 class="mediabout mediabout-dark">طالب </h3>
                                                 <a class="button is-fullwidth process-button is-light is-light-dark "
                                                    onclick="setUerType('student')" data-step="step-dot-2">
                                                     {% trans 'Continue' %}
                                                 </a>
                                             </div>
+                                        </div>
+                                        <div class="column is-3 ">
+                                            <div class="account-type account-type-dark">
+                                                <img src="{% static 'assets/img/teach.svg' %}" alt="">
+                                                <h3 class="mediabout mediabout-dark">معلم </h3>
+                                                <a class="button is-fullwidth process-button is-light is-light-dark"
+                                                   onclick="setUerType('teacher')">
+                                                    {% trans 'Continue' %}
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="column is-3 ">
                                         </div>
                                     {% else %}
                                         <div class="column is-3 is-offset-3">
                                             <div class="account-type account-type-dark">
                                                 <img src="{% static 'assets/img/student.svg' %}"
-                                                     style="width: 142px; height:auto;" alt="">
-                                                <h3 class="mediabout mediabout-dark">{% trans 'Student' %} </h3>
+                                                     style="" alt="">
+                                                <h3 class="mediabout mediabout-dark">Student </h3>
                                                 <a class="button is-fullwidth process-button is-light is-light-dark "
                                                    onclick="setUerType('student')" data-step="step-dot-2">
                                                     {% trans 'Continue' %}
                                                 </a>
                                             </div>
                                         </div>
-                                    {% endif %}
-                                    <div class="column is-3">
-                                        <div class="account-type account-type-dark">
-                                            <img src="{% static 'assets/img/teach.svg' %}" alt="">
-                                            <h3 class="mediabout mediabout-dark">{% trans 'Teacher' %} </h3>
-                                            <a class="button is-fullwidth process-button is-light is-light-dark"
-                                               onclick="setUerType('teacher')">
-                                                {% trans 'Continue' %}
-                                            </a>
+                                        <div class="column is-3">
+                                            <div class="account-type account-type-dark">
+                                                <img src="{% static 'assets/img/teach.svg' %}" alt="">
+                                                <h3 class="mediabout mediabout-dark">Teacher </h3>
+                                                <a class="button is-fullwidth process-button is-light is-light-dark"
+                                                   onclick="setUerType('teacher')">
+                                                    {% trans 'Continue' %}
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
+                                    {% endif %}
                                 </div>
                                 <hr class="hrrrr hrrrr-dark">
                                 <p class="mediabout mediabout-dark" style="color: grey;text-align: center !important;">{% trans 'Or' %}</p><br>
@@ -312,13 +340,13 @@
                                 <div class="signupvia">
                                     <div class="columns ">
                                         <div class="column  " style="">
-                                            <a href="#" class="button socig socig-dark"
+                                            <a href="{% url 'social:begin' 'google-oauth2' %}" class="button socig socig-dark"
                                                style="">{% trans 'Sign up via Gmail' %}
                                                 &nbsp;<i class="mdi mdi-gmail"></i>
                                             </a>
                                         </div>
                                         <div class="column " style="">
-                                            <a href="#" class="button  soci soci-dark"
+                                            <a href="{% url 'social:begin' 'facebook' %}" class="button  soci soci-dark"
                                                style="">{% trans 'Sign up via Facebook' %}
                                                 &nbsp;<i class="mdi mdi-facebook"></i>
                                             </a>

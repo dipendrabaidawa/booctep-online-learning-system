@@ -2,6 +2,11 @@
 {% load i18n %}
 <!-- Footer -->
 
+<script>
+    var userid = '{{request.user.id}}';
+</script>
+
+
 {% get_current_language as lang %}
 {% if lang == "en" %}
 <style>
@@ -11,6 +16,12 @@
     margin-top: 60px;
     margin-left: 50px !important;
 }
+
+.social-follow {
+
+    margin-top: -30px;
+}
+
 
 </style>
 {% else %}
@@ -249,8 +260,15 @@
 }
 
 
+@media (max-width: 624px) {
+
+.logo-footer{
+    margin-top: 50px;
+}
+}
 
 </style>
+
 
 <div class="cookiees">
   <img class="cookiees-icon" src="https://raw.githubusercontent.com/s1mpson/-/master/codepen/we-use-cookies/cookie.png">
@@ -266,12 +284,12 @@
                 {% if lang == "ar" %}
                 <div class="logo-footer">
                     <img src="{% static 'ar/assets/img/logo/booctep.png' %}" alt="Booctep Logo - Arabic">
-                    <img src="{% static 'assets/img/payments.png' %}" alt="Payment method - Arabic" style="width: 140px;margin-right: 20px;">
+                    <!-- <img src="{% static 'assets/img/payment.png' %}" alt="Booctep Payments - Arabic" style="width: 180px"> -->
                 </div>
                 {% else %}
                 <div class="logo-footer" style="margin-right: 50px;">
                     <img src="{% static 'assets/img/logo/logo-booctep.png' %}" alt="Booctep Logo - English">
-                    <img src="{% static 'assets/img/payments.png' %}" alt="Payment method - English" style="width: 140px;margin-left: 20px;">
+                    <!-- <img src="{% static 'assets/img/payment.png' %}" alt="Booctep Payments - English" style="width: 180px"> -->
                 </div>
                 {% endif %}
             </div>
@@ -366,14 +384,31 @@
                     <div class="column ">
                         <ul class="footer-column footer-column-dark">
                             <div class="column">
+                                
+                                {% if user.group_id == 2 and request.user.id == None %}
                                 {% get_current_language as lang %}
                                 {% if lang == "ar" %}
                                 <a href="/{{ lang }}/become"
-                                   style="font-weight: 400;margin: 0 auto;" class="footcolor footcolor-dark"><b>{% trans 'Become a teacher' %}</b></a>
+                                   style="font-weight: 400;margin: 0 auto;" class="footcolor footcolor-dark"><b>أصبح معلم</b></a>
                                 {% else %}
                                 <a href="/{{ lang }}/become"
                                    style="font-weight: 400;margin: 0 auto;" class="footcolor footcolor-dark">{% trans 'Become a teacher' %}</a>
                                 {% endif %}
+
+                               
+                                {% else %}
+                               
+                                {% get_current_language as lang %}
+                                {% if lang == "ar" %}
+                                <a href="{% url 'teacher courses' %}"
+                                   style="font-weight: 400;margin: 0 auto;" class="footcolor footcolor-dark"><b>{% trans 'Become a teacher' %}</b></a>
+                                {% else %}
+                                <a href="{% url 'teacher courses' %}"
+                                   style="font-weight: 400;margin: 0 auto;" class="footcolor footcolor-dark">{% trans 'Become a teacher' %}</a>
+                                {% endif %}
+                                {% endif %}
+
+
                             </div>
                         </ul>
                     </div>
@@ -395,7 +430,7 @@
                                     {% else %}
                                         English
                                     {% endif %}                                    
-                                </span>
+                                    </span>
                                 </div>
                             </div>
                             <div class="box-chevron">
@@ -413,8 +448,8 @@
                                                     <span class="checkmark"><i data-feather="check"></i></span>
                                                 </a>
                                             </li>
-                                            <li class="" >
-                                                <a href="/en" style="width: 100%; display: flex;">
+                                            <li class="">
+                                                <a href="/en" style="width: 100%; display: flex;" class="switch-lang">
                                                     <span class="item-icon"></span>
                                                     <span class="item-name translate footcolor footcolor-dark" id="en">English</span>
                                                     <span class="checkmark"><i data-feather="check"></i></span>
@@ -433,14 +468,14 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="/ar" style="width: 100%; display: flex;">
-                                            <span class="item-icon">
-                                            </span>
+                                                <a href="/ar" style="width: 100%; display: flex;" class="switch-lang">
+                                                    <span class="item-icon">
+                                                    </span>
                                                     <span class="item-name translate" class=""
                                                           id="ar1">{% trans 'Arabic' %}</span>
                                                     <span class="checkmark">
-                                                <i data-feather="check"></i>
-                                            </span>
+                                                        <i data-feather="check"></i>
+                                                    </span>
                                                 </a>
                                             </li>
                                         {% endif %}
@@ -454,13 +489,16 @@
                 <div class="social">
                     {% get_current_language as lang %}
                     {% if lang == "ar" %}
-                    <b class="social-follow social-follow-dark">{% trans 'نتشرف بمتابعتك' %}</b><br>
+                    <b class="social-follow social-follow-dark" style="margin-top: 10px;">نتشرف بمتابعتك</b><br>
                     {% else %}
-                    <p class="social-follow social-follow-dark">{% trans 'Follow us' %}</p><br>
+                    <p class="social-follow social-follow-dark" style="margin-top: 10px;">Follow us</p><br>
                     {% endif %}
                     <a href="https://www.instagram.com/booctep/" target="_blank">
-                        <img style="margin-top:10px;" src="{% static 'assets/img/instagram.png' %}" width="25"
+                        <img style="" src="{% static 'assets/img/instagram.png' %}" width="25"
                              height="25" style="cursor:pointer" alt="instagram.com/booctep" /></a>
+                             <a href="https://www.twitter.com/booctep/" target="_blank">
+                                 <img style="" src="{% static 'assets/img/twitter.png' %}" width="25"
+                                      height="25" style="cursor:pointer" alt="instagram.com/booctep" alt="Follow us Twitter" /></a>
                 </div>
 
             </div>
@@ -498,4 +536,100 @@
         localStorage.setItem(ip, 'yes')
     }
 
+    $(document).ready(function () {
+        let cur_url = window.location.href;
+        let arr = cur_url.split("/");
+        let cur_domain = arr[2];
+        let cur_path = window.location.pathname;
+        let cur_subpath = cur_path.substr(3, cur_path.length);
+        let cur_paths = cur_path.split("/");
+        let cur_lang = cur_paths[1];
+        let toggle_lang = cur_lang === "ar" ? "en" : "ar";
+
+        let params_str = "";
+        if (cur_url.indexOf("?") !== -1) {
+            params_str = cur_url.substr(cur_url.indexOf("?"), cur_url.length);
+        }
+
+        let switch_url = window.location.protocol + '//' + cur_domain + "/" + toggle_lang + cur_subpath + params_str;
+
+        $(".switch-lang").attr('href', switch_url);
+    });
 </script>
+
+<script>
+    $(".darkmode").click(function(){ //1
+        $("body").toggleClass("dark")//2
+          .css( //3
+            $("body").hasClass("dark") ? //4
+              {background:"#010508", color:"#f9f9f9"} : {background:"#f9f9f9", color:"#202225"} //5
+          );
+    
+        $(".bg-white").toggleClass("dark")//2
+          .css( //3
+            $(".bg-white").hasClass("dark") ? //4
+              {background:"#344258", color:"#f9f9f9"} : {background:"#f9f9f9", color:"#202225"} //5
+          );
+    
+          $(".border-top").toggleClass("dark")//2
+            .css( //3
+              $(".border-top").hasClass("dark") ? //4
+                {borderTop:"1px solid #000"} : {borderTop:"1px solid #eaebec"} //5
+          );
+    
+    
+      });
+      
+    
+      
+      // It's not clear if the ternary counts as 2 lines or 1 when I'm trying to minimise line count, but I'm counting it as 2
+      
+    </script>
+
+    <script>
+$('.tabs .tab').click(function(){
+    if ($(this).hasClass('teacher')) {
+        $('.tabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.teacher-cont').show();
+        window.location.hash = '';
+    } 
+    if ($(this).hasClass('student')) {
+        $('.tabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.student-cont').show();
+        window.location.hash = '';
+    }
+});
+
+
+$('.tabs .tab').click(function(){
+    if ($(this).hasClass('teachernot')) {
+        $('.tabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.teachernot-cont').show();
+        window.location.hash = '';
+    }
+    if ($(this).hasClass('studentnot')) {
+        $('.tabs .tab').removeClass('active');
+        $(this).addClass('active');
+        $('.cont').hide();
+        $('.studentnot-cont').show();
+        window.location.hash = '';
+    }
+});
+
+
+$('.container .bg').mousemove(function(e){
+    var amountMovedX = (e.pageX * -1 / 30);
+    var amountMovedY = (e.pageY * -1 / 9);
+    $(this).css('background-position', amountMovedX + 'px ' + amountMovedY + 'px');
+});
+
+
+
+
+    </script>

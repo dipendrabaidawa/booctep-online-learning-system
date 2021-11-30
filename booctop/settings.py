@@ -130,7 +130,16 @@ WSGI_APPLICATION = 'booctop.wsgi.application'
 #   }
 
 DATABASES = {
+    # 'default': {
+    #   'ENGINE': 'django.db.backends.mysql',
+    #   'NAME': 'booctop',
+    #   'USER': 'root',
+    #   'PASSWORD': '',
+    #   'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+    #   'PORT': '3306',
+    # }
    'default': {
+<<<<<<< HEAD
       'ENGINE': 'django.db.backends.mysql',
       'NAME': 'kvtest',
       'USER': 'root',
@@ -138,6 +147,15 @@ DATABASES = {
       'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
       'PORT': '3306',
   }
+=======
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'booctop',
+        'USER': 'root', # 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost', #'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '8889',
+    }
+>>>>>>> a8cc786112676e2b1f2746f1015b63dbc5c401ef
   # 'default': {
   #       'ENGINE': 'django.db.backends.mysql',
   #       'NAME': 'booctop',
@@ -272,6 +290,10 @@ VIMEO_TOKEN = '219cb1675d7cffd2eca82a6c9ca86dbb'
 VIMEO_KEY = '252b44a621d7c1212a01e13f5737bfe9eb912b83'
 VIMEO_SECRET = 'jffm+bdiKCgVh1vVcWwOEwQzX7U+J6e/J1ecHdltMtM4Qgg6KAB4hf4W2oA/b5KPC0V0l65sryTYror1ZHDkSRT+Vxw709RJgyAwkCRQWPEd44qp7ymBDbDRVfF6SGLj'
 
+<<<<<<< HEAD
 CRONJOBS = [
     ('*/5 * * * *', 'teacher.cron.my_scheduled_job')
 ]
+=======
+CRONJOBS = [('*/10 * * * *', 'teacher.cron.my_jobs')]
+>>>>>>> a8cc786112676e2b1f2746f1015b63dbc5c401ef

@@ -967,25 +967,53 @@
             for (var i = 0; i < sections.length; i++) {
                 new_id = sections[i].id;
                 let element = "#video-list-" + new_id;
-                console.log("videoList teset:", sections[i])
                 for (var j = 0; j < sections[i].videoList.length; j++) {
                     let video = sections[i].videoList[j]
                     let videoname_length = video.name.length;
                     let duration = video.duration;
                     let videoname = video.name.substr(0, videoname_length - 4)
-                    let html1 = `
-                <li class="accordion__menu-link" id="` + video.key.toString() + `" ondragover="dragoverLI(event)" draggable="true" ondragstart="dragStartLI(event)" ondrop="dropLI(event)" xmlns="http://www.w3.org/1999/html">
-                    <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
-                    <a class="flex">` + videoname + `</a>
-                    <span>` + duration + ` mins</span>
+                    video.isPromo = (i === 0 && j===0) ? 1 : 0;
+                    video.lock = 0;
 
-                    <span style="margin-left:10px; cursor: pointer;" class="material-icons sidebar-menu-icon sidebar-menu-icon--left" onclick="deleteVideo(this)">delete</span>
-                </li>
-                `;
+                    let select_element = "";
+                    if (paid*1 === 0) {
+                        if (video.isPromo == 0) {
+                            select_element = 
+                                `<select style="margin-left:10px; margin-right:10px; background:rgb(58, 98, 117); color:rgba(39, 44, 51, 0.7)" onchange="changeLockStatus(this, ${i}, ${j})">
+                                    <option value="1" selected>Lock</option>
+                                    <option value="0">Unlock</option>
+                                </select>`;
+                            video.lock = 1;
+                        } else {
+                            select_element = 
+                                `<select style="margin-left:10px; margin-right:10px; background:rgb(58, 98, 117); color:rgba(39, 44, 51, 0.7)" onchange="changeLockStatus(this, ${i}, ${j})">
+                                    <option value="1">Lock</option>
+                                    <option value="0" selected>Unlock</option>
+                                </select>`;
+                        }    
+                    }
+  
+                    let html1 = `
+                        <li class="accordion__menu-link" id="` + video.key.toString() + `" ondragover="dragoverLI(event)" draggable="true" ondragstart="dragStartLI(event)" ondrop="dropLI(event)" xmlns="http://www.w3.org/1999/html">
+                            <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
+                            <a class="flex">` + videoname + `</a>
+                            <span>` + duration + ` mins</span>`
+                            + select_element +    
+                            `<span style="margin-left:10px; cursor: pointer;" class="material-icons sidebar-menu-icon sidebar-menu-icon--left" onclick="deleteVideo(this)">delete</span>
+                        </li>
+                        `;
                     $(element).prepend(html1)
+                    // $(element).append(html1)
                 }
+                console.log("videoList teset:", sections[i])
             }
 
+        }
+
+        const changeLockStatus = (selectedObj, i, j) => {
+            var video = sections[i].videoList[j];
+            var value = selectedObj.value;
+            video.lock = value;
         }
 
         // add section
@@ -1094,6 +1122,18 @@
         });
 
         function addCourse() {
+            for(let section of sections)
+            {
+                if (section.videoList.length === 0) {
+                    $("#loadings").css("display","none")
+                    swal({
+                        title: "You must remove sections without video.",
+                        closeOnConfirm: false,
+                    });
+                    return;
+                }
+            }
+
             let url = "/store_course_2/";
             sections.forEach((item) => {
                 section_list.push({
@@ -1114,7 +1154,6 @@
                 totalTime += item.duration * 1
             })
 
-            console.log("video LIst::::", videoList)
             // if (paid * 1 == 0) {
             //     if (section_list.length < 3) {
             //         $("#loadings").css("display","none")
@@ -1151,13 +1190,14 @@
             //         });
             //         return;
             //     }
-            // }            
+            // }
 
             form_data.append("course_id", course_id);
             form_data.append("video_list", JSON.stringify(videoList));
             form_data.append("section_list", JSON.stringify(section_list));
             form_data.append("pending", 2);
 
+            console.log(videoList);
             $.ajax({
                 url: url,
                 type: 'POST',

@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 # from . import views
 # from django.urls import path
-
+from django.urls import include, path
 from django.conf import settings
 from django.conf.urls import include, url, i18n
 from django.conf.urls.static import static
@@ -87,7 +87,7 @@ urlpatterns += i18n.i18n_patterns(
     # url(r'^search/search/$', searching, name='searchfromanywhere'),
     
     
-	url(r'^category/(?P<id>[0-9]+)/$', single_category, name='single category'),
+	url(r'^category/(?P<category_name>\w+)/(?P<id>[0-9]+)/$', single_category, name='single category'),
 	
 	
 	# url(r'^single_course/(?P<id>[0-9]+)/$', single_course, name='single_course'), 
@@ -96,6 +96,7 @@ urlpatterns += i18n.i18n_patterns(
     url(r'^course/(?P<teacher_id>[0-9]+)/(?P<course_url>\w+)/checkdiscountcode/$', checkdiscountcodewithid, name='check discount code single'),
     # url(r'^course/checkdiscountcode/$', checkdiscountcodewithid, name='check discount code single'),
     url(r'^student/enrollment/(?P<course_id>[0-9]+)/$', enrollment, name='student enrollment'),
+    path('student/enrollments/<course_ids>', enrollments, name='student enrollments'),
     url(r'^ecommerce_cart/$', ecommerce_cart, name='ecommerce_cart'),
     # url(r'^ecommerce_payment/(?P<id>[0-9]+)/$', ecommerce_payment, name='ecommerce_payment'),
     url(r'^ecommerce_payment/(?P<id>[0-9]+)/getcardinfo/$', getcardinfo, name='getcardinfo'),
@@ -156,8 +157,8 @@ urlpatterns += i18n.i18n_patterns(
     url(r'^cart/$', showCartList, name='show cart list'),
     url(r'^cart/checkout/$', checkout, name='checkout'),
     # url('checkout/', checkout, name='checkout'),
-    # url(r'^process-payment/$', process_payment, name='process_payment'),
-    url(r'^payment-done/$', payment_done, name='payment_done'),
+    url(r'^process-payment/$', process_payment, name='process_payment'),
+    url(r'^payment-done/(?P<course_id>[0-9]+)/(?P<student_id>[0-9]+)/$', payment_done, name='payment_done'),
     url(r'^payment-cancelled/$', payment_canceled, name='payment_cancelled'),
 
     url(r'^cart/checkdiscountcode/$', checkdiscountcode, name='check discount code'),
@@ -166,7 +167,7 @@ urlpatterns += i18n.i18n_patterns(
     # url(r'^getQuiz/$', getQuiz, name='show cart list'),
     url(r'^getQuiz/$', getQuiz, name='get Quiz'),
 
-    url(r'^video/playground/(?P<id>[0-9]+)/$', playground, name='video playground'),
+    url(r'^video/(?P<course_name>\w+)/(?P<id>[0-9]+)/$', playground, name='video playground'),
     )
 
 # urlpatterns =[url('', viewcertificates, name='viewcertificates'),url(r'^pdf', pdf, name='pdf'),]

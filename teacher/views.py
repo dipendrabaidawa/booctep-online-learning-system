@@ -168,10 +168,18 @@ def dashboard(request):
 
     nowtime = datetime.now()
 
+    total_students = 0
+    is_there_free_course = 0
+
     for course in course_list:
         price = 0
         stu_num = student_register_courses.objects.filter(course_id_id=course.id).count()
+        total_students += stu_num
         price = course.price * stu_num
+        
+        if price == 0:
+            is_there_free_course += 1
+
         total_revenue += price
         pending_list = student_register_courses.objects.filter(course_id_id=course.id).filter(withdraw=0)
         hold_money = 0
@@ -181,7 +189,8 @@ def dashboard(request):
             time = ele.date_created
             time = datetime.strptime(time, "%Y-%m-%d %H:%M:%S")
             interval = (nowtime - time).days
-            if interval >= 30:
+            # if interval >= 30:
+            if interval >= 45:
                 ele.withdraw = 1
                 ele.save()
                 hold_money += ele.course_id.price
@@ -225,6 +234,19 @@ def dashboard(request):
     #     totalRate = 0
     # else:
     #     totalRate = round(rateSum / rateCnt, 2)
+
+    # Evaluate the revenue type
+    percentage_revenue = 50
+    # if is_there_free_course < 3 or total_rating <= 4.5 or total_students <= 1000:
+    #     percentage_revenue = 50
+    if is_there_free_course >= 3 and total_rating > 4.7 and total_students > 5000:
+        percentage_revenue = 70
+    elif is_there_free_course >= 1 and total_rating > 4.5 and total_students > 1000:
+        percentage_revenue = 60
+    
+    total_revenue = total_revenue * percentage_revenue / 100.0
+    total_hold_money = total_hold_money * percentage_revenue / 100.0 
+
     return render(request, 'teacher/dashboard.html',
                   {'lang': getLanguage(request)[0], 'courses': course_list, 'total_rating': total_rating,
                    'total_revenue': total_revenue,
@@ -317,10 +339,14 @@ def course_engagement(request):
             coupon = discount.objects.filter(course_id=cur_course_id)[0]
         else:
             coupon = ''
+    
+         
 
     else:
         course = ''
         reviewList = ''
+ 
+
     return render(request, 'teacher/course-engagement.html',
                   {'lang': getLanguage(request)[0], 'courses': courses, 'course': course, 'reviewList': reviewList,
                    'cur_course_id': cur_course_id, 'page': page, 'coupon': coupon, 'review_type': review_type})
@@ -552,7 +578,6 @@ def add_course(request):
         url_id = "{0:0=4d}".format(course.id)
         url = '/course/' + course.name + '/' + request.user.first_name + '_' + request.user.last_name + '_' + url_id
         course.course_url = url
-        # course.save()
         return render(request, 'teacher/new-course-4.html',
                       {'course_id': course_id, 'video_list': data['video_list'], 'question_list': data['question_list'],
                        'section_list': data['section_list'], 'course': course, 'promo_video': data['promo_video'], 'lang': getLanguage(request)[0]})
@@ -695,7 +720,7 @@ def store_course(request):
     pending = request.POST.get('pending')
     type = request.POST.get('type')
     course_level = request.POST.get('course_level')
-    dripping = request.POST.get('dripping')
+    # dripping = request.POST.get('dripping')
     user_name = request.user.first_name + " " + request.user.last_name
 
     full_path = ''
@@ -749,7 +774,7 @@ def store_course(request):
             pending=pending,
             type=type,
             course_level=course_level,
-            dripping=dripping,
+            dripping=0,
             approval_status=0
         )
         objCourse.save()
@@ -774,7 +799,7 @@ def store_course(request):
         objCourse.course_url = courseUrl
         objCourse.type = type
         objCourse.course_level = course_level
-        objCourse.dripping = dripping
+        # objCourse.dripping = dripping
         objCourse.save()
         msg = "successs"
         id = objCourse.id
@@ -902,7 +927,7 @@ def store_course_2(request):
         section_list = data.get("section_list")
         section_list = json.loads(section_list)
         json_video_list = json.loads(data.get("video_list"))
-        json_video_list[0]['isPromo'] = 1
+        # json_video_list[0]['isPromo'] = 1
 
         if (len(json_video_list) > 0):
             ## store section in DB
@@ -1002,10 +1027,11 @@ def store_course_2(request):
                                 section_id=section_id,
                                 url=full_path,
                                 promo=item['isPromo'],
-                                duration=item['duration']
+                                duration=item['duration'],
+                                lock=item['lock']
                             )
-                            if item['isPromo'] == 1 or course.price == 0.0:
-                                objVideo.lock = 0
+                            # if item['isPromo'] == 1 or course.price == 0.0:
+                            #     objVideo.lock = 0
                             objVideo.save()
 
             msg = "success"

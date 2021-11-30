@@ -1,5 +1,7 @@
 {% extends "video/base.html" %}
 {% block content %}
+
+{% load i18n %}
 {% load static %}
 
 <style>
@@ -103,6 +105,12 @@
     display: none !important;
 }
 
+
+
+.sidebar{
+    background-color: #ebedf0 !important;
+    border-left: 1px solid #ebedf0 !important;
+}
 
 .sidebar-dark{
     background-color: #22252c !important;
@@ -242,7 +250,15 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                                 <div class="d-flex flex-column" style=" font-size: 21px">
                                     <nav class="nav navbar-nav">
                                         <div class="nav-item navbar-list__item">
-                                            <a href="/video/playground/{{ course.id }}" class="nav-link h-auto mediabout mediabout-dark"><i class="material-icons icon--left mediabout mediabout-dark">keyboard_backspace</i> Back to Dashboard</a>
+                                            {% get_current_language as lang %}
+                                            {% if lang == "ar" %}
+                                            <a href="/ar/courses" class="nav-link h-auto mediabout mediabout-dark"><i
+                                                    class="material-icons icon--left mediabout mediabout-dark">keyboard_backspace</i> الرجوع إلى لوحة التحكم</a>
+                                            {% else %}
+                                            <a href="/en/courses" class="nav-link h-auto mediabout mediabout-dark"><i
+                                                    class="material-icons icon--left mediabout mediabout-dark">keyboard_backspace</i> Back to
+                                                Dashboard</a>
+                                            {% endif %}  
                                         </div>
                                         <div class="nav-item navbar-list__item">
                                             <div class="d-flex align-items-center flex-nowrap">
@@ -250,9 +266,16 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                                                     <span class="material-icons sidebar-menu-icon sidebar-menu-icon--left mediabout mediabout-dark">dvr</span>
                                                 </div>
                                                 <div class="flex">
-                                                    <a href="mini-student-take-course.html" class="card-title text-body mb-0"><b class="blllu blllu-dark">{{ course.name }}</b></a>
+                                                    {% get_current_language as lang %}
+                                                    {% if lang == "ar" %}
+                                                    <a href="/ar/courses" class="card-title text-body mb-0"><b class="blllu blllu-dark">{{ course.name }}</b></a>
                                                     <p class="lh-1 d-flex align-items-center mb-0">
                                                     </p>
+                                                    {% else %}
+                                                    <a href="/en/courses" class="card-title text-body mb-0"><b class="blllu blllu-dark">{{ course.name }}</b></a>
+                                                    <p class="lh-1 d-flex align-items-center mb-0">
+                                                    </p>
+                                                    {% endif %}  
                                                 </div>
                                             </div>
                                         </div>
@@ -263,7 +286,7 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                         </div>
                         <div class="py-2 flex d-flex align-items-center">
                             <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0" data-toggle="sidebar" type="button">
-                                <i class="material-icons">people_outline</i>
+                                <i class="material-icons">swipe</i>
                             </button>
                         </div>
                     </div>
@@ -330,6 +353,7 @@ function startQuiz() {
     localStorage.setItem('right', 0)
     localStorage.setItem('wrong', 0)
     localStorage.setItem('skip', 0)
+    localStorage.setItem('last_question', 1)
     location = '/quiz/{{ course.course_url }}/{{ quiz_id }}/?question=1'
 }
 

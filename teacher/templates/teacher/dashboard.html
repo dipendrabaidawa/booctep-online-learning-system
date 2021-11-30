@@ -2,7 +2,7 @@
 
 {% load static %}
 {% load i18n %}
-
+{% load l10n %}
 
 {% block title %}
     dashboard
@@ -44,18 +44,6 @@
         border: 0 !important;
     }
 
-.btn-primary{
-    background-color: rgb(33, 150, 243)!important;
-    color: rgb(254, 254, 255);
-    border: 1px solid rgb(20, 71, 167) !important;
-}
-
-.btn-primary-dark{
-    background-color: #323741 !important;
-    color: rgb(199, 199, 199) !important;
-    border: 1px solid  #21242b !important;
-    box-shadow: none !important;
-}
 
 
 .blllu{
@@ -134,13 +122,13 @@ a.mediabout-dark{
 }
 
 
-        
+  
 .btn-primary{
-    background-color: rgb(37, 148, 192) !important;
+    background-color: rgb(6, 69, 151)!important;
     color: rgb(254, 254, 255);
-    border: 1px solid rgb(23, 104, 136) !important;
+    border: 1px solid rgb(5, 35, 90) !important;
 }
-        
+     
 .btn-primary-dark{
     background-color: #323741 !important;
     color: rgb(199, 199, 199) !important;
@@ -158,8 +146,10 @@ th,td {
 }
 
 .tehead{
-    background-color: rgb(197, 223, 235) !important;
+    background-color: rgb(233, 234, 235) !important;
+    border: 1px solid #ddd;
     border-top: 0!important;
+    color: rgb(229, 238, 247) !important;
     border-bottom: 0 !important;
 }
 
@@ -315,7 +305,7 @@ a.disabled{
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">تقييم المعلم</b>
                                 </p>
-                                <span class="h2 m-0 mediabout mediabout-light">{{ total_rating }}</span>
+                                <span class="h2 m-0 mediabout mediabout-light">{{ total_rating|unlocalize }}</span>
                             </div>                            
                             <i class="material-icons icon-32pt text-20 ml-8pt">star</i>
 
@@ -329,7 +319,7 @@ a.disabled{
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">مجموع الإيرادات</b>
                                 </p>
-                                <span class="h2 m-0" style="color: rgb(144, 221, 151);">&dollar;{{ total_revenue }}</span>
+                                <span class="h2 m-0" style="color: rgb(144, 221, 151);">{{ total_revenue|unlocalize }} ريال سعودي</span>
                             </div>
                             <i class="material-icons icon-32pt text-20 ml-8pt">monetization_on</i>
                         </div>
@@ -342,7 +332,7 @@ a.disabled{
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">مجموع ( تحت الملاحظة )</b>
                                 </p>
-                                <span class="h2 m-0 mediabout mediabout-light">&dollar;{{ total_hold_money }}</span>
+                                <span class="h2 m-0 mediabout mediabout-light">{{ total_hold_money|unlocalize }} ريال سعودي</span>
                             </div>
                             <i class="material-icons icon-32pt text-20 ml-8pt">people_outline</i>
                         </div>
@@ -355,7 +345,7 @@ a.disabled{
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">مجموع التحويلات الجديدة</b>
                                 </p>
-                                <span class="h2 m-0 mediabout mediabout-light">&dollar;{{ total_transfer_money }}</span>
+                                <span class="h2 m-0 mediabout mediabout-light">{{ total_transfer_money|unlocalize }} ريال سعودي</span>
                             </div>
                             <i class="material-icons icon-32pt text-20 ml-8pt">people_outline</i>
                         </div>
@@ -368,7 +358,7 @@ a.disabled{
             </div>
 
             <a onclick="showRequestModal()"
-               class="btn btn-secondary btn-primary btn-primary-light mb-16pt {% if total_hold_money == 0 %}disabled{% endif %}"
+               class="btn btn-primary mb-16pt {% if total_hold_money == 0 %}disabled{% endif %}"
                style="{% if total_hold_money == 0 %}cursor: not-allowed; {% endif %}">طلب ارسال الإيرادات</a>
 
             <div class="card mb-0" style="border-radius: 5px 5px 0 0 !important;">
@@ -382,7 +372,7 @@ a.disabled{
                         <thead class="tehead tehead-light">
                         <tr class="text-uppercase small">
                             <th>
-                                <a href="javascript:void(0)" class="sort blllu blllu-light " class="">الدورة</a>
+                                <a href="#" class="sort blllu blllu-light " class="">الدورة</a>
                             </th>
                             <th class="text-center" style="width:130px">
                                 <a href="javascript:void(0)" class=" blllu blllu-light ">رسوم الدورة</a>
@@ -424,32 +414,32 @@ a.disabled{
                                             <div class="media-body" style="float: right;text-align: right;margin-right: 10px;">
                                                 <a class="text-body js-lists-values-course"
                                                    href="mini-instructor-edit-course.html"><strong>{{ course.name }}</strong></a>
-                                                <div class="text-muted small">{{ course.stuCnt }} طالب</div>
+                                                <div class="text-muted small">{{ course.count }} طالب</div>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="text-center text-black-70">
-                                        &dollar;<span class="js-lists-values-fees">{{ course.price }}</span> ريال سعودي
+                                        <span class="js-lists-values-fees">{{ course.price|unlocalize }}</span> ريال سعودي
                                     </td>
                                     <td class="text-center text-black-70">
                                         <span class="js-lists-values-discount">0%</span>
                                     </td>
                                     <td class="text-center text-black-70">
-                                        <span class="js-lists-values-tax">{{ teacher_tax }}</span> %
+                                        <span class="js-lists-values-tax">{{ teacher_tax|unlocalize }}</span> %
                                     </td>
                                     <td class="text-center text-black-70">
-                                        &dollar;<span class="js-lists-values-hold">{{ course.hold_money }}</span> ريال سعودي
+                                        <span class="js-lists-values-hold">{{ course.hold_money|unlocalize }}</span> ريال سعودي
                                     </td>
                                     <td class="text-center text-black-70">
-                                        &dollar;<span class="js-lists-values-refund">{{ course.refund_money }}</span>
+                                        <span class="js-lists-values-refund">{{ course.refund_money|unlocalize }}</span> ريال سعودي
                                     </td>
                                     <td class="text-center text-black-70">
-                                        &dollar;<span class="js-lists-values-collect">{{ course.ready_money }}</span>
-                                        USD
+                                        <span class="js-lists-values-collect">{{ course.ready_money|unlocalize }}</span> ريال سعودي
+                                        
                                     </td>
                                     <td class="text-center text-black-70">
-                                        &dollar;<span
-                                            class="js-lists-values-transferred">{{ course.transfer_money }}</span> ريال سعودي
+                                        <span
+                                            class="js-lists-values-transferred">{{ course.transfer_money|unlocalize }}</span> ريال سعودي
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -509,7 +499,7 @@ a.disabled{
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">Total revenue</b>
                                 </p>
-                                <span class="h2 m-0" style="color: rgb(144, 221, 151);">&dollar;{{ total_revenue }}</span>
+                                <span class="h2 m-0" style="color: rgb(144, 221, 151);"> {{ total_revenue }} SR</span>
                             </div>
                             <i class="material-icons icon-32pt text-20 ml-8pt">monetization_on</i>
                         </div>
@@ -522,7 +512,7 @@ a.disabled{
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">Total In Hold</b>
                                 </p>
-                                <span class="h2 m-0 mediabout mediabout-light">&dollar;{{ total_hold_money }}</span>
+                                <span class="h2 m-0 mediabout mediabout-light">{{ total_hold_money }} SR</span>
                             </div>
                             <i class="material-icons icon-32pt text-20 ml-8pt">people_outline</i>
                         </div>
@@ -535,7 +525,7 @@ a.disabled{
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">Total Transferred</b>
                                 </p>
-                                <span class="h2 m-0 mediabout mediabout-light">&dollar;{{ total_transfer_money }}</span>
+                                <span class="h2 m-0 mediabout mediabout-light">{{ total_transfer_money }} SR</span>
                             </div>
                             <i class="material-icons icon-32pt text-20 ml-8pt">people_outline</i>
                         </div>
@@ -548,7 +538,7 @@ a.disabled{
             </div>
 
             <a onclick="showRequestModal()"
-               class="btn btn-secondary btn-primary btn-primary-light mb-16pt {% if total_hold_money == 0 %}disabled{% endif %}"
+               class="btn btn-primary  mb-16pt {% if total_hold_money == 0 %}disabled{% endif %}"
                style="{% if total_hold_money == 0 %}cursor: not-allowed; {% endif %}">Send Request</a>
 
             <div class="card mb-0" style="border-radius: 5px 5px 0 0 !important;">
@@ -604,32 +594,32 @@ a.disabled{
                                             <div class="media-body">
                                                 <a class="text-body js-lists-values-course"
                                                    href="mini-instructor-edit-course.html"><strong>{{ course.name }}</strong></a>
-                                                <div class="text-muted small">{{ course.stuCnt }} Students</div>
+                                                <div class="text-muted small">{{ course.count }} Students</div>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="text-center text-black-70">
-                                        &dollar;<span class="js-lists-values-fees">{{ course.price }}</span> USD
+                                        <span class="js-lists-values-fees">{{ course.price }}</span> SR
                                     </td>
                                     <td class="text-center text-black-70">
                                         <span class="js-lists-values-discount">0%</span>
                                     </td>
                                     <td class="text-center text-black-70">
-                                        <span class="js-lists-values-tax">{{ teacher_tax }}</span> %
+                                        <span class="js-lists-values-tax">{{ teacher_tax }}</span> % SR
                                     </td>
                                     <td class="text-center text-black-70">
-                                        &dollar;<span class="js-lists-values-hold">{{ course.hold_money }}</span> USD
+                                        <span class="js-lists-values-hold">{{ course.hold_money }}</span> SR
                                     </td>
                                     <td class="text-center text-black-70">
-                                        &dollar;<span class="js-lists-values-refund">{{ course.refund_money }}</span>
+                                        <span class="js-lists-values-refund">{{ course.refund_money }} SR</span>
                                     </td>
                                     <td class="text-center text-black-70">
-                                        &dollar;<span class="js-lists-values-collect">{{ course.ready_money }}</span>
-                                        USD
+                                        <span class="js-lists-values-collect">{{ course.ready_money }} SR</span>
+                                        
                                     </td>
                                     <td class="text-center text-black-70">
-                                        &dollar;<span
-                                            class="js-lists-values-transferred">{{ course.transfer_money }}</span> USD
+                                        <span
+                                            class="js-lists-values-transferred">{{ course.transfer_money }}</span> SR
                                     </td>
                                 </tr>
                             {% endfor %}

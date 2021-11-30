@@ -54,6 +54,7 @@ $(document).ready(function () {
       if ($(this).hasClass('is-shifted')) {
         if (cartcountAvailable != 0) {
           $.post(urlcart, { student: user_id, course: courseiddata }, function (res) {
+            setInterval(function(){ window.location.reload(); }, 4000);
             $(".carttotalcourses").empty();
             $(".carttotalcourses").append("" + (cartcountAvailable - 1));
             iziToast.show({
@@ -101,6 +102,7 @@ $(document).ready(function () {
         }
       } else {
         $.post(urlcart, { student: user_id, course: courseiddata }, function (res) {
+          setInterval(function(){ window.location.reload(); }, 4000);
           var cartdropdownNameAdd = res[0]['fields']['name'];
           var cartdropdownImageAdd = res[0]['fields']['cover_img'];
           var cartdropdownPriceAdd = res[0]['fields']['price'];
@@ -176,6 +178,7 @@ $(document).ready(function () {
     } else if ($(this).attr('id') == 'invite-pop') {
       if ($(this).hasClass('is-shifted')) {
         $.post(urlfav, { student: user_id, course: courseiddata }, function (res) {
+          setInterval(function(){ window.location.reload(); }, 4000);
           $(".favtotalcourses").empty();
           $(".favtotalcourses").append("" + (favcountAvailable - 1));
           iziToast.show({
@@ -223,6 +226,7 @@ $(document).ready(function () {
         });
       } else {
         $.post(urlfav, { student: user_id, course: courseiddata }, function (res) {
+          setInterval(function(){ window.location.reload(); }, 4000);
           var favdropdownNameAdd = res[0]['fields']['name'];
           var favdropdownImageAdd = res[0]['fields']['cover_img'];
           var favdropdownPriceAdd = res[0]['fields']['price'];

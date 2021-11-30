@@ -104,9 +104,48 @@
 
 </style>
 
+
+<style>
+
+    .content-to-hide{
+        display: none;
+    }    
+    
+    /* Extra small devices (phones, 600px and down) */
+    @media only screen and (max-width: 600px) {
+    
+    .course_name{
+        display: none !important;
+    }
+    .app-messages__container{
+    width: 500px !important;
+    }
+    .hide-on-phone{
+        color: rgb(30, 42, 53);
+    }
+    .hide-on-phone-dark{
+    
+    
+        color: #fff;
+    }
+    .pl-50{
+        padding-left: 50px;
+    }
+    
+    .content-to-hide{
+        background-color: rgb(242, 245, 248) !important;
+        width: 100vw !important;
+        display: block;
+        height: 100vh !important;
+        color: rgb(30, 33, 39);
+    }
+    }
+    </style>
+
+
     <div data-push data-responsive-width="768px" data-has-scrollable-region data-fullbleed
          class="mdk-drawer-layout js-mdk-drawer-layout" style="height: 100% !important;">
-        <div class="mdk-drawer-layout__content" style="" data-perfect-scrollbar>
+        <div class="mdk-drawer-layout__content"  style="" data-perfect-scrollbar>
             <div class="app-messages__container d-flex flex-column h-100 pb-4" style="">
                 <div class="flex pt-4" style="">
                     <div class="container page__container page__section" style="max-width: 90% !important; margin-top: 40px;">
@@ -124,7 +163,7 @@
                                 <th>
                                     <a href="javascript:void(0)" class="mediabout mediabout-dark" >الرسالة</a>
                                 </th>
-                                <th style="">
+                                <th style="" class="course_name">
                                     <a href="javascript:void(0)" 
                                        style="" class="mediabout mediabout-dark">أسم الدورة</a>
                                 </th>
@@ -140,7 +179,7 @@
                                 <th>
                                     <a href="javascript:void(0)" class="mediabout mediabout-dark" >Message</a>
                                 </th>
-                                <th style="">
+                                <th style="" class="course_name">
                                     <a href="javascript:void(0)" 
                                        style="" class="mediabout mediabout-dark">course name</a>
                                 </th>
@@ -178,8 +217,8 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
-                                       <b>{{ noti.title }}</b> 
+                                    <td class="course_name">
+                                       <b >{{ noti.title }}</b> 
                                     </td>
                                     <td>
                                        <b>{{ noti.text | truncatechars:70 }}</b> 

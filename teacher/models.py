@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.db.models.base import ModelState
 
 class categories(models.Model):
     id = models.AutoField(primary_key=True)
@@ -46,6 +47,7 @@ class VideoUploads(models.Model):
     name = models.CharField(max_length=200)
     section_id = models.IntegerField(null=True, blank=True)
     url = models.CharField(max_length=200)
+    vimeo_url = models.CharField(max_length=255,default='')
     promo = models.IntegerField(validators=[MaxValueValidator(3)],default=0)
     duration = models.IntegerField(validators=[MaxValueValidator(10)],default=0)
     lock = models.IntegerField(validators=[MaxValueValidator(2)],default=1)
@@ -54,9 +56,10 @@ class TestVideo(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
     url = models.CharField(max_length=200)
+    vimeo_url = models.CharField(max_length=255,default='')
     user_id = models.IntegerField(max_length=11)
     review = models.IntegerField(max_length=11)
-
+    
 class Sections(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=200)
@@ -119,7 +122,3 @@ class transactions(models.Model):
     fees = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(100)])
     revenue = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(100)])
     course_id = models.IntegerField(null=True, blank=True, default=0)
-
-
-
-

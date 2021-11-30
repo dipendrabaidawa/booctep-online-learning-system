@@ -8,6 +8,167 @@
 
     <style>
 
+
+.dropbtn {
+  background-color: #5d6164;
+  color: white;
+  padding: 5px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #373a3d;
+}
+.dropbtn-dark {
+  background-color: #dce0e2;
+  color: rgb(54, 53, 53);
+}
+
+.dropbtn:hover, .dropbtn:focus {
+  background-color: #ced2d4;
+}
+
+.dropdown {
+  margin-top: 10px;
+  margin-left: 10px;
+  position: relative;
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 100px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+
+.dropdown-content-dark {
+  background-color: #272d36;
+}
+
+.dropdown-content-dark a {
+  color: rgb(230, 227, 227);
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+
+/*  VIDEO PLAYER CONTAINER
+############################### */
+.vid-container {
+  position: relative;
+  padding-bottom: 52%;
+  padding-top: 30px; 
+  height: 0; 
+width:70%;
+float:left;
+}
+
+.troph-2{
+    color: #808aa5;
+    cursor: pointer;
+}
+
+.troph-2-dark{
+    color: #202a46;
+    cursor: pointer;
+}
+
+
+.vid-container iframe,
+.vid-container object,
+.vid-container embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 360px;
+}
+
+
+/*  VIDEOS PLAYLIST 
+############################### */
+.vid-list-container {
+  width: 30%;
+height:360px;
+  overflow: hidden;
+float:right;
+}
+
+.vid-list-container:hover, .vid-list-container:focus {
+overflow-y: auto;
+}
+
+ol#vid-list {
+margin:0;
+padding:0;
+background: #222;
+}
+
+ol#vid-list li {
+list-style: none;
+}
+
+ol#vid-list li a {
+text-decoration: none;
+background-color: #222;
+height:55px;
+display:block;
+padding:10px;
+}
+
+ol#vid-list li a:hover {
+background-color:#666666
+}
+
+.vid-thumb {
+float:left;
+  margin-right: 8px;
+}
+
+.active-vid { 
+background:#3A3A3A;
+}
+
+#vid-list .desc {
+  color: #CACACA;
+  font-size: 13px;
+  margin-top:5px;
+}
+
+
+@media (max-width: 624px) {
+  body {
+      margin: 15px;
+  }
+  .caption {
+      margin-top: 40px;
+  }
+  .vid-list-container {
+      padding-bottom: 20px;
+  }
+  .app-video{
+      height: 100vh !important;
+  }
+
+}
+
+
         .teacher {
             float: right !important;
         }
@@ -34,262 +195,275 @@
             color: #444444;
             text-align: left;
         }
-    </style>
     
-<style>
-
-
-    .mdk-drawer-layout__content .app-messages__container-dark{
-        background-color: #4c525e !important;
-    }
-    
-    .blllu{
-        color: rgb(11, 111, 241) !important;
-    } 
-    
-    .blllu-dark{
-        color: rgb(177, 197, 223) !important;
-        margin-right: 8px !important;
-    }
-    
-    
-    .card-footer{
-        background-color: rgb(255, 255, 255) !important;
-        border-bottom: 0.5px solid rgb(211, 228, 236)!important;
-    }
-    
-    
-    .bllu{
-        color: rgb(57, 137, 241) !important;
-    } 
-    .bllu-dark{
-
-        color: rgb(177, 200, 230) !important;
-    }
-    .card-footer-dark{
-        background-color: rgb(26, 28, 34) !important;
-        border: 1px solid rgb(9, 10, 12) !important;
-    }
-    
-    .btn-light{
-        background-color: #3a76d1 !important;
-        color: rgb(199, 199, 199) !important;
+        .mdk-drawer-layout__content .app-messages__container-dark{
+            background-color: #4c525e !important;
+        }
         
-        border: 1px solid  #2d62b3 !important;
-        box-shadow: none !important;
-    }
-    
-    
-    .btn-light-dark{
-        background-color: #323741 !important;
-        color: rgb(199, 199, 199) !important;
+        .blllu{
+            color: rgb(11, 111, 241) !important;
+        } 
         
-        border: 1px solid  #21242b !important;
-        box-shadow: none !important;
-    }
-    
-    
-    .brd{
-        border: 0 ;
-        color: #fff;
-    }
-    
-    .brd-dark{
-        border: 0;
-        color: rgb(202, 202, 202);
-    }
-    
-    
-    .avatar-offline:after,
-    .avatar-offline:before,
-    .avatar-online:after,
-    .avatar-online:before {
-        display: none !important;
-    }
-    
-    
-    .sidebar-dark{
-        background-color: #22252c !important;
-        border-left: 1px solid #323741 !important;
-    }
-    
-    
-    .sidebar-dark .divee{
-        background-color: #22252c !important;
-        border-left: 1px solid #1d1f22 !important;
-    }
-    
-    
-    .mediabout{
-        color: rgb(21, 43, 71) !important;
-    }
-      
-    .mediabout-dark{
-       color: rgb(219, 219, 219) !important;
-    }
-    
-    
-    .ptt{
-        padding-top: 80px !important;
-    }
-    .btn-primary{
-        background-color: rgb(33, 150, 243)!important;
-        color: rgb(254, 254, 255);
-        float: right !important;
-        margin-left: 15px !important;
-        border: 1px solid rgb(20, 71, 167) !important;
-    }
-    
-    .btn-primary-dark{
-        background-color: #323741 !important;
-        color: rgb(199, 199, 199) !important;
-        float: right !important;
-        border: 1px solid  #21242b !important;
-        margin-left: 15px !important;
-        box-shadow: none !important;
-    }
-    
-    
-    .message__body{
-        text-align: right !important;
-        width: 250px !important;
-    }
-    
-    .card-dark{
-            background-color: rgb(195, 211, 226) !important;
-            border: 0 !important;
-    }
-    
-    
-.progress .bg-primary{
-    background-color: rgb(45, 95, 189) !important;
-    border-radius: 0 !important;
-}
+        .blllu-dark{
+            color: rgb(177, 197, 223) !important;
+            margin-right: 8px !important;
+        }
+        
+        
+        .card-footer{
+            background-color: rgb(255, 255, 255) !important;
+            border-bottom: 0.5px solid rgb(211, 228, 236)!important;
+        }
+        
+        
+        .bllu{
+            color: rgb(57, 137, 241) !important;
+        } 
+        .bllu-dark{
 
-.progress .bg-primary-dark{
-    background-color: rgb(142, 165, 209) !important;
-    border-radius: 0 !important;
-}
-    .message__body .card{
-            background-color: rgb(235, 237, 240) !important;
-            border: 0 !important;
+            color: rgb(177, 200, 230) !important;
+        }
+        .card-footer-dark{
+            background-color: rgb(26, 28, 34) !important;
+            border: 1px solid rgb(9, 10, 12) !important;
+        }
+        
+        .btn-light{
+            background-color: #3a76d1 !important;
+            color: rgb(199, 199, 199) !important;
+            
+            border: 1px solid  #2d62b3 !important;
+            box-shadow: none !important;
+        }
+        
+        
+        .btn-light-dark{
+            background-color: #323741 !important;
+            color: rgb(199, 199, 199) !important;
+            
+            border: 1px solid  #21242b !important;
+            box-shadow: none !important;
+        }
+        
+        
+        .brd{
+            border: 0 ;
+            color: #fff;
+        }
+        
+        .brd-dark{
+            border: 0;
+            color: rgb(202, 202, 202);
+        }
+        
+        
+        .avatar-offline:after,
+        .avatar-offline:before,
+        .avatar-online:after,
+        .avatar-online:before {
+            display: none !important;
+        }
+        
+        
+        .sidebar{
+            background-color: #f0f0f3 !important;
+            border-left: 1px solid #dededf !important;
+        }
+        
+        
+        
+        .sidebar-dark{
+            background-color: #22252c !important;
+            border-left: 1px solid #323741 !important;
+        }
+        
+        
+        .sidebar-dark .divee{
+            background-color: #22252c !important;
+            border-left: 1px solid #1d1f22 !important;
+        }
+        
+        
+        .mediabout{
+            color: rgb(21, 43, 71) !important;
+        }
+        
+        .mediabout-dark{
+        color: rgb(219, 219, 219) !important;
+        }
+        
+        
+        .ptt{
+            padding-top: 80px !important;
+        }
+        .btn-primary{
+            background-color: rgb(33, 150, 243)!important;
+            color: rgb(254, 254, 255);
+            float: right !important;
+            margin-left: 15px !important;
+            border: 1px solid rgb(20, 71, 167) !important;
+        }
+        
+        .btn-primary-dark{
+            background-color: #323741 !important;
+            color: rgb(199, 199, 199) !important;
+            float: right !important;
+            border: 1px solid  #21242b !important;
+            margin-left: 15px !important;
+            box-shadow: none !important;
+        }
+        
+        
+        .message__body{
+            text-align: right !important;
+            width: 250px !important;
+        }
+        
+        .card-dark{
+                background-color: rgb(195, 211, 226) !important;
+                border: 0 !important;
         }
     
-    .message{
-        background-color: transparent !important;
-    }
     
-    .message-dark{
-        background-color: transparent !important;
-    }
-    
-    .teachername{
-        color: rgb(1, 36, 59) !important;
-        font-weight:700 !important;
-        text-decoration: none !important;
-        border: 0 !important;
-    }
-    
-    .teachermsg{
-        color: rgb(0, 77, 128);
-    }
-    
-    strong{
-        border-bottom: none !important;
-    }
-    
+        .progress .bg-primary{
+            background-color: rgb(45, 95, 189) !important;
+            border-radius: 0 !important;
+        }
+
+        .progress .bg-primary-dark{
+            background-color: rgb(142, 165, 209) !important;
+            border-radius: 0 !important;
+        }
+        .message__body .card{
+                background-color: rgb(235, 237, 240) !important;
+                border: 0 !important;
+            }
+        
+        .message{
+            background-color: transparent !important;
+        }
+        
+        .message-dark{
+            background-color: transparent !important;
+        }
+        
+        .teachername{
+            color: rgb(1, 36, 59) !important;
+            font-weight:700 !important;
+            text-decoration: none !important;
+            border: 0 !important;
+        }
+        
+        .teachermsg{
+            color: rgb(0, 77, 128);
+        }
+        
+        strong{
+            border-bottom: none !important;
+        }
+        
+        
+        .navbar-dark{
+            background-color: #22252c !important;
+            border-bottom: 1px solid #1b1d22!important;
+        }
+        
+
+        .bgg-primary{
+            background-color: rgb(63, 0, 82) !important;
+        }
+        
+        .accordion__item{
+            border-radius: 3px !important;
+            border: 0 !important;
+        }
+        .accordion__item-dark{
+            background-color: rgb(13, 17, 20) !important;
+        }
+        .accordion__item:last-child{
+            height: 100% !important;
+        }
+        .accordion__item-dark:last-child{
+            overflow: hidden !important;
+        }
+
+        .dots-menu {
+        font-size: 15px;
+        }
+        .dots-menu.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+        border-radius: 5px;
+        }
+        .dots-menu a.btn {
+        
+        }
+        .dots-menu a.btn:active {
+        box-shadow: none;
+        }
+        .dots-menu ul.dropdown-menu {
+
+        }
+        .dots-menu ul.dropdown-menu li {
+        }
+        .dots-menu ul.dropdown-menu li a {
+        margin: 0;
+        }
+            
+        .dropdown-menu::before{
+            background-color: none !important;
+        }
+        .fleeex{
+            display: flex !important;
+            flex-direction: column !important;
+            max-width: 500px;
+        }
+
+        .crrct{
+            position: absolute !important;
+            left: 80px !important;
+            top: 50px !important;
+        }
+        .accordion{
+            margin: 0 !important;
+            padding: 0 !important;
+            border: 0 !important;
+            color: #fff !important;
+            background-color: rgb(214, 223, 233) !important;
+        }
+        .accordion-dark{
+                background-color: rgb(56, 66, 87) !important;
+                color: #fff;
+                order: 0 !important;
+                color: #fff !important;
+            }
+
      
-    .navbar-dark{
-        background-color: #22252c !important;
-        border-bottom: 1px solid #1b1d22!important;
-    }
-    
 
-    .bgg-primary{
-        background-color: rgb(63, 0, 82) !important;
-    }
-    
-    .accordion{
-        background-color: lightgreen !important;
-        border: 0 !important;
-    }
+        .accordion__toggle{
+            background-color: rgb(192, 219, 243) !important;
+        }
 
-    .accordion-dark{
-        background-color: lightgreen !important;
-        border: 0 !important;
-    }
+        .accordion__toggle-dark{
+            background-color: rgb(24, 33, 49) !important;
+        }
 
-    .accordion__item{
-        border-radius: 3px !important;
-        border: 0 !important;
-    }
-    .accordion__item-dark{
-        background-color: rgb(13, 17, 20) !important;
-    }
-    .accordion__item:last-child{
-        height: 100% !important;
-    }
-    .accordion__item-dark:last-child{
-        overflow: hidden !important;
-    }
-
-    .dots-menu {
-  font-size: 15px;
-}
-.dots-menu.btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
-  border-radius: 5px;
-}
-.dots-menu a.btn {
- 
-}
-.dots-menu a.btn:active {
-  box-shadow: none;
-}
-.dots-menu ul.dropdown-menu {
-
-}
-.dots-menu ul.dropdown-menu li {
-}
-.dots-menu ul.dropdown-menu li a {
-  margin: 0;
-}
-    
-.dropdown-menu::before{
-    background-color: none !important;
-}
-.fleeex{
-    display: flex !important;
-    flex-direction: column !important;
-    max-width: 500px;
-}
-
-.crrct{
-    position: absolute !important;
-    left: 810px !important;
-    top: 50px !important;
-}
-.accordion{
-    margin: 0 !important;
-    padding: 0 !important
-}
-.accordion-dark{
-        background-color: rgb(59, 109, 216) !important;
-        border-bottom: 0!important;
-    }
-
-.accordion__toggle.collapsed{
-    margin: 0 !important;
-}
-
-.accordion__toggle-dark{
-    border-bottom: 0 !important;
-}
-  
-.sweet-alert-dark{
+        .sweet-alert-dark{
             background-color: rgb(158, 171, 179) !important;
         }
 
-</style>
+        .app-video{
+            height: 90% !important
+        }
+
+        .more-info{
+            background-color: #d9ddeb !important;
+        }
+        .more-info-dark{
+            background-color: #25262b !important;
+        }
+        [dir=ltr] hr{
+            border-top: 0 !important;
+        }
+    </style>
 
     <div data-push data-responsive-width="768px" data-has-scrollable-region data-fullbleed
          class="mdk-drawer-layout js-mdk-drawer-layout">
@@ -304,10 +478,10 @@
                                         <div class="nav-item navbar-list__item">
                                             {% get_current_language as lang %}
                                             {% if lang == "ar" %}
-                                            <a href="/courses" class="nav-link h-auto mediabout mediabout-dark"><i
+                                            <a href="/ar/courses" class="nav-link h-auto mediabout mediabout-dark"><i
                                                     class="material-icons icon--left mediabout mediabout-dark">keyboard_backspace</i> الرجوع إلى لوحة التحكم</a>
                                             {% else %}
-                                            <a href="/courses" class="nav-link h-auto mediabout mediabout-dark"><i
+                                            <a href="/en/courses" class="nav-link h-auto mediabout mediabout-dark"><i
                                                     class="material-icons icon--left mediabout mediabout-dark">keyboard_backspace</i> Back to
                                                 Dashboard</a>
                                             {% endif %}    
@@ -330,47 +504,26 @@
                                     </nav> 
                                     {% get_current_language as lang %}
                                     {% if lang == "ar" %}
-                                    <div class="fleeex">
+                                    <div class="fleeex ">
                                         <a class="troph-2 mediabout mediabout-dark" href="#" style="margin-right: 30px;"
                                         onclick="openRatingModal()"><b style="font-size: 17px;">أضف تقييم</b> <i class="fa fa-star troph-i mediabout mediabout-dark"></i></a>
-                                        <a data-toggle="dropdown" class="troph-2" style="color: rgb(226, 224, 224);font: xx-large;margin-right: 150px;margin-top: 3px;">
-                                            <i class="fa fa-bars"></i>
-                                        </a>
-                                        <!-- <span class="glyphicon glyphicon-option-vertical"> </span>-->
-                                        <ul class="dropdown-menu crrct" style="background-color: #afb0b4;">
-                                            <li><a href="#" onclick="openSpamModal()"><i class="fa fa-pencil"></i> تبليغ عن محتوى</a></li>
-                                            {% if interval < 30 %}
-                                            <li><a href="#" onclick="openRefundModal()" ><i class="fa fa-pencil"></i> طلب إسترداد</a></li>
-                                            {% endif %}
-                                        </ul>
-                                        {% if course.type == 0 %}
+
+                                        
+                                        {% if course.price > 0 %}
                                         <p class="troph mediabout mediabout-dark" id="cert" style="cursor:not-allowed !important;" onclick="gotoQuiz()"><b style="font-size: 17px;" >أختبار الحصول على الشهادة</b>  <i
                                                 class="fa fa-trophy troph-i"></i></p>
+
                                         {% endif %}
+
+                                        
                                     </div>
-                                    
-                                    
-                                       
-                                       
-                                    
-                                   
                                     {% else %}
                                     <a class="troph-2 mediabout mediabout-dark" href="#" style="margin-left: 45px !important;"
                                        onclick="openRatingModal()">Leave your ratings <i class="fa fa-star troph-i mediabout mediabout-dark"></i></a>
-                                    <a href="#"
-                                       style="margin-left: 45px !important; position: absolute;top: 20px;font-size: small;right: 360px;"
-                                       onclick="openSpamModal()" class="mediabout mediabout-dark">Report Spam <i class="fa fa-file troph-i"
-                                                                                style="color: rgb(219, 135, 135)"></i></a>
-                                    {% if interval < 30 %}
-                                        <a href="#"
-                                           style="margin-left: 45px !important; position: absolute;top: 20px;font-size: small;right: 500px;"
-                                           onclick="openRefundModal()" class="mediabout mediabout-dark">Refund Money <i class="fa fa-money-bill troph-i"
-                                                                                       style="color: rgb(147, 231, 185)"></i></a>
-                                    {% endif %}
-                                    {% if course.type == 0 %}
+                                    
                                     <p class="troph mediabout mediabout-dark" id="cert" style="cursor:not-allowed !important;" onclick="gotoQuiz()">Get your certificate <i
                                             class="fa fa-trophy troph-i"></i></p>
-                                    {% endif %}
+                                    
                                     {% endif %}
                                 </div>
                             </div>
@@ -378,21 +531,28 @@
                         <div class="py-2 flex d-flex align-items-center">
                             <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0"
                                     data-toggle="sidebar" type="button">
-                                <i class="material-icons">people_outline</i>
+                                <i class="material-icons">swipe</i>
                             </button>
                         </div>
                     </div>
                 </div>
                 <div id="show" class="">
-                    <div class="app-video" style="height: 92% !important">
+                    <!-- <div class="app-video" style="">
                         <video autoplay poster="{% static 'assets/img/setting.jpg' %}" id="player" playsinline controls>
                             <source type="video/webm" src="../../../../static{{ first_video.url }}"/>
-                            <!-- Captions are optional -->
                             <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en"
                                    default/>
                         </video>
+                    </div> -->
+                    <div class="schedule-header">
+                        <video autoplay poster="{% static 'assets/img/setting.png' %}" id="videoplayer" playsinline controls style="width: 75%; margin-left: 100px;">
+                            <source src="../../../../static{{ first_video.url }}"
+                                    type="video/webm"/>
+                            <track kind="captions" label="English captions"
+                                   src="/path/to/captions.vtt" srclang="en" default/>
+                        </video>
                     </div>
-                    <div class=" page__container page__container page__container-2 card-footer card-footer-dark" style="width: 100%;height: 100px !important;border-radius: 0 !important;">
+                    <div class=" page__container page__container page__container-2 card-footer card-footer-dark" style="width: 100%;height: 75px !important;border-radius: 0 !important;">
                         <form action="#" id="message-reply" class="form-down-2 ">
                             <div class="progress"
                                  style="height: 10px;margin-top: 25px; width: 50%;border-radius: 10px;">
@@ -443,24 +603,48 @@
         <div class="mdk-drawer js-mdk-drawer" data-align="end" id="messages-drawer">
             <div class="mdk-drawer__content top-0">
                 <div class="sidebar sidebar-dark sidebar-right o-hidden">
-                    <div class="d-flex flex-column h-100">
-                        <div style="margin-top: 30px;" class="flex" data-perfect-scrollbar>
-                            <div class="sidebar-headig"
-                                 style="width: 100%;position: fixed;top: 0;right: 0;height: 50px !important; z-index: 99999;">
+                    <div class="d-flex flex-column">
+                        <div sclass="flex" data-perfect-scrollbar>
+                            <div class=""
+                                 style="width: 100%;position: fixed;top: 0;right: 0;height: 0px !important; z-index: 99999;">
                                  {% get_current_language as lang %}
                                  {% if lang == "ar" %}
                                 <b style="top:12px;position:absolute;right:20px;font-size: 20px;font-weight: 700;" class="mediabout mediabout-dark">محتوى الدورة</b>
+                                <span class="dropdown">
+                                    <button onclick="myFunction()" class="dropbtn">&#9776;</button>
+                                    <div id="myDropdown" class="dropdown-content">
+                                      <a href="#" onclick="openSpamModal()">تبليغ عن محتوى</a>
+                                      {% if interval < 30 and course.type == 0 %}
+                                        <a href="#" onclick="openRefundModal()" > طلب إسترداد</a>
+                                        {% endif %}
+                                    </div>
+                                </span>
                                 {% else %}
                                 <b style="top:12px;position:absolute;left:20px">Course curriculum</b>
 
+                                <span class="dropdown">
+                                    <button onclick="myFunction()" class="dropbtn">&#9776;</button>
+                                    <div id="myDropdown" class="dropdown-content">
+                                        <a href="#"
+                                        style="margin-left: 45px !important; position: absolute;top: 20px;font-size: small;right: 360px;"
+                                        onclick="openSpamModal()" class="mediabout mediabout-dark">Report Spam <i class="fa fa-file troph-i"
+                                                                                 style="color: rgb(219, 135, 135)"></i></a>
+                                      {% if interval < 30 and course.type == 0 %}
+                                      <a href="#"
+                                      style="margin-left: 45px !important; position: absolute;top: 20px;font-size: small;right: 500px;"
+                                      onclick="openRefundModal()" class="mediabout mediabout-dark">Refund Money <i class="fa fa-money-bill troph-i"
+                                                                                  style="color: rgb(147, 231, 185)"></i></a>
+                                        {% endif %}
+                                    </div>
+                                </span>
                                 {% endif %}
                             </div>
                             <hr>
-                            <ul class="list-group mb-3" style="">
+                            <ul class="list-group" style="margin-top:50px">
                                     {% for ele in section_list %}
                                     <div class="accordion accordion-dark " id="parent">
-                                        <div class="accordion__item accordion__item-dark">
-                                            <a href="#" class="accordion__toggle accordion__toggle-dark collapsed" data-toggle="collapse"
+                                        <div class=" ">
+                                            <a href="" class="accordion__toggle accordion__toggle-dark collapsed" data-toggle="collapse"
                                                data-target="#course-toc-{{ ele.id }}" data-parent="#parent">
                                                 <span class="flex mediabout mediabout-dark">{{ ele.name }}</span>
                                                 <span class="accordion__toggle-icon material-icons mediabout mediabout-dark">keyboard_arrow_down</span>
@@ -470,11 +654,11 @@
                                                     {% for i in ele.videoList %}
                                                         <div class="accordion__menu-link" style="cursor: pointer;">
                                                             <i class="material-icons icon-16pt tick{{ i.id }}"
-                                                               data-lock="{{ i.lock }}"
+                                                               data-lock="0"
                                                                onclick="checkThis(this)" data-sr_no="{{ i.sr_no }}"
                                                                id="icon_first">check_circle</i> &nbsp
                                                             <div data-id="{{ i.id }}" data-srno="{{ i.sr_no }}"
-                                                                 data-lock="{{ i.lock }}" data-left="{{ i.count_left }}"
+                                                                 data-lock="0" data-left="{{ i.count_left }}"
                                                                  data-url="{{ i.url }}"
                                                                  class="flex videourl v{{ forloop.parentloop.counter }}"
                                                                  onclick="playmyvideo(this)"
@@ -766,7 +950,7 @@
     <script>
 
         let memory;
-        let video = $(".app-video video")[0]
+        let video = $(".schedule-header video")[0]
         let user_id = '{{ request.user.id }}'
         let course_id = '{{ course_id }}'
         let key = user_id + '-' + course_id
@@ -862,6 +1046,26 @@
         }
 
         $(document).ready(function () {
+            const controls = [
+                'restart', // Restart playback
+                'rewind', // Rewind by the seek time (default 10 seconds)
+                'play', // Play/pause playback
+                'fast-forward', // Fast forward by the seek time (default 10 seconds)
+                'progress', // The progress bar and scrubber for playback and buffering
+                'current-time', // The current time of playback
+                'duration', // The full duration of the media
+                'mute', // Toggle mute
+                'volume', // Volume control
+                'airplay', // Airplay (currently Safari only)
+            ];
+
+            const player = Plyr.setup('#videoplayer', {controls});
+
+            $("#videoplayer")[0].load();
+            
+            const plyrcontrols = document.getElementsByClassName("plyr__controls")[0];
+            plyrcontrols.setAttribute("style", "width:75%; margin-left:100px");
+
             if (cache_str == '') {
                 len = $(".accordion__menu-link").length
                 checkList = new Array(len)
@@ -1171,10 +1375,8 @@
             let cur_video_name = $(cname).html().split('.')
             cur_video_name.pop()
             $("#cur_video_name").html(cur_video_name.toString())
-            $(".app-video video source").attr("src", "../../../../static" + dataurl)
-            console.log("here")
-            $(".app-video video")[0].load();
-            console.log("here1")
+            $(".schedule-header video source").attr("src", "../../../../static" + dataurl)
+            $(".schedule-header video")[0].load();
             $(".list-group .flex").removeAttr("style")
             $(cname).css({"color": "rgb(1, 100, 192)"});
 
@@ -1302,9 +1504,36 @@
                 nextinlist()
             }
         }
+        
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+
 
     </script>
 {% endblock %}
 
 
 
+<!-- Concatenated js plugins and jQuery -->
+<!-- Video player js -->
+
+<!-- jQuery -->
+<script src="/static/assets/vendor/jquery.min.js"></script>

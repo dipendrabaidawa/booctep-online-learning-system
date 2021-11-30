@@ -193,7 +193,46 @@ div.navbar{
 
     </style>
 
+
+<style>
+
+    .content-to-hide{
+        display: none;
+    }    
+    
+    /* Extra small devices (phones, 600px and down) */
+    @media only screen and (max-width: 600px) {
+    
+    .course_name{
+        display: none !important;
+    }
+    .app-messages__container{
+    width: 500px !important;
+    }
+    .hide-on-phone{
+        color: rgb(30, 42, 53);
+    }
+    .hide-on-phone-dark{
+    
+    
+        color: #fff;
+    }
+    .pl-50{
+        padding-left: 50px;
+    }
+    
+    .content-to-hide{
+        background-color: rgb(242, 245, 248) !important;
+        width: 100vw !important;
+        display: block;
+        height: 100vh !important;
+        color: rgb(30, 33, 39);
+    }
+    }
+    </style>
     {% load static %}
+
+
     <div data-push data-responsive-width="768px" data-has-scrollable-region data-fullbleed
          class="mdk-drawer-layout js-mdk-drawer-layout">
         <div class="mdk-drawer-layout__content" data-perfect-scrollbar>
@@ -224,16 +263,13 @@ div.navbar{
                                 <th>
                                     <a href="javascript:void(0)" class="mediabout mediabout-dark" data-sort="js-lists-values-name">العنوان</a>
                                 </th>
-                                <th style="width: 650px;">
+                                <th style="width: 650px;" class="course_name">
                                     <a href="javascript:void(0)" class="mediabout mediabout-dark" data-sort="js-lists-values-name"
                                        style="justify-content: center; display: flex;">الرسالة</a>
                                 </th>
-                                <th>
+                                <th class="course_name">
                                     <a href="javascript:void(0)" class="mediabout mediabout-dark"
                                        data-sort="js-lists-values-name">الدورة</a>
-                                </th>
-                                <th>
-                                    <a href="javascript:void(0)" class="mediabout mediabout-dark" data-sort="js-lists-values-name">نوع التنبيه</a>
                                 </th>
                                 <th>
                                     <a href="javascript:void(0)" class="mediabout mediabout-dark"
@@ -248,16 +284,13 @@ div.navbar{
                                 <th>
                                     <a href="javascript:void(0)" class="mediabout mediabout-dark" data-sort="js-lists-values-name">title</a>
                                 </th>
-                                <th style="width: 650px;">
+                                <th style="width: 650px;" class="course_name">
                                     <a href="javascript:void(0)" class="mediabout mediabout-dark" data-sort="js-lists-values-name"
                                        style="justify-content: center; display: flex;">text</a>
                                 </th>
-                                <th>
+                                <th class="course_name">
                                     <a href="javascript:void(0)" class="mediabout mediabout-dark"
                                        data-sort="js-lists-values-name">course</a>
-                                </th>
-                                <th>
-                                    <a href="javascript:void(0)" class="mediabout mediabout-dark" data-sort="js-lists-values-name">type</a>
                                 </th>
                                 <th>
                                     <a href="javascript:void(0)" class="mediabout mediabout-dark"
@@ -297,30 +330,14 @@ div.navbar{
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
+                                    <td class="course_name">
                                         {{ noti.title }}
                                     </td>
                                     <td>
                                         {{ noti.text | truncatechars:70 }}
                                     </td>
-                                    <td>
+                                    <td class="course_name">
                                         {{ noti.course_name }}
-                                    </td>
-                                    <td>
-                                        {% get_current_language as lang %}
-                                        {% if lang == "ar" %}
-                                        {% if noti.type == 0 %}
-                                            مرسل
-                                        {% else %}
-                                            مستقبل
-                                        {% endif %}
-                                        {% else %}
-                                        {% if noti.type == 0 %}
-                                            Send
-                                        {% else %}
-                                            Receive
-                                        {% endif %}
-                                        {% endif %}
                                     </td>
                                     <td>
                                         <a href="#" onclick="openEditModal(this)" data-id="{{ noti.id }}"

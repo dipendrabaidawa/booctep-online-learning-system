@@ -108,8 +108,8 @@
   }
 
   .cennnter {
-        width: 60% !important;
-        height: 450px !important;
+        width: 57.8% !important;
+        height: 446px !important;
   }
 
 
@@ -126,7 +126,7 @@
   @media only screen and (max-width: 600px) {
     .cennnter {
         width: 90% !important;
-        height: 350px !important;
+        height: 247px !important;
     }
   }
 
@@ -156,7 +156,12 @@
                 <div class="container">
                   <div class="hero-becom-flex">
                   <h1 class="booctep-1 hero-become-4-h1" data-shadow='Booctep'>{% trans 'Become a teacher' %}</h1>
-                  <h2 class="booctep-h2 hero-become-4-h2">{% trans 'Teach what you learn and earn money now, see this step for how to be a teacher than sign as a teacher.' %}</h2>
+                  {% get_current_language as lang %}
+                  {% if lang == "ar" %}
+                  <h2 class="booctep-h2 hero-become-4-h2">قم بتعليم ما تعلمت وأكسب المزيد من المال, تقدم بطلب الإلتحاق كمعلم الآن.</h2>
+                  {% else %}
+                  <h2 class="booctep-h2 hero-become-4-h2">Teach what you learn and earn money now, see this step for how to be a teacher then sign as a teacher.</h2>
+                  {% endif %}
                   <a href="/{{lang}}/become_a_teacher" style="" class="button is-light is-light-dark hero-become-4-a">
                   <b>{% trans 'Become a teacher' %}</b>
                   </a>
@@ -187,7 +192,7 @@
                   <li class="liness liness-dark">
                     <div>
                       <time class="time time-dark">الخطوة الثانية</time>
-                        <h2 style="font-weight: 500;">قم بإكمال أعدادات حسابك</h2>
+                        <h2 style="font-weight: 500;">قم بإكمال إعدادات حسابك</h2>
                     </div>
                   </li>
                   <li class="liness liness-dark">
@@ -199,13 +204,13 @@
                   <li class="liness liness-dark">
                     <div>
                       <time class="time time-dark">{% trans 'Step 4' %}</time>
-                        <h2 style="font-weight: 500;">انشأ دورة وقم بتعليم ما تعلمت</h2>
+                        <h2 style="font-weight: 500;">انشىء دورة وقم بتعليم ما تعلمت</h2>
                     </div>
                   </li>
                   <li class="liness liness-dark">
                     <div>
                       <time class="time time-dark">{% trans 'Step 5' %}</time>
-                        <h2 style="font-weight: 500;">غير متأكد؟ قم بإنشاء فيديو تجريبي, لتقييمه</h2>
+                        <h2 style="font-weight: 500;">غير متأكد؟ قم بإنشاء فيديو تجريبي لتقييمه</h2>
                     </div>
                   </li>
                   <li class="liness liness-dark">
@@ -320,7 +325,7 @@
                   {% get_current_language as lang %}
                   {% if lang == "ar" %}
                   <h3 class=" mediabout-dark mediabout" style="margin-bottom: 30px !important;">كيف تصبح معلم؟</h3>
-                  <div class="cennnter cennnter-dark" style="width: 58.4% !important;" >
+                  <div class="cennnter cennnter-dark" style="" >
 
                     <video class="viddeo" poster="" id="player" playsinline controls>
                       <source src="{% static 'assets/videos/become.mp4' %}" style="width: 100% !important;" type="video/mp4" />
