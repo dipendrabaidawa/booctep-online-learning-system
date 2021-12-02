@@ -3,6 +3,26 @@
         .schedule video {
             width: 100% !important;
         }
+        
+        @media (max-width: 624px) {
+        .is-comboe-hide {
+        
+            display: none !important
+            ;
+        }
+        .select-phone{
+            margin-left: 20px !important;
+        }
+        .shop-header-phone{
+            padding-right: 50px !important
+            ;
+        }
+        .single_category-c {
+            padding-left: 25px !important;
+            padding-right: 25px !important;
+        }
+        }
+        
 
         .plyr--video {
             width: 100%;
@@ -184,7 +204,7 @@
     {% if favCnt > 0 %}
     
     <!-- Start Carousel -->
-    <div class="single_category-4">
+    <div class="single_category-4 single_category-c">
         <div class="container">
             {% get_current_language as lang %}
             {% if lang == "ar" %}
@@ -208,7 +228,7 @@
         <input type="hidden" id="order" name="order" value="{{ order }}">
     </form>
 
-        <div class="shop-header shop-header-is-dark ">
+        <div class="shop-header shop-header-phone shop-header-is-dark ">
             <div class="container" style="display: flex; justify-content: space-between;">
                 <div class="store-tabs">
                     <a data-tab="products-tab" class="tab-control {% if type == -1 %}is-active{% endif %}"
@@ -221,7 +241,7 @@
                 </div>
 
                 <div class="combo-item is-combo-dark">
-                    <div class="select is-rounded  ">
+                    <div class="select is-rounded  select-phone">
                         <select class="is-comboe is-comboe-dark" style="border-radius:3px;height:40px;margin-top:2px;"
                                 id="category_id_2">
                             {% get_current_language as lang %}
@@ -238,8 +258,8 @@
                             {% endif %}
                         </select>
                     </div>
-                    <div class="select is-rounded " >
-                        <select class="is-comboe is-comboe-dark" id="category_id" data-select="{{ cat_id }}"
+                    <div class="select  is-rounded " >
+                        <select class="is-comboe is-comboe-hide is-comboe-dark" id="category_id" data-select="{{ cat_id }}"
                                 style="border-radius:3px;height:40px;margin-top:2px" onchange="category()">
                             {% get_current_language as lang %}
                             {% if lang == "ar" %}
@@ -423,14 +443,27 @@
 
         <div class="store-sections-6 mb-3"
              style="display:flex;flex-direction: column !important;align-items:center !important;justify-content: center !important; margin-bottom: 70px;margin-top: 90px;">
-            <img src="{% static 'assets/img/no-cart.svg' %}" style="height:auto" alt="">
-            <h2 style="margin-top: -40px;color: gray;">unfortunately, there are no courses yet in your cart</h2>
+             <img src="{% static 'assets/img/no-cart.png' %}"
+             style="width: 350px;height: auto;" alt="" class="no-cart">
+             {% get_current_language as lang %}
+             {% if lang == "ar" %}
+            <h2 style="margin-top: -40px;" class="mediabout mediabout-dark">لا توجد دورات متاحة</h2>
            
             <a class="button process-button cnti cnti-dark" href="/{{ lang }}"
-            style="border: 1px solid rgb(139, 189, 189);margin-top: 15px;">
+            style="border: 1px solid rgb(181, 226, 226);margin-top: 15px;">
+             اكمل التسوق &nbsp;<span
+                 class="fa fa-shopping-cart"></span>
+            </a>
+
+            {% else %}
+            <h2 style="margin-top: -40px;" class="mediabout mediabout-dark">unfortunately, there are no courses yet in your cart</h2>
+           
+            <a class="button process-button cnti cnti-dark" href="/{{ lang }}"
+            style="border: 1px solid rgb(181, 226, 226);margin-top: 15px;">
              Continue shopping &nbsp;<span
                  class="fa fa-shopping-cart"></span>
             </a>
+            {% endif %}
         </div>
     {% endif %}
     <div id="parent" style="display: none"></div>
@@ -440,7 +473,13 @@
             <div class="card">
                 <div class="card-heading">
                     <div class="user-meta">
-                        <img id="modal-img" src="/static/assets/img/man.jpg">
+                        {% if user.profile.image %}
+                        <img class="avatar brd brd-dark" src="/static{{ user.image }}" style=""
+                             data-demo-src="">
+                        {% else %}
+                        <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style=""
+                             data-demo-src="">
+                        {% endif %}
                     </div>
                     <span class="user-meta-span"
                           id="modal-user-name">{{ course.user.first_name }}{{ course.user.last_name }} </span>

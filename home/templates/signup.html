@@ -239,6 +239,35 @@
 }
 
 }
+
+.success-text-dark h3{
+    color: rgb(233, 245, 250);
+}
+
+.success-text-dark p{
+    color: rgb(230, 237, 247);
+}
+
+.signup-wrapper .process-panel-wrap .form-panel-dark{
+    background-color: rgb(24, 31, 39) !important;
+    border: 1px solid rgb(12, 15, 19) !important;;
+}
+
+.signup-wrapper .process-panel-wrap .form-panel-dark h3{
+    color: rgb(233, 245, 250) !important;
+}
+
+.signup-wrapper .process-panel-wrap .form-panel-dark p{
+    color: rgb(230, 237, 247) !important;
+}
+
+.signup-wrapper {
+    min-height: 100vh;
+    position: relative
+}
+
+
+
     </style>
 
     <div class="products-navigation" style="display: none;">
@@ -370,12 +399,12 @@
                                         style="font-size: 33px; margin-bottom:50px">{% trans 'What are you going to teach?' %}</h2>
                                     <div class="combo-item">
                                         {% if lang == 'ar/' %}
-                                        <h4>اختر الفئة</h4>
+                                        <h4 class="mediabout mediabout-dark">اختر الفئة</h4>
                                         {% else %}
-                                        <h4>Select category</h4>
+                                        <h4 class="mediabout mediabout-dark">Select category</h4>
                                         {% endif %}
-                                        <div class="select ">
-                                            <select class="selecttt selecttt-dark firstsubcategory" id="subcategory" class="subcategory" style="border-radius: 3px;">
+                                        <div class="select selecttt">
+                                            <select class="selecttt  firstsubcategory" id="subcategory" class="subcategory" style="border-radius: 3px;">
                                                 <option></option>
                                                 {% for i in objC %}
                                                     {% if lang == 'ar/' %}
@@ -389,17 +418,17 @@
                                     </div>
 
                                     <div class="combo-item secondsubsubcategorydiv" style="margin-top: 40px">
-                                        <h4>Select subcategory</h4>
-                                        <div class="select ">
-                                            <select class="selecttt selecttt-dark secondsubsubcategories" id="secondsubsubcategories" style="border-radius:3px; width:220px">
+                                        <h4 class="mediabout mediabout-dark">Select subcategory</h4>
+                                        <div class="select selecttt">
+                                            <select class="selecttt secondsubsubcategories" id="secondsubsubcategories" style="border-radius:3px; width:220px">
                                             </select>
                                         </div>
                                     </div>
                                 </center>
                                 <div class="buttons">
-                                    <a class="button process-button" href="/signup">{% trans 'Back' %}</a>
-                                    <a class="button process-button is-next" data-step="step-dot-2"
+                                    <a class="button signin-button signin-button-is-dark process-button is-next" data-step="step-dot-2"
                                        onclick="checkCategory()">{% trans 'Next' %}</a>
+                                    <a class="button signup-button signup-button-is-dark process-button" href="/signup">{% trans 'Back' %}</a>
                                 </div>
                             </div>
 
@@ -459,114 +488,30 @@
                             </div>
 
                             <div id="signup-panel-3" class="process-panel-wrap is-narrow">
-                                <div class="form-panel">
-                                    <img class="success-image" src="{% static 'assets/img/mailsent.svg' %}" alt="">
+                                <div class="form-panel form-panel-dark">
+                                    <img class="success-image success-image-2" src="{% static 'assets/img/mailsent.png' %}" alt="">
+                                    {% get_current_language as lang %}
+                                    {% if lang == "ar" %}
+                                    <div class="success-text">
+                                        <h3>تم تسجيلك بنجاح, شكرا لك</h3>
+                                        <p> قمنا بإرسال رابط لتنشيط حسابك, تأكد من ايميلك</p>
+                                    </div>
+                                    {% else %}
                                     <div class="success-text">
                                         <h3>{% trans 'Congratz, you successfully created your account.' %}</h3>
                                         <p> {% trans 'We just sent you a confirmation email. Please confirm your account within 24 hours.' %}</p>
                                     </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!--Edit Credit card Modal-->
-                    <div id="crop-modal" class="modal mdl-modal is-small crop-modal is-animated">
-                        <div class="modal-background"></div>
-                        <div class="modal-content">
-                            <div class="modal-card" style="width: 100%;">
-                                <header class="modal-card-head">
-                                    <div class="modal-card-title">
-                                        <span>{% trans 'Crop your picture' %}</span>
-                                    </div>
-                                    <button class="mdl-modal-close" aria-label="close">
-                                        <i data-feather="x"></i>
-                                    </button>
-                                </header>
-                                <div class="modal-card-body">
-                                    <div id="cropper-wrapper" class="cropper-wrapper">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
         <!-- Signup steps -->
 
-        <!--- Categories Modal start-->
-        <div id="user-photos-modal" class="modal user-photos-modal is-medium has-light-bg">
-            <div class="modal-background"></div>
-            <div class="modal-content">
-                <!-- Card -->
-                <div class="card card-dark">
-                    <div class="card-heading">
-                        <h3>{% trans 'What will you teach?' %}</h3>
-                        <!-- Close X button -->
-                        <div class="close-wrap">
-                    <span class="close-modal">
-                    <i data-feather="x"></i>
-                </span>
-                        </div>
-                    </div>
-                    <!-- Card body -->
-                    <div class="card-body">
-                        <!-- Tabs -->
-                        <div class="nav-tabs-wrapper">
-
-                            <!-- Recent Photos -->
-                            <div id="recent-photos" class="tab-content has-slimscroll-md is-active">
-                                <!-- Grid -->
-                                <div class="albums-grid">
-                                    <div class="columns is-multiline">
-                                        <!-- Album item -->
-                                        {% for c in objC %}
-                                            <div class="column is-4" onclick="return subCategory('{{ c.id }}')">
-                                                <div class="album-wrapper" data-album="album-photos-{{ c.id }}">
-                                                    <div class="album-image">
-                                                        <img src="/static/{{ c.image }}"
-                                                             data-demo-src="{% static 'assets5/img/demo/unsplash/35.jpg' %}"
-                                                             alt="">
-                                                    </div>
-                                                    <div class="album-meta">
-                                                        <div class="album-title">
-                                                            <span>{{ c.name }}</span>
-                                                        </div>
-                                                        <div class="image-count">
-                                                            <i data-feather="grid"></i>
-                                                            <span>8</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endfor %}
-
-                                    </div>
-                                </div>
-
-                                <!-- Hidden Grid | Design and colors -->
-                                <div id="album-photos-1" class="album-image-grid is-hidden">
-                                    <div class="album-info">
-                                        <h4 id="album_header"></h4><a
-                                            class="close-nested-photos">{% trans 'Go Back' %}</a></div>
-                                    <div class="columns is-multiline" id="album_content">
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button class="button is-solid accent-button replace-button is-disabled"
-                                onclick="return addSubCategory()">{% trans 'Add' %}</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <!--- Categories Modal end-->
     </div>
 
 {% endblock %} {% block script %}

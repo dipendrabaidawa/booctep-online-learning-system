@@ -6,6 +6,9 @@
 
 
     <style>
+        .selecttt{
+            border: 1px solid #49576d !important;
+        }
        .backbtn-dark {
         color: rgb(199, 199, 199) !important;
         background-color: #323741 !important; 
@@ -149,9 +152,6 @@
 
 .signin-button-is-dark:hover{
     border: 1px solid #060707;
-}
-.signup-button-is-dark:hover{
-    border: 1px solid #060707 !important;
 }
 
     .soci{
@@ -389,6 +389,10 @@
     
       
     }
+
+    .track-dark{
+        background-color: #506075 !important;
+    }
     
 </style>
     
@@ -445,7 +449,7 @@
                             <input type="hidden" id="category" name="category"/>
                             <div id="signup-panel-1" class="process-panel-wrap mainpanel is-active">                                
                                 <center>
-                                    <div class="combo-item">
+                                    <div class="combo-item ">
                                         <div class="select ">
                                             <select class="selecttt" id="category_id"
                                                     style="border-radius:3px;">
@@ -461,7 +465,7 @@
                                     </div>
                                     <div class="buttons" style="margin-top:25px;">
                                         <a id="nextbtn" class="button btn-primary process-button is-next setcategoryclass" onclick="setCategory()" data-step="step-dot-2">{% trans 'Next' %}</a></div>
-                                    <hr>
+                                    <hr class="hrrrr hrrrr-dark">
                                     {% get_current_language as lang %}
                                     {% if lang == "ar" %}
                                     <p class="mediabout mediabout-dark" style="text-align: center !important;margin-top: 10px;font-size:20px">
@@ -471,8 +475,8 @@
                                             <div class="cart-summary cart-summary-dark">
 
                                                 <div class="summary-card" style="">
-                                                    <img src="{% static 'assets/img/icons/questions/help.svg' %}"
-                                                         alt="">
+                                                    <img src="{% static 'assets/img/help.png' %}"
+                                                         alt="" class="help-become">
                                                 <h4 class="mediabout mediabout-dark"> طلب المساعدة؟</h4>
                                                 <p class="mediabout mediabout-dark">إذا كانت تواجهك أي مشكلة في التسجيل راسلنا<a class="standard-link blllu blllu-dark" href="{% url 'contact_us' %}">هنا</a> سوف نسعد بمساعدتك, نحن متواجدون دوما لمساعدتك للحصول على تجربة فريدة في بوستيب.</p>
                                                 </div>
@@ -484,8 +488,8 @@
                                             <div class="cart-summary cart-summary-dark">
 
                                                 <div class="summary-card" style="">
-                                                    <img src="{% static 'assets/img/icons/questions/help.svg' %}"
-                                                         alt="">
+                                                    <img src="{% static 'assets/img/guide.png' %}"
+                                                         alt="" class="guide-become">
                                                 <h4 class="mediabout mediabout-dark"> إرشادات المعلم</h4>
                                                 <p class="mediabout mediabout-dark">إذا أردت أخراج دورتك بأفضل صورة ممكنة لدينا في لوحة تحكم المعلم إرشادات لإخراج دورتك بأفضل صورة ألقي نظرة عليها.</p>
                                                 </div>
@@ -497,8 +501,8 @@
                                             <div class="cart-summary cart-summary-dark">
 
                                                 <div class="summary-card" style="">
-                                                    <img src="{% static 'assets/img/icons/questions/help.svg' %}"
-                                                         alt="">
+                                                    <img src="{% static 'assets/img/contacct.png' %}"
+                                                         alt="" class="contact-become">
                                                 <h4 class="mediabout mediabout-dark">الإتصال بنا؟</h4>
                                                 <p class="mediabout mediabout-dark">هناك عدة طرق للوصل إلينا, عبرالإيميل: support@booctep.com أو عبر الدردشة المباشرة أو عبر مواقع التواصل الإجتماعي.</p>
                                                 </div>
@@ -515,10 +519,10 @@
                                             <div class="cart-summary cart-summary-dark">
 
                                                 <div class="summary-card" style="">
-                                                    <img src="{% static 'assets/img/icons/questions/help.svg' %}"
-                                                         alt="">
+                                                    <img src="{% static 'assets/img/help.png' %}"
+                                                         alt="" class="help-become">
                                                 <h4 class="mediabout mediabout-dark"> Help center?</h4>
-                                                <p class="mediabout mediabout-dark">Having trouble? Please search our <a class="standard-link blllu blllu-dark"
+                                                <p class="mediabout mediabout-dark">Having trouble with sign up as a teacher? Please search our <a class="standard-link blllu blllu-dark"
                                                                                         href="support.html">Help
                                                     Center</a> for a quick
                                                     answer to your .</p>
@@ -531,13 +535,10 @@
                                             <div class="cart-summary cart-summary-dark">
 
                                                 <div class="summary-card" style="">
-                                                    <img src="{% static 'assets/img/icons/questions/help.svg' %}"
-                                                         alt="">
-                                                <h4 class="mediabout mediabout-dark"> Help center?</h4>
-                                                <p class="mediabout mediabout-dark">Having trouble? Please search our <a class="standard-link blllu blllu-dark"
-                                                                                        href="support.html">Help
-                                                    Center</a> for a quick
-                                                    answer to your .</p>
+                                                    <img src="{% static 'assets/img/guide.png' %}"
+                                                         alt="" class="guide-become">
+                                                <h4 class="mediabout mediabout-dark"> Teacher guideline?</h4>
+                                                <p class="mediabout mediabout-dark">If you would to output best course in our website there are a guideline in teacher dashboard you can take a look at it.</p>
                                                 </div>
 
                                             </div>
@@ -547,13 +548,11 @@
                                             <div class="cart-summary cart-summary-dark">
 
                                                 <div class="summary-card" style="">
-                                                    <img src="{% static 'assets/img/icons/questions/help.svg' %}"
-                                                         alt="">
-                                                <h4 class="mediabout mediabout-dark"> Help center?</h4>
-                                                <p class="mediabout mediabout-dark">Having trouble? Please search our <a class="standard-link blllu blllu-dark"
-                                                                                        href="support.html">Help
-                                                    Center</a> for a quick
-                                                    answer to your .</p>
+                                                    <img src="{% static 'assets/img/contacct.png' %}"
+                                                         alt="" class="contact-become">
+                                                <h4 class="mediabout mediabout-dark"> Contact us?</h4>
+                                                <p class="mediabout mediabout-dark">There are many ways to contact us if you get any problem, please <a class="standard-link blllu blllu-dark"
+                                                                                        href="support.html">contact us</a>  we would be happy to help.</p>
                                                 </div>
 
                                             </div>
@@ -568,7 +567,7 @@
                                 <center>
                                     <div class="combo-item">
                                         <div class="select ">
-                                            <select class="combo-box selected-item full-width" style="width: 150%;" id="subcategory_id" style="border-radius:3px;height:40px;margin-top:2px">
+                                            <select class="combo-box selecttt selected-item full-width" style="width: 150%;" id="subcategory_id" style="border-radius:3px;height:40px;margin-top:2px">
                                             </select>
                                         </div>
                                     </div>
@@ -584,7 +583,7 @@
                                            data-step="step-dot-3">Finish<span style="font-size:18px">&#128075;</span></a>
                                         {%endif%}
                                     </div>
-                                    <hr>
+                                    <hr class="hrrrr hrrrr-dark">
                                     {% get_current_language as lang %}
                                     {% if lang == "ar" %}
                                     <p class="mediabout mediabout-dark" style="text-align: center !important;margin-top: 10px;font-size:20px">
@@ -594,8 +593,8 @@
                                             <div class="cart-summary cart-summary-dark">
 
                                                 <div class="summary-card" style="">
-                                                    <img src="{% static 'assets/img/icons/questions/help.svg' %}"
-                                                         alt="">
+                                                    <img src="{% static 'assets/img/help.png' %}"
+                                                         alt="" class="help-become">
                                                 <h4 class="mediabout mediabout-dark"> طلب المساعدة؟</h4>
                                                 <p class="mediabout mediabout-dark">إذا كانت تواجهك أي مشكلة في التسجيل راسلنا<a class="standard-link blllu blllu-dark" href="{% url 'contact_us' %}">هنا</a> سوف نسعد بمساعدتك, نحن متواجدون دوما لمساعدتك للحصول على تجربة فريدة في بوستيب.</p>
                                                 </div>
@@ -607,8 +606,8 @@
                                             <div class="cart-summary cart-summary-dark">
 
                                                 <div class="summary-card" style="">
-                                                    <img src="{% static 'assets/img/icons/questions/help.svg' %}"
-                                                         alt="">
+                                                    <img src="{% static 'assets/img/guide.png' %}"
+                                                         alt="" class="guide-become">
                                                 <h4 class="mediabout mediabout-dark"> إرشادات المعلم</h4>
                                                 <p class="mediabout mediabout-dark">إذا أردت أخراج دورتك بأفضل صورة ممكنة لدينا في لوحة تحكم المعلم إرشادات لإخراج دورتك بأفضل صورة ألقي نظرة عليها.</p>
                                                 </div>
@@ -620,8 +619,8 @@
                                             <div class="cart-summary cart-summary-dark">
 
                                                 <div class="summary-card" style="">
-                                                    <img src="{% static 'assets/img/icons/questions/help.svg' %}"
-                                                         alt="">
+                                                    <img src="{% static 'assets/img/contacct.png' %}"
+                                                         alt="" class="contact-become">
                                                 <h4 class="mediabout mediabout-dark">الإتصال بنا؟</h4>
                                                 <p class="mediabout mediabout-dark">هناك عدة طرق للوصل إلينا, عبرالإيميل: support@booctep.com أو عبر الدردشة المباشرة أو عبر مواقع التواصل الإجتماعي.</p>
                                                 </div>
@@ -638,10 +637,10 @@
                                             <div class="cart-summary cart-summary-dark">
 
                                                 <div class="summary-card" style="">
-                                                    <img src="{% static 'assets/img/icons/questions/help.svg' %}"
-                                                         alt="">
+                                                    <img src="{% static 'assets/img/help.png' %}"
+                                                         alt="" class="help-become">
                                                 <h4 class="mediabout mediabout-dark"> Help center?</h4>
-                                                <p class="mediabout mediabout-dark">Having trouble? Please search our <a class="standard-link blllu blllu-dark"
+                                                <p class="mediabout mediabout-dark">Having trouble with sign up as a teacher? Please search our <a class="standard-link blllu blllu-dark"
                                                                                         href="support.html">Help
                                                     Center</a> for a quick
                                                     answer to your .</p>
@@ -654,13 +653,10 @@
                                             <div class="cart-summary cart-summary-dark">
 
                                                 <div class="summary-card" style="">
-                                                    <img src="{% static 'assets/img/icons/questions/help.svg' %}"
-                                                         alt="">
-                                                <h4 class="mediabout mediabout-dark"> Help center?</h4>
-                                                <p class="mediabout mediabout-dark">Having trouble? Please search our <a class="standard-link blllu blllu-dark"
-                                                                                        href="support.html">Help
-                                                    Center</a> for a quick
-                                                    answer to your .</p>
+                                                    <img src="{% static 'assets/img/guide.png' %}"
+                                                         alt="" class="guide-become">
+                                                <h4 class="mediabout mediabout-dark"> Teacher guideline?</h4>
+                                                <p class="mediabout mediabout-dark">If you would to output best course in our website there are a guideline in teacher dashboard you can take a look at it.</p>
                                                 </div>
 
                                             </div>
@@ -670,13 +666,11 @@
                                             <div class="cart-summary cart-summary-dark">
 
                                                 <div class="summary-card" style="">
-                                                    <img src="{% static 'assets/img/icons/questions/help.svg' %}"
-                                                         alt="">
-                                                <h4 class="mediabout mediabout-dark"> Help center?</h4>
-                                                <p class="mediabout mediabout-dark">Having trouble? Please search our <a class="standard-link blllu blllu-dark"
-                                                                                        href="support.html">Help
-                                                    Center</a> for a quick
-                                                    answer to your .</p>
+                                                    <img src="{% static 'assets/img/contacct.png' %}"
+                                                         alt="" class="contact-become">
+                                                <h4 class="mediabout mediabout-dark"> Contact us?</h4>
+                                                <p class="mediabout mediabout-dark">There are many ways to contact us if you get any problem, please <a class="standard-link blllu blllu-dark"
+                                                                                        href="support.html">contact us</a>  we would be happy to help.</p>
                                                 </div>
 
                                             </div>
@@ -689,7 +683,7 @@
                             </div>
                             <div id="signup-panel-3" class="process-panel-wrap is-narrow">
                                 <div class="form-panel">
-                                    <img class="success-image" src="{% static 'assets/img/teach.svg' %}" alt="">
+                                    <img class="success-image" src="{% static 'assets/img/teach.png' %}" alt="">
                                     <div class="success-text">
                                         <h3> {% trans 'please login again to configure your account.' %}</h3>
                                     </div>

@@ -663,17 +663,6 @@ margin: 0 auto;
 
 
 
-.hero-about-dark{
-  position: relative;
-  height: 500px;
-  padding-top: 80px !important;
-  margin: 0 !important;
-  background-size: cover;
-  background-image: linear-gradient(to bottom, rgba(169, 199, 241, 0.73), rgba(42, 84, 133, 0.52)),
-  url('../img/1560.jpg') !important;
-  clip-path: polygon(0 0, 100% 0%, 100% 87%, 0% 100%);
-}
-
 
 
 .cennnter{
@@ -687,6 +676,12 @@ margin: 0 auto;
   width: 90% !important;
 }
 
+}
+
+
+.landing-wrapper .made-with .made-block .block-icon-dark {
+  background-color: #30435c;
+  border: 1px solid #26364b;
 }
 
 </style>
@@ -708,7 +703,7 @@ margin: 0 auto;
             <!--Products-->
             <div id="products-tab" class="store-tab-pane store-tab-pane-2 is-active" id="demo">
 
-                <section class="hero is-small is-bold hero-about hero-about-dark">
+                <section class="hero is-small is-bold hero-about">
                     <div class="hero-body">
                       <div class="container">
 
@@ -746,7 +741,7 @@ margin: 0 auto;
                             <div class="made-with " class="blocksabout" style="margin-right: auto;margin-left: auto;margin-top: -130px;">
                                 <div id="made-with-bulma" class="made-block">
                                     <div class="block-icon is-box-reveal ">
-                                        <img src="{%static 'assets/img/about/step1.png' %}" alt="" style="" >
+                                        <img src="{%static 'assets/img/about/step1.png' %}" alt="Students enrolled" class="step-student" />
                                     </div>
                                     <div class="block-title " style="">
                                         <h3 style="margin-right: -40px;" class="mediabout mediabout-dark">+0 طالب</h3>
@@ -754,7 +749,7 @@ margin: 0 auto;
                                 </div>
                                 <div class="made-block">
                                     <div class="block-icon is-box-reveal">
-                                        <img src="{%static 'assets/img/about/step3.png' %}" alt="" style="width: 90%;" >
+                                        <img src="{%static 'assets/img/about/step3.png' %}" alt="Courses created" class="step-courses" style="width: 90%;" >
                                     </div>
                                     <div class="block-title" style="">
                                         <h3 style="margin-right: -40px;" class="mediabout mediabout-dark">+0 دورة</h3>
@@ -762,7 +757,7 @@ margin: 0 auto;
                                 </div>
                                 <div class="made-block">
                                     <div class="block-icon is-box-reveal">
-                                        <img src="{%static 'assets/img/about/step2.png' %}" alt="" style="width: 90%;" >
+                                        <img src="{%static 'assets/img/about/step2.png' %}" alt="Tasks" class="step-tasks" style="width: 90%;" >
                                     </div>
                                     <div class="block-title" style="">
                                         <h3 style="margin-right: -40px;" class="mediabout mediabout-dark">+0 أختبار </h3>
@@ -773,7 +768,7 @@ margin: 0 auto;
                             <div class="made-with " class="blocksabout" style="margin-right: auto;margin-left: auto;margin-top: -130px;">
                                 <div id="made-with-bulma" class="made-block">
                                     <div class="block-icon is-box-reveal ">
-                                        <img src="{%static 'assets/img/about/step1.png' %}" alt="" style="" >
+                                        <img src="{%static 'assets/img/about/step1.png' %}" alt="" class="step-student" style="Students enrolled" >
                                     </div>
                                     <div class="block-title " style="">
                                         <h3 style="margin-right: -40px;" class="mediabout mediabout-dark">+0 Students</h3>
@@ -781,7 +776,7 @@ margin: 0 auto;
                                 </div>
                                 <div class="made-block">
                                     <div class="block-icon is-box-reveal">
-                                        <img src="{%static 'assets/img/about/step3.png' %}" alt="" style="width: 90%;" >
+                                        <img src="{%static 'assets/img/about/step3.png' %}" alt="Tasks" class="step-courses" style="width: 90%;" >
                                     </div>
                                     <div class="block-title" style="">
                                         <h3 style="margin-right: -40px;" class="mediabout mediabout-dark">+0 Courses</h3>
@@ -789,7 +784,7 @@ margin: 0 auto;
                                 </div>
                                 <div class="made-block">
                                     <div class="block-icon is-box-reveal">
-                                        <img src="{%static 'assets/img/about/step2.png' %}" alt="" style="width: 90%;" >
+                                        <img src="{%static 'assets/img/about/step2.png' %}" alt="Tasks" class="step-tasks" style="width: 90%;" >
                                     </div>
                                     <div class="block-title" style="">
                                         <h3 style="margin-right: -40px;" class="mediabout mediabout-dark">+0 Quizzes </h3>
@@ -880,12 +875,12 @@ margin: 0 auto;
                                   {% endif %}
                                 </div>
                                 <div class="column is-7">
-                                    <img src="{%static 'assets/img/about/about-1.png' %}" class="booctep-2" alt="">
+                                    <img src="{%static 'assets/img/about/about-1.png' %}" class="booctep-2 about-img-1" alt="">
                                 </div>
                             </div>
                             <div class="columns is-vcentered" style="margin-bottom: 55px;">
                                 <div class="column is-6  ">
-                                    <img src="{%static 'assets/img/download.png' %}" class="booctep-2" alt="">
+                                    <img src="{%static 'assets/img/about/about-2.png' %}" class="booctep-2 about-img-2" alt="">
                                 </div>
                                 <div class="column is-6">
 
@@ -921,7 +916,7 @@ margin: 0 auto;
                                   
                                 </div>
                                 <div class="column is-7">
-                                    <img src="{%static 'assets/img/about/about-3.png' %}" class="booctep-2" alt="">
+                                    <img src="{%static 'assets/img/about/about-3.png' %}" class="booctep-2 about-img-3" alt="">
                                 </div>
                             </div>
                         </div>

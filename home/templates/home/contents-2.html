@@ -1,4 +1,4 @@
-<{% load static %} {% load i18n %}
+{% load static %} {% load i18n %}
 <!-- Start Carousel -->
 
 <style>
@@ -28,7 +28,7 @@
       rgb(124, 155, 190) 0%,
       rgb(100, 121, 150) 100%
     );
-    height: 420px;
+    height: auto;
     width: 100%;
     color: rgb(13, 39, 56);
   }
@@ -86,19 +86,28 @@
     {% if lang == "ar" %}
     {% if user.group_id == 3 %}
       <a href="/{{lang}}/teacher/courses" style="color:rgb(217, 251, 255) "><b>أضف دورة جديدة</b></a>
-    {% else %}
-      <a href="/{{lang}}/courses" style="color:rgb(217, 251, 255) "><b>أكمل التعلم</b></a>
     {% endif %}
 
     {% else %}
     {% if user.group_id == 3 %}
     <a href="/{{lang}}/teacher/courses" style="color:rgb(217, 251, 255) ">Add new course</a>
+    {% endif %}
+
+    {% endif %}
+
+
+    {% get_current_language as lang %} 
+    {% if lang == "ar" %}
+    {% if user.group_id == 4 %}
+      <a href="/{{lang}}/courses" style="color:rgb(217, 251, 255) "><b>أكمل التعلم</b></a>
+    {% endif %}
+
     {% else %}
-     <a href="/{{lang}}/courses" style="color:rgb(217, 251, 255) ">continue learning</a>
+    {% if user.group_id == 4 %}
+    <a href="/{{lang}}/courses" style="color:rgb(217, 251, 255) "><b> continue learning</b></a>
     {% endif %}
 
     {% endif %}
-
     </div>
 
   </div>

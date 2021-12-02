@@ -2016,9 +2016,15 @@ hr{
 
 
 
+.typewritter-title-white{
+  color: #e8ecee !important;
+  
+}
+
+
 .secondary__title{
   position: relative;  
-  color: #fafafa;
+  color: #e8ecee !important;
 }
 
 .secondary__title::after{
@@ -5236,10 +5242,6 @@ img {
   border: 0;
 }
 
-.second-button{
-  background-color: #efecec;
-}
-
 .checkbox {
   opacity: 0;
   position: absolute; 
@@ -5382,9 +5384,10 @@ img {
 
 .hero-become-3{
   position: relative;
-  height: 100%;
+  height: 100% !important;
   background-image: linear-gradient(to bottom, rgba(13,52,96, 0.52), rgba(1, 46, 63, 0.911)),
   url('../img/videos.jpg');
+  background-repeat: no-repeat;
 }
 
 .hero-become h3{
@@ -7075,7 +7078,8 @@ progress {
 .hero .hero-body .booctep-1 {
   color: white;
   font-family: 'Montserrat', sans-serif;
-  font-size: 60px; 
+  font-size: 50px; 
+  margin-bottom: 10px;
   text-align: center !important;
   text-shadow: .03em .03em 0 hsla(230,40%,50%,1);
 }
@@ -10694,15 +10698,175 @@ box-sizing: border-box;
 
 
 
-/* Dark mode */
 
-body div.darkmode {
-  display: inline-block;
-  font-size: 15px;
-  padding: 0;
-  cursor: pointer;
+
+.hero-homepage-2{
+  background-image: url('../img/Boocteep-light-ar.svg');
+  background-size: cover;
 }
-body.dark .darkmode .light, body:not(.dark) .darkmode .dark {
-  display: none;
+
+.hero-homepage-2 .title{
+  color: #fff !important;
+  margin-bottom: 0;
+  font-weight: 600;
+  font-size: 35px;
+}
+
+
+.hero-about-dark{
+  background-image: linear-gradient(to bottom, rgba(59, 88, 124, 0.52), rgba(30, 39, 51, 0.73)),
+  url('../img/1560-dark.jpg') !important;
+  clip-path: polygon(0 0, 100% 0%, 100% 87%, 0% 100%);
+}
+
+
+
+
+.searchby{
+  background-image: linear-gradient(to bottom, rgba(67, 130, 207, 0.52), rgba(19, 80, 138, 0.73)),
+url('../img/categories/single_categories/no-found-ar.svg') !important;
+background-size: cover;
+height: 26px !important;
+}
+
+
+.searchby-dark{
+  background-image: linear-gradient(to bottom, rgba(99, 138, 189, 0.52), rgba(17, 45, 71, 0.911)),
+url('../img/categories/single_categories/no-found-ar.svg') !important;
+background-size: cover;
+}
+
+
+.hero-faqs-dark{
+  background-image: linear-gradient(to bottom,rgba(67, 130, 207, 0.52), rgba(19, 80, 138, 0.73)),
+  url('../img/faqs-dark.jpg') !important;
+}
+
+
+.hero-terms{
+  position: relative;
+  height: 100%;
+  padding-top: 70px !important;
+  background-size: cover;
+  background-image: linear-gradient(to bottom, rgba(33, 78, 129, 0.52), rgba(20, 72, 121, 0.911)),
+  url('../img/terms.jpg') !important;
+}
+
+
+.hero-terms h3{
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.hero-terms a{
+  align-items: center;
+  padding: 20px 50px;
+  margin-left: 41%;
+  margin-bottom: 25px;
+}
+
+
+.hero-terms-dark{
+  background-image: linear-gradient(to bottom,rgba(29, 64, 107, 0.52), rgba(6, 28, 49, 0.73)),
+  url('../img/terms-dark.jpg') !important;
+}
+
+
+
+.hero-privacy{
+  position: relative;
+  height: 100%;
+  padding-top: 70px !important;
+  background-size: cover;
+  background-image: linear-gradient(to bottom, rgba(33, 78, 129, 0.52), rgba(20, 72, 121, 0.911)),
+  url('../img/privacy.jpg') !important;
+}
+
+
+.hero-privacy h3{
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.hero-privacy a{
+  align-items: center;
+  padding: 20px 50px;
+  margin-left: 41%;
+  margin-bottom: 25px;
+}
+
+
+.hero-privacy-dark{
+  background-image: linear-gradient(to bottom,rgba(29, 64, 107, 0.52), rgba(6, 28, 49, 0.73)),
+  url('../img/privacy-dark.jpg') !important;
+}
+
+
+
+
+.hero-contact{
+  position: relative;
+  height: 100%;
+  padding-top: 70px !important;
+  background-size: cover;
+  background-image: linear-gradient(to bottom, rgba(33, 78, 129, 0.52), rgba(20, 72, 121, 0.911)),
+  url('../img/contact.png') !important;
+}
+
+
+.hero-contact h3{
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.hero-contact a{
+  align-items: center;
+  padding: 20px 50px;
+  margin-left: 41%;
+  margin-bottom: 25px;
+}
+
+
+.hero-contact-dark{
+  background-image: linear-gradient(to bottom,rgba(29, 64, 107, 0.52), rgba(6, 28, 49, 0.73)),
+  url('../img/contact-dark.png') !important;
+}
+
+
+
+.hero-become-4{
+  position: relative;
+  padding-top: 5px !important;
+  height: 360px !important;
+  background-size: cover;
+  background-image: linear-gradient(to bottom, rgba(33, 78, 129, 0.52), rgba(20, 72, 121, 0.911)),
+  url('../img/becomee.jpg') !important;
+}
+
+
+.hero-become-4 h3{
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.hero-become-4 a{
+  align-items: center;
+  padding: 20px 50px;
+  margin-left: 41%;
+  margin-bottom: 25px;
+}
+
+
+.hero-become-4-dark{
+  background-image: linear-gradient(to bottom,rgba(29, 64, 107, 0.52), rgba(6, 28, 49, 0.73)),
+  url('../img/becomee-dark.jpg') !important;
 }
 

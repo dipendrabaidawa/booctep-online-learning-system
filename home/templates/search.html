@@ -157,11 +157,28 @@
     padding-right: 25px !important;
 }
 }
+
+.single_category-c {
+    padding-top: 90px;
+    font-size: 25px;
+    color: rgb(229, 236, 241);
+}
+
+.activepagination{
+    background-color: rgb(10, 107, 218) !important;
+    color: white !important;
+}
+
+.activepagination-dark{
+    background-color: rgb(119, 141, 168) !important;
+    border: 1px solid rgb(43, 65, 92) !important;
+    color: rgb(20, 37, 73) !important;
+}
+
     </style>
 
-    <div class="single_category"
-         style="background-image: url('{% static 'assets/img/categories/single_categories/no-found.svg' %}') !important">
-        <div class="container single_category-c">
+    <div class="searchby" style="height: 300px !important;position: relative;">
+        <div class="container single_category-c" style="z-index: 9 !important;">
             {% get_current_language as lang %}
             {% if lang == "ar" %}
             {% if searchstatus == 0 %}
@@ -195,36 +212,35 @@
         <div class="shop-header shop-header-phone">
             <div class="container" style="display: flex; justify-content: space-between;">
                 <div class="store-tabs">
-                    <a data-tab="products-tab" class="tab-control {% if type == -1 %}is-active{% endif %}"
+                    <a class="tab-control {% if type == -1 %}is-active{% endif %}"
                        onclick="setType(-1)">{% trans 'All' %}</a>
-                    <a data-tab="brands-tab" class="tab-control {% if type == 0 %}is-active{% endif %}"
+                    <a class="tab-control {% if type == 0 %}is-active{% endif %}"
                        onclick="setType(0)">{% trans 'Paid' %}</a>
-                    <a data-tab="followers-tab" class="tab-control {% if type == 1 %}is-active{% endif %}"
+                    <a class="tab-control {% if type == 1 %}is-active{% endif %}"
                        onclick="setType(1)">{% trans 'Free' %}</a>
                     <div class="store-naver"></div>
                 </div>
-
-                <div class="combo-item ">
-                    <div class="select is-comboe-hide is-rounded">
-                        <select class="combo-box " style="border-radius:3px;height:40px;margin-top:2px;"
-                            id="category_id_2">
-                            {% get_current_language as lang %}                            
+                <div class="combo-item is-combo-dark">
+                    <div class="select is-comboe-hide is-rounded  ">
+                        <select class="is-comboe  is-comboe-dark" style="border-radius:3px;height:40px;margin-top:2px;"
+                                id="category_id_2">
+                            {% get_current_language as lang %}
                             {% if lang == "ar" %}
-                                <option value="0" {% if order == 0 %}selected{% endif %}>الكل</option>
-                                <option value="1" {% if order == 1 %}selected{% endif %}>الأعلى تقييم</option>
-                                <option value="2" {% if order == 2 %}selected{% endif %}>الأكثر مشاركة</option>
-                                <option value="3" {% if order == 3 %}selected{% endif %}>الأحدث</option>
+                            <option value="0" {% if order == 0 %}selected{% endif %}>الكل</option>
+                            <option value="1" {% if order == 1 %}selected{% endif %}>الأعلى تقييم</option>
+                            <option value="2" {% if order == 2 %}selected{% endif %}>الأكثر مشاركة</option>
+                            <option value="3" {% if order == 3 %}selected{% endif %}>الأحدث</option>
                             {% else %}
-                                <option value="0" {% if order == 0 %}selected{% endif %}>All</option>
-                                <option value="1" {% if order == 1 %}selected{% endif %}>Most Rating</option>
-                                <option value="2" {% if order == 2 %}selected{% endif %}>Most Students</option>
-                                <option value="3" {% if order == 3 %}selected{% endif %}>Newest</option>
+                            <option value="0" {% if order == 0 %}selected{% endif %}>All</option>
+                            <option value="1" {% if order == 1 %}selected{% endif %}>Most Rating</option>
+                            <option value="2" {% if order == 2 %}selected{% endif %}>Most Students</option>
+                            <option value="3" {% if order == 3 %}selected{% endif %}>Newest</option>
                             {% endif %}
-                    </select>
+                        </select>
                     </div>
-
-                    <div class="select select-phone is-rounded">
-                        <select class="combo-box selected-item is-focused"  style="border-radius:3px;height:40px;margin-top:2px;" id="category_id" onchange="category()">
+                    <div class="select select-phone is-rounded " >
+                        <select class="is-comboe is-comboe-dark" id="category_id" data-select="{{ cat_id }}"
+                                style="border-radius:3px;height:40px;margin-top:2px" onchange="category()">
                             {% get_current_language as lang %}
                             {% if lang == "ar" %}
                                 <option value="0">الكل</option>
@@ -304,6 +320,7 @@
                                                     </div>
 
                                                     {% if course.price > 0 %}
+                                                      {% if user.is_authenticated %}
                                                         {% if course.id in alreadyinFav %}
                                                             <div class="photo-like pop-button has-tooltip is-shifted is-active favbutton"
                                                                  id="invite-pop" data-id="{{ course.id }}">
@@ -328,9 +345,7 @@
                                                                     </svg>
                                                                 </a>
                                                             </div>
-
                                                         {% else %}
-
                                                             <div class="photo-like pop-button has-tooltip favbutton"
                                                                  id="invite-pop" data-id="{{ course.id }}">
 
@@ -361,7 +376,7 @@
                                                                data-title="Relationship"
                                                                data-id="{{ course.id }}">
                                                                 <i class="fa fa-shopping-cart"
-                                                                   style="font-size: 22px;color: blue;"></i>
+                                                                   style="font-size: 22px;color: rgb(88, 88, 241);"></i>
                                                             </a>
                                                         {% else %}
                                                             <a id="follow-pop"
@@ -372,7 +387,8 @@
                                                                    style="font-size: 22px;color: #fff;"></i>
                                                             </a>
                                                         {% endif %}
-                                                    {% else %}
+                                                       {% else %}
+                                                       {% if user.is_authenticated %}
                                                         <div class="photo-like pop-button has-tooltip favbutton"
                                                              style="left:10px !important"
                                                              data-title="Relationship"
@@ -396,7 +412,8 @@
                                                                 </svg>
                                                             </a>
                                                         </div>
-
+                                                        {% endif %}
+                                                        {% endif %}
                                                     {% endif %}
                                                 </div>
                                             </div>
@@ -478,32 +495,46 @@
                         {% endfor %}
                     </div>
 
+
+                    <style>
+                        .pagination{
+                            direction: ltr !important;
+                        }
+                        .disabled-dark{
+                            background-color: rgb(211, 215, 221) !important;
+                            border: 1px solid rgb(211, 215, 221) !important;
+                            color: rgb(27, 63, 97) !important;
+                        }
+                        .itempagination-dark{
+                            background-color: rgb(224, 233, 240) !important;
+                        }
+                    </style>
                     <center>
                         {% if course_list.has_other_pages %}
                             <ul class="pagination">
                                 {% if course_list.has_previous %}
-                                    <li><a onclick="page_prev()">
-                                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                    <li style="" class="itempagination itempagination-dark"><a onclick="page_prev()" style="">
+                                        <i class="fa fa-angle-right" style="" aria-hidden="true"></i>
                                     </a></li>
                                 {% else %}
-                                    <li class="disabled">
+                                    <li class="disabled disabled-dark">
                                         <i class="fa fa-angle-left" aria-hidden="true"></i></li>
                                 {% endif %}
                                 {% for i in course_list.paginator.page_range %}
                                     {% if course_list.number == i %}
-                                        <li class="active" style="background: #0d79df; color: white; cursor: pointer;"
+                                        <li class="active activepagination" style=" cursor: pointer;"
                                             onclick="page_set({{ i }})"><span>{{ i }}</span>
                                         </li>
                                     {% else %}
-                                        <li><a onclick="page_set({{ i }})">{{ i }}</a></li>
+                                        <li class="itempagination itempagination-dark"><a onclick="page_set({{ i }})">{{ i }}</a></li>
                                     {% endif %}
                                 {% endfor %}
                                 {% if course_list.has_next %}
-                                    <li><a onclick="page_next()">
+                                    <li class="itempagination itempagination-dark"><a onclick="page_next()">
                                         <i class="fa fa-angle-right" aria-hidden="true"></i>
                                     </a></li>
                                 {% else %}
-                                    <li class="disabled">
+                                    <li class="disabled disabled-dark">
                                         <i class="fa fa-angle-right" aria-hidden="true"></i>
                                     </li>
                                 {% endif %}
@@ -523,7 +554,13 @@
             <div class="card">
                 <div class="card-heading">
                     <div class="user-meta">
-                        <img id="modal-img" src="/static/assets/img/man.jpg">
+                        {% if user.profile.image %}
+                        <img class="avatar brd brd-dark" src="/static{{ user.image }}" style=""
+                             data-demo-src="">
+                        {% else %}
+                        <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style=""
+                             data-demo-src="">
+                        {% endif %}
                     </div>
                     <span class="user-meta-span"
                           id="modal-user-name ml-3">{{ course.user.first_name }}{{ course.user.last_name }} </span>
@@ -533,8 +570,8 @@
 
                     <!-- Close X button -->
                     <div class="close-wrap" >
-                        <span class="close-modal" style="background-color: #e9e9e9 !important;">
-                            <i data-feather="x" style="color: #c7c7c7 !important;"></i>
+                        <span class="close-modal" onclick="closeModal()" style="">
+                            <i class="fa fa-times"></i>
                         </span>
                     </div>
                 </div>

@@ -185,12 +185,11 @@
   background-size: cover;
 }
 
+  
 .dark-homepage .title{
-  color: #222831;
+    color: #dce3ee !important;
 }
-
-
-
+  
 
 .shop-header-is-dark{
     background-color: #222831;
@@ -220,6 +219,15 @@
 
 
 
+
+
+
+  .hero-about-dark{
+    background-image: linear-gradient(to bottom, rgba(59, 88, 124, 0.52), rgba(30, 39, 51, 0.73)),
+    url('../img/1560-dark.jpg') !important;
+    clip-path: polygon(0 0, 100% 0%, 100% 87%, 0% 100%);
+  }
+  
 
 
 
@@ -1092,3 +1100,5 @@
     border: 1px solid #000;
     background: #222831
 }
+
+

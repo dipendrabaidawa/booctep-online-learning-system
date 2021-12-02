@@ -1089,3 +1089,21 @@
     border: 1px solid #000;
     background: #222831
 }
+
+
+.dark-homepage-2{
+    background-image: url('../img/bg-dark-2.svg');
+    background-size: cover;
+}
+  
+.dark-homepage-2 .title{
+  color: #dce3ee;
+}
+
+
+.hero-about-dark{
+    background-image: linear-gradient(to bottom, rgba(31, 50, 73, 0.52), rgba(49, 65, 87, 0.73)),
+    url('../img/1560-dark.jpg') !important;
+    clip-path: polygon(0 0, 100% 0%, 100% 87%, 0% 100%);
+}
+  

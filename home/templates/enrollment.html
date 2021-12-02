@@ -4,6 +4,40 @@
       width: 100% !important;
   }
 
+
+.textt{
+  color: rgb(50, 53, 58) !important;
+}
+
+.textt-dark{
+  color: rgb(228, 229, 230) !important;
+}
+
+
+  .suceeess{
+    background-color: rgb(77, 202, 161) !important;
+    border: 1px solid rgb(60, 156, 97);
+    color: rgb(4, 44, 37);
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .dawrat{
+    background-color: rgb(255, 255, 255) !important;
+    padding-top: 20px;
+    border: 1px solid rgb(217, 219, 219);
+    border-radius: 5px;
+  }
+  .dawrat-dark{
+    background-color: #222831 !important;
+    border: 1px solid #161a20 !important;
+  }
+
+  .suceeess-dark{
+    background-color: rgb(167, 209, 196) !important;
+    border: 1px solid rgb(224, 248, 228) !important;
+  }
+
   .plyr--video {
       width: 100%;
   }
@@ -477,143 +511,77 @@
     </style>
 {% endblock %} {% block content %}
 
-<!-- Mobile Navbar -->
-<nav class="navbar mobile-navbar is-hidden-desktop" aria-label="main navigation">
-  <!-- Brand -->
-  <div class="navbar-brand">
-    <a class="navbar-item2" href="/">
-      <img class="mobile-logo" src="/static/assets/img/favicon.png" alt="" />
-    </a>
 
-    <div id="mobile-explorer-trigger" class="navbar-item is-icon">
-      <a class="icon-link is-primary">
-        <i class="mdi mdi-apps"></i>
-      </a>
+
+
+<div class="container" style="padding-top: 90px;">
+  <div class="shop-wrappr">
+    <div class="suceeess suceeess-dark">
+      {% get_current_language as lang %}
+      {% if lang == 'ar' %}
+        <b style="">شكرا لشرائك, حان وقت البدء للاستفادة وزيادة قدراتك</b>
+      {% else %}
+        <b style="">Thanks for your purchase, its time for study and increase your learning career.</b>
+      {% endif %}
     </div>
-
-    <!-- Mobile menu toggler icon -->
-    <div class="navbar-burger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-  <!-- Navbar mobile menu -->
-  <div class="navbar-menu">
-    <!-- Account -->
-    <div class="navbar-item has-dropdown">
-      <div class="navbar-link">
-        <img
-          src="/static/assets/img/man.jpg"
-          data-demo-src="/static/assets/img/avatars/jenna.png"
-          alt=""
-        />
-        <span class="is-heading"> </span>
-      </div>
-
-      <div class="navbar-item">
-        <div id="global-search" class="control">
-          <input
-            id="tipue_drop_input"
-            class="input"
-            type="text"
-            placeholder="Search"
-            required
-          />
-          <span id="clear-search" class="reset-search">
-            <i data-feather="x"></i>
-          </span>
-          <span class="search-icon">
-            <i data-feather="search"></i>
-          </span>
-        </div>
-      </div>
-      <!-- Mobile Dropdown -->
-      <div class="navbar-dropdown">
-        <a href="#" class="navbar-item is-flex is-mobile-icon">
-          <span><i data-feather="user"></i>Profile</span>
-        </a>
-        <a href="#" class="navbar-item is-flex is-mobile-icon">
-          <span><i data-feather="shopping-cart"></i>Cart</span>
-          <span class="menu-badge">3</span>
-        </a>
-        <a href="#" class="navbar-item is-flex is-mobile-icon">
-          <span><i data-feather="settings"></i>Settings</span>
-        </a>
-        <a href="#" class="navbar-item is-flex is-mobile-icon">
-          <span><i data-feather="hexagon"></i>Logout</span>
-        </a>
-
-        <div class="buttons">
-          <a class="button second-button">
-            <p>Sign up</p>
-          </a>
-          <a
-            class="
-              button
-              primary-button
-              raised
-              quickview-trigger
-              process-button
-            "
-          >
-            <p>Log in</p>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</nav>
-
-<!-- Start Carousel -->
-<div class="single_category-5">
-  <div class="container">
-    {% get_current_language as lang %}
-    {% if lang == 'ar' %}
-      <h3 style="">شكرا لتسجيلك!</h3>
-    {% else %}
-      <h3 style="">Thanks for your enrollment!</h3>
-    {% endif %}
-    <!-- <p>{{ course.description|safe }}</p> -->
   </div>
 </div>
-<!-- End Carousel -->
+
 
 <div class="container">
-    <div class="shop-wrapper">
-        <div class="cart-content">
-            <div class="schedule schedule-dark" style="margin-top: 30px !important">
-                <div class="videos-wrapper has-player" style="padding-top:16px">
-                    <div class="video-side" >
-                        <div class="video-meta"  style="background-color: inherit !important;">
-                            {% get_current_language as lang %}
-                            {% if lang == 'ar' %}
-                              <span style="font-size: 20px !important; margin-right: 20px;" class="mediabout mediabout-dark">{{ course.name }}</span>
-                              <span class="mediabout mediabout-dark" style="float:left; margin-left: 20px;">{{ course.category.name }}</span>
-                            {% else %}
-                              <span style="font-size: 20px !important; margin-left: 20px;" class="mediabout mediabout-dark">{{ course.name }}</span>
-                              <span class="mediabout mediabout-dark" style="float:right; margin-right: 20px;">{{ course.category.name }}</span>
-                            {% endif %}
-                        </div>
-                        <div class="meta-box video-meta"  style="background-color: inherit !important;">
-                            <h4 style="font-size: 16px; margin-left: 20px;" class="mediabout mediabout-dark">
-                              {{ course.description }}
-                            </h4>
-                        </div>
-                    </div>
-                </div>
-                {% get_current_language as lang %}
-                {% if lang == "ar" %}
-                  <a class="button primary-button is-solid raised story modal-trigger login-button-is-dark" href="javascript:void(0)" style="margin: 10px;" onclick="onStartLearn({{ course.id }})">ابدأ التعلم
-                  </a>
-                {% else %}
-                  <a class="button primary-button is-solid raised story modal-trigger login-button-is-dark" href="javascript:void(0)" style="margin: 10px;" onclick="onStartLearn({{ course.id }})">Start learn
-                  </a>
-                {% endif %}
+
+
+  <div class="cart-content">
+    <div class="columns">
+      {% get_current_language as lang %}
+      {% if lang == 'en' %}
+        <div class="column is-6" style="padding-top: 40px;">
+
+          <div class="categories-header">
+              <h2>My courses</h2>
+          </div>
+
+          <div class="dawrat dawrat-dark">
+            
+
+              <span style="font-size: 20px !important; margin-left: 20px;" class="mediabout mediabout-dark">{{ course.name }}</span>
+              <span class="mediabout mediabout-dark" style="float:right; margin-right: 20px;">{{ course.category.name }}</span>
+           
+            <br>
+
+              <a class="button primary-button is-solid raised story modal-trigger login-button-is-dark" href="javascript:void(0)" style="margin: 10px;" onclick="onStartLearn({{ course.id }})">Start learn
+              </a>
+      
             </div>
         </div>
+        <div class="column is-6"></div>
+      {% else %}
+      <div class="column is-6" style="padding-top: 40px;">
+
+        <div class="categories-header">
+            <h2>دوراتي</h2>
+        </div>
+
+        <div class="dawrat dawrat-dark">
+          
+
+            <span style="font-size: 20px !important; margin-right: 20px;" class="mediabout mediabout-dark">{{ course.name }}</span>
+            <span class="mediabout mediabout-dark" style="float:left; margin-left: 20px;">{{ course.category.name }}</span>
+     
+          <br>
+
+            <a class="button primary-button is-solid raised story modal-trigger login-button-is-dark" href="javascript:void(0)" style="margin: 10px;" onclick="onStartLearn({{ course.id }})">ابدأ التعلم
+            </a>
+    
+          </div>
+      </div>
+      <div class="column is-6"></div>
+      {% endif %}
     </div>
+  </div>
+
 </div>
+
 
 <!-- Filters and courses -->
 <div id="shop-page" class="shop-wrapper">
@@ -812,7 +780,7 @@
                       overflow: hidden;
                       text-overflow: ellipsis;
                     "
-                  >
+                  class="textt textt-dark">
                     {{ course.description | safe | truncatechars:30 }}
                   </div>
                   <i class="fa fa-users"></i>

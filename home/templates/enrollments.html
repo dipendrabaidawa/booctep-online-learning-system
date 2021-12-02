@@ -4,6 +4,39 @@
       width: 100% !important;
   }
 
+  .textt{
+  color: rgb(50, 53, 58) !important;
+}
+
+.textt-dark{
+  color: rgb(228, 229, 230) !important;
+}
+
+
+  .suceeess{
+    background-color: rgb(77, 202, 161) !important;
+    border: 1px solid rgb(60, 156, 97);
+    color: rgb(4, 44, 37);
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .dawrat{
+    background-color: rgb(255, 255, 255) !important;
+    padding-top: 20px;
+    border: 1px solid rgb(217, 219, 219);
+    border-radius: 5px;
+  }
+  .dawrat-dark{
+    background-color: #222831 !important;
+    border: 1px solid #161a20 !important;
+  }
+
+  .suceeess-dark{
+    background-color: rgb(167, 209, 196) !important;
+    border: 1px solid rgb(224, 248, 228) !important;
+  }
+
   .plyr--video {
       width: 100%;
   }
@@ -478,57 +511,79 @@
 {% endblock %} {% block content %}
 
 
-<!-- Start Carousel -->
-<div class="single_category-5">
-  <div class="container">
-    {% get_current_language as lang %}
-    {% if lang == 'ar' %}
-      <h3 style="">شكرا لتسجيلك!</h3>
-    {% else %}
-      <h3 style="">Thanks for your enrollment!</h3>
-    {% endif %}
-    <!-- <p>{{ course.description|safe }}</p> -->
+
+<div class="container" style="padding-top: 90px;">
+  <div class="shop-wrappr">
+    <div class="suceeess suceeess-dark">
+      {% get_current_language as lang %}
+      {% if lang == 'ar' %}
+        <b style="">شكرا لانضمامك, حان وقت البدء للاستفادة وزيادة قدراتك</b>
+      {% else %}
+        <b style="">Thanks for your enrollment, its time for study and increase your learning career.</b>
+      {% endif %}
+    </div>
   </div>
 </div>
-<!-- End Carousel -->
+
+
+
 
 <div class="container">
-    <div class="shop-wrapper">
-        <div class="cart-content">
-          {% for course in courses %}
-            <div class="schedule schedule-dark" style="margin-top: 30px !important">
-                <div class="videos-wrapper has-player" style="padding-top:16px">
-                    <div class="video-side" >
-                        <div class="video-meta"  style="background-color: inherit !important;">
-                            {% get_current_language as lang %}
-                            {% if lang == 'ar' %}
-                              <span style="font-size: 20px !important; margin-right: 20px;" class="mediabout mediabout-dark">{{ course.name }}</span>
-                              <span class="mediabout mediabout-dark" style="float:left; margin-left: 20px;">{{ course.category.name }}</span>
-                            {% else %}
-                              <span style="font-size: 20px !important; margin-left: 20px;" class="mediabout mediabout-dark">{{ course.name }}</span>
-                              <span class="mediabout mediabout-dark" style="float:right; margin-right: 20px;">{{ course.category.name }}</span>
-                            {% endif %}
-                        </div>
-                        <div class="meta-box video-meta"  style="background-color: inherit !important;">
-                          <h4 style="font-size: 16px; margin-left: 20px;" class="mediabout mediabout-dark">
-                            {{ course.description }}
-                          </h4>
-                        </div>
-                    </div>
-                </div>
-                {% get_current_language as lang %}
-                {% if lang == "ar" %}
-                  <a class="button primary-button is-solid raised story modal-trigger login-button-is-dark" href="javascript:void(0)" style="margin: 10px;" onclick="onStartLearn({{ course.id }})">ابدأ التعلم
-                  </a>
-                {% else %}
-                  <a class="button primary-button is-solid raised story modal-trigger login-button-is-dark" href="javascript:void(0)" style="margin: 10px;" onclick="onStartLearn({{ course.id }})">Start learn
-                  </a>
-                {% endif %}
+
+
+  <div class="cart-content">
+    <div class="columns">
+      {% get_current_language as lang %}
+      {% if lang == 'en' %}
+        <div class="column is-6" style="padding-top: 40px;">
+
+          <div class="categories-header">
+              <h2>My courses</h2>
+          </div>
+
+          <div class="dawrat dawrat-dark">
+            
+
+              <span style="font-size: 20px !important; margin-left: 20px;" class="mediabout mediabout-dark">{{ course.name }}</span>
+              <span class="mediabout mediabout-dark" style="float:right; margin-right: 20px;">{{ course.category.name }}</span>
+           
+            <br>
+
+              <a class="button primary-button is-solid raised story modal-trigger login-button-is-dark" href="javascript:void(0)" style="margin: 10px;" onclick="onStartLearn({{ course.id }})">Start learn
+              </a>
+      
             </div>
-          {% endfor %}
         </div>
+        <div class="column is-6"></div>
+      {% else %}
+      <div class="column is-6" style="padding-top: 40px;">
+
+        <div class="categories-header">
+            <h2>دوراتي</h2>
+        </div>
+
+        <div class="dawrat dawrat-dark">
+          
+
+            <span style="font-size: 20px !important; margin-right: 20px;" class="mediabout mediabout-dark">{{ course.name }}</span>
+            <span class="mediabout mediabout-dark" style="float:left; margin-left: 20px;">{{ course.category.name }}</span>
+     
+          <br>
+
+            <a class="button primary-button is-solid raised story modal-trigger login-button-is-dark" href="javascript:void(0)" style="margin: 10px;" onclick="onStartLearn({{ course.id }})">ابدأ التعلم
+            </a>
+    
+          </div>
+      </div>
+      <div class="column is-6"></div>
+      {% endif %}
     </div>
+  </div>
+
 </div>
+
+
+
 
 <!-- Filters and courses -->
 <div id="shop-page" class="shop-wrapper">
@@ -537,7 +592,12 @@
     <div class="store-sections">
       <div class="container">
         <div class="categories-header">
+          {% get_current_language as lang %}
+          {% if lang == 'ar' %}
+          <h2>دورات مماثلة</h2>
+          {% else %}
           <h2>Similar courses</h2>
+          {% endif %}
         </div>
         <div
           id="products-tab"
@@ -722,7 +782,7 @@
                       overflow: hidden;
                       text-overflow: ellipsis;
                     "
-                  >
+                  class="textt textt-dark">
                     {{ course.description | safe | truncatechars:30 }}
                   </div>
                   <i class="fa fa-users"></i>

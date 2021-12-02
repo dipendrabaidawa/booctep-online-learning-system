@@ -7,6 +7,10 @@
 
 <style>
 
+.skyblue-hover:hover{
+    color: rgb(144, 162, 190);
+}
+
 article {
 	max-width: 900px;
 	margin: 0 auto;
@@ -670,7 +674,7 @@ article p{
                                     
                                     <div>
                                         <h1>كيف تقوم بإنشاء حساب في بوستيب؟</h1>
-                                        <code><b>أولا:</b> اذهب إلى صفحة <a href="{% url 'signup' %}">تسجيل جديد</a> </code><br>
+                                        <code><b>أولا:</b> اذهب إلى صفحة <a href="{% url 'signup' %}" class="skyblue-hover">تسجيل جديد</a> </code><br>
                                         <code><b>ثانيا:</b> قم باختيار نوع الحساب, معلم أم طالب.</code><br>
                                         <code><b>ثالثا:</b> أدخل اسمك الأول والأخير.</code><br>
                                         <code><b>رابعا:</b> أدخل إيميلك.</code><br>
@@ -681,7 +685,7 @@ article p{
                                         
                                         <h1>لم تتمكن من التسجيل؟</h1>
                                         <p>تستطيع أيضا التسجيل عبر حسابات التواصل الإجتماعي, فيسبوك وقوقل.</p>
-                                        <code style="margin-bottom: 15px !important;">سوف تجدها في صفحة التسجيل من <a href="{% url 'signup' %}">هنا </a> </code>
+                                        <code style="margin-bottom: 15px !important;">سوف تجدها في صفحة التسجيل من <a href="{% url 'signup' %}" class="skyblue-hover">هنا </a> </code>
 
                                         <img src="{%static 'assets/img/ensign.png' %}" alt="signup" />
                                         
@@ -716,7 +720,7 @@ article p{
                                     
                                     <div>
                                         <h1>How to create an account?</h1>
-                                        <code>1. Go to <a href="{% url 'signup' %}">signup</a> page.</code><br>
+                                        <code>1. Go to <a href="{% url 'signup' %}" class="skyblue-hover">signup</a> page.</code><br>
                                         <code>2. Choose what you either want to learn or teach.</code><br>
                                         <code>3. Enter your first and last name.</code><br>
                                         <code>4. Enter your Email.</code><br>
@@ -733,7 +737,7 @@ article p{
                                         
                                         
                                         <h1>Still you can't sign up?</h1>
-                                        <p>If you still having a trouble with sign up, please <a href="{% url 'contact_us' %}">contact us</a> and we'll be ready to help.</p>
+                                        <p>If you still having a trouble with sign up, please <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> and we'll be ready to help.</p>
                                         <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                     </div>
@@ -805,14 +809,14 @@ article p{
                                 <div>
                                     <h1>كيف أقوم بتعديل اسمي؟</h1>
                                     <code>- قم بالدخول إلى حسابك</code><br>
-                                    <code>- اذهب إلى لوحة التحكم الخاصة بك | الإعدادات من <a href="{% url 'student account' %}">هنا</a>  </code><br>
+                                    <code>- اذهب إلى لوحة التحكم الخاصة بك | الإعدادات من <a href="{% url 'student account' %}" class="skyblue-hover">هنا</a>  </code><br>
                                     <code>- قم بالتعديل على اسمك الأول والأخير.</code><br>
                                     <code>- قم بالضغط على حفظ البيانات.</code><br>
                                     
 
                                     <h1>كيف أقوم بتغيير صورتي الشخصية؟</h1>
                                     <code>- قم بالدخول إلى حسابك</code><br>
-                                    <code>- اذهب إلى لوحة التحكم الخاصة بك | الإعدادات من <a href="{% url 'student account' %}">هنا</a>  </code><br>
+                                    <code>- اذهب إلى لوحة التحكم الخاصة بك | الإعدادات من <a href="{% url 'student account' %}" class="skyblue-hover">هنا</a>  </code><br>
                                     <code>- قم باختيار صورة لوضعها.</code><br>
                                     <code>- قم بالضغط على حفظ البيانات.</code><br>
 
@@ -820,7 +824,7 @@ article p{
 
                                     <h1>كيف أقوم بتغيير كلمة المرور؟</h1>
                                     <code>- قم بالدخول إلى حسابك</code><br>
-                                    <code>- اذهب إلى لوحة التحكم الخاصة بك | الأمان من <a href="{% url 'student security' %}">هنا</a>  </code><br>
+                                    <code>- اذهب إلى لوحة التحكم الخاصة بك | الأمان من <a href="{% url 'student security' %}" class="skyblue-hover">هنا</a>  </code><br>
                                     <code>- قم بإدخال كلمة المرور الحالية.</code><br>
                                     <code>- قم بإدخال كلمة المرور ( يفضل أن تكون قوية وسهلة الحفظ لك ).</code><br>
                                     <code>- إعادة ادخال كلمة المرور.</code><br>
@@ -829,7 +833,7 @@ article p{
                                   
                                     
                                     <h1>لا زلت تواجه مشكلة في تعديل بياناتك؟</h1>
-                                    <p>إذا واجهت مشكلة في تعديل بياناتك, من فضلك قم <a href="{% url 'contact_us' %}">بالإتصال بنا</a> , سوف نكون سعداء بمساعدتك.</p>
+                                    <p>إذا واجهت مشكلة في تعديل بياناتك, من فضلك قم <a href="{% url 'contact_us' %}" class="skyblue-hover">بالإتصال بنا</a> , سوف نكون سعداء بمساعدتك.</p>
 
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
@@ -857,14 +861,14 @@ article p{
                                 <div>
                                     <h1>How to edit my profile first name & last name?</h1>
                                     <code>1. Login into your booctep account.</code><br>
-                                    <code>2. Go to your dashboard/setting by clicking <a href="{% url 'student account' %}">here</a></code><br>
+                                    <code>2. Go to your dashboard/setting by clicking <a href="{% url 'student account' %}" class="skyblue-hover">here</a></code><br>
                                     <code>3. Change your first name or last name.</code><br>
                                     <code>4. Click on save changes.</code><br>
                                     
 
                                     <h1>How to edit my profile photo?</h1>
                                     <code>1. Login into your booctep account.</code><br>
-                                    <code>2. Go to your dashboard/setting by clicking <a href="{% url 'student account' %}">here</a></code><br>
+                                    <code>2. Go to your dashboard/setting by clicking <a href="{% url 'student account' %}" class="skyblue-hover">here</a></code><br>
                                     <code>3. Select the photo you want.</code><br>
                                     <code>4. Click on save changes.</code><br>
 
@@ -872,7 +876,7 @@ article p{
 
                                     <h1>How to edit my password?</h1>
                                     <code>1. Login into your booctep account.</code><br>
-                                    <code>2. Go to your dashboard/security by clicking <a href="{% url 'student security' %}">here</a></code><br>
+                                    <code>2. Go to your dashboard/security by clicking <a href="{% url 'student security' %}" class="skyblue-hover">here</a></code><br>
                                     <code>3. Enter your old password.</code><br>
                                     <code>4. Enter your new password.</code><br>
                                     <code>5. Retype your password.</code><br>
@@ -881,7 +885,7 @@ article p{
                                   
                                     
                                     <h1>Still having a trouble with edit your information?</h1>
-                                    <p>If you still having a trouble with editing your information, please <a href="{% url 'contact_us' %}">contact us</a> and we'll be ready to help.</p>
+                                    <p>If you still having a trouble with editing your information, please <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> and we'll be ready to help.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 </div>
@@ -944,7 +948,7 @@ article p{
                                 </div>
 
                                 <h1>مشاكل تسجيل الدخول:</h1>
-                                <p>إذا كنت تتذكر كلمة مرورك الحالية قم بتغيير كلمة المرور من <a href="{% url 'student security' %}">هنا</a></a>.</p>
+                                <p>إذا كنت تتذكر كلمة مرورك الحالية قم بتغيير كلمة المرور من <a href="{% url 'student security' %}" class="skyblue-hover">هنا</a></a>.</p>
 
                                 <br>
                                 <br>
@@ -957,7 +961,7 @@ article p{
                                     <h1>إذا كنت تواجه مشاكل في تغيير كلمة مرورك, هنا بعض أكثر المشاكل الشائعة:</h1>    
                                     <br>
                                     <p>كيف تقوم بتسجيل الدخول للمنصة؟</p>
-                                    <code>1. قم بالذهاب إلى <a href="/{{ lang }}">booctep.com</a></code><br>
+                                    <code>1. قم بالذهاب إلى <a href="/{{ lang }}" class="skyblue-hover">booctep.com</a></code><br>
                                     <code>2. في أعلى الصفحة بالجهة اليسرى قم بالضغط على تسجيل دخول.</code><br>
                                     <code>3. تستطيع تسجيل الدخول بأي بريد إلكتروني مسجل بالمنصة.</code><br>
                                     <code>4. قم بإدخال كلمة المرور.</code><br>
@@ -966,7 +970,7 @@ article p{
                                     <br>
 
                                     <p>كيف أقوم بتغيير كلمة مرور حسابي؟</p>
-                                    <code>1. قم بالذهاب إلى <a href="/{{ lang }}">هنا</a>.</code><br>
+                                    <code>1. قم بالذهاب إلى <a href="/{{ lang }}" class="skyblue-hover">هنا</a>.</code><br>
                                     <code>2. قم بإدخال بريدك الإلكتروني المسجل في المنصة.</code><br>
                                     <code>3. قم بالذهاب إلى بريدك الإلكتروني.</code><br>
                                     <code>4. قم بالضغط على البريد المستلم من بوستيب لتغيير كلمة المرور.</code><br>
@@ -976,12 +980,12 @@ article p{
                                     <br><br>
 
                                     <p>قمت بنسيان البريد الإلكتروني؟</p>
-                                    <code>من فضلك قم بالتواصل معنا من <a href="{% url 'contact_us' %}">هنا</a> سنكون سعداء لخدمتك.</code><br>
+                                    <code>من فضلك قم بالتواصل معنا من <a href="{% url 'contact_us' %}" class="skyblue-hover">هنا</a> سنكون سعداء لخدمتك.</code><br>
                                     
                                     <br>
 
                                     <p>لا أستطيع تغيير كلمة المرور</p>
-                                    <code>من فضلك قم بالتواصل معنا من <a href="{% url 'contact_us' %}">هنا</a> سنكون سعداء لخدمتك.</code><br>
+                                    <code>من فضلك قم بالتواصل معنا من <a href="{% url 'contact_us' %}" class="skyblue-hover">هنا</a> سنكون سعداء لخدمتك.</code><br>
                                     
 
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
@@ -1005,7 +1009,7 @@ article p{
                                 </div>
 
                                 <h1>Login popular problems</h1>
-                                <p>If you know your current password, you can <a href="{% url 'student security' %}">change it</a>.</p>
+                                <p>If you know your current password, you can <a href="{% url 'student security' %}" class="skyblue-hover"> change it</a>.</p>
                                
                                 <p>When you create a new password, bear in mind:</p>
                                 <ol style="margin-bottom: 10px !important;">
@@ -1019,7 +1023,7 @@ article p{
                                     
                                 <div>
                                     <h1>How can you login to your account?</h1>
-                                    <code>1. Go to <a href="/{{ lang }}">booctep.com</a>.</code><br>
+                                    <code>1. Go to <a href="/{{ lang }}" class="skyblue-hover">booctep.com</a>.</code><br>
                                     <code>2. on the top right click on Login button.</code><br>
                                     <code>3. You can log in with any email address that's listed on your Booctep account.</code><br>
                                     <code>4. Click on password and enter your password.</code><br>
@@ -1029,7 +1033,7 @@ article p{
 
 
                                     <h1>How to reset my password?</h1>
-                                    <code>1. Go to <a href="/{{ lang }}">Here</a>.</code><br>
+                                    <code>1. Go to <a href="/{{ lang }}" class="skyblue-hover">Here</a>.</code><br>
                                     <code>2. Enter your email  address that's listed on your Booctep account.</code><br>
                                     <code>3. Go to your Email inbox.</code><br>
                                     <code>4. Click on reset password link.</code><br>
@@ -1039,12 +1043,12 @@ article p{
                                   
 
                                     <h1>I forget my email address?</h1>
-                                    <code>Please <a href="{% url 'contact_us' %}">contact us</a> and we'll be ready to help.</code><br>
+                                    <code>Please <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> and we'll be ready to help.</code><br>
                                     
          
 
                                     <h1>I can't reset my passwoed?</h1>
-                                    <code>Please <a href="{% url 'contact_us' %}">contact us</a> and we'll be ready to help.</code><br>
+                                    <code>Please <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> and we'll be ready to help.</code><br>
                                     
 
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
@@ -1117,7 +1121,7 @@ article p{
                                   
                                     
                                     <h1>لا زلت تواجه مشكلة؟</h1>
-                                    <p>إذا كنت تواجه المشكلة مجددا, من فضلك قم بمراسلتنا <a href="{% url 'contact_us' %}">هنا</a> سنكون سعداء بخدمتك.</p>
+                                    <p>إذا كنت تواجه المشكلة مجددا, من فضلك قم بمراسلتنا <a href="{% url 'contact_us' %}" class="skyblue-hover">هنا</a> سنكون سعداء بخدمتك.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 </div>
@@ -1150,7 +1154,7 @@ article p{
                                   
                                     
                                     <h1>Still having a trouble?</h1>
-                                    <p>If you still having a trouble with your password, please <a href="{% url 'contact_us' %}">contact us</a> and we'll be ready to help.</p>
+                                    <p>If you still having a trouble with your password, please <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> and we'll be ready to help.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 </div>
@@ -1216,7 +1220,7 @@ article p{
                                     <h1>إذا واجهتك مشاكل في عدم تذكر البريد الإلكتروني, قم بمراسلتنا سنكون سعداء بخدمتك</h1>
 
              
-                                    <p> راسلنا<a href="{% url 'contact_us' %}"> هنا </a> نحن في أتم الإستعداد  لخدمتك.</p>
+                                    <p> راسلنا<a href="{% url 'contact_us' %}" class="skyblue-hover"> هنا </a> نحن في أتم الإستعداد  لخدمتك.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 </div>
@@ -1241,7 +1245,7 @@ article p{
                                 <div>
                                     <h1>If you're having trouble finding your email, please let us know.</h1>
              
-                                    <p> please <a href="{% url 'contact_us' %}">contact us</a> and we'll be ready to help.</p>
+                                    <p> please <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> and we'll be ready to help.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 </div>
@@ -1299,7 +1303,7 @@ article p{
                                 </div>
 
                                 <h1>تغيير كلمة المرور</h1>
-                                <p>إذا كنت تتذكر كلمة مرورك الحالية قم بتغيير كلمة المرور من <a href="{% url 'student security' %}">هنا</a></a>.</p>
+                                <p>إذا كنت تتذكر كلمة مرورك الحالية قم بتغيير كلمة المرور من <a href="{% url 'student security' %}" class="skyblue-hover">هنا</a></a>.</p>
                                
 
                                 <br>
@@ -1314,7 +1318,7 @@ article p{
 
 
                                 <p>كيف أقوم بتغيير كلمة مرور حسابي؟</p>
-                                <code>1. قم بالذهاب إلى <a href="/{{ lang }}">هنا</a>.</code><br>
+                                <code>1. قم بالذهاب إلى <a href="/{{ lang }}" class="skyblue-hover">هنا</a>.</code><br>
                                 <code>2. قم بإدخال بريدك الإلكتروني المسجل في المنصة.</code><br>
                                 <code>3. قم بالذهاب إلى بريدك الإلكتروني.</code><br>
                                 <code>4. قم بالضغط على البريد المستلم من بوستيب لتغيير كلمة المرور.</code><br>
@@ -1322,7 +1326,7 @@ article p{
                                 <code>4. قم بالضغط على إرسال.</code><br>
 
                                 <h1>لا زلت تواجه مشكلة؟</h1>
-                                 <code>من فضلك قم بمراسلتنا <a href="{% url 'contact_us' %}"> هنا </a>سنكون سعداء بخدمتك.</code><br>
+                                 <code>من فضلك قم بمراسلتنا <a href="{% url 'contact_us' %}" class="skyblue-hover"> هنا </a>سنكون سعداء بخدمتك.</code><br>
                                     
 
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
@@ -1346,7 +1350,7 @@ article p{
                                 </div>
 
                                 <h1>Reset your password</h1>
-                                <p>If you know your current password, you can <a href="{% url 'student security' %}">change it</a>.</p>
+                                <p>If you know your current password, you can <a href="{% url 'student security' %}" class="skyblue-hover">change it</a>.</p>
                                
                                 <p>When you create a new password, bear in mind:</p>
                                 <ol style="margin-bottom: 10px !important;">
@@ -1363,7 +1367,7 @@ article p{
                              
 
                                     <h1>How to reset my password?</h1>
-                                    <code>1. Go to <a href="/{{ lang }}">Here</a>.</code><br>
+                                    <code>1. Go to <a href="/{{ lang }}" class="skyblue-hover">Here</a>.</code><br>
                                     <code>2. Enter your email  address that's listed on your Booctep account.</code><br>
                                     <code>3. Go to your Email inbox.</code><br>
                                     <code>4. Click on reset password link.</code><br>
@@ -1372,7 +1376,7 @@ article p{
 
                                   
                                     <h1>I still can't reset my passwoed?</h1>
-                                    <code>Please <a href="{% url 'contact_us' %}">contact us</a> and we'll be ready to help.</code><br>
+                                    <code>Please <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> and we'll be ready to help.</code><br>
                                     
 
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
@@ -1538,7 +1542,7 @@ article p{
 
                                     <h1>كيف أقوم بإيقاف استقبال البريد الإلكتروني المرسل من منصة بوستيب؟</h1>
                                     <code>1. قم بالدخول إلى حسابك.</code><br>
-                                    <code>- اذهب إلى لوحة التحكم الخاصة بك | الخصوصية من <a href="{% url 'student privacy' %}">هنا</a>  </code><br>
+                                    <code>- اذهب إلى لوحة التحكم الخاصة بك | الخصوصية من <a href="{% url 'student privacy' %}" class="skyblue-hover">هنا</a>  </code><br>
                                     <code>3. قم بتعطيل خيار إستقبال البريد الإلكتروني.</code><br>
                                     <code>3. قم بالضغط على حفظ البيانات.</code><br>
 
@@ -1567,7 +1571,7 @@ article p{
 
                                     <h1>How to stop receiving emails?</h1>
                                     <code>1. Login into your booctep account.</code><br>
-                                    <code>2. Go to your dashboard/privacy by clicking <a href="{% url 'student privacy' %}">here</a></code><br>
+                                    <code>2. Go to your dashboard/privacy by clicking <a href="{% url 'student privacy' %}" class="skyblue-hover">here</a></code><br>
                                     <code>3. Off recieve automatic emails & recieve marketing emails.</code><br>
                                     <code>3. Click on save changes.</code><br>
 
@@ -1761,11 +1765,11 @@ article p{
                                 <div>
                                     <h1>كيف أستطيع إيجاد دوراتي التي قمت بشرائها/ قمت بالانضمام لها؟</h1>
                                     <code>1. قم بتسجيل الدخول لحسابك</code><br>
-                                    <code>2. اذهب إلى لوحة التحكم الخاصة بك | دوراتي من <a href="{% url 'student courses' %}">هنا</a>  </code><br>
+                                    <code>2. اذهب إلى لوحة التحكم الخاصة بك | دوراتي من <a href="{% url 'student courses' %}" class="skyblue-hover">هنا</a>  </code><br>
 
                            
                                     <h1>لا زلت لا تجد دوراتك؟</h1>
-                                    <p>إذا واجهتك أي مشكلة قم بمراسلتنا <a href="{% url 'contact_us' %}">هنا </a> سنكون سعداء بخدمتك.</p>
+                                    <p>إذا واجهتك أي مشكلة قم بمراسلتنا <a href="{% url 'contact_us' %}" class="skyblue-hover">هنا </a> سنكون سعداء بخدمتك.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 </div>
@@ -1791,11 +1795,11 @@ article p{
                                 <div>
                                     <h1>How you can find the course(s) that you bought or enrolled?</h1>
                                     <code>1. Login into your booctep account.</code><br>
-                                    <code>2. Go to your dashboard/my_courses by clicking <a href="{% url 'student courses' %}">here</a></code><br>
+                                    <code>2. Go to your dashboard/my_courses by clicking <a href="{% url 'student courses' %}" class="skyblue-hover">here</a></code><br>
 
                            
                                     <h1>Still you can't find your courses?</h1>
-                                    <p>If you still having a trouble finding your courses, please <a href="{% url 'contact_us' %}">contact us</a> and we'll be ready to help.</p>
+                                    <p>If you still having a trouble finding your courses, please <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> and we'll be ready to help.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 </div>
@@ -1902,7 +1906,7 @@ article p{
                                     <code>1. If you are self-enrolling in a course using a join code or URL, you may not have completed the registration process, check your email for information from your instructor as to how to enroll in your course.</code><br>
                                     <code>2. Confirm your browser is up to date. Outdated browsers cannot support Canvas courses.</code><br>
                                     <code>3. Some courses are dripping style, you might need sometime to have the new section opening.</code><br>
-                                    <code>4. In some cases sometimes booctep deleted some courses for a reasons, any way if you haven't see your courses you can ask for help from <a href="{% url 'contact_us' %}">here</a> we will be ready to help.</code><br>
+                                    <code>4. In some cases sometimes booctep deleted some courses for a reasons, any way if you haven't see your courses you can ask for help from <a href="{% url 'contact_us' %}"  class="skyblue-hover">here</a> we will be ready to help.</code><br>
 
                            
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
@@ -2300,7 +2304,7 @@ article p{
                                     <br>
                                     
 
-                                    <p>لمشاهدة الدورات, نحن نوصي باستخدام قوقل كروم, قم بتنزيله إنه مجاني, عبر موقعهم الرسمي من <a href="https://www.google.com/chrome/">هنا</a> .</p><br>
+                                    <p>لمشاهدة الدورات, نحن نوصي باستخدام قوقل كروم, قم بتنزيله إنه مجاني, عبر موقعهم الرسمي من <a href="https://www.google.com/chrome/" class="skyblue-hover">هنا</a> .</p><br>
                 
                             
 
@@ -2356,7 +2360,7 @@ article p{
                                     <br>
                                     
 
-                                    <p>To watch courses, we recommend using Google Chrome. You can download Chrome for free <a href="https://www.google.com/chrome/">here</a> .</p><br>
+                                    <p>To watch courses, we recommend using Google Chrome. You can download Chrome for free <a href="https://www.google.com/chrome/" class="skyblue-hover">here</a> .</p><br>
                 
                             
 
@@ -2442,7 +2446,7 @@ article p{
                            
                                     
                                     <h1>لا زلت تواجه مشكلة في تعديل بياناتك؟</h1>
-                                    <p>إذا واجهت مشكلة في تعديل بياناتك, من فضلك قم <a href="{% url 'contact_us' %}">بالإتصال بنا</a> , سوف نكون سعداء بمساعدتك.</p>
+                                    <p>إذا واجهت مشكلة في تعديل بياناتك, من فضلك قم <a href="{% url 'contact_us' %}" class="skyblue-hover">بالإتصال بنا</a> , سوف نكون سعداء بمساعدتك.</p>
 
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
@@ -2475,12 +2479,12 @@ article p{
                                     <code>1. If you are self-enrolling in a course using a join code or URL, you may not have completed the registration process, check your email for information from your instructor as to how to enroll in your course.</code><br>
                                     <code>2. Confirm your browser is up to date. Outdated browsers cannot support Canvas courses.</code><br>
                                     <code>3. Some courses are dripping style, you might need sometime to have the new section opening.</code><br>
-                                    <code>4. In some cases sometimes booctep deleted some courses for a reasons, any way if you haven't see your courses you can ask for help from <a href="{% url 'contact_us' %}">here</a> we will be ready to help.</code><br>
+                                    <code>4. In some cases sometimes booctep deleted some courses for a reasons, any way if you haven't see your courses you can ask for help from <a href="{% url 'contact_us' %}" class="skyblue-hover">here</a> we will be ready to help.</code><br>
 
                            
                                     
                                     <h1>Still have a trouble?</h1>
-                                    <p>Please,  <a href="{% url 'contact_us' %}">contact us</a> , We will be ready to help you.</p>
+                                    <p>Please,  <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> , We will be ready to help you.</p>
 
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
@@ -2879,7 +2883,7 @@ article p{
                                     <h1>كيف أصبح معلم في بوستيب؟</h1>
                                     <p>هناك طريقتين لتصبح معلم في بوستيب:</p>
                                     <b>- عن طريق فتح حساب جديد</b><br>
-                                    <code>1. قم بالذهاب إلى تسجيل من <a href="{% url 'signup' %}">هنا</a>.</code><br>
+                                    <code>1. قم بالذهاب إلى تسجيل من <a href="{% url 'signup' %}" class="skyblue-hover">هنا</a>.</code><br>
                                     <code>2. قم بالضغط على تسجيل كمعلم.</code><br>
                                     <code>3. قم بالذهاب إلى بريدك الإلكتروني, قم بالضغط على البريد الإلكتروني المرسل من بوستيب.</code><br>
                                     <code>4. قم بالضغط على تفعيل الحساب.</code><br>
@@ -2887,7 +2891,7 @@ article p{
 
                                     <b>- عن طريق حساب طالب</b><br>
                                     <code>1. قم بتسجيل الدخول إلى حسابك</code><br>
-                                    <code>2. قم بالذهاب إلى صفحة أصبح معلم من <a href="{% url 'become a teacher' %}"> هنا</a>.</code><br>
+                                    <code>2. قم بالذهاب إلى صفحة أصبح معلم من <a href="{% url 'become a teacher' %}" class="skyblue-hover"> هنا</a>.</code><br>
                                     <code>3. قم باختيار ماذا سوف تعلم.</code><br>
                                     <code>4. قم باختيار التخصص الفرعي.</code><br>
                                     <code>5. قم بالذهاب إلى بريدك الإلكتروني, قم بالضغط على البريد الإلكتروني المرسل من بوستيب.</code><br>
@@ -2898,7 +2902,7 @@ article p{
 
                            
                                     <h1>لا زلت تواجه مشكلة في أن تصبح معلم؟</h1>
-                                    <p>من فضلك قم,  <a href="{% url 'contact_us' %}"> بمراسلتنا</a> , سوف نكون سعداء بمساعدتك.</p>
+                                    <p>من فضلك قم,  <a href="{% url 'contact_us' %}" class="skyblue-hover"> بمراسلتنا</a> , سوف نكون سعداء بمساعدتك.</p>
                                     
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
@@ -2927,7 +2931,7 @@ article p{
                                     <h1>How to become a teacher?</h1>
                                     <p>There are two ways to become a teacher:</p>
                                     <b>- New user</b><br>
-                                    <code>1. Go to <a href="{% url 'signup' %}">signup</a>.</code><br>
+                                    <code>1. Go to <a href="{% url 'signup' %}" class="skyblue-hover">signup</a>.</code><br>
                                     <code>2. Click on signup as a teacher.</code><br>
                                     <code>3. Check your Email inbox.</code><br>
                                     <code>4. Click on the link to activate your account.</code><br>
@@ -2936,7 +2940,7 @@ article p{
 
                                     <b>- Student account</b><br>
                                     <code>1. Login into yout account.</code><br>
-                                    <code>2. Go to <a href="{% url 'become a teacher' %}">become a teacher</a>.</code><br>
+                                    <code>2. Go to <a href="{% url 'become a teacher' %}" class="skyblue-hover">become a teacher</a>.</code><br>
                                     <code>3. Choose what you going to teach as a main category.</code><br>
                                     <code>4. Choose what you going to teach as a sub category.</code><br>
                                     <code>5. Check your Email inbox.</code><br>
@@ -2947,7 +2951,7 @@ article p{
 
                            
                                     <h1>Still you can't become a teacher?</h1>
-                                    <p>If you still having a trouble becoming a teacher, please <a href="{% url 'contact_us' %}">contact us</a> and we'll be ready to help.</p>
+                                    <p>If you still having a trouble becoming a teacher, please <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> and we'll be ready to help.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 </div>
@@ -3039,7 +3043,7 @@ article p{
 
                                     <br>
                            
-                                    <p>لمعلومات أكثر, يرجى قراءة <a href="{% url 'terms' %}">الشروط والأحكام</a>.</p>
+                                    <p>لمعلومات أكثر, يرجى قراءة <a href="{% url 'terms' %}" class="skyblue-hover">الشروط والأحكام</a>.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 </div>
@@ -3087,7 +3091,7 @@ article p{
                                     <br>
                                     <br>
                            
-                                    <p>For more information, please read our <a href="{% url 'terms' %}">terms & condition</a>.</p>
+                                    <p>For more information, please read our <a href="{% url 'terms' %}" class="skyblue-hover">terms & condition</a>.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 </div>
@@ -3158,18 +3162,18 @@ article p{
                                     <h1>كيف تدفع لي منصة بوستيب إيراداتي؟</h1>
                                     <p>هنالك حالتين تبين أنك مؤهل لاستقبال إيراداتك:</p><br>
                                     <p>- في حال لم يكن لديك طريقة لندفع لك بها</p>
-                                    <code>1. قم بالذهاب إلى <a href="{% url 'teacher payout' %}" target="_blank">حساب المعلم</a>.</code><br>
+                                    <code>1. قم بالذهاب إلى <a href="{% url 'teacher payout' %}" target="_blank" class="skyblue-hover">حساب المعلم</a>.</code><br>
                                     <code>2. قم بإضافة معلومات بطاقة بنكية صالحة لإستلام المبالغ.</code><br>
-                                    <code>3. قم بالذهاب إلى <a href="{% url 'teacher dashboard' %}" target="_blank">لوحة تحكم المعلم </a>.</code><br>
+                                    <code>3. قم بالذهاب إلى <a href="{% url 'teacher dashboard' %}" target="_blank" class="skyblue-hover">لوحة تحكم المعلم </a>.</code><br>
                                     <code>4. قم بالضغط على طلب إرسال الإيرادات</code><br><br>
 
                                     <p>- في حال كان لديك طريقة دفع</p>
-                                    <code>1. قم بالذهاب إلى <a href="{% url 'teacher dashboard' %}" target="_blank">لوحة تحكم المعلم</a>.</code><br>
+                                    <code>1. قم بالذهاب إلى <a href="{% url 'teacher dashboard' %}" target="_blank"> class="skyblue-hover"لوحة تحكم المعلم</a>.</code><br>
                                     <code>2. قم بالضغط على طلب إرسال الإيرادات</code>
                                     
                  
                                     <h1>لا زلت تواجه مشكلة في استقبال إيراداتك؟</h1>
-                                    <p>إذا واجهت مشكلة في استقبال إيراداتك, من فضلك قم <a href="{% url 'contact_us' %}"> بمراسلتنا</a> , سوف نكون سعداء بمساعدتك.</p>
+                                    <p>إذا واجهت مشكلة في استقبال إيراداتك, من فضلك قم <a href="{% url 'contact_us' %}" class="skyblue-hover"> بمراسلتنا</a> , سوف نكون سعداء بمساعدتك.</p>
 
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
@@ -3203,17 +3207,17 @@ article p{
                                     <h1>How to get paid my revenue?</h1>
                                     <p>There are two cases to receive your money:</p><br>
                                     <p>- If you don't have a payout method</p>
-                                    <code>1. Got to <a href="{% url 'teacher payout' %}" target="_blank">teacher payout</a>.</code><br>
+                                    <code>1. Got to <a href="{% url 'teacher payout' %}" target="_blank" class="skyblue-hover">teacher payout</a>.</code><br>
                                     <code>2. Fill out your bank possible information, your bank name, card number, card holder name.</code><br>
-                                    <code>3. Go to <a href="{% url 'teacher dashboard' %}" target="_blank">teacher dashboard</a>.</code><br>
+                                    <code>3. Go to <a href="{% url 'teacher dashboard' %}" target="_blank" class="skyblue-hover">teacher dashboard</a>.</code><br>
                                     <code>4. Click on send request.</code><br><br>
 
                                     <p>- If you have a payout method</p>
-                                    <code>1. Go to <a href="{% url 'teacher dashboard' %}" target="_blank">teacher dashboard</a>.</code><br>
+                                    <code>1. Go to <a href="{% url 'teacher dashboard' %}" target="_blank" class="skyblue-hover">teacher dashboard</a>.</code><br>
                                     <code>2. Click on send request.</code><br><br>
                                     
                  
-                                    <p>Still have a trouble receiving your revenue? please <a href="{% url 'contact_us' %}">contact us</a> and we'll be ready to help.</p>
+                                    <p>Still have a trouble receiving your revenue? please <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> and we'll be ready to help.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 </div>
@@ -3415,7 +3419,7 @@ article p{
 
                                     <br>
                                     <br>    
-                                    <p>تريد أن تصبح معلم؟ اضغط <a href="{% url 'become' %}">هنا</a>.</p>
+                                    <p>تريد أن تصبح معلم؟ اضغط <a href="{% url 'become' %}" class="skyblue-hover">هنا</a>.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 </div>
@@ -3442,12 +3446,12 @@ article p{
                                 <div>
                                     <b style="font-size: 18px;">Booctep's requirements:</b>
                                     <p>1. Exclusive course fo booctep</p>
-                                    <p>2. Met our video & audio requirements, for more information read our <a href="{% url 'become' %}">become a teacher</a> page.</p>
+                                    <p>2. Met our video & audio requirements, for more information read our <a href="{% url 'become' %}" class="skyblue-hover">become a teacher</a> page.</p>
                         
 
                                     <br>
                                     <br>    
-                                    <p>Wants to become a teacher? click <a href="{% url 'become' %}">here</a>.</p>
+                                    <p>Wants to become a teacher? click <a href="{% url 'become' %}" class="skyblue-hover">here</a>.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 </div>
@@ -3525,7 +3529,7 @@ article p{
 
                                     <p>2. مواد الدورة:
                                        <br> إضافة أقسام, فيديوهات إلى دورتك؟</p>
-                                    <code>- قم بتسجيل الدخول إلى حسابك, ثم اذهب إلى <a href="{% url 'teacher dashboard' %}">لوحة التحكم</a>.</code><br>
+                                    <code>- قم بتسجيل الدخول إلى حسابك, ثم اذهب إلى <a href="{% url 'teacher dashboard' %}" class="skyblue-hover">لوحة التحكم</a>.</code><br>
                                     <code>- اضغط على أضافة دورة.</code><br>
                                     <code>- قم بملئ صفحة الهبوط.</code><br>
                                     <code>- أضف أقسام.</code><br>
@@ -3547,7 +3551,7 @@ article p{
 
                                     <p>5. إضافة اختبار اجتياز:
                                        <br> أضافة الاسئلة والأجوبة؟</p>
-                                    <code>- قم بتسجيل الدخول إلى <a href="{% url 'teacher dashboard' %}">لوحة التحكم</a>.</code><br>
+                                    <code>- قم بتسجيل الدخول إلى <a href="{% url 'teacher dashboard' %}" class="skyblue-hover">لوحة التحكم</a>.</code><br>
                                     <code>- قم بالضغط على أضافة سؤال.</code><br>
                                     <code>- أكتب السؤال.</code><br>
                                     <code>- أكتب الأجوبة.</code><br>
@@ -3582,7 +3586,7 @@ article p{
 
                                     
                                     <h1>لا زلت تواجه مشكلة؟</h1>
-                                    <p>إذا كنت تواجه المشكلة مجددا, من فضلك قم بمراسلتنا <a href="{% url 'contact_us' %}">هنا</a> سنكون سعداء بخدمتك.</p>
+                                    <p>إذا كنت تواجه المشكلة مجددا, من فضلك قم بمراسلتنا <a href="{% url 'contact_us' %}" class="skyblue-hover">هنا</a> سنكون سعداء بخدمتك.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 
@@ -3620,7 +3624,7 @@ article p{
 
                                     <p>2. Course curriculum:
                                        <br> Add sections, and video content to your course.</p>
-                                    <code>- Login into your account from <a href="{% url 'teacher dashboard' %}"></a>.</code><br>
+                                    <code>- Login into your account from <a href="{% url 'teacher dashboard' %}" class="skyblue-hover"></a>.</code><br>
                                     <code>- Click on Add a course.</code><br>
                                     <code>- Fill out landing page.</code><br>
                                     <code>- Click on Add new section.</code><br>
@@ -3642,7 +3646,7 @@ article p{
 
                                     <p>5. course quiz:
                                        <br> Add Quiz, and questions to your course.</p>
-                                    <code>- Login into your account from <a href="{% url 'teacher dashboard' %}"></a>.</code><br>
+                                    <code>- Login into your account from <a href="{% url 'teacher dashboard' %}" class="skyblue-hover">here</a>.</code><br>
                                     <code>- Click on Add a course.</code><br>
                                     <code>- Fill out landing page.</code><br>
                                     <code>- Upload your course videos.</code><br>
@@ -3735,7 +3739,7 @@ article p{
 
                                     <p>كيف تقوم بحذف دورة؟</p>
                                     <code>- قم بتسجيل الدخول إلى حسابك</code><br>
-                                    <code>- قم بالذهاب إلى لوحة تحكم المعلم / دوراتي من <a href="{% url 'teacher courses' %}">هنا</a>.</code><br>
+                                    <code>- قم بالذهاب إلى لوحة تحكم المعلم / دوراتي من <a href="{% url 'teacher courses' %}" class="skyblue-hover">هنا</a>.</code><br>
                                     <code>- اضغط على زر أحذف الدورة.</code><br>
                                     <br>
                                     <p>تنويه: زر حذف الدورة سيظهر فقط للدورة التي لا تضم طلاب بعد.</p>
@@ -3744,7 +3748,7 @@ article p{
                                
                                     <br>
                                     <br>    
-                                    <p>للمزيد من المعلومات, قم بقراءة <a href="{% url 'terms' %}">الشروط والأحكام</a>.</p>
+                                    <p>للمزيد من المعلومات, قم بقراءة <a href="{% url 'terms' %}" class="skyblue-hover">الشروط والأحكام</a>.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 
@@ -3781,7 +3785,7 @@ article p{
 
                                     <p>How to Unpublish/Delete a Course?</p>
                                     <code>- Login into your account.</code><br>
-                                    <code>- Go to teacher/courses from here <a href="{% url 'teacher courses' %}">here</a>.</code><br>
+                                    <code>- Go to teacher/courses from here <a href="{% url 'teacher courses' %}" class="skyblue-hover">here</a>.</code><br>
                                     <code>- Click on delete button.</code><br>
                                     <br>
                                     <p>Notes: The delete button is only shown for the courses that doesn’t have students yet.</p>
@@ -3790,7 +3794,7 @@ article p{
                                
                                     <br>
                                     <br>    
-                                    <p>For more information please read our <a href="{% url 'terms' %}">terms & condition</a>.</p>
+                                    <p>For more information please read our <a href="{% url 'terms' %}" class="skyblue-hover">terms & condition</a>.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 
@@ -3859,7 +3863,7 @@ article p{
                                     <h1> ما هو الفرق بين قسيمة التخفيض وتخفيضات بوستيب؟
                                     </h1>
                                     <p>- قسيمة التخفيض يقوم بإنشائها المعلم.</p>
-                                    <p>- تخفيضات بوستيب، تقدم في أي وقت في السوق ، لمزيد من المعلومات ، يرجى قراءة <a href="{% url 'terms' %}"> الشروط والأحكام</a></p>
+                                    <p>- تخفيضات بوستيب، تقدم في أي وقت في السوق ، لمزيد من المعلومات ، يرجى قراءة <a href="{% url 'terms' %}" class="skyblue-hover"> الشروط والأحكام</a></p>
                                     <br>
                                     <br>
                                     <p>
@@ -3876,7 +3880,7 @@ article p{
 
                                     <p>كيف أقوم بإنشاء قسيمة تخفيض؟</p>
                                     <code>- قم بتسجيل دخول إلى حسابك</code><br>
-                                    <code>- قم بالذهاب إلى لوحة تحكم المعلم / ارتباطات الدورة من  <a href="{% url 'teacher courses' %}">هنا</a>.</code><br>
+                                    <code>- قم بالذهاب إلى لوحة تحكم المعلم / ارتباطات الدورة من  <a href="{% url 'teacher courses' %}" class="skyblue-hover">هنا</a>.</code><br>
                                     <code>- قم باختيار الدورة المطلوبة.</code><br>
                                     <code>- قم بالضغط على إنشاء قسيمة تخفيض.</code><br>
                                     <code>- قم بملئ الخيارات, عدد أيام التخفيض, نسبة التخفيض, اسم التخفيض.</code><br>
@@ -3888,7 +3892,7 @@ article p{
                                
                                     <br>
                                     <br>    
-                                    <p>لمزيد من المعلومات, قم بقراءة <a href="{% url 'terms' %}">الشروط والأحكام</a>.</p>
+                                    <p>لمزيد من المعلومات, قم بقراءة <a href="{% url 'terms' %}" class="skyblue-hover">الشروط والأحكام</a>.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 
@@ -3918,7 +3922,7 @@ article p{
                                     <h1> What is the different between discounts and coupons?
                                     </h1>
                                     <p>- Coupons created by the teacher.</p>
-                                    <p>- Discounts are given by Booctep anytime on the marketplace, for more info please read our <a href="{% url 'terms' %}">terms & condition</a></p>
+                                    <p>- Discounts are given by Booctep anytime on the marketplace, for more info please read our <a href="{% url 'terms' %}" class="skyblue-hover">terms & condition</a></p>
                                     <br>
                                     <br>
                                     <p>Creating coupons and referring students is an important part of any teacher's promotional strategy. 
@@ -3930,7 +3934,7 @@ article p{
 
                                     <p>How to create a coupon?</p>
                                     <code>- Login into your account.</code><br>
-                                    <code>- Go to teacher/course_engagnment from here <a href="{% url 'teacher courses' %}">here</a>.</code><br>
+                                    <code>- Go to teacher/course_engagnment from here <a href="{% url 'teacher courses' %}" class="skyblue-hover">here</a>.</code><br>
                                     <code>- Select the course.</code><br>
                                     <code>- Click on create a coupon.</code><br>
                                     <code>- Fill out, the valid days, coupon name, discount number.</code><br>
@@ -3942,7 +3946,7 @@ article p{
                                
                                     <br>
                                     <br>    
-                                    <p>For more information please read our <a href="{% url 'terms' %}">terms & condition</a>.</p>
+                                    <p>For more information please read our <a href="{% url 'terms' %}" class="skyblue-hover">terms & condition</a>.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 
@@ -4085,7 +4089,7 @@ article p{
                                     <br>
                                     <img src="{%static 'assets/img/cer.png' %}" width="400" alt="certificate" />
                                     <br>
-                                    <code>2. من لوحة تحكم الطالب / شهاداتي, تستطيع الوصل لها من <a href="student certificate">هنا </a>ثم الضغط على تنزيل, أو مشاهدة.</code>
+                                    <code>2. من لوحة تحكم الطالب / شهاداتي, تستطيع الوصل لها من <a href="student certificate" class="skyblue-hover">هنا </a>ثم الضغط على تنزيل, أو مشاهدة.</code>
                
                                     <br>
                                     <br>
@@ -4093,7 +4097,7 @@ article p{
 
                                     <br>
                                     <br>    
-                                    <p>لا زالت تواجهك مشاكل في تنزيل الشهادة؟ قم بمراسلتنا من  <a href="{% url 'contact_us' %}"> هنا </a>سوف نكون سعداء لخدمتك.</p>
+                                    <p>لا زالت تواجهك مشاكل في تنزيل الشهادة؟ قم بمراسلتنا من  <a href="{% url 'contact_us' %}" class="skyblue-hover"> هنا </a>سوف نكون سعداء لخدمتك.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 
@@ -4137,7 +4141,7 @@ article p{
 
                                     <br>
                                     <br>    
-                                    <p>Still having a problem downloading your certificate? Please <a href="{% url 'contact_us' %}">contact us</a> and we'll be ready to help.</p>
+                                    <p>Still having a problem downloading your certificate? Please <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> and we'll be ready to help.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 
@@ -4382,7 +4386,7 @@ article p{
 
                                     <br>
                                     <br>    
-                                    <p>Still having a problem downloading your certificate? Please <a href="{% url 'contact_us' %}">contact us</a> and we'll be ready to help.</p>
+                                    <p>Still having a problem downloading your certificate? Please <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> and we'll be ready to help.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 
@@ -4452,7 +4456,7 @@ article p{
                                 <br>
                                 <br>
                                  <div>
-                                     <p> نريدك أن تكون راضيًا ، لذلك يمكن استرداد جميع الدورات المؤهلة التي تم شراؤها في منصة بوستيب في غضون 30 يومًا. لأي سبب من الأسباب ، إذا لم تكن راضيًا عن الدورة التدريبية ، يمكنك طلب استرداد الأموال ، بشرط أن يتوافق الطلب مع الإرشادات الواردة في <a href="{% url 'privacy_policy' %}"> سياسة استرداد الأموال </a>.</p>
+                                     <p> نريدك أن تكون راضيًا ، لذلك يمكن استرداد جميع الدورات المؤهلة التي تم شراؤها في منصة بوستيب في غضون 30 يومًا. لأي سبب من الأسباب ، إذا لم تكن راضيًا عن الدورة التدريبية ، يمكنك طلب استرداد الأموال ، بشرط أن يتوافق الطلب مع الإرشادات الواردة في <a href="{% url 'privacy_policy' %}" class="skyblue-hover"> سياسة استرداد الأموال </a>.</p>
  
                                      <p>يتم إرجاع معظم المبالغ المستردة عبر طريقة الدفع الأصلية ، ما لم يكن هناك حظر من البنك الذي تتعامل معه ، ومع ذلك ، سنتصل بك في أي مسألة أخرى.</p>
                                      <br>
@@ -4470,7 +4474,7 @@ article p{
  
                                      
                                      <br>  
-                                     <p>لا زالت لديك مشاكل في استرداد أموالك؟ قم بمراسلتنا من  <a href="{% url 'contact_us' %}">هنا </a>سنكون سعداء بمساعدتك.</p>
+                                     <p>لا زالت لديك مشاكل في استرداد أموالك؟ قم بمراسلتنا من  <a href="{% url 'contact_us' %}" class="skyblue-hover">هنا </a>سنكون سعداء بمساعدتك.</p>
                                      <div class="clear" style="margin-bottom: 35px !important;"></div>
  
                                 
@@ -4495,7 +4499,7 @@ article p{
                                <br>
                                <br>
                                 <div>
-                                    <p> We want you to be satisfied, so all eligible courses purchased on Booctep can be refunded within 30 days. For whatever reason, if you are unhappy with a course, you can request a refund, provided the request meets the guidelines in our <a href="{% url 'privacy_policy' %}">refund privacy & policy</a>.</p>
+                                    <p> We want you to be satisfied, so all eligible courses purchased on Booctep can be refunded within 30 days. For whatever reason, if you are unhappy with a course, you can request a refund, provided the request meets the guidelines in our <a href="{% url 'privacy_policy' %}" class="skyblue-hover">refund privacy & policy</a>.</p>
 
                                     <p>Most refunds are returned via the original payment method, unless there is blocked from your bank, However, we will contact you in any further matter.</p>
                                     <br>
@@ -4512,7 +4516,7 @@ article p{
 
                                     
                                     <br>  
-                                    <p>You still have a trouble? please <a href="{% url 'contact_us' %}"> contact us </a>we will be ready to help you.</p>
+                                    <p>You still have a trouble? please <a href="{% url 'contact_us' %}" class="skyblue-hover"> contact us </a>we will be ready to help you.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 
@@ -4587,8 +4591,8 @@ article p{
                                     </p>
                                     <code>- الدردشة المباشرة.</code><br>
                                     <code>- بريد إلكتروني: support@booctep.com .</code><br>
-                                    <code>- انستقرام: <a href="https://instagram.com" target="_blanck">/Booctep</a> .</code><br>
-                                    <code>- تويتر: <a href="https://twitter.com" target="_blanck">/Booctep</a> .</code>
+                                    <code>- انستقرام: <a href="https://instagram.com" target="_blanck" class="skyblue-hover">/Booctep</a> .</code><br>
+                                    <code>- تويتر: <a href="https://twitter.com" target="_blanck" class="skyblue-hover">/Booctep</a> .</code>
                                    
                                     
                                     <br>  
@@ -4813,7 +4817,7 @@ article p{
                        
                                     <br>  
                                     <br>
-                                    <p>إذا كنت تواجه أي  مشكلة أخرى قم بمراسلتنا <a href="{% url 'contact_us' %}">هنا </a> سنكون سعداء بخدمتك.</p>
+                                    <p>إذا كنت تواجه أي  مشكلة أخرى قم بمراسلتنا <a href="{% url 'contact_us' %}" class="skyblue-hover">هنا </a> سنكون سعداء بخدمتك.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 
@@ -4853,7 +4857,7 @@ article p{
                        
                                     <br>  
                                     <br>
-                                    <p>If you still having a trouble with payments, please <a href="{% url 'contact_us' %}">contact us</a> and we'll be ready to help.</p>
+                                    <p>If you still having a trouble with payments, please <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> and we'll be ready to help.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 
@@ -5664,7 +5668,7 @@ article p{
 
                                     <p>كيف أقوم بتفعيل الوضع الليلي؟</p>
                                     <code>- قم بتسجيل الدخول إلى حسابك.</code><br>
-                                    <code>- قم بالذهاب إلى لوحة التحكم / الخصوصية من <a href="{% url 'student privacy' %}">هنا</a>.</code><br>
+                                    <code>- قم بالذهاب إلى لوحة التحكم / الخصوصية من <a href="{% url 'student privacy' %}" class="skyblue-hover">هنا</a>.</code><br>
                                     <code>- قم بتفعيل الوضع الليلي.</code>
 
                                     <br>
@@ -5678,11 +5682,11 @@ article p{
                                     <br>
                                     <br>
                        
-                                    <b>تنويه: هذه الميزة متاحة فقط لمن لديهم دورات مدفوعة, لمزيد من المعلومات قم بقراءة <a href="{% url 'terms' %}"> الشروط والأحكام</a>.</b>
+                                    <b>تنويه: هذه الميزة متاحة فقط لمن لديهم دورات مدفوعة, لمزيد من المعلومات قم بقراءة <a href="{% url 'terms' %}" class="skyblue-hover"> الشروط والأحكام</a>.</b>
                        
                                     <br>  
                                     <br>
-                                    <p>لا زالت لديك مشاكل؟ قم  <a href="{% url 'contact_us' %}">بمراسلتنا </a> سنكون سعداء بخدمتك.</p>
+                                    <p>لا زالت لديك مشاكل؟ قم  <a href="{% url 'contact_us' %}" class="skyblue-hover">بمراسلتنا </a> سنكون سعداء بخدمتك.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 
@@ -5712,7 +5716,7 @@ article p{
 
                                     <p>How to enable dark mode?</p>
                                     <code>- Login into your account.</code><br>
-                                    <code>- Go to dashboard/privacy from <a href="{% url 'student privacy' %}">here</a>.</code><br>
+                                    <code>- Go to dashboard/privacy from <a href="{% url 'student privacy' %}" class="skyblue-hover">here</a>.</code><br>
                                     <code>- Enable dark mode.</code>
 
                                     <br>
@@ -5721,16 +5725,16 @@ article p{
                        
                                     <p>What are communication Tools?</p>
                                     <code>- Login into your account.</code><br>
-                                    <code>- Go to dashboard/messages from <a href="{% url 'student privacy' %}">here</a>.</code><br>
+                                    <code>- Go to dashboard/messages from <a href="{% url 'student privacy' %}" class="skyblue-hover">here</a>.</code><br>
                                     <code>- Select target teacher Or student.</code>
                                     <br>
                                     <br>
                        
-                                    <b>Notes: the free courses are limited from this feature, for more information read our <a href="{% url 'terms' %}">terms & condition</a>.</b>
+                                    <b>Notes: the free courses are limited from this feature, for more information read our <a href="{% url 'terms' %}" class="skyblue-hover">terms & condition</a>.</b>
                        
                                     <br>  
                                     <br>
-                                    <p>If you still having a trouble with payments, please <a href="{% url 'contact_us' %}">contact us</a> and we'll be ready to help.</p>
+                                    <p>If you still having a trouble with payments, please <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> and we'll be ready to help.</p>
                                     <div class="clear" style="margin-bottom: 35px !important;"></div>
 
                                 
@@ -6417,98 +6421,6 @@ article p{
 
 
 
-
-
-    <!-- Categories -->
-    <div class="explorer-menu" >
-        <div class="explorer-inner">
-            <div class="container">
-                <!--Header-->
-                <div class="explorer-header">
-                    <h3>Explore</h3>
-                </div>
-                <!--List-->
-                <div class="explore-list">
-                    <!--item-->
-                    <a href="index.html" class="explore-item">
-                        <img src="{%static 'assets/img/icons/explore/coding.svg' %}" alt="">
-                        <h4>Web Development</h4>
-                    </a>
-                    <!--item-->
-                    <a href="index.html" class="explore-item">
-                        <img src="{%static 'assets/img/icons/explore/business.svg' %}" alt="">
-                        <h4>Business</h4>
-                    </a>
-                    <!--item-->
-                    <a href="index.html" class="explore-item">
-                        <img src="{%static 'assets/img/icons/explore/aviation.svg' %}" alt="">
-                        <h4>Aviation</h4>
-                    </a>
-                    <!--item-->
-                    <a href="index.html" class="explore-item">
-                        <img src="{%static 'assets/img/icons/explore/controller.svg' %}" alt="">
-                        <h4>Games</h4>
-                    </a>
-                    <!--item-->
-                    <a href="index.html" class="explore-item">
-                        <img src="{%static 'assets/img/icons/explore/math.svg' %}" alt="">
-                        <h4>Mathmatics</h4>
-                    </a>
-                    <!--item-->
-                    <a href="index.html" class="explore-item">
-                        <img src="{%static 'assets/img/icons/explore/lifestyle.svg' %}" alt="">
-                        <h4>life Style</h4>
-                    </a>
-                    <!--item-->
-                    <a href="index.html" class="explore-item">
-                        <img src="{%static 'assets/img/icons/explore/arts.svg' %}" alt="">
-                        <h4>Arts</h4>
-                    </a>
-                    <!--item-->
-                    <a href="index.html" class="explore-item">
-                        <img src="{%static 'assets/img/icons/explore/It.svg' %}" alt="">
-                        <h4>Information Technology</h4>
-                    </a>
-                    <!--item-->
-                    <a href="index.html" class="explore-item">
-                        <img src="{%static 'assets/img/icons/explore/drama.svg' %}" alt="">
-                        <h4>Cenima & Drama</h4>
-                    </a>
-                    <!--item-->
-                    <a href="index.html" class="explore-item">
-                        <img src="{%static 'assets/img/icons/explore/software.svg' %}" alt="">
-                        <h4>Software Programming</h4>
-                    </a>
-                    <!--item-->
-                    <a href="index.html" class="explore-item">
-                        <img src="{%static 'assets/img/icons/explore/languages.svg' %}" alt="">
-                        <h4>Languages</h4>
-                    </a>
-                    <!--item-->
-                    <a href="index.html" class="explore-item">
-                        <img src="{%static 'assets/img/icons/explore/coock.svg' %}" alt="">
-                        <h4>Food & Cooking</h4>
-                    </a>
-                    <!--item-->
-                    <a href="index.html" class="explore-item">
-                        <img src="{%static 'assets/img/icons/explore/maintanece.svg' %}" alt="">
-                        <h4>Repare & Maintaince</h4>
-                    </a>
-                    <!--item-->
-                    <a href="index.html" class="explore-item">
-                        <img src="{%static 'assets/img/icons/explore/skills.svg' %}" alt="">
-                        <h4>Skills</h4>
-                    </a>
-                    <!--item-->
-                    <a href="index.html" class="explore-item">
-                        <img src="{%static 'assets/img/icons/explore/other.svg' %}" alt="">
-                        <h4>Others</h4>
-                    </a>
-                </div>
-            </div>
-        </div>
-</div>
-<!-- Categories -->
 
 
 <script>
