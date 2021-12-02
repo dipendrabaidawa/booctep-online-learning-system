@@ -138,6 +138,14 @@ DATABASES = {
       'HOST': 'x8autxobia7sgh74.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', #'localhost',   # Or an IP Address that your DB is hosted on
       'PORT': '3306',
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'booctop',
+    #     'USER': 'root',
+    #     'PASSWORD': '',
+    #     'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+    #     'PORT': '3306',
+    # }
 }
 
 # Password validation
