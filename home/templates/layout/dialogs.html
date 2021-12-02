@@ -367,7 +367,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="field">
+                        <style>
+                            .no-background{
+                                background-color: transparent !important;
+                            }
+                        </style>
+                        <div class="field no-background">
                             <div class="control">
                                 <p style="font-size: small;"><input id="remember" type="checkbox"> {% trans 'Remember me' %}</p>
                             </div>
@@ -405,14 +410,14 @@
             <div class="card-heading">
                 <h3>{% trans 'Forget Password' %}</h3>
                 <div class="close-wrap">
-                   <span class="close-modal" onclick="closeModal()"  style="background: #F4F4F4 !important;border: 1px solid #E4E4E4;color: #939393">&times;</span>
+                   <span class="close-modal" onclick="closeModal()"  style="background: #d4dce0 !important;border: 1px solid #E4E4E4;color: #383c3f">&times;</span>
                </div>
             </div>
             <div class="card-body">
                 <div class="content-block is-active" style="margin-left: -35px;text-align: center;align-items: center;">
-                    <img src="{% static 'assets/img/forget_email.svg' %}" alt="">
+                    <img src="{% static 'assets/img/forget_email.png' %}" class="forget_email" alt="">
                     <div class="help-text">
-                        <p style="margin-bottom: 10px;color: rgb(29, 29, 29);">{% trans 'Enter your Email address.' %}</p>
+                        <p style="margin-bottom: 10px;" class="mediabout mediabout-dark">{% trans 'Enter your Email address.' %}</p>
                         {% if lang == 'ar' %}
                             <form action="/ar/reset_password/" aa= "{{lang}}" method="POST" class="text-center">
                         {% else %}
@@ -422,7 +427,7 @@
                                     {{form}}
                             <input type="text" style="margin-bottom: 10px;" class="input is-fade" name="email"
                                 placeholder="{% trans 'Enter your Email' %}">
-                            <button type="submit" style="background-color:rgb(0, 81, 128);color: #fff;"
+                            <button type="submit" style="background-color:rgb(68, 127, 161);color: #fff;"
                                 class="button is-fullwidth dark-button">{% trans 'Send link' %}</button>
                         </form>
                     </div>
@@ -434,56 +439,66 @@
                 </div>
             </div>
             <div class="card-footer">
-                <p style="font-size: small;margin-top: 10px;font-weight: 400;">{% trans 'Forget your email?' %} <a href="/{{lang}}help">{% trans 'Get help!' %}</a> </p>
+                {% if lang == 'ar' %}
+                <p style="font-size: small;margin-top: 10px;font-weight: 400;">نسيت إيميلك؟ <a href="/{{lang}}/help">أحصل على المساعدة </a> </p>
+                {% else %}
+                <p style="font-size: small;margin-top: 10px;font-weight: 400;">{% trans 'Forget your email?' %} <a href="/{{lang}}/help">{% trans 'Get help!' %}</a> </p>
+                {% endif %}
             </div>
         </div>
     </div>
 </div>
 
-
+<style>
+.marggin{
+    padding-top: 150px;
+}
+</style>
 <!-- reset Password -->
-<div id="reset-password-modal" class="modal albums-help-modal is-xsmall has-light-bg">
+<div id="reset-password-modal" class="modal albums-help-modal marggin is-xsmall has-light-bg">
     <div class="modal-background"></div>
-    <div class="modal-content" style="top:200px!important;">
+    <div class="modal-content" style="">
         <div class="card card-dark">
             <div class="card-heading">
+                {% if lang == 'ar' %}
+                <h3 style="text-align: center">إعادة تعيين كلمة المرور</h3>
+                {% else %}
                 <h3 style="text-align: center">{% trans 'Reset Password' %}</h3>
+                {% endif %}
                 <!-- Close X button -->
-                <div class="close-wrap">
-                   <span class="close-modal" onclick="closeModal()"  style="background: #F4F4F4 !important;border: 1px solid #E4E4E4;color: #939393">
-                    &times;
-                   </span>
-               </div>
             </div>
             <div class="card-body">
                 <div class="content-block is-active"
                     style="margin-left: -35px;text-align: center;align-items: center;">
                     <div class="help-text">
-                        <h3 style="margin-bottom: 20px;color: rgb(29, 29, 29); margin-top: 40px;">{% trans 'Enter Password and Confirm Password.' %}</h3>
                         {% if lang == "ar" %}
+                        <h3 style="margin-bottom: 20px; margin-top: 40px;" class="mediabout mediabout-dark">أدخل كلمة المرور الجديدة</h3>
                         <form action="/ar/forgot_Changepassword/" method="POST" class="text-center">
+                            {% csrf_token %}
+                            {{form}}
+                        <input type="hidden" name="baseparam" id = "baseparamval" value="">
+                        <input type="password" required style="margin-bottom: 20px;" id="resetnewpassword" class="input is-fade" name="newpassword" placeholder="كلمة السر الجديدة">
+                        <input type="password" required style="margin-bottom: 30px;" id="resetconfirmpassword" class="input is-fade" name="confirmpassword" placeholder="اعادة كتابة كلمة السر">
+                        <button type="submit" id = "resetpasswordbutton" style="background-color:rgb(103, 174, 214);color: rgb(11, 37, 49);" class="button is-fullwidth dark-button">تغيير كلمة المرور</button>
+                    </form>
                         {% else %}
+                        <h3 style="margin-bottom: 20px; margin-top: 40px;" class="mediabout mediabout-dark">{% trans 'Enter Password and Confirm Password.' %}</h3>
                         <form action="/en/forgot_Changepassword/" method="POST" class="text-center">
+                            {% csrf_token %}
+                            {{form}}
+                        <input type="hidden" name="baseparam" id = "baseparamval" value="">
+                        <input type="password" required style="margin-bottom: 20px;" id="resetnewpassword" class="input is-fade" name="newpassword" placeholder="{% trans 'Password' %}">
+                        <input type="password" required style="margin-bottom: 30px;" id="resetconfirmpassword" class="input is-fade" name="confirmpassword" placeholder="{% trans 'Confirm Password' %}">
+                        <button type="submit" id = "resetpasswordbutton" style="background-color:rgb(103, 174, 214);color: rgb(11, 37, 49);" class="button is-fullwidth dark-button">{% trans 'Change password' %}</button>
+                    </form>
                         {% endif %}
-                                {% csrf_token %}
-                                {{form}}
-                            <input type="hidden" name="baseparam" id = "baseparamval" value="">
-                            <input type="password" required style="margin-bottom: 20px;" id="resetnewpassword" class="input is-fade" name="newpassword" placeholder="{% trans 'Password' %}">
-                            <input type="password" required style="margin-bottom: 30px;" id="resetconfirmpassword" class="input is-fade" name="confirmpassword" placeholder="{% trans 'Confirm Password' %}">
-                            <button type="submit" id = "resetpasswordbutton" style="background-color:rgb(0, 81, 128);color: #fff;" class="button is-fullwidth dark-button">{% trans 'Change password' %}</button>
-                        </form>
                     </div>
-                </div>
-                <div class="content-block">
                 </div>
 
                 <div class="slide-dots">
                     <div class="column is-12">
                     </div>
                 </div>
-            </div>
-            <div class="card-footer">
-                <p style="font-size: small;margin-top: 10px;font-weight: 400;">{% trans 'Forget your email?' %} <a href="/{{lang}}help">{% trans 'Get help!' %}</a> </p>
             </div>
         </div>
     </div>

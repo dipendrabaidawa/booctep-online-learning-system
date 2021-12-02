@@ -44,16 +44,11 @@
             border: 1px solid #1d2229 !important;
             background-color: rgb(33, 39, 46) !important;
         }
-        
-.hero-faqs-dark{
-  position: relative;
-  height: 100%;
-  padding-top: 70px !important;
-  background-size: cover;
-  background-image: linear-gradient(to bottom, rgba(42, 52, 66, 0.73), rgba(8, 13, 19, 0.52)),
-  url('../img/faqs.jpg') !important;
 
-}
+        .skyblue-hover:hover{
+            color: rgb(144, 162, 190);
+        }
+        
 
     </style>
 
@@ -64,7 +59,7 @@
         <!-- Brands -->
         <div id="brands-tab" class="store-tab-pane is-active">
             <!-- Timeline -->
-            <section class="hero is-small is-bold hero-faqs hero-faqs-dark">
+            <section class="hero is-small is-bold hero-faqs">
                 <div class="hero-body">
                     <div class="container">
                         {% get_current_language as lang %}
@@ -114,13 +109,13 @@
                                         <span class="flex" style="font-size: small;">The courses might be removing?</span>
                                     </a>
                                     <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-2">
-                                        <p>On rare occasions, Booctep may be required to remove a course from the platform due to policy or legal reasons. If this does happen to a course you're enrolled in, please <a href="{% url 'contact_us' %}">contact us</a> and we'll be ready to help.</p>
+                                        <p>On rare occasions, Booctep may be required to remove a course from the platform due to policy or legal reasons. If this does happen to a course you're enrolled in, please <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> and we'll be ready to help.</p>
                                     </div>
                                     {% else %}
                                     <span class="flex" style="font-size: small;">هل من الممكن أن تحذف دورة من دوراتي؟</span>
                                 </a>
                                 <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-2">
-                                    <p>في حالات نادرة ، قد يُطلب من منصة بوستيب إزالة دورة تدريبية من النظام الأساسي لأسباب تتعلق بالسياسة أو لأسباب قانونية. إذا كان هذا ينطبق على الدورة التدريبية التي قمت بالتسجيل فيها ، فيرجى <a href="{% url 'contact_us' %}">الاتصال بنا</a> وسنكون على استعداد للمساعدة.</p>
+                                    <p>في حالات نادرة ، قد يُطلب من منصة بوستيب إزالة دورة تدريبية من النظام الأساسي لأسباب تتعلق بالسياسة أو لأسباب قانونية. إذا كان هذا ينطبق على الدورة التدريبية التي قمت بالتسجيل فيها ، فيرجى <a href="{% url 'contact_us' %}" class="skyblue-hover">الاتصال بنا</a> وسنكون على استعداد للمساعدة.</p>
                                 </div>
 
                                     {% endif %}
@@ -139,13 +134,13 @@
                                         <span class="flex" style="font-size: small;">How do I become a teacher?</span>
                                     </a>
                                     <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-3">
-                                        <p>We’re happy you’re interested in becoming on of our Booctep community. At Booctep you can teach what you know, for more info <a href="{% url 'become' %}">click here.</a></p>
+                                        <p>We’re happy you’re interested in becoming on of our Booctep community. At Booctep you can teach what you know, for more info <a href="{% url 'become' %}" class="skyblue-hover">click here.</a></p>
                                     </div>
                                     {% else %}
                                     <span class="flex" style="font-size: small;">كيف أصبح معلم في منصة بوستيب؟</span>
                                 </a>
                                 <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-3">
-                                    <p>يسعدنا ويشرفنا اهتمامك بالإنضمام لمجتمع مدربي منصة بوستيب, تستطيع في منصة بوستيب أن تعلًم ما تعلمت في أي وقت, لمزيد من المعلومات <a href="{% url 'become' %}">اضغط هنا</a></p>
+                                    <p>يسعدنا ويشرفنا اهتمامك بالإنضمام لمجتمع مدربي منصة بوستيب, تستطيع في منصة بوستيب أن تعلًم ما تعلمت في أي وقت, لمزيد من المعلومات <a href="{% url 'become' %}" class="skyblue-hover">اضغط هنا</a></p>
                                 </div>
 
                                     {% endif %}
@@ -189,13 +184,13 @@
                                         <span class="flex" style="font-size: small;">What I need to qualified Booctep requirements as a teacher?</span>
                                     </a>
                                     <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-5">
-                                        <p>You’ll need to have a good camera and good microphone to qualified Booctep’s courses, for more info <a href="{% url 'terms' %}">click here.</a></p>
+                                        <p>You’ll need to have a good camera and good microphone to qualified Booctep’s courses, for more info <a href="{% url 'terms' %}" class="skyblue-hover">click here.</a></p>
                                     </div>
                                     {% else %}
                                     <span class="flex" style="font-size: small;">ماهي متطلبات منصة بوستيب من كل مدرب جديد؟</span>
                                 </a>
                                 <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-5">
-                                    <p>تحتاج أن تحصل على كاميرا ومكرفون جيدين لمطابقة شروط المنصة الأساسية, لمزيد من المعلومات <a href="{% url 'terms' %}">اضغط هنا.</a></p>
+                                    <p>تحتاج أن تحصل على كاميرا ومكرفون جيدين لمطابقة شروط المنصة الأساسية, لمزيد من المعلومات <a href="{% url 'terms' %}" class="skyblue-hover">اضغط هنا.</a></p>
                                 </div>
                                     {% endif %}
                                 </div>
@@ -233,14 +228,14 @@
                                         
                                     </a>
                                     <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-7">
-                                        <p>You can check your email ( be sure to check spam as well ), or Follow us on <a href="https://instagram.com/booctep">Instagram</a> or <a href="https://twitter.com/booctep">Twitter</a>, all the promotions will be sharing with our community.</p>
+                                        <p>You can check your email ( be sure to check spam as well ), or Follow us on <a href="https://instagram.com/booctep" target="_blank" class="skyblue-hover">Instagram</a> or <a href="https://twitter.com/booctep" class="skyblue-hover" target="_blank">Twitter</a>, all the promotions will be sharing with our community.</p>
                                     </div>
                                     {% else %}
                                     <span class="flex" style="font-size: small;">كيف يمكنني الحصول على العروض الجديدة؟</span>
                                     
                                 </a>
                                 <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-7">
-                                    <p>تستطيع تفعيل خاصية تلقي الإيميلات عن طريق لوحة التحكم أو متابعتنا في مواقع التواصل الإجتماعي  <a href="https://instagram.com/booctep" target="_blank">انستقرام</a> أو <a href="https://twitter.com/booctep" target="_blank">تويتر</a>, نقوم بمشاركة الكثير من العروض بإستمرار.</p>
+                                    <p>تستطيع تفعيل خاصية تلقي الإيميلات عن طريق لوحة التحكم أو متابعتنا في مواقع التواصل الإجتماعي  <a href="https://instagram.com/booctep" target="_blank" class="">انستقرام</a> أو <a href="https://twitter.com/booctep" target="_blank" class="">تويتر</a>, نقوم بمشاركة الكثير من العروض بإستمرار.</p>
                                 </div>
                                     {% endif %}
                                 </div>
@@ -260,13 +255,13 @@
                                         <span class="flex" style="font-size: small;">Can I download my courses?</span>
                                     </a>
                                     <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-8">
-                                        <p>No, unfortunately you can’t, to protect or teacher privacy we make sure to not download any of Booctep contents <a href="{% url 'privacy_policy' %}">click here to see our privacy & policy.</a></p>
+                                        <p>No, unfortunately you can’t, to protect or teacher privacy we make sure to not download any of Booctep contents <a href="{% url 'privacy_policy' %}" class="skyblue-hover">click here to see our privacy & policy.</a></p>
                                     </div>
                                     {% else %}
                                     <span class="flex" style="font-size: small;">هل أستطيع تحميل دوراتي؟</span>
                                 </a>
                                 <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-8">
-                                    <p>لا يمكنك ذلك, نحن نحمي مدربي منصة بوستيب ولحمايتهم يجب أن نحمي محتواهم <a href="{% url 'privacy_policy' %}">اضغط هنا لمشاهدة سياسة الخصوصية.</a></p>
+                                    <p>لا يمكنك ذلك, نحن نحمي مدربي منصة بوستيب ولحمايتهم يجب أن نحمي محتواهم <a href="{% url 'privacy_policy' %}" class="skyblue-hover">اضغط هنا لمشاهدة سياسة الخصوصية.</a></p>
                                 </div>
                                     {% endif %}
                                 </div>
@@ -331,13 +326,13 @@
                                         <span class="flex" style="font-size: small;">What’s the difference between Free courses and Paid courses?</span>
                                     </a>
                                     <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-11">
-                                        <p>Free courses has limited features, while in paid courses you will get the full features such as certificates, direct chatting with your teacher and more, read more info <a href="{% url 'terms' %}">Here</a>.</p>
+                                        <p>Free courses has limited features, while in paid courses you will get the full features such as certificates, direct chatting with your teacher and more, read more info <a href="{% url 'terms' %}" class="skyblue-hover">Here</a>.</p>
                                     </div>
                                     {% else %}
                                     <span class="flex" style="font-size: small;">ماهو الفرق بين الدورات المجانية والدورات المدفوعة؟</span>
                                 </a>
                                 <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-11">
-                                    <p>الدورات المجانية لديها مميزات محدودة, بعكس الدورات المدفوعة التي لديها كل المميزات من اختبارات والحصول على الشهادة, لمزيد من المعلومات <a href="{% url 'terms' %}">اضغط هنا.</a></p>
+                                    <p>الدورات المجانية لديها مميزات محدودة, بعكس الدورات المدفوعة التي لديها كل المميزات من اختبارات والحصول على الشهادة, لمزيد من المعلومات <a href="{% url 'terms' %}" class="skyblue-hover">اضغط هنا.</a></p>
                                 </div>
                                     {% endif %}
                                 </div>
@@ -376,14 +371,14 @@
                                         
                                     </a>
                                     <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-13">
-                                        <p>Register at Booctep is a free, to register click on ‘ Sign up ‘ button on the top of nav bar or go to this <a href="{% url 'signup' %}">link</a> </p>
+                                        <p>Register at Booctep is a free, to register click on ‘ Sign up ‘ button on the top of nav bar or go to this <a href="{% url 'signup' %}" class="skyblue-hover">link</a> </p>
                                     </div>
                                     {% else %}
                                     <span class="flex" style="font-size: small;">كيفية التسجيل في منصة بوستيب؟</span>
                                     
                                 </a>
                                 <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-13">
-                                    <p>التسجيل في منصة بوستيب هو متاح بشكل مجاني للجميع, يمكنك التسجيل عن طريق الضغط على زر التسجيل أعلى الصفحة أو الضغط <a href="{% url 'signup' %}">هنا.</a></p>
+                                    <p>التسجيل في منصة بوستيب هو متاح بشكل مجاني للجميع, يمكنك التسجيل عن طريق الضغط على زر التسجيل أعلى الصفحة أو الضغط <a href="{% url 'signup' %}" class="skyblue-hover">هنا.</a></p>
                                 </div>
                                     {% endif %}
                                 </div>
@@ -403,13 +398,13 @@
                                         <span class="flex" style="font-size: small;">Can I become an ambassador for Booctep?</span>
                                     </a>
                                     <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-14">
-                                        <p>We always encourage community participation! feel free to write/create video content or use other means of spreading the word about Booctep. If you create anything Booctep related, feel free to show us, and we’ll make sure to share this with the rest of the community! <a href="{% url 'contact_us' %}">contact us</a> if you have any questions.</p>
+                                        <p>We always encourage community participation! feel free to write/create video content or use other means of spreading the word about Booctep. If you create anything Booctep related, feel free to show us, and we’ll make sure to share this with the rest of the community! <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> if you have any questions.</p>
                                     </div>
                                     {% else %}
                                     <span class="flex" style="font-size: small;">هل بالإمكان أن أصبح سفيرا لمنصة بوستيب؟</span>
                                 </a>
                                 <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-14">
-                                    <p>بكل تأكيد نشجع دائما مجتمعنا, لا تتردد في الكتابة أو إنشاء فيديوهات ومشاركتها أو إستخدام كلمة بوستيب, اذا قمت بإنشاء أي شيء متعلق بمنصة بوستيب لا تتردد في إظهاره لنا وسنتأكد من مشاركته مع بقية مجتمع بوستيب, <a href="{% url 'contact_us' %}">تواصل معنا</a> في حال كان لديك أي استفسار</p>
+                                    <p>بكل تأكيد نشجع دائما مجتمعنا, لا تتردد في الكتابة أو إنشاء فيديوهات ومشاركتها أو إستخدام كلمة بوستيب, اذا قمت بإنشاء أي شيء متعلق بمنصة بوستيب لا تتردد في إظهاره لنا وسنتأكد من مشاركته مع بقية مجتمع بوستيب, <a href="{% url 'contact_us' %}" class="skyblue-hover">تواصل معنا</a> في حال كان لديك أي استفسار</p>
                                 </div>
                                     {% endif %}
                                 </div>
@@ -452,14 +447,14 @@
                                         
                                     </a>
                                     <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-16">
-                                        <p>yes of course, actually we want you to be happy with what you learn, if you unhappy please open ticket on that matter, make sure the process be before 30 days from your purchase date, for more info click <a href="{% url 'terms' %}">here.</a></p>
+                                        <p>yes of course, actually we want you to be happy with what you learn, if you unhappy please open ticket on that matter, make sure the process be before 30 days from your purchase date, for more info click <a href="{% url 'terms' %}" class="skyblue-hover">here.</a></p>
                                     </div>
                                     {% else %}
                                     <span class="flex" style="font-size: small;">هل أستطيع استعادة مالي؟</span>
                                     
                                 </a>
                                 <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-16">
-                                    <p>نعم بالتأكيد يمكنك, في الواقع نحن نريد ضمان أنك تتمتع بتجربة فريدة في التعليم في حال كنت غير سعيد في أي دورة تستطيع استعادة أموالك, كن متأكد انك قدمت طلب استعادة قبل ٣٠ يوم من تاريخ الشراء, لمزيد من المعلومات <a href="{% url 'terms' %}">اضغط هنا</a></p>
+                                    <p>نعم بالتأكيد يمكنك, في الواقع نحن نريد ضمان أنك تتمتع بتجربة فريدة في التعليم في حال كنت غير سعيد في أي دورة تستطيع استعادة أموالك, كن متأكد انك قدمت طلب استعادة قبل ٣٠ يوم من تاريخ الشراء, لمزيد من المعلومات <a href="{% url 'terms' %}" class="skyblue-hover">اضغط هنا</a></p>
                                 </div>
                                     {% endif %}
                                 </div>
@@ -479,13 +474,13 @@
                                         <span class="flex" style="font-size: small;">Urgent issues?</span>
                                     </a>
                                     <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-17">
-                                        <p>If you got any urgent issue, questions or problems, etc, you can easily open a ticket on through our email support@booctep.com or live chat box, we’ll ready to help, We are available 24/7, <a href="{% url 'contact_us' %}">contact us</a> now.</p>
+                                        <p>If you got any urgent issue, questions or problems, etc, you can easily open a ticket on through our email support@booctep.com or live chat box, we’ll ready to help, We are available 24/7, <a href="{% url 'contact_us' %}" class="skyblue-hover">contact us</a> now.</p>
                                     </div>
                                     {% else %}
                                     <span class="flex" style="font-size: small;">مشكلة عاجلة؟</span>
                                 </a>
                                 <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-17">
-                                    <p>لا تتردد في الإتصال بنا مباشرة في حال كان لديك أمر طاريء, تستطيع التواصل معنا عبر الإيميل support@booctep.com أو عبر اللايف شات نحن في أتم الإستعداد لمساعدتك على مدار الساعة 24/7 , تواصل معنا <a href="{% url 'contact_us' %}">هنا.</a></p>
+                                    <p>لا تتردد في الإتصال بنا مباشرة في حال كان لديك أمر طاريء, تستطيع التواصل معنا عبر الإيميل support@booctep.com أو عبر اللايف شات نحن في أتم الإستعداد لمساعدتك على مدار الساعة 24/7 , تواصل معنا <a href="{% url 'contact_us' %}" class="skyblue-hover">هنا.</a></p>
                                 </div>
                                     {% endif %}
                                 </div>
@@ -535,14 +530,14 @@
                                         
                                     </a>
                                     <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-19">
-                                        <p>You can Just become a teacher from <a href="{% url 'become' %}">here</a>, please note, to create a paid courses, you’ll need an active Paypal account or Visa/Mastercard account.</p>
+                                        <p>You can Just become a teacher from <a href="{% url 'become' %}" class="skyblue-hover">here</a>, please note, to create a paid courses, you’ll need an active Paypal account or Visa/Mastercard account.</p>
                                     </div>
                                     {% else %}
                                     <span class="flex" style="font-size: small;">ماذا أحتاج لكي أصبح معلم؟</span>
                                     
                                 </a>
                                 <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-19">
-                                    <p>تستطيع أن تصبح معلم فقط بالتسجيل كمعلم وفي حالة كنت طالب تستطيع أن تصبح معلم من <a href="{% url 'become' %}">هنا</a>, تنويه لإنشاء دورات مدفوعة يجب على المدرب أن يحصل على حساب بايبال او بطافة بنكية.</p>
+                                    <p>تستطيع أن تصبح معلم فقط بالتسجيل كمعلم وفي حالة كنت طالب تستطيع أن تصبح معلم من <a href="{% url 'become' %}" class="skyblue-hover">هنا</a>, تنويه لإنشاء دورات مدفوعة يجب على المدرب أن يحصل على حساب بايبال او بطافة بنكية.</p>
                                 </div>
                                     {% endif %}
                                 </div>
@@ -562,14 +557,14 @@
                                         <span class="flex" style="font-size: small;">Will Booctep promote my courses?</span>
                                     </a>
                                     <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-20">
-                                        <p>Yes, but only for teachers whom met our requirements, for more in read <a href="{% url 'terms' %}">here,</a>.
+                                        <p>Yes, but only for teachers whom met our requirements, for more in read <a href="{% url 'terms' %}" class="skyblue-hover">here,</a>.
                                           </p>
                                     </div>
                                     {% else %}
                                     <span class="flex" style="font-size: small;">هل منصة بوستيب سوف تقوم بالتسويق لدورتي؟</span>
                                 </a>
                                 <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-20">
-                                    <p>نعم, لكن فقط للمدربين الذين أتمموا متطلبات المنصة من جودة الدورة المقدمة لعدد الطلاب والمزيد من المتطلبات الضرورية, لمزيد من المعلومات اضغط <a href="{% url 'contact_us' %}">هنا.</a></p>
+                                    <p>نعم, لكن فقط للمدربين الذين أتمموا متطلبات المنصة من جودة الدورة المقدمة لعدد الطلاب والمزيد من المتطلبات الضرورية, لمزيد من المعلومات اضغط <a href="{% url 'contact_us' %}" class="skyblue-hover">هنا.</a></p>
                                 </div>
                                     {% endif %}
                                 </div>
@@ -731,14 +726,14 @@
                                         <span class="flex" style="font-size: small;">Can I teach and study at the same time?</span>
                                     </a>
                                     <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-26">
-                                        <p>Yes of course, if you want to share what you have learned, feel free to read our become a teacher guideline <a href="{% url 'become' %}">here.</a>.
+                                        <p>Yes of course, if you want to share what you have learned, feel free to read our become a teacher guideline <a href="{% url 'become' %}" class="skyblue-hover">here.</a>.
                                           </p>
                                     </div>
                                     {% else %}
                                     <span class="flex" style="font-size: small;">هل أستطيع أن أصبح معلم وطالب في نفس الوقت؟</span>
                                 </a>
                                 <div class="accordion__menu collapse accorddd accorddd-dark" id="course-toc-26">
-                                    <p>نعم تستطيع بالتأكيد, إذا أردت أن تعلًم ما تعلمت, ألقي نظرة على صفحة كن معلم من <a href="{% url 'become' %}">هنا.</a></p>
+                                    <p>نعم تستطيع بالتأكيد, إذا أردت أن تعلًم ما تعلمت, ألقي نظرة على صفحة كن معلم من <a href="{% url 'become' %}" class="skyblue-hover">هنا.</a></p>
                                 </div>
                                     {% endif %}
                                 </div>

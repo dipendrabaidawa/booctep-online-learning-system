@@ -1,5 +1,6 @@
-{% extends "base.html" %}
-{% load static %} {% block head %} {% load l10n %}
+{% extends "base.html" %} {% load static %} {% load i18n %} {% load l10n %} {% load social_share %} {% load home_extras %}
+
+{% block head %}
     <style>
         .schedule video {
             width: 100% !important;
@@ -243,7 +244,12 @@
                         <div class="column is-8">
                             <div class="wrapper">
                                 <div class="categories-header categories-header-dark">
+                                    {% get_current_language as lang %}
+                                    {% if lang == "ar" %}
+                                    <h2>مشترياتي</h2>
+                                    {% else %}
                                     <h2>My order</h2>
+                                    {% endif %}
                                 </div>
                                 <div class="notifications">
                                     {% if cartCnt > 0 %}
@@ -292,29 +298,30 @@
                                         {% endif %}
                                     {% else %}
                                         <div class="store-sections-6" style="display: block;">
-                                            <img src="{% static 'assets/img/no-cart.svg' %}"
-                                                 style="width: 350px;height: auto;" alt="">
-                                            <h2 style="margin-top: -40px;" class="mediabout mediabout-dark">Unfortunately, there are no
-                                                courses yet in your cart</h2>
-                                            <input style="margin-bottom: 15px;" id="tipue_drop_input"
-                                                   class="input c-input" type="text" placeholder="Search" required>
-                                            <h3 style="">
-                                                <a href="index.html" class="button">Search &nbsp;<span
-                                                        class="fa fa-search"></span></a>
-                                            </h3>
+                                            <center>
+
+                                                <img src="{% static 'assets/img/no-cart.png' %}"
+                                                style="width: 350px;height: auto;" alt="" class="no-cart">
+                                                {% get_current_language as lang %}
+                                                {% if lang == "ar" %}
+                                               <h2 style="margin-top: -40px;" class="mediabout mediabout-dark"> لا توجد دورات متاحة</h2>
+                                               {% else %}
+                                               <h2 style="margin-top: -40px;" class="mediabout mediabout-dark">Unfortunately, there are no
+                                                   courses yet in your cart</h2>
+                                               {% endif %}
+                                            </center>
                                         </div>
                                     {% endif %}
                                     <div class="store-sections-6 cartzeroopen" style="display: none;">
-                                        <img src="{% static 'assets/img/no-cart.svg' %}"
-                                             style="width: 350px;height: auto;" alt="">
-                                        <h2 style="margin-top: -40px;" class="mediabout mediabout-dark">Unfortunately, there are no courses
-                                            yet in your cart</h2>
-                                        <input style="margin-bottom: 15px;" id="tipue_drop_input" class="input c-input"
-                                               type="text" placeholder="Search" required>
-                                        <h3 style="">
-                                            <a href="index.html" class="button">Search &nbsp;<span
-                                                    class="fa fa-search"></span></a>
-                                        </h3>
+                                        <img src="{% static 'assets/img/no-cart.png' %}"
+                                             style="width: 350px;height: auto;" alt="" class="no-cart">
+                                             {% get_current_language as lang %}
+                                             {% if lang == "ar" %}
+                                            <h2 style="margin-top: -40px;" class="mediabout mediabout-dark"> لا توجد دورات متاحة</h2>
+                                            {% else %}
+                                            <h2 style="margin-top: -40px;" class="mediabout mediabout-dark">Unfortunately, there are no
+                                                courses yet in your cart</h2>
+                                            {% endif %}
                                     </div>
 
                                 </div>
@@ -355,17 +362,46 @@
                             <section>
                                 <div class="store-sections sectionstore">
                                     <div class="container ">
+                                        {% get_current_language as lang %}
+                                        {% if lang == "ar" %}
+                                        <div class="categories-header categories-header-dark">
+                                            <h2>وصول سريع</h2>
+                                        </div>
+                                        <a class="button process-button cnti cnti-dark" href="{% url 'home' %}"
+                                           style="border: 1px solid rgb(139, 189, 189);">
+                                            واصل التسوق &nbsp;<span
+                                                class="fa fa-shopping-cart"></span>
+                                        </a>
+                                       {% if user.is_authenticated %}
+                                        <a href="{% url 'show fav list' %}" class="button process-button" style="">
+                                            أذهب إلى المفضلة &nbsp;<span class="fa fa-heart"></span>
+                                        </a>
+                                        {% else %}
+                                        <a href="/{{ lang }}/become" class="button process-button" style="">
+                                            أصبح معلم &nbsp;<span class="fa fa-tv"></span>
+                                        </a>
+
+                                        {% endif %}
+                                        {% else %}
                                         <div class="categories-header categories-header-dark">
                                             <h2>Quick Access</h2>
                                         </div>
-                                        <a class="button process-button cnti cnti-card" href="/{{ lang }}"
-                                           style="border: 1px solid rgb(185, 223, 223);">
+                                        <a class="button process-button cnti cnti-dark" href="{% url 'home' %}"
+                                           style="border: 1px solid rgb(139, 189, 189);">
                                             Continue shopping &nbsp;<span
                                                 class="fa fa-shopping-cart"></span>
                                         </a>
-                                        <a href="/favorite" class="button process-button" style="">
-                                            Go to Fav courses &nbsp;<span class="fa fa-heart"></span>
+                                       {% if user.is_authenticated %}
+                                        <a href="{% url 'show fav list' %}" class="button process-button" style="">
+                                            Go to Fav courses &nbsp; &nbsp;<span class="fa fa-heart"></span>
                                         </a>
+                                        {% else %}
+                                        <a href="/{{ lang }}/become" class="button process-button" style="">
+                                            Become a teacher &nbsp;<span class="fa fa-tv"></span>
+                                        </a>
+
+                                        {% endif %}
+                                        {% endif %}
                                     </div>
                                 </div>
                             </section>
@@ -374,31 +410,105 @@
                         <div class="column is-4">
                             <div class="cart-summary ">
                                 <div class="summary-header">
+                                    {% get_current_language as lang %}
+                                    {% if lang == "ar" %}
+                                    <h3 class="mediabout mediabout-dark">معلومات مشترياتي</h3>
+                                    {% else %}
                                     <h3 class="mediabout mediabout-dark">Order Summary</h3>
+                                    {% endif %}
                                 </div>
                                 <!--card-->
+                                    {% get_current_language as lang %}
+                                    {% if lang == "ar" %}
                                 <div class="summary-card summary-card-dark">
 
                                     <div class="order-line">
-                                        <span>Total courses</span>
+                                        <span class="mediabout mediabout-dark">مجموع الدورات</span>
                                         <b class="carttotalcourses"
                                            style="font-weight:500;font-size: 14px">{{ cartCnt }}</b>
                                     </div>
 
                                     <div class="order-line">
-                                        <span>Subtotal</span>
+                                        <span class="mediabout mediabout-dark">سعر الدورات</span>
                                         <span class="cartsubtotal prcg prcg-dark">{{ subtotal|unlocalize }}</span>
                                         <input type="hidden" id="h_subtotal" value="{{ subtotal|unlocalize }}">
                                     </div>
 
                                     <div class="order-line discountamountparent">
-                                        <span>Discount</span>
+                                        <span class="mediabout mediabout-dark">الخصم</span>
                                         <span class="discountamount prcg prcg-dark">{{ subDiscount|unlocalize }}</span>
                                         <input type="hidden" id="h_discount" value="{{ subDiscount|unlocalize }}">
                                     </div>
 
                                     <div class="order-line discountamountparent">
-                                        <span>Tax</span>
+                                        <span class="mediabout mediabout-dark">الضريبة</span>
+                                        <span class="tax">{{ tax|unlocalize }}</span>
+                                        <input type="hidden" id="h_tax" value="{{ tax|unlocalize }}">
+                                    </div>
+
+                                    <div class="header-coupon" style="width: 100%;">
+                                        <div class="field is-grouped" style="width: 100%;">
+                                            <div class="control" style="width: 50%; margin-right: 0px !important">
+                                                <input type="text" class="input"
+                                                       id="promoinput"
+                                                       placeholder="Gift card or discount code"
+                                                       style=""/>
+                                            </div>
+                                            <div class="control" style="width: 20%;">
+                                                <button class="button is-solid primary-button raised applypromobutton"
+                                                        style=" margin-left: 0px !important">
+                                                    ادخل القسيمة
+                                                </button>
+                                                <button class="button primary-button is-danger cancelpromobutton"
+                                                        style="display: none;"
+                                                        disabled>الغاء القسيمة
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <span class="promoerror" style="color: rgb(236, 174, 174);"></span>
+                                    
+                                    <div class="order-line" style="margin-top: 10px;margin-bottom: 10px;">
+                                        <span class="is-total mediabout mediabout-dark">Total</span>
+                                        <span class="is-total totalsum prcgr prcgr-dark">{{ cartTotalSum|unlocalize }}</span>
+                                        <input type="hidden" id="h_total" value="{{ cartTotalSum|unlocalize }}">
+                                    </div>
+                                    {% if cartCnt > 0 %}
+                                        <a href="javascript:doBuyCourses()" class="button is-fullwidth primary-button is-raised checkoutbutton">
+                                            <p style="color:rgb(241, 228, 228)">اتمام الطلب</p>
+                                        </a>
+                                    {% else %}
+                                        <a class="button btncheck btncheck-dark is-fullwidth is-raised checkoutbutton">
+                                            <p class="mediabout mediabout-dark">اتمام الطلب</p>
+                                        </a>
+                                    {% endif %}
+                                    
+                                </div>
+                                {% else %}
+                                <div class="summary-card summary-card-dark">
+
+                                    <div class="order-line">
+                                        <span class="mediabout mediabout-dark">Total courses</span>
+                                        <b class="carttotalcourses"
+                                           style="font-weight:500;font-size: 14px">{{ cartCnt }}</b>
+                                    </div>
+
+                                    <div class="order-line">
+                                        <span class="mediabout mediabout-dark">Subtotal</span>
+                                        <span class="cartsubtotal prcg prcg-dark">{{ subtotal|unlocalize }}</span>
+                                        <input type="hidden" id="h_subtotal" value="{{ subtotal|unlocalize }}">
+                                    </div>
+
+                                    <div class="order-line discountamountparent">
+                                        <span class="mediabout mediabout-dark">Discount</span>
+                                        <span class="discountamount prcg prcg-dark">{{ subDiscount|unlocalize }}</span>
+                                        <input type="hidden" id="h_discount" value="{{ subDiscount|unlocalize }}">
+                                    </div>
+
+                                    <div class="order-line discountamountparent">
+                                        <span class="mediabout mediabout-dark">Tax</span>
                                         <span class="tax">{{ tax|unlocalize }}</span>
                                         <input type="hidden" id="h_tax" value="{{ tax|unlocalize }}">
                                     </div>
@@ -425,32 +535,25 @@
 
                                     </div>
 
-                                    <span class="promoerror" style="color: rgb(226, 135, 135);"></span>
+                                    <span class="promoerror" style="color: rgb(236, 174, 174);"></span>
                                     
                                     <div class="order-line" style="margin-top: 10px;margin-bottom: 10px;">
-                                        <span class="is-total">Total</span>
+                                        <span class="is-total mediabout mediabout-dark">Total</span>
                                         <span class="is-total totalsum prcgr prcgr-dark">{{ cartTotalSum|unlocalize }}</span>
                                         <input type="hidden" id="h_total" value="{{ cartTotalSum|unlocalize }}">
                                     </div>
                                     {% if cartCnt > 0 %}
                                         <a href="javascript:doBuyCourses()" class="button is-fullwidth primary-button is-raised checkoutbutton">
-                                            <p style="color:white">Checkout</p>
+                                            <p style="color:rgb(241, 228, 228)">Checkout</p>
                                         </a>
                                     {% else %}
                                         <a class="button btncheck btncheck-dark is-fullwidth is-raised checkoutbutton">
-                                            <p>Checkout</p>
+                                            <p class="mediabout mediabout-dark">Checkout</p>
                                         </a>
                                     {% endif %}
                                     
                                 </div>
-                                <!--card-->
-                                <div class="summary-card summary-card-dark">
-                                    <img src="/static/assets/img/icons/questions/help.svg" alt="">
-                                    <h4>Help center</h4>
-                                    <p>Having trouble? Please search our <a href="support.html" class="standard-link">Help
-                                        Center</a> for a quick
-                                        answer to your problem.</p>
-                                </div>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
