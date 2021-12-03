@@ -10,9 +10,57 @@
     .teacher {
         float: right !important;
     }
+    
+    .answeeer{
+        color: rgb(50, 103, 218) !important;
+    }
+
+    .answeeer-dark{
+        color: rgb(223, 231, 250) !important;
+    }
+
+    .wrrong{
+        background-color: rgb(206, 35, 35);
+        border: 1px solid rgb(153, 19, 19);
+        color: #fff;
+    }
+    .wrrong-dark{
+        background-color: rgb(241, 212, 216);
+        border: 1px solid rgb(189, 137, 140) !important;
+        color: rgb(68, 4, 9) !important;
+    }
+
+    .skiip{
+        background-color: rgb(35, 103, 206);
+        border: 1px solid rgb(24, 85, 177);
+        color: #fff;
+    }
+    .skiip-dark{
+        background-color: rgb(207, 218, 235);
+        border: 1px solid rgb(146, 168, 201) !important;
+        color: rgb(4, 43, 68) !important;
+    }
+    .coreect{
+        background-color: rgb(49, 143, 61);
+        border: 1px solid rgb(41, 124, 52);
+        color: #fff !important;
+    }
+    .coreect-dark{
+        background-color: rgb(202, 243, 208);
+        border: 1px solid rgb(152, 219, 161) !important;
+        color: rgb(16, 85, 53) !important;
+    }
 
     .bluesky {
         background: #61e076bf !important;
+    }
+    .btn-accentt{
+        background-color: red !important;
+        color: #fff !important;
+    }
+    .btn-accentt-dark{
+        background-color: rgb(221, 171, 171) !important;
+        color: rgb(71, 12, 12) !important;
     }
 
     .message {
@@ -303,10 +351,19 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                                             </div>
                                         </div>
                                     </nav>
+                                    {% get_current_language as lang %}
+                                    {% if lang == "ar" %}
                                     {% if end_flag == 1 %}
-                                    <a class="troph" id="cert" style="cursor: pointer!important; color:#de8413" onclick="getCertificate()" >Get your certificate <i class="fa fa-trophy troph-i"></i></a>
+                                    <a class="troph" id="cert" style="cursor: pointer!important; color:#ecb066;font-size: 18px;" onclick="getCertificate()" >احصل على شهادتك <i class="fa fa-trophy troph-i"></i></a>
+                                    {% else %}
+                                    <p class="troph" style="font-size: 18px;">احصل على شهادتك <i class="fa fa-trophy troph-i"></i></p>
+                                    {% endif %}
+                                    {% else %}
+                                    {% if end_flag == 1 %}
+                                    <a class="troph" id="cert" style="cursor: pointer!important; color:#f5b568" onclick="getCertificate()" >Get your certificate <i class="fa fa-trophy troph-i"></i></a>
                                     {% else %}
                                     <p class="troph">Get your certificate <i class="fa fa-trophy troph-i"></i></p>
+                                    {% endif %}
                                     {% endif %}
                                 </div>
                             </div>
@@ -323,12 +380,20 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                 <div class="Quiz">
                     <div class="quiz-1">
                         <input type="hidden" value="{{ questionNo }}" id="curQuizNo">
-                        <h2 class="quiz-h2" style="text-align: center;" id="QuizTitle">{{ title }}</h2>
+                        <h2 class="quiz-h2 mediabout mediabout-dark" style="text-align: center;" id="QuizTitle">{{ title }}</h2>
                         {% for ele in eleList %}
+                            {% get_current_language as lang %}
+                            {% if lang == "ar" %}
                             <div class="d-flex" style="align-items: center;">
-                            <a href="#" class="quiz-a choice_one" style="width:95%;">{{ ele }}</a>
+                            <a href="#" class="quiz-a choice_one answeeer answeeer-dark" style="width:95%;text-align: right !important;">{{ ele }}</a>
+                            <input class="quizAns" style="margin-left:1%; display:none;" type="checkbox" >
+                            </div>
+                            {% else %}
+                            <div class="d-flex" style="align-items: center;">
+                            <a href="#" class="quiz-a choice_one answeeer answeeer-dark" style="width:95%;">{{ ele }}</a>
                             <input class="quizAns" style="margin-left:1%; display:none;" type="checkbox">
                             </div>
+                            {% endif %}
                             <br>
                         {% endfor %}
                     </div>
@@ -363,11 +428,54 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
             </div>
         </div>
 
+        <style>
+
+            .primary{
+                background-color: red !important;
+            }
+        </style>
+
         <div class="mdk-drawer js-mdk-drawer" data-align="end" id="messages-drawer">
             <div class="mdk-drawer__content top-0">
                 <div class="sidebar sidebar-right sidebar-dark o-hidden">
                     <div class="d-flex flex-column h-100">
 
+                        {% get_current_language as lang %}
+                        {% if lang == "ar" %}
+                        <div style="margin-top: 10px;" class="flex" data-perfect-scrollbar>
+                            <div class="sidebar-heading">قياس الاختبار </div>
+
+                            <ul class="list-group list-group-flush mb-3">
+                                <div class="chart chart-2" style="height: 232px; width: 180px;">
+                                    <div class="text-center fullbleed d-flex align-items-center justify-content-center flex-column z-0">
+                                        <h2 class="m-0 mediabout-dark mediabout">{{ question_no }} / {{ question_count }}</h2>
+                                        <strong>{{ left }} متبقي من الاسئلة</strong>
+                                    </div>
+                                    <canvas class="chart-canvas position-relative z-1" id="attendanceDoughnutChart"
+                                            data-chart-legend="#attendanceDoughnutChartLegend"
+                                            data-chart-line-background-color="primary;accent;gray.700;gray" width="10" height="10" style="margin-top:25px">
+                                        <span style="font-size: 1rem;" class="text-muted"><strong>Attendance</strong> doughnut chart goes here.</span>
+                                    </canvas>
+                                </div>
+                                <div class="col-12">
+                                    <div class="nav border-0">
+                                    </div>
+                                    <div id="attendanceDoughnutChartLegend" class="chart-legend chart-legend--vertical mt-24pt is-fullwidth" style="float: right
+                                    text-align:right;">
+                                        <sapn class="chart-legend-item coreect coreect-dark">
+                                        </sapn>
+                                        <sapn class="chart-legend-item skiip skiip-dark">
+                                        </sapn>
+                                        <sapn class="chart-legend-item wrrong wrrong-dark">
+                                        </sapn>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-accentt btn-accentt-dark flex" onclick="continueLater()"
+                                        style="width: 90%;margin:0 auto;margin-top: 90px;">أكمل لاحقا
+                                </button>
+                            </ul>
+                        </div>
+                        {% else %}
                         <div style="margin-top: 10px;" class="flex" data-perfect-scrollbar>
                             <div class="sidebar-heading">Quiz Timeline</div>
 
@@ -400,6 +508,7 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                                 </button>
                             </ul>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

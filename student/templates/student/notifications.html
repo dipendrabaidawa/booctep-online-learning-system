@@ -2,14 +2,18 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-    Messages
-{% endblock %}
 
 {% block headercontent %}
-{% with title="Notifications" %}
+{% get_current_language as lang %}
+{% if lang == "ar" %}
+    {% with title="الرسائل" %}
+        {% include "./layout/header.html" %}
+    {% endwith %}
+{% else %}
+{% with title="Messages" %}
     {% include "./layout/header.html" %}
 {% endwith %}
+{% endif %}   
 
     <link rel="stylesheet" href="{% static 'student/assets/css/sweetalert.css' %}">
     <style>
@@ -20,7 +24,6 @@
     .table thead{
         height: 65px !important;
     }
-
     .tehead{
         background-color: rgb(197, 223, 235) !important;
     border-top: 1px solid rgb(24, 31, 36) !important;
@@ -71,7 +74,12 @@
 .table{
     background-color: transparent !important;
 }
-[dir="ltr"] .table thead th{
+.table thead th{
+    border-bottom: 0 !important;
+    border-top: 0 !important;
+}
+
+.table thead tr th{
     border-bottom: 0 !important;
     border-top: 0 !important;
 }
@@ -262,7 +270,7 @@
          data-animation="pop" data-timer="null" style="display: none; margin-top: -144px;">
          {% get_current_language as lang %}
          {% if lang == "ar" %}
-        <h3>معلومات الرسالة</h3>
+        <h3>معلومات التنبيه</h3>
         {% else %}
         <h3>Notification info</h3>
         {% endif %}

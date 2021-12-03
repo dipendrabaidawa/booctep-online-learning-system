@@ -2,20 +2,28 @@
 {% load static %}
 {% load i18n %}
 
-{% get_current_language as lang %}
-{% block title %}
-Course
-{% endblock %}
+
 
 {% block headercontent %}
-    {% with title="My Courses" %}
-    {% include "./layout/header.html" %}
+{% get_current_language as lang %}
+{% if lang == "ar" %}
+    {% with title="الخصوصية" %}
+        {% include "./layout/header.html" %}
     {% endwith %}
+{% else %}
+    {% with title="Privacy" %}
+        {% include "./layout/header.html" %}
+    {% endwith %}
+{% endif %}
     <style>
         /* Ratings widget */
         .rate {
             display: inline-block;
             border: 0;
+        }
+
+        .sweet-alert-dark{
+            background-color: rgb(208, 222, 231) !important;
         }
 
         /* Hide radio */
@@ -52,7 +60,7 @@ Course
             content: "\f005"; /* half star no outline */
             position: absolute;
             padding-right: 0;
-            width: 0.6rem;
+            width: 0.5rem;
             overflow: hidden;
             margin-right: 0.4rem;
         }
@@ -328,7 +336,7 @@ Course
                             {% endif %}
                             <small class="ml-8pt mediabout mediabout-dark" style="color: rgb(240, 127, 75) !important;">{{ i.rating|unlocalize  }}</small>
                         </div>
-                        <div class="mt-16pt mediabout mediabout-dark rigggt" style="font-size: 15px; height: 70px;"> {{ i.course_id.description | safe | truncatechars:200 }} </div>
+                        <div class="mt-16pt mediabout mediabout-dark rigggt" style="font-size: 15px; height: 70px;text-align: right;"> {{ i.course_id.description | safe | truncatechars:90 }} </div>
                         <div class="d-flex align-items-center justify-content-center" style="margin-top:20px;">
                             {% get_current_language as lang %}
                             {% if lang == "ar" %}
@@ -339,7 +347,7 @@ Course
                        </div>
                     </div>
                     <div class="progress progress-dark rounded-0" style="height: 4px;border-radius: 0 0 4px 4px !important;">
-                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ i.progress }}%;background-color:green !important;" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ i.progress }}%;background-color:#8EE49E !important;" aria-valuenow="37" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                 </div>
             </div>
@@ -380,9 +388,61 @@ Course
         {% endif %}
 
     </center>
-    <div class="sweet-overlay" tabindex="-1" style="opacity: 1.09; display: none;" id="rating_modal_back"></div>
 
-    <div class="sweet-alert showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
+    {% get_current_language as lang %}
+    {% if lang == "ar" %}
+    <div class="sweet-alert sweet-alert-dark sweet-alert-dark showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
+         id="rating_modal"
+         data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="true"
+         data-animation="pop" data-timer="null" style="display: none;">
+        <input type="hidden" id="commentId" value="">
+        <input type="hidden" id="commentType" value="">
+        <div class="modal-header">
+            <center><h5 class="modal-title" id="formModal">أضف تعليقك و تقييمك للدورة</h5></center>
+            
+        </div>
+        <div class="modal-body">
+            <h5 class="modal-title" style="margin-bottom: 5px;">ماهو تقييمك للدورة؟</h5>
+            <div class="input-group leaverating justify-content-center align-content-center"
+                 style="border: 1px solid black; height: 70px; margin-bottom: 5px;">
+                <fieldset class="rate" id="rating_value">
+                    <input type="radio" id="rating10" name="rating" value="5"/>
+                    <label for="rating10" title="5 stars"></label>
+                    <input type="radio" id="rating9" name="rating" value="4.5"/>
+                    <label class="half" for="rating9" title="4 1/2 stars"></label>
+                    <input type="radio" id="rating8" name="rating" value="4"/>
+                    <label for="rating8" title="4 stars"></label>
+                    <input type="radio" id="rating7" name="rating" value="3.5"/>
+                    <label class="half" for="rating7" title="3 1/2 stars"></label>
+                    <input type="radio" id="rating6" name="rating" value="3"/>
+                    <label for="rating6" title="3 stars"></label>
+                    <input type="radio" id="rating5" name="rating" value="2.5"/>
+                    <label class="half" for="rating5" title="2 1/2 stars"></label>
+                    <input type="radio" id="rating4" name="rating" value="2"/>
+                    <label for="rating4" title="2 stars"></label>
+                    <input type="radio" id="rating3" name="rating" value="1.5"/>
+                    <label class="half" for="rating3" title="1 1/2 stars"></label>
+                    <input type="radio" id="rating2" name="rating" value="1"/>
+                    <label for="rating2" title="1 star"></label>
+                    <input type="radio" id="rating1" name="rating" value="0.5"/>
+                    <label class="half" for="rating1" title="1/2 star"></label>
+                </fieldset>
+            </div>
+            <h5 class="modal-title" style="margin-bottom: 15px; margin-top: 10px;">تعليقك عن الدورة؟</h5>
+            <div class="input-group" style="margin-bottom: 5px;">
+                <textarea id="comment" style="height: 100px; overflow-y: auto;" class="form-control"
+                          placeholder="أكتب تعليقك"></textarea>
+            </div>
+            <button style="color:#fff;background: #62adeb;" type="button" onclick="saveRating()"
+                    class="btn">تقييم
+            </button>
+            <button style="color:#fff;background: #f1a49f;" type="button" onclick="hideModal()"
+                    class="btn">إغلاق
+            </button>
+        </div>
+    </div>
+    {% else %}
+    <div class="sweet-alert sweet-alert-dark showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
          id="rating_modal"
          data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="true"
          data-animation="pop" data-timer="null" style="display: none;">
@@ -430,52 +490,69 @@ Course
             <button style="color:#fff;background: #2196f3;" type="button" onclick="saveRating()"
                     class="btn">Save
             </button>
-            <button style="color:#fff;background: #f5837a;" type="button" onclick="hideRatingModal()"
+            <button style="color:#fff;background: #f5837a;" type="button" onclick="hideModal()"
                     class="btn">Close
             </button>
         </div>
     </div>
-    <div class="sweet-overlay" tabindex="-1" style="opacity: 1.09; display: none;" id="rating_modal_back"></div>
-    <div class="sweet-alert showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
-         id="result_modal"
-         data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="true"
-         data-animation="pop" data-timer="null" style="display: none; margin-top: -169px;">
-        <div class="sa-icon sa-warning pulseWarning" style="display: none;">
-          <span class="sa-body pulseWarningIns"></span>
-          <span class="sa-dot pulseWarningIns"></span>
-        </div>
-        <div class="sa-icon sa-success animate" style="display: block;">
-            <span class="sa-line sa-tip animateSuccessTip"></span>
-            <span class="sa-line sa-long animateSuccessLong"></span>
-            <div class="sa-placeholder"></div>
-            <div class="sa-fix"></div>
-        </div>
-        <div class="sa-icon sa-custom" style="display: none;"></div>
-        <h2 id="result_title">Success!</h2>
-        <p style="display: block;" id="result_content">Thanks!</p>
-        <fieldset>
-            <input type="text" tabindex="3" placeholder="">
-            <div class="sa-input-error"></div>
-        </fieldset>
-        <div class="sa-error-container">
-            <div class="icon">!</div>
-            <p>Not valid!</p>
-        </div>
-        <div class="sa-button-container">
-            <button class="cancel" tabindex="2" style="display: none; box-shadow: none;">Cancel</button>
-            <div class="sa-confirm-button-container">
-                <button class="confirm" tabindex="1" onclick="hideResultModal()"
-                        style="display: inline-block; background-color: rgb(33, 150, 243); box-shadow: rgba(33, 150, 243, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">
-                    OK
-                </button>
-                <div class="la-ball-fall">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% endif %}
+
+    <div class="sweet-alert sweet-alert-dark showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
+    id="result_modal"
+    data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="true"
+    data-animation="pop" data-timer="null" style="display: none; margin-top: -169px;">
+   <div class="sa-icon sa-warning pulseWarning" style="display: none;">
+     <span class="sa-body pulseWarningIns"></span>
+     <span class="sa-dot pulseWarningIns"></span>
+   </div>
+   <div class="sa-icon sa-success animate" style="display: block;">
+       <span class="sa-line sa-tip animateSuccessTip"></span>
+       <span class="sa-line sa-long animateSuccessLong"></span>
+       <div class="sa-placeholder"></div>
+       <div class="sa-fix"></div>
+   </div>
+   <div class="sa-icon sa-custom" style="display: none;"></div>
+   {% get_current_language as lang %}
+   {% if lang == "ar" %}
+   <h2 id="result_title">شكرا لتقييمك</h2>
+   <p style="display: block;" id="result_content">Thanks!</p>
+   {% else %}
+   <h2 id="result_title">You have rated</h2>
+   <p style="display: block;" id="result_content">Thanks!</p>
+   {% endif %}
+   <fieldset>
+       <input type="text" tabindex="3" placeholder="">
+       <div class="sa-input-error"></div>
+   </fieldset>
+   <div class="sa-error-container">
+       <div class="icon">!</div>
+       <p>Not valid!</p>
+   </div>
+   <div class="sa-button-container">
+       <button class="cancel" tabindex="2" style="display: none; box-shadow: none;">Cancel</button>
+       <div class="sa-confirm-button-container">
+           {% get_current_language as lang %}
+           {% if lang == "ar" %}
+           <button class="confirm" tabindex="1" onclick="hideResultModal()"
+                   style="display: inline-block; background-color: rgb(33, 150, 243); box-shadow: rgba(33, 150, 243, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">
+               انهاء
+           </button>
+           {% else %}
+           <button class="confirm" tabindex="1" onclick="hideResultModal()"
+                   style="display: inline-block; background-color: rgb(33, 150, 243); box-shadow: rgba(33, 150, 243, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">
+               OK
+           </button>
+           {% endif %}
+           <div class="la-ball-fall">
+               <div></div>
+               <div></div>
+               <div></div>
+           </div>
+       </div>
+   </div>
+</div>
+
+
 {% endblock %}
 {% block script %}
 {% get_current_language as lang %}
@@ -483,6 +560,8 @@ Course
 
     let cur_page = '{{ course_list.number }}'
     let cur_course = '';
+
+    
 
     function showRatingModal(course_id) {
         $("#rating_modal").css({
@@ -547,7 +626,7 @@ Course
 
                 } else if (response['msg'] == "error") {
                     swal("Course Video Not Found!", {
-                        icon: "info",
+                        icon: "success",
                         button: "Ok",
                         closeOnClickOutside: false,
                     }).then(function () {
@@ -578,7 +657,7 @@ Course
             data: form_data,
         }).then(response => {
             if(response.status*1 == 1) {
-                $("#result_content").html("Thanks for your rating this course")
+                $("#result_content").html("شكرا لتقييمك هذه الدورة, تستطيع تغيير التقييم أي وقت")
                 openResultModal()
                 hideModal()
                 location.reload()
@@ -631,4 +710,5 @@ Course
         $("#submitForm").submit()
     }
 </script>
+
 {% endblock %}
