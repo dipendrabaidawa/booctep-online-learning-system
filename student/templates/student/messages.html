@@ -75,13 +75,13 @@ margin-right: 8px !important;
 }
 
 
-.card-footer{
+.whitee{
 background-color: rgb(255, 255, 255) !important;
 border-bottom: 0.5px solid rgb(211, 228, 236)!important;
 }
 
 
-.card-footer-dark{
+.whitee-dark{
 background-color: rgb(26, 28, 34) !important;
 border: 1px solid rgb(9, 10, 12) !important;
 }
@@ -228,7 +228,7 @@ justify-content: center !important;
 @media only screen and (min-width: 800px) {
 
 .app-messages__container{
-   width: 600px !important;
+   width: 500px !important;
 }
 
 }
@@ -237,7 +237,7 @@ justify-content: center !important;
 @media only screen and (max-width: 500px) {
 
 .app-messages__container{
-   width: 150px !important;
+   width: 130px !important;
 }
 
 }
@@ -291,7 +291,7 @@ color: rgb(219, 219, 219) !important;
 @media only screen and (max-width: 600px) {
 
 .app-messages__container{
-width: 500px !important;
+width: 450px !important;
 }
 .hide-on-phone{
     color: rgb(30, 42, 53);
@@ -325,7 +325,7 @@ width: 500px !important;
          class="mdk-drawer-layout js-mdk-drawer-layout" >
         <div class=" d-none" id="content" data-perfect-scrollbar>
             <div class="app-messages__container app-messages__container-dark d-flex flex-column h-100 pb-4">
-                <div class="navbar navbar-light card-footer card-footer-dark navbar-expand-sm navbar-shadow z-1" id="messages-navbar">
+                <div class="navbar navbar-light whitee whitee-dark navbar-expand-sm navbar-shadow z-1" id="messages-navbar">
                     <div class="container-fluid flex-wrap px-sm-0" style="height:90px;">
                         <div class="nav py-2">
                             <div class="nav-item d-flex align-items-center mr-3">
@@ -337,7 +337,12 @@ width: 500px !important;
                                 <input type="hidden" value="{{ user_id }}" id="student_id">
                                 <div class="mr-3">
                                     <div class="avatar avatar-online avatar-sm" style="width: 60px !important;height: 60px !important;">
-                                        <img class="avatar-img rounded-circle">
+                                        {% if user.profile.image %}
+                                        <img src="/static{{ user.image }}" alt="" class="brd brd-dark avatar-img rounded-circle" style="margin-top: 0px;">
+                                        {% else %}
+                                        <img  class="brd brd-dark avatar-img rounded-circle" style="margin-top: 0px;"src="{% static 'assets/img/userdefault.png' %}"
+                                             data-demo-src="">
+                                        {% endif %}
                                     </div>
                                 </div>
 
@@ -347,28 +352,19 @@ width: 500px !important;
                                     </strong>
                                     <span class="text-50 text-ellipsis"><div id="name_course"></div></span>
                                 </div>
-                                {% get_current_language as lang %}
-                                {% if lang == "ar" %}
-                                <button type="button" class="btn btn-sm btn-light" style="left: 160px !important;position: absolute;top: 30px !important;" onclick="deleteHistory()">
-                                    <b class="mediabout mediabout-dark" style="font-size: 17px;font-weight: 700;">حذف الدردشة</b>
-                                </button>
-                                {% else %}
-                                <button type="button" class="btn btn-sm btn-light " style="margin-left:100px;" onclick="deleteHistory()">
-                                    DELETE HISTORY
-                                </button>
-                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="flex pt-4" id="msg_block" style="position: relative;height: 300px; bottom: 140px; margin-top: 120px!important;" data-perfect-scrollbar>
-                    <div class="container page__container page__container" style="height: 100%!important;">
+                    <div class="container  " style="height: 100vh !important;">
                         <div id="student_msg_div" class="">
+                            
                         </div>
                     </div>
                 </div>
-                <div class="container page__container page__container"
-                     style=" bottom: 90px; position: absolute; height: 40px;overflow: hidden !important;">
+                <div class="container page__container "
+                     style=" bottom: 90px; height: 100vh;overflow: hidden !important;">
                      <div class="hiddd" style="">
                         {% get_current_language as lang %}
                         {% if lang == "ar" %}
@@ -410,7 +406,7 @@ width: 500px !important;
                 </button>
         <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
             
-            <h2 style="" class="mt-5 mediabout mediabout-dark">من فضلك قم بأختيار محادثة</h2>
+            <h2 style="" class="mt-5 mediabout mediabout-dark mr-4">من فضلك قم بأختيار محادثة</h2>
             
            
             <div class="d-flex justify-content-center align-items-center">
@@ -427,7 +423,7 @@ width: 500px !important;
         <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
             
             
-            <h2 style="" class="mt-5 mediabout mediabout-dark">Please select the teacher to start</h2>
+            <h2 style="" class="mt-5 mediabout mediabout-dark ml-4">Please select the teacher to start</h2>
            
             <div class="d-flex justify-content-center align-items-center">
                 <img src="{% static 'assets/img/no-messages.svg' %}" style="width: 40%; height: auto;" alt="">
@@ -459,12 +455,22 @@ width: 500px !important;
                                             <img src="{% static i.teacher_image %}" alt="Avatar"
                                                  class="avatar-img rounded-circle">
                                         </span>
-                                            <span class="flex d-flex flex-column" style="max-width: 175px;">
+                                        {% get_current_language as lang %}
+                                        {% if lang == "ar" %}
+                                            <span class="flex d-flex flex-column" style="max-width: 175px;margin-right: 7px;">
                                             <b class=" mediabout mediabout-dark"
-                                                    style="cursor: pointer;font-size: 16px !important;">{{ i.teacher_name }}</b>
+                                                    style="cursor: pointer;font-size: 14px !important;">{{ i.teacher_name | truncatechars:15  }}</b>
                                             <span class=" blllu blllu-dark"
-                                                  style="cursor: pointer;font-size: 12px !important;">{{ i.course_name }}</span>
+                                                  style="cursor: pointer;font-size: 12px !important;">{{ i.course_name | truncatechars:30  }}</span>
                                         </span>
+                                        {% else %}
+                                        <span class="flex d-flex flex-column" style="max-width: 175px;">
+                                        <b class=" mediabout mediabout-dark"
+                                                style="cursor: pointer;font-size: 14px !important;">{{ i.teacher_name | truncatechars:15  }}</b>
+                                        <span class=" blllu blllu-dark"
+                                              style="cursor: pointer;font-size: 12px !important;">{{ i.course_name | truncatechars:30  }}</span>
+                                       </span>
+                                        {% endif %}
                                             <a href="#" onclick="showDelModal('{{ i.teacher_id }}','{{ i.course_id }}')">
                                                 <svg xmlns="http://www.w3.org/2000/svg" style="color: rgb(231, 149, 135) !important;" width="16" height="16"
                                                      fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -500,7 +506,7 @@ width: 500px !important;
             <span class="sa-body pulseWarningIns"></span>
             <span class="sa-dot pulseWarningIns"></span>
         </div>
-        <h2>Are you sure?</h2>
+        <h2>حذف المحادثة</h2>
         <fieldset>
             <input type="text" tabindex="3" placeholder="">
             <div class="sa-input-error"></div>
@@ -510,13 +516,10 @@ width: 500px !important;
             <p>Not valid!</p>
         </div>
         <div class="sa-button-container">
-            <button class="cancel" tabindex="2" style="display: inline-block; box-shadow: none;"
-                    onclick="closeDelModal()">Cancel!
-            </button>
             <div class="sa-confirm-button-container">
                 <button class="confirm" tabindex="1" onclick="deleteHistory()"
-                        style="display: inline-block; background-color: rgb(33, 150, 243); box-shadow: rgba(33, 150, 243, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">
-                    Yes, delete it!
+                        style="display: inline-block; background-color: rgb(142, 195, 238); box-shadow: rgba(153, 199, 236, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">
+                    تأكيد الحذف
                 </button>
                 <div class="la-ball-fall">
                     <div></div>
@@ -524,6 +527,9 @@ width: 500px !important;
                     <div></div>
                 </div>
             </div>
+            <button class="cancel" tabindex="2" style="display: inline-block; box-shadow: none;"
+                    onclick="closeDelModal()"> إلغاء
+            </button>
         </div>
     </div>
     <div class="sweet-overlay" tabindex="-1" style="opacity: 1.09; display: none;" id="modal_back"></div>
@@ -612,7 +618,7 @@ width: 500px !important;
                         data: form_data,
                     }).then(response => {
                     })
-                    let html = `<li class=" message message-dark " style="">
+                    let html = `<li class=" message message-dark " style="text-decoration:none;list-style:none">
                                 <div class="message__body card card-dark">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
@@ -696,7 +702,7 @@ width: 500px !important;
                 let html = ''
                 messages.forEach(item => {
                     if (cur_id * 1 == item.fields.receiver * 1) {
-                        html += `<li class="message message-dark">
+                        html += `<li class="message message-dark" style="text-decoration:none;list-style:none">
                                 <div class="message__body card card-dark">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">
@@ -712,7 +718,7 @@ width: 500px !important;
                                 </div>
                             </li>`
                     } else {
-                        html += `<li class="message message-dark student">
+                        html += `<li class="message message-dark student" style="text-decoration:none;list-style:none">
                                 <div class="message__body card card-dark">
                                     <div class="card-body">
                                         <div class="d-flex align-items-center">

@@ -1,13 +1,21 @@
 {% extends "student/base.html" %}
 
-{% block title %}
-    Security
-{% endblock %}
+
+{% load static %}
+{% load i18n %}
+
 
 {% block headercontent %}
+{% get_current_language as lang %}
+{% if lang == "ar" %}
+    {% with title="الأمان" %}
+        {% include "./layout/header.html" %}
+    {% endwith %}
+{% else %}
     {% with title="Security" %}
         {% include "./layout/header.html" %}
     {% endwith %}
+{% endif %}
 {% endblock %}
 
 {% load static %}

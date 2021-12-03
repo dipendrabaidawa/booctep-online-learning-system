@@ -4,14 +4,19 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-    Account
-{% endblock %}
+
 
 {% block headercontent %}
+{% get_current_language as lang %}
+{% if lang == "ar" %}
+    {% with title="الإعدادات" %}
+        {% include "./layout/header.html" %}
+    {% endwith %}
+{% else %}
     {% with title="Account" %}
         {% include "./layout/header.html" %}
     {% endwith %}
+{% endif %}
 {% endblock %}
 
 
