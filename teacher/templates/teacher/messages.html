@@ -381,40 +381,34 @@ width: 400px !important;
         </div>
            
 
-            {% get_current_language as lang %}
-            {% if lang == "ar" %}
-            <center>
-                <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0"
-                        data-toggle="sidebar" type="button">
-                    <i class="material-icons">swipe</i> <b>اختر محادثة</b>
-                </button>
-        <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
-            
-            <h2 style="" class="mt-5 mediabout mediabout-dark">من فضلك قم بأختيار محادثة</h2>
-            
-           
-            <div class="d-flex justify-content-center align-items-center">
-                <img src="{% static 'assets/img/no-messages.svg' %}" style="width: 40%; height: auto;" alt="">
+        {% get_current_language as lang %}
+        {% if lang == "ar" %}
+        <center>
+            <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0"
+                    data-toggle="sidebar" type="button">
+                <i class="material-icons">swipe</i> <b>اختر محادثة</b>
+            </button>
+            <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>  
+                <h2 style="" class="mt-5 mediabout mediabout-dark">الرجاء تحديد الطالب للبدء</h2>
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="{% static 'assets/img/no-messages.svg' %}" style="width: 40%; height: auto;" alt="">
+                </div>
             </div>
-        </div>
-    </center>
+        </center>
         {% else %}
         <center>
             <button data-target="#messages-drawer" class="navbar-toggler d-block d-md-none ml-3 p-0"
                     data-toggle="sidebar" type="button">
                 <i class="material-icons">swipe</i> <b>Choose a chat</b>
             </button>
-        <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
-            
-            
-            <h2 style="" class="mt-5 mediabout mediabout-dark">Please select the teacher to start</h2>
-           
-            <div class="d-flex justify-content-center align-items-center">
-                <img src="{% static 'assets/img/no-messages.svg' %}" style="width: 40%; height: auto;" alt="">
+            <div class="mdk-drawer-layout__content" id="err" data-perfect-scrollbar>
+                <h2 style="" class="mt-5 mediabout mediabout-dark">Please select the student to start</h2>
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="{% static 'assets/img/no-messages.svg' %}" style="width: 40%; height: auto;" alt="">
+                </div>
             </div>
-        </div>
-        {% endif %}
         </center>      
+        {% endif %}
 
         <div class="mdk-drawer js-mdk-drawer " data-align="end" id="messages-drawer">
             <div class="mdk-drawer__content top-0 hide-phone">
