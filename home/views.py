@@ -2936,52 +2936,6 @@ def single_category(request, category_name, id):
     else:
         order = int(order)
 
-    if id == '1':
-        categorie = "Web Development"
-
-    elif id == '2':
-        categorie = "Business"
-
-    elif id == '3':
-        categorie = "Design"
-
-    elif id == '4':
-        categorie = "Drama & Cinema"
-
-    elif id == '5':
-        categorie = "Mathmatics"
-
-    elif id == '6':
-        categorie = "Aviation"
-
-    elif id == '7':
-        categorie = "Engineering"
-
-    elif id == '8':
-        categorie = "Art"
-
-    elif id == '9':
-        categorie = "Food"
-
-    elif id == '10':
-        categorie = "softwares Programming"
-
-    elif id == '11':
-        categorie = "skills"
-
-    elif id == '12':
-        categorie = "sewiing"
-
-    elif id == '13':
-        categorie = "Self Development"
-
-    elif id == '14':
-        categorie = "Information Technology"
-
-    else:
-        categorie = "All"
-
-
     # show fav page.., cart page...
     favList = student_favourite_courses.objects.filter(student_id_id=request.user.id)
     cartList = student_cart_courses.objects.filter(student_id_id=request.user.id)
@@ -2997,18 +2951,6 @@ def single_category(request, category_name, id):
     for cart in cartList:
         cartTotalSum += cart.course_id.price
 
-    category = ''
-    if categories.objects.filter(name=categorie).exists():
-        category_id = categories.objects.get(name=categorie).id
-        category = categories.objects.get(name=categorie)
-    else:
-        return render(request, 'filter_404_page.html', {'lang': getLanguage(request)[0], 'favList': favListShow,
-                                                        'cartList': cartListShow, 'favCnt': len(favList),
-                                                        'cartCnt': len(cartList), 'stu_courses':stu_courses,
-                                                        'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                                                        'noti_list': noti_list, 'msg_list': msg_list,
-                                                        'msg_cnt': msg_cnt, 'type': type, 'order': order})
-
     if getLanguage(request)[1] == None:
         l = ""
     else:
@@ -3019,84 +2961,65 @@ def single_category(request, category_name, id):
         else:
             l = "en/"
 
-    if subcategories.objects.filter(categories_id=category_id).exists():
-        sub_obj = subcategories.objects.filter(categories_id=category_id)
-        for i in sub_obj:
-            if Courses.objects.filter(subcat_id=i.id).exists():
-                if user_id == None:
-                    if type == -1:
-                        course_list = Courses.objects.filter(subcat_id=i.id).filter(approval_status=2).order_by('-created_at')
-                    else:
-                        course_list = Courses.objects.filter(subcat_id=i.id).filter(type=type).filter(approval_status=2).order_by('created_at')
-                else:
-                    register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
-                    if type == -1:
-                        course_list = Courses.objects.filter(subcat_id=i.id).filter(approval_status=2).exclude(id__in=register_course_ids).order_by('-created_at')
-                    else:
-                        course_list = Courses.objects.filter(subcat_id=i.id).filter(type=type).filter(approval_status=2).exclude(id__in=register_course_ids).order_by('created_at')
-
-                for course in course_list:
-                    rating_list = course_comments.objects.filter(course_id_id=course.id)
-                    course.stuCnt = student_register_courses.objects.filter(course_id_id=course.id).count()
-                    course.ratingCnt = course_comments.objects.filter(course_id_id=course.id).count()
-                    course.rating = getRatingFunc(rating_list)
-                    course.video = getVideoCnt(course)
-                count = course_list.count()
-                course_list_tmp = course_list
-                if order == 1:
-                    course_list = sorted(course_list_tmp, key=attrgetter('rating'), reverse=True)
-                elif order == 2:
-                    course_list = sorted(course_list_tmp, key=attrgetter('stuCnt'), reverse=True)
-
-                course_list_paginator = Paginator(course_list, 10)
-                try:
-                    course_list = course_list_paginator.page(page)
-                except PageNotAnInteger:
-                    course_list = course_list_paginator.page(1)
-                except EmptyPage:
-                    course_list = course_list_paginator.page(course_list_paginator.num_pages)
-                for course in course_list:
-                    course.link = courseUrlGenerator(course)
-
-                if l != getLanguage(request)[0]:
-                    rl = getLanguage(request)[0].split('/')
-                    return render(request, 'single_category.html',
-                                  {'lang': getLanguage(request)[0], 'course_list': course_list,
-                                   "course_cnt": str(count), "course_name": categorie, "user_id": user_id,
-                                   'category': category, 'favList': favListShow, 'alreadyinFav': alreadyinFavView,
-                                   'alreadyinCart': alreadyinCartView, 'stu_courses':stu_courses,
-                                   'cartList': cartListShow, 'favCnt': len(favList), 'cartCnt': len(cartList),
-                                   'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
-                                   'msg_list': msg_list, 'msg_cnt': msg_cnt, 'type': type, 'page': page,
-                                   'order': order})
-
-                else:
-                    return render(request, 'single_category.html',
-                                  {'lang': getLanguage(request)[0], 'course_list': course_list,
-                                   "course_cnt": str(count), "course_name": categorie, "user_id": user_id,
-                                   'category': category, 'favList': favListShow, 'alreadyinFav': alreadyinFavView,
-                                   'alreadyinCart': alreadyinCartView, 'stu_courses':stu_courses,
-                                   'cartList': cartListShow, 'favCnt': len(favList), 'cartCnt': len(cartList),
-                                   'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
-                                   'msg_list': msg_list, 'msg_cnt': msg_cnt, 'type': type, 'page': page,
-                                   'order': order})
-
-            else:
-                return render(request, 'filter_404_page.html', {'lang': getLanguage(request)[0], 'favList': favListShow,
-                                                                'cartList': cartListShow, 'favCnt': len(favList),
-                                                                'cartCnt': len(cartList), 'stu_courses':stu_courses,
-                                                                'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                                                                'noti_list': noti_list, 'msg_list': msg_list,
-                                                                'msg_cnt': msg_cnt, 'type': type, 'page': page,
-                                                                'order': order})
+    category = categories.objects.get(pk=id)
+    categorie = category.name;
+    if user_id == None:
+        if type == -1:
+            course_list = Courses.objects.filter(scat_id=id).filter(approval_status=2).order_by('-created_at')
+        else:
+            course_list = Courses.objects.filter(scat_id=id).filter(type=type).filter(approval_status=2).order_by('created_at')
     else:
-        return render(request, 'filter_404_page.html', {'lang': getLanguage(request)[0], 'favList': favListShow,
-                                                        'cartList': cartListShow, 'favCnt': len(favList),
-                                                        'cartCnt': len(cartList), 'stu_courses':stu_courses,
-                                                        'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                                                        'noti_list': noti_list, 'msg_list': msg_list,
-                                                        'msg_cnt': msg_cnt, 'type': type, 'page': page, 'order': order})
+        register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
+        if type == -1:
+            course_list = Courses.objects.filter(scat_id=id).filter(approval_status=2).exclude(id__in=register_course_ids).order_by('-created_at')
+        else:
+            course_list = Courses.objects.filter(scat_id=id).filter(type=type).filter(approval_status=2).exclude(id__in=register_course_ids).order_by('created_at')
 
+    for course in course_list:
+        rating_list = course_comments.objects.filter(course_id_id=course.id)
+        course.stuCnt = student_register_courses.objects.filter(course_id_id=course.id).count()
+        course.ratingCnt = course_comments.objects.filter(course_id_id=course.id).count()
+        course.rating = getRatingFunc(rating_list)
+        course.video = getVideoCnt(course)
+    count = course_list.count()
+    course_list_tmp = course_list
+    if order == 1:
+        course_list = sorted(course_list_tmp, key=attrgetter('rating'), reverse=True)
+    elif order == 2:
+        course_list = sorted(course_list_tmp, key=attrgetter('stuCnt'), reverse=True)
+
+    course_list_paginator = Paginator(course_list, 10)
+    try:
+        course_list = course_list_paginator.page(page)
+    except PageNotAnInteger:
+        course_list = course_list_paginator.page(1)
+    except EmptyPage:
+        course_list = course_list_paginator.page(course_list_paginator.num_pages)
+    for course in course_list:
+        course.link = courseUrlGenerator(course)
+
+    if l != getLanguage(request)[0]:
+        rl = getLanguage(request)[0].split('/')
+        return render(request, 'single_category.html',
+                      {'lang': getLanguage(request)[0], 'course_list': course_list,
+                       "course_cnt": str(count), "course_name": categorie, "user_id": user_id,
+                       'category': category, 'favList': favListShow, 'alreadyinFav': alreadyinFavView,
+                       'alreadyinCart': alreadyinCartView, 'stu_courses':stu_courses,
+                       'cartList': cartListShow, 'favCnt': len(favList), 'cartCnt': len(cartList),
+                       'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
+                       'msg_list': msg_list, 'msg_cnt': msg_cnt, 'type': type, 'page': page,
+                       'order': order})
+
+    else:
+        return render(request, 'single_category.html',
+                      {'lang': getLanguage(request)[0], 'course_list': course_list,
+                       "course_cnt": str(count), "course_name": categorie, "user_id": user_id,
+                       'category': category, 'favList': favListShow, 'alreadyinFav': alreadyinFavView,
+                       'alreadyinCart': alreadyinCartView, 'stu_courses':stu_courses,
+                       'cartList': cartListShow, 'favCnt': len(favList), 'cartCnt': len(cartList),
+                       'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
+                       'msg_list': msg_list, 'msg_cnt': msg_cnt, 'type': type, 'page': page,
+                       'order': order})
 
 def getPromoData(request):
     course_id = request.POST.get('course_id')

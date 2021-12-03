@@ -766,7 +766,7 @@ body .container .content .studentnot-cont {
                                     </li>
                                 {% endfor %}
                             </ul>
-                        {% else %}
+                            {% else %}
                             <div class="shopping-cart-header " style="border-top: 0 !important;">
                                 <div class="shopping-cart-total " style="border-top: 0 !important;">
                                     <span class="lighter-text"
@@ -790,19 +790,16 @@ body .container .content .studentnot-cont {
                                           style="">لا توجد تنبيهات متاحة</span>
                                     {% else %}
                                     <span class="item-name item-name-dark"
-                                          style="">There are no notifications from students yet.</span>
+                                          style="">There are no notifications yet.</span>
                                     {% endif %}
                                 </li>
                             </ul>
                         {% endif %}
                         {% get_current_language as lang %}
                         {% if lang == "ar" %}
-                        <a href="javascript:void(0)" onclick="goToNotifications()"
-                               class="button primary-button is-raised">مشاهدة التنبيهات</a>
-                        
+                        <a href="/{{ lang }}/student/notifications" class="button primary-button is-raised">مشاهدة التنبيهات</a>
                         {% else %}
-                        <a href="javascript:void(0)" onclick="goToNotifications()"
-                               class="button primary-button is-raised">{% trans 'View all Notifications' %}</a>
+                        <a href="/{{ lang }}/student/notifications" class="button primary-button is-raised">{% trans 'View all Notifications' %}</a>
                         {% endif %}
                         </div>
                     </div>
