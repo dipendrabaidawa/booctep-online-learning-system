@@ -916,7 +916,7 @@ body .container .content .studentnot-cont {
                     <div class="cart-button cart-button-dark">
                         <i class="fa fa-comment-alt"></i>
                         <div class="cart-count cart-count-dark">
-                            <span class="messagescnt" id="messagesid">{{ msg_cnt }}</span>
+                            <span class="messagescnt" id="messagesid">{{ total_msg_cnt }}</span>
                         </div>
                     </div>
                     <!-- Cart dropdown -->
@@ -1006,37 +1006,23 @@ body .container .content .studentnot-cont {
                                         </ul>
                                     {% endif %}
 
-
-                                    {% if user.group_id == 2 %}
                                     {% get_current_language as lang %}
                                     {% if lang == "ar" %}
-                                        <a href="/{{ lang }}/student/messages" class="button primary-button is-raised"
-                                           onclick="set_count_zero()">مشاهدة الرسائل</a>
+                                    <a href="/{{ lang }}/teacher/messages" class="button primary-button is-raised" onclick="set_count_zero()">مشاهدة الرسائل</a>
                                     {% else %}
-                                    <a href="/{{ lang }}/student/messages" class="button primary-button is-raised"
-                                       onclick="set_count_zero()">{% trans 'View all Messages' %}</a>
-                                    {% endif %} 
-                                    {% else %}
-                                    {% get_current_language as lang %}
-                                    {% if lang == "ar" %}
-                                    <a href="/{{ lang }}/teacher/messages" class="button primary-button is-raised"
-                                       onclick="set_count_zero()">مشاهدة الرسائل</a>
-                                    {% else %}
-                                        <a href="/{{ lang }}/teacher/messages" class="button primary-button is-raised"
-                                           onclick="set_count_zero()">{% trans 'View all Messages' %}</a>
-                                    {% endif %}
+                                    <a href="/{{ lang }}/teacher/messages" class="button primary-button is-raised" onclick="set_count_zero()">{% trans 'View all Messages' %}</a>
                                     {% endif %}
                                 </div>
                                 <div class="student-cont cont">
-                                    {% if msg_cnt > 0 %}
+                                    {% if stu_msg_cnt > 0 %}
                                         <div class="shopping-cart-header">
                                             <div class="shopping-cart-total">
                                                 <span class="lighter-text mediabout mediabout-dark">{% trans 'Total:' %}</span>
-                                                <span class="main-color-text blllu blllu-dark"><b class="messagescnt">{{ msg_cnt }}</b> {% trans ' Senders' %}</span>
+                                                <span class="main-color-text blllu blllu-dark"><b class="messagescnt">{{ stu_msg_cnt }}</b> {% trans ' Senders' %}</span>
                                             </div>
                                         </div>
                                         <ul class="shopping-cart-items">
-                                            {% for msg in msg_list %}
+                                            {% for msg in stu_msg_list %}
                                                 <li class="cart-row msgitem" data-id="{{ msg.id }}">
                                                     <img src="{% static msg.sender.image %}" alt=""/>
                                                     <span class="item-meta">
@@ -1088,24 +1074,12 @@ body .container .content .studentnot-cont {
                                             </li>
                                         </ul>
                                     {% endif %}
-                                    {% if user.group_id == 2 %}
+
                                     {% get_current_language as lang %}
                                     {% if lang == "ar" %}
-                                        <a href="/{{ lang }}/student/messages" class="button primary-button is-raised"
-                                           onclick="set_count_zero()">مشاهدة الرسائل</a>
+                                    <a href="/{{ lang }}/student/messages" class="button primary-button is-raised" onclick="set_count_zero()">مشاهدة الرسائل</a>
                                     {% else %}
-                                    <a href="/{{ lang }}/student/messages" class="button primary-button is-raised"
-                                       onclick="set_count_zero()">{% trans 'View all Messages' %}</a>
-                                    {% endif %}       
-                                    {% else %}
-                                    {% get_current_language as lang %}
-                                    {% if lang == "ar" %}
-                                        <a href="/{{ lang }}/teacher/messages" class="button primary-button is-raised"
-                                           onclick="set_count_zero()">مشاهدة الرسائل</a>
-                                    {% else %}
-                                    <a href="/{{ lang }}/teacher/messages" class="button primary-button is-raised"
-                                       onclick="set_count_zero()">{% trans 'View all Messages' %}</a>
-                                    {% endif %}       
+                                    <a href="/{{ lang }}/student/messages" class="button primary-button is-raised" onclick="set_count_zero()">{% trans 'View all Messages' %}</a>
                                     {% endif %}
                                 </div>
                           </div>

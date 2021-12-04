@@ -176,7 +176,7 @@ def home_view(request):
     ele = Admincontrol.objects.get(pk=1)
     cat_id = int(ele.priority)
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     course_list_paginator = Paginator(course_list, 10)
@@ -252,7 +252,8 @@ def home_view(request):
                                                       'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
                                                       'alreadyinCart': alreadyinCartView, 'favCnt': favCnt,
                                                       'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum,
-                                                      'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                                      'msg_list': msg_list, 'msg_cnt': msg_cnt, 
+                                                      'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                                       'noti_cnt': noti_cnt, 'noti_list': noti_list, 'cat_id': cat_id,
                                                       'ip': ip, 'order': order, 'host_url': host_url})
             else:
@@ -261,7 +262,8 @@ def home_view(request):
                                                       'favList': favListShow, 'cartList': cartListShow,
                                                       'favCnt': favCnt, 'cartCnt': cartCnt,
                                                       'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                                                      'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                                      'msg_list': msg_list, 'msg_cnt': msg_cnt, 
+                                                      'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                                       'noti_list': noti_list, 'cat_id': cat_id, 'ip': ip,
                                                       'order': order, 'host_url': host_url})
         else:
@@ -319,6 +321,7 @@ def home_view(request):
                                    'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt,
                                    'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
                                    'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                   'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                    'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
                 else:
                     return render(request, 'index.html',
@@ -326,7 +329,8 @@ def home_view(request):
                                    'lang': getLanguage(request)[0],
                                    "category_obj": category_obj, 'favList': favListShow, 'cartList': cartListShow,
                                    'favCnt': favCnt, 'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum,
-                                   'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                   'msg_list': msg_list, 'msg_cnt': msg_cnt, 
+                                   'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                    'noti_cnt': noti_cnt, 'noti_list': noti_list, 'cat_id': cat_id, 'ip': ip,
                                    'order': order, 'host_url': host_url})
             else:
@@ -338,7 +342,7 @@ def home_view(request):
                                    'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
                                    'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt,
                                    'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
-                                   'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                   'msg_list': msg_list, 'msg_cnt': msg_cnt, 
                                    'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
                 else:
                     return render(request, 'index.html',
@@ -346,7 +350,7 @@ def home_view(request):
                                    'lang': getLanguage(request)[0],
                                    "category_obj": category_obj, 'favList': favListShow, 'cartList': cartListShow,
                                    'favCnt': favCnt, 'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum,
-                                   'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                   'msg_list': msg_list, 'msg_cnt': msg_cnt, 
                                    'noti_cnt': noti_cnt, 'noti_list': noti_list, 'cat_id': cat_id, 'ip': ip,
                                    'order': order, 'host_url': host_url})
         else:
@@ -377,7 +381,8 @@ def home_view(request):
                                            'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
                                            'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt,
                                            'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
-                                           'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                           'msg_list': msg_list, 'msg_cnt': msg_cnt, 
+                                           'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                            'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
                         else:
                             return render(request, 'index.html',
@@ -386,7 +391,8 @@ def home_view(request):
                                            "category_obj": category_obj, 'favList': favListShow,
                                            'cartList': cartListShow, 'favCnt': favCnt, 'cartCnt': cartCnt,
                                            'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
-                                           'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                           'msg_list': msg_list, 'msg_cnt': msg_cnt, 
+                                           'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                            'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
                     else:
                         if user_id:
@@ -411,10 +417,6 @@ def home_view(request):
                 else:
                     return redirect(u)
             else:
-                # u = ur[0] + "//" + ur[2] + "/" + ln + "/" + ur[4] + "/"
-                # u = ur[0] + "//" + ur[2] + "/" + ln + "/" + ur[4] + "/"
-                # if ur[4] == "":
-                #     u = u[:len(u) - 1]
                 if user_type == "student":
                     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
                     return render(request, 'index.html',
@@ -436,7 +438,8 @@ def home_view(request):
                                        'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
                                        'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt,
                                        'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
-                                       'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                       'msg_list': msg_list, 'msg_cnt': msg_cnt, 
+                                       'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                        'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
                     else:
                         return render(request, 'index.html',
@@ -445,7 +448,8 @@ def home_view(request):
                                        "category_obj": category_obj, 'favList': favListShow,
                                        'cartList': cartListShow, "user_id": user_id, 'favCnt': favCnt,
                                        'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                                       'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                       'msg_list': msg_list, 'msg_cnt': msg_cnt, 
+                                       'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                        'noti_list': noti_list, 'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
                 else:
                     if user_id:
@@ -746,25 +750,9 @@ def home_view1(request):
                 else:
                     return redirect(u)
 
-"""
-(
-    <QuerySet []>,
-    0, 
-    [], 
-    <QuerySet [<student_cart_courses: student_cart_courses object (170)>, 
-    <student_cart_courses: student_cart_courses object (169)>, 
-    <student_cart_courses: student_cart_courses object (168)>]>, 
-    4, 
-    [48, 65, 64, 46], 
-    262.0, 
-    <QuerySet [<notifications: notifications object (102)>, 
-    <notifications: notifications object (76)>]>, 
-    2, 
-    [], 
-    0
-)
-"""
 def findheader(userid):
+    # Getting user's group
+    user_group_id = 0 if userid is None else User.objects.get(pk=userid).group_id
     # show fav page.., cart page...
     favList = student_favourite_courses.objects.filter(student_id_id=userid)
     favCnt = len(favList)
@@ -796,15 +784,33 @@ def findheader(userid):
 
     msg_list = []
     sender_ids = []
+    student_msg_list = []
+    student_sender_ids = []
+    stu_msg_cnt = 0
     msgs = Messages.objects.filter(receiver_id=userid, is_read=0).order_by("-id")
-    # Adding one latest message per sender and number of send should be small than 3
-    for msg in msgs:
-        if msg.sender not in sender_ids and len(sender_ids) < 3:
-            sender_ids.append(msg.sender)
-            msg_list.append(msg)
-    msg_cnt = Messages.objects.filter(receiver_id=userid, is_read=0).values('sender_id').distinct().count()
+    # if user is student&teacher account
+    if user_group_id != 4:
+        # Adding one latest message per sender and number of send should be small than 3
+        for msg in msgs:
+            if msg.sender_id not in sender_ids and len(sender_ids) < 3:
+                sender_ids.append(msg.sender_id)
+                msg_list.append(msg)
+        msg_cnt = Messages.objects.filter(receiver_id=userid, is_read=0).values('sender_id').distinct().count()
+    else:
+        for msg in msgs:
+            sender_group_id = User.objects.get(pk=msg.sender_id).group_id
+            if msg.sender_id not in sender_ids and len(sender_ids) < 3 and sender_group_id == 2:
+                sender_ids.append(msg.sender_id)
+                msg_list.append(msg)
+            if msg.sender_id not in student_sender_ids and len(student_sender_ids) < 3 and (sender_group_id == 3 or sender_group_id == 4):
+                student_sender_ids.append(msg.sender_id)
+                student_msg_list.append(msg)
 
-    return favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt
+        msg_cnt = Messages.objects.filter(receiver_id=userid, is_read=0, sender_id__in=sender_ids).values('sender_id').distinct().count()
+        stu_msg_cnt = Messages.objects.filter(receiver_id=userid, is_read=0, sender_id__in=student_sender_ids).values('sender_id').distinct().count()
+
+    total_msg_cnt = msg_cnt + stu_msg_cnt
+    return favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, student_msg_list, stu_msg_cnt, total_msg_cnt
 
 
 def signup(request):
@@ -830,65 +836,65 @@ def loginn(request):
 
 
 def about(request):
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'about.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def faqs(request):
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'faqs.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def help(request):
     user_id = request.session.get("user_id")
     user_type = request.session.get("user_type")
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'support.html',
                   {'lang': getLanguage(request)[0], 'user_type': user_type, "user_id": user_id, 'favList': x1,
                    'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def terms(request):
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'terms.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def policy(request):
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'privacy.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def contact(request):
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'contact.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def become(request):
@@ -902,13 +908,13 @@ def become(request):
     # show notification...
     noti_list = notifications.objects.filter(user_id=request.user.id, is_read=0).order_by("-id")[:3]
     noti_cnt = notifications.objects.filter(user_id=request.user.id, is_read=0).count()
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'become.html',
                   {'lang': getLanguage(request)[0], 'catList': objC, 'favList': favListShow, 'cartList': cartListShow,
                    'favCnt': len(favList), 'cartCnt': len(cartList), 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
+                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def become_a_teacher(request):
@@ -921,12 +927,12 @@ def become_a_teacher(request):
 
     noti_list = notifications.objects.filter(user_id=request.user.id, is_read=0).order_by("-id")[:3]
     noti_cnt = notifications.objects.filter(user_id=request.user.id, is_read=0).count()
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'become-teacher.html', {'lang': getLanguage(request)[0], 'categories': categoryList, 'favList': favListShow, 'cartList': cartListShow,
                    'favCnt': len(favList), 'cartCnt': len(cartList), 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
+                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def save_become_teacher(request):
@@ -1252,7 +1258,7 @@ def single_course(request, teacher_id, course_url):
     for cart in cartList:
         cartTotalSum += cart.course_id.price
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     teacher_id = Courses.objects.get(pk=id).user_id
@@ -1298,16 +1304,6 @@ def single_course(request, teacher_id, course_url):
             if VideoUploads.objects.filter(section_id=i.id, promo=1).exists():
                 promo_video = VideoUploads.objects.filter(section_id=i.id, promo=1)[0].url
 
-            # making the includeList
-            # include = {}
-            # include['id'] = i.id
-            # include['name'] = i.name
-            # include['course_id'] = i.course_id
-            # include['type'] = i.type
-            # include['nos'] = i.nos
-            # include['tname'] = re.sub(r'[^\w]', '', i.name)
-            # includeList.append(include)
-
     fav_exist = 0
     if student_favourite_courses.objects.filter(student_id_id=user_id, course_id_id=course.id).exists():
         fav_exist = 1
@@ -1325,7 +1321,7 @@ def single_course(request, teacher_id, course_url):
                    'alreadyinFav': alreadyinFavView, 'cartList': cartListShow, 'alreadyinCart': alreadyinCartView,
                    'favCnt': len(favList), 'cartCnt': len(cartList), 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
                    'noti_list': noti_list, 'is_me': is_me, 'fav_exist': fav_exist, 'cart_exist': cart_exist,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 @csrf_exempt
@@ -2696,7 +2692,7 @@ def searching(request):
     user_type = request.session.get("user_type")
     user_id = request.session.get("user_id")
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     optionObj = Option.objects.filter(oname="main_host")[0]
@@ -2798,7 +2794,7 @@ def searching(request):
                                            'totalsearchresult': totalsearchresult, "category_obj": category_obj,
                                            'course_list': sehList, 'favList': favListShow,
                                            'cartList': cartListShow, 'favCnt': favCnt, 'cartCnt': cartCnt,
-                                           'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
+                                           'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                            'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'page': page, 'type': type, 'order': order, 'host_url': host_url})
 
 
@@ -2945,7 +2941,7 @@ def single_category(request, category_name, id):
     for value in range(len(alreadyinCart)):
         alreadyinCartView.append(alreadyinCart[value]['course_id_id'])
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     for cart in cartList:
@@ -3008,7 +3004,7 @@ def single_category(request, category_name, id):
                        'cartList': cartListShow, 'favCnt': len(favList), 'cartCnt': len(cartList),
                        'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
                        'msg_list': msg_list, 'msg_cnt': msg_cnt, 'type': type, 'page': page,
-                       'order': order})
+                       'order': order, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
     else:
         return render(request, 'single_category.html',
@@ -3019,7 +3015,7 @@ def single_category(request, category_name, id):
                        'cartList': cartListShow, 'favCnt': len(favList), 'cartCnt': len(cartList),
                        'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
                        'msg_list': msg_list, 'msg_cnt': msg_cnt, 'type': type, 'page': page,
-                       'order': order})
+                       'order': order, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 def getPromoData(request):
     course_id = request.POST.get('course_id')
@@ -3181,6 +3177,7 @@ def showCartList(request):
         subTax += cart.course_id.price * (tax / 100)
     
     subDiscount = round(subDiscount, 2)
+    subTax = round(subTax, 2)
         
     cartListTmp = Paginator(cartList, 2)
 
@@ -3193,7 +3190,7 @@ def showCartList(request):
 
     cartTotalSumPrice = round(subTotal - subTax - subDiscount, 2)
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     user_type = request.session.get("user_type")
@@ -3203,7 +3200,7 @@ def showCartList(request):
                    'cartList1': cartList, 'favCnt': favCnt, 'stu_courses':stu_courses,
                    'cartCnt': cartCnt, 'subtotal': subTotal, 'subDiscount': subDiscount,'cartTotalSum': cartTotalSumPrice,
                    'noti_cnt': noti_cnt, 'page': page, 'tax': subTax,
-                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 ##### PAYMENT #####
@@ -3237,7 +3234,7 @@ def ecommerce_payment(request, teacher_id, id, course_url):
 
     request.session['order_id'] = orderid,
     request.session['amount'] = float(totalmoney or 0)
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     # if user_type == "student":
@@ -3273,7 +3270,7 @@ def ecommerce_payment(request, teacher_id, id, course_url):
                    'discountmoney': discountmoney, 'lang': getLanguage(request)[0], 'savedcard': list(savedcard),
                    "course": course, "user_id": user_id, 'favList': favListShow, 'favCnt': favCnt, 'alreadyinFav': alreadyinFavView,
                    'cartList': cartListShow, 'cartCnt': cartCnt, 'alreadyinCart': alreadyinCartView, 'cartTotalSum': cartTotalSum, 'noti_list': noti_list,
-                   'noti_cnt': noti_cnt, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_courses': stu_courses})
+                   'noti_cnt': noti_cnt, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_courses': stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
     # else:
     #     return redirect("/")
 
@@ -3371,7 +3368,7 @@ def checkout(request):
     user_id = request.session.get("user_id")
     savedcard = payment.objects.filter(student_id=user_id)
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     orderid = generateRandomChar()
@@ -3401,11 +3398,11 @@ def checkout(request):
                    'discountmoney': discountmoney, 'lang': getLanguage(request)[0], 'savedcard': list(savedcard),
                    "user_id": user_id, 'favList': favListShow, 'favCnt': favCnt, 'alreadyinFav': alreadyinFavView,
                    'cartList': cartListShow, 'cartCnt': cartCnt, 'alreadyinCart': alreadyinCartView, 'cartTotalSum': cartTotalSum, 'noti_list': noti_list,
-                   'noti_cnt': noti_cnt, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_courses': stu_courses})
+                   'noti_cnt': noti_cnt, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_courses': stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 @csrf_exempt
 def process_payment(request):
-    x1, x2, x3, y1, y2, purchase_course_ids, y4, z1, z2, msg_list, msg_cnt= findheader(request.user.id)
+    x1, x2, x3, y1, y2, purchase_course_ids, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     student_cart_courses.objects.filter(student_id_id=request.user.id).delete()
     purchase_courses = []
     for course_id in purchase_course_ids:
@@ -3620,7 +3617,7 @@ def showFavList(request):
 
     # show fav page.., cart page...
     category_obj = categories.objects.all()
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     user_id = request.user.id
@@ -3693,7 +3690,7 @@ def showFavList(request):
                   {'stu_courses': stu_courses, 'category_obj': category_obj, 'lang': getLanguage(request)[0], 'favList1': favList,
                    'cartList': cartListShow, 'favCnt': favCnt, 'favList': favListShow,
                    'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'page': page, 'type': type,
-                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'order': order})
+                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'order': order, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def viewProfile(request, id, pname):
@@ -3757,7 +3754,7 @@ def viewProfile(request, id, pname):
     except EmptyPage:
         course_list = course_list_paginator.page(course_list_paginator.num_pages)
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     user.courses = course_list
@@ -3800,7 +3797,7 @@ def viewProfile(request, id, pname):
                   {'teacher': user, 'favList': favListShow, 'lang': getLanguage(request)[0], 'cartList': cartListShow,
                    'favCnt': len(favList), "stu_courses": stu_courses,
                    'cartCnt': len(cartList), 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'page': page,
-                   'page1': page1,
+                   'page1': page1, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                    'noti_list': noti_list, 'order': order, 'tab': tab, 'msg_list': msg_list, 'msg_cnt': msg_cnt})
 
 
@@ -4023,7 +4020,7 @@ def enrollment(request, course_id):
 
     similar_course = sorted(similar_course, key=attrgetter('rating'), reverse=True)[:5]
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     
@@ -4066,7 +4063,7 @@ def enrollment(request, course_id):
                   {'course': course, 'similar_courses': similar_course, 'favList': favListShow,'lang': getLanguage(request)[0],
                    'alreadyinFav': alreadyinFavView, 'cartList': cartListShow, 'stu_courses': stu_courses,
                    'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt, 'msg_list': msg_list,
-                   'msg_cnt': msg_cnt,
+                   'msg_cnt': msg_cnt, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                    'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt})
 
 @csrf_exempt
@@ -4130,7 +4127,7 @@ def enrollments(request, course_ids):
 
     similar_course = sorted(similar_course, key=attrgetter('rating'), reverse=True)[:5]
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
 
@@ -4138,7 +4135,7 @@ def enrollments(request, course_ids):
                   {'courses': courses, 'similar_courses': similar_course, 'favList': favListShow,'lang': getLanguage(request)[0],
                    'alreadyinFav': alreadyinFavView, 'cartList': cartListShow, 'stu_courses': stu_courses,
                    'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt, 'msg_list': msg_list,
-                   'msg_cnt': msg_cnt,
+                   'msg_cnt': msg_cnt, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                    'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt})
 
 @csrf_exempt

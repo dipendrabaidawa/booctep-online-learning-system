@@ -418,6 +418,13 @@ def teacher_messages(request):
             course = Courses.objects.get(pk=i['course_id'])
             userList = Messages.objects.filter(receiver_id=user_id, course_id=i['course_id']).filter(
                 delete_id=0).values('sender_id').distinct()
+
+            # if user is student&teacher, then shows only students in teacher message screen
+            if user_type == 'stuteach':
+                student_ids = User.objects.filter(group_id=2).values('id')
+                userList = Messages.objects.filter(receiver_id=user_id, course_id=i['course_id'], sender_id__in=student_ids).filter(
+                delete_id=0).values('sender_id').distinct()
+
             for ele in userList:
                 unread = Messages.objects.filter(receiver_id=user_id, sender_id=ele['sender_id'],
                                                  course_id=i['course_id'], is_read=0)
@@ -433,19 +440,7 @@ def teacher_messages(request):
                     student_dict['unread'] = 1
                 student_list.append(student_dict)
                 student_dict = {}
-
-        # for i in obj:
-        # 	if student_register_courses.objects.filter(course_id = i.id).exists():
-        # 		student_obj = student_register_courses.objects.filter(course_id = i.id)
-        # 		for k in student_obj:
-        # 			student_dict["course_name"] = i.name
-        # 			student_dict["course_id"] = i.id
-        # 			student_dict["student_id"] = k.student_id.id
-        # 			student_dict["student_name"] = k.student_id.first_name+" "+k.student_id.last_name
-        # 			student_dict["student_image"] = k.student_id.image
-        # 			student_list.append(student_dict)
-        # 			student_dict = {}
-        print("student list:::", student_list)
+                
         return render(request, 'teacher/messages.html',
                       {'lang': getLanguage(request)[0], 'datetime': datetime, "studentList": student_list,
                        "user_id": user_id, "user_name": user_name})
