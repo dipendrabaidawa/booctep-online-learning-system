@@ -4,23 +4,20 @@
 {% load i18n %}
 {% load l10n %}
 
-{% block title %}
-    dashboard
-{% endblock %}
-
 
 {% block headercontent %}
 {% get_current_language as lang %}
 {% if lang == "ar" %}
-    {% with title="لوحة التحكم" %}
+    {% with title="الإعدادات" %}
         {% include "./layout/header.html" %}
     {% endwith %}
 {% else %}
-{% with title="dashboard" %}
-    {% include "./layout/header.html" %}
-{% endwith %}
-{% endif %}    
+    {% with title="Account" %}
+        {% include "./layout/header.html" %}
+    {% endwith %}
+{% endif %}
 {% endblock %}
+
 
 {% block content %}
 
