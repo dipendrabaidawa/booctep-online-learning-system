@@ -640,20 +640,19 @@ background:#3A3A3A;
                                     </div>
                                 </span>
                                 {% else %}
-                                <b style="top:12px;position:absolute;left:20px">Course curriculum</b>
+                                <b style="top:12px;position:absolute;right:20px;font-size: 20px;font-weight: 700;" class="mediabout mediabout-dark">Course curriculum</b>
 
+                                
                                 <span class="dropdown">
                                     <button onclick="myFunction()" class="dropbtn">&#9776;</button>
                                     <div id="myDropdown" class="dropdown-content">
                                         <a href="#"
-                                        style="margin-left: 45px !important; position: absolute;top: 20px;font-size: small;right: 360px;"
-                                        onclick="openSpamModal()" class="mediabout mediabout-dark">Report Spam <i class="fa fa-file troph-i"
-                                                                                 style="color: rgb(219, 135, 135)"></i></a>
+                                        style=""
+                                        onclick="openSpamModal()" class="">Report Spam </a>
                                       {% if interval < 30 and course.type == 0 %}
                                       <a href="#"
-                                      style="margin-left: 45px !important; position: absolute;top: 20px;font-size: small;right: 500px;"
-                                      onclick="openRefundModal()" class="mediabout mediabout-dark">Refund Money <i class="fa fa-money-bill troph-i"
-                                                                                  style="color: rgb(147, 231, 185)"></i></a>
+                                      style=""
+                                      onclick="openRefundModal()" class="">Refund Money </a>
                                         {% endif %}
                                     </div>
                                 </span>
@@ -813,7 +812,7 @@ background:#3A3A3A;
     <div class="sweet-alert sweet-alert-dark showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
          id="refund_modal"
          data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="true"
-         data-animation="pop" data-timer="null" style="display: none; margin-top: -144px;">
+         data-animation="pop" data-timer="null" style="display: none; margin-top: -20%;">
         <div class="modal-header">
             <h5 class="modal-title" id="formModal">ماهو سبب طلب استرداد المبلغ؟</h5>
             <button style=" float: right; margin-top: -30px; margin-bottom: 10px;outline: none; background: no-repeat;border: none;font-size: 20px;"
@@ -829,11 +828,11 @@ background:#3A3A3A;
                 <textarea id="refund_content" style="height: 150px; overflow-y: auto;" class="form-control"
                           placeholder="content"></textarea>
             </div>
-            <button style="color:#fff;background: #4ba6f0;" type="button" onclick="refund()"
-                    class="btn">Save
+            <button style="color:#fff;background: #66a5da;" type="button" onclick="refund()"
+                    class="btn">ارسال 
             </button>
-            <button style="color:#fff;background: #f3968f;" type="button" onclick="hideRefundModal()"
-                    class="btn">Close
+            <button style="color:#fff;background: #e7938d;" type="button" onclick="hideRefundModal()"
+                    class="btn">اغلاق
             </button>
         </div>
     </div>
@@ -866,13 +865,10 @@ background:#3A3A3A;
     <div class="sweet-alert showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
          id="refund_modal"
          data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="true"
-         data-animation="pop" data-timer="null" style="display: none; margin-top: -144px;">
+         data-animation="pop" data-timer="null" style="display: none; margin-top: -20%;">
         <div class="modal-header">
             <h5 class="modal-title" id="formModal">Leave your Refund title and comment here!</h5>
-            <button style=" float: right; margin-top: -30px; margin-bottom: 10px;outline: none; background: no-repeat;border: none;font-size: 20px;"
-                    type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            
         </div>
         <div class="modal-body">
             <h5 class="modal-title" style="margin-bottom: 5px;">Refund title</h5>
@@ -894,13 +890,10 @@ background:#3A3A3A;
     <div class="sweet-alert showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
          id="spam_modal"
          data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="true"
-         data-animation="pop" data-timer="null" style="display: none; margin-top: -144px;">
+         data-animation="pop" data-timer="null" style="display: none; margin-top: -20%;">
         <div class="modal-header">
             <h5 class="spam-title" id="formModal">Leave your Spam Title and comment here!</h5>
-            <button style=" float: right; margin-top: -30px; margin-bottom: 10px;outline: none; background: no-repeat;border: none;font-size: 20px;"
-                    type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            
         </div>
         <div class="modal-body">
             <h5 class="modal-title" style="margin-bottom: 5px;">Spam Title</h5>

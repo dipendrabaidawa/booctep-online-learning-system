@@ -7,8 +7,32 @@
 
 <style>
 
+
     .teacher {
         float: right !important;
+    }
+    .successbtn{
+        background-color: teal !important;
+        color: white;
+    }
+
+    .skipp{
+        background-color: rgb(107, 11, 107) !important;
+        color: white !important;
+    }
+    .skipp-dark{
+        background-color: rgb(240, 183, 240) !important;
+        color: rgb(67, 2, 70) !important;
+    }
+    
+    .sweet-alert-dark{
+            background-color: rgb(208, 222, 231) !important;
+        }
+
+
+    .successbtn-dark{
+        background-color: rgb(178, 226, 226) !important;
+        color: rgb(8, 68, 35);
     }
     
     .answeeer{
@@ -354,9 +378,9 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                                     {% get_current_language as lang %}
                                     {% if lang == "ar" %}
                                     {% if end_flag == 1 %}
-                                    <a class="troph" id="cert" style="cursor: pointer!important; color:#ecb066;font-size: 18px;" onclick="getCertificate()" >احصل على شهادتك <i class="fa fa-trophy troph-i"></i></a>
+                                    <a class="troph mediabout mediabout-dark" id="cert" style="cursor: pointer!important; color:#ecb066;font-size: 18px;" onclick="getCertificate()" >احصل على شهادتك <i class="fa fa-trophy troph-i"></i></a>
                                     {% else %}
-                                    <p class="troph" style="font-size: 18px;">احصل على شهادتك <i class="fa fa-trophy troph-i"></i></p>
+                                    <p class="troph mediabout mediabout-dark" style="font-size: 18px;">احصل على شهادتك <i class="fa fa-trophy troph-i"></i></p>
                                     {% endif %}
                                     {% else %}
                                     {% if end_flag == 1 %}
@@ -400,30 +424,57 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                 </div>
                 <div class=" page__container page__container page__container-2 card-footer card-footer-dark" style="width: 100%;height: 70px !important;border-radius: 0 !important;">
                     <div id="message-reply" class="form-down-2">
+                        {% get_current_language as lang %}
+                        {% if lang == "ar" %}
+                        <button class="btn skipp skipp-dark flex" onclick="skipAnswer()" 
+                                style="width: 40%;margin:0 auto;margin-top: 30px;">تخطي 
+                        </button>
+                        {% else %}
                         <button class="btn btn--light btn-dark flex" onclick="skipAnswer()" 
                                 style="width: 40%;margin:0 auto;margin-top: 30px;">Skip
                         </button>
+                        {% endif %}
                         <!-- <button class="btn flex showhint" style="color: rgb(87, 185, 185);" data-toggle="toastr" data-toastr-type="info"
                                 data-toastr-title="null" style="cursor: not-allowed;"
                                 data-toastr-show-method="slideDown" data-toastr-hide-method="slideUp"
                                 data-toastr-close-method="slideUp">Hint
                             <i class="fa fa-lightbulb" style="margin-left: 5px;"></i>
                         </button> -->
-                        <button class="btn flex" id="checkbtn"
-                                style="background: rgb(135, 226, 135);color: #fff; width: 40%;margin:0 auto;margin-top: 30px;"
-                                onclick="checkAnswer()">
-                            {% if end_flag == 0 %}check answer{% elif end_flag == 2 %}finish{% endif %}
-                        </button>
+                            {% get_current_language as lang %}
+                            {% if lang == "ar" %}
+                            
+                            <button class="btn successbtn successbtn-dark flex" id="checkbtn"
+                                    style=" width: 40%;margin:0 auto;margin-top: 30px;"
+                                    onclick="checkAnswer()">
+                                {% if end_flag == 0 %}السؤال التالي{% elif end_flag == 2 %}إكمال الاختبار{% endif %}
+                            </button>
+                            {% else %}
+                            <button class="btn successbtn successbtn-dark flex" id="checkbtn"
+                                    style=" width: 40%;margin:0 auto;margin-top: 30px;"
+                                    onclick="checkAnswer()">
+                                {% if end_flag == 0 %}check answer{% elif end_flag == 2 %}finish{% endif %}
+                            </button>
+                            {% endif %}
                     </div>
 
                 </div>
                 {% else %}
+                {% get_current_language as lang %}
+                {% if lang == "ar" %}
                 <div class="Quiz">
                     <div class="quiz-1">
-                        <h6 class="quiz-h2" style="text-align: center; font-size: 40px !important;" >Congratlations!</h6>
+                        <h6 class="quiz-h2 mediabout mediabout-dark" style="text-align: center; font-size: 40px !important;" > &#128079; تهانـينا</h6>
+                        <b class="mediabout mediabout-dark" style="font-size: 20px !important;text-align: center !important;" >لقد اجتزت اختبار الشهادة بنجاح, تستطيع تحميل شهادتك بالضغط على " الحصول على شهادتي " بالأعلى</b>
+                    </div>
+                </div>
+                {% else %}
+                <div class="Quiz">
+                    <div class="quiz-1">
+                        <h6 class="quiz-h2" style="text-align: center; font-size: 40px !important;" >Congratlations &#128079;</h6>
                         <h5 class="quiz-h2" style="text-align: center; font-size: 20px !important;" >You have done the quiz and you ready to get your certificate</h5>
                     </div>
                 </div>
+                {% endif %}
                 {% endif %}
             </div>
         </div>
@@ -443,7 +494,7 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                         {% get_current_language as lang %}
                         {% if lang == "ar" %}
                         <div style="margin-top: 10px;" class="flex" data-perfect-scrollbar>
-                            <div class="sidebar-heading">قياس الاختبار </div>
+                            <div class="sidebar-heading" style="text-align: right;">قياس الاختبار </div>
 
                             <ul class="list-group list-group-flush mb-3">
                                 <div class="chart chart-2" style="height: 232px; width: 180px;">
@@ -517,7 +568,7 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
 
     <div class="sweet-overlay" tabindex="-1" style="opacity: 1.09; display: none;" id="alert_modal_back"></div>
 
-    <div class="sweet-alert showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
+    <div class="sweet-alert sweet-alert-dark showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
          id="alert_modal"
          data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="true"
          data-animation="pop" data-timer="null" style="display: none; margin-top: -169px;">
@@ -532,8 +583,8 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
             <div class="sa-fix"></div>
         </div>
         <div class="sa-icon sa-custom" style="display: none;"></div>
-        <h2 id="alert_title">Warning!</h2>
-        <p style="display: block;" id="alert_content">You must choose an answer!</p>
+        <h2 id="alert_title">قيمة خالية</h2>
+        <p style="display: block;" id="alert_content">فضلا قم باختيار اجابة من الحقول</p>
         <fieldset>
             <input type="text" tabindex="3" placeholder="">
             <div class="sa-input-error"></div>
@@ -545,10 +596,18 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
         <div class="sa-button-container">
             <button class="cancel" tabindex="2" style="display: none; box-shadow: none;">Cancel</button>
             <div class="sa-confirm-button-container">
+                {% get_current_language as lang %}
+                {% if lang == "ar" %}
+                <button class="confirm" tabindex="1" onclick="hideAlertModal()"
+                        style="display: inline-block; background-color: rgb(33, 150, 243); box-shadow: rgba(33, 150, 243, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">
+                    اغلاق
+                </button>
+                {% else %}
                 <button class="confirm" tabindex="1" onclick="hideAlertModal()"
                         style="display: inline-block; background-color: rgb(33, 150, 243); box-shadow: rgba(33, 150, 243, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">
                     OK
                 </button>
+                {% endif %}
                 <div class="la-ball-fall">
                     <div></div>
                     <div></div>
@@ -590,9 +649,9 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
             skipdiv.html('');
             wrongdiv.html('');
 
-            rightdiv.html('<i class="chart-legend-indicator" style="background-color: rgba(85, 103, 255, 1)"></i>right  :  ' + right)
-            skipdiv.html('<i class="chart-legend-indicator" style="background-color: rgba(242, 240, 124, 1)"></i>skip  :  ' + skip)
-            wrongdiv.html('<i class="chart-legend-indicator" style="background-color: rgba(247, 94, 104, 1)"></i>wrong  :  ' + wrong);
+            rightdiv.html('<i class="chart-legend-indicator" style="background-color: rgba(85, 103, 255, 1);text-align:right !important"></i><b>إجابة صحيحة</b>  :  ' + right)
+            skipdiv.html('<i class="chart-legend-indicator" style="background-color: rgba(242, 240, 124, 1)"></i><b>تخطي</b>  :  ' + skip)
+            wrongdiv.html('<i class="chart-legend-indicator" style="background-color: rgba(247, 94, 104, 1)"></i><b>إجابة خاطئة</b>  :  ' + wrong);
 
             $(".quiz-a").click(function(){
 
@@ -600,8 +659,8 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                 $(".quizAns").prop( "checked", false );
                 $(".quiz-a").removeAttr("id");
 
-                $(this).css("background-color","rgb(14,109,187)");
-                $(this).css("color","#fff");
+                $(this).css("background-color","rgb(127, 201, 250)");
+                $(this).css("color","#0F4C75");
                 $(this).next().prop( "checked", true );
                 $(this).attr("id","thisisselected");
             });
@@ -622,19 +681,19 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
 
             const data = {
                 labels: [
-                    'Right',
-                    'Skip',
-                    'Wrong',
-                    'Left'
+                    'إجابات صحيحة',
+                    'تخطي',
+                    'إجابات خاطئة',
+                    'متبقي من الاسئلة'
                 ],
                 datasets: [{
                     label: 'My First Dataset',
                     data: [right_percent, skip_percent, wrong_percent, left_percent],
                     backgroundColor: [
-                        "rgba(85, 103, 255, 1)",
-                        "rgba(242, 240, 124, 1)",
-                        "rgba(247, 94, 104, 1)",
-                        "rgb(227, 235, 246, 1)"
+                        "rgb(204, 255, 221)",
+                        "rgb(153, 214, 255)",
+                        "rgb(255, 102, 102)",
+                        "rgb(245, 204, 255)"
                     ],
                     borderColor: "#FFFFFF",
                     borderWidth: 4,
@@ -741,8 +800,8 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                 $("#alert_modal_back").css({
                     'display': 'block'
                 })
-                $("#alert_title").html('Warning!')
-                $("#alert_content").html('You must choose an answer!')
+                $("#alert_title").html('قيمة خالية')
+                $("#alert_content").html('فضلا قم باختيار اجابة من الحقول ')
                 return;
             }
             let answer = '{{ answerList }}'
