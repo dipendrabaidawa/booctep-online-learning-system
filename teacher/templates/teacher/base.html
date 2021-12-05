@@ -398,6 +398,8 @@
         {% endblock %}
     </title>
     <!-- Prevent the demo from appearing in search engines -->
+
+    <!-- -->
     <meta name="robots" content="noindex">
     <link rel="shortcut icon" href="{% static 'assets/img/favicon.png' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -472,12 +474,89 @@
     <script src="{% static 'teacher/assets/vendor/sweetalert.min.js' %}"></script>
     <script src="{% static 'teacher/assets/js/sweetalert.js' %}"></script>
     <script src="{% static 'assets/js/axios.min.js' %}"></script>
+    <script type="text/javascript">
+        function sorthistory() {
+            var sort_value = $("#historysort").val();
+            if (sort_value == 1) {
+                $('.purchaselist .purchaseentity').sort(function (a, b) {
+                    return $(b).data('sort') - $(a).data('sort');
+                }).appendTo('.purchaselist');
+            }
+            if (sort_value == 2) {
+                $('.purchaselist .purchaseentity').sort(function (a, b) {
+                    return $(a).data('sort') - $(b).data('sort');
+                }).appendTo('.purchaselist');
+            }
+            if (sort_value == 3) {
+                $('.purchaselist .purchaseentity').sort(function (a, b) {
+                    return $(b).data('sort') - $(a).data('sort');
+                }).appendTo('.purchaselist');
+            }
+        }
+    </script>    <style type="text/css">
+        .pagination li {
+            width: 45px;
+            height: 45px;
+            border: 1px solid black;
+            font-size: 30px;
+            border-radius: 50%;
+            margin-left: 5px;
+        }
+        .nocourseavailable {
+            text-align: center;
+            font-size: 30px;
+            font-weight: bolder;
+        }
 
+        /* .animated-toggle .toggler{
+                 position: relative;
+             display: block;
+             height: 31px;
+             width: 53px;
+             border: 2px solid #c29f01;
+             border-radius: 100px;
+             -webkit-transition: all .3s;
+             transition: all .3s;
+             cursor: pointer;
+         }*/
+
+        .sweet-alert .sa-icon.sa-success:after {
+            opacity: 0.0;
+        }
+
+        .sweet-alert .sa-icon.sa-success:before {
+            opacity: 0.0;
+        }
+
+        .sweet-alert .sa-icon.sa-success .sa-fix {
+            opacity: 0.0;
+        }
+    </style>
     {% block head %} {% endblock %}
 </head>
 
-<body class="layout-mini backgg backgg-light" style="height: 100%;">
+<style>
+    .backgg{
+        background-color: #e8f4ff !important;
+    }
+    .backgg-dark{
+        background-color: #4c525e !important;
+    }
 
+.screen-dark{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: rgb(17, 25, 36) !important;
+  z-index: 9999;
+  opacity: 1;
+}
+
+</style>
+
+<body class="layout-mini backgg backgg-dark"  style="height: 100%;">
 <input type="hidden" id="hd_csrf" value="{{ csrf_token }}">
 
 <div class="screen hidden">
@@ -550,8 +629,8 @@
     </div>
 </div>
 
-<div class="mdk-drawer-layout js-mdk-drawer-layout" data-push data-responsive-width="440px">
-    <div class="mdk-drawer-layout__content page-content">
+<div class="mdk-drawer-layout js-mdk-drawer-layout" data-push data-responsive-width="992px" style="background-color: none !important ;">
+    <div class="mdk-drawer-layout__content page-content" style="background-color: none !important;">
 
         {% block headercontent %}
         {% endblock %}
@@ -560,13 +639,7 @@
         {% endblock %}
 
     </div>
-    <!-- // END drawer-layout__content -->
-
-    {% block modal %}
-    {% endblock %}
-
-    {% include './layout/left-sidebar.html' %}
-
+    {% include "./layout/left-sidebar.html" %}
 </div>
 <!-- // END drawer-layout -->
 
@@ -804,11 +877,12 @@
             $(".sidebar-secondary").addClass('sidebar-secondary-dark'); 
             $(".btn-primary").addClass('btn-primary-dark');
             $(".top").addClass('top-dark');
-            $(".top").addClass('top-dark');
             $(".carousel-item").addClass('carousel-item-dark'); 
+            $(".card-body").addClass('card-body-dark');
             $(".message").addClass('message-dark');
             $(".card").addClass('card-dark');
             $(".active-a").addClass('active-a-dark'); 
+            $(".seelector").addClass('seelector-dark');
             $(".menu-icon").addClass('menu-icon-dark'); 
             $(".nav-drop-header").addClass('nav-drop-header-dark');  
             $(".disabled").addClass('disabled-dark'); 
@@ -817,8 +891,10 @@
             $(".sidebar-light-dodger-blue").addClass('sidebar-light-dodger-blue-dark'); 
             $(".blllu").addClass('blllu-dark'); 
             $(".bllu").addClass('bllu-dark'); 
+            $(".accordion__menu-link").addClass('accordion__menu-link-dark');
             $(".addbg").addClass('addbg-dark');
             $(".prcg").addClass('prcg-dark'); 
+            $(".btn-accentt").addClass('btn-accentt-dark');
             $(".progress").addClass('progress-dark'); 
             $(".accordion__toggle").addClass('accordion__toggle-dark'); 
             $(".carddy").addClass('card-dark'); 
@@ -831,7 +907,6 @@
             $(".hrrrr").addClass('hrrrr-dark');
             $(".sweet-alert").addClass('sweet-alert-dark'); 
             $(".is-light").addClass('is-light-dark'); 
-            $(".page-num").addClass('page-num-dark'); 
             $(".form-control").addClass('form-control-dark'); 
             $(".bgg-primary").addClass('bgg-primary-dark'); 
             $(".accorddd").addClass('accorddd-dark'); 
@@ -864,12 +939,15 @@
             $(".custom-file").removeClass('custom-file-dark');
             $(".activve").removeClass('activve-dark');
             $(".page-num").removeClass('page-num-dark');
+            $(".btn-accentt").removeClass('btn-accentt-dark');
             $(".prcg").removeClass('prcg-dark');
             $(".border-left-2").removeClass('border-left-2-dark');
             $(".app-messages__container").removeClass('app-messages__container-dark');
             $(".material-icons").removeClass('material-icons-dark');
             $(".icn").removeClass('icn-dark');
             $(".accordion").removeClass('accordion-dark');
+            $(".card").removeClass('card-dark');
+            $(".card-body").removeClass('card-body-dark');
             $(".carddy").removeClass('card-dark');
             $(".addbg").removeClass('addbg-dark');
             $(".accordion__toggle").removeClass('accordion__toggle-dark');
@@ -900,9 +978,11 @@
             $(".brd").removeClass('brd-dark');
             $(".lineeeet").removeClass('lineeeet-dark');
             $(".hrrrr").removeClass('hrrrr-dark');
+            $(".accordion__menu-link").removeClass('accordion__menu-link-dark');
             $(".is-dark").removeClass('is-dark-dark');
             $(".accorddd").removeClass('accorddd-dark');
             $(".track").removeClass('track-dark');
+            $(".seelector").removeClass('seelector-dark');
             $(".socig").removeClass('socig-dark');
             $(".bg-primary").removeClass('bg-primary-dark');
             $(".soci").removeClass('soci-dark');

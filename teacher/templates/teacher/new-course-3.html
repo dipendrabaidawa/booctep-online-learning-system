@@ -38,6 +38,39 @@
 
 {% block content %}
     {% load static %}
+
+<style>
+
+.card-dark{
+    background-color: rgb(33, 41, 51) !important;
+    border: 0 !important;
+}
+
+.progress {
+    background-color: rgb(198, 211, 236) !important;
+}
+
+[dir=rtl] .custom-file-naked .custom-file-input{
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+[dir=ltr] .custom-file-naked .custom-file-input{
+    margin-right: auto !important;
+    margin-left: auto !important;
+}
+                  
+.progress .bg-primary{
+    background-color: rgb(45, 95, 189) !important;
+    border-radius: 0 !important;
+}
+    
+.progress .bg-primary-dark{
+    background-color: rgb(27, 30, 34) !important;
+    border-radius: 0 !important;
+}         
+
+</style>
+
     <div class="progress rounded-0" style="height: 4px;">
         <div class="progress-bar bg-primary" role="progressbar" style="width: 75%;" aria-valuenow="37" aria-valuemin="0"
              aria-valuemax="100"></div>
@@ -53,7 +86,7 @@
                             <div class="page-separator__text">Step 3</div>
                         </div>
 
-                        <div class="card">
+                        <div class="card card-dark">
                             <div class="card-body media" style="height: 55px !important;">
 
                                 <b style="font-size: medium;">Course Quiz</b>

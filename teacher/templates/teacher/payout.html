@@ -21,6 +21,10 @@
     <style>
         html {
             overflow-y: auto;
+            letter-spacing: 0 !important;
+        }
+        .col-form-label{
+            letter-spacing: 0 !important;
         }
     </style>
 
@@ -102,11 +106,11 @@
             {% if lang == "ar" %}
             <div class="list-group list-group-form " style="">
                 <div class="list-group-item d-flex align-items-center  card-header card-header-dark" style="padding-top:20px"> 
-                    <strong id="card_num" class="blllu blllu-dark"> </strong><b>أدخل معلومات ويسترون يونيون</b>
+                    <strong id="card_num" class="blllu blllu-dark"> </strong><b class="mediabout mediabout-dark" style="font-size: 18px;">أدخل معلومات ويسترون يونيون</b>
                 </div>
                 <div class="list-group-item carddy card-dark">
                     <div class="form-group row align-items-center mb-0">
-                        <label class="col-form-label form-label col-sm-3 mediabout mediabout-dark">أسمك الكامل ( كما هو مكتوب في الجواز )</label>
+                        <label class="col-form-label form-label col-sm-3 mediabout mediabout-dark" style="letter-spacing: 0 !important;">أسمك الكامل ( كما هو مكتوب في الجواز )</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control form-control-dark" id="card_name" placeholder="الرجاء التأكد من إدخال الاسم بشكل صحيح"
                                    value="{{ card.card_name }}"/>
@@ -115,7 +119,7 @@
                 </div>
                 <div class="list-group-item carddy card-dark">
                     <div class="form-group row align-items-center mb-0">
-                        <label class="col-form-label form-label mediabout mediabout-dark col-sm-3"> بلد الاقامة الحالية</label>
+                        <label class="col-form-label form-label mediabout mediabout-dark col-sm-3" style="letter-spacing: 0 !important;"> بلد الاقامة الحالية</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control form-control-dark" id="card_number"
                                    placeholder="أين ستقوم بإستلام أموالك؟" value="{{ card.card_number }}"/>
@@ -124,7 +128,7 @@
                 </div>
                 <div class="list-group-item carddy card-dark">
                     <div class="form-group row align-items-center mb-0">
-                        <label class="col-form-label form-label col-sm-3 mediabout mediabout-dark" >عنوانك </label>
+                        <label class="col-form-label form-label col-sm-3 mediabout mediabout-dark" style="letter-spacing: 0 !important;">عنوانك </label>
                         <div class="col-sm-9">
                             <textarea type="text" class="form-control form-control-dark" id="bank_number" placeholder="قم بإدخال عنوانك بشكل كامل"
                                    value="{{ card.bank_number }}"></textarea>
@@ -143,7 +147,7 @@
             {% else %}
             <div class="list-group list-group-form " style="">
                 <div class="list-group-item d-flex align-items-center  card-header card-header-dark">
-                    <strong id="card_num" class="blllu blllu-dark"> </strong><b>Enter your Westron union information</b>
+                    <strong id="card_num" class="blllu blllu-dark"> </strong><b class="mediabout mediabout-dark" style="font-size: 22px;">Enter your Westron union information</b>
                 </div>
                 <div class="list-group-item carddy card-dark">
                     <div class="form-group row align-items-center mb-0">
@@ -208,7 +212,7 @@
             bank_number = $("#bank_number").val()
 
             if (card_name == '' || card_number == '' || bank_number == '') {
-                showAlert(0, 'Please fill all fields!')
+                showAlert(0, 'من فضلك قم بادخال البيانات')
                 return;
             }
 

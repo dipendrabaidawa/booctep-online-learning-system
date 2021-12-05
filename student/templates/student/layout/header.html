@@ -7,7 +7,19 @@
 
 html{
     background-color: transparent !important;
+    letter-spacing: 0 !important;
 }
+
+[dir=rtl] .form-control:focus{
+    outline: 0 !important;
+    box-shadow: inset 0 1px 1px rgba(39, 44, 51, .075), 0 0 0 1px #9bc3e4
+}
+
+[dir=ltr] .form-control:focus{
+    outline: 0 !important;
+    box-shadow: inset 0 1px 1px rgba(39, 44, 51, .075), 0 0 0 1px #9bc3e4
+}
+
 
 .mediabout{
     color: rgb(9, 23, 41) !important;
@@ -163,6 +175,8 @@ html{
 </style>
 
 {% endif %}
+
+
 <div class="navbar navbar-dark navbar-expand pr-0 navbar-light " id="default-navbar" data-primary>
     <!-- Navbar toggler -->
     <button class="navbar-toggler w-auto mr-16pt d-block d-lg-none rounded-0" type="button" data-toggle="sidebar">

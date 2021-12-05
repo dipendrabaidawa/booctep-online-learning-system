@@ -166,17 +166,17 @@
                                 {% if lang == "ar" %}
                             <tr style="">
                                 <th style="width: 150px;">
-                                    <a href="javascript:void(0)" class="mediabout mediabout-dark">أسم المرسل</a>
+                                    <a href="javascript:void(0)" class="mediabout mediabout-dark" style="letter-spacing: 0px !important;">أسم المرسل</a>
                                 </th>
                                 <th>
-                                    <a href="javascript:void(0)" class="mediabout mediabout-dark" >الرسالة</a>
+                                    <a href="javascript:void(0)" class="mediabout mediabout-dark" style="letter-spacing: 0 !important;">الرسالة</a>
                                 </th>
                                 <th style="" class="course_name">
                                     <a href="javascript:void(0)" 
-                                       style="" class="mediabout mediabout-dark">أسم الدورة</a>
+                                       style="" class="mediabout mediabout-dark" style="letter-spacing: 0 !important;">أسم الدورة</a>
                                 </th>
                                 <th>
-                                    <a href="javascript:void(0)" class="mediabout mediabout-dark" >خيارات</a>
+                                    <a href="javascript:void(0)" class="mediabout mediabout-dark" style="letter-spacing: 0 !important;">خيارات</a>
                                 </th>
                             </tr>
                             {% else %}
@@ -202,7 +202,7 @@
                                 <tr >
                                     <td >
                                         <div class="media flex-nowrap align-items-center" style="white-space: nowrap;">
-                                            <div class="avatar avatar-sm mr-8pt">
+                                            <div class="avatar avatar-sm mr-8pt" style="border: 0 !important;">
                                                 <img src="{% if noti.type == 0 %}{% static noti.sender.image %}{% else %}{% static 'assets/img/favicon.png' %}{% endif %}"
                                                      style="height:41px;" alt="people"
                                                      width="56" class="rounded-circle brd brd-dark"/>

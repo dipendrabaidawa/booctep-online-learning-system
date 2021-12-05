@@ -6,7 +6,7 @@
 {% block headercontent %}
 {% get_current_language as lang %}
 {% if lang == "ar" %}
-    {% with title="الحوالات" %}
+    {% with title="التحويلات" %}
         {% include "./layout/header.html" %}
     {% endwith %}
 {% else %}
@@ -21,6 +21,7 @@
 
 
 <style>
+
     .backgg{
         background-color: #e8f4ff !important;
     }
@@ -28,6 +29,14 @@
         background-color: #4c525e !important;
     }
 
+
+    .carddy{
+        background-color: rgb(247, 247, 247) !important;
+    }
+    .card-dark{
+        background-color: rgb(33, 41, 51) !important;
+        border: 0 !important;
+    }
 
 
  .card-header{
@@ -144,7 +153,9 @@ a.mediabout-dark{
    color: none !important;
 }
 
-
+html{
+    letter-spacing: 0 !important;
+}
         
 .btn-primary{
     background-color: rgb(37, 148, 192) !important;
@@ -166,6 +177,8 @@ th,td {
 
 .table thead{
     height: 65px !important;
+    border-top: 1px solid rgb(25, 25, 29);
+    border-bottom: 1px solid rgb(25, 25, 29)
 }
 
 .tehead{
@@ -182,6 +195,7 @@ th,td {
     background-color: rgb(33, 41, 51) !important;
     border-top: 1px solid rgb(24, 31, 36) !important;
     border-bottom: 1px solid rgb(24, 31, 36) !important;
+    border: 1px solid rgb(24, 31, 36) !important;
 }
 
 
@@ -204,6 +218,13 @@ th,td {
 }
 
 [dir="ltr"] .table td, [dir="ltr"] .table th{
+    border: 0 !important;
+    border-left: 0 !important;
+
+}
+
+
+[dir="rtl"] .table td, [dir="rtl"] .table th{
     border: 0 !important;
 
 }
@@ -300,7 +321,12 @@ a.disabled{
         <div class="columns">
             <div class="column is-12">
                 <div class="page-separator">
+                    {% get_current_language as lang %}
+                    {% if lang == "ar" %}
+                    <div class="page-separator__text backgg backgg-dark mediabout mediabout-dark" style="font-size: 20px;">العمليات</div>
+                    {% else %}
                     <div class="page-separator__text backgg backgg-dark mediabout mediabout-dark">Transactions</div>
+                    {% endif %}
                 </div>
 
                 <div class="card  mb-0">
@@ -349,26 +375,26 @@ a.disabled{
                         <table class="table mb-0 thead-border-top-0 table-nowrap">
                             {% get_current_language as lang %}
                             {% if lang == "ar" %}
-                            <thead class="thead tehead-dark">
-                                <tr >
+                            <thead class="thead  tehead-dark" style="text-align: right !important;border: 0 !important;border-top: 0px !important;">
+                                <tr style="border: 0 !important !important;">
 
-                                    <th>
-                                        <a href="javascript:void(0)" data-sort="js-lists-values-employee-name" class="bllu bllu-dark flllot">العملية</a>
+                                    <th style="">
+                                        <a href="javascript:void(0)" data-sort="js-lists-values-employee-name" class="bllu bllu-dark flllot"style="letter-spacing:0 ;float: right !important;margin-right:10px">العملية</a>
                                     </th>
 
                                     <th style="width: 150px;">
-                                        <a href="javascript:void(0)" data-sort="js-lists-values-employer-name" class="bllu bllu-dark">التاريخ</a>
+                                        <a href="javascript:void(0)" data-sort="js-lists-values-employer-name" class="bllu bllu-dark"style="letter-spacing:0 ">التاريخ</a>
                                     </th>
 
 
                                     <th class="text-center" style="width: 48px;">
-                                        <a href="javascript:void(0)" data-sort="js-lists-values-projects" class="bllu bllu-dark">العملة</a>
+                                        <a href="javascript:void(0)" data-sort="js-lists-values-projects" class="bllu bllu-dark"style="letter-spacing:0 ">العملة</a>
                                     </th>
 
 
 
                                     <th style="width: 120px;">
-                                        <a href="javascript:void(0)" data-sort="js-lists-values-activity" class="bllu bllu-dark">المبلغ</a>
+                                        <a href="javascript:void(0)" data-sort="js-lists-values-activity" class="bllu bllu-dark"style="letter-spacing:0 ">المبلغ</a>
                                     </th>
                                 </tr>
                             </thead>
@@ -397,7 +423,7 @@ a.disabled{
                                 </tr>
                             </thead>
                             {% endif %}
-                            <tbody class="list" id="staff">
+                            <tbody class="list" id="staff" style="">
 
                                 <tr class="selected">
 
@@ -446,7 +472,7 @@ a.disabled{
                                 <ul class="pagination-list " style="font-size:small;margin-top: 15px !important;">
                                
                                     
-                                    <li><a class="btn disabled disabled-dark mr-1" >السابق</a></li>
+                                    <li><a class="btn disabled disabled-dark mr-1 mediabout mediabout-dark" >السابق</a></li>
                                     
                                 
                                     <li class="btn nextt nextt-dark mr-1"><a >1</a></li>
@@ -455,7 +481,7 @@ a.disabled{
                                         2
                                     </a></li>
                                     
-                                    <li class="btn disabled disabled-dark mr-1"><a href="#">
+                                    <li class=""><a href="#" class="btn disabled disabled-dark ml-1 mediabout mediabout-dark">
                                         التالي
                                     </a></li>
                                     
@@ -468,7 +494,7 @@ a.disabled{
                                 <ul class="pagination-list " style="font-size:small;margin-top: 15px !important;">
                                
                                     
-                                    <li><a class="btn disabled disabled-dark mr-1" >Previous</a></li>
+                                    <li><a class="btn disabled disabled-dark mr-1 mediabout mediabout-dark" >Previous</a></li>
                                     
                                 
                                     <li class="btn nextt nextt-dark mr-1"><a >1</a></li>
@@ -477,8 +503,8 @@ a.disabled{
                                         2
                                     </a></li>
                                     
-                                    <li class="btn disabled disabled-dark mr-1"><a href="#">
-                                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                    <li class=""><a href="#" class="btn disabled disabled-dark ml-1 mediabout mediabout-dark">
+                                        Next
                                     </a></li>
                                     
                                 </ul>
