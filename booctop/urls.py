@@ -69,7 +69,7 @@ urlpatterns += i18n.i18n_patterns(
     url(r'^terms/$', terms, name='terms'),
     url(r'^become/$', become, name='become'),
     url(r'^become_a_teacher/$', become_a_teacher, name='become a teacher'),
-
+    url(r'^discount_banner/$', discount_banner, name='discount banner'),
     url(r'^search/$', searching, name='search'),
 
     url(r'^send_reset_password_email/$', sendResetPasswordEmail, name='reset password'),

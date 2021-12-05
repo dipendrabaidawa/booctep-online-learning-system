@@ -520,11 +520,12 @@ body .container .content .studentnot-cont {
         color: transparent !important;
     }
 </style>
-<!-- <div class="banner">
+
+<div class="banner" style="display: none">
     <div class="container ">
         <div class="banner__content">
             <div class="banner__text">
-                <b>Get any course by 20 SR now in 3 days 19 Hours 12 Minutes.</b>
+                <b id="banner_text"></b>
             </div>
             <button class="banner__close" type="button">
                 <span class="material-icons">
@@ -533,7 +534,7 @@ body .container .content .studentnot-cont {
             </button>
         </div>
     </div>
-</div> -->
+</div>
 
 <div id="main-navbar" class="navbar navbar-dark is-inline-flex no-shadow is-hidden-mobile">
     <!-- style="margin-top:49px" -->
@@ -1706,7 +1707,7 @@ body .container .content .studentnot-cont {
     </nav>
     <!-- Mobile Navbar -->
 {% endif %}
-
+<script src="{% static 'socket/socket.io.js' %}"></script>
 <script>
     function deleteFromFavDropDown(obj) {
         let course_id = $(obj).data('id')
@@ -1944,6 +1945,68 @@ body .container .content .studentnot-cont {
         e.target.setCustomValidity('{% trans "Write a course name please!" %}');
     };
 
-   
+    var socket = io.connect("http://localhost:3000")
+    var myfunc = null
+    $(document).ready(function() {
+        socket.on('create_discount_complete', (data) =>{
+            $("div.banner").css("display", "block");
+            $("#main-navbar").css("top", "46px")
+
+            var expire_date = data.expire
+            var countDownDate = new Date(expire_date).getTime();
+            clearInterval(myfunc)
+            myfunc = setInterval(function() {
+                var now = new Date().getTime();
+                var timeleft = countDownDate - now;
+                if (timeleft == 0) {
+                    $("div.banner").css("display", "none");
+                    $("#main-navbar").css("top", "0px")
+                    clearInterval(myfunc);
+                }    
+                var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+
+                var banner_text = data.description + " now in " + days + "days " + hours + "hours " + minutes+ "minutes " + seconds + "seconds.";
+
+                $("#banner_text").html(banner_text)
+            }, 1000)
+        })
+
+        $(".banner__close").click(function() {
+            $("div.banner").css("display", "none");
+            $("#main-navbar").css("top", "0px")
+            clearInterval(myfunc)
+        })
+
+        $.get("/discount_banner", function(res) {
+            if (res.status == 1) {
+                var expire_date = res.expire_date
+                var countDownDate = new Date(expire_date).getTime();
+                console.log(new Date(expire_date))
+                console.log(countDownDate)
+                $("div.banner").css("display", "block");
+                $("#main-navbar").css("top", "46px")
+                myfunc = setInterval(function() {
+                    var now = new Date().getTime();
+                    var timeleft = countDownDate - now;
+                    if (timeleft == 0) {
+                        $("div.banner").css("display", "none");
+                        $("#main-navbar").css("top", "0px")
+                        clearInterval(myfunc);
+                    }   
+                    var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+
+                    var banner_text = res.description + " now in " + days + "days " + hours + "hours " + minutes+ "minutes " + seconds + "seconds.";
+
+                    $("#banner_text").html(banner_text)
+                }, 1000)      
+            }
+        })
+    });
 
 </script>

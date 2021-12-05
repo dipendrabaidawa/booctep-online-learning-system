@@ -4249,6 +4249,33 @@ def checkPayoutStatus(request):
     }
     return JsonResponse(ret)
 
+@csrf_exempt
+def discount_banner(request):
+    discount = Discount.objects.all()
+    now = datetime.now().strftime('%Y-%m-%d')
+
+    discount_description = ""
+    discount_percent = ""
+    if discount.count() == 0:
+        status = 0
+    else:
+        if now > discount[0].expire_date:
+            status = 0
+        else:
+            status = 1
+            discount_description = discount[0].description
+            discount_percent = discount[0].discount
+            discount_expire = discount[0].expire_date
+    
+    ret = {
+        'status': status,
+        'description': discount_description,
+        'discount': discount_percent,
+        'expire_date': discount_expire
+    }
+
+    return JsonResponse(ret)
+
 #
 # def handler404(request, exception):
 #     return render(request, 'filter_404_page.html')
