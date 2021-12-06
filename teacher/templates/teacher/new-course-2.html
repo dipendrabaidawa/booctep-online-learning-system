@@ -45,13 +45,23 @@
 
     <style>
  
+
+
+a.blakandwhate{
+    color: #1c212c !important;
+}
+
+a.blakandwhate-dark{
+    color: #1c212c !important;
+}
+
 .seelector{
     background-color: #a6b8db !important;
+    border: 1px solid #91a1c2 !important;
     color: #20293a !important;
     padding: 3px;
     padding-left: 2px;
     border-radius: 2px;
-    border: 1px solid #91a1c2 !important;
 }
 
 .seelector-dark{
@@ -61,17 +71,14 @@
     padding-left: 2px;
 }
 
-.accordion{
-    background-color: #a6b8db !important;
-}
+.accordion__toggle{
+     border: 1px solid #91ace9 !important;
+ }
 
- .accordion__toggle{
+ .accordion__toggle-dark{
      border: 1px solid #21242b !important;
  }
 
- .accordion__menu-link-dark{
-     border-bottom: 1px solid #051122 !important;
- }
 
  [dir=rtl] .list-group-item{
      border: 0 !important;
@@ -116,14 +123,12 @@
               
               .btn-primary{
                   background-color: rgb(33, 150, 243)!important;
-                  color: rgb(254, 254, 255);
                   border: 1px solid rgb(20, 71, 167) !important;
               }
               
         
         .btn-primary-dark{
             background-color: #a6b8db !important;
-            color: rgb(17, 38, 71) !important;
             border: 1px solid  #21242b !important;
             box-shadow: none !important;
         }
@@ -197,6 +202,15 @@
               }
               
               
+              a.mediabout{
+                  color: rgb(214, 223, 231) !important;
+              }
+              
+              a.mediabout-dark{
+                 color: rgb(18, 25, 39) !important;
+              }
+              
+              
               .mediabout{
                   color: rgb(214, 223, 231) !important;
               }
@@ -214,13 +228,11 @@
                       
               .btn-primary{
                   background-color: rgb(37, 148, 192) !important;
-                  color: rgb(254, 254, 255);
                   border: 1px solid rgb(23, 104, 136) !important;
               }
         
         .btn-primary-dark{
             background-color: #a6b8db !important;
-            color: rgb(17, 38, 71) !important;
             border: 1px solid  #21242b !important;
             box-shadow: none !important;
         }
@@ -336,12 +348,16 @@
            }
 
            .accordion{
-               border: 0 !important;
-               background-color: #a6b8db !important;
+               border: 1px solid #94a5c9 !important;
+               background-color: #3d475a !important;
                border-radius: 5px !important;
            }
            .accordion__item{
                border-radius: 5px !important;
+               border: 1px solid #3a83d6 !important;
+           }
+           [dir="rtl"] .accordion{
+               border: 0 !important;
            }
            [dir="rtl"] .accordion--boxed .accordion__item{
                background-color: transparent !important;
@@ -357,6 +373,18 @@
                background-color: transparent !important;
                border: 0 !important;
                border-radius: 5px !important;
+           }
+           .accordion__menu-dark{
+               background-color: #a5abb1 !important;
+               border-bottom: 0 !important;
+               color: #1f2531 !important;
+           }
+           .accordion__menu-link-dark{
+               border-bottom: 1px solid #051122 !important;
+           }
+           .accordion__menu-link{
+               border-bottom: 1px solid #dfe2e7 !important;
+
            }
            .accordion__menu-dark{
                background-color: #212933;
@@ -398,7 +426,7 @@
                         <div class="card" >
                             <div class="card card-dark" style="border-radius: 3px 3px 0 0 !important;">
                                 <div class="card-header card-header-dark " style="border-radius: 3px 3px 0 0 !important;">
-                                    <a onclick="addCourse()" id="addCourse" class="btn btn-primary btn-primary-dark mr-4">Add course</a>
+                                    <a onclick="addCourse()" id="addCourse" class="btn btn-primary btn-primary-dark mediabout mediabout-dark mr-4">Add course</a>
                                     {% if course.approval_status != 2 %}
                                     <a href="javascript:;void(0)" class="btn btn-accentt btn-accentt-dark" onclick="saveLater()">Save for later</a>
                                     {% endif %}
@@ -475,7 +503,7 @@
                         <div class="card" >
                             <div class="card card-dark" style="border-radius: 3px 3px 0 0 !important;">
                                 <div class="card-header card-header-dark " style="border-radius: 3px 3px 0 0 !important;">
-                                    <a onclick="addCourse()" id="addCourse" class="btn btn-primary btn-primary-dark mr-4">أضف دورة</a>
+                                    <a onclick="addCourse()" id="addCourse" class="btn btn-primary btn-primary-dark mediabout mediabout-dark mr-4">أضف دورة</a>
                                     {% if course.approval_status != 2 %}
                                     <a href="javascript:;void(0)" class="btn btn-accentt btn-accentt-dark" onclick="saveLater()">اكمال التسجيل لاحقا</a>
                                     {% endif %}
@@ -502,7 +530,7 @@
                     </div>
 
             </div>
-            <a class="btn btn-primary btn-primary-light" style="margin-bottom: 330px !important;margin-top: 40px !important;" id="add_section">إضافة قسم</a>
+            <a class="btn btn-primary btn-primary-light mediabout mediabout-dark" style="margin-bottom: 330px !important;margin-top: 40px !important;" id="add_section">إضافة قسم</a>
         </div>
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="formModal"
              aria-hidden="true" style="padding-top: 12%;">
@@ -963,8 +991,8 @@
                 {% if lang == 'en' %}
                     html += `<ul class="mt-3 accordion accordion-dark accordion--boxed js-accordion mb-0 sect" style="border-radius: 0 !important;" id="toc-` + new_id + `"
                                 ondragover="dragoverUL(event)" draggable="true" ondragstart="dragStartUL(event)" ondrop="dropUL(event)">
-                                <li class="accordion__item open">
-                                    <div class="accordion__toggle" data-toggle="collapse" data-parent="#toc-` + new_id + `" href="#video-list-` + new_id + `">
+                                <li class="accordion__item accordion__item-dark open">
+                                    <div class="accordion__toggle accordion__toggle-dark" data-toggle="collapse" data-parent="#toc-` + new_id + `" href="#video-list-` + new_id + `">
                                         <span class="flex" >
                                             <span class="mediabout mediabout-dark flllot mr-2" id="section_name_` + new_id + `" name="section_name_` + new_id + `">` + section_name + `</span>
                                             <a style="margin-left: 10px !important;" onclick="editSectionName('` + new_id + `')"><b class="blllu blllu-dark flllot">Edit section name</b></a>
@@ -995,7 +1023,7 @@
                     html += `<ul class="mt-3 accordion accordion-dark accordion--boxed js-accordion mb-0 sect" style="border-radius: 0 !important;" id="toc-` + new_id + `"
                                     ondragover="dragoverUL(event)" draggable="true" ondragstart="dragStartUL(event)" ondrop="dropUL(event)">
                                     <li class="accordion__item open">
-                                        <div class="accordion__toggle" data-toggle="collapse" data-parent="#toc-` + new_id + `" href="#video-list-` + new_id + `">
+                                        <div class="accordion__toggle accordion__toggle-dark" data-toggle="collapse" data-parent="#toc-` + new_id + `" href="#video-list-` + new_id + `">
                                             <span class="flex"  >
                                                 <span style="float: right !important;" class="mediabout mediabout-dark flllot mr-2" id="section_name_` + new_id + `" name="section_name_` + new_id + `">` + section_name + `</span>
                                                 <a style="margin-left: 10px !important; float: right;" onclick="editSectionName('` + new_id + `')"><b style="margin-left: 20px;" class="blllu blllu-dark flllot">تحرير اسم القسم</b></a>
@@ -1014,7 +1042,7 @@
                                                     <a  class="custom-file custom-file-naked d-flex"  style="margin: 0 auto !important;">
                                                         <input type="file" class="custom-file-input" id="customFile" onchange="addVideo(this,'` + new_id + `')">
                                                         <label class="custom-file-label" style="" for="customFile">
-                                                        <b class="blllu blllu-dark mt-1" style="margin-right:0 auto !important;margin-left: 0 auto !important;align-items: center !important;text-align:center !important"> أضف فيديو جديد +</b>
+                                                        <b class=" mt-1 blakandwhate blakandwhate-dark" style="margin-right:0 auto !important;margin-left: 0 auto !important;align-items: center !important;text-align:center !important"> اضافة فيديو جديد +</b>
                                                         </label>
                                                     </a>
                                                     </div>
@@ -1050,7 +1078,7 @@
                             video.lock = 1;
                         } else {
                             select_element = 
-                                `الفيديو الترويجي - `;
+                                `<b class="mediabout mediabout-dark">الفيديو الترويجي -<b>`;
                         }    
                     }
   
@@ -1061,7 +1089,7 @@
                             <span class=" mediabout mediabout-dark">` + duration + ` دقيقة - &nbsp;</span>
                             <span class=" mediabout mediabout-dark">` + select_element + ` &nbsp;&nbsp;</span>
                             <span style="margin-left:10px; cursor: pointer;" class="material-icons sidebar-menu-icon sidebar-menu-icon--left mediabout mediabout-dark" onclick="deleteVideo(this)">delete</span>`
-                            +  + 
+                            + 
                             `
                         </li>
                         `;
