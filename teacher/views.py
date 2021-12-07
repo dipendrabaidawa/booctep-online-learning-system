@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from teacher.models import categories, Courses, VideoUploads, Sections, questions, TestVideo, student_mark, answers, \
-    subcategories
-from home.models import User, user_profile, notifications, Admincontrol, Messages, Card
+    subcategories, transactions
+from home.models import User, user_profile, notifications, Admincontrol, Messages, Card, Discount
 from student.models import student_register_courses, course_comments
 from discount.models import *
 from datetime import datetime
@@ -166,6 +166,9 @@ def dashboard(request):
     total_hold_money = 0
     total_transfer_money = 0
 
+    # get discount information
+    admin_discount = Discount.objects.all()
+    now = datetime.now().strftime('%Y-%m-%d')
     nowtime = datetime.now()
 
     total_students = 0
@@ -173,6 +176,7 @@ def dashboard(request):
 
     for course in course_list:
         price = 0
+        # getting the number of student registered with course
         stu_num = student_register_courses.objects.filter(course_id_id=course.id).count()
         total_students += stu_num
         price = course.price * stu_num
@@ -193,7 +197,7 @@ def dashboard(request):
             if interval >= 45:
                 ele.withdraw = 1
                 ele.save()
-                hold_money += ele.course_id.price
+                # hold_money += ele.course_id.price
         hold_list = student_register_courses.objects.filter(course_id_id=course.id).filter(withdraw=1)
         for ele in hold_list:
             hold_money += ele.course_id.price
@@ -207,8 +211,39 @@ def dashboard(request):
         course.ready_money = ready_money
         course.transfer_money = transfer_money
         course.refund_money = 0
+        course.count = stu_num
         total_hold_money += hold_money
         total_transfer_money += transfer_money
+
+        # counting discount
+        if admin_discount.count() == 0:
+            discount_percent = 0
+        else:
+            if now > admin_discount[0].expire_date:
+                discount_percent = 0
+            else:
+                not_str = admin_discount[0].not_apply_course
+                not_list = not_str.split(',')
+                if str(course.id) in not_list:
+                    discount_percent = 0
+                else:
+                    discount_percent = admin_discount[0].discount / 100
+
+        discount_amount = course.price * discount_percent
+        discount_price = course.price - discount_amount
+
+        # counting discount by promocode
+        promo_discount = discount.objects.filter(course_id=course.id)
+        if promo_discount.count() == 0:
+            promo_percent = 0
+        else:
+            if not promo_discount[0].promo_code or now > promo_discount[0].expire:
+                promo_percent = 0
+            else:
+                promo_percent = promo_discount[0].discount_percent / 100
+
+        promo_discount_amount = discount_price * promo_percent
+        course.total_discount_amount = round(discount_amount + promo_discount_amount, 2)
 
     teacher_tax = Admincontrol.objects.get(pk=1).teacher_tax
 
@@ -339,8 +374,6 @@ def course_engagement(request):
             coupon = discount.objects.filter(course_id=cur_course_id)[0]
         else:
             coupon = ''
-    
-         
 
     else:
         course = ''
@@ -352,8 +385,16 @@ def course_engagement(request):
                    'cur_course_id': cur_course_id, 'page': page, 'coupon': coupon, 'review_type': review_type})
 
 
-def transactions(request):
-    return render(request, 'teacher/transactions.html', {'lang': getLanguage(request)[0]})
+def transaction(request):
+    user_id = request.session.get('user_id')
+    if user_id == None:
+        return redirect('/')
+
+    trans = transactions.objects.filter(teacher_id=user_id)
+    for tran in trans:
+        tran.description = tran.payment_method + " payment from booctep.com To " + User.objects.get(pk=user_id).email
+    print(trans[0].description)
+    return render(request, 'teacher/transactions.html', {'lang': getLanguage(request)[0], 'transactions': trans})
 
 
 def payout(request):

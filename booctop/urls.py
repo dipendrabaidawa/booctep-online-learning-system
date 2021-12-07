@@ -23,7 +23,7 @@ from django.conf.urls.static import static
 from home.views import *
 from student.views import *
 
-from teacher.views import getCourseDetailsById, teacher_account, teacher_privacy, teacher_notifications, teacher_courses, teacher_security, teacher_payments, teacher_messages, teacher_faqs, payout, teacher_help, course_engagement, addtofeedback, student_performance, dashboard, dashboard1, guideline, help2,  newcourse, nocourseengagement, nocourse, transactions, add_course, test_video
+from teacher.views import getCourseDetailsById, teacher_account, teacher_privacy, teacher_notifications, teacher_courses, teacher_security, teacher_payments, teacher_messages, teacher_faqs, payout, teacher_help, course_engagement, addtofeedback, student_performance, dashboard, dashboard1, guideline, help2,  newcourse, nocourseengagement, nocourse, transaction, add_course, test_video
 
 from video.views import playground, video_quiz, video_quiz2, video_quiz3, getQuiz
 
@@ -122,7 +122,7 @@ urlpatterns += i18n.i18n_patterns(
     url(r'^teacher/payments/$', teacher_payments, name='teacher payments'),
     url(r'^teacher/notifications/$', teacher_notifications, name='teacher notifications'),
     url(r'^course_engagement/$', course_engagement, name='teacher course engagement'),
-    url(r'^transactions/$', transactions, name='teacher transactions'),
+    url(r'^transactions/$', transaction, name='teacher transactions'),
     url(r'^student/transactions/$', transaction, name='student transactions'),
     url(r'^addtofeedback/$', addtofeedback, name='addtofeedback'),
     url(r'^teacher/messages/$', teacher_messages, name='teacher messages'),

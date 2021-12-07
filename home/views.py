@@ -4155,6 +4155,7 @@ def saveCardInfo(request):
     card_name = request.POST.get('card_name')
     card_number = request.POST.get('card_number')
     bank_number = request.POST.get('bank_number')
+    passport_number = request.POST.get('passport_number')
     status = 1
     try:
         if id == None or id == '':
@@ -4162,7 +4163,8 @@ def saveCardInfo(request):
                 user_id=user_id,
                 card_name=card_name,
                 card_number=card_number,
-                bank_number=bank_number
+                bank_number=bank_number,
+                passport_number=passport_number
             )
             ele.save()
         else:
@@ -4170,6 +4172,7 @@ def saveCardInfo(request):
             ele.card_name = card_name
             ele.card_number = card_number
             ele.bank_number = bank_number
+            ele.passport_number = passport_number
             ele.save()
     except:
         status = 0

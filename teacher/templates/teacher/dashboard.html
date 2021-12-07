@@ -419,7 +419,7 @@ a.disabled{
                                         <span class="js-lists-values-fees">{{ course.price|unlocalize }}</span> ريال سعودي
                                     </td>
                                     <td class="text-center text-black-70">
-                                        <span class="js-lists-values-discount">0%</span>
+                                        <span class="js-lists-values-discount">{{ course.total_discount_amount|unlocalize }} SR</span>
                                     </td>
                                     <td class="text-center text-black-70">
                                         <span class="js-lists-values-tax">{{ teacher_tax|unlocalize }}</span> %
@@ -599,7 +599,7 @@ a.disabled{
                                         <span class="js-lists-values-fees">{{ course.price }}</span> SR
                                     </td>
                                     <td class="text-center text-black-70">
-                                        <span class="js-lists-values-discount">0%</span>
+                                        <span class="js-lists-values-discount">{{ course.total_discount_amount|unlocalize}} SR</span>
                                     </td>
                                     <td class="text-center text-black-70">
                                         <span class="js-lists-values-tax">{{ teacher_tax }}</span> % SR

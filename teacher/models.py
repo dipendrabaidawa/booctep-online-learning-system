@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db.models.base import ModelState
+from datetime import datetime 
 
 class categories(models.Model):
     id = models.AutoField(primary_key=True)
@@ -119,6 +120,7 @@ class student_mark(models.Model):
 
 class transactions(models.Model):
     id = models.AutoField(primary_key=True)
-    fees = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(100)])
-    revenue = models.FloatField(validators=[MinValueValidator(0), MaxValueValidator(100)])
-    course_id = models.IntegerField(null=True, blank=True, default=0)
+    teacher = models.ForeignKey('home.User', on_delete=models.CASCADE, default=1)
+    payment_method = models.CharField(max_length=255, default='')
+    amount = models.FloatField(validators=[MinValueValidator(0)], default=0)
+    date_time = models.DateTimeField(default=datetime.now, blank=True)

@@ -1950,7 +1950,7 @@ body .container .content .studentnot-cont {
     $(document).ready(function() {
         socket.on('create_discount_complete', (data) =>{
             $("div.banner").css("display", "block");
-            $("#main-navbar").css("top", "46px")
+            $("#main-navbar").css("top", "40px")
 
             var expire_date = data.expire
             var countDownDate = new Date(expire_date).getTime();
@@ -1987,7 +1987,7 @@ body .container .content .studentnot-cont {
                 console.log(new Date(expire_date))
                 console.log(countDownDate)
                 $("div.banner").css("display", "block");
-                $("#main-navbar").css("top", "46px")
+                $("#main-navbar").css("top", "40px")
                 myfunc = setInterval(function() {
                     var now = new Date().getTime();
                     var timeleft = countDownDate - now;

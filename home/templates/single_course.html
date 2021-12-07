@@ -2548,6 +2548,7 @@
                             var totalsum = parseFloat($("#totalsumid").text());
                             price_off_percentage = res
                             price_off = (totalsum * price_off_percentage) / 100;
+                            price_off = Math.round((price_off + Number.EPSILON) * 100) / 100
                             $(".discountamount").empty();
                             $(".discountamount").append(price_off);
                             $("#promoinput").prop('disabled', true);
@@ -2555,7 +2556,8 @@
                             $(".applypromobutton").prop("disabled", true);
                             $(".cancelpromobutton").prop("disabled", false);
                             $(".cancelpromobutton").css("display", "block");
-                            var totalsum = parseInt($("#totalsumid").text());
+                            var totalsum = parseFloat($("#totalsumid").text());
+                            console.log(totalsum)
                             $(".totalsum").empty();
                             $(".totalsum").append((totalsum - price_off));
                         }

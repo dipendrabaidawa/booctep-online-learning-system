@@ -106,6 +106,15 @@
                 </div>
                 <div class="list-group-item carddy card-dark">
                     <div class="form-group row align-items-center mb-0">
+                        <label class="col-form-label form-label mediabout mediabout-dark col-sm-3">رقم جواز السفر</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control form-control-dark" id="passport_number"
+                                   placeholder="أين ستقوم بإستلام أموالك؟" value="{{ card.passport_number }}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="list-group-item carddy card-dark">
+                    <div class="form-group row align-items-center mb-0">
                         <label class="col-form-label form-label col-sm-3 mediabout mediabout-dark">أسمك الكامل ( كما هو مكتوب في الجواز )</label>
                         <div class="col-sm-9">
                             <input type="text" class="form-control form-control-dark" id="card_name" placeholder="الرجاء التأكد من إدخال الاسم بشكل صحيح"
@@ -126,8 +135,8 @@
                     <div class="form-group row align-items-center mb-0">
                         <label class="col-form-label form-label col-sm-3 mediabout mediabout-dark" >عنوانك </label>
                         <div class="col-sm-9">
-                            <textarea type="text" class="form-control form-control-dark" id="bank_number" placeholder="قم بإدخال عنوانك بشكل كامل"
-                                   value="{{ card.bank_number }}"></textarea>
+                            <input type="text" class="form-control form-control-dark" id="bank_number" placeholder="قم بإدخال عنوانك بشكل كامل"
+                                   value="{{ card.bank_number }}"></input>
                         </div>
                     </div>
                 </div>
@@ -144,6 +153,15 @@
             <div class="list-group list-group-form " style="">
                 <div class="list-group-item d-flex align-items-center  card-header card-header-dark">
                     <strong id="card_num" class="blllu blllu-dark"> </strong><b>Enter your Westron union information</b>
+                </div>
+                <div class="list-group-item carddy card-dark">
+                    <div class="form-group row align-items-center mb-0">
+                        <label class="col-form-label form-label mediabout mediabout-dark col-sm-3">Passport Number</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control form-control-dark" id="passport_number"
+                                   placeholder="Where do you want to recieve the payment?" value="{{ card.passport_number }}"/>
+                        </div>
+                    </div>
                 </div>
                 <div class="list-group-item carddy card-dark">
                     <div class="form-group row align-items-center mb-0">
@@ -167,8 +185,8 @@
                     <div class="form-group row align-items-center mb-0">
                         <label class="col-form-label form-label col-sm-3 mediabout mediabout-dark" >Address</label>
                         <div class="col-sm-9">
-                            <textarea type="text" class="form-control form-control-dark" id="bank_number" placeholder="Please write a specific address"
-                                   value="{{ card.bank_number }}"></textarea>
+                            <input type="text" class="form-control form-control-dark" id="bank_number" placeholder="Please write a specific address"
+                                   value="{{ card.bank_number }}"></input>
                         </div>
                     </div>
                 </div>
@@ -206,6 +224,7 @@
             card_name = $("#card_name").val()
             card_number = $("#card_number").val()
             bank_number = $("#bank_number").val()
+            passport_number = $("#passport_number").val()
 
             if (card_name == '' || card_number == '' || bank_number == '') {
                 showAlert(0, 'Please fill all fields!')
@@ -223,6 +242,7 @@
             form_data.append('card_name', card_name)
             form_data.append('card_number', card_number)
             form_data.append('bank_number', bank_number)
+            form_data.append('passport_number', passport_number)
             form_data.append('user_id', user_id)
             form_data.append('card_id', card_id)
             $.ajax({
