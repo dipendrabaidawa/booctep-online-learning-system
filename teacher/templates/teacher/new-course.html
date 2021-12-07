@@ -41,9 +41,21 @@
 
 {% block content %}
     {% load static %}
-    <style>
+    <style> 
+        
+        .btn-accentt{
+            background-color: red !important;
+            color: white !important;
+        }
+        .btn-accentt-dark{
+            background-color: rgb(224, 169, 169) !important;
+            color: rgb(65, 7, 7) !important;
+        }
         .accordion-dark{
             background-color: rgb(13, 16, 22) !important;
+        }
+        .form-control::selection{
+            border:1px solid tomato !important;
         }
         .backgg{
             background-color: #e8f4ff !important;
@@ -51,14 +63,27 @@
         .backgg-dark{
             background-color: #4c525e !important;
         }
-
+        [dir=rtl] .card-header{
+            background-color: transparent !important;
+            border: 0px !important;
+        }
+        [dir=rtl] .border-bottom-2{
+            border-bottom: 0 !important;
+        }
+        [dir=ltr] .card-header{
+            background-color: transparent !important;
+            border: 0px !important;
+        }
+        [dir=ltr] .border-bottom-2{
+            border-bottom: 0 !important;
+        }
         .card-header{
                 background-color: rgb(225, 235, 247) !important;
                 border: 1px solid rgb(196, 206, 218) !important;
         }
         .card-header-dark{
                 background-color: rgb(25, 32, 41) !important;
-                border: 0 !important;
+                border: 1px solid rgb(14, 18, 24) !important;
         }
         .carddy{
                 background-color: rgb(247, 247, 247) !important;
@@ -70,13 +95,12 @@
         
         .btn-primary{
             background-color: rgb(33, 150, 243)!important;
-            color: rgb(254, 254, 255);
+            color: rgb(254, 254, 255) !important;
             border: 1px solid rgb(20, 71, 167) !important;
         }
         
         .btn-primary-dark{
-            background-color: #323741 !important;
-            color: rgb(199, 199, 199) !important;
+            background-color: #a6b8db !important;
             border: 1px solid  #21242b !important;
             box-shadow: none !important;
         }
@@ -142,24 +166,13 @@
             color: rgb(42, 51, 65) !important;
         }
         
-        a.mediabout{
-            background-color: rgb(207, 228, 245) !important;
-            border: 1px solid #0d2150 !important;
-            color: rgb(11, 41, 68) !important;
-        }
-        
-        a.mediabout-dark{
-            background-color: rgb(42, 51, 65) !important;
-            color: rgb(204, 213, 221) !important;
-        }
-        
         
         .mediabout{
             color: rgb(214, 223, 231) !important;
         }
         
         .mediabout-dark{
-            color: rgb(100, 152, 248) !important;
+            color: rgb(10, 21, 41) !important;
         }
         
             
@@ -171,17 +184,16 @@
                 
         .btn-primary{
             background-color: rgb(37, 148, 192) !important;
-            color: rgb(254, 254, 255);
+            color: rgb(254, 254, 255) !important;
             border: 1px solid rgb(23, 104, 136) !important;
         }
-                
+          
         .btn-primary-dark{
-            background-color: #323741 !important;
-            color: rgb(199, 199, 199) !important;
+            background-color: #a6b8db !important;
+            color: rgb(17, 38, 71) !important;
             border: 1px solid  #21242b !important;
             box-shadow: none !important;
-        }
-                
+        } 
         th,td {
             text-align: center !important;
             border-top: 1px solid rgb(25, 25, 29)
@@ -244,6 +256,10 @@
             background-color: rgb(33, 41, 51) !important;
             border: 1px solid rgb(9, 10, 12) !important;
         }
+        .progress {
+            background-color: rgb(198, 211, 236) !important;
+        }
+              
             
         .progress .bg-primary{
             background-color: rgb(45, 95, 189) !important;
@@ -251,7 +267,7 @@
         }
         
         .progress .bg-primary-dark{
-            background-color: rgb(189, 209, 245) !important;
+            background-color: rgb(27, 30, 34) !important;
             border-radius: 0 !important;
         }
         
@@ -270,6 +286,14 @@
             border-radius: 0 !important;
         }
         
+        .mediabout{
+            color: rgb(214, 223, 231) !important;
+        }
+        
+        .mediabout-dark{
+            color: rgb(10, 21, 41) !important;
+        }
+        
 
         .selecttt-dark{
             background-color: rgb(165, 172, 189) !important;
@@ -283,8 +307,6 @@
         <div class="progress-bar bg-primary" role="progressbar" style="width: 5%;" aria-valuenow="37" aria-valuemin="0"
              aria-valuemax="100"></div>
     </div>
-    {% get_current_language as lang %}
-    {% if lang == 'en' %}
         <div class="page-section border-bottom-2">
             <div class=" page__container">
 
@@ -292,337 +314,56 @@
                     <div class="row">
                         <div class="col-md-8">
                             <div class="page-separator">
-                                <div class="page-separator__text backgg backgg-light mediabout mediabout-light">Step 1</div>
+                                <div class="page-separator__text backgg backgg-light mediabout mediabout-light">الخطوة الأولى</div>
                             </div>
 
-                            <label class="form-label mediabout mediabout-light">Course Name
-                                <b style="color: rgb(240, 100, 100);font-size: large;">*</b>
+                            <label class="form-label mediabout mediabout-light" style="letter-spacing: 0 !important;">اسم الدورة 
+                                <b style="color: rgb(236, 134, 134);font-size: large;">*</b>
                             </label>
                             <div class="form-group mb-24pt">
-                                <input name="course_name" type="text" class="form-control form-control-lg req"
-                                    style="font-size: medium;" placeholder="Course Name" value="{{ course.name }}">
-                                <small class=" bllu bllu-light">For Example: <b href="" class=" mediabout mediabout-light">Learn photoshop with
-                                    css..</b></small>
+                                <input name="course_name" type="text" class="form-control form-control-lg req mb-2"
+                                    style="font-size: medium;" placeholder="ادخل اسم الدورة" value="{{ course.name }}">
+                                <small class=" bllu bllu-light ">على سبيل المثال: <b href="" class=" mediabout mediabout-light">تعلم برمجة وتصميم المواقع من الصفر حتى الاحتراف..</b></small>
                             </div>
 
-                            <label class="form-label mediabout-light">Course description
-                                <b style="color: rgb(240, 100, 100);font-size: large;">*</b>
-                            </label>
-                            <div class="form-group mb-24pt">
-                                <textarea id="course_description" name="course_description" type="text" cols="9" rows="6" class="form-control form-control-lg req"
-                                    style="font-size: medium;" data-value="" placeholder="Course description"></textarea>
-                                <small class=" bllu bllu-light">For Example: <b href="" class=" mediabout mediabout-light">Learn photoshop with
-                                css..</b></small>
-                            </div>
-                            {% comment %} 
-                            <label class="form-label mediabout-light">Course Requirments
-                                <b style="color: rgb(240, 100, 100);font-size: large;">*</b>
-                            </label>
-                            <div class="form-group mb-24pt">
-                                <textarea id="course_requirements" name="course_requirements" type="text" cols="9" rows="6" class="form-control form-control-lg req"
-                                    style="font-size: medium;" data-value="" placeholder="Course description" value="{{ course.name }}"></textarea>
-                                <small class=" bllu bllu-light">For Example: <b href="" class=" mediabout mediabout-light">Learn photoshop with
-                                css..</b></small>
-                            </div> {% endcomment %}
-
-                            <label class="form-label mediabout-light">Course Requirments
-                                <b style="color: rgb(240, 100, 100);font-size: large;">*</b>
-                            </label>
-                            <div class="form-group mb-24pt">
-                                <textarea id="course_requirements" name="course_requirements" type="text" cols="9" rows="6" class="form-control form-control-lg req"
-                                    style="font-size: medium;" data-value="" placeholder="Course description" ></textarea>
-                                <small class=" bllu bllu-light">For Example: <b href="" class=" mediabout mediabout-light">Learn photoshop with
-                                css..</b></small>
-                            </div>
-
-                            <label class="form-label mediabout-light">Course Gains
-                                <b style="color: rgb(240, 100, 100);font-size: large;">*</b>
-                            </label>
-                            <div class="form-group mb-24pt">
-                                <textarea id="course_grains" name="course_grains" type="text" cols="9" rows="6" class="form-control form-control-lg req"
-                                    style="font-size: medium;" data-value="" placeholder="Course description" ></textarea>
-                                <small class=" bllu bllu-light">For Example: <b href="" class=" mediabout mediabout-light">Learn photoshop with
-                                css..</b></small>
-                            </div>
-
-                            <!-- <label class="form-label mt-1">Course description
-                                <b style="color: red;font-size: large;">*</b>
-                            </label>
-
-                            <div id="course_description" name="course_description" style="height: 150px;" class="mb-0"
-                                data-toggle="quill" placeholder="hhh">
-                            </div>
-                            <small class="form-text text-muted">For Example: <a href="">This course about photoshop and it's
-                                new features..</a></small> -->
-
-                            <!-- <label class="form-label mt-4">Course Requirments
-                                <b style="color: red;font-size: large;">*</b>
-                            </label>
-
-                            <div id="course_requirements" name="course_requirements" style="height: 150px;" class="mb-0"
-                                data-toggle="quill" placeholder="hhh" data-value="">
-
-                            </div>
-                            <small class="form-text text-muted">For Example: <a href="">To take this course you need to know
-                                the basics at least..</a></small> -->
-
-                            <!-- <label class="form-label mt-4">Course Gains
-                                <b style="color: red;font-size: large;">*</b>
-                            </label>
-
-                            <div id="course_grains" name="course_grains" style="height: 150px;" class="mb-0"
-                                data-toggle="quill" placeholder="hhh">
-                            </div> -->
-
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card" style="border-radius: 3px 3px 0 0 !important;">
-                                <div class="card-header card-header-light " style="border-radius: 3px 3px 0 0 !important;">
-                                    <a onclick="addCourse()" id="addCourse" class="btn btn-primary mr-4">Add course</a>
-                                    {% if course.approval_status != 2 %}
-                                    <a href="javascript:;void(0)" class="btn btn-accent" onclick="saveLater()">Save for later</a>
-                                    {% endif %}
-                                </div>
-                                <div class="list-group list-group-flush">
-                                    <div class="list-group-item d-flex" style="border-bottom: 1px solid rgb(47, 72, 87);">
-                                        <a class="flex blllu blllu-light" href="#"><strong>Save Draft</strong></a>
-                                        <i class="material-icons text-muted">check</i>
-                                    </div>
-                                    <!-- <div class="list-group-item">
-                                        <a class="" style="color: rgb(240, 116, 116);" id="delBtn" onclick="showDelModal()"><strong>Delete Course</strong></a>
-                                    </div> -->
-                                </div>
-                            </div>
-
-                            <div class="page-separator">
-                                <div class="page-separator__text mediabout mediabout-light backgg backgg-light">Course Image</div>
-                            </div>
-
-                            <div class="card ">
-                                <img {% if course.cover_img %} src="{% static course.cover_img %}" {% else %}
-                                                            src="" {% endif %} id="coverImg"
-                                                            style=" height:180px;border-radius: 0 !important;"
-                                                            class=""/>
-
-                            <div class="media-body">
-                                <div class="custom-file">
-                                    <input type="file"
-                                        class="custom-file-input"
-                                        id="inputGroupFile01"
-                                    >
-                                    <label class="custom-file-label  selecttt selecttt-light" style="border-radius: 0 !important;" for="inputGroupFile01">Choose file</label>
-                                </div>
-                            </div>
-                            </div>
-
-
-                            <div class="page-separator">
-                                <div class="page-separator__text mediabout mediabout-light backgg backgg-light">Header Image</div>
-                            </div>
-
-                            
-                                    <div class="card " >
-
-                                        <img {% if course.header_img %} src="{% static course.header_img %}" {% else %}
-                                                                        src="" {% endif %} id="headerImg"
-                                                                        style=" height:200px;border-radius: 0 !important;"
-                                                                        class=" "/>
-                                        <div class="media-body">
-                                            <div class="custom-file">
-                                                <input type="file"
-                                                    class="custom-file-input"
-                                                    id="inputGroupFile02"
-                                                >
-                                                <label class="custom-file-label  selecttt selecttt-light" style="border-radius: 0 !important;" for="inputGroupFile02">Choose file</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    
-
-                            <div class="page-separator">
-                                <div class="page-separator__text mediabout mediabout-light backgg backgg-light">Options</div>
-                            </div>
-
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label class="form-label mediabout mediabout-light">Category</label>
-                                        <select id="category" name="category" class="form-control selecttt selecttt-light">
-                                            {% for cat in categories %}
-                                                {% if cat.id == course.scat_id %}
-                                                    <option value="{{ cat.id }}" selected>{{ cat.name }}</option>
-                                                {% else %}
-                                                    <option value="{{ cat.id }}">{{ cat.name }}</option>
-                                                {% endif %}
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label mediabout mediabout-light">Sub categories</label>
-                                        <select id="sub_category" name="sub_category" class="form-control selecttt selecttt-light">
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label mediabout mediabout-light">Level</label>
-                                        <select id="level" name="level" class="form-control selecttt selecttt-light">
-                                            <option value="0" {% if course.course_level == 0 %} selected {% endif %}>All
-                                                Levels
-                                            </option>
-                                            <option value="1" {% if course.course_level == 1 %} selected {% endif %}>
-                                                Beginner
-                                            </option>
-                                            <option value="2" {% if course.course_level == 2 %} selected {% endif %}>
-                                                Intermediate
-                                            </option>
-                                            <option value="3" {% if course.course_level == 3 %} selected {% endif %}>
-                                                Advanced
-                                            </option>
-                                        </select>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label mediabout mediabout-light">Price</label>
-                                        <select id="price" name="price" class="form-control selecttt selecttt-light">
-                                            <option value="0" {% if course.type == 0 %} selected {% endif %}>Paid</option>
-                                            <option value="1" {% if course.type == 1 %} selected {% endif %}>Free</option>
-                                        </select>
-                                        <div class="row" style="margin-top: 20px">
-                                            <div class="col-md-6">
-                                                <div class="input-group form-inline">
-                                                    <span class="input-group-prepend"><span class="input-group-nexttext"></span></span>
-                                                    <input id="course_price" name="course_price" type="number"
-                                                        class="form-control form-control-light" placeholder="add a price"
-                                                        itemid="{{ course.type }}"
-                                                        value="{{ course.price }}" {% if course.type == 1 %} disabled {% endif %}>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <small class="blllu blllu-light flllot" style="margin-bottom: 10px !important;">The recommended price is between &dollar;10 and &dollar;15</small>
-                                    </div>
-                                    <!-- <div class="form-group">
-                                        <label class="form-label mediabout mediabout-light">Course style</label>
-                                        <select id="dripping" name="dripping" class="form-control selecttt selecttt-light">
-                                            <option value="0" {% if course.dripping == 0 %} selected {% endif %}>Normal
-                                            </option>
-                                            <option value="1" {% if course.dripping == 1 %} selected {% endif %}>Dripping
-                                            </option>
-                                        </select>
-                                        <small class="form-text text-muted">For complicated courses dripping style is recommened.</small>
-                                    </div> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    {% else %}
-        <div class="page-section border-bottom-2">
-            <div class=" page__container">
-
-                <form action="/store-course" id="new-course">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="page-separator">
-                                <div class="page-separator__text backgg backgg-light mediabout mediabout-light">الخطوة 1</div>
-                            </div>
-
-                            <label class="form-label mediabout mediabout-light">اسم الدورة التدريبية
-                                <b style="color: rgb(240, 100, 100);font-size: large;">*</b>
-                            </label>
-                            <div class="form-group mb-24pt">
-                                <input name="course_name" type="text" class="form-control form-control-lg req"
-                                    style="font-size: medium;" placeholder="اسم الدورة التدريبية" value="{{ course.name }}">
-                                <small class=" bllu bllu-light">على سبيل المثال:<b href="" class=" mediabout mediabout-light">تعلم الفوتوشوب مع css ..</b></small>
-                            </div>
-
-                            <label class="form-label mediabout-light">وصف الدورة التدريبية
-                                <b style="color: rgb(240, 100, 100);font-size: large;">*</b>
+                            <label class="form-label mediabout mediabout-light" style="letter-spacing: 0 !important;">وصف الدورة 
+                                <b style="color: rgb(236, 134, 134);font-size: large;">*</b>
                             </label>
                             <div class="form-group mb-24pt">
                                 <textarea id="course_description" name="course_description" type="text" cols="9" rows="6" class="form-control form-control-lg req"
-                                    style="font-size: medium;" data-value="" placeholder="وصف الدورة التدريبية"></textarea>
-                                <small class=" bllu bllu-light">على سبيل المثال: <b href="" class=" mediabout mediabout-light">تعلم الفوتوشوب مع css ..</b></small>
+                                    style="font-size: medium;" data-value="" placeholder="أكتب وصف للدورة"></textarea>
                             </div>
-                            {% comment %} 
-                            <label class="form-label mediabout-light">متطلبات الدورة
-                                <b style="color: rgb(240, 100, 100);font-size: large;">*</b>
+
+                            <label class="form-label mediabout mediabout-light" style="letter-spacing: 0 !important;">متطلبات الدورة
+                                <b style="color: rgb(236, 134, 134);font-size: large;">*</b>
                             </label>
                             <div class="form-group mb-24pt">
                                 <textarea id="course_requirements" name="course_requirements" type="text" cols="9" rows="6" class="form-control form-control-lg req"
-                                    style="font-size: medium;" data-value="" placeholder="وصف الدورة التدريبية" value="{{ course.name }}"></textarea>
-                                <small class=" bllu bllu-light">على سبيل المثال: <b href="" class=" mediabout mediabout-light">تعلم الفوتوشوب مع css ..</b></small>
-                            </div> 
-                            {% endcomment %}
-
-                            <label class="form-label mediabout-light">متطلبات الدورة
-                                <b style="color: rgb(240, 100, 100);font-size: large;">*</b>
-                            </label>
-                            <div class="form-group mb-24pt">
-                                <textarea id="course_requirements" name="course_requirements" type="text" cols="9" rows="6" class="form-control form-control-lg req"
-                                    style="font-size: medium;" data-value="" placeholder="وصف الدورة التدريبية" ></textarea>
-                                <small class=" bllu bllu-light">على سبيل المثال: <b href="" class=" mediabout mediabout-light">تعلم الفوتوشوب مع css ..</b></small>
+                                    style="font-size: medium;" data-value="" placeholder="ماهي المتطلبات المطلوبة من الطالب للدخول في الدورة؟" ></textarea>
                             </div>
 
-                            <label class="form-label mediabout-light">مكاسب الدورة
-                                <b style="color: rgb(240, 100, 100);font-size: large;">*</b>
+                            <label class="form-label mediabout mediabout-light" style="letter-spacing: 0 !important;">مكاسب الدورة
+                                <b style="color: rgb(236, 134, 134);font-size: large;">*</b>
                             </label>
                             <div class="form-group mb-24pt">
                                 <textarea id="course_grains" name="course_grains" type="text" cols="9" rows="6" class="form-control form-control-lg req"
-                                    style="font-size: medium;" data-value="" placeholder="Course description" ></textarea>
-                                <small class=" bllu bllu-light">>على سبيل المثال:  <b href="" class=" mediabout mediabout-light">تعلم الفوتوشوب مع css ..</b></small>
+                                    style="font-size: medium;" data-value="" placeholder="أكتب المكاسب التي سوف يحصل عليها الطالب بعد الانتهاء من الدورة" ></textarea>
                             </div>
 
-                            <!-- <label class="form-label mt-1">Course description
-                                <b style="color: red;font-size: large;">*</b>
-                            </label>
-
-                            <div id="course_description" name="course_description" style="height: 150px;" class="mb-0"
-                                data-toggle="quill" placeholder="hhh">
-                            </div>
-                            <small class="form-text text-muted">For Example: <a href="">This course about photoshop and it's
-                                new features..</a></small> -->
-
-                            <!-- <label class="form-label mt-4">Course Requirments
-                                <b style="color: red;font-size: large;">*</b>
-                            </label>
-
-                            <div id="course_requirements" name="course_requirements" style="height: 150px;" class="mb-0"
-                                data-toggle="quill" placeholder="hhh" data-value="">
-
-                            </div>
-                            <small class="form-text text-muted">For Example: <a href="">To take this course you need to know
-                                the basics at least..</a></small> -->
-
-                            <!-- <label class="form-label mt-4">Course Gains
-                                <b style="color: red;font-size: large;">*</b>
-                            </label>
-
-                            <div id="course_grains" name="course_grains" style="height: 150px;" class="mb-0"
-                                data-toggle="quill" placeholder="hhh">
-                            </div> -->
 
                         </div>
                         <div class="col-md-4">
-                            <div class="card" style="border-radius: 3px 3px 0 0 !important;">
+                            <div class="card card-dark" style="border-radius: 3px 3px 0 0 !important;">
                                 <div class="card-header card-header-light " style="border-radius: 3px 3px 0 0 !important;">
-                                    <a onclick="addCourse()" id="addCourse" class="btn btn-primary mr-4">أضف دورة</a>
+                                    <a onclick="addCourse()" id="addCourse" class="btn btn-primary btn-primary-dark mr-4">أضف دورة</a>
                                     {% if course.approval_status != 2 %}
-                                    <a href="javascript:;void(0)" class="btn btn-accent" onclick="saveLater()">احفظ لوقت لاحق</a>
+                                    <a href="javascript:;void(0)" class="btn btn-accentt btn-accentt-dark" onclick="saveLater()">اكمال التسجيل لاحقا</a>
                                     {% endif %}
-                                </div>
-                                <div class="list-group list-group-flush">
-                                    <div class="list-group-item d-flex" style="border-bottom: 1px solid rgb(47, 72, 87);">
-                                        <a class="flex blllu blllu-light" href="#"><strong>حفظ المسودة</strong></a>
-                                        <i class="material-icons text-muted">التحقق من</i>
-                                    </div>
-                                    <!-- <div class="list-group-item">
-                                        <a class="" style="color: rgb(240, 116, 116);" id="delBtn" onclick="showDelModal()"><strong>حذف الدورة</strong></a>
-                                    </div> -->
                                 </div>
                             </div>
 
                             <div class="page-separator">
-                                <div class="page-separator__text mediabout mediabout-light backgg backgg-light">صورة الدورة</div>
+                                <div class="page-separator__text mediabout mediabout-light backgg backgg-light">الصورة الأساسية </div>
                             </div>
 
                             <div class="card ">
@@ -644,7 +385,7 @@
 
 
                             <div class="page-separator">
-                                <div class="page-separator__text mediabout mediabout-light backgg backgg-light">صورة رأس</div>
+                                <div class="page-separator__text mediabout mediabout-light backgg backgg-light">صورة صفحة الهبوط</div>
                             </div>
 
                             
@@ -660,7 +401,7 @@
                                                     class="custom-file-input"
                                                     id="inputGroupFile02"
                                                 >
-                                                <label class="custom-file-label  selecttt selecttt-light" style="border-radius: 0 !important;" for="inputGroupFile02">Choose file</label>
+                                                <label class="custom-file-label  selecttt selecttt-light" style="border-radius: 0 !important;" for="inputGroupFile02">اختر ملف</label>
                                             </div>
                                         </div>
                                     </div>
@@ -673,7 +414,7 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label class="form-label mediabout mediabout-light">فئة</label>
+                                        <label class="form-label mediabout mediabout-light" style="letter-spacing: 0 !important;">القسم الأساسي</label>
                                         <select id="category" name="category" class="form-control selecttt selecttt-light">
                                             {% for cat in categories %}
                                                 {% if cat.id == course.scat_id %}
@@ -685,12 +426,12 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label mediabout mediabout-light">الفئات الفرعية</label>
+                                        <label class="form-label mediabout mediabout-light" style="letter-spacing: 0 !important;">القسم الفرعي</label>
                                         <select id="sub_category" name="sub_category" class="form-control selecttt selecttt-light">
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label mediabout mediabout-light">مستوى</label>
+                                        <label class="form-label mediabout mediabout-light" style="letter-spacing: 0 !important;">مستوى الدورة</label>
                                         <select id="level" name="level" class="form-control selecttt selecttt-light">
                                             <option value="0" {% if course.course_level == 0 %} selected {% endif %}>جميع المستويات
                                             </option>
@@ -706,10 +447,10 @@
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label mediabout mediabout-light">سعر</label>
+                                        <label class="form-label mediabout mediabout-light" style="letter-spacing: 0 !important;">سعر الدورة</label>
                                         <select id="price" name="price" class="form-control selecttt selecttt-light">
                                             <option value="0" {% if course.type == 0 %} selected {% endif %}>مدفوع</option>
-                                            <option value="1" {% if course.type == 1 %} selected {% endif %}>حر</option>
+                                            <option value="1" {% if course.type == 1 %} selected {% endif %}>مجاني</option>
                                         </select>
                                         <div class="row" style="margin-top: 20px">
                                             <div class="col-md-6">
@@ -722,7 +463,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <small class="blllu blllu-light flllot" style="margin-bottom: 10px !important;">السعر الموصى به بين 10 و 15 دولاراً</small>
+                                        <small class="blllu blllu-light " style="margin-top: 10px !important;text-align: right;">السعر الموصى به بين 50 و 100 ريال</small>
                                     </div>
                                     <!-- <div class="form-group">
                                         <label class="form-label mediabout mediabout-light">أسلوب الدورة</label>
@@ -741,11 +482,11 @@
                 </form>
             </div>
         </div>
-    {% endif %}
+        
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true" style="padding-top: 12%;">
         <input type="hidden" id="commentDeleteId" value="">
         <div class="modal-dialog" role="document">
-            <div class="modal-content" style="background: white; padding: 30px;border: 1px solid #ccc;">
+            <div class="modal-content" style="background: rgb(255, 255, 255); padding: 30px;border: 1px solid #ccc;">
                 <div class="modal-header">
                     <h4 class="modal-title" id="formModal" style="text-align:center;">Do you really want to delete?</h4>
                     <button style=" float: right; margin-top: -30px; margin-bottom: 10px;outline: none; background: no-repeat;border: none;font-size: 20px;"
@@ -1047,7 +788,7 @@
 
             if (coursename == undefined || coursename == '') {
                 swal({
-                    title: "Course Name Missing", 
+                    title: "اسم الدورة مفقود", 
                     icon: "warning",
                     closeOnConfirm: false,
                 });
@@ -1056,7 +797,7 @@
 
             if (description == undefined || description == '') {
                 swal({
-                    title: "Course Description Missing",
+                    title: "وصف الدورة مفقود",
                     icon: "warning",
                     closeOnConfirm: false,
                 });
@@ -1065,7 +806,7 @@
 
             if (grains == undefined || grains == '') {
                 swal({
-                    title: "Course Gains Missing",
+                    title: "مكاسب الدورة مفقود",
                     icon: "warning",
                     closeOnConfirm: false,
                 });
@@ -1074,7 +815,7 @@
 
             if (requirements == undefined || requirements == '') {
                 swal({
-                    title: "Cover Image Missing",
+                    title: "متطلبات الدورة مفقودة",
                     icon: "warning",
                     closeOnConfirm: false,
                 });
@@ -1084,7 +825,7 @@
             if (coverImg == undefined || coverImg == '') {
                 if ($('#coverImg').attr('src') == '') {
                     swal({
-                        title: "Cover Image Missing",
+                        title: "الصوؤة الأساسية مفقودة",
                         icon: "warning",
                         closeOnConfirm: false,
                     });
@@ -1095,7 +836,7 @@
             if (headerImg == undefined || headerImg == '') {
                 if ($('#headerImg').attr('src') == '') {
                     swal({
-                        title: "Header Image Missing",
+                        title: "صورة صفحة الهبوط مفقودة",
                         icon: "warning",
                         closeOnConfirm: false,
                     });
@@ -1130,7 +871,7 @@
 
         function showDelModal() {
             swal({
-                    title: "Delete course",
+                    title: "هل أنت متأكد من حذف الدورة؟",
                     text: "Are you sure delete course",
                     showCancelButton: true,
                     closeOnConfirm: false,

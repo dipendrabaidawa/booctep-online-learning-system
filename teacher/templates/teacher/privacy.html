@@ -16,6 +16,11 @@
         html {
             overflow-y: auto;
         }
+        
+.alert-soft-primary-dark{
+    background-color: #1d2025 !important;
+    border: 1px solid #14171b !important;
+}
     </style>
 
 
@@ -42,28 +47,21 @@
         }    
     </style>
 
+<style>
+    html {
+        overflow-y: auto;
+    }
+    
+.alert-soft-primary-dark{
+background-color: #1d2025 !important;
+border: 1px solid #14171b !important;
+}
+</style>
+
     <div class=" page__container " style="margin-top: 0px;height: 100vh !important;">
         <div class="col-lg-8 d-flex align-items-center" style="">
         </div>
         <div class="col-md-7 pt-3">
-            <div class="alert alert-soft-primary alert-dismissible fade show " role="alert" style="width:60%">
-                <div class="d-flex flex-wrap align-items-start" style="justify-content: space-between;">
-                    <div class="mr-8pt riggggt">
-                        <i class="material-icons blllu blllu-dark riggt">help</i>
-                    </div>
-                    <div class="flex" style="min-width: 180px;float: right !important;">
-                        <small class="text-black-100" style="">
-
-                            {% get_current_language as lang %}
-                            {% if lang == "ar" %}
-                            <b style="margin-top: 10px !important;" class=" blllu blllu-dark">السلام عليكم</b>
-                            {% else %}
-                            <b style="margin-top: 10px !important;" class=" blllu blllu-dark">Hello there</b>
-                            {% endif %}
-                        </small>
-                    </div>
-                </div>
-            </div>
             <!-- <div class="form-group " style="margin-bottom: 20px !important">
                 <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1 riggt">
                     <input style="font-size:5px !important;margin-top:-10px !important" type="checkbox"
@@ -98,6 +96,24 @@
                 </div>
             </div> -->
             <div class="form-group" style="margin-bottom: 20px !important">
+                <div class="alert alert-soft-primary  alert-soft-primary-dark alert-dismissible fade show " role="alert" style="width:60%">
+                    <div class="d-flex flex-wrap align-items-start">
+                        <div class="mr-8pt riggggt">
+                            <i class="material-icons blllu blllu-dark riggt">help</i>
+                        </div>
+                        <div class="flex" style="min-width: 180px;float: right !important;text-align: right;">
+                            <small class="text-black-100" style="">
+    
+                                {% get_current_language as lang %}
+                                {% if lang == "ar" %}
+                                <b style="margin-top: 10px !important;" class=" blllu blllu-dark">نقوم بارسال خصومات وعروض خاصة تناسبك </b>
+                                {% else %}
+                                <b style="margin-top: 10px !important;" class=" blllu blllu-dark">we will send you an offers and discounts fit you.</b>
+                                {% endif %}
+                            </small>
+                        </div>
+                    </div>
+                </div>
                 <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1 riggt">
                     <input style="font-size:5px !important;margin-top:-10px !important" type="checkbox"
                            {% if user.receive_email == 1 %}checked{% endif %}
@@ -121,11 +137,10 @@
                 </div>
                 {% get_current_language as lang %}
                 {% if lang == "ar" %}
-                <b style=" margin-top:3px !important" class="mediabout mediabout-dark riggt ">وضع المظهـر (<span
-                    class="getmodename "></span>)</b>
+                <b style=" margin-top:3px !important" class="mediabout mediabout-dark riggt ">تغيير المظهـر 
+                   </b>
                 {% else %}
-                <b style=" margin-top:3px !important" class="mediabout mediabout-dark riggt ">Set the default mode to (<span
-                    class="getmodename "></span>)</b>
+                <b style=" margin-top:3px !important" class="mediabout mediabout-dark riggt ">Change the mode </b>
                 {% endif %}
             </div>
 
@@ -136,7 +151,7 @@
             <button type="submit" class="btn btn-primary btn-primary-dark toppp" onclick="saveChanges()">حفظ البيانات</button>
             {% else %}
 
-            <button type="submit" class="btn btn-primary btn-primary-dark " onclick="saveChanges()">Save changes</button>
+            <button type="submit" class="btn btn-primary btn-primary-dark " style="float: left !important;" onclick="saveChanges()">Save changes</button>
             {% endif %}
 
         </div>

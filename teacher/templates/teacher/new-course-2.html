@@ -45,12 +45,61 @@
 
     <style>
  
+
+
+a.blakandwhate{
+    color: #1c212c !important;
+}
+
+a.blakandwhate-dark{
+    color: #1c212c !important;
+}
+
+.seelector{
+    background-color: #a6b8db !important;
+    border: 1px solid #91a1c2 !important;
+    color: #20293a !important;
+    padding: 3px;
+    padding-left: 2px;
+    border-radius: 2px;
+}
+
+.seelector-dark{
+    background-color: #20293a !important;
+    border: 1px solid #161d29 !important;
+    color: #a6b8db !important;
+    padding-left: 2px;
+}
+
+.accordion__toggle{
+     border: 1px solid #91ace9 !important;
+ }
+
+ .accordion__toggle-dark{
+     border: 1px solid #21242b !important;
+ }
+
+
+ [dir=rtl] .list-group-item{
+     border: 0 !important;
+ }
+ [dir=ltr] .list-group-item{
+     border: 0 !important;
+ }
         .backgg{
                background-color: #e8f4ff !important;
            }
            .backgg-dark{
                background-color: #4c525e !important;
            }
+        .btn-accentt{
+            background-color: red !important;
+            color: white !important;
+        }
+        .btn-accentt-dark{
+            background-color: rgb(224, 169, 169) !important;
+            color: rgb(65, 7, 7) !important;
+        }
 
            .isloading{
                display:block;
@@ -74,17 +123,17 @@
               
               .btn-primary{
                   background-color: rgb(33, 150, 243)!important;
-                  color: rgb(254, 254, 255);
                   border: 1px solid rgb(20, 71, 167) !important;
               }
               
-              .btn-primary-dark{
-                  background-color: #323741 !important;
-                  color: rgb(199, 199, 199) !important;
-                  border: 1px solid  #21242b !important;
-                  box-shadow: none !important;
-               } 
-               
+        
+        .btn-primary-dark{
+            background-color: #a6b8db !important;
+            border: 1px solid  #21242b !important;
+            box-shadow: none !important;
+        }
+        
+        
                .accordion-dark{
                    background-color: rgb(24, 30, 41) !important;
                    border: 1px solid rgb(15, 19, 27) !important;
@@ -152,15 +201,13 @@
                  color: rgb(42, 51, 65) !important;
               }
               
+              
               a.mediabout{
-                  background-color: rgb(207, 228, 245) !important;
-                  border: 1px solid #0d2150 !important;
-                  color: rgb(11, 41, 68) !important;
+                  color: rgb(214, 223, 231) !important;
               }
               
               a.mediabout-dark{
-                 background-color: rgb(42, 51, 65) !important;
-                 color: rgb(204, 213, 221) !important;
+                 color: rgb(18, 25, 39) !important;
               }
               
               
@@ -181,16 +228,16 @@
                       
               .btn-primary{
                   background-color: rgb(37, 148, 192) !important;
-                  color: rgb(254, 254, 255);
                   border: 1px solid rgb(23, 104, 136) !important;
               }
-                      
-              .btn-primary-dark{
-                  background-color: #323741 !important;
-                  color: rgb(199, 199, 199) !important;
-                  border: 1px solid  #21242b !important;
-                  box-shadow: none !important;
-              }
+        
+        .btn-primary-dark{
+            background-color: #a6b8db !important;
+            border: 1px solid  #21242b !important;
+            box-shadow: none !important;
+        }
+        
+        
                       
               th,td {
                   text-align: center !important;
@@ -255,13 +302,26 @@
                   border: 1px solid rgb(9, 10, 12) !important;
               }
                   
-              .progress .bg-primary{
+                  .progress {
+                      background-color: rgb(198, 211, 236) !important;
+                  }
+
+                  [dir=rtl] .custom-file-naked .custom-file-input{
+                      margin-right: auto !important;
+                      margin-left: auto !important;
+                  }
+                  [dir=ltr] .custom-file-naked .custom-file-input{
+                      margin-right: auto !important;
+                      margin-left: auto !important;
+                  }
+                  
+                  .progress .bg-primary{
                   background-color: rgb(45, 95, 189) !important;
                   border-radius: 0 !important;
               }
-              
+                  
               .progress .bg-primary-dark{
-                  background-color: rgb(189, 209, 245) !important;
+                  background-color: rgb(27, 30, 34) !important;
                   border-radius: 0 !important;
               }
               
@@ -288,10 +348,20 @@
            }
 
            .accordion{
-               border: 0 !important;
+               border: 1px solid #94a5c9 !important;
+               background-color: #3d475a !important;
                border-radius: 5px !important;
            }
            .accordion__item{
+               border-radius: 5px !important;
+               border: 1px solid #3a83d6 !important;
+           }
+           [dir="rtl"] .accordion{
+               border: 0 !important;
+           }
+           [dir="rtl"] .accordion--boxed .accordion__item{
+               background-color: transparent !important;
+               border: 0 !important;
                border-radius: 5px !important;
            }
            [dir="ltr"] .accordion--boxed .accordion__item{
@@ -299,8 +369,29 @@
                border: 0 !important;
                border-radius: 5px !important;
            }
+           .accordion--boxed .accordion__item{
+               background-color: transparent !important;
+               border: 0 !important;
+               border-radius: 5px !important;
+           }
            .accordion__menu-dark{
-               background-color: rgb(58, 98, 117);
+               background-color: #a5abb1 !important;
+               border-bottom: 0 !important;
+               color: #1f2531 !important;
+           }
+           .accordion__menu-link-dark{
+               border-bottom: 1px solid #051122 !important;
+           }
+           .accordion__menu-link{
+               border-bottom: 1px solid #dfe2e7 !important;
+
+           }
+           .accordion__menu-dark{
+               background-color: #212933;
+           }
+
+           .marggintop{
+               margin-top: 120px !important;
            }
 
               </style>
@@ -332,30 +423,30 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header card-header-light text-center" style="border-radius: 5px !important;">
-                                <a href="javascript:;void(0)" class="btn btn-primary mr-4" id="addCourseBtn">Add course</a>
-                                {% if course.approval_status != 2 %}
-                                    <a href="javascript:;void(0)" class="btn " style="background: rgb(224, 127, 127);" onclick="saveLater()">Save for later</a>
-                                {% endif %}
-                            </div>
-                            <div class="list-group list-group-flush">
-                                <div class="list-group-item d-flex" style="border-bottom: 1px solid rgb(19, 27, 41);">
-                                    <a class="flex" href="javascript:;void(0)"><b class="blllu blllu-light flllot">Save Draft</b></a>
-                                    <i class="material-icons text-muted">check</i>
+                        <div class="card" >
+                            <div class="card card-dark" style="border-radius: 3px 3px 0 0 !important;">
+                                <div class="card-header card-header-dark " style="border-radius: 3px 3px 0 0 !important;">
+                                    <a onclick="addCourse()" id="addCourse" class="btn btn-primary btn-primary-dark mediabout mediabout-dark mr-4">Add course</a>
+                                    {% if course.approval_status != 2 %}
+                                    <a href="javascript:;void(0)" class="btn btn-accentt btn-accentt-dark" onclick="saveLater()">Save for later</a>
+                                    {% endif %}
                                 </div>
-                                <div class="list-group-item">
+                            </div>
+                            <div class="list-group list-group-flush"style="border-bottom: 0 !important;">
+                                <div class="list-group-item" >
                                     <a class="" style="cursor: pointer;color: rgb(147, 173, 223); border-bottom: 1px solid rgb(19, 27, 41);"
-                                    onclick="$('#prevStep').submit()"><strong>Go back to Edit previous page</strong></a>
+                                    onclick="$('#prevStep').submit()"><strong style="text-decoration: none !important;font-size: 17px;">Go back to Edit previous page
+                                    
+                                    </strong></a>
                                 </div>
                                 {% get_current_language as lang %}
                                 <form action="/{{lang}}/teacher/add_course/?step=1" method="post" id="prevStep">
                                     {% csrf_token %}
                                     <input type="hidden" name="course" value="{{ course_id }}">
                                 </form>
-                                <!-- <div class="list-group-item" style="border-top: 0 !important;">
+                                <div class="list-group-item" style="border-top: 0 !important;">
                                     <a class="text-danger" onclick="showDelModal()"><strong>Delete Course</strong></a>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
 
@@ -395,7 +486,7 @@
                     <div class="col-md-8" id="group_section">
 
                         <div class="page-separator">
-                            <div class="page-separator__text mediabout mediabout-light backgg backgg-light">الخطوة 2</div>
+                            <div class="page-separator__text mediabout mediabout-light backgg backgg-light">الخطوة الثانية</div>
                         </div>
 
                         <div class="card divider">
@@ -409,37 +500,37 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <div class="card">
-                            <div class="card-header card-header-light text-center" style="border-radius: 5px !important;">
-                                <a href="javascript:;void(0)" class="btn btn-primary mr-4" id="addCourseBtn">أضف دورة</a>
-                                {% if course.approval_status != 2 %}
-                                    <a href="javascript:;void(0)" class="btn " style="background: rgb(224, 127, 127);" onclick="saveLater()">احفظ لوقت لاحق</a>
-                                {% endif %}
-                            </div>
-                            <div class="list-group list-group-flush">
-                                <div class="list-group-item d-flex" style="border-bottom: 1px solid rgb(19, 27, 41);">
-                                    <a class="flex" href="javascript:;void(0)"><b class="blllu blllu-light flllot">حفظ المسودة</b></a>
-                                    <i class="material-icons text-muted">التحقق من</i>
+                        <div class="card" >
+                            <div class="card card-dark" style="border-radius: 3px 3px 0 0 !important;">
+                                <div class="card-header card-header-dark " style="border-radius: 3px 3px 0 0 !important;">
+                                    <a onclick="addCourse()" id="addCourse" class="btn btn-primary btn-primary-dark mediabout mediabout-dark mr-4">أضف دورة</a>
+                                    {% if course.approval_status != 2 %}
+                                    <a href="javascript:;void(0)" class="btn btn-accentt btn-accentt-dark" onclick="saveLater()">اكمال التسجيل لاحقا</a>
+                                    {% endif %}
                                 </div>
-                                <div class="list-group-item">
+                            </div>
+                            <div class="list-group list-group-flush"style="border-bottom: 0 !important;">
+                                <div class="list-group-item" >
                                     <a class="" style="cursor: pointer;color: rgb(147, 173, 223); border-bottom: 1px solid rgb(19, 27, 41);"
-                                    onclick="$('#prevStep').submit()"><strong>ارجع إلى تحرير الصفحة السابقة</strong></a>
+                                    onclick="$('#prevStep').submit()"><strong style="text-decoration: none !important;font-size: 17px;">ارجع إلى تحرير الصفحة السابقة
+                                    
+                                    </strong></a>
                                 </div>
                                 {% get_current_language as lang %}
                                 <form action="/{{lang}}/teacher/add_course/?step=1" method="post" id="prevStep">
                                     {% csrf_token %}
                                     <input type="hidden" name="course" value="{{ course_id }}">
                                 </form>
-                                <!-- <div class="list-group-item" style="border-top: 0 !important;">
+                                <div class="list-group-item" style="border-top: 0 !important;">
                                     <a class="text-danger" onclick="showDelModal()"><strong>حذف الدورة</strong></a>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
 
                     </div>
 
             </div>
-            <a class="btn btn-primary btn-primary-light" style="margin-bottom: 330px !important;margin-top: 40px !important;" id="add_section">إضافة قسم</a>
+            <a class="btn btn-primary btn-primary-light mediabout mediabout-dark" style="margin-bottom: 330px !important;margin-top: 40px !important;" id="add_section">إضافة قسم</a>
         </div>
         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="formModal"
              aria-hidden="true" style="padding-top: 12%;">
@@ -900,8 +991,8 @@
                 {% if lang == 'en' %}
                     html += `<ul class="mt-3 accordion accordion-dark accordion--boxed js-accordion mb-0 sect" style="border-radius: 0 !important;" id="toc-` + new_id + `"
                                 ondragover="dragoverUL(event)" draggable="true" ondragstart="dragStartUL(event)" ondrop="dropUL(event)">
-                                <li class="accordion__item open">
-                                    <div class="accordion__toggle" data-toggle="collapse" data-parent="#toc-` + new_id + `" href="#video-list-` + new_id + `">
+                                <li class="accordion__item accordion__item-dark open">
+                                    <div class="accordion__toggle accordion__toggle-dark" data-toggle="collapse" data-parent="#toc-` + new_id + `" href="#video-list-` + new_id + `">
                                         <span class="flex" >
                                             <span class="mediabout mediabout-dark flllot mr-2" id="section_name_` + new_id + `" name="section_name_` + new_id + `">` + section_name + `</span>
                                             <a style="margin-left: 10px !important;" onclick="editSectionName('` + new_id + `')"><b class="blllu blllu-dark flllot">Edit section name</b></a>
@@ -915,7 +1006,7 @@
                                     </div>
                                     <div class="accordion__menu accordion__menu-dark">
                                         <ul class="list-unstyled collapse show video" id="video-list-` + new_id + `" >
-                                            <li class="accordion__menu-link" style="padding-left: 40% !important;padding: 25px 0;">
+                                            <li class="accordion__menu-link accordion__menu-link-dark" style="padding-left: 40% !important;padding: 25px 0;">
                                                 <a  class="custom-file custom-file-naked d-flex"  >
                                                     <input type="file" class="custom-file-input" id="customFile" onchange="addVideo(this,'` + new_id + `')">
                                                     <label class="custom-file-label" style="color: inherit;margin-top: 0px;margin-left: 10%;" for="customFile">
@@ -932,7 +1023,7 @@
                     html += `<ul class="mt-3 accordion accordion-dark accordion--boxed js-accordion mb-0 sect" style="border-radius: 0 !important;" id="toc-` + new_id + `"
                                     ondragover="dragoverUL(event)" draggable="true" ondragstart="dragStartUL(event)" ondrop="dropUL(event)">
                                     <li class="accordion__item open">
-                                        <div class="accordion__toggle" data-toggle="collapse" data-parent="#toc-` + new_id + `" href="#video-list-` + new_id + `">
+                                        <div class="accordion__toggle accordion__toggle-dark" data-toggle="collapse" data-parent="#toc-` + new_id + `" href="#video-list-` + new_id + `">
                                             <span class="flex"  >
                                                 <span style="float: right !important;" class="mediabout mediabout-dark flllot mr-2" id="section_name_` + new_id + `" name="section_name_` + new_id + `">` + section_name + `</span>
                                                 <a style="margin-left: 10px !important; float: right;" onclick="editSectionName('` + new_id + `')"><b style="margin-left: 20px;" class="blllu blllu-dark flllot">تحرير اسم القسم</b></a>
@@ -946,14 +1037,15 @@
                                         </div>
                                         <div class="accordion__menu accordion__menu-dark">
                                             <ul class="list-unstyled collapse show video" id="video-list-` + new_id + `" >
-                                                <li class="accordion__menu-link" style="padding-left: 40% !important;padding: 25px 0;">
-                                                    <a  class="custom-file custom-file-naked d-flex"  >
+                                                <li class="accordion__menu-link accordion__menu-link-dark" style="padding: 25px 0;">
+                                                    <div class="cennter" style="margin: 0 auto !important;">
+                                                    <a  class="custom-file custom-file-naked d-flex"  style="margin: 0 auto !important;">
                                                         <input type="file" class="custom-file-input" id="customFile" onchange="addVideo(this,'` + new_id + `')">
-                                                        <label class="custom-file-label" style="color: inherit;margin-top: 0px;margin-left: 10%;" for="customFile">
-                                                        <b class="blllu blllu-dark flllot mt-1" style="position: relative; right: 250px;"> أضف فيديو جديد</b>
-                                                            <i class="material-icons blllu blllu-dark flllot" style="font-size: x-large !important; position: relative; right: 250px;">+</i>
+                                                        <label class="custom-file-label" style="" for="customFile">
+                                                        <b class=" mt-1 blakandwhate blakandwhate-dark" style="margin-right:0 auto !important;margin-left: 0 auto !important;align-items: center !important;text-align:center !important"> اضافة فيديو جديد +</b>
                                                         </label>
                                                     </a>
+                                                    </div>
                                                 </li>
                                             </ul>
                                         </div>
@@ -979,27 +1071,26 @@
                     if (paid*1 === 0) {
                         if (video.isPromo == 0) {
                             select_element = 
-                                `<select style="margin-left:10px; margin-right:10px; background:rgb(58, 98, 117); color:rgba(39, 44, 51, 0.7)" onchange="changeLockStatus(this, ${i}, ${j})">
-                                    <option value="1" selected>Lock</option>
-                                    <option value="0">Unlock</option>
+                                `<select style="" class="seelector seelector-dark" onchange="changeLockStatus(this, ${i}, ${j})">
+                                    <option value="1" selected>فيديو مغلق</option>
+                                    <option value="0">فيديو ترويجي</option>
                                 </select>`;
                             video.lock = 1;
                         } else {
                             select_element = 
-                                `<select style="margin-left:10px; margin-right:10px; background:rgb(58, 98, 117); color:rgba(39, 44, 51, 0.7)" onchange="changeLockStatus(this, ${i}, ${j})">
-                                    <option value="1">Lock</option>
-                                    <option value="0" selected>Unlock</option>
-                                </select>`;
+                                `<b class="mediabout mediabout-dark">الفيديو الترويجي -<b>`;
                         }    
                     }
   
                     let html1 = `
-                        <li class="accordion__menu-link" id="` + video.key.toString() + `" ondragover="dragoverLI(event)" draggable="true" ondragstart="dragStartLI(event)" ondrop="dropLI(event)" xmlns="http://www.w3.org/1999/html">
-                            <span class="material-icons icon-16pt icon--left text-body">play_circle_outline</span>
-                            <a class="flex">` + videoname + `</a>
-                            <span>` + duration + ` mins</span>`
-                            + select_element +    
-                            `<span style="margin-left:10px; cursor: pointer;" class="material-icons sidebar-menu-icon sidebar-menu-icon--left" onclick="deleteVideo(this)">delete</span>
+                        <li class="accordion__menu-link accordion__menu-link-dark" id="` + video.key.toString() + `" ondragover="dragoverLI(event)" draggable="true" ondragstart="dragStartLI(event)" ondrop="dropLI(event)" xmlns="http://www.w3.org/1999/html">
+                            <span class="material-icons icon-16pt icon--left mediabout mediabout-dark ">play_circle_outline</span>
+                            <a class="flex mediabout mediabout-dark">` + videoname + `</a>
+                            <span class=" mediabout mediabout-dark">` + duration + ` دقيقة - &nbsp;</span>
+                            <span class=" mediabout mediabout-dark">` + select_element + ` &nbsp;&nbsp;</span>
+                            <span style="margin-left:10px; cursor: pointer;" class="material-icons sidebar-menu-icon sidebar-menu-icon--left mediabout mediabout-dark" onclick="deleteVideo(this)">delete</span>`
+                            + 
+                            `
                         </li>
                         `;
                     $(element).prepend(html1)

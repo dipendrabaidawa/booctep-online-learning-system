@@ -21600,7 +21600,7 @@ html {
     text-transform: uppercase;
     font-family: Exo\ 2, Helvetica Neue, Arial, sans-serif;
     font-weight: 600;
-    letter-spacing: 2px
+    letter-spacing: 0px !important
 }
 
 [dir=rtl] .table tbody .selected > td {

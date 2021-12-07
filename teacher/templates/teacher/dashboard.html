@@ -8,11 +8,11 @@
 {% block headercontent %}
 {% get_current_language as lang %}
 {% if lang == "ar" %}
-    {% with title="الإعدادات" %}
+    {% with title="لوحة التحكم" %}
         {% include "./layout/header.html" %}
     {% endwith %}
 {% else %}
-    {% with title="Account" %}
+    {% with title="Dashboard" %}
         {% include "./layout/header.html" %}
     {% endwith %}
 {% endif %}
@@ -22,8 +22,23 @@
 {% block content %}
 
 <style>
- 
- 
+    .card-dark{
+        border: 1px solid rgb(21, 27, 34) !important;
+    }
+
+
+.card-body{
+    background-color: transparent !important;
+}
+
+.card-body-dark{
+    background: rgb(33, 41, 51) !important;
+    border: 1px solid rgb(21, 27, 34) !important;
+}
+
+.table thead th{
+     background-color: transparent !important;
+ }
 
  .card-header{
         background-color: rgb(225, 235, 247) !important;
@@ -35,10 +50,6 @@
     }
     .carddy{
         background-color: rgb(247, 247, 247) !important;
-    }
-    .card-dark{
-        background-color: rgb(33, 41, 51) !important;
-        border: 0 !important;
     }
 
 
@@ -150,12 +161,10 @@ th,td {
     border-bottom: 0 !important;
 }
 
-.table .tehead {
-        
-}
     
 .tehead-dark{
     background-color: rgb(33, 41, 51) !important;
+    border: 0px !important;
     border-top: 1px solid rgb(24, 31, 36) !important;
     border-bottom: 1px solid rgb(24, 31, 36) !important;
 }
@@ -198,6 +207,15 @@ a.disabled{
 }
 
 
+.mediabout{
+   color: rgb(42, 51, 65) !important;
+}
+
+.mediabout-dark{
+    color: rgb(214, 223, 231) !important;
+}
+
+
 </style>    
 
     <div class=" page__container page-section">
@@ -205,11 +223,11 @@ a.disabled{
             <div class="carousel-inner">
                 <div class="carousel-item carousel-item-light active"
                      style="height: 230px;border-radius: 7px;">
-                    <div class="card border-0 mb-0" href="" style="margin-top: 100px;">
+                    <div class="card card-dark border-0 mb-0" href="" style="margin-top: 100px;">
                         <div class="fullbleed bg-primary" style="opacity: .5;"></div>
                         {% get_current_language as lang %}
                         {% if lang == "ar" %}
-                        <span class="card-body d-flex flex-column align-items-center justify-content-center fullbleed">
+                        <span class="carrd-body d-flex flex-column align-items-center justify-content-center fullbleed">
                             <h3 style="" class="prcg prcg-light">جاهز لإنشاء دورة؟</h3>
 
                             <p>
@@ -218,7 +236,7 @@ a.disabled{
                             </p>
                         </span>
                         {% else %}
-                        <span class="card-body d-flex flex-column align-items-center justify-content-center fullbleed">
+                        <span class="carrd-body d-flex flex-column align-items-center justify-content-center fullbleed">
                             <h3 style="" class="prcg prcg-light">Are you ready to teach?</h3>
                             <p>
                                 {% get_current_language as lang %}
@@ -235,14 +253,14 @@ a.disabled{
                         <div class="fullbleed bg-primary" style="opacity: .5;"></div>
                         {% get_current_language as lang %}
                         {% if lang == "ar" %}
-                        <span class="card-body d-flex flex-column align-items-center justify-content-center fullbleed">
+                        <span class="carrd-body d-flex flex-column align-items-center justify-content-center fullbleed">
                             <b style="font-size: 28px !important;font-weight: 700;" class="prcg prcg-light">لست متأكد بعد؟</b>
                             <p style="width: 70%;text-align: center;font-size: 17px;" class="mediabout mediabout-light">أضف فيديو تجريبي, سوف نقوم بإعطائك إرشادات وأراء حول الفيديو التجريبي.</p>
                             <a href="/teacher/test_video/" class="btn btn-secondary mb-16pt ml-16pt mediabout mediabout-light"
                                style="">أضف فيديو تجريبي</a>
                         </span>
                         {% else %}
-                        <span class="card-body d-flex flex-column align-items-center justify-content-center fullbleed">
+                        <span class="carrd-body d-flex flex-column align-items-center justify-content-center fullbleed">
                             <h3 style="" class="mediabout mediabout-light">Not sure yet?</h3>
                             <p style="width: 70%;text-align: center;" class="mediabout mediabout-light">Add Test course to see our suggetions and recommandation to you.</p>
                             <a href="/{{lang}}/teacher/test_video/" class="btn btn-secondary mb-16pt ml-16pt mediabout mediabout-light"
@@ -271,80 +289,80 @@ a.disabled{
             <div class="row card-group-row mb-lg-8pt">
                 <div class="col-lg-4 col-md-6 card-group-row__col">
                     <div class="card card-group-row__card p-relative o-hidden">
-                        <div class="card-body d-flex flex-row align-items-center">
+                        <div class="card-body card-body-dark d-flex flex-row align-items-center">
                             <div class="flex">
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">عدد الطلاب في الدورات المجانية</b>
                                 </p>
                                 <span class="h2 m-0 mediabout mediabout-light">{{ totalFreeStuCnt }}</span>
                             </div>
-                            <i class="material-icons icon-32pt text-20 ml-8pt">people_outline</i>
+                            <i class="material-icons mediabout mediabout-light">people_outline</i>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 card-group-row__col">
                     <div class="card card-group-row__card p-relative o-hidden">
-                        <div class="card-body d-flex flex-row align-items-center">
+                        <div class="card-body card-body-dark d-flex flex-row align-items-center">
                             <div class="flex">
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">عدد الطلاب في الدورات المدفوعة</b>
                                 </p>
                                 <span class="h2 m-0 mediabout mediabout-light">{{ totalPaidStuCnt }}</span>
                             </div>
-                            <i class="material-icons icon-32pt text-20 ml-8pt">people_outline</i>
+                            <i class="material-icons mediabout mediabout-light">people_outline</i>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 card-group-row__col">
                     <div class="card card-group-row__card">
-                        <div class="card-body d-flex flex-row align-items-center">
+                        <div class="card-body card-body-dark d-flex flex-row align-items-center">
                             <div class="flex">
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">تقييم المعلم</b>
                                 </p>
                                 <span class="h2 m-0 mediabout mediabout-light">{{ total_rating|unlocalize }}</span>
                             </div>                            
-                            <i class="material-icons icon-32pt text-20 ml-8pt">star</i>
+                            <i class="material-icons mediabout mediabout-light">star</i>
 
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 card-group-row__col">
                     <div class="card card-group-row__card p-relative o-hidden">
-                        <div class="card-body d-flex flex-row align-items-center">
+                        <div class="card-body card-body-dark d-flex flex-row align-items-center">
                             <div class="flex">
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">مجموع الإيرادات</b>
                                 </p>
                                 <span class="h2 m-0" style="color: rgb(144, 221, 151);">{{ total_revenue|unlocalize }} ريال سعودي</span>
                             </div>
-                            <i class="material-icons icon-32pt text-20 ml-8pt">monetization_on</i>
+                            <i class="material-icons mediabout mediabout-light">monetization_on</i>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 card-group-row__col">
                     <div class="card card-group-row__card p-relative o-hidden">
-                        <div class="card-body d-flex flex-row align-items-center">
+                        <div class="card-body card-body-dark d-flex flex-row align-items-center">
                             <div class="flex">
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">مجموع ( تحت الملاحظة )</b>
                                 </p>
                                 <span class="h2 m-0 mediabout mediabout-light">{{ total_hold_money|unlocalize }} ريال سعودي</span>
                             </div>
-                            <i class="material-icons icon-32pt text-20 ml-8pt">people_outline</i>
+                            <i class="material-icons mediabout mediabout-light">people_outline</i>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 card-group-row__col">
                     <div class="card card-group-row__card p-relative o-hidden">
-                        <div class="card-body d-flex flex-row align-items-center">
+                        <div class="card-body card-body-dark d-flex flex-row align-items-center">
                             <div class="flex">
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">مجموع التحويلات الجديدة</b>
                                 </p>
                                 <span class="h2 m-0 mediabout mediabout-light">{{ total_transfer_money|unlocalize }} ريال سعودي</span>
                             </div>
-                            <i class="material-icons icon-32pt text-20 ml-8pt">people_outline</i>
+                            <i class="material-icons mediabout mediabout-light">people_outline</i>
                         </div>
                     </div>
                 </div>
@@ -355,7 +373,7 @@ a.disabled{
             </div>
 
             <a onclick="showRequestModal()"
-               class="btn btn-primary mb-16pt {% if total_hold_money == 0 %}disabled{% endif %}"
+               class="btn btn-primary mb-16pt mediabout mediabout-dark {% if total_hold_money == 0 %}disabled{% endif %}"
                style="{% if total_hold_money == 0 %}cursor: not-allowed; {% endif %}">طلب ارسال الإيرادات</a>
 
             <div class="card mb-0" style="border-radius: 5px 5px 0 0 !important;">
@@ -440,6 +458,12 @@ a.disabled{
                                     </td>
                                 </tr>
                             {% endfor %}
+                        {% else %}
+                                <tr >
+                                    <td colspan="8" style="padding: 20px 0;">
+                                        <b>لا يوجد لديك دورات متاحة بعد</b>
+                                    </td>
+                                </tr>
                         {% endif %}
                         </tbody>
                     </table>
@@ -452,79 +476,79 @@ a.disabled{
             <div class="row card-group-row mb-lg-8pt">
                 <div class="col-lg-4 col-md-6 card-group-row__col">
                     <div class="card card-group-row__card p-relative o-hidden">
-                        <div class="card-body d-flex flex-row align-items-center">
+                        <div class="card-body card-body-dark d-flex flex-row align-items-center">
                             <div class="flex">
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">Total students ( Free courses )</b>
                                 </p>
                                 <span class="h2 m-0 mediabout mediabout-light">{{ totalFreeStuCnt }}</span>
                             </div>
-                            <i class="material-icons icon-32pt text-20 ml-8pt">people_outline</i>
+                            <i class="material-icons mediabout mediabout-light">people_outline</i>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 card-group-row__col">
                     <div class="card card-group-row__card p-relative o-hidden">
-                        <div class="card-body d-flex flex-row align-items-center">
+                        <div class="card-body card-body-dark d-flex flex-row align-items-center">
                             <div class="flex">
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">Total students ( Paid courses )</b>
                                 </p>
                                 <span class="h2 m-0 mediabout mediabout-light">{{ totalPaidStuCnt }}</span>
                             </div>
-                            <i class="material-icons icon-32pt text-20 ml-8pt">people_outline</i>
+                            <i class="material-icons mediabout mediabout-light">people_outline</i>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 card-group-row__col">
                     <div class="card card-group-row__card">
-                        <div class="card-body d-flex flex-row align-items-center">
+                        <div class="card-body card-body-dark d-flex flex-row align-items-center">
                             <div class="flex">
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">Teacher rating</b>
                                 </p>
                                 <span class="h2 m-0 mediabout mediabout-light">{{ total_rating }}</span>
                             </div>
-                            <i class="material-icons icon-32pt text-20 ml-8pt">star</i>
+                            <i class="material-icons mediabout mediabout-light">star</i>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 card-group-row__col">
                     <div class="card card-group-row__card p-relative o-hidden">
-                        <div class="card-body d-flex flex-row align-items-center">
+                        <div class="card-body card-body-dark d-flex flex-row align-items-center">
                             <div class="flex">
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">Total revenue</b>
                                 </p>
                                 <span class="h2 m-0" style="color: rgb(144, 221, 151);"> {{ total_revenue }} SR</span>
                             </div>
-                            <i class="material-icons icon-32pt text-20 ml-8pt">monetization_on</i>
+                            <i class="material-icons mediabout mediabout-light">monetization_on</i>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 card-group-row__col">
                     <div class="card card-group-row__card p-relative o-hidden">
-                        <div class="card-body d-flex flex-row align-items-center">
+                        <div class="card-body card-body-dark d-flex flex-row align-items-center">
                             <div class="flex">
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">Total In Hold</b>
                                 </p>
                                 <span class="h2 m-0 mediabout mediabout-light">{{ total_hold_money }} SR</span>
                             </div>
-                            <i class="material-icons icon-32pt text-20 ml-8pt">people_outline</i>
+                            <i class="material-icons mediabout mediabout-light">people_outline</i>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 card-group-row__col">
                     <div class="card card-group-row__card p-relative o-hidden">
-                        <div class="card-body d-flex flex-row align-items-center">
+                        <div class="card-body card-body-dark d-flex flex-row align-items-center">
                             <div class="flex">
                                 <p class="card-title d-flex align-items-center">
                                     <b class="mediabout mediabout-light">Total Transferred</b>
                                 </p>
                                 <span class="h2 m-0 mediabout mediabout-light">{{ total_transfer_money }} SR</span>
                             </div>
-                            <i class="material-icons icon-32pt text-20 ml-8pt">people_outline</i>
+                            <i class="material-icons mediabout mediabout-light">people_outline</i>
                         </div>
                     </div>
                 </div>
@@ -620,6 +644,12 @@ a.disabled{
                                     </td>
                                 </tr>
                             {% endfor %}
+                            {% else %}
+                                    <tr >
+                                        <td colspan="8" style="padding: 20px 0;">
+                                            <b>There are no courses yet.</b>
+                                        </td>
+                                    </tr>
                         {% endif %}
                         </tbody>
                     </table>
