@@ -130,21 +130,22 @@ WSGI_APPLICATION = 'booctop.wsgi.application'
 # Never change db config and commit.
 # If you want to use local db, change this config and don't commit to repo.
 DATABASES = {
-   'default': {
-      'ENGINE': 'django.db.backends.mysql',
-      'NAME': 'booctop',
-      'USER': 'root', # 'root',
-      'PASSWORD': 'root',
-      'HOST': 'localhost', #'localhost',   # Or an IP Address that your DB is hosted on
+   # 'default': {
+   #    'ENGINE': 'django.db.backends.mysql',
+   #    'NAME': 'booctop',
+   #    'USER': 'root', # 'root',
+   #    'PASSWORD': 'root',
+   #    'HOST': 'localhost', #'localhost',   # Or an IP Address that your DB is hosted on
+   #    'PORT': '8889',
+   #  }
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'booctop',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'booctop',
-    #     'USER': 'root',
-    #     'PASSWORD': '',
-    #     'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-    #     'PORT': '3306',
-    # }
 }
 
 # Password validation
