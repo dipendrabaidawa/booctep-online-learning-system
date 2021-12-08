@@ -1,15 +1,21 @@
 {% extends "student/base.html" %}
- {% load static %}
+
+
+{% load static %}
 {% load i18n %}
 
-{% block title %}
-    Security
-{% endblock %}
 
 {% block headercontent %}
+{% get_current_language as lang %}
+{% if lang == "ar" %}
+    {% with title="الخصوصية" %}
+        {% include "./layout/header.html" %}
+    {% endwith %}
+{% else %}
     {% with title="Privacy" %}
         {% include "./layout/header.html" %}
     {% endwith %}
+{% endif %}
 
 <style>
 .blllu{
@@ -147,19 +153,19 @@
         <div class="col-lg-8 d-flex align-items-center" style="">
         </div>
         <div class="col-md-7 pt-3">
-            <div class="alert alert-soft-primary alert-dismissible fade show " role="alert" style="width:60%">
+            <div class="alert alert-soft-primary alert-soft-primary-dark alert-dismissible fade show " role="alert" style="width:60%">
                 <div class="d-flex flex-wrap align-items-start" style="justify-content: space-between;">
                     <div class="mr-8pt riggggt">
                         <i class="material-icons blllu blllu-dark riggt">help</i>
                     </div>
-                    <div class="flex" style="min-width: 180px;float: right !important;">
+                    <div class="flex" style="min-width: 180px;float: right !important;text-align: right !important;">
                         <small class="text-black-100" style="">
 
                             {% get_current_language as lang %}
                             {% if lang == "ar" %}
-                            <b style="margin-top: 10px !important;" class=" blllu blllu-dark">السلام عليكم</b>
+                            <b style="margin-top: 10px !important;text-align: right !important;" class=" blllu blllu-dark">ننصحك بعدم تعطيل الرسائل التلقائية فهي تمنحك الخصوصية لمعرفة كيفية سير بياناتك</b>
                             {% else %}
-                            <b style="margin-top: 10px !important;" class=" blllu blllu-dark">Hello there</b>
+                            <b style="margin-top: 10px !important;" class=" blllu blllu-dark"> We recommend you to not turn it off, it will give you the privacy.</b>
                             {% endif %}
                         </small>
                     </div>
@@ -180,19 +186,19 @@
                 <b style="margin-top:3px !important" class="mediabout mediabout-dark riggt">Recieve automatic emails.</b><br/>
                 {% endif %}
             </div>
-            <div class="alert alert-soft-primary alert-dismissible fade show " role="alert" style="width:60%">
+            <div class="alert alert-soft-primary alert-soft-primary-dark alert-dismissible fade show " role="alert" style="width:60%">
                 <div class="d-flex flex-wrap align-items-start">
                     <div class="mr-8pt riggggt">
                         <i class="material-icons blllu blllu-dark riggt">help</i>
                     </div>
-                    <div class="flex" style="min-width: 180px;float: right !important;">
+                    <div class="flex" style="min-width: 180px;float: right !important;text-align: right;">
                         <small class="text-black-100" style="">
 
                             {% get_current_language as lang %}
                             {% if lang == "ar" %}
-                            <b style="margin-top: 10px !important;" class=" blllu blllu-dark">السلام عليكم</b>
+                            <b style="margin-top: 10px !important;" class=" blllu blllu-dark">نقوم بارسال خصومات وعروض خاصة تناسبك </b>
                             {% else %}
-                            <b style="margin-top: 10px !important;" class=" blllu blllu-dark">Hello there</b>
+                            <b style="margin-top: 10px !important;" class=" blllu blllu-dark">we will send you an offers and discounts fit you.</b>
                             {% endif %}
                         </small>
                     </div>
@@ -222,11 +228,9 @@
                 </div>
                 {% get_current_language as lang %}
                 {% if lang == "ar" %}
-                <b style=" margin-top:3px !important" class="mediabout mediabout-dark riggt ">وضع المظهـر (<span
-                    class="getmodename "></span>)</b>
+                <b style=" margin-top:3px !important" class="mediabout mediabout-dark riggt ">تغيير المظهـر </b>
                 {% else %}
-                <b style=" margin-top:3px !important" class="mediabout mediabout-dark riggt ">Set the default mode to (<span
-                    class="getmodename "></span>)</b>
+                <b style=" margin-top:3px !important" class="mediabout mediabout-dark riggt ">change the mode</b>
                 {% endif %}
             </div>
 

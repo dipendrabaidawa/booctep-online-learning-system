@@ -4,14 +4,19 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}
-    Account
-{% endblock %}
+
 
 {% block headercontent %}
+{% get_current_language as lang %}
+{% if lang == "ar" %}
+    {% with title="الإعدادات" %}
+        {% include "./layout/header.html" %}
+    {% endwith %}
+{% else %}
     {% with title="Account" %}
         {% include "./layout/header.html" %}
     {% endwith %}
+{% endif %}
 {% endblock %}
 
 
@@ -214,7 +219,7 @@
 
         {% load static %}
     <div class=" page__container " style="margin-bottom: 35px;">
-        <div class=" alert-soft-primary alert-soft-primary-dark fade show" role="alert"
+        <!-- <div class=" alert-soft-primary alert-soft-primary-dark fade show" role="alert"
              style="width:49%;margin-left:5px;margin-top:30px;margin-bottom:30px">
             <div class="d-flex flex-wrap align-items-start">
                 <div class="mr-8pt">
@@ -231,7 +236,7 @@
                     </small>
                 </div>
             </div>
-        </div>
+        </div> -->
         
         {% get_current_language as lang %}
         {% if lang == "ar" %}
@@ -250,7 +255,7 @@
                     </a>
                     <div class="media-body">
                         <div class="custom-file custom-file-dark">
-                            <label class="custom-file-label" for="inputGroupFile01" style="padding-left: 90px !important;">قم باختيار صورة ( يفضل مقاس ٦٤ * ٦٤ )</label>
+                            <label class="custom-file-label" for="inputGroupFile01" style="padding-left: 90px !important;">قم باختيار صورة ( مقاس ٦٤ * ٦٤ )</label>
                             <input type="file" class="custom-file-input" id="inputGroupFile01" onchange="changeImg()">
                         </div>
                     </div>
@@ -286,7 +291,7 @@
                     <div class="media-body">
                         <div class="custom-file">
                             <input type="file" class="custom-file-input" id="inputGroupFile02" onchange="changeImg1()">
-                            <label class="custom-file-label" for="inputGroupFile01" style="padding-left: 90px !important;">قم باختيار صورة ( يفضل مقاس ١,٢٠٠ * ٤٥٠ )</label>
+                            <label class="custom-file-label" for="inputGroupFile01" style="padding-left: 90px !important;">قم باختيار صورة ( مقاس ١,٢٠٠ * ٤٥٠ )</label>
                         </div>
                     </div>
                 </div>                
@@ -517,17 +522,17 @@
 
         function updateUser() {
             if(has_change == 0) {
-                showAlert(0, "You didnt change anything!")
+                showAlert(0, "لم تقم بتغيير شيء")
                 return
             }
             if ($("#first_name").val() == "") {
-                showAlert(0, "Please enter the first name")
+                showAlert(0, "من فضلك قم بادخل اسمك الاول")
                 return false
             } else if ($("#last_name").val() == "") {
-                showAlert(0, "Please enter the last name")
+                showAlert(0, "من فضلك قم بادخال اسم العائلة")
                 return false
             } else if ($("#email").val() == "") {
-                showAlert(0, "Please enter the correct email")
+                showAlert(0, "من فضلك قم بادخال بريد الكتروني صحيح")
                 return false
             }
             var formData = new FormData();

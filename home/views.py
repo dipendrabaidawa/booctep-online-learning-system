@@ -176,7 +176,7 @@ def home_view(request):
     ele = Admincontrol.objects.get(pk=1)
     cat_id = int(ele.priority)
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     course_list_paginator = Paginator(course_list, 10)
@@ -252,7 +252,8 @@ def home_view(request):
                                                       'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
                                                       'alreadyinCart': alreadyinCartView, 'favCnt': favCnt,
                                                       'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum,
-                                                      'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                                      'msg_list': msg_list, 'msg_cnt': msg_cnt, 
+                                                      'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                                       'noti_cnt': noti_cnt, 'noti_list': noti_list, 'cat_id': cat_id,
                                                       'ip': ip, 'order': order, 'host_url': host_url})
             else:
@@ -261,7 +262,8 @@ def home_view(request):
                                                       'favList': favListShow, 'cartList': cartListShow,
                                                       'favCnt': favCnt, 'cartCnt': cartCnt,
                                                       'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                                                      'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                                      'msg_list': msg_list, 'msg_cnt': msg_cnt, 
+                                                      'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                                       'noti_list': noti_list, 'cat_id': cat_id, 'ip': ip,
                                                       'order': order, 'host_url': host_url})
         else:
@@ -319,6 +321,7 @@ def home_view(request):
                                    'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt,
                                    'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
                                    'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                   'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                    'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
                 else:
                     return render(request, 'index.html',
@@ -326,7 +329,8 @@ def home_view(request):
                                    'lang': getLanguage(request)[0],
                                    "category_obj": category_obj, 'favList': favListShow, 'cartList': cartListShow,
                                    'favCnt': favCnt, 'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum,
-                                   'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                   'msg_list': msg_list, 'msg_cnt': msg_cnt, 
+                                   'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                    'noti_cnt': noti_cnt, 'noti_list': noti_list, 'cat_id': cat_id, 'ip': ip,
                                    'order': order, 'host_url': host_url})
             else:
@@ -338,7 +342,7 @@ def home_view(request):
                                    'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
                                    'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt,
                                    'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
-                                   'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                   'msg_list': msg_list, 'msg_cnt': msg_cnt, 
                                    'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
                 else:
                     return render(request, 'index.html',
@@ -346,7 +350,7 @@ def home_view(request):
                                    'lang': getLanguage(request)[0],
                                    "category_obj": category_obj, 'favList': favListShow, 'cartList': cartListShow,
                                    'favCnt': favCnt, 'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum,
-                                   'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                   'msg_list': msg_list, 'msg_cnt': msg_cnt, 
                                    'noti_cnt': noti_cnt, 'noti_list': noti_list, 'cat_id': cat_id, 'ip': ip,
                                    'order': order, 'host_url': host_url})
         else:
@@ -377,7 +381,8 @@ def home_view(request):
                                            'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
                                            'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt,
                                            'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
-                                           'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                           'msg_list': msg_list, 'msg_cnt': msg_cnt, 
+                                           'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                            'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
                         else:
                             return render(request, 'index.html',
@@ -386,7 +391,8 @@ def home_view(request):
                                            "category_obj": category_obj, 'favList': favListShow,
                                            'cartList': cartListShow, 'favCnt': favCnt, 'cartCnt': cartCnt,
                                            'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
-                                           'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                           'msg_list': msg_list, 'msg_cnt': msg_cnt, 
+                                           'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                            'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
                     else:
                         if user_id:
@@ -411,10 +417,6 @@ def home_view(request):
                 else:
                     return redirect(u)
             else:
-                # u = ur[0] + "//" + ur[2] + "/" + ln + "/" + ur[4] + "/"
-                # u = ur[0] + "//" + ur[2] + "/" + ln + "/" + ur[4] + "/"
-                # if ur[4] == "":
-                #     u = u[:len(u) - 1]
                 if user_type == "student":
                     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
                     return render(request, 'index.html',
@@ -436,7 +438,8 @@ def home_view(request):
                                        'alreadyinFav': alreadyinFavView, 'cartList': cartListShow,
                                        'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt,
                                        'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
-                                       'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                       'msg_list': msg_list, 'msg_cnt': msg_cnt, 
+                                       'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                        'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
                     else:
                         return render(request, 'index.html',
@@ -445,7 +448,8 @@ def home_view(request):
                                        "category_obj": category_obj, 'favList': favListShow,
                                        'cartList': cartListShow, "user_id": user_id, 'favCnt': favCnt,
                                        'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                                       'msg_list': msg_list, 'msg_cnt': msg_cnt,
+                                       'msg_list': msg_list, 'msg_cnt': msg_cnt, 
+                                       'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                        'noti_list': noti_list, 'cat_id': cat_id, 'ip': ip, 'order': order, 'host_url': host_url})
                 else:
                     if user_id:
@@ -564,7 +568,7 @@ def home_view1(request):
         request.user.id)
 
     ## Pagination
-    number_of_courses_in_a_page = 5
+    number_of_courses_in_a_page = 15
     course_list_page = request.GET.get('course_list_page', 1)
     course_list_paginator = Paginator(course_list, number_of_courses_in_a_page)
 
@@ -746,25 +750,9 @@ def home_view1(request):
                 else:
                     return redirect(u)
 
-"""
-(
-    <QuerySet []>,
-    0, 
-    [], 
-    <QuerySet [<student_cart_courses: student_cart_courses object (170)>, 
-    <student_cart_courses: student_cart_courses object (169)>, 
-    <student_cart_courses: student_cart_courses object (168)>]>, 
-    4, 
-    [48, 65, 64, 46], 
-    262.0, 
-    <QuerySet [<notifications: notifications object (102)>, 
-    <notifications: notifications object (76)>]>, 
-    2, 
-    [], 
-    0
-)
-"""
 def findheader(userid):
+    # Getting user's group
+    user_group_id = 0 if userid is None else User.objects.get(pk=userid).group_id
     # show fav page.., cart page...
     favList = student_favourite_courses.objects.filter(student_id_id=userid)
     favCnt = len(favList)
@@ -796,15 +784,33 @@ def findheader(userid):
 
     msg_list = []
     sender_ids = []
+    student_msg_list = []
+    student_sender_ids = []
+    stu_msg_cnt = 0
     msgs = Messages.objects.filter(receiver_id=userid, is_read=0).order_by("-id")
-    # Adding one latest message per sender and number of send should be small than 3
-    for msg in msgs:
-        if msg.sender not in sender_ids and len(sender_ids) < 3:
-            sender_ids.append(msg.sender)
-            msg_list.append(msg)
-    msg_cnt = Messages.objects.filter(receiver_id=userid, is_read=0).values('sender_id').distinct().count()
+    # if user is student&teacher account
+    if user_group_id != 4:
+        # Adding one latest message per sender and number of send should be small than 3
+        for msg in msgs:
+            if msg.sender_id not in sender_ids and len(sender_ids) < 3:
+                sender_ids.append(msg.sender_id)
+                msg_list.append(msg)
+        msg_cnt = Messages.objects.filter(receiver_id=userid, is_read=0).values('sender_id').distinct().count()
+    else:
+        for msg in msgs:
+            sender_group_id = User.objects.get(pk=msg.sender_id).group_id
+            if msg.sender_id not in sender_ids and len(sender_ids) < 3 and sender_group_id == 2:
+                sender_ids.append(msg.sender_id)
+                msg_list.append(msg)
+            if msg.sender_id not in student_sender_ids and len(student_sender_ids) < 3 and (sender_group_id == 3 or sender_group_id == 4):
+                student_sender_ids.append(msg.sender_id)
+                student_msg_list.append(msg)
 
-    return favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt
+        msg_cnt = Messages.objects.filter(receiver_id=userid, is_read=0, sender_id__in=sender_ids).values('sender_id').distinct().count()
+        stu_msg_cnt = Messages.objects.filter(receiver_id=userid, is_read=0, sender_id__in=student_sender_ids).values('sender_id').distinct().count()
+
+    total_msg_cnt = msg_cnt + stu_msg_cnt
+    return favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, student_msg_list, stu_msg_cnt, total_msg_cnt
 
 
 def signup(request):
@@ -830,65 +836,65 @@ def loginn(request):
 
 
 def about(request):
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'about.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def faqs(request):
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'faqs.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def help(request):
     user_id = request.session.get("user_id")
     user_type = request.session.get("user_type")
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'support.html',
                   {'lang': getLanguage(request)[0], 'user_type': user_type, "user_id": user_id, 'favList': x1,
                    'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def terms(request):
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'terms.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def policy(request):
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'privacy.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def contact(request):
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'contact.html',
                   {'lang': getLanguage(request)[0], 'favList': x1, 'favCnt': x2, 'alreadyinFav': x3, 'cartList': y1,
                    'cartCnt': y2, 'alreadyinCart': y3, 'cartTotalSum': y4, 'noti_list': z1, 'noti_cnt': z2,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def become(request):
@@ -902,13 +908,13 @@ def become(request):
     # show notification...
     noti_list = notifications.objects.filter(user_id=request.user.id, is_read=0).order_by("-id")[:3]
     noti_cnt = notifications.objects.filter(user_id=request.user.id, is_read=0).count()
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'become.html',
                   {'lang': getLanguage(request)[0], 'catList': objC, 'favList': favListShow, 'cartList': cartListShow,
                    'favCnt': len(favList), 'cartCnt': len(cartList), 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
+                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def become_a_teacher(request):
@@ -921,12 +927,12 @@ def become_a_teacher(request):
 
     noti_list = notifications.objects.filter(user_id=request.user.id, is_read=0).order_by("-id")[:3]
     noti_cnt = notifications.objects.filter(user_id=request.user.id, is_read=0).count()
-    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt = findheader(request.user.id)
+    x1, x2, x3, y1, y2, y3, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'become-teacher.html', {'lang': getLanguage(request)[0], 'categories': categoryList, 'favList': favListShow, 'cartList': cartListShow,
                    'favCnt': len(favList), 'cartCnt': len(cartList), 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses})
+                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, "stu_courses": stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def save_become_teacher(request):
@@ -1252,7 +1258,7 @@ def single_course(request, teacher_id, course_url):
     for cart in cartList:
         cartTotalSum += cart.course_id.price
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     teacher_id = Courses.objects.get(pk=id).user_id
@@ -1298,16 +1304,6 @@ def single_course(request, teacher_id, course_url):
             if VideoUploads.objects.filter(section_id=i.id, promo=1).exists():
                 promo_video = VideoUploads.objects.filter(section_id=i.id, promo=1)[0].url
 
-            # making the includeList
-            # include = {}
-            # include['id'] = i.id
-            # include['name'] = i.name
-            # include['course_id'] = i.course_id
-            # include['type'] = i.type
-            # include['nos'] = i.nos
-            # include['tname'] = re.sub(r'[^\w]', '', i.name)
-            # includeList.append(include)
-
     fav_exist = 0
     if student_favourite_courses.objects.filter(student_id_id=user_id, course_id_id=course.id).exists():
         fav_exist = 1
@@ -1325,7 +1321,7 @@ def single_course(request, teacher_id, course_url):
                    'alreadyinFav': alreadyinFavView, 'cartList': cartListShow, 'alreadyinCart': alreadyinCartView,
                    'favCnt': len(favList), 'cartCnt': len(cartList), 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
                    'noti_list': noti_list, 'is_me': is_me, 'fav_exist': fav_exist, 'cart_exist': cart_exist,
-                   'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 @csrf_exempt
@@ -2696,7 +2692,7 @@ def searching(request):
     user_type = request.session.get("user_type")
     user_id = request.session.get("user_id")
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     optionObj = Option.objects.filter(oname="main_host")[0]
@@ -2798,7 +2794,7 @@ def searching(request):
                                            'totalsearchresult': totalsearchresult, "category_obj": category_obj,
                                            'course_list': sehList, 'favList': favListShow,
                                            'cartList': cartListShow, 'favCnt': favCnt, 'cartCnt': cartCnt,
-                                           'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
+                                           'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                                            'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'page': page, 'type': type, 'order': order, 'host_url': host_url})
 
 
@@ -2936,52 +2932,6 @@ def single_category(request, category_name, id):
     else:
         order = int(order)
 
-    if id == '1':
-        categorie = "Web Development"
-
-    elif id == '2':
-        categorie = "Business"
-
-    elif id == '3':
-        categorie = "Design"
-
-    elif id == '4':
-        categorie = "Drama & Cinema"
-
-    elif id == '5':
-        categorie = "Mathmatics"
-
-    elif id == '6':
-        categorie = "Aviation"
-
-    elif id == '7':
-        categorie = "Engineering"
-
-    elif id == '8':
-        categorie = "Art"
-
-    elif id == '9':
-        categorie = "Food"
-
-    elif id == '10':
-        categorie = "softwares Programming"
-
-    elif id == '11':
-        categorie = "skills"
-
-    elif id == '12':
-        categorie = "sewiing"
-
-    elif id == '13':
-        categorie = "Self Development"
-
-    elif id == '14':
-        categorie = "Information Technology"
-
-    else:
-        categorie = "All"
-
-
     # show fav page.., cart page...
     favList = student_favourite_courses.objects.filter(student_id_id=request.user.id)
     cartList = student_cart_courses.objects.filter(student_id_id=request.user.id)
@@ -2991,23 +2941,11 @@ def single_category(request, category_name, id):
     for value in range(len(alreadyinCart)):
         alreadyinCartView.append(alreadyinCart[value]['course_id_id'])
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     for cart in cartList:
         cartTotalSum += cart.course_id.price
-
-    category = ''
-    if categories.objects.filter(name=categorie).exists():
-        category_id = categories.objects.get(name=categorie).id
-        category = categories.objects.get(name=categorie)
-    else:
-        return render(request, 'filter_404_page.html', {'lang': getLanguage(request)[0], 'favList': favListShow,
-                                                        'cartList': cartListShow, 'favCnt': len(favList),
-                                                        'cartCnt': len(cartList), 'stu_courses':stu_courses,
-                                                        'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                                                        'noti_list': noti_list, 'msg_list': msg_list,
-                                                        'msg_cnt': msg_cnt, 'type': type, 'order': order})
 
     if getLanguage(request)[1] == None:
         l = ""
@@ -3019,84 +2957,65 @@ def single_category(request, category_name, id):
         else:
             l = "en/"
 
-    if subcategories.objects.filter(categories_id=category_id).exists():
-        sub_obj = subcategories.objects.filter(categories_id=category_id)
-        for i in sub_obj:
-            if Courses.objects.filter(subcat_id=i.id).exists():
-                if user_id == None:
-                    if type == -1:
-                        course_list = Courses.objects.filter(subcat_id=i.id).filter(approval_status=2).order_by('-created_at')
-                    else:
-                        course_list = Courses.objects.filter(subcat_id=i.id).filter(type=type).filter(approval_status=2).order_by('created_at')
-                else:
-                    register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
-                    if type == -1:
-                        course_list = Courses.objects.filter(subcat_id=i.id).filter(approval_status=2).exclude(id__in=register_course_ids).order_by('-created_at')
-                    else:
-                        course_list = Courses.objects.filter(subcat_id=i.id).filter(type=type).filter(approval_status=2).exclude(id__in=register_course_ids).order_by('created_at')
-
-                for course in course_list:
-                    rating_list = course_comments.objects.filter(course_id_id=course.id)
-                    course.stuCnt = student_register_courses.objects.filter(course_id_id=course.id).count()
-                    course.ratingCnt = course_comments.objects.filter(course_id_id=course.id).count()
-                    course.rating = getRatingFunc(rating_list)
-                    course.video = getVideoCnt(course)
-                count = course_list.count()
-                course_list_tmp = course_list
-                if order == 1:
-                    course_list = sorted(course_list_tmp, key=attrgetter('rating'), reverse=True)
-                elif order == 2:
-                    course_list = sorted(course_list_tmp, key=attrgetter('stuCnt'), reverse=True)
-
-                course_list_paginator = Paginator(course_list, 10)
-                try:
-                    course_list = course_list_paginator.page(page)
-                except PageNotAnInteger:
-                    course_list = course_list_paginator.page(1)
-                except EmptyPage:
-                    course_list = course_list_paginator.page(course_list_paginator.num_pages)
-                for course in course_list:
-                    course.link = courseUrlGenerator(course)
-
-                if l != getLanguage(request)[0]:
-                    rl = getLanguage(request)[0].split('/')
-                    return render(request, 'single_category.html',
-                                  {'lang': getLanguage(request)[0], 'course_list': course_list,
-                                   "course_cnt": str(count), "course_name": categorie, "user_id": user_id,
-                                   'category': category, 'favList': favListShow, 'alreadyinFav': alreadyinFavView,
-                                   'alreadyinCart': alreadyinCartView, 'stu_courses':stu_courses,
-                                   'cartList': cartListShow, 'favCnt': len(favList), 'cartCnt': len(cartList),
-                                   'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
-                                   'msg_list': msg_list, 'msg_cnt': msg_cnt, 'type': type, 'page': page,
-                                   'order': order})
-
-                else:
-                    return render(request, 'single_category.html',
-                                  {'lang': getLanguage(request)[0], 'course_list': course_list,
-                                   "course_cnt": str(count), "course_name": categorie, "user_id": user_id,
-                                   'category': category, 'favList': favListShow, 'alreadyinFav': alreadyinFavView,
-                                   'alreadyinCart': alreadyinCartView, 'stu_courses':stu_courses,
-                                   'cartList': cartListShow, 'favCnt': len(favList), 'cartCnt': len(cartList),
-                                   'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
-                                   'msg_list': msg_list, 'msg_cnt': msg_cnt, 'type': type, 'page': page,
-                                   'order': order})
-
-            else:
-                return render(request, 'filter_404_page.html', {'lang': getLanguage(request)[0], 'favList': favListShow,
-                                                                'cartList': cartListShow, 'favCnt': len(favList),
-                                                                'cartCnt': len(cartList), 'stu_courses':stu_courses,
-                                                                'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                                                                'noti_list': noti_list, 'msg_list': msg_list,
-                                                                'msg_cnt': msg_cnt, 'type': type, 'page': page,
-                                                                'order': order})
+    category = categories.objects.get(pk=id)
+    categorie = category.name;
+    if user_id == None:
+        if type == -1:
+            course_list = Courses.objects.filter(scat_id=id).filter(approval_status=2).order_by('-created_at')
+        else:
+            course_list = Courses.objects.filter(scat_id=id).filter(type=type).filter(approval_status=2).order_by('created_at')
     else:
-        return render(request, 'filter_404_page.html', {'lang': getLanguage(request)[0], 'favList': favListShow,
-                                                        'cartList': cartListShow, 'favCnt': len(favList),
-                                                        'cartCnt': len(cartList), 'stu_courses':stu_courses,
-                                                        'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt,
-                                                        'noti_list': noti_list, 'msg_list': msg_list,
-                                                        'msg_cnt': msg_cnt, 'type': type, 'page': page, 'order': order})
+        register_course_ids = student_register_courses.objects.filter(student_id_id=user_id).values_list('course_id_id', flat=True)
+        if type == -1:
+            course_list = Courses.objects.filter(scat_id=id).filter(approval_status=2).exclude(id__in=register_course_ids).order_by('-created_at')
+        else:
+            course_list = Courses.objects.filter(scat_id=id).filter(type=type).filter(approval_status=2).exclude(id__in=register_course_ids).order_by('created_at')
 
+    for course in course_list:
+        rating_list = course_comments.objects.filter(course_id_id=course.id)
+        course.stuCnt = student_register_courses.objects.filter(course_id_id=course.id).count()
+        course.ratingCnt = course_comments.objects.filter(course_id_id=course.id).count()
+        course.rating = getRatingFunc(rating_list)
+        course.video = getVideoCnt(course)
+    count = course_list.count()
+    course_list_tmp = course_list
+    if order == 1:
+        course_list = sorted(course_list_tmp, key=attrgetter('rating'), reverse=True)
+    elif order == 2:
+        course_list = sorted(course_list_tmp, key=attrgetter('stuCnt'), reverse=True)
+
+    course_list_paginator = Paginator(course_list, 10)
+    try:
+        course_list = course_list_paginator.page(page)
+    except PageNotAnInteger:
+        course_list = course_list_paginator.page(1)
+    except EmptyPage:
+        course_list = course_list_paginator.page(course_list_paginator.num_pages)
+    for course in course_list:
+        course.link = courseUrlGenerator(course)
+
+    if l != getLanguage(request)[0]:
+        rl = getLanguage(request)[0].split('/')
+        return render(request, 'single_category.html',
+                      {'lang': getLanguage(request)[0], 'course_list': course_list,
+                       "course_cnt": str(count), "course_name": categorie, "user_id": user_id,
+                       'category': category, 'favList': favListShow, 'alreadyinFav': alreadyinFavView,
+                       'alreadyinCart': alreadyinCartView, 'stu_courses':stu_courses,
+                       'cartList': cartListShow, 'favCnt': len(favList), 'cartCnt': len(cartList),
+                       'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
+                       'msg_list': msg_list, 'msg_cnt': msg_cnt, 'type': type, 'page': page,
+                       'order': order, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
+
+    else:
+        return render(request, 'single_category.html',
+                      {'lang': getLanguage(request)[0], 'course_list': course_list,
+                       "course_cnt": str(count), "course_name": categorie, "user_id": user_id,
+                       'category': category, 'favList': favListShow, 'alreadyinFav': alreadyinFavView,
+                       'alreadyinCart': alreadyinCartView, 'stu_courses':stu_courses,
+                       'cartList': cartListShow, 'favCnt': len(favList), 'cartCnt': len(cartList),
+                       'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'noti_list': noti_list,
+                       'msg_list': msg_list, 'msg_cnt': msg_cnt, 'type': type, 'page': page,
+                       'order': order, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 def getPromoData(request):
     course_id = request.POST.get('course_id')
@@ -3258,6 +3177,7 @@ def showCartList(request):
         subTax += cart.course_id.price * (tax / 100)
     
     subDiscount = round(subDiscount, 2)
+    subTax = round(subTax, 2)
         
     cartListTmp = Paginator(cartList, 2)
 
@@ -3270,7 +3190,7 @@ def showCartList(request):
 
     cartTotalSumPrice = round(subTotal - subTax - subDiscount, 2)
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     user_type = request.session.get("user_type")
@@ -3280,7 +3200,7 @@ def showCartList(request):
                    'cartList1': cartList, 'favCnt': favCnt, 'stu_courses':stu_courses,
                    'cartCnt': cartCnt, 'subtotal': subTotal, 'subDiscount': subDiscount,'cartTotalSum': cartTotalSumPrice,
                    'noti_cnt': noti_cnt, 'page': page, 'tax': subTax,
-                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt})
+                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 ##### PAYMENT #####
@@ -3314,7 +3234,7 @@ def ecommerce_payment(request, teacher_id, id, course_url):
 
     request.session['order_id'] = orderid,
     request.session['amount'] = float(totalmoney or 0)
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     # if user_type == "student":
@@ -3350,7 +3270,7 @@ def ecommerce_payment(request, teacher_id, id, course_url):
                    'discountmoney': discountmoney, 'lang': getLanguage(request)[0], 'savedcard': list(savedcard),
                    "course": course, "user_id": user_id, 'favList': favListShow, 'favCnt': favCnt, 'alreadyinFav': alreadyinFavView,
                    'cartList': cartListShow, 'cartCnt': cartCnt, 'alreadyinCart': alreadyinCartView, 'cartTotalSum': cartTotalSum, 'noti_list': noti_list,
-                   'noti_cnt': noti_cnt, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_courses': stu_courses})
+                   'noti_cnt': noti_cnt, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_courses': stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
     # else:
     #     return redirect("/")
 
@@ -3448,7 +3368,7 @@ def checkout(request):
     user_id = request.session.get("user_id")
     savedcard = payment.objects.filter(student_id=user_id)
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     orderid = generateRandomChar()
@@ -3478,11 +3398,11 @@ def checkout(request):
                    'discountmoney': discountmoney, 'lang': getLanguage(request)[0], 'savedcard': list(savedcard),
                    "user_id": user_id, 'favList': favListShow, 'favCnt': favCnt, 'alreadyinFav': alreadyinFavView,
                    'cartList': cartListShow, 'cartCnt': cartCnt, 'alreadyinCart': alreadyinCartView, 'cartTotalSum': cartTotalSum, 'noti_list': noti_list,
-                   'noti_cnt': noti_cnt, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_courses': stu_courses})
+                   'noti_cnt': noti_cnt, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_courses': stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 @csrf_exempt
 def process_payment(request):
-    x1, x2, x3, y1, y2, purchase_course_ids, y4, z1, z2, msg_list, msg_cnt= findheader(request.user.id)
+    x1, x2, x3, y1, y2, purchase_course_ids, y4, z1, z2, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(request.user.id)
     student_cart_courses.objects.filter(student_id_id=request.user.id).delete()
     purchase_courses = []
     for course_id in purchase_course_ids:
@@ -3576,11 +3496,11 @@ def payment_done(request, course_id, student_id):
     text +='<link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet" type="text/css">'
     text +='<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet" type="text/css">'
     text +='<link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet" type="text/css"><!--<![endif]--></head><body class="clean-body" style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;background-color: #efefef;color: #000000"><!--[if IE]><div class="ie-container"><![endif]--><!--[if mso]><div class="mso-container"><![endif]--><table style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;min-width: 320px;Margin: 0 auto;background-color: #efefef;width:100%" cellpadding="0" cellspacing="0"><tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color: #efefef;"><![endif]--><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color:   #d7dbf5;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #0000ff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]--><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:Open Sans,sans-serif;" align="left"><table width="100%" cellpadding="0" cellspacing="0" border="0" ><tr><td style="padding-right: 0px;padding-left: 0px;" align="center">'
-    text +='<img align="center" border="0" src="' + imageLink + '" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 80px;" width="80"></td></tr></table></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]--><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" ><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:18px 10px 12px;font-family:Open Sans,sans-serif;" align="left"><div style="color: #333333; line-height: 140%; text-align: center; word-wrap: break-word;"><p style="font-size: 14px; line-height: 140%;"><span style="font-size: 22px; line-height: 30.8px;"><strong>Good News!</strong></span></p></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]--><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" ><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:0px 25px 10px;font-family:Open Sans,sans-serif;" align="left"><div style="color: #333333; line-height: 160%; text-align: center; word-wrap: break-word;"><p style="font-size: 14px; line-height: 160%; text-align: left;">Hello Dear!</br>Someone purchased your course! Please check your courses.</p></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]--><table id="u_content_button_4" style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:Open Sans,sans-serif;" align="left"><div align="center"><!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;font-family:Open Sans,sans-serif;"><tr><td style="font-family:Open Sans,sans-serif;" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:38px; v-text-anchor:middle; width:274px;" arcsize="92%" stroke="f" fillcolor="#1b36ab"><w:anchorlock/><center style="color:#FFFFFF;font-family:Open Sans,sans-serif;"><![endif]-->'
-    text +='<a href="' + link + '" target="_blank" style="box-sizing: border-box;display: inline-block;font-family:Open Sans,sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #1b36ab; border-radius: 35px; -webkit-border-radius: 35px; -moz-border-radius: 35px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;"><span class="v-padding" style="display:block;padding:12px 40px 10px;line-height:120%;"><span style="font-size: 14px; line-height: 16.8px;"><strong><span style="line-height: 16.8px; font-size: 14px;">Go to your courses</span></strong></span></span></a><!--[if mso]></center></v:roundrect></td></tr></table><![endif]--></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]--><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:15px 10px 9px;font-family:Open Sans,sans-serif;" align="left"><table height="0px" align="center" border="0" cellpadding="0" cellspacing="0" width="72%" style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;border-top: 1px solid #413d45;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%"><tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;font-size: 0px;line-height: 0px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%"><span>&#160;</span></td></tr></tbody></table></td></tr></tbody></table><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:Open Sans,sans-serif;" align="left"><div style="color: #7e7e81; line-height: 150%; text-align: center; word-wrap: break-word;"><p style="font-size: 14px; line-height: 150%;"><span style="font-size: 12px; line-height: 18px;">You have received this email as a registered user of Booctep.com</span><span style="font-size: 12px; line-height: 18px;"></span></p></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><!--[if (mso)|(IE)]></td></tr></table><![endif]--></td></tr></tbody></table><!--[if mso]></div><![endif]--><!--[if IE]></div><![endif]--></body>'
+    text +='<img align="center" border="0" src="' + imageLink + '" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 80px;" width="80"></td></tr></table></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]--><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" ><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:18px 10px 12px;font-family:Open Sans,sans-serif;" align="left"><div style="color: #333333; line-height: 140%; text-align: center; word-wrap: break-word;"><p style="font-size: 14px; line-height: 140%;"><span style="font-size: 22px; line-height: 30.8px;"><strong>تم الانضمام بنجاح</strong></span></p></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]--><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" ><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:0px 25px 10px;font-family:Open Sans,sans-serif;" align="left"><div style="color: #333333; line-height: 160%; text-align: center; word-wrap: break-word;"><p style="font-size: 14px; line-height: 160%; text-align: right;">لقد قمت بإتمام عملية الشراء بنجاح, الان هو وقت البدء بزيادة قدراتك</p></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]--><table id="u_content_button_4" style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:Open Sans,sans-serif;" align="left"><div align="center"><!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;font-family:Open Sans,sans-serif;"><tr><td style="font-family:Open Sans,sans-serif;" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:38px; v-text-anchor:middle; width:274px;" arcsize="92%" stroke="f" fillcolor="#1b36ab"><w:anchorlock/><center style="color:#FFFFFF;font-family:Open Sans,sans-serif;"><![endif]-->'
+    text +='<a href="' + link + '" target="_blank" style="box-sizing: border-box;display: inline-block;font-family:Open Sans,sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #1b36ab; border-radius: 35px; -webkit-border-radius: 35px; -moz-border-radius: 35px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;"><span class="v-padding" style="display:block;padding:12px 40px 10px;line-height:120%;"><span style="font-size: 14px; line-height: 16.8px;"><strong><span style="line-height: 16.8px; font-size: 14px;">الذهاب الى لوحة التحكم</span></strong></span></span></a><!--[if mso]></center></v:roundrect></td></tr></table><![endif]--></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]--><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:15px 10px 9px;font-family:Open Sans,sans-serif;" align="left"><table height="0px" align="center" border="0" cellpadding="0" cellspacing="0" width="72%" style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;border-top: 1px solid #DFF2F5;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%"><tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;font-size: 0px;line-height: 0px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%"><span>&#160;</span></td></tr></tbody></table></td></tr></tbody></table><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:Open Sans,sans-serif;" align="left"><div style="color: #7e7e81; line-height: 150%; text-align: center; word-wrap: break-word;"><p style="font-size: 14px; line-height: 150%;"><span style="font-size: 12px; line-height: 18px;">هذه الرسالة تلقائية من فريق دعم منصة بوستيب, نتمنى لك يوما سعيد</span><span style="font-size: 12px; line-height: 18px;"></span></p></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><!--[if (mso)|(IE)]></td></tr></table><![endif]--></td></tr></tbody></table><!--[if mso]></div><![endif]--><!--[if IE]></div><![endif]--></body>'
     text +='</html>'
     
-    subject = 'Congrats, Updated Courses!'
+    subject = 'Joined to courses'
     msg = EmailMultiAlternatives(subject, '...', 'support@booctep.com', [to, to1])
     msg.attach_alternative(text, "text/html")
     msg.send()
@@ -3697,7 +3617,7 @@ def showFavList(request):
 
     # show fav page.., cart page...
     category_obj = categories.objects.all()
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     user_id = request.user.id
@@ -3770,7 +3690,7 @@ def showFavList(request):
                   {'stu_courses': stu_courses, 'category_obj': category_obj, 'lang': getLanguage(request)[0], 'favList1': favList,
                    'cartList': cartListShow, 'favCnt': favCnt, 'favList': favListShow,
                    'cartCnt': cartCnt, 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'page': page, 'type': type,
-                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'order': order})
+                   'noti_list': noti_list, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'order': order, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
 
 
 def viewProfile(request, id, pname):
@@ -3834,7 +3754,7 @@ def viewProfile(request, id, pname):
     except EmptyPage:
         course_list = course_list_paginator.page(course_list_paginator.num_pages)
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
 
     user.courses = course_list
@@ -3877,7 +3797,7 @@ def viewProfile(request, id, pname):
                   {'teacher': user, 'favList': favListShow, 'lang': getLanguage(request)[0], 'cartList': cartListShow,
                    'favCnt': len(favList), "stu_courses": stu_courses,
                    'cartCnt': len(cartList), 'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt, 'page': page,
-                   'page1': page1,
+                   'page1': page1, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                    'noti_list': noti_list, 'order': order, 'tab': tab, 'msg_list': msg_list, 'msg_cnt': msg_cnt})
 
 
@@ -3920,22 +3840,22 @@ def sendResetPasswordEmail(request):
     text += '.ie-container table,.mso-container table {table-layout: fixed;}* {line-height: inherit;}a[x-apple-data-detectors="true"] {color: inherit !important;text-decoration: none !important;}</style>'
     text += '<!--[if !mso]><!--><link href="https://fonts.googleapis.com/css?family=Lato:400,700&display=swap" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet" type="text/css"><link href="https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap" rel="stylesheet" type="text/css"><!--<![endif]--></head>'
     text += '<body class="clean-body" style="margin: 0;padding: 0;-webkit-text-size-adjust: 100%;background-color: #efefef;color: #000000"><!--[if IE]><div class="ie-container"><![endif]--><!--[if mso]><div class="mso-container"><![endif]--><table style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;min-width: 320px;Margin: 0 auto;background-color: #efefef;width:100%" cellpadding="0" cellspacing="0"><tbody><tr style="vertical-align: top"><td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center" style="background-color: #efefef;"><![endif]--><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color:   #d7dbf5;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;"><!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #0000ff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->'
-    text += '<table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:Open Sans,sans-serif;" align="left"><table width="100%" cellpadding="0" cellspacing="0" border="0" ><tr>'
+    text += '<table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:Open Sans,sans-serif;" align="right"><table width="100%" cellpadding="0" cellspacing="0" border="0" ><tr>'
     text += '<td style="padding-right: 0px;padding-left: 0px;" align="center"><img align="center" border="0" src="{imageLink}" alt="Image" title="Image" style="outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 80px;" width="80">'
     text += '</td></tr></table></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div>'
     text += '<div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">'
     text += '<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]--><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" >'
-    text += '<tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:18px 10px 12px;font-family:Open Sans,sans-serif;" align="left"><div style="color: #333333; line-height: 140%; text-align: center; word-wrap: break-word;"><p style="font-size: 14px; line-height: 140%;">'
-    text += '<span style="font-size: 22px; line-height: 30.8px;"><strong>Thank you for signup in Booctep</strong></span></p></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent">'
+    text += '<tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:18px 10px 12px;font-family:Open Sans,sans-serif;" align="right"><div style="color: #333333; line-height: 140%; text-align: center; word-wrap: break-word;"><p style="font-size: 14px; line-height: 140%;">'
+    text += '<span style="font-size: 22px; line-height: 30.8px;"><strong>اعادة تعيين كلمة المرور</strong></span></p></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent">'
     text += '<div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">'
     text += '<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]-->'
     text += '<!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->'
     text += '<table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" ><tbody><tr>'
-    text += '<td style="overflow-wrap:break-word;word-break:break-word;padding:0px 25px 10px;font-family:Open Sans,sans-serif;" align="left"><div style="color: #333333; line-height: 160%; text-align: center; word-wrap: break-word;"><p style="font-size: 14px; line-height: 160%; text-align: left;">Hello  </br>To reset you password, pls click the link. bellow</p></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">'
+    text += '<td style="overflow-wrap:break-word;word-break:break-word;padding:0px 25px 10px;font-family:Open Sans,sans-serif;" align="left"><div style="color: #333333; line-height: 160%; text-align: center; word-wrap: break-word;"><p style="font-size: 14px; line-height: 160%; text-align: right;float:right">لتغيير كلمة المرور اضغط الرابط في الأسفل</p></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">'
     text += '<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]-->'
     text += '<!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->'
     text += '<div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]--><table id="u_content_button_4" style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:Open Sans,sans-serif;" align="left"><div align="center"><!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;font-family:Open Sans,sans-serif;"><tr><td style="font-family:Open Sans,sans-serif;" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:38px; v-text-anchor:middle; width:274px;" arcsize="92%" stroke="f" fillcolor="#1b36ab"><w:anchorlock/><center style="color:#FFFFFF;font-family:Open Sans,sans-serif;"><![endif]-->'
-    text += '<a href="+ link + " target="_blank" style="box-sizing: border-box;display: inline-block;font-family:Open Sans,sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #1b36ab; border-radius: 35px; -webkit-border-radius: 35px; -moz-border-radius: 35px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;"><span class="v-padding" style="display:block;padding:12px 40px 10px;line-height:120%;"><span style="font-size: 14px; line-height: 16.8px;"><strong><span style="line-height: 16.8px; font-size: 14px;"> Reset &nbsp;&nbsp; password </span></strong></span></span></a><!--[if mso]></center></v:roundrect></td></tr></table><![endif]--></div></td></tr></tbody></table>'
+    text += '<a href="+ link + " target="_blank" style="box-sizing: border-box;display: inline-block;font-family:Open Sans,sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #33BEFF; border-radius: 35px; -webkit-border-radius: 35px; -moz-border-radius: 35px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;"><span class="v-padding" style="display:block;padding:12px 40px 10px;line-height:120%;"><span style="font-size: 14px; line-height: 16.8px;"><strong><span style="line-height: 16.8px; font-size: 14px;">تغيير </span></strong></span></span></a><!--[if mso]></center></v:roundrect></td></tr></table><![endif]--></div></td></tr></tbody></table>'
     text += '<!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">'
     text += '<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!-->'
     text += '<div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">'
@@ -3944,7 +3864,7 @@ def sendResetPasswordEmail(request):
     text += '<td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;font-size: 0px;line-height: 0px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">'
     text += '<span>&#160;</span></td></tr></tbody></table></td></tr></tbody></table><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">'
     text += '<tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:Open Sans,sans-serif;" align="left"><div style="color: #7e7e81; line-height: 150%; text-align: center; word-wrap: break-word;"><p style="font-size: 14px; line-height: 150%;">'
-    text += '<span style="font-size: 12px; line-height: 18px;">You have received this email as a registered user of Booctep.com</span><span style="font-size: 12px; line-height: 18px;"></span>'
+    text += '<span style="font-size: 12px; line-height: 18px;">هذه الرسالة تلقائية من فريق دعم منصة بوستيب, نتمنى لك يوما سعيد</span><span style="font-size: 12px; line-height: 18px;"></span>'
     text += '</p></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><!--[if (mso)|(IE)]></td></tr></table><![endif]--></td></tr></tbody></table><!--[if mso]></div><![endif]--><!--[if IE]></div><![endif]--></body></html>'
 
     to = email
@@ -3994,29 +3914,29 @@ def resetPassword(request):
             text += '<div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">'
             text += '<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]--><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" >'
             text += '<tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:18px 10px 12px;font-family:Open Sans,sans-serif;" align="left"><div style="color: #333333; line-height: 140%; text-align: center; word-wrap: break-word;"><p style="font-size: 14px; line-height: 140%;">'
-            text += '<span style="font-size: 22px; line-height: 30.8px;"><strong>Thank you for signup in Booctep</strong></span></p></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent">'
+            text += '<span style="font-size: 22px; line-height: 30.8px;"><strong>إعادة تعيين كلمة المرور</strong></span></p></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent">'
             text += '<div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">'
             text += '<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]-->'
             text += '<!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]-->'
             text += '<table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0" ><tbody><tr>'
-            text += '<td style="overflow-wrap:break-word;word-break:break-word;padding:0px 25px 10px;font-family:Open Sans,sans-serif;" align="left"><div style="color: #333333; line-height: 160%; text-align: center; word-wrap: break-word;"><p style="font-size: 14px; line-height: 160%; text-align: left;">Hello  </br>To reset you password, pls click the link. bellow</p></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">'
+            text += '<td style="overflow-wrap:break-word;word-break:break-word;padding:0px 25px 10px;font-family:Open Sans,sans-serif;" align="left"><div style="color: #333333; line-height: 160%; text-align: center; word-wrap: break-word;"><p style="font-size: 14px; line-height: 160%; text-align: right;">لإعادة تعيين كلمة المرور, الرجاء الضغط على الرابط بالأسفل</p></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">'
             text += '<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]-->'
             text += '<!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]-->'
             text += '<div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!--><div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;"><!--<![endif]--><table id="u_content_button_4" style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:Open Sans,sans-serif;" align="left"><div align="center"><!--[if mso]><table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-spacing: 0; border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;font-family:Open Sans,sans-serif;"><tr><td style="font-family:Open Sans,sans-serif;" align="center"><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="" style="height:38px; v-text-anchor:middle; width:274px;" arcsize="92%" stroke="f" fillcolor="#1b36ab"><w:anchorlock/><center style="color:#FFFFFF;font-family:Open Sans,sans-serif;"><![endif]-->'
-            text += '<a href="' + link + '" target="_blank" style="box-sizing: border-box;display: inline-block;font-family:Open Sans,sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #1b36ab; border-radius: 35px; -webkit-border-radius: 35px; -moz-border-radius: 35px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;"><span class="v-padding" style="display:block;padding:12px 40px 10px;line-height:120%;"><span style="font-size: 14px; line-height: 16.8px;"><strong><span style="line-height: 16.8px; font-size: 14px;"> Reset &nbsp;&nbsp; password </span></strong></span></span></a><!--[if mso]></center></v:roundrect></td></tr></table><![endif]--></div></td></tr></tbody></table>'
+            text += '<a href="' + link + '" target="_blank" style="box-sizing: border-box;display: inline-block;font-family:Open Sans,sans-serif;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #33BEFF; border-radius: 35px; -webkit-border-radius: 35px; -moz-border-radius: 35px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;"><span class="v-padding" style="display:block;padding:12px 40px 10px;line-height:120%;"><span style="font-size: 14px; line-height: 16.8px;"><strong><span style="line-height: 16.8px; font-size: 14px;"> تغيير كلمة المرور</span></strong></span></span></a><!--[if mso]></center></v:roundrect></td></tr></table><![endif]--></div></td></tr></tbody></table>'
             text += '<!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><div class="u-row-container" style="padding: 0px;background-color: transparent"><div class="u-row" style="Margin: 0 auto;min-width: 320px;max-width: 600px;overflow-wrap: break-word;word-wrap: break-word;word-break: break-word;background-color: #ffffff;"><div style="border-collapse: collapse;display: table;width: 100%;background-color: transparent;">'
             text += '<!--[if (mso)|(IE)]><table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td style="padding: 0px;background-color: transparent;" align="center"><table cellpadding="0" cellspacing="0" border="0" style="width:600px;"><tr style="background-color: #ffffff;"><![endif]--><!--[if (mso)|(IE)]><td align="center" width="600" style="width: 600px;padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;" valign="top"><![endif]--><div class="u-col u-col-100" style="max-width: 320px;min-width: 600px;display: table-cell;vertical-align: top;"><div style="width: 100% !important;"><!--[if (!mso)&(!IE)]><!-->'
             text += '<div style="padding: 0px;border-top: 0px solid transparent;border-left: 0px solid transparent;border-right: 0px solid transparent;border-bottom: 0px solid transparent;">'
             text += '<!--<![endif]--><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0"><tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:15px 10px 9px;font-family:Open Sans,sans-serif;" align="left">'
-            text += '<table height="0px" align="center" border="0" cellpadding="0" cellspacing="0" width="72%" style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;border-top: 1px solid #413d45;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%"><tbody><tr style="vertical-align: top">'
+            text += '<table height="0px" align="center" border="0" cellpadding="0" cellspacing="0" width="72%" style="border-collapse: collapse;table-layout: fixed;border-spacing: 0;mso-table-lspace: 0pt;mso-table-rspace: 0pt;vertical-align: top;border-top: 1px solid #DFF2F5;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%"><tbody><tr style="vertical-align: top">'
             text += '<td style="word-break: break-word;border-collapse: collapse !important;vertical-align: top;font-size: 0px;line-height: 0px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%">'
             text += '<span>&#160;</span></td></tr></tbody></table></td></tr></tbody></table><table style="font-family:Open Sans,sans-serif;" role="presentation" cellpadding="0" cellspacing="0" width="100%" border="0">'
             text += '<tbody><tr><td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:Open Sans,sans-serif;" align="left"><div style="color: #7e7e81; line-height: 150%; text-align: center; word-wrap: break-word;"><p style="font-size: 14px; line-height: 150%;">'
-            text += '<span style="font-size: 12px; line-height: 18px;">You have received this email as a registered user of Booctep.com</span><span style="font-size: 12px; line-height: 18px;"></span>'
+            text += '<span style="font-size: 12px; line-height: 18px;">هذه الرسالة تلقائية من فريق دعم منصة بوستيب, نتمنى لك يوما سعيد</span><span style="font-size: 12px; line-height: 18px;"></span>'
             text += '</p></div></td></tr></tbody></table><!--[if (!mso)&(!IE)]><!--></div><!--<![endif]--></div></div><!--[if (mso)|(IE)]></td><![endif]--><!--[if (mso)|(IE)]></tr></table></td></tr></table><![endif]--></div></div></div><!--[if (mso)|(IE)]></td></tr></table><![endif]--></td></tr></tbody></table><!--[if mso]></div><![endif]--><!--[if IE]></div><![endif]--></body></html>'
 
             to = email
-            subject = 'Thanks :)'
+            subject = 'Reset password request'
 
             msg = EmailMultiAlternatives(subject, '...', 'support@booctep.com', [to])
             msg.attach_alternative(text, "text/html")
@@ -4100,7 +4020,7 @@ def enrollment(request, course_id):
 
     similar_course = sorted(similar_course, key=attrgetter('rating'), reverse=True)[:5]
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     
@@ -4143,7 +4063,7 @@ def enrollment(request, course_id):
                   {'course': course, 'similar_courses': similar_course, 'favList': favListShow,'lang': getLanguage(request)[0],
                    'alreadyinFav': alreadyinFavView, 'cartList': cartListShow, 'stu_courses': stu_courses,
                    'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt, 'msg_list': msg_list,
-                   'msg_cnt': msg_cnt,
+                   'msg_cnt': msg_cnt, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                    'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt})
 
 @csrf_exempt
@@ -4207,7 +4127,7 @@ def enrollments(request, course_ids):
 
     similar_course = sorted(similar_course, key=attrgetter('rating'), reverse=True)[:5]
 
-    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt = findheader(
+    favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
 
@@ -4215,7 +4135,7 @@ def enrollments(request, course_ids):
                   {'courses': courses, 'similar_courses': similar_course, 'favList': favListShow,'lang': getLanguage(request)[0],
                    'alreadyinFav': alreadyinFavView, 'cartList': cartListShow, 'stu_courses': stu_courses,
                    'alreadyinCart': alreadyinCartView, 'favCnt': favCnt, 'cartCnt': cartCnt, 'msg_list': msg_list,
-                   'msg_cnt': msg_cnt,
+                   'msg_cnt': msg_cnt, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt,
                    'cartTotalSum': cartTotalSum, 'noti_cnt': noti_cnt})
 
 @csrf_exempt
@@ -4235,6 +4155,7 @@ def saveCardInfo(request):
     card_name = request.POST.get('card_name')
     card_number = request.POST.get('card_number')
     bank_number = request.POST.get('bank_number')
+    passport_number = request.POST.get('passport_number')
     status = 1
     try:
         if id == None or id == '':
@@ -4242,7 +4163,8 @@ def saveCardInfo(request):
                 user_id=user_id,
                 card_name=card_name,
                 card_number=card_number,
-                bank_number=bank_number
+                bank_number=bank_number,
+                passport_number=passport_number
             )
             ele.save()
         else:
@@ -4250,6 +4172,7 @@ def saveCardInfo(request):
             ele.card_name = card_name
             ele.card_number = card_number
             ele.bank_number = bank_number
+            ele.passport_number = passport_number
             ele.save()
     except:
         status = 0
@@ -4327,6 +4250,33 @@ def checkPayoutStatus(request):
     ret = {
         'status': status
     }
+    return JsonResponse(ret)
+
+@csrf_exempt
+def discount_banner(request):
+    discount = Discount.objects.all()
+    now = datetime.now().strftime('%Y-%m-%d')
+
+    discount_description = ""
+    discount_percent = ""
+    if discount.count() == 0:
+        status = 0
+    else:
+        if now > discount[0].expire_date:
+            status = 0
+        else:
+            status = 1
+            discount_description = discount[0].description
+            discount_percent = discount[0].discount
+            discount_expire = discount[0].expire_date
+    
+    ret = {
+        'status': status,
+        'description': discount_description,
+        'discount': discount_percent,
+        'expire_date': discount_expire
+    }
+
     return JsonResponse(ret)
 
 #

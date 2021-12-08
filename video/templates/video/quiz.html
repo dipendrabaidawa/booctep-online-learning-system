@@ -6,6 +6,21 @@
 
 <style>
 
+.Quiz img{
+  margin-left: 130px;
+  margin-bottom: 10px;
+  border: 0 !important;
+  border-radius: 50%;
+}
+
+    .btn-accentt{
+        background-color: red !important;
+        color: #fff !important;
+    }
+    .btn-accentt-dark{
+        background-color: rgb(221, 171, 171) !important;
+        color: rgb(71, 12, 12) !important;
+    }
     .teacher {
         float: right !important;
     }
@@ -280,7 +295,12 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                                             </div>
                                         </div>
                                     </nav>
+                                    {% get_current_language as lang %}
+                                    {% if lang == "ar" %}
+                                    <p class="troph" style="font-size: 18px;">الحصول على شهادتي <i class="fa fa-trophy troph-i"></i></p>
+                                    {% else %}
                                     <p class="troph">Get your certificate <i class="fa fa-trophy troph-i"></i></p>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
@@ -292,9 +312,28 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                     </div>
                 </div>
 
+                {% get_current_language as lang %}
+                {% if lang == "ar" %}
                 <div class="Quiz ">
                     <div class="mb-24pt mb-sm-0 mr-sm-24pt">
-                        <img src="{% static 'assets/img/favicon.png' %}" alt="">
+                        <img src="{% static 'assets/img/favicon.png' %}" class="mobile_logo" alt="">
+                        <h2 class="mb-0 mediabout mediabout-dark">{{ course.name }} اختبار دورة </h2>
+                        <form id="quizForm" action="/video/quiz2/" method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="course_id" value="{{ course.id }}">
+                        </form>
+                        <a class="btn btn-accentt btn-accentt-dark flex" style="color: rgb(238, 224, 224)" onclick="startQuiz()">ابــدأ الاختبار</a>
+                    </div>
+                </div>
+                <div class=" page__container page__container card-footer card-footer-dark "style="height:150px;position:absolute;bottom:0;right:0;border-radius: 0 !important;width:100% !important ;text-align: right !important;">
+                    <form action="#" id="message-reply" class="form-down">
+                        <b style="font-size: 19px;" class="mediabout mediabout-dark">لا تقلق هناك حقل تخطي الاجابة في حال لم تستطع الإجابة وكما تستطيع أن تقوم بمراسلة معلمك للحصول على المساعدة, نثق بأنك تستطيع أن تفعلها وحدك</b>
+                    </form>
+                </div>
+                {% else %}
+                <div class="Quiz ">
+                    <div class="mb-24pt mb-sm-0 mr-sm-24pt">
+                        <img src="{% static 'assets/img/favicon.png' %}" class="mobile_logo" alt="">
                         <h2 class="mb-0">{{ course.name }} Quize</h2>
                         <form id="quizForm" action="/video/quiz2/" method="post">
                             {% csrf_token %}
@@ -308,14 +347,48 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
                         <p>To get the certificate you have to finish this quick quiz don't worry it's easy and you can skip any hard questions also you can ask your teacher if you want or complete your quiz later.</p>
                     </form>
                 </div>
+                {% endif %}
             </div>
         </div>
+        <style>
+            .mdk-drawer::-webkit-scrollbar {
+    display: none !important;
+}
+        </style>
 
-        <div class="mdk-drawer js-mdk-drawer" data-align="end" id="messages-drawer">
-            <div class="mdk-drawer__content top-0">
-                <div class="sidebar sidebar-right sidebar-dark o-hidden">
-                    <div class="d-flex flex-column h-100">
+        <div class="mdk-drawer js-mdk-drawer" data-align="end" id="messages-drawer"scroll="no" style="overflow: hidden">
+            <div class="mdk-drawer__content top-0" >
+                <div class="sidebar sidebar-right sidebar-dark o-hidden " >
+                    <div class="d-flex flex-column h-100" style="">
 
+                        {% get_current_language as lang %}
+                        {% if lang == "ar" %}
+                        <div style="margin-top: 10px;" class="flex" data-perfect-scrollbar>
+                            <div class="sidebar-heading" style="text-align: right !important;">قياس الاختبار </div>
+
+                            <ul class="list-group list-group-flush mb-3">
+
+                                <div class="chart chart-2" style="height: 262px;">
+                                    <div class="text-center fullbleed d-flex align-items-center justify-content-center flex-column z-0">
+                                        <h2 class="m-0 mediabout mediabout-dark">0 / {{ question_count }}</h2>
+                                        <strong>{{ question_count }} متبقي من الاسئلة</strong>
+                                    </div>
+                                    <canvas class="chart-canvas position-relative z-1" id="attendanceDoughnutChart" data-chart-legend="#attendanceDoughnutChartLegend" data-chart-line-background-color="primary;accent;gray.700;gray">
+                                        <span style="font-size: 1rem;" class="text-muted"><strong>Attendance</strong> doughnut chart goes here.</span>
+                                    </canvas>
+                                </div>
+
+                                <div class="col-6">
+                                    <div class="nav border-0">
+                                    </div>
+                                    <div id="attendanceDoughnutChartLegend" class="chart-legend chart-legend--vertical mt-24pt"></div>
+                                </div>
+
+                                <button type="submit" class="btn btn-accent flex" style="width: 90%;margin:0 auto;margin-top: 30px;cursor:not-allowed;" disabled>التكملة لاحقا</button>
+
+                            </ul>
+                        </div>
+                        {% else %}
                         <div style="margin-top: 10px;" class="flex" data-perfect-scrollbar>
                             <div class="sidebar-heading">Quiz Timeline</div>
 
@@ -341,6 +414,7 @@ class="mdk-drawer-layout js-mdk-drawer-layout">
 
                             </ul>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

@@ -14,6 +14,11 @@
     <meta name="twitter:image" content="/static{{ course.header_img }}">
     <meta name="twitter:card" content="summary_large_image">
     <style>
+
+        .comments-wrap-dark{
+            background-color: #222831 !important;
+            border: 1px solid #161a20 !important;
+        }
         @media only screen(max-width: 1216px and min-width:  1200px) {
             .store-sections {
                 margin-left: 15px !important;
@@ -900,6 +905,12 @@
 
 
 
+                                                    <style>
+                                                        .coolumn{
+                                                            display: flex;
+                                                            flex-direction: column !important;
+                                                        }
+                                                    </style>
 
     <section class="hero is-small is-bold hero-single-course hero-single-course-dark" style="">
         <input type="hidden" id="pageId" value="{{ id }}"/>
@@ -1013,6 +1024,11 @@
             </div>
         </div>
 
+        <style>
+            .coolumn{
+                
+            }
+        </style>
         <div class="store-sections" style="margin-right: 20px; margin-left: 20px;">
             <div class="container">
                 <div id="products-tab" class="store-tab-pane is-active">
@@ -1156,6 +1172,7 @@
                                                                     <p class="mediabout mediabout-dark"> Comments Not Found </p>
                                                                     {% endif %}
                                                                 {% endif %}
+                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -1470,80 +1487,50 @@
                                         <div class="column is-4">
                                             <div class="cart-summary">
                                                 <!--card-->
-                                                <div class="summary-card summary-card-dark">
-                                                    <div class="order-line"
-                                                         style="">
+                                                <div class="summary-card summary-card-dark ">
+                                                    <div class="order- ">
+                                                         {% get_current_language as lang %}
+                                                         {% if lang == "ar" %}
+                                                        <b class="is-total mediabout mediabout-dark" style="font-size: medium;
+                                                        ">هذه الدورة تحتوي</b>
+                                                     
+                                                       <div class="order-line mb-3" style="margin-bottom: 10px;margin-top: 10px;">
+                                                           <span class="is-total mediabout mediabout-dark" style="font-size: small;">
+                                                            <span class="fa fa-hand-point-left"></span>&nbsp;
+                                                                       وصول لا محدود للمحتوى <br>
+                                                            <span class="fa fa-hand-point-left"></span>&nbsp;
+                                                                       الحصول على كل محتوى الدورة <br>
+                                                            <span class="fa fa-hand-point-left"></span>&nbsp;
+                                                                       تواصل مباشر مع المعلم<br>
+                                                            <span class="fa fa-hand-point-left"></span>&nbsp;
+                                                                       أختبر نفسك <br>
+                                                            <span class="fa fa-hand-point-left"></span>&nbsp;
+                                                                       أحصل على شهادة الاتمام
+                                                           </span>
+                                                       </div>
+                                                   
+                                                        {% else %}
+                                                        <b class="is-total mediabout mediabout-dark" style="font-size: medium;
+                                                        ">This course includes</b>
+                                                        
+                                                           <div class="order-line" style="margin-bottom: 10px;margin-top: 10px;">
+                                                               <span class="is-total mediabout mediabout-dark" style="font-size: small;">
+                                                                <span class="fa fa-hand-point-right"></span>&nbsp;
+                                                                           Lifetime access <br>
+                                                                <span class="fa fa-hand-point-right"></span>&nbsp;
+                                                                           Full course content <br>
+                                                                <span class="fa fa-hand-point-right"></span>&nbsp;
+                                                                           Direct communicate with your teacher<br>
+                                                                <span class="fa fa-hand-point-right"></span>&nbsp;
+                                                                           Take a certificate  quiz<br>
+                                                                <span class="fa fa-hand-point-right"></span>&nbsp;
+                                                                           Get a certificate
+                                                               </span>
+                                                           </div>
+                                                        
+                                                        {% endif %}
 
-                                                    <!-- Free -->     
-                                                    {% if course.price == 0 %}
-                                                    {% get_current_language as lang %}
-                                                    {% if lang == "ar" %}
-                                                   <span class="is-total mediabout mediabout-dark" style="font-size: medium;">هذه الدورة تحتوي</span>
-                                               </div>
-                                               <div class="order-line">
-                                                   <span class="is-total mediabout mediabout-dark" style="font-size: small;">
-                                                    <span class="fa fa-hand-point-left"></span>&nbsp;
-                                                               وصول لا محدود للمحتوى <br>
-                                                    <span class="fa fa-hand-point-left"></span>&nbsp;
-                                                               الحصول على كل محتوى الدورة 
-                                                   </span>
-                                               </div>
-                                               {% else %}
-                                               <span class="is-total mediabout mediabout-dark" style="font-size: medium;">This course includes</span>
-                                           </div>
-                                               <div class="order-line">
-                                                   <span class="is-total mediabout mediabout-dark" style="font-size: small;">
-                                                    <span class="fa fa-hand-point-right"></span>&nbsp;
-                                                               Lifetime access <br>
-                                                    <span class="fa fa-hand-point-right"></span>&nbsp;
-                                                               Full course content 
-                                                   </span>
-                                               </div>
-                                               {% endif %}
-
-                                                    {% else %}
-                                                    <!-- Free -->   
-                                                    
-                                                    <!-- Paid -->     
-                                                    {% get_current_language as lang %}
-                                                    {% if lang == "ar" %}
-                                                   <span class="is-total mediabout mediabout-dark" style="font-size: medium;">هذه الدورة تحتوي</span>
-                                               </div>
-                                               <div class="order-line">
-                                                   <span class="is-total mediabout mediabout-dark" style="font-size: small;">
-                                                    <span class="fa fa-hand-point-left"></span>&nbsp;
-                                                               وصول لا محدود للمحتوى <br>
-                                                    <span class="fa fa-hand-point-left"></span>&nbsp;
-                                                               الحصول على كل محتوى الدورة <br>
-                                                    <span class="fa fa-hand-point-left"></span>&nbsp;
-                                                               تواصل مباشر مع المعلم<br>
-                                                    <span class="fa fa-hand-point-left"></span>&nbsp;
-                                                               أختبر نفسك <br>
-                                                    <span class="fa fa-hand-point-left"></span>&nbsp;
-                                                               أحصل على شهادة الاتمام
-                                                   </span>
-                                               </div>
-                                               {% else %}
-                                               <span class="is-total mediabout mediabout-dark" style="font-size: medium;">This course includes</span>
-                                           </div>
-                                               <div class="order-line">
-                                                   <span class="is-total mediabout mediabout-dark" style="font-size: small;">
-                                                    <span class="fa fa-hand-point-right"></span>&nbsp;
-                                                               Lifetime access <br>
-                                                    <span class="fa fa-hand-point-right"></span>&nbsp;
-                                                               Full course content <br>
-                                                    <span class="fa fa-hand-point-right"></span>&nbsp;
-                                                               Direct communicate with your teacher<br>
-                                                    <span class="fa fa-hand-point-right"></span>&nbsp;
-                                                               Take a certificate  quiz<br>
-                                                    <span class="fa fa-hand-point-right"></span>&nbsp;
-                                                               Get a certificate
-                                                   </span>
-                                               </div>
-                                               {% endif %}
-                                               {% endif %}
-                                                    <!-- Paid -->   
-
+                                                    </div>
 
                                                     {% if is_me == 0 %}
                                                         {% if course.price > 0 %}
@@ -1554,10 +1541,6 @@
                                                                 <span class="is-total subtotalprice prcg prcg-dark"
                                                                       style="">{{ course.price|unlocalize }}</span>
                                                             </div>
-                                                            <div class="order-line discountamountparent">
-                                                                <span class=" mediabout mediabout-dark">الخصم</span>
-                                                                <span class="discountamount prcg prcg-dark">{{ course.discount|unlocalize }}</span>
-                                                            </div>
                                                             <div class="order-line">
                                                                 <span class=" mediabout mediabout-dark">تملك قسيمة شرائية؟</span>
                                                             </div>
@@ -1566,10 +1549,6 @@
                                                                 <span class="is-total  mediabout mediabout-dark">Total</span>
                                                                 <span class="is-total subtotalprice prcg prcg-dark"
                                                                       style="">{{ course.price|unlocalize }}</span>
-                                                            </div>
-                                                            <div class="order-line discountamountparent">
-                                                                <span class=" mediabout mediabout-dark">Discount</span>
-                                                                <span class="discountamount prcg prcg-dark">{{ course.discount|unlocalize }}</span>
                                                             </div>
                                                             <div class="order-line">
                                                                 <span class=" mediabout mediabout-dark">Promo code?</span>
@@ -1634,7 +1613,7 @@
                                                                                    style="width: 100%; margin-right: 0px !important"/>
                                                                         </div>
                                                                         <div class="control" style="width: 50%;">
-                                                                            <button class="button is-solid primary-button raised applypromobutton"  
+                                                                            <button class="button is-solid primary-button raised applypromobutton"
                                                                                     style=" margin-left: 0px !important">
                                                                                 تطبيق الخصم
                                                                             </button>
@@ -1644,6 +1623,7 @@
                                                                             </button>
                                                                         </div>
                                                                     </div>
+
                                                                 </div>
                                                                 {% else %}
                                                                 <div class="header-coupon" style="width: 100%;">
@@ -1675,14 +1655,22 @@
                                                             <span class="promoerror prcg prcg-dark" style=""></span>
                                                             {% get_current_language as lang %}
                                                             {% if lang == "ar" %}
+                                                            <div class="order-line discountamountparent">
+                                                                <span class=" mediabout mediabout-dark">الخصم</span>
+                                                                <span class="discountamount prcg prcg-dark">0.0</span>
+                                                            </div>
 
                                                             <div class="order-line">
                                                                 <span class="is-total mediabout mediabout-dark">السعر بعد الخصم</span>
                                                                 <span class="is-total totalsum prcgr prcgr-dark" id="totalsumid"
-                                                                      style="">{{ course.discount_price|unlocalize|unlocalize }}
-                                                                </span>
+                                                                      style="">{{ course.discount_price|unlocalize }}</span>
                                                             </div>
                                                             {% else %}
+                                                            <div class="order-line discountamountparent">
+                                                                <span class=" mediabout mediabout-dark">Discount</span>
+                                                                <span class="discountamount prcg prcg-dark">0.0</span>
+                                                            </div>
+
                                                             <div class="order-line">
                                                                 <span class="is-total mediabout mediabout-dark">Total after discount</span>
                                                                 <span class="is-total totalsum prcgr prcgr-dark" id="totalsumid"
@@ -1696,13 +1684,13 @@
                                                                 <a onclick="addToCartList()" id="add_cart"
                                                                    class="button pop-button has-tooltip is-fullwidth second-button is-raised prcg prcg-dark"
                                                                    style="margin-bottom: 10px; "><p
-                                                                        style="">أضف للسلة <i
+                                                                        style="" class="mediabout mediabout-dark">أضف للسلة <i
                                                                         class="fa fa-shopping-cart"></i></p></a>
                                                               {% else %}
                                                               <a onclick="addToCartList()" id="add_cart"
                                                                  class="button pop-button has-tooltip is-fullwidth second-button is-raised prcg prcg-dark"
                                                                  style="margin-bottom: 10px; "><p
-                                                                      style="">Add to cart <i
+                                                                      style="" class="mediabout mediabout-dark">Add to cart <i
                                                                       class="fa fa-shopping-cart"></i></p></a>
                                                               {% endif %}
                                                             {% else %}
@@ -1710,13 +1698,13 @@
                                                               {% if lang == "ar" %}
                                                                 <a onclick="addToCartList()" id="add_cart"
                                                                    class="button pop-button has-tooltip is-fullwidth second-button is-raised"
-                                                                   style="margin-bottom: 10px;"><p style="color: grey;">
+                                                                   style="margin-bottom: 10px;"><p  class="mediabout mediabout-dark">
                                                                     إزالة من المفضلة <i class="fa fa-shopping-cart"></i>
                                                                 </p></a>
                                                                {% else %}
                                                                <a onclick="addToCartList()" id="add_cart"
                                                                   class="button pop-button has-tooltip is-fullwidth second-button is-raised"
-                                                                  style="margin-bottom: 10px;"><p style="color: grey;">
+                                                                  style="margin-bottom: 10px;"><p  class="mediabout mediabout-dark">
                                                                    Remove from cart <i class="fa fa-shopping-cart"></i>
                                                                </p></a>
                                                                {% endif %}
@@ -1741,7 +1729,7 @@
                                                             <a onclick="addFav()" id="follow-pop"
                                                                class="button pop-button has-tooltip is-fullwidth second-button is-raised"
                                                                style="margin-bottom: 10px;">
-                                                                <p style="color: rgb(82, 82, 82);">أَضف للمفضلة
+                                                                <p style="color: rgb(180, 180, 180);">أَضف للمفضلة
                                                                     <i class="fa fa-heart"></i></p></a>
                                                             <a href="javascript:doEnroll({{course.id}})"
                                                                class="button is-fullwidth buy-button is-raised"><p
@@ -1750,7 +1738,7 @@
                                                           <a onclick="addFav()" id="follow-pop"
                                                              class="button pop-button has-tooltip is-fullwidth second-button is-raised"
                                                              style="margin-bottom: 10px;">
-                                                              <p style="color: rgb(82, 82, 82);">Add to Fav
+                                                              <p style="color: rgb(131, 131, 131);">Add to Fav
                                                                   <i class="fa fa-heart"></i></p></a>
                                                           <a href="javascript:doEnroll({{course.id}})"
                                                              class="button is-fullwidth buy-button is-raised"><p
@@ -1764,24 +1752,18 @@
                                                     <div class="teacher-card">
                                                         
                                                         {% if user.profile.image %}
-                                                        <img src="/static{{ user.image }}" alt="" class="brd brd-dark" style="margin-top: 0px;">
+                                                        <div class="avatar brd brd-dark">
+                                                            <img id="user-avatar" style=" " class="avatar-image hero-single-course hero-single-course-dark" src="/static{{ user.image }}" style=""
+                                                             data-demo-src="">
                                                         {% else %}
-                                                        <img  class="brd brd-dark" style="margin-top: 0px;"src="{% static 'assets/img/userdefault.png' %}"
+                                                        <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style=""
                                                              data-demo-src="">
                                                         {% endif %}
+
                                                         <div class="teacher-card-info">
-                                                            <div class="hideonphone">
-                                                            <a href="/{{ lang }}/profile/{{ user_info.id }}/{{ user_info.url_name }}" >
-                                                            <h3 class="mediabout mediabout-dark">
-                                                                {{ user_info.first_name }}{{ user_info.last_name }}
+                                                            <h3 class=""><a href="/{{ lang }}/profile/{{ user_info.id }}/{{ user_info.url_name }}" class="mediabout mediabout-dark">
+                                                                {{ user_info.first_name }}{{ user_info.last_name }}</a>
                                                             </h3>
-                                                            </a>
-                                                            </div>
-                                                            <div class="hideondesktop">
-                                                            <h3 class="mediabout mediabout-dark">
-                                                                {{ user_info.first_name }}{{ user_info.last_name }}
-                                                            </h3>
-                                                            </div>
                                                         </div>
                                                     </div>
 
@@ -1824,7 +1806,7 @@
                                                         <div class="colmn">
                                                             <label class="mediabout mediabout-dark">Rating</label>
                                                             <div class="num mediabout mediabout-dark">
-                                                                {{ course.rating|unlocalize }} <i class="fa fa-star"
+                                                                {{ course.rating }} <i class="fa fa-star"
                                                                                        style="color: rgb(243, 191, 95);"></i>
                                                             </div>
                                                         </div>
@@ -1997,22 +1979,51 @@
                                         <div class="column is-4">
                                             <div class="cart-summary">
                                                 <!--card-->
-                                                <div class="summary-card summary-card-dark">
-                                                    <div class="order-line"
-                                                         style="">
+                                                <div class="summary-card summary-card-dark ">
+                                                    <div class="order- ">
                                                          {% get_current_language as lang %}
                                                          {% if lang == "ar" %}
-                                                        <span class="is-total mediabout mediabout-dark" style="font-size: medium;">هذه الدورة تحتوي</span>
+                                                        <b class="is-total mediabout mediabout-dark" style="font-size: medium;
+                                                        ">هذه الدورة تحتوي</b>
+                                                     
+                                                       <div class="order-line mb-3" style="margin-bottom: 10px;margin-top: 10px;">
+                                                           <span class="is-total mediabout mediabout-dark" style="font-size: small;">
+                                                            <span class="fa fa-hand-point-left"></span>&nbsp;
+                                                                       وصول لا محدود للمحتوى <br>
+                                                            <span class="fa fa-hand-point-left"></span>&nbsp;
+                                                                       الحصول على كل محتوى الدورة <br>
+                                                            <span class="fa fa-hand-point-left"></span>&nbsp;
+                                                                       تواصل مباشر مع المعلم<br>
+                                                            <span class="fa fa-hand-point-left"></span>&nbsp;
+                                                                       أختبر نفسك <br>
+                                                            <span class="fa fa-hand-point-left"></span>&nbsp;
+                                                                       أحصل على شهادة الاتمام
+                                                           </span>
+                                                       </div>
+                                                   
                                                         {% else %}
-                                                        <span class="is-total mediabout mediabout-dark" style="font-size: medium;">This course includes</span>
+                                                        <b class="is-total mediabout mediabout-dark" style="font-size: medium;
+                                                        ">This course includes</b>
+                                                        
+                                                           <div class="order-line" style="margin-bottom: 10px;margin-top: 10px;">
+                                                               <span class="is-total mediabout mediabout-dark" style="font-size: small;">
+                                                                <span class="fa fa-hand-point-right"></span>&nbsp;
+                                                                           Lifetime access <br>
+                                                                <span class="fa fa-hand-point-right"></span>&nbsp;
+                                                                           Full course content <br>
+                                                                <span class="fa fa-hand-point-right"></span>&nbsp;
+                                                                           Direct communicate with your teacher<br>
+                                                                <span class="fa fa-hand-point-right"></span>&nbsp;
+                                                                           Take a certificate  quiz<br>
+                                                                <span class="fa fa-hand-point-right"></span>&nbsp;
+                                                                           Get a certificate
+                                                               </span>
+                                                           </div>
+                                                        
                                                         {% endif %}
+
                                                     </div>
-                                                    {% for include in includeList %}
-                                                        <div class="order-line">
-                                                            <span class="is-total mediabout mediabout-dark" style="font-size: x-small;"><span
-                                                                    class="fa fa-smile"></span>&nbsp;{{ include.name }}</span>
-                                                        </div>
-                                                    {% endfor %}
+
                                                     {% if is_me == 0 %}
                                                         {% if course.price > 0 %}
                                                             {% get_current_language as lang %}
@@ -2165,13 +2176,13 @@
                                                                 <a onclick="addToCartList()" id="add_cart"
                                                                    class="button pop-button has-tooltip is-fullwidth second-button is-raised prcg prcg-dark"
                                                                    style="margin-bottom: 10px; "><p
-                                                                        style="">أضف للسلة <i
+                                                                        style="" class="mediabout mediabout-dark">أضف للسلة <i
                                                                         class="fa fa-shopping-cart"></i></p></a>
                                                               {% else %}
                                                               <a onclick="addToCartList()" id="add_cart"
                                                                  class="button pop-button has-tooltip is-fullwidth second-button is-raised prcg prcg-dark"
                                                                  style="margin-bottom: 10px; "><p
-                                                                      style="">Add to cart <i
+                                                                      style="" class="mediabout mediabout-dark">Add to cart <i
                                                                       class="fa fa-shopping-cart"></i></p></a>
                                                               {% endif %}
                                                             {% else %}
@@ -2537,6 +2548,7 @@
                             var totalsum = parseFloat($("#totalsumid").text());
                             price_off_percentage = res
                             price_off = (totalsum * price_off_percentage) / 100;
+                            price_off = Math.round((price_off + Number.EPSILON) * 100) / 100
                             $(".discountamount").empty();
                             $(".discountamount").append(price_off);
                             $("#promoinput").prop('disabled', true);
@@ -2544,7 +2556,8 @@
                             $(".applypromobutton").prop("disabled", true);
                             $(".cancelpromobutton").prop("disabled", false);
                             $(".cancelpromobutton").css("display", "block");
-                            var totalsum = parseInt($("#totalsumid").text());
+                            var totalsum = parseFloat($("#totalsumid").text());
+                            console.log(totalsum)
                             $(".totalsum").empty();
                             $(".totalsum").append((totalsum - price_off));
                         }

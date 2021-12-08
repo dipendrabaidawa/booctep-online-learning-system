@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from teacher.models import categories, Courses, VideoUploads, Sections, questions, TestVideo, student_mark, answers, \
-    subcategories
-from home.models import User, user_profile, notifications, Admincontrol, Messages, Card
+    subcategories, transactions
+from home.models import User, user_profile, notifications, Admincontrol, Messages, Card, Discount
 from student.models import student_register_courses, course_comments
 from discount.models import *
 from datetime import datetime
@@ -166,6 +166,9 @@ def dashboard(request):
     total_hold_money = 0
     total_transfer_money = 0
 
+    # get discount information
+    admin_discount = Discount.objects.all()
+    now = datetime.now().strftime('%Y-%m-%d')
     nowtime = datetime.now()
 
     total_students = 0
@@ -173,6 +176,7 @@ def dashboard(request):
 
     for course in course_list:
         price = 0
+        # getting the number of student registered with course
         stu_num = student_register_courses.objects.filter(course_id_id=course.id).count()
         total_students += stu_num
         price = course.price * stu_num
@@ -193,7 +197,7 @@ def dashboard(request):
             if interval >= 45:
                 ele.withdraw = 1
                 ele.save()
-                hold_money += ele.course_id.price
+                # hold_money += ele.course_id.price
         hold_list = student_register_courses.objects.filter(course_id_id=course.id).filter(withdraw=1)
         for ele in hold_list:
             hold_money += ele.course_id.price
@@ -207,8 +211,39 @@ def dashboard(request):
         course.ready_money = ready_money
         course.transfer_money = transfer_money
         course.refund_money = 0
+        course.count = stu_num
         total_hold_money += hold_money
         total_transfer_money += transfer_money
+
+        # counting discount
+        if admin_discount.count() == 0:
+            discount_percent = 0
+        else:
+            if now > admin_discount[0].expire_date:
+                discount_percent = 0
+            else:
+                not_str = admin_discount[0].not_apply_course
+                not_list = not_str.split(',')
+                if str(course.id) in not_list:
+                    discount_percent = 0
+                else:
+                    discount_percent = admin_discount[0].discount / 100
+
+        discount_amount = course.price * discount_percent
+        discount_price = course.price - discount_amount
+
+        # counting discount by promocode
+        promo_discount = discount.objects.filter(course_id=course.id)
+        if promo_discount.count() == 0:
+            promo_percent = 0
+        else:
+            if not promo_discount[0].promo_code or now > promo_discount[0].expire:
+                promo_percent = 0
+            else:
+                promo_percent = promo_discount[0].discount_percent / 100
+
+        promo_discount_amount = discount_price * promo_percent
+        course.total_discount_amount = round(discount_amount + promo_discount_amount, 2)
 
     teacher_tax = Admincontrol.objects.get(pk=1).teacher_tax
 
@@ -339,8 +374,6 @@ def course_engagement(request):
             coupon = discount.objects.filter(course_id=cur_course_id)[0]
         else:
             coupon = ''
-    
-         
 
     else:
         course = ''
@@ -352,8 +385,16 @@ def course_engagement(request):
                    'cur_course_id': cur_course_id, 'page': page, 'coupon': coupon, 'review_type': review_type})
 
 
-def transactions(request):
-    return render(request, 'teacher/transactions.html', {'lang': getLanguage(request)[0]})
+def transaction(request):
+    user_id = request.session.get('user_id')
+    if user_id == None:
+        return redirect('/')
+
+    trans = transactions.objects.filter(teacher_id=user_id)
+    for tran in trans:
+        tran.description = tran.payment_method + " payment from booctep.com To " + User.objects.get(pk=user_id).email
+    print(trans[0].description)
+    return render(request, 'teacher/transactions.html', {'lang': getLanguage(request)[0], 'transactions': trans})
 
 
 def payout(request):
@@ -418,6 +459,13 @@ def teacher_messages(request):
             course = Courses.objects.get(pk=i['course_id'])
             userList = Messages.objects.filter(receiver_id=user_id, course_id=i['course_id']).filter(
                 delete_id=0).values('sender_id').distinct()
+
+            # if user is student&teacher, then shows only students in teacher message screen
+            if user_type == 'stuteach':
+                student_ids = User.objects.filter(group_id=2).values('id')
+                userList = Messages.objects.filter(receiver_id=user_id, course_id=i['course_id'], sender_id__in=student_ids).filter(
+                delete_id=0).values('sender_id').distinct()
+
             for ele in userList:
                 unread = Messages.objects.filter(receiver_id=user_id, sender_id=ele['sender_id'],
                                                  course_id=i['course_id'], is_read=0)
@@ -433,19 +481,7 @@ def teacher_messages(request):
                     student_dict['unread'] = 1
                 student_list.append(student_dict)
                 student_dict = {}
-
-        # for i in obj:
-        # 	if student_register_courses.objects.filter(course_id = i.id).exists():
-        # 		student_obj = student_register_courses.objects.filter(course_id = i.id)
-        # 		for k in student_obj:
-        # 			student_dict["course_name"] = i.name
-        # 			student_dict["course_id"] = i.id
-        # 			student_dict["student_id"] = k.student_id.id
-        # 			student_dict["student_name"] = k.student_id.first_name+" "+k.student_id.last_name
-        # 			student_dict["student_image"] = k.student_id.image
-        # 			student_list.append(student_dict)
-        # 			student_dict = {}
-        print("student list:::", student_list)
+                
         return render(request, 'teacher/messages.html',
                       {'lang': getLanguage(request)[0], 'datetime': datetime, "studentList": student_list,
                        "user_id": user_id, "user_name": user_name})

@@ -130,7 +130,16 @@ WSGI_APPLICATION = 'booctop.wsgi.application'
 # Never change db config and commit.
 # If you want to use local db, change this config and don't commit to repo.
 DATABASES = {
+   # 'default': {
+   #    'ENGINE': 'django.db.backends.mysql',
+   #    'NAME': 'booctop',
+   #    'USER': 'root', # 'root',
+   #    'PASSWORD': 'root',
+   #    'HOST': 'localhost', #'localhost',   # Or an IP Address that your DB is hosted on
+   #    'PORT': '8889',
+   #  }
    'default': {
+<<<<<<< HEAD
       'ENGINE': 'django.db.backends.mysql',
       'NAME': 'booctop',
       'USER': 'root',
@@ -151,6 +160,15 @@ DATABASES = {
   #       'use_unicode': True,
   #     }
   # }
+=======
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'dzjq9t85dqv8kckj',
+        'USER': 'otp2j74kv3w9g03y', # 'root',
+        'PASSWORD': 'ow5vd8s2bue9y9xt',
+        'HOST': 'x8autxobia7sgh74.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', #'localhost',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
+    }
+>>>>>>> 1d806aa1ae6b5bb9d62af46657057fb394c03bc1
 }
 
 # Password validation
@@ -238,7 +256,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 # django-paypal settings
-PAYPAL_RECEIVER_EMAIL = 'booctepdotcom2030@gmail.com' #'sjcdas-facilitator@gmail.com' # 'sb-wtj43p8374977@business.example.com'
+PAYPAL_RECEIVER_EMAIL = 'support@booctep.com' #'sjcdas-facilitator@gmail.com' # 'sb-wtj43p8374977@business.example.com'
 PAYPAL_TEST = True
 
 LOGIN_URL = 'login'

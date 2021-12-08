@@ -8,6 +8,9 @@
 
     <style>
 
+.accordion__menu-dark{
+    background-color: #adc0db !important;
+}
 
 .dropbtn {
   background-color: #5d6164;
@@ -437,17 +440,22 @@ background:#3A3A3A;
             }
 
      
+        [dir=ltr] .accordion__toggle{
+            border-bottom: 0px !important;
+        }
 
         .accordion__toggle{
             background-color: rgb(192, 219, 243) !important;
+            border-bottom: none;
         }
 
         .accordion__toggle-dark{
-            background-color: rgb(24, 33, 49) !important;
+            background-color: rgb(40, 53, 77) !important;
+            border-bottom: 1px solid rgb(30, 41, 59) !important;
         }
 
         .sweet-alert-dark{
-            background-color: rgb(158, 171, 179) !important;
+            background-color: rgb(208, 222, 231) !important;
         }
 
         .app-video{
@@ -544,6 +552,18 @@ background:#3A3A3A;
                                    default/>
                         </video>
                     </div> -->
+                    <style>
+                        .schedule-header{
+                            height: 78vh !important;
+                        }
+                        @media (max-width: 624px) {
+                        .schedule-header{
+                            height: 72vh !important;
+                        }
+                        
+                        }
+                        
+                    </style>
                     <div class="schedule-header">
                         <video autoplay poster="{% static 'assets/img/setting.png' %}" id="videoplayer" playsinline controls style="width: 75%; margin-left: 100px;">
                             <source src="../../../../static{{ first_video.url }}"
@@ -620,20 +640,19 @@ background:#3A3A3A;
                                     </div>
                                 </span>
                                 {% else %}
-                                <b style="top:12px;position:absolute;left:20px">Course curriculum</b>
+                                <b style="top:12px;position:absolute;right:20px;font-size: 20px;font-weight: 700;" class="mediabout mediabout-dark">Course curriculum</b>
 
+                                
                                 <span class="dropdown">
                                     <button onclick="myFunction()" class="dropbtn">&#9776;</button>
                                     <div id="myDropdown" class="dropdown-content">
                                         <a href="#"
-                                        style="margin-left: 45px !important; position: absolute;top: 20px;font-size: small;right: 360px;"
-                                        onclick="openSpamModal()" class="mediabout mediabout-dark">Report Spam <i class="fa fa-file troph-i"
-                                                                                 style="color: rgb(219, 135, 135)"></i></a>
+                                        style=""
+                                        onclick="openSpamModal()" class="">Report Spam </a>
                                       {% if interval < 30 and course.type == 0 %}
                                       <a href="#"
-                                      style="margin-left: 45px !important; position: absolute;top: 20px;font-size: small;right: 500px;"
-                                      onclick="openRefundModal()" class="mediabout mediabout-dark">Refund Money <i class="fa fa-money-bill troph-i"
-                                                                                  style="color: rgb(147, 231, 185)"></i></a>
+                                      style=""
+                                      onclick="openRefundModal()" class="">Refund Money </a>
                                         {% endif %}
                                     </div>
                                 </span>
@@ -652,7 +671,7 @@ background:#3A3A3A;
                                             <div class="accordion__menu collapse" id="course-toc-{{ ele.id }}">
                                                 {% if ele.videoList %}
                                                     {% for i in ele.videoList %}
-                                                        <div class="accordion__menu-link" style="cursor: pointer;">
+                                                        <div class="accordion__menu-link" style="cursor: pointer;" style="">
                                                             <i class="material-icons icon-16pt tick{{ i.id }}"
                                                                data-lock="0"
                                                                onclick="checkThis(this)" data-sr_no="{{ i.sr_no }}"
@@ -689,11 +708,8 @@ background:#3A3A3A;
         <input type="hidden" id="commentId" value="">
         <input type="hidden" id="commentType" value="">
         <div class="modal-header">
-            <h5 class="modal-title" id="formModal">أضف تعليقك و تقييمك للدورة</h5>
-            <button style=" float: right; margin-top: -30px; margin-bottom: 10px;outline: none; background: no-repeat;border: none;font-size: 20px;"
-                    type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            <center><h5 class="modal-title" id="formModal">أضف تعليقك و تقييمك للدورة</h5></center>
+            
         </div>
         <div class="modal-body">
             <h5 class="modal-title" style="margin-bottom: 5px;">ماهو تقييمك للدورة؟</h5>
@@ -793,10 +809,10 @@ background:#3A3A3A;
 
     {% get_current_language as lang %}
     {% if lang == "ar" %}
-    <div class="sweet-alert showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
+    <div class="sweet-alert sweet-alert-dark showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
          id="refund_modal"
          data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="true"
-         data-animation="pop" data-timer="null" style="display: none; margin-top: -144px;">
+         data-animation="pop" data-timer="null" style="display: none; margin-top: -20%;">
         <div class="modal-header">
             <h5 class="modal-title" id="formModal">ماهو سبب طلب استرداد المبلغ؟</h5>
             <button style=" float: right; margin-top: -30px; margin-bottom: 10px;outline: none; background: no-repeat;border: none;font-size: 20px;"
@@ -812,53 +828,47 @@ background:#3A3A3A;
                 <textarea id="refund_content" style="height: 150px; overflow-y: auto;" class="form-control"
                           placeholder="content"></textarea>
             </div>
-            <button style="color:#fff;background: #2196f3;" type="button" onclick="refund()"
-                    class="btn">Save
+            <button style="color:#fff;background: #66a5da;" type="button" onclick="refund()"
+                    class="btn">ارسال 
             </button>
-            <button style="color:#fff;background: #f5837a;" type="button" onclick="hideRefundModal()"
-                    class="btn">Close
+            <button style="color:#fff;background: #e7938d;" type="button" onclick="hideRefundModal()"
+                    class="btn">اغلاق
             </button>
         </div>
     </div>
 
-    <div class="sweet-alert showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
+    <div class="sweet-alert sweet-alert-dark showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
          id="spam_modal"
          data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="true"
-         data-animation="pop" data-timer="null" style="display: none; margin-top: -144px;">
+         data-animation="pop" data-timer="null" style="display: none; margin-top: -20%;">
         <div class="modal-header">
-            <h5 class="spam-title" id="formModal">قم بالتبليغ عن المحتوى</h5>
-            <button style=" float: right; margin-top: -30px; margin-bottom: 10px;outline: none; background: no-repeat;border: none;font-size: 20px;"
-                    type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            <center><h5 class="" style="font-size: 20px;text-align: right;" id="formModal">تواجه مشكلة؟</h5></center>
+           
         </div>
         <div class="modal-body">
             <h5 class="modal-title" style="margin-bottom: 5px;">عنوان البلاغ</h5>
-            <input type="text" id="spam_title" style="display: block !important;" placeholder="title">
+            <input type="text" id="spam_title" style="text-align: right;display: block;" placeholder="عنوان الرسالة">
         </div>
         <h5 class="modal-title" style="margin-bottom: 5px;">الرسالة</h5>
         <div class="input-group" style="margin-bottom: 5px;">
-                <textarea id="spam_content" style="height: 150px; overflow-y: auto;" class="form-control"
-                          placeholder="content"></textarea>
+                <textarea id="spam_content" style="height: 150px;" class="form-control"
+                          placeholder="ماهي المشكلة التي تواجهها؟"></textarea>
         </div>
-        <button style="color:#fff;background: #2196f3;" type="button" onclick="reportSpam()"
-                class="btn">Save
+        <button style="color:#fff;background: #63a9e2;" type="button" onclick="reportSpam()"
+                class="btn">ارسال
         </button>
-        <button style="color:#fff;background: #f5837a;" type="button" onclick="hideSpamModal()"
-                class="btn">Close
+        <button style="color:#fff;background: #f19892;" type="button" onclick="hideSpamModal()"
+                class="btn">اغلاق
         </button>
     </div>
     {% else %}
     <div class="sweet-alert showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
          id="refund_modal"
          data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="true"
-         data-animation="pop" data-timer="null" style="display: none; margin-top: -144px;">
+         data-animation="pop" data-timer="null" style="display: none; margin-top: -20%;">
         <div class="modal-header">
             <h5 class="modal-title" id="formModal">Leave your Refund title and comment here!</h5>
-            <button style=" float: right; margin-top: -30px; margin-bottom: 10px;outline: none; background: no-repeat;border: none;font-size: 20px;"
-                    type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            
         </div>
         <div class="modal-body">
             <h5 class="modal-title" style="margin-bottom: 5px;">Refund title</h5>
@@ -880,13 +890,10 @@ background:#3A3A3A;
     <div class="sweet-alert showSweetAlert visible" data-custom-class="" data-has-cancel-button="false"
          id="spam_modal"
          data-has-confirm-button="true" data-allow-outside-click="false" data-has-done-function="true"
-         data-animation="pop" data-timer="null" style="display: none; margin-top: -144px;">
+         data-animation="pop" data-timer="null" style="display: none; margin-top: -20%;">
         <div class="modal-header">
             <h5 class="spam-title" id="formModal">Leave your Spam Title and comment here!</h5>
-            <button style=" float: right; margin-top: -30px; margin-bottom: 10px;outline: none; background: no-repeat;border: none;font-size: 20px;"
-                    type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+            
         </div>
         <div class="modal-body">
             <h5 class="modal-title" style="margin-bottom: 5px;">Spam Title</h5>
@@ -921,8 +928,14 @@ background:#3A3A3A;
             <div class="sa-fix"></div>
         </div>
         <div class="sa-icon sa-custom" style="display: none;"></div>
-        <h2 id="result_title">Success!</h2>
+        {% get_current_language as lang %}
+        {% if lang == "ar" %}
+        <h2 id="result_title">تم الارسال بنجاح</h2>
         <p style="display: block;" id="result_content">Thanks!</p>
+        {% else %}
+        <h2 id="result_title">You have rated</h2>
+        <p style="display: block;" id="result_content">Thanks!</p>
+        {% endif %}
         <fieldset>
             <input type="text" tabindex="3" placeholder="">
             <div class="sa-input-error"></div>
@@ -934,10 +947,18 @@ background:#3A3A3A;
         <div class="sa-button-container">
             <button class="cancel" tabindex="2" style="display: none; box-shadow: none;">Cancel</button>
             <div class="sa-confirm-button-container">
+                {% get_current_language as lang %}
+                {% if lang == "ar" %}
+                <button class="confirm" tabindex="1" onclick="hideResultModal()"
+                        style="display: inline-block; background-color: rgb(33, 150, 243); box-shadow: rgba(33, 150, 243, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">
+                    انهاء
+                </button>
+                {% else %}
                 <button class="confirm" tabindex="1" onclick="hideResultModal()"
                         style="display: inline-block; background-color: rgb(33, 150, 243); box-shadow: rgba(33, 150, 243, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset;">
                     OK
                 </button>
+                {% endif %}
                 <div class="la-ball-fall">
                     <div></div>
                     <div></div>
@@ -1294,7 +1315,7 @@ background:#3A3A3A;
                 data: form_data,
             }).then(response => {
                 if (response.status == 1) {
-                    $("#result_content").html("Thanks for your submitting Report")
+                    $("#result_content").html("شكرا لابلاغنا بالمشكلة, سوف نعمل على حلها.")
                     openResultModal()
                     hideSpamModal()
                 }
@@ -1322,7 +1343,7 @@ background:#3A3A3A;
                 data: form_data,
             }).then(response => {
                 if(response.status*1 == 1) {
-                    $("#result_content").html("Thanks for your rating this course")
+                    $("#result_content").html("شكرا لتقييمك هذه الدورة")
                     openResultModal()
                     hideModal()
                 }
@@ -1349,7 +1370,7 @@ background:#3A3A3A;
                 success: function (response) {
                     if (response == "success") {
                         swal("Added successfully!", {
-                            button: "Ok",
+                            button: "انهاء",
                             closeOnClickOutside: false,
                         });
                         $('#exampleModal4').modal('hide');

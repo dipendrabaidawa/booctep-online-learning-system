@@ -111,11 +111,11 @@
 
             <div class="form-group " style="margin-top: 25px !important;">
                 <label class=" mediabout mediabout-dark" style=""><b style="font-size: 18px; font-weight: 700;"> كلمة المرور الجديدة</b></label>
-                <input type="password" id="newpassword" class="form-control" placeholder="قم بكتابة كلمة المرور"></div>
+                <input type="password" id="newpassword" class="form-control" placeholder="قم بكتابة كلمة المرور الجديدة"></div>
 
             <div class="form-group " style="margin-top: 25px !important;">
-                <label class=" mediabout mediabout-dark" style=""><b style="font-size: 18px; font-weight: 700;"> إعادة كلمة المرور الجديدة</b></label>
-                <input type="password" id="retypenewpassword" class="form-control" placeholder="قم بكتابة كلمة المرور"> </div>
+                <label class=" mediabout mediabout-dark" style=""><b style="font-size: 18px; font-weight: 700;"> إعادة كتابة كلمة المرور الجديدة</b></label>
+                <input type="password" id="retypenewpassword" class="form-control" placeholder="قم بإعادة كتابة كلمة المرور الجديدة"> </div>
             <button type="submit" class="btn btn-primary" onclick="return changepassword()">حفظ البيانات</button>
         </div>
     </div>
@@ -146,7 +146,7 @@
             passVal = $('#currentpassword').val();
             pass = '{{ password }}';
             if (pass != passVal) {
-                showAlert(0, 'Current Password Incorrect!')
+                showAlert(0, 'كلمة المرور الحالية غير صحيحة')
                 return;
             }
         }
@@ -154,14 +154,14 @@
         function changepassword() {
             checkPass()
             if ($("#currentpassword").val() == "") {
-                showAlert(0, 'Please enter the current password')
+                showAlert(0, 'من فضلك أدخل كلمة المرور الحالية')
                 return
             }
             if ($("#newpassword").val().trim().length < 6) {
-                showAlert(0, 'New password must be greater than 5 digit')
+                showAlert(0, 'كلمة المرور أكثر لا بد أن تكون اكثر من 5 حروف')
                 return
             } else if ($("#retypenewpassword").val() == $("#newpassword").val() == "") {
-                showAlert(0, "password is not match. Please re-enter the correct password.")
+                showAlert(0, "كلمة المرور غير متطابقة")
                 return
             }
             // Ajax start

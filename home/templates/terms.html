@@ -134,6 +134,11 @@
 
 }
 
+
+.skyblue-hover:hover{
+    color: rgb(144, 162, 190);
+}
+        
     
     </style>
 
@@ -151,7 +156,7 @@
         <!-- Brands -->
         <div id="brands-tab" class="store-tab-pane is-active">
             <!-- Timeline -->
-            <section class="hero is-small is-bold hero-faqs hero-faqs-dark">
+            <section class="hero is-small is-bold hero-terms">
                 <div class="hero-body">
                     <div class="container">
                         {% get_current_language as lang %}
@@ -281,7 +286,7 @@
                                             <div class="card-body">
                                                 <p class="mediabout mediabout-dark">ينشئ بوستيب تقنيات وخدمات التعلم عبر الإنترنت التي تمكن المعلمين من التواصل مع الطلاب.
                                                 </p>
-                                                <p class="mediabout mediabout-dark">توضح <a href="{% url 'privacy_policy' %}"> سياسة الخصوصية </a> كيفية تعاملنا مع بياناتك الشخصية وكيفية حماية خصوصيتك عند استخدام خدماتنا ، باستخدام خدماتنا ، فإنك توافق على أن بوستيب قد تستخدم هذه البيانات وفقًا لسياسة الخصوصية الخاصة بنا.</p>
+                                                <p class="mediabout mediabout-dark">توضح <a href="{% url 'privacy_policy' %}" class="skyblue-hover"> سياسة الخصوصية </a> كيفية تعاملنا مع بياناتك الشخصية وكيفية حماية خصوصيتك عند استخدام خدماتنا ، باستخدام خدماتنا ، فإنك توافق على أن بوستيب قد تستخدم هذه البيانات وفقًا لسياسة الخصوصية الخاصة بنا.</p>
                                                 <p class="mediabout mediabout-dark">يمنح الطالب ترخيصًا محدودًا وغير حصري وغير قابل للتحويل وغير قابل للتحويل لجميع أنواع الدورات المشتراة.</p>
                                                 <p class="mediabout mediabout-dark">يحتفظ المعلم بحق تعديل المقرر متى شاء.</p>
                                                 <p class="mediabout mediabout-dark">أنت توافق على أن جميع المعلومات المقدمة على الموقع أو أي مادة أخرى يتم الوصول إليها من خلال المنصة ، بما في ذلك عبر أي موقع أو تطبيق مرتبط ، هي معلومات عامة وليست في شكل نصيحة.</p>
@@ -356,7 +361,7 @@
                                         <div class="collapse" id="accordion-tab-1-content-3" aria-labelledby="accordion-tab-1-heading-3" data-parent="#accordion-tab-1">
                                             <div class="card-body">
                                                 <p class="mediabout mediabout-dark">Booctep creates online learning technologies and services that enable teachers to connect with students.</p>
-                                                <p class="mediabout mediabout-dark"><a href="{% url 'privacy_policy' %}">The Privacy Policy</a> explains how we treat your personal data and how to protect your privacy When you use our Services, by using our Services, you agree that Booctep may use this data in accordance with our Privacy Policy.</p>
+                                                <p class="mediabout mediabout-dark"><a href="{% url 'privacy_policy' %}" class="skyblue-hover">The Privacy Policy</a> explains how we treat your personal data and how to protect your privacy When you use our Services, by using our Services, you agree that Booctep may use this data in accordance with our Privacy Policy.</p>
                                                 <p class="mediabout mediabout-dark">The student is granted a limited, non-exclusive, non-transferable, non-transferable license of all kinds for the courses purchased.</p>
                                                 <p class="mediabout mediabout-dark">The teacher reserves the right to modify the course whenever he wants.</p>
                                                 <p class="mediabout mediabout-dark">You agree that all information provided on the site or any other material accessed through the Platform, including via any linked website or application, is general information and not in the form of advice.</p>

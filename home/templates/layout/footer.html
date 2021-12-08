@@ -558,12 +558,14 @@
         let isShowCookie = true;
         let cookies = document.cookie;
         let cookie_arrs = cookies.split(";");
+        console.log(cookie_arrs);
         for (let item of cookie_arrs) {
             let key_value = item.split("=");
             if ((key_value[0] == "username") && (key_value[1] == "support@booctop.com")) {
                 isShowCookie = false;
             }
         }
+        console.log(isShowCookie);
         if (isShowCookie == true) {
             showCookie();
         }

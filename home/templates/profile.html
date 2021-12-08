@@ -680,6 +680,11 @@
                                             </div>
                                         {% endfor %}
                                     </div>
+                                    <style>
+                                        .pagination{
+                                            direction: ltr !important;
+                                        }
+                                    </style>
                                     <center>
                                             {% if teacher.courses.has_other_pages %}
                                                 <ul class="pagination">
@@ -744,12 +749,12 @@
                                             {% if lang == "ar" %}
                                             <h1 style="font-size: medium;font-weight: 500;margin-left: 15px;" class="blllu blllu-dark">التقييم العام:
                                                 &nbsp;&nbsp;{{ teacher.total_rating|unlocalize }}&nbsp;&nbsp;&nbsp;<span class="fa fa-star"
-                                                       style="color: rgb(223, 168, 117);"></span>&nbsp;&nbsp;({{ teacher.reviewCnt }} تعليق)
+                                                       style="color: rgb(233, 204, 178);"></span>&nbsp;&nbsp;({{ teacher.reviewCnt }} تعليق)
                                             </h1>
                                             {% else %}
                                             <h1 style="font-size: medium;font-weight: 500;margin-left: 15px;" class="blllu blllu-dark">Total
                                                 :&nbsp;&nbsp;{{ teacher.total_rating }}&nbsp;&nbsp;&nbsp;<span class="fa fa-star"
-                                                       style="color: rgb(223, 168, 117);"></span>&nbsp;&nbsp;({{ teacher.reviewCnt }} Reviews)
+                                                       style="color: rgb(235, 211, 189);"></span>&nbsp;&nbsp;({{ teacher.reviewCnt }} Reviews)
                                             </h1>
                                             {% endif %}
                                         </div>
@@ -777,16 +782,15 @@
                                             <div class="column is-6">
                                                 <div class="card" style="margin-bottom: 15px !important;width: 95%;margin:0 auto;">
                                                     <div class="card-body card-body-dark" style="display:flex;flex-direction:row;align-items:center">
+                    
                                                              {% if user.profile.image %}
-                                                             <img class="avatar brd brd-dark" src="/static{{ user.image }}" style=""
+                                                             <div class="avatar brd brd-dark">
+                                                                 <img id="user-avatar" style="border-radius: 50%;margin-left: 10px;height: 40px !important;width: 40px !important; " class="avatar-image hero-single-course hero-single-course-dark" src="/static{{ user.image }}" style=""
                                                                   data-demo-src="">
                                                              {% else %}
-                                                             <img style="border-radius: 50%;margin-right: 10px;height: 40px !important;width: 40px !important; "
-                                                                  src="assets/img/userdefault.png" class="brd brd-dark">
-                                                             <!-- <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style=""
-                                                                  data-demo-src=""> -->
+                                                             <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style="border-radius: 50%;margin-left: 10px;height: 40px !important;width: 40px !important; "
+                                                                  data-demo-src="">
                                                              {% endif %}
-
                                                              
                                                         <h3 class="mediabout mediabout-dark">{{ i.user.first_name }} {{ i.user.last_name }}</h3>
                                                         <b style="color: rgb(223, 168, 117);margin-left: 10px;">{{ i.rating|unlocalize }}<span

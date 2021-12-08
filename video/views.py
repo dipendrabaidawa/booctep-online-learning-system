@@ -378,13 +378,18 @@ def getCertificate(request):
         video = 1 if video == 0 else video
         videotime += video
     hr = int(videotime / 60)
-    name = str(hr) + 'hours'
+    name = str(hr)
+    unitStr = 'hours'
     if hr == 0:
-        name = str(videotime) + 'minutes'
-    length = len(name)
+        name = str(videotime)
+        unitStr = 'minutes'
+    # length = len(name)
     namePos = [770, 845]
-
+    font = en_font
     draw.text(namePos, name, (255, 0, 255), font=font)  # this will draw text with Blackcolor and 16 size
+    font2 = ImageFont.truetype(en_fonturl, 70)
+    namePos = [820, 850]
+    draw.text(namePos, unitStr, (255, 0, 255), font=font2)
 
     # drawing course name to the img
     course = Courses.objects.get(pk=id)
@@ -407,6 +412,7 @@ def getCertificate(request):
     length = len(name)
     dif = 12 - length
     namePos = [2000, 845]
+    font = en_font
     draw.text(namePos, name, (255, 0, 255), font=font)  # this will draw text with Blackcolor and 16 size
 
     # drawing teacher's name to the img
@@ -430,7 +436,7 @@ def getCertificate(request):
     length = len(name)
     dif = 12 - length
     namePos = [1200 + dif * 15, 1300]
-
+    font = en_font
     draw.text(namePos, name, (255, 0, 255), font=font)  # this will draw text with Blackcolor and 16 size
 
     no = str(randint(10000000, 99999999))

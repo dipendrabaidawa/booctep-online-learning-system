@@ -3,6 +3,30 @@
 {% load i18n %}
 <style>
 
+.payment-form-dark{
+    background-color: #222831 !important;
+    border: 1px solid #161a20 !important;
+}
+
+.confirmation-box-dark{
+    background-color: #222831 !important;
+    border: 1px solid #161a20 !important;
+
+}
+
+.primary-button-dark{
+    background-color: rgb(186, 240, 222) !important;
+}
+
+.pricee{
+    color: rgb(39, 153, 73) !important;
+}
+
+
+.pricee-dark{
+    color: rgb(212, 243, 221) !important;
+}
+
 .checkout-container {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -251,7 +275,6 @@
     background: #fff;
     border-radius: 10px;
     padding: 24px;
-    border: 1px solid #e8e8e8;
     -webkit-box-shadow: -1px 3px 10px 0 rgba(0, 0, 0, 0.06);
     box-shadow: -1px 3px 10px 0 rgba(0, 0, 0, 0.06);
 } /* line 1533, src/assets/scss/pages/_app-commerce.scss */
@@ -274,7 +297,6 @@
     font-size: 0.9rem;
     padding-bottom: 20px;
     margin-bottom: 20px;
-    border-bottom: 1px solid #dedede;
 } /* line 1557, src/assets/scss/pages/_app-commerce.scss */
 .checkout-container .confirmation-box .order-summary {
     padding-bottom: 10px;
@@ -491,6 +513,16 @@ textarea {
   margin-bottom: 15px
 }
 
+.form-section-header-1-dark h3{
+    color: rgb(236, 242, 247) !important;
+}
+
+
+.inpput-dark[type=text]{
+    background: rgb(210, 217, 228) !important;
+    border: 1px solid rgb(164, 174, 190) !important;
+}
+
 .field-1 label{
   margin-bottom: 70px !important;
 }
@@ -635,209 +667,339 @@ textarea {
    height: 30px
 }
 
+.cart-content{
+    height: 100vh !important;
+}
+
+.shop-wrapper::-webkit-scrollbar {
+    display: none !important;
+}
+
+
+
+@media (max-width: 624px) {
+.hide-on-phone{
+    display: none !important;
+}
+
+.more-width-phone{
+    width: 100% !important;
+}
+}
 </style>
 
 {% endblock %} {% block content %}
 
 
 
-    <div class="view-wrapper" style="padding-top: 80px;">
-            <div class="shop-wrapper">
-                <div class="cart-container">
-                    <div class="cart-header">
-                        <div class="header-inner">
+    <div class="view-wrapper">
+        <div class="cart-container">
+            <div class="cart-header">
+            </div>
+
+            <div class="cart-content">
+                <div class="columns">
+                    <div class="column is-offset-1 is-10" style="padding-top: 120px;">
+
+                        <div class="wrapper">
                             <div class="categories-header">
+                                {% get_current_language as lang %}
+                                {% if lang == "ar" %}
+                                <h2>إتمام مشترياتي</h2>
+                                {% else %}
+                                <h2>Checkout</h2>
+                                {% endif %}
                             </div>
 
-{#                            <div class="header-actions">#}
-{#                                <a href="#" class="button is-fullwidth primary-button is-raised"><p style="color: #fff;">Save for later</p></a>#}
-{##}
-{#                            </div>#}
+                        <div class="cart-summary">
+                            <!--card-->
+                            <div class="summary-card">
+
+        <div id="payment-container" class="checkout-container">
+
+            <!--Right Side-->
+            <div class="right" style="display:flex;flex-direction: row !important;width:100%;" >
+                <div class="payment-form more-width-phone" style="width: 60%;">
+                    <form action="/charge" method="post" id="stripe-payment-form" class="provider-form is-active">
+                        <div id="checkout-contact-section" class="form-section has-margin-bottom">
+                            <div class="form-section-header form-section-header-1">
+                                {% get_current_language as lang %}
+                                {% if lang == "ar" %}
+                                <h3>معلومات البطاقة الائتمانية</h3>
+                                {% else %}
+                                <h3>Payment Information</h3>
+                                {% endif %}
+                            </div>
+                            <!-- <div class="field">
+                                <label for="card-element" class="card-element-b">Saved card?</label>
+                                <div class="control" style="margin-top: 7px">
+                                    <div class="select">
+                                        <select>
+                                            <option>Choose your card</option>
+                                            <option>Card number end with: 5642</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                            </div> -->
+
+                        <div id="checkout-payment-section" class="form-section">
+
+
+                            {% get_current_language as lang %}
+                            {% if lang == "ar" %}
+                            <div class="field field-1">
+                                <label for="card-element">اسم حامل البطاقة</label>
+                                <div class="control" style="margin-top: 10px;font-size:large !important">
+                                    <input class="input inpput inpput-dark" placeholder="Enter card holder name"
+                                        name="checkout_name" type="text" style="text-align: left;">
+                                </div>
+                            </div>
+
+                            <div class="field field-1">
+                                <label for="card-element">رقم البطاقة ورمز الأمان</label>
+                                <div class="control">
+                                    <div id="card-element">
+                                        <!-- a Stripe Element will be inserted here. -->
+                                    <input class="input inpput inpput-dark" placeholder="من فضلك ادخل رقم البطاقة"
+                                        name="checkout_name" type="text">
+                                    </div>
+
+                                    <!-- Used to display Element errors -->
+                                    <div id="card-errors" role="alert"></div>
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="field field-1">
+                                <label for="card-element">Name on card</label>
+                                <div class="control" style="margin-top: 10px;font-size:large !important">
+                                    <input class="input" placeholder="Enter the name on the credit card"
+                                        name="checkout_name">
+                                </div>
+                            </div>
+
+                            <div class="field field-1">
+                                <label for="card-element">Credit or debit card</label>
+                                <div class="control">
+                                    <div id="card-element">
+                                        <!-- a Stripe Element will be inserted here. -->
+                                    <input class="input" placeholder="Enter the name on the credit card"
+                                        name="checkout_name">
+                                    </div>
+
+                                    <!-- Used to display Element errors -->
+                                    <div id="card-errors" role="alert"></div>
+                                </div>
+                            </div>
+                            {% endif %}
+
+
+
+                            {% get_current_language as lang %}
+                            {% if lang == "ar" %}
+                       <center>
+                        <div class="field field-3 is-button">
+                            <div class="buttons has-addons">
+                                <!-- <button id="payment-button" type="button" onclick = "save_course_to_cart()" class="button is-solid primary-button">Confirm
+                                    Payment</button> -->
+                                <button type="button" class="button is-solid primary-button primary-button-dark is-fullwidth" style="width: 200px;">اتمام الطلب {{totalmoney}} ريال سعودي</button>
+                            </div>
+                        </div>
+                           </center>
+
+                           <br>
+                           <style>
+                           .hrrrr-dark{
+                               background-color: #202329 !important;
+                            }
+
+                           </style>
+                           <br>
+                            <hr class="hrrrr hrrrr-dark" />
+                        <div class="field ">
+                                
+                            <h4 style="font-size:small" class="mediabout mediabout-dark">اتمام الدفع عن طريق بايبال 
+
+                        </div>
+                        {% else %}
+                        <center>
+                         <div class="field field-3 is-button">
+                             <div class="buttons has-addons">
+                                 <button type="button" class="button is-solid primary-button primary-button-dark">complete oreder {{totalmoney}} Saudi Rials</button>
+                             </div>
+                         </div>
+                            </center>
+
+                             <hr />
+                         <div class="field ">
+                                 
+                             <h4 style="font-size:small" class="mediabout mediabout-dark">Or Pay via Paypal 
+
+                                 
+                         </div>
+                        {% endif %}
+
+
+
+
+
+
+                        </div>
+
+                        </div>
+                    </form>
+
+                        {{ form.render }}
+                </div>
+                <div class="payment-form hide-on-phone"style="margin-left: 25px;width: 40%">
+                    <form action="/charge" class="provider-form is-active">
+                        <div id="checkout-contact-section" class="form-section has-margin-bottom">
+   
+                            {% get_current_language as lang %}
+                            {% if lang == "ar" %}
+                            <div class="form-section-header form-section-header-1">
+                                <h3>معلومات الطلب</h3>
+                            </div>
+
+
+                <div class="order-summary">
+
+                    <div class="order-line">
+                        <div class="item">
+                            <b class="mediabout mediabout-dark">رقم الطلب</b>
+                        </div>
+                        <div class="amount">
+                            <span class="pricee pricee-dark">{{orderid}}</span>
                         </div>
                     </div>
-
-                    <div class="cart-content">
-                        <div class="columns">
-                            <div class="column is-offset-1 is-10">
-
-                                <div class="wrapper">
-                                    <div class="categories-header">
-                                        <h2>Checkout</h2>
-                                    </div>
-
-                                <div class="cart-summary">
-                                    <!--card-->
-                                    <div class="summary-card">
-
-                <div id="payment-container" class="checkout-container">
-
-                    <!--Right Side-->
-                    <div class="right" style="display:flex;flex-direction: row !important;width:100%">
-                        <div class="payment-form" style="width: 60%">
-                            <form action="/charge" method="post" id="stripe-payment-form" class="provider-form is-active">
-                                <div id="checkout-contact-section" class="form-section has-margin-bottom">
-                                    <div class="form-section-header form-section-header-1">
-                                        <h3>Payment Information</h3>
-                                    </div>
-                                    <div class="field">
-                                        <label for="card-element" class="card-element-b">Saved card?</label>
-                                        <div class="control" style="margin-top: 7px">
-                                            <div class="select">
-                                                <select>
-                                                    <option>Choose your card</option>
-                                                    <option>Card number end with: 5642</option>
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                <div id="checkout-payment-section" class="form-section">
-
-
-                                    <div class="field field-1">
-                                        <label for="card-element">Name on card</label>
-                                        <div class="control" style="margin-top: 10px;font-size:large !important">
-                                            <input class="input" placeholder="Enter the name on the credit card"
-                                                name="checkout_name">
-                                        </div>
-                                    </div>
-
-                                    <div class="field field-1">
-                                        <label for="card-element">Credit or debit card</label>
-                                        <div class="control">
-                                            <div id="card-element">
-                                                <!-- a Stripe Element will be inserted here. -->
-                                            <input class="input" placeholder="Enter the name on the credit card"
-                                                name="checkout_name">
-                                            </div>
-
-                                            <!-- Used to display Element errors -->
-                                            <div id="card-errors" role="alert"></div>
-                                        </div>
-                                    </div>
-
-
-
-                               <center>
-                                <div class="field field-3 is-button">
-                                    <div class="buttons has-addons">
-                                        <button id="payment-button" type="button" onclick = "save_course_to_cart()" class="button is-solid primary-button">Confirm
-                                            Payment</button>
-                                        <button type="button" class="button is-solid primary-button">${{totalmoney}}</button>
-                                    </div>
-                                </div>
-                                   </center>
-
-                                    <hr />
-                                <div class="field ">
-                                        
-                                    <h4 style="font-size:small">Or Pay via Paypal: 
-
-                                </div>
-
-
-
-
-
-
-                                </div>
-
-                                </div>
-                            </form>
-
-                                {{ form.render }}
+                    <div class="order-line">
+                        <div class="item">
+                            <b class="mediabout mediabout-dark">سعر الدورات</b>
                         </div>
-                        <div class="payment-form"style="margin-left: 25px;width: 40%">
-                            <form action="/charge" class="provider-form is-active">
-                                <div id="checkout-contact-section" class="form-section has-margin-bottom">
-                                    <div class="form-section-header form-section-header-1">
-                                        <h3>Order information</h3>
-                                    </div>
-
-
-                        <div class="order-summary">
-                            <h4>Order Summary</h4>
-
-                            <div class="order-line">
-                                <div class="item">
-                                    <span>Transaction ID</span>
-                                </div>
-                                <div class="amount">
-                                    <span>#{{orderid}}</span>
-                                </div>
-                            </div>
-                            <div class="order-line">
-                                <div class="item">
-                                    <span>Subtotal</span>
-                                </div>
-                                <div class="amount">
-                                    <span data-currency="USD">${{subtotalmoney}}</span>
-                                </div>
-                            </div>
-                            <div class="order-line">
-                                <div class="item">
-                                    <span>Taxes</span>
-                                </div>
-                                <div class="amount">
-                                    <span data-currency="USD">$0</span>
-                                </div>
-                            </div>
-                            <div class="order-line">
-                                <div class="item">
-                                    <span>Discount</span>
-                                </div>
-                                <div class="amount">
-                                    <span data-currency="USD">$0</span>
-                                </div>
-                            </div>
-                            <div class="order-line">
-                                <div class="item is-total">
-                                    <span>Total</span>
-                                </div>
-                                <div class="amount is-total">
-                                    <span data-currency="USD">${{totalmoney}}</span>
-                                </div>
-                            </div>
+                        <div class="amount">
+                            <span data-currency="SR" class="pricee pricee-dark">{{subtotalmoney}} ريال سعودي</span>
                         </div>
-
-                                </div>
-                            </form>
+                    </div>
+                    <div class="order-line">
+                        <div class="item">
+                            <b class="mediabout mediabout-dark">ضريبة القيمة المضافة</b>
+                        </div>
+                        <div class="amount">
+                            <span data-currency="SR" class="pricee pricee-dark">0 ريال سعودي </span>
+                        </div>
+                    </div>
+                    <div class="order-line">
+                        <div class="item">
+                            <b class="mediabout mediabout-dark">خصم</b>
+                        </div>
+                        <div class="amount">
+                            <span data-currency="SR" class="pricee pricee-dark">0 ريال سعودي </span>
+                        </div>
+                    </div>
+                    <div class="order-line">
+                        <div class="item is-total">
+                            <b class="mediabout mediabout-dark">المجموع</b>
+                        </div>
+                        <div class="amount is-total">
+                            <span data-currency="SR" class="pricee pricee-dark"> {{totalmoney}} ريال سعودي</span>
                         </div>
                     </div>
                 </div>
-
-                <div id="confirmation-container" class="checkout-container is-hidden">
-
-                    <div class="confirmation-box">
-                         <svg id="successAnimation" class="animated" xmlns="http://www.w3.org/2000/svg" width="70"
-                            height="70" viewBox="0 0 70 70">
-                            <path id="successAnimationResult" fill="#D8D8D8"
-                                d="M35,60 C21.1928813,60 10,48.8071187 10,35 C10,21.1928813 21.1928813,10 35,10 C48.8071187,10 60,21.1928813 60,35 C60,48.8071187 48.8071187,60 35,60 Z M23.6332378,33.2260427 L22.3667622,34.7739573 L34.1433655,44.40936 L47.776114,27.6305926 L46.223886,26.3694074 L33.8566345,41.59064 L23.6332378,33.2260427 Z" />
-                            <circle id="successAnimationCircle" cx="35" cy="35" r="24" stroke="#979797" stroke-width="2"
-                                stroke-linecap="round" fill="transparent" />
-                            <polyline id="successAnimationCheck" stroke="#979797" stroke-width="2" points="23 34 34 43 47 27"
-                                fill="transparent" />
-                        </svg>
-                        <h3>Your payment was successful.</h3>
-                        <p>Thank you for your purchase. Your course(s) it's already in your account.</p>
-                        <p>You will redirect in 5 seconds to Homepage.</p>
+                   
+                 {% else %}
+                 <div class="form-section-header form-section-header-1">
+                     <h3>Order information</h3>
+                 </div>
 
 
-                    </div>
+     <div class="order-summary">
 
-                </div>
-                                </div>
-                                </div>
-                                  </div>
-
-
-                            </div>
+         <div class="order-line">
+             <div class="item">
+                 <span class="mediabout mediabout-dark">Transaction ID</span>
+             </div>
+             <div class="amount">
+                 <span class="mediabout mediabout-dark">{{orderid}}</span>
+             </div>
+         </div>
+         <div class="order-line">
+             <div class="item">
+                 <b class="mediabout mediabout-dark">Subtotal</b>
+             </div>
+             <div class="amount">
+                 <span data-currency="SR" class="pricee pricee-dark">SR {{subtotalmoney}}</span>
+             </div>
+         </div>
+         <div class="order-line">
+             <div class="item">
+                 <b class="mediabout mediabout-dark">Taxes</b>
+             </div>
+             <div class="amount">
+                 <span data-currency="SR" class="pricee pricee-dark">SR 0</span>
+             </div>
+         </div>
+         <div class="order-line">
+             <div class="item">
+                 <b class="mediabout mediabout-dark">Discount</b>
+             </div>
+             <div class="amount">
+                 <span data-currency="SR" class="pricee pricee-dark">SR 0</span>
+             </div>
+         </div>
+         <div class="order-line">
+             <div class="item is-total">
+                 <b class="mediabout mediabout-dark">Total</b>
+             </div>
+             <div class="amount is-total">
+                 <span data-currency="SR" class="pricee pricee-dark">SR {{totalmoney}}</span>
+             </div>
+         </div>
+     </div>
+                 {% endif %}
 
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
+        </div>
+
+        <div id="confirmation-container" class="checkout-container is-hidden">
+
+            <div class="confirmation-box confirmation-box-dark">
+                 <svg id="successAnimation" class="animated" xmlns="http://www.w3.org/2000/svg" width="70"
+                    height="70" viewBox="0 0 70 70">
+                    <path id="successAnimationResult" fill="#D8D8D8"
+                        d="M35,60 C21.1928813,60 10,48.8071187 10,35 C10,21.1928813 21.1928813,10 35,10 C48.8071187,10 60,21.1928813 60,35 C60,48.8071187 48.8071187,60 35,60 Z M23.6332378,33.2260427 L22.3667622,34.7739573 L34.1433655,44.40936 L47.776114,27.6305926 L46.223886,26.3694074 L33.8566345,41.59064 L23.6332378,33.2260427 Z" />
+                    <circle id="successAnimationCircle" cx="35" cy="35" r="24" stroke="#979797" stroke-width="2"
+                        stroke-linecap="round" fill="transparent" />
+                    <polyline id="successAnimationCheck" stroke="#979797" stroke-width="2" points="23 34 34 43 47 27"
+                        fill="transparent" />
+                </svg>
+                {% get_current_language as lang %}
+                {% if lang == "ar" %}
+                <h3 class="mediabout mediabout-dark">تمت عمليتك بنجاح</h3>
+                <p class="mediabout mediabout-dark">شكرا لك لاستخدامك دفع منصة بوستيب لشراء دوراتك</p>
+                <p class="pricee pricee-dark">سوف يتم اعادة تحويلك لصفحة مشترياتك</p>
+                {% else %}
+                <h3 class="mediabout mediabout-dark">Your payment was successful.</h3>
+                <p class="mediabout mediabout-dark">Thank you for your purchase. Your course(s) it's already in your account.</p>
+                <p class="pricee pricee-dark">You will redirect to enrollments page.</p>
+                {% endif %}
+
+
+            </div>
+
+        </div>
+                        </div>
+                        </div>
+                          </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
         </div>
 <script>
