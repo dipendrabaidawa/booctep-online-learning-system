@@ -150,15 +150,27 @@ def dashboard(request):
     course_list = Courses.objects.filter(user_id=user_id)
     sum = 0
     cnt = 0
+    number_free_courses = 0
     for course in course_list:
         rating_list = course_comments.objects.filter(course_id_id=course.id)
         sum += getRatingFunc(rating_list)
         if len(rating_list) > 0:
             cnt += 1
+        if course.type == 1:
+            number_free_courses += 1
+
     if cnt == 0:
         total_rating = 0
     else:
         total_rating = round(sum / cnt, 1)
+
+    # calculating the teacher level
+    # Evaluate the revenue type
+    percentage_revenue = 50
+    if number_free_courses >= 1 and total_rating > 4.5 and total_students > 1000:
+        percentage_revenue = 60
+    elif number_free_courses >= 3 and total_rating > 4.7 and total_students > 5000:
+        percentage_revenue = 70
 
     # get total revenue
     total_revenue = 0
@@ -174,21 +186,23 @@ def dashboard(request):
     total_students = 0
     is_there_free_course = 0
 
+    teacher_tax = Admincontrol.objects.get(pk=1).teacher_tax
+
     for course in course_list:
         price = 0
         # getting the number of student registered with course
         stu_num = student_register_courses.objects.filter(course_id_id=course.id).count()
         total_students += stu_num
         price = course.price * stu_num
-        
-        if price == 0:
-            is_there_free_course += 1
 
         total_revenue += price
         pending_list = student_register_courses.objects.filter(course_id_id=course.id).filter(withdraw=0)
         hold_money = 0
+        hold_cnt = 0
         ready_money = 0
+        ready_cnt = 0
         transfer_money = 0
+        transfer_cnt = 0
         for ele in pending_list:
             time = ele.date_created
             time = datetime.strptime(time, "%Y-%m-%d %H:%M:%S")
@@ -201,19 +215,15 @@ def dashboard(request):
         hold_list = student_register_courses.objects.filter(course_id_id=course.id).filter(withdraw=1)
         for ele in hold_list:
             hold_money += ele.course_id.price
+            hold_cnt += 1
         ready_list = student_register_courses.objects.filter(course_id_id=course.id).filter(withdraw=2)
         for ele in ready_list:
             ready_money += ele.course_id.price
+            ready_cnt += 1
         transfer_list = student_register_courses.objects.filter(course_id_id=course.id).filter(withdraw=3)
         for ele in transfer_list:
             transfer_money += ele.course_id.price
-        course.hold_money = hold_money
-        course.ready_money = ready_money
-        course.transfer_money = transfer_money
-        course.refund_money = 0
-        course.count = stu_num
-        total_hold_money += hold_money
-        total_transfer_money += transfer_money
+            transfer_cnt += 1
 
         # counting discount
         if admin_discount.count() == 0:
@@ -245,7 +255,20 @@ def dashboard(request):
         promo_discount_amount = discount_price * promo_percent
         course.total_discount_amount = round(discount_amount + promo_discount_amount, 2)
 
-    teacher_tax = Admincontrol.objects.get(pk=1).teacher_tax
+        course.count = stu_num
+
+        level_hold_money = (hold_money - hold_cnt * course.total_discount_amount - hold_money * teacher_tax / 100) * percentage_revenue / 100.0
+        course.hold_money = round(level_hold_money, 2) 
+
+        level_ready_money = (ready_money - ready_cnt * course.total_discount_amount - ready_money * teacher_tax / 100) * percentage_revenue / 100.0
+        course.ready_money = round(level_ready_money, 2)
+
+        level_transfer_money = (transfer_money - transfer_cnt * course.total_discount_amount - transfer_money * teacher_tax / 100) * percentage_revenue / 100.0
+        course.transfer_money = round(level_transfer_money, 2)
+
+        course.refund_money = 0
+        total_hold_money += course.hold_money
+        total_transfer_money += transfer_money
 
     # # get total rating
     # rateSum = 0
@@ -269,18 +292,8 @@ def dashboard(request):
     #     totalRate = 0
     # else:
     #     totalRate = round(rateSum / rateCnt, 2)
-
-    # Evaluate the revenue type
-    percentage_revenue = 50
-    # if is_there_free_course < 3 or total_rating <= 4.5 or total_students <= 1000:
-    #     percentage_revenue = 50
-    if is_there_free_course >= 3 and total_rating > 4.7 and total_students > 5000:
-        percentage_revenue = 70
-    elif is_there_free_course >= 1 and total_rating > 4.5 and total_students > 1000:
-        percentage_revenue = 60
     
-    total_revenue = total_revenue * percentage_revenue / 100.0
-    total_hold_money = total_hold_money * percentage_revenue / 100.0 
+    total_revenue = total_revenue * percentage_revenue / 100.0 
 
     return render(request, 'teacher/dashboard.html',
                   {'lang': getLanguage(request)[0], 'courses': course_list, 'total_rating': total_rating,
