@@ -444,7 +444,7 @@ def payout(request):
     user_id = request.user.id
     card = []
     if Card.objects.filter(user_id=user_id).exists():
-        card = Card.objects.get(user_id=user_id)
+        card = Card.objects.filter(user_id=user_id)[0]
     return render(request, 'teacher/payout.html', {'lang': getLanguage(request)[0], 'card': card})
 
 
