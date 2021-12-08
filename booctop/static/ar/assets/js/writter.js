@@ -49,9 +49,10 @@ class Typewritter {
     this.sT.innerHTML = chars;
   }
 }
+text: "Python,Artificial Entalingence,Data science,Cyber security,Business,Android apps,ios apps,Hybrid apps,web design,Web development,Design,Qias,Languages,Self development", // Set words separate with commas in this property
 
 new Typewritter({
-  text: "تطوير ويب,رياضيات,فن ورسم,طيران,ادارة اعمال", // Set words separate with commas in this property
+  text: "بايثون, ذكاء اصطناعي, علوم البيانات, الأمن السيبراني, إدارة أعمال, تطبيقات أندرويد, تطبيقات أي او اس, تطبيقات هايبرد, تصميم مواقع, برمجة مواقع, تصميم, قياس, لغات, تطوير الذات", // Set words separate with commas in this property
   time: 100 // Set speed of writing
 });
 

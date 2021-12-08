@@ -185,12 +185,11 @@
   background-size: cover;
 }
 
+  
 .dark-homepage .title{
-  color: #222831;
+    color: #dce3ee !important;
 }
-
-
-
+  
 
 .shop-header-is-dark{
     background-color: #222831;
@@ -1092,3 +1091,5 @@
     border: 1px solid #000;
     background: #222831
 }
+
+

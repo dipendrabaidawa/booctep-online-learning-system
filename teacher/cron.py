@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-def my_scheduled_job():
-  pass
-=======
 from teacher.models import VideoUploads
 from django.conf import settings
 import vimeo
@@ -51,4 +47,3 @@ def my_jobs():
     
     print('Done.')
 
->>>>>>> a8cc786112676e2b1f2746f1015b63dbc5c401ef

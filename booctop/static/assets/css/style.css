@@ -2013,6 +2013,7 @@ hr{
   background-size: cover;
 }
 
+
 .hero-homepage .title{
   color: #fff;
   margin-bottom: 0;
@@ -2032,11 +2033,14 @@ hr{
   border-color: #d8eef8;
 }
 
-
+.typewritter-title-white{
+  color: #e8ecee !important;
+  
+}
 
 .secondary__title{
   position: relative;
-  color: #fafafa;
+  color: #e8ecee !important;
 }
 
 .secondary__title::after{
@@ -10884,13 +10888,3 @@ box-sizing: border-box;
 
 
 /* Dark mode */
-
-body div.darkmode {
-  display: inline-block;
-  font-size: 15px;
-  padding: 0;
-  cursor: pointer;
-}
-body.dark .darkmode .light, body:not(.dark) .darkmode .dark {
-  display: none;
-}

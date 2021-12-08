@@ -51,7 +51,7 @@ class Typewritter {
 }
 
 new Typewritter({
-  text: "Development,Mathmatics,Arts,Aviation,Business", // Set words separate with commas in this property
+  text: "Python,Artificial Entalingence,Data science,Cyber security,Business,Android apps,ios apps,Hybrid apps,web design,Web development,Design,Qias,Languages,Self development", // Set words separate with commas in this property
   time: 100 // Set speed of writing
 });
 

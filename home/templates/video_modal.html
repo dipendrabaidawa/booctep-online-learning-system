@@ -22,9 +22,14 @@
 <div class="modal-content">
     <div class="card">
         <div class="card-heading">
-            <div class="user-meta">
-                <img src="/static{{ course.user.image }}"
-                    data-demo-src="{% static 'assets2/images/avatars/jenna.png' %}" alt="">
+            
+            {% if user.profile.image %}
+            <img class="avatar brd brd-dark" src="/static{{ user.image }}" style=""
+                 data-demo-src="">
+            {% else %}
+            <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style=""
+                 data-demo-src="">
+            {% endif %}
             </div>
             <span class="user-meta-span">{{ course.user.first_name }}{{ course.user.last_name }} </span>
             <span class="user-meta-span">&nbsp; &nbsp; |   {{ course.name }}&nbsp; &nbsp;</span>

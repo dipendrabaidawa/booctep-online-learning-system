@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 22.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 1300 400" style="enable-background:new 0 0 1300 400;" xml:space="preserve">
 <style type="text/css">
@@ -8,7 +8,7 @@
 	.st2{fill:none;stroke:#E9E8E8;stroke-width:0.8937;stroke-miterlimit:10;}
 	.st3{fill:#919191;}
 	.st4{fill:#B7B7B8;}
-	.st5{fill:#AFAFAF;}
+	.st5{fill:#020F16;}
 	.st6{fill:#564B9F;}
 	.st7{fill:#191919;}
 	.st8{fill:#2B2C2B;}
@@ -22,18 +22,16 @@
 	.st16{opacity:0.26;fill:#6D6C6D;enable-background:new    ;}
 	.st17{opacity:0.34;fill:#6D6C6D;enable-background:new    ;}
 	.st18{opacity:0.47;fill:#6D6C6D;enable-background:new    ;}
-	.st19{fill:#222831;stroke:#171717;stroke-width:0.5958;stroke-miterlimit:10;}
+	.st19{fill:#171717;stroke:#171717;stroke-width:0.5958;stroke-miterlimit:10;}
 	.st20{opacity:0.18;fill:#6D6C6D;enable-background:new    ;}
 	.st21{opacity:0.28;fill:#6D6C6D;enable-background:new    ;}
 	.st22{opacity:0.33;fill:#6D6C6D;enable-background:new    ;}
 	.st23{opacity:0.38;fill:#6D6C6D;enable-background:new    ;}
 	.st24{opacity:0.25;fill:#6D6C6D;enable-background:new    ;}
-	.st25{fill:#222831;}
-	.st26{fill:#595959;}
 </style>
-<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="0" y1="202" x2="1300" y2="202" gradientTransform="matrix(1 0 0 -1 0 402)">
-	<stop  offset="0" style="stop-color:#384155"/>
-	<stop  offset="1" style="stop-color:#FFFFFF"/>
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="0" y1="202" x2="1301.718" y2="202" gradientTransform="matrix(1 0 0 -1 0 402)">
+	<stop  offset="0" style="stop-color:#021633"/>
+	<stop  offset="0.9992" style="stop-color:#DDEDF2"/>
 </linearGradient>
 <rect class="st0" width="1300" height="400"/>
 <g id="background_n3">
@@ -1283,17 +1281,17 @@
 <g id="head">
 	<path class="st10" d="M1007.3,123.9c-1.5,7,1.4,12.7,3.8,17.5c2.3,4.6,4.3,8.5,8.6,10.3c0.4,0.2,6.1,2.5,11.5-0.7
 		c6-3.6,7-11.3,7.4-14.8c0.3-2.7,1.3-10.4-3.3-16.7c-4.9-6.8-14.9-10.3-21.7-5.8C1008.8,116.8,1007.5,122.7,1007.3,123.9z"/>
-	<path class="st25" d="M1005.1,134.4c-0.2-2.1-1.1-14.4,6.7-19.5c7-4.6,15.2,0.3,16.4,1c6.5,3.9,9.8,11.5,10,18.4
+	<path class="st9" d="M1005.1,134.4c-0.2-2.1-1.1-14.4,6.7-19.5c7-4.6,15.2,0.3,16.4,1c6.5,3.9,9.8,11.5,10,18.4
 		c0,1.7,0.2,9-4.5,13.3c-2.4,2.2-5,2.7-8.4,3.4c-5.1,1-9.4,0.5-12.2,0c0.2,1.8,0.3,3.6,0.5,5.5c6,1.4,11,1.4,14.4,1.1
 		c4.8-0.3,8.5-1.4,11-2.1c4.3-1.2,7.8-2.7,10.5-4c0.6-3.6,1.2-8.7,1.2-14.8c0-8.7,0.1-14.5-2.6-20.7c-1.1-2.5-5-11.8-14.6-15.3
 		c-10.8-4-20.1,2.6-21.7,3.8c-2.2,1.6-7.5,6.1-10,14.3c-0.4,1.2-2.2,7.7-0.3,15.6c2.8,12.2,12.4,19.1,12.8,18.7
 		C1012.8,151.5,1006,145.1,1005.1,134.4z"/>
 	<g id="Layer_5">
-		<path class="st26" d="M1010.2,134.6c0,0,5.9,2.3,11.2,0.9c5.4-1.4,9.1-3.5,12.5-7.8c0,0-2,17.1-10.7,17.8
+		<path class="st5" d="M1010.2,134.6c0,0,5.9,2.3,11.2,0.9c5.4-1.4,9.1-3.5,12.5-7.8c0,0-2,17.1-10.7,17.8
 			S1010.2,134.6,1010.2,134.6z"/>
 		
-			<ellipse transform="matrix(1.512406e-02 -0.9999 0.9999 1.512406e-02 873.5501 1139.196)" class="st26" cx="1015.1" cy="126.2" rx="3" ry="1.8"/>
-		<path class="st26" d="M1026.6,125.8c0.9,0,1.9,0.5,2.7,0.9c-0.1-2.1-1.3-4-2.6-4.1c-1.4-0.1-2.9,1.8-3.2,4.1
+			<ellipse transform="matrix(1.512406e-02 -0.9999 0.9999 1.512406e-02 873.5501 1139.196)" class="st5" cx="1015.1" cy="126.2" rx="3" ry="1.8"/>
+		<path class="st5" d="M1026.6,125.8c0.9,0,1.9,0.5,2.7,0.9c-0.1-2.1-1.3-4-2.6-4.1c-1.4-0.1-2.9,1.8-3.2,4.1
 			C1024.4,126.3,1025.6,125.8,1026.6,125.8z"/>
 	</g>
 </g>

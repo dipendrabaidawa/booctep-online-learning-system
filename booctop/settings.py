@@ -37,17 +37,15 @@ SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = ['*']
 
+# This SMTP config is given from the client directly. Never change it.
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtpout.secureserver.net'
 EMAIL_HOST_USER = 'support@booctep.com'
-EMAIL_HOST_PASSWORD = 'BooctepSupport'
+EMAIL_HOST_PASSWORD = 'BooctepSupportCom'
 EMAIL_USE_TLS = False
 EMAIL_PORT = 465
-EMAIL_USE_SSL=True 
-# EMAIL_HOST_USER = 'booctepdotcom2030@gmail.com'
-# EMAIL_HOST_USER = 'parshotam.kumar32@gmail.com'
-# EMAIL_HOST_PASSWORD = 'booctepgmailcom1011'
-# EMAIL_HOST_PASSWORD = 'parshotam@g'
+EMAIL_USE_SSL=True
+
 
 # Application definition
 
@@ -129,33 +127,18 @@ WSGI_APPLICATION = 'booctop.wsgi.application'
 #       'PORT': '3306',
 #   }
 
+# Never change db config and commit.
+# If you want to use local db, change this config and don't commit to repo.
 DATABASES = {
-    # 'default': {
-    #   'ENGINE': 'django.db.backends.mysql',
-    #   'NAME': 'booctop',
-    #   'USER': 'root',
-    #   'PASSWORD': '',
-    #   'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-    #   'PORT': '3306',
-    # }
    'default': {
-<<<<<<< HEAD
       'ENGINE': 'django.db.backends.mysql',
-      'NAME': 'kvtest',
+      'NAME': 'booctop',
       'USER': 'root',
       'PASSWORD': '',
       'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
       'PORT': '3306',
   }
-=======
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'booctop',
-        'USER': 'root', # 'root',
-        'PASSWORD': 'root',
-        'HOST': 'localhost', #'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '8889',
-    }
->>>>>>> a8cc786112676e2b1f2746f1015b63dbc5c401ef
+
   # 'default': {
   #       'ENGINE': 'django.db.backends.mysql',
   #       'NAME': 'booctop',
@@ -290,10 +273,6 @@ VIMEO_TOKEN = '219cb1675d7cffd2eca82a6c9ca86dbb'
 VIMEO_KEY = '252b44a621d7c1212a01e13f5737bfe9eb912b83'
 VIMEO_SECRET = 'jffm+bdiKCgVh1vVcWwOEwQzX7U+J6e/J1ecHdltMtM4Qgg6KAB4hf4W2oA/b5KPC0V0l65sryTYror1ZHDkSRT+Vxw709RJgyAwkCRQWPEd44qp7ymBDbDRVfF6SGLj'
 
-<<<<<<< HEAD
 CRONJOBS = [
-    ('*/5 * * * *', 'teacher.cron.my_scheduled_job')
+    ('0 13 * * *', 'teacher.cron.my_jobs')
 ]
-=======
-CRONJOBS = [('*/10 * * * *', 'teacher.cron.my_jobs')]
->>>>>>> a8cc786112676e2b1f2746f1015b63dbc5c401ef
