@@ -51,24 +51,6 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Invoice_lines',
-            fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('student_id', models.IntegerField(default=0)),
-                ('course_id', models.IntegerField(default=0)),
-                ('price', models.FloatField()),
-            ],
-        ),
-        migrations.CreateModel(
-            name='Invoices',
-            fields=[
-                ('id', models.AutoField(primary_key=True, serialize=False)),
-                ('course_id', models.IntegerField(default=0)),
-                ('teacher_id', models.IntegerField(default=0)),
-                ('req_date', models.DateField()),
-            ],
-        ),
-        migrations.CreateModel(
             name='questions',
             fields=[
                 ('id', models.AutoField(primary_key=True, serialize=False)),
