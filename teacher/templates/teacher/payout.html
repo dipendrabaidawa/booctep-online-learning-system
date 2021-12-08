@@ -260,6 +260,9 @@
             }).then(response => {
                 if (response.status == 1) {
                     showAlert(1, 'Saved Successfully!!!')
+                    setInterval(function() {
+                        location.reload();
+                    }, 2000)
                 } else {
                     showAlert(0, 'Errors in save!!')
                 }
