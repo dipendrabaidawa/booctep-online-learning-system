@@ -130,22 +130,22 @@ WSGI_APPLICATION = 'booctop.wsgi.application'
 # Never change db config and commit.
 # If you want to use local db, change this config and don't commit to repo.
 DATABASES = {
-   # 'default': {
-   #    'ENGINE': 'django.db.backends.mysql',
-   #    'NAME': 'booctop',
-   #    'USER': 'root', # 'root',
-   #    'PASSWORD': 'root',
-   #    'HOST': 'localhost', #'localhost',   # Or an IP Address that your DB is hosted on
-   #    'PORT': '8889',
-   #  }
    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dzjq9t85dqv8kckj',
-        'USER': 'otp2j74kv3w9g03y', # 'root',
-        'PASSWORD': 'ow5vd8s2bue9y9xt',
-        'HOST': 'x8autxobia7sgh74.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', #'localhost',   # Or an IP Address that your DB is hosted on
-        'PORT': '3306',
+      'ENGINE': 'django.db.backends.mysql',
+      'NAME': 'booctop',
+      'USER': 'root', # 'root',
+      'PASSWORD': '',
+      'HOST': 'localhost', #'localhost',   # Or an IP Address that your DB is hosted on
+      'PORT': '3306',
     }
+   # 'default': {
+   #      'ENGINE': 'django.db.backends.mysql',
+   #      'NAME': 'dzjq9t85dqv8kckj',
+   #      'USER': 'otp2j74kv3w9g03y', # 'root',
+   #      'PASSWORD': 'ow5vd8s2bue9y9xt',
+   #      'HOST': 'x8autxobia7sgh74.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', #'localhost',   # Or an IP Address that your DB is hosted on
+   #      'PORT': '3306',
+   #  }
 }
 
 # Password validation
