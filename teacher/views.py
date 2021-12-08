@@ -4,7 +4,7 @@ from teacher.models import categories, Courses, VideoUploads, Sections, question
 from home.models import User, user_profile, notifications, Admincontrol, Messages, Card, Discount
 from student.models import student_register_courses, course_comments
 from discount.models import *
-from datetime import datetime
+from datetime import datetime, timedelta, time
 import os, sys, shutil
 import traceback
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -403,11 +403,41 @@ def transaction(request):
     if user_id == None:
         return redirect('/')
 
-    trans = transactions.objects.filter(teacher_id=user_id)
-    for tran in trans:
-        tran.description = tran.payment_method + " payment from booctep.com To " + User.objects.get(pk=user_id).email
-    print(trans[0].description)
-    return render(request, 'teacher/transactions.html', {'lang': getLanguage(request)[0], 'transactions': trans})
+    page = request.POST.get('page')
+    if page == None or page == '':
+        page = 1
+    else:
+        page = int(page)
+
+    order = request.POST.get('order')
+    if order == '' or order == None:
+        order = 0
+    else:
+        order = int(order)
+
+    if not order: 
+        trans = transactions.objects.filter(teacher_id=user_id)
+        for tran in trans:
+            tran.description = tran.payment_method + " payment from booctep.com To " + User.objects.get(pk=user_id).email
+    else:
+        today = datetime.now().date()
+        tomorrow = today + timedelta(1)
+        today_start = datetime.combine(today, time())
+        today_end = datetime.combine(tomorrow, time())
+        trans = transactions.objects.filter(teacher_id=user_id, date_time__lte=today_end, date_time__gte=today_start)
+
+        for tran in trans:
+            tran.description = tran.payment_method + " payment from booctep.com To " + User.objects.get(pk=user_id).email
+
+    transTmp = Paginator(trans, 5)
+    try:
+        trans = transTmp.page(page)
+    except PageNotAnInteger:
+        trans = transTmp.page(1)
+    except EmptyPage:
+        trans = transTmp.page(transTmp.num_pages)
+
+    return render(request, 'teacher/transactions.html', {'lang': getLanguage(request)[0], 'transactions': trans, 'order': order})
 
 
 def payout(request):

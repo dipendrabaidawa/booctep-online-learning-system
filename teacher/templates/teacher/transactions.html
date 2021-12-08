@@ -329,35 +329,38 @@ a.disabled{
                         {% get_current_language as lang %}
                         {% if lang == "ar" %}
                         <div class="card-header card-header-dark">
-                            <form class="form-inline">
+                            <form class="form-inline" method="post" action="" id="transaction_form">
+                                {% csrf_token %}
+                                <label class="mr-sm-2 form-label mediabout mediabout-dark">مصنف بواسطة:</label>
                                 <div class="field">
                                     <div class="control">
                                         <div class="select">
-                                            <select class="selecttt selecttt-dark">
-                                                <option >كل الأوقات</option>
-                                                <option >اليوم</option>
+                                            <select class="selecttt selecttt-dark" name="order" onchange="order_set()">
+                                                <option value="0">كل الأوقات</option>
+                                                <option value="1">اليوم</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-
+                                <input type="hidden" name="page" id="page" value="{{ page }}">
                             </form>
                         </div>
                         {% else %}
                         <div class="card-header card-header-dark">
-                            <form class="form-inline">
+                            <form class="form-inline" method="post" action="" id="transaction_form">
+                                {% csrf_token %}
                                 <label class="mr-sm-2 form-label mediabout mediabout-dark">Filter by:</label>
                                 <div class="field">
                                     <div class="control">
                                         <div class="select">
-                                            <select class="selecttt selecttt-dark">
-                                                <option >All time</option>
-                                                <option >Today</option>
+                                            <select class="selecttt selecttt-dark" name="order" onchange="order_set()">
+                                                <option value="0" {% if order == 0 %}selected{% endif %}>All time</option>
+                                                <option value="1" {% if order == 1 %}selected{% endif %}>Today</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-
+                                <input type="hidden" name="page" id="page" value="{{ page }}">
                             </form>
                         </div>
                         {% endif %}
@@ -425,66 +428,87 @@ a.disabled{
                         </table>
                     </div>
                     <div class="card-footer p-8pt">
-                        {% get_current_language as lang %}
-                        {% if lang == "ar" %}
+                        {% if transactions.has_other_pages %}
+                            {% get_current_language as lang %}
+                            {% if lang == "ar" %}
                             <center>
-                                
-                                <ul class="pagination-list " style="font-size:small;margin-top: 15px !important;">
-                               
-                                    
-                                    <li><a class="btn disabled disabled-dark mr-1 mediabout mediabout-dark" >السابق</a></li>
-                                    
-                                
-                                    <li class="btn nextt nextt-dark mr-1"><a >1</a></li>
-                                
-                                    <li class="btn btn-primary btn-primary-dark"><a >
-                                        2
-                                    </a></li>
-                                    
-                                    <li class=""><a href="#" class="btn disabled disabled-dark ml-1 mediabout mediabout-dark">
+                                <ul class="pagination-list" style="font-size:small;margin-top: 15px !important;">
+                                    {% if transactions.has_previous %}
+                                        <li><a class="btn mr-1 mediabout mediabout-dark" onclick="page_prev()">السابق</a></li>
+                                    {% else %}
+                                        <li><a class="btn disabled disabled-dark mr-1 mediabout mediabout-dark" >السابق</a></li>
+                                    {% endif %}
+                                    {% for i in transactions.paginator.page_range %}
+                                        {% if transactions.number == i %}
+                                            <li class="btn btn-primary btn-primary-dark" onclick="page_set({{ i }})">{{ i }}</li>
+                                        {% else %}
+                                            <li class="btn nextt nextt-dark mr-1" onclick="page_set({{ i }})">{{i}}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if transactions.has_next %}
+                                        <li><a class="btn ml-1 mediabout mediabout-dark" onclick="page_next()">
                                         التالي
-                                    </a></li>
-                                    
+                                        </a></li>
+                                    {% else %}
+                                        <li><a class="btn disabled disabled-dark ml-1 mediabout mediabout-dark">
+                                        التالي
+                                        </a></li>
+                                    {% endif %}
                                 </ul>
-                                
                             </center>
                             {% else %}
                             <center>
-                                
-                                <ul class="pagination-list " style="font-size:small;margin-top: 15px !important;">
-                               
-                                    
-                                    <li><a class="btn disabled disabled-dark mr-1 mediabout mediabout-dark" >Previous</a></li>
-                                    
-                                
-                                    <li class="btn nextt nextt-dark mr-1"><a >1</a></li>
-                                
-                                    <li class="btn btn-primary btn-primary-dark"><a >
-                                        2
-                                    </a></li>
-                                    
-                                    <li class=""><a href="#" class="btn disabled disabled-dark ml-1 mediabout mediabout-dark">
-                                        Next
-                                    </a></li>
-                                    
+                                <ul class="pagination-list" style="font-size:small;margin-top: 15px !important;">
+                                    {% if transactions.has_previous %}
+                                        <li><a class="btn mr-1 mediabout mediabout-dark" onclick="page_prev()">Prev</a></li>
+                                    {% else %}
+                                        <li><a class="btn disabled disabled-dark mr-1 mediabout mediabout-dark">Prev</a></li>
+                                    {% endif %}
+                                    {% for i in transactions.paginator.page_range %}
+                                        {% if transactions.number == i %}
+                                            <li class="btn btn-primary btn-primary-dark" onclick="page_set({{ i }})">{{i}}</li>
+                                        {% else %}    
+                                            <li class="btn nextt nextt-dark mr-1" onclick="page_set({{ i }})">{{i}}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if transactions.has_next %}
+                                        <li><a class="btn ml-1 mediabout mediabout-dark" onclick="page_next()">Next</a></li>
+                                    {% else %}
+                                        <li><a class="btn disabled disabled-dark ml-1 mediabout mediabout-dark">Next</a></li>
+                                    {% endif %}
                                 </ul>
-                                
                             </center>
                             {% endif %}
-
+                        {% endif %}
                     </div>
-                    <!-- <div class="card-body bordet-top text-right">
-  15 <span class="text-50">of 1,430</span> <a href="#" class="text-50"><i class="material-icons ml-1">arrow_forward</i></a>
-</div> -->
-
-
                 </div>
             </div>
         </div>
     </div>
 
     <script>
+        let cur_page = '{{ transactions.number }}'
 
+        function page_prev() {
+            page = cur_page * 1-1
+            $("#page").val(page)
+            $("#transaction_form").submit()
+        }
+
+        function page_next() {
+            page = cur_page * 1+1
+            $("#page").val(page)
+            $("#transaction_form").submit()
+        }
+
+        function page_set(page) {
+            $("#page").val(page)
+            $("#transaction_form").submit()
+        }
+
+        function order_set() {
+            $("#transaction_form").submit()   
+        }
     </script>
 
 {%  endblock %}
