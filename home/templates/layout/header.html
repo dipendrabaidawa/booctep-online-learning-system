@@ -146,6 +146,12 @@ body .container .content .studentnot-cont {
         width: 100%;
         z-index: 99999999999999;
     }
+    .banner-dark {
+        background: linear-gradient(90deg, rgb(58, 101, 167) 0%, rgb(32, 62, 99) 42%, rgb(8, 46, 77) 65%, rgb(22, 41, 92) 100%);
+        position: fixed;
+        width: 100%;
+        z-index: 99999999999999;
+    }
 
     .banner__content {
         max-width: 100%;
@@ -521,15 +527,21 @@ body .container .content .studentnot-cont {
     }
 </style>
 
-<div class="banner" style="display: none">
+<div class="banner banner-dark" style="display: none">
     <div class="container ">
         <div class="banner__content">
-            <div class="banner__text">
-                <b id="banner_text"></b>
+            {% if lang == "ar" %}
+            <div class="banner__text" style="text-align: right;">
+                <b id="banner_text" style="text-align: right;"></b>
             </div>
+            {% else %}
+            <div class="banner__text" style="text-align: left;">
+                <b id="banner_text" style="text-align: left;"></b>
+            </div>
+            {% endif %}
             <button class="banner__close" type="button">
                 <span class="material-icons">
-                  close
+                  <i class="fa fa-times"></i>
                 </span>
             </button>
         </div>
@@ -1996,12 +2008,12 @@ body .container .content .studentnot-cont {
                         $("#main-navbar").css("top", "0px")
                         clearInterval(myfunc);
                     }   
-                    var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+
                     var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                     var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
                     var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
 
-                    var banner_text = res.description + " now in " + days + "days " + hours + "hours " + minutes+ "minutes " + seconds + "seconds.";
+                    var banner_text =  res.description + " - " + hours + "hr " + minutes+ "min " + seconds + "sec " 
 
                     $("#banner_text").html(banner_text)
                 }, 1000)      

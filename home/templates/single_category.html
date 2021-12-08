@@ -84,8 +84,14 @@
 
         <div class="single_category" style="background-image: url('{% static category.image %}') !important">
             <div class="container">
+                {% get_current_language as lang %}
+                {% if lang == "ar" %}
+                <h3>{% blocktrans %} هناك عدد {{ course_cnt }} دورات في قسم {{ course_name }} {% endblocktrans %} </h3>
+                <p>{% trans "If you don't find what you want, be more specific.." %}</p>
+                {% else %}
                 <h3>{% blocktrans %} {{ course_cnt }} courses in {{ course_name }} {% endblocktrans %} </h3>
                 <p>{% trans "If you don't find what you want, be more specific.." %}</p>
+                {% endif %}
             </div>
         </div>
 
@@ -150,8 +156,7 @@
                                                     
 
                                                     <div class="flex-1 has-background-image show-image"
-                                                         data-background="{% static course.cover_img %}"
-                                                         data-demo-background="/static/assets/img/courses/pc.jpg">
+                                                         data-background="{% static course.cover_img %}">
                                                         <a href="../../../course/{{ course.link }}">
                                                             <div class="overlay"></div>
                                                         </a>
