@@ -4194,27 +4194,27 @@ def searchCourseName(request):
 def saveCardInfo(request):
     user_id = request.POST.get('user_id')
     id = request.POST.get('card_id')
-    card_name = request.POST.get('card_name')
-    card_number = request.POST.get('card_number')
-    bank_number = request.POST.get('bank_number')
     passport_number = request.POST.get('passport_number')
+    full_name = request.POST.get('full_name')
+    country = request.POST.get('country')
+    address = request.POST.get('address')
     status = 1
     try:
         if id == None or id == '':
             ele = Card(
                 user_id=user_id,
-                card_name=card_name,
-                card_number=card_number,
-                bank_number=bank_number,
-                passport_number=passport_number
+                passport_number=passport_number,
+                full_name=full_name,
+                country=country,
+                address=address
             )
             ele.save()
         else:
             ele = Card.objects.get(pk=id)
-            ele.card_name = card_name
-            ele.card_number = card_number
-            ele.bank_number = bank_number
             ele.passport_number = passport_number
+            ele.full_name = full_name
+            ele.country = country
+            ele.address = address
             ele.save()
     except:
         status = 0
