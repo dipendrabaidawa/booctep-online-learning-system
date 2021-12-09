@@ -1970,7 +1970,7 @@ body .container .content .studentnot-cont {
             myfunc = setInterval(function() {
                 var now = new Date().getTime();
                 var timeleft = countDownDate - now;
-                if (timeleft == 0) {
+                if (timeleft <= 0) {
                     $("div.banner").css("display", "none");
                     $("#main-navbar").css("top", "0px")
                     clearInterval(myfunc);
@@ -1980,7 +1980,7 @@ body .container .content .studentnot-cont {
                 var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
 
-                var banner_text = data.description + " now in " + days + "days " + hours + "hours " + minutes+ "minutes " + seconds + "seconds.";
+                var banner_text =  res.description + " - " + hours + "hr " + minutes+ "min " + seconds + "sec " 
 
                 $("#banner_text").html(banner_text)
             }, 1000)
@@ -1996,14 +1996,12 @@ body .container .content .studentnot-cont {
             if (res.status == 1) {
                 var expire_date = res.expire_date
                 var countDownDate = new Date(expire_date).getTime();
-                console.log(new Date(expire_date))
-                console.log(countDownDate)
                 $("div.banner").css("display", "block");
                 $("#main-navbar").css("top", "40px")
                 myfunc = setInterval(function() {
                     var now = new Date().getTime();
                     var timeleft = countDownDate - now;
-                    if (timeleft == 0) {
+                    if (timeleft <= 0) {
                         $("div.banner").css("display", "none");
                         $("#main-navbar").css("top", "0px")
                         clearInterval(myfunc);
