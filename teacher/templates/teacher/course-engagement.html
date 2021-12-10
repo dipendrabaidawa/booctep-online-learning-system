@@ -319,7 +319,7 @@ td.selected{
                             <p class="card-title d-flex align-items-center">
                                 <b class="mediabout mediabout-dark">مجموع الإيرادات</b>
                             </p>
-                            <span class="h2 m-0" style="color: rgb(144, 221, 151);">&dollar;{{ course.price }}</span>
+                            <span class="h2 m-0" style="color: rgb(144, 221, 151);">&dollar;{{ course.price|default:"0" }}</span>
                         </div>
                         <i class="material-icons icon-32pt text-20 ml-8pt">monetization_on</i>
                     </div>
@@ -332,7 +332,7 @@ td.selected{
                             <p class="card-title d-flex align-items-center">
                                 <b class="mediabout mediabout-dark">مجموع الطلاب</b>
                             </p>
-                            <span class="h2 m-0 blllu blllu-dark ">{{ course.stuCnt }}</span>
+                            <span class="h2 m-0 blllu blllu-dark ">{{ course.stuCntvalue|default:"0" }}</span>
                         </div>
                         <i class="material-icons icon-32pt text-20 ml-8pt">people_outline</i>
                     </div>
@@ -345,7 +345,7 @@ td.selected{
                             <p class="card-title d-flex align-items-center">
                                 <b class="mediabout mediabout-dark">تقييم الدورة</b>
                             </p>
-                            <span class="h2 m-0 blllu blllu-dark ">{{ course.rating }}</span>
+                            <span class="h2 m-0 blllu blllu-dark ">{{ course.rating|default:"0" }}</span>
                         </div>
                     </div>
                 </div>
@@ -372,7 +372,7 @@ td.selected{
                             <p class="card-title d-flex align-items-center">
                                 <b class="mediabout mediabout-dark">Total revenue</b>
                             </p>
-                            <span class="h2 m-0" style="color: rgb(144, 221, 151);">&dollar;{{ course.price }}</span>
+                            <span class="h2 m-0" style="color: rgb(144, 221, 151);">&dollar;{{ course.price|default:"0" }}</span>
                         </div>
                         <i class="material-icons icon-32pt text-20 ml-8pt">monetization_on</i>
                     </div>
@@ -385,7 +385,7 @@ td.selected{
                             <p class="card-title d-flex align-items-center">
                                 <b class="mediabout mediabout-dark">total students</b>
                             </p>
-                            <span class="h2 m-0 blllu blllu-dark flllot">{{ course.stuCnt }}</span>
+                            <span class="h2 m-0 blllu blllu-dark flllot">{{ course.stuCnt|default:"0" }}</span>
                         </div>
                         <i class="material-icons icon-32pt text-20 ml-8pt">people_outline</i>
                     </div>
@@ -398,7 +398,7 @@ td.selected{
                             <p class="card-title d-flex align-items-center">
                                 <b class="mediabout mediabout-dark">Course rating</b>
                             </p>
-                            <span class="h2 m-0 blllu blllu-dark flllot">{{ course.rating }}</span>
+                            <span class="h2 m-0 blllu blllu-dark flllot">{{ course.rating|default:"0" }}</span>
                         </div>
                     </div>
                 </div>
@@ -417,7 +417,7 @@ td.selected{
                     <div class="table-responsive" data-toggle="lists" data-lists-sort-by="js-lists-values-employee-name"
                          data-lists-values='["js-lists-values-employee-name", "js-lists-values-employer-name", "js-lists-values-projects", "js-lists-values-activity", "js-lists-values-earnings"]'>
                         <div class="card-header card-header-dark">
-                            <button class="btn btn-primary mt-3 " onclick="openAddModal()" {% if coupon != '' %} disabled style="cursor:not-allowed" {% endif %}>إنشاء قسيمة خصم</button>
+                            <button class="btn btn-primary mt-3 " onclick="openAddModal()" {% if coupon != '' or courses|length == 0 %} disabled style="cursor:not-allowed" {% endif %}>إنشاء قسيمة خصم</button>
                         </div>
                         <table class="table table-nowrap table-flush" style="border-radius: 30px 30px 0 0 !important;">
                             <thead class="tehead tehead-dark">
@@ -602,7 +602,7 @@ td.selected{
                     <div class="table-responsive" data-toggle="lists" data-lists-sort-by="js-lists-values-employee-name"
                          data-lists-values='["js-lists-values-employee-name", "js-lists-values-employer-name", "js-lists-values-projects", "js-lists-values-activity", "js-lists-values-earnings"]'>
                         <div class="card-header card-header-dark">
-                            <button class="btn btn-primary mt-3 " onclick="openAddModal()" {% if coupon != '' %} disabled style="cursor:not-allowed" {% endif %}>Create Coupon</button>
+                            <button class="btn btn-primary mt-3 " onclick="openAddModal()" {% if coupon != '' or courses|length == 0 %} disabled style="cursor:not-allowed" {% endif %}>Create Coupon</button>
                         </div>
                         <table class="table table-nowrap table-flush" style="border-radius: 30px 30px 0 0 !important;">
                             <thead class="tehead tehead-dark">

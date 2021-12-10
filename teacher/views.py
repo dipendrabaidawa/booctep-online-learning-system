@@ -358,6 +358,11 @@ def course_engagement(request):
             cur_course_id = 0
     else:
         cur_course_id = int(cur_course_id)
+
+    course = {}
+    reviewList = ''
+    coupon = ''
+
     if len(courses) > 0:
         course = Courses.objects.get(pk=cur_course_id)
         # total students
@@ -386,15 +391,9 @@ def course_engagement(request):
             reviewList = paginator.page(1)
         except EmptyPage:
             reviewList = paginator.page(reviewList.num_pages)
+
         if discount.objects.filter(course_id=cur_course_id).exists():
             coupon = discount.objects.filter(course_id=cur_course_id)[0]
-        else:
-            coupon = ''
-
-    else:
-        course = ''
-        reviewList = ''
- 
 
     return render(request, 'teacher/course-engagement.html',
                   {'lang': getLanguage(request)[0], 'courses': courses, 'course': course, 'reviewList': reviewList,
