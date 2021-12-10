@@ -124,6 +124,9 @@ def teacher_privacy(request):
 
 
 def dashboard(request):
+    if request.session.get('course_id') != None:
+        del request.session['course_id']
+
     if request.session.get('user_id') == None:
         return redirect('/')
     user_id = request.session.get('user_id')
@@ -562,25 +565,23 @@ def add_course(request):
         return redirect('/')
     step = int(request.GET.get('step'))
 
+    if request.session.get('course_id') == None:
+        if request.method == 'POST':
+            course_id = request.POST.get('course')
+            if course_id is None or course_id == "":
+                course_id = ''
+    else:
+        course_id = request.session.get('course_id')
+
+    print(course_id)
+
     if step == 1:
         course = []
         obj_cat = categories.objects.all()
         autoUrl = ''
-        if request.method == 'POST':
-            course_id = request.POST.get('course')
+        
+        if course_id != "":
             course = Courses.objects.get(pk=course_id)
-            print("course_id", course_id)
-            print("description", course.description)
-            print("requirements", course.requirements)
-            print("gains", course.gains)
-            print("category", course.scat_id)
-            print("subcategory", course.subcat_id)
-            print("gains", course.gains)
-            print("gains", course.gains)
-            print("type", course.type)
-            print("price", course.price)
-        else:
-            course_id = ''
 
         courseCnt = Courses.objects.filter(user_id=request.user.id).count()
         teacher_name = request.user.first_name + " " + request.user.last_name
@@ -603,39 +604,32 @@ def add_course(request):
                        'course_id': course_id})
 
     elif step == 2:
-        if request.method == 'POST':
-            course_id = request.POST.get('course')
-            if course_id != '':
-                course = Courses.objects.get(pk=course_id)
-                sections = Sections.objects.filter(course_id=course_id).filter(type='video')
-                videos = []
-                section_video = []
-                key = 1
-                video_key = 0
-                for section in sections:
-                    video_res = VideoUploads.objects.filter(section_id=section.id)
-                    videos += video_res
-            else:
-                course_id = ''
-                course = []
-                sections = []
-                videos = []
-        else:
-            course_id = ''
-            course = []
-            sections = []
-            videos = []
+        course = []
+        sections = []
+        videos = []
 
-        print("sections:", sections)
-        print("videos:", videos)
+        if course_id != '':
+            course = Courses.objects.get(pk=course_id)
+            sections = Sections.objects.filter(course_id=course_id).filter(type='video')
+            videos = []
+            section_video = []
+            key = 1
+            video_key = 0
+            for section in sections:
+                video_res = VideoUploads.objects.filter(section_id=section.id)
+                videos += video_res
+
         return render(request, 'teacher/new-course-2.html',
                       {'lang': getLanguage(request)[0], 'course_id': course_id, 'course': course,
                        'sections': serializers.serialize('json', sections),
                        'videos': serializers.serialize('json', videos)})
 
     elif step == 3:
-        if request.method == 'POST':
-            course_id = request.POST.get('course')
+        section = []
+        question = []
+        course = []
+
+        if course_id != '':
             course = Courses.objects.get(pk=course_id)
             if Sections.objects.filter(course_id=course_id).filter(type='question').exists():
                 section = Sections.objects.filter(course_id=course_id).filter(type='question')[0]
@@ -643,20 +637,23 @@ def add_course(request):
             else:
                 section = ''
                 question = ''
-        else:
-            course_id = ''
-            section = []
-            question = []
+
         return render(request, 'teacher/new-course-3.html',
                       {'lang': getLanguage(request)[0], 'course_id': course_id, 'section': section, 'course': course,
                        'question_list': serializers.serialize('json', question)})
     else:
-        course_id = request.POST.get('course')
-        data = get_courseDetails(course_id)
-        course = Courses.objects.get(pk=course_id)
-        url_id = "{0:0=4d}".format(course.id)
-        url = '/course/' + course.name + '/' + request.user.first_name + '_' + request.user.last_name + '_' + url_id
-        course.course_url = url
+        data = []
+        course = []
+        url_id = ""
+        url = ""
+
+        if course_id != '':
+            data = get_courseDetails(course_id)
+            course = Courses.objects.get(pk=course_id)
+            url_id = "{0:0=4d}".format(course.id)
+            url = '/course/' + course.name + '/' + request.user.first_name + '_' + request.user.last_name + '_' + url_id
+            course.course_url = url
+
         return render(request, 'teacher/new-course-4.html',
                       {'course_id': course_id, 'video_list': data['video_list'], 'question_list': data['question_list'],
                        'section_list': data['section_list'], 'course': course, 'promo_video': data['promo_video'], 'lang': getLanguage(request)[0]})
@@ -886,6 +883,10 @@ def store_course(request):
     to_return = {
         'msg': msg,
         'id': id}
+
+    # saving course_id to session variable
+    request.session['course_id'] = id
+
     serialized = json.dumps(to_return)
     return HttpResponse(serialized, content_type="application/json")
 
@@ -907,7 +908,7 @@ def save_later(request):
     pending = request.POST.get('pending')
     type = request.POST.get('type')
     course_level = request.POST.get('course_level')
-    dripping = request.POST.get('dripping')
+    # dripping = request.POST.get('dripping')
 
     coverImg = request.FILES.get('coverImg')
     headerImg = request.FILES.get('headerImg')
@@ -940,6 +941,9 @@ def save_later(request):
             fd.write(chunk)
         fd.close()
 
+    # making the courseUrl only with alphabets and underscore.
+    courseUrl = re.sub(r'[^\w]', '', name)
+
     if id == '':  # add case
         objCourse = Courses(
             name=name,
@@ -947,6 +951,7 @@ def save_later(request):
             requirements=requirements,
             gains=gains,
             scat_id=category_id,
+            subcat_id=sub_category_id,
             price=price,
             user_id=request.user.id,
             cover_img=full_path,
@@ -955,7 +960,7 @@ def save_later(request):
             pending=pending,
             type=type,
             course_level=course_level,
-            dripping=dripping,
+            dripping=0,
             approval_status=0
         )
         objCourse.save()
@@ -969,6 +974,7 @@ def save_later(request):
         objCourse.requirements = requirements
         objCourse.gains = gains
         objCourse.scat_id = category_id
+        objCourse.subcat_id = sub_category_id
         objCourse.price = price
         objCourse.user_id = request.user.id
         objCourse.cover_img = full_path
@@ -976,7 +982,7 @@ def save_later(request):
         objCourse.course_url = courseUrl
         objCourse.type = type
         objCourse.course_level = course_level
-        objCourse.dripping = dripping
+        # objCourse.dripping = dripping
         objCourse.save()
         msg = "successs"
         id = objCourse.id
@@ -1286,8 +1292,8 @@ def store_course_3(request):
 # @return HttpResponse
 
 def store_course_4(request):
-    course_id = request.POST.get('course_id')
-    course = Courses.objects.get(pk=course_id)
+    courseid = request.POST.get('course_id')
+    course = Courses.objects.get(pk=courseid)
     course.approval_status = 1  # send request....
     course.pending = 4
     course.save()
@@ -1296,6 +1302,8 @@ def store_course_4(request):
     to_return = {
         'msg': msg,
     }
+
+    del request.session['course_id']
 
     serialized = json.dumps(to_return)
     return HttpResponse(serialized, content_type="application/json")

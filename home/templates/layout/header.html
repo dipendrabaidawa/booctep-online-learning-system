@@ -1996,8 +1996,6 @@ body .container .content .studentnot-cont {
             if (res.status == 1) {
                 var expire_date = res.expire_date
                 var countDownDate = new Date(expire_date).getTime();
-                $("div.banner").css("display", "block");
-                $("#main-navbar").css("top", "40px")
                 myfunc = setInterval(function() {
                     var now = new Date().getTime();
                     var timeleft = countDownDate - now;
@@ -2005,6 +2003,9 @@ body .container .content .studentnot-cont {
                         $("div.banner").css("display", "none");
                         $("#main-navbar").css("top", "0px")
                         clearInterval(myfunc);
+                    } else {
+                        $("div.banner").css("display", "block");
+                        $("#main-navbar").css("top", "40px")
                     }   
 
                     var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));

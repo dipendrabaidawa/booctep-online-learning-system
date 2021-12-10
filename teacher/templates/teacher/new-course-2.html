@@ -1195,14 +1195,14 @@ a.blakandwhate-dark{
                 processData: false,
                 data: form_data,
             })
-                .then(response => {
-                    let message = response.msg;
-                    console.log("Stored section group successfully", message);
-                    if (message == "success") {
-                        document.location.href = "/{{lang}}/teacher/courses/";
-                    }
-                })
-                .catch(error => console.error(error));
+            .then(response => {
+                let message = response.msg;
+                console.log("Stored section group successfully", message);
+                if (message == "success") {
+                    document.location.href = "/{{lang}}/teacher/courses/";
+                }
+            })
+            .catch(error => console.error(error));
         }
 
         $('#addCourseBtn').on('click', () => {      

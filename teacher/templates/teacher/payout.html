@@ -140,7 +140,7 @@
                         <label class="col-form-label form-label col-sm-3 mediabout mediabout-dark" style="letter-spacing: 0 !important;">عنوانك </label>
                         <div class="col-sm-9">
                             <textarea type="text" class="form-control form-control-dark" id="address" placeholder="قم بإدخال عنوانك بشكل كامل"
-                                   value="{{ card.address }}"></textarea>
+                                   value="{{ card.address }}">{{ card.address }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -190,7 +190,7 @@
                         <label class="col-form-label form-label col-sm-3 mediabout mediabout-dark" >Address</label>
                         <div class="col-sm-9">
                             <textarea type="text" class="form-control form-control-dark" id="address" placeholder="Please write a specific address"
-                                   value="{{ card.address }}"></textarea>
+                                   value="{{ card.address }}">{{ card.address }}</textarea>
                         </div>
                     </div>
                 </div>
@@ -209,19 +209,24 @@
     </div>
     <script>
 
-        let change = 0, change1 = 0
+        let change = 0
+        var lang = "{{ lang }}"
 
         $("#full_name").on('change', function(){
             change = 1
         })
 
         $("#country").on('change', function(){
-            change1 = 1
+            change = 1
         })
 
         $("#address").on('change', function(){
             change = 1
         })
+
+        $("#passport_number").on('change', function(){
+            change = 1
+        })        
 
         function saveBank() {
             card_id = '{{ card.id }}'
@@ -230,13 +235,19 @@
             country = $("#country").val()
             address = $("#address").val()
 
-            if (full_name == '' || country == '' || address == '') {
-                showAlert(0, 'من فضلك قم بادخال المعلومات')
+            if (full_name == '' || country == '' || address == '' || passport_number == '') {
+                if (lang == 'ar')
+                    showAlert(0, 'من فضلك قم بادخال المعلومات')
+                else
+                    showAlert(0, 'Please insert every field.')
                 return;
             }
 
-            if (change == 0 && change1 == 0) {
-                showAlert(0, 'You didnt change anything!!')
+            if (change == 0) {
+                if (lang == 'ar')
+                    showAlert(0, 'أنت لم تغير أي شيء!')
+                else
+                    showAlert(0, "You didn't change anything!")
                 return;
             }
 
@@ -247,7 +258,6 @@
             form_data.append('country', country)
             form_data.append('full_name', full_name)
             form_data.append('passport_number', passport_number)
-            form_data.append('user_id', user_id)
             form_data.append('card_id', card_id)
             $.ajax({
                 url: url,

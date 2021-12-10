@@ -416,11 +416,20 @@
                                     <div class="form-group">
                                         <label class="form-label mediabout mediabout-light" style="letter-spacing: 0 !important;">القسم الأساسي</label>
                                         <select id="category" name="category" class="form-control selecttt selecttt-light">
+                                            {% get_current_language as lang %}
                                             {% for cat in categories %}
                                                 {% if cat.id == course.scat_id %}
+                                                    {% if lang == "ar" %}
                                                     <option value="{{ cat.id }}" selected>{{ cat.namear }}</option>
+                                                    {% else %}
+                                                    <option value="{{ cat.id }}" selected>{{ cat.name }}</option>
+                                                    {% endif %}
                                                 {% else %}
+                                                    {% if lang == "ar" %}
                                                     <option value="{{ cat.id }}">{{ cat.namear }}</option>
+                                                    {% else %}
+                                                    <option value="{{ cat.id }}">{{ cat.name }}</option>
+                                                    {% endif %}
                                                 {% endif %}
                                             {% endfor %}
                                         </select>
@@ -652,6 +661,7 @@
 
         const getSubCat = (cat_id) => {
             let url = "/getsubcategory";
+            let lang = "{{ lang }}"
             //Ajax Start
             $.ajax({
                 url: url,
@@ -667,20 +677,25 @@
                 },
                 success: function (data) {
                     selected_id = "{{ course.subcat_id }}"
-                    k = 0;
                     let sub_cat = data.subcat_list;
                     let html_subCat = '';
-                    sub = data.subcat_list;
-                    k = sub[0].id
-                    sub_cat.forEach(cat => {
-                        if(k == selected_id){
-                            html_subCat += '<option value="' + cat.id + '" selected >' + cat.name + '</option>';
-                            
-                        }else{
-                            html_subCat += '<option value="' + cat.id + '" >' + cat.name + '</option>';
-                        }
-                        k++;
-                    });
+                    if (lang == 'en') {
+                        sub_cat.forEach(cat => {
+                            if(cat.id == selected_id){
+                                html_subCat += '<option value="' + cat.id + '" selected >' + cat.name + '</option>';
+                            }else{
+                                html_subCat += '<option value="' + cat.id + '" >' + cat.name + '</option>';
+                            }
+                        });
+                    } else {
+                        sub_cat.forEach(cat => {
+                            if(cat.id == selected_id){
+                                html_subCat += '<option value="' + cat.id + '" selected >' + cat.namear + '</option>';
+                            }else{
+                                html_subCat += '<option value="' + cat.id + '" >' + cat.namear + '</option>';
+                            }
+                        });
+                    }
                     $('#sub_category').empty();
                     $('#sub_category').append(html_subCat);
                 },
@@ -703,7 +718,6 @@
             let grains = $('#course_grains').val();
             let coverImg = $("#inputGroupFile01")[0].files[0];
             let headerImg = $("#inputGroupFile02")[0].files[0];
-            let courseUrl = $("#courseUrl").val();
             let price = $('input[name="course_price"]').val()
             let course_level = $('#level').val()
             // let dripping = $('#dripping').val()
@@ -721,7 +735,6 @@
             data.append('price', price);
             data.append('coverImg', coverImg);
             data.append('headerImg', headerImg);
-            data.append('courseUrl', '');
             data.append('course_level', course_level);
             // data.append('dripping', dripping);
             data.append('user_id', '{{ request.user.id }}');

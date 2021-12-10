@@ -4192,7 +4192,7 @@ def searchCourseName(request):
 
 @csrf_exempt
 def saveCardInfo(request):
-    user_id = request.POST.get('user_id')
+    user_id = request.session.get("user_id")
     id = request.POST.get('card_id')
     passport_number = request.POST.get('passport_number')
     full_name = request.POST.get('full_name')
@@ -4301,6 +4301,7 @@ def discount_banner(request):
 
     discount_description = ""
     discount_percent = ""
+    discount_expire = ''
     if discount.count() == 0:
         status = 0
     else:
