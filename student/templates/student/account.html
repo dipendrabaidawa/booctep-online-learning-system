@@ -627,9 +627,12 @@
                 <br />
                 <div class="media align-items-center">
                     <a href="" class="media-left">
-                        <img src="{% static user.image %}" style="border: 2px solid rgb(197, 189, 189); height:56px;" alt="people"
-                             id="photo_img"
-                             width="56" class="rounded-circle lifft"/>
+                        {% if user.image %}
+                        <img src="{% static user.image %}" style="border: 2px solid rgb(197, 189, 189); height:56px;" alt="people" id="photo_img" width="56" class="rounded-circle lifft"/>
+                        {% else %}
+                        <img src="{% static 'assets/img/userdefault.png' %}"  style="border-radius: 50%;width: 50px !important;height: 40px !important;" class="avatar brd brd-dark"
+                             data-demo-src="">
+                        {% endif %}
                     </a>
                     <div class="media-body">
                         <div class="custom-file custom-file-dark">
@@ -644,9 +647,12 @@
                 <br />
                 <div class="media align-items-center">
                     <a href="" class="media-left">
-                        <img src="{% static user.image %}" style="border: 2px solid rgb(197, 189, 189); height:56px;" alt="people"
-                             id="photo_img"
-                             width="56" class="rounded-circle lifft"/>
+                        {% if user.image %}
+                        <img src="{% static user.image %}" style="border: 2px solid rgb(197, 189, 189); height:56px;" alt="people" id="photo_img" width="56" class="rounded-circle lifft"/>
+                        {% else %}
+                        <img src="{% static 'assets/img/userdefault.png' %}"  style="border-radius: 50%;width: 50px !important;height: 40px !important;" class="avatar brd brd-dark"
+                             data-demo-src="">
+                        {% endif %}
                     </a>
                     <div class="media-body">
                         <div class="custom-file custom-file-dark">

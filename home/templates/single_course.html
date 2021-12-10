@@ -948,7 +948,7 @@
                         
                     </div>
                     
-                    {% if user.profile.image %}
+                    {% if user.image %}
                     <img src="/static{{ user.image }}" alt="" class="brd brd-dark" style="margin-top: 0px;">
                     {% else %}
                     <img  class="brd brd-dark" style="margin-top: 0px;"src="{% static 'assets/img/userdefault.png' %}"
@@ -1751,7 +1751,7 @@
                                                 <div class="summary-card summary-card-dark" style="margin-top:25px">
                                                     <div class="teacher-card">
                                                         
-                                                        {% if user.profile.image %}
+                                                        {% if user.image %}
                                                         <div class="avatar brd brd-dark">
                                                             <img id="user-avatar" style=" " class="avatar-image hero-single-course hero-single-course-dark" src="/static{{ user.image }}" style=""
                                                              data-demo-src="">

@@ -472,7 +472,7 @@
     <div class=" is-paddingless" style="">
         {% if user.group_id == 3 and user.group_id == 4 %}
             <div class="cover-bg" style="">
-                {% if teacher.profile.header_img %}
+                {% if teacher.header_img %}
                 <img class="avatar brd brd-dark" src="{% static teacher.profile.header_img %}" style=""
                      data-demo-src="">
                 {% else %}
@@ -480,7 +480,7 @@
                      data-demo-src="">
                 {% endif %}
 
-                {% if user.profile.image %}
+                {% if user.image %}
                 <div class="avatar">
                     <img id="user-avatar" style="height: 100% !important;" class="avatar-image hero-single-course hero-single-course-dark" src="/static{{ user.image }}" style=""
                      data-demo-src="">
@@ -495,7 +495,7 @@
                 <img class="cover-image hero-single-course hero-single-course-dark" src=""
                      data-demo-src="" alt="" style="">
                 <div class="avatar">
-                    {% if user.profile.image %}
+                    {% if user.image %}
                     <img id="user-avatar" class="avatar-image hero-single-course hero-single-course-dark" src="{% static teacher.image %}"
                          data-demo-src="assets/img/avatars/jenna.png" alt=""  style="height: 100% !important;">
                     {% else %}
@@ -783,7 +783,7 @@
                                                 <div class="card" style="margin-bottom: 15px !important;width: 95%;margin:0 auto;">
                                                     <div class="card-body card-body-dark" style="display:flex;flex-direction:row;align-items:center">
                     
-                                                             {% if user.profile.image %}
+                                                             {% if user.image %}
                                                              <div class="avatar brd brd-dark">
                                                                  <img id="user-avatar" style="border-radius: 50%;margin-left: 10px;height: 40px !important;width: 40px !important; " class="avatar-image hero-single-course hero-single-course-dark" src="/static{{ user.image }}" style=""
                                                                   data-demo-src="">

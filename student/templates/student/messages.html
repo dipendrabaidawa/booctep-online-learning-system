@@ -339,7 +339,7 @@ width: 450px !important;
                                 <input type="hidden" value="{{ user_id }}" id="student_id">
                                 <div class="mr-3">
                                     <div class="avatar avatar-online avatar-sm" style="width: 60px !important;height: 60px !important;">
-                                        {% if user.profile.image %}
+                                        {% if user.image %}
                                         <img src="/static{{ user.image }}" alt="" class="brd brd-dark avatar-img rounded-circle" style="margin-top: 0px;">
                                         {% else %}
                                         <img  class="brd brd-dark avatar-img rounded-circle" style="margin-top: 0px;"src="{% static 'assets/img/userdefault.png' %}"

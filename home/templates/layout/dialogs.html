@@ -387,17 +387,12 @@
                     <img src="{% static 'assets/img/forget_email.png' %}" class="forget_email" alt="">
                     <div class="help-text">
                         <p style="margin-bottom: 10px;" class="mediabout mediabout-dark">{% trans 'Enter your Email address.' %}</p>
-                        {% if lang == 'ar' %}
-                            <form action="/ar/reset_password/" aa= "{{lang}}" method="POST" class="text-center">
-                        {% else %}
-                            <form action="/en/reset_password/" aa= "{{lang}}" method="POST" class="text-center">
-                        {% endif %}
-                                  {% csrf_token %}
-                                    {{form}}
-                            <input type="text" style="margin-bottom: 10px;" class="input is-fade" name="email"
-                                placeholder="{% trans 'Enter your Email' %}">
+                            <form action="/{{ lang }}/reset_password/" aa="{{lang}}" method="POST" class="text-center" id="reset_password_form">
+                            {% csrf_token %}
+                            {{form}}
+                            <input type="text" style="margin-bottom: 10px;" class="input is-fade" name="email" placeholder="{% trans 'Enter your Email' %}">
                             <button type="submit" style="background-color:rgb(68, 127, 161);color: #fff;"
-                                class="button is-fullwidth dark-button">{% trans 'Send link' %}</button>
+                                class="button is-fullwidth dark-button" id="reset_password_btn">{% trans 'Send link' %}</button>
                         </form>
                     </div>
                 </div>
@@ -489,6 +484,16 @@
             if(e.keyCode == 13){
                 login();
             }
+        })
+
+        $("#reset_password_btn").click(function(e) {
+            e.preventDefault()
+            let email = $("input[name='email']").val()
+            if (email == "") {
+                alert("Please insert valid email.")
+                return
+            }
+            $("#reset_password_form").submit()
         })     
     });
     

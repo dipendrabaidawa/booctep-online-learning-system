@@ -1411,7 +1411,7 @@ body .container .content .studentnot-cont {
                 <div id="account-dropdown" class="navbar-item is-account drop-trigger has-caret" style="
                 margin-left: -10px !important;">
                     <div class="small-avatar1">
-                        {% if user.profile.image %}
+                        {% if user.image %}
                         <img class="avatar brd brd-dark" src="/static{{ user.image }}" style=""
                              data-demo-src="">
                         {% else %}
@@ -1594,7 +1594,7 @@ body .container .content .studentnot-cont {
             <!-- Account -->
             <div class="navbar-item has-dropdown ">
                 <div class="navmobile">
-                    {% if user.profile.image %}
+                    {% if user.image %}
                     <img class="avatar brd brd-dark" src="/static{{ user.image }}" style=""
                          data-demo-src="">
                     {% else %}
