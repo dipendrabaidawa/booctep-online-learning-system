@@ -566,9 +566,10 @@ def add_course(request):
     step = int(request.GET.get('step'))
 
     if request.session.get('course_id') == None:
+        course_id = ''
         if request.method == 'POST':
             course_id = request.POST.get('course')
-            if course_id is None or course_id == "":
+            if course_id is None:
                 course_id = ''
     else:
         course_id = request.session.get('course_id')
