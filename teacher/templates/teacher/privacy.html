@@ -130,8 +130,7 @@ border: 1px solid #14171b !important;
             </div>
             <div class="form-group" style="margin-bottom: 20px !important">
                 <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1 riggt">
-                    <input style="font-size:5px !important;margin-top:-10px !important" checked="" type="checkbox" onchange="setMode(this)"
-                           id="changemode" class="custom-control-input toggler" style="font-size: x-small;">
+                    <input style="font-size:5px !important;margin-top:-10px !important" checked="" type="checkbox" onchange="setMode(this)" id="changemode" class="custom-control-input toggler" style="font-size: x-small;" checked>
 
                     <label class="custom-control-label" for="changemode">Yes</label>
                 </div>
@@ -232,7 +231,7 @@ border: 1px solid #14171b !important;
         privacy_item = localStorage.getItem('privacyItem')
         if(privacy_item == null || privacy_item ==  '') {
             privacy_item = {
-                'mode': 0,
+                'mode': 1,
                 'lang': 0
             }
         } else {
@@ -258,13 +257,13 @@ border: 1px solid #14171b !important;
 
     function saveChanges() {
         localStorage.setItem('privacyItem', JSON.stringify(privacy_item));
-        auto_email = $("#auto_email").is(":checked")
+        // auto_email = $("#auto_email").is(":checked")
         receive_email = $("#receive_email").is(":checked")
         user_id = '{{ request.user.id }}'
         let url = '/set_privacy/'
         let form_data = new FormData()
         form_data.append('user_id', user_id)
-        form_data.append('auto_email', auto_email)
+        // form_data.append('auto_email', auto_email)
         form_data.append('receive_email', receive_email)
         $.ajax({
             url: url,
@@ -287,7 +286,6 @@ border: 1px solid #14171b !important;
                 }, 2000)
             },
         })
-
     }
 </script>
 

@@ -1438,8 +1438,8 @@ background:#3A3A3A;
             videoname = $(`[data-srno=${memory.cur_video}]`).html().split('.')
             videoname.pop()
             $("#cur_video_name").html(videoname.toString())
-            $(".app-video video source").attr("src", "../../../../static" + dataurl)
-            $(".app-video video")[0].load();
+            $(".schedule-header video source").attr("src", "../../../../static" + dataurl)
+            $(".schedule-header video")[0].load();
             console.log("memory", memory)
             $(".list-group .flex").removeAttr("style")
             $(`[data-srno=${memory.cur_video}]`).css({"color": "rgb(1, 100, 192)"});
@@ -1480,8 +1480,8 @@ background:#3A3A3A;
             videoname = $(`[data-srno=${memory.cur_video}]`).html().split('.')
             videoname.pop()
             $("#cur_video_name").html(videoname.toString())
-            $(".app-video video source").attr("src", "../../../../static" + dataurl)
-            $(".app-video video")[0].load();
+            $(".schedule-header video source").attr("src", "../../../../static" + dataurl)
+            $(".schedule-header video")[0].load();
             console.log("memory test::", memory)
             $(".list-group .flex").removeAttr("style")
             $(`[data-srno=${memory.cur_video}]`).css({"color": "rgb(1, 100, 192)"});

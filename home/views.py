@@ -4228,12 +4228,10 @@ def saveCardInfo(request):
 def setPrivacy(request):
     user_id = request.POST.get('user_id')
     receive_email = request.POST.get('receive_email')
-    auto_email = request.POST.get('auto_email')
     if receive_email == 'true':
         receive_email = 1
     else:
         receive_email = 0
-    print("receive email:::", receive_email)
     status = 1
     try:
         user = User.objects.get(pk=user_id)

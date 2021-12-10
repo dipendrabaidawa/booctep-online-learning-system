@@ -174,7 +174,7 @@
             <div class="form-group " style="margin-bottom: 20px !important">
                 <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1 riggt">
                     <input style="font-size:5px !important;margin-top:-10px !important" type="checkbox"
-                           id="auto_email" class="custom-control-input" style="font-size: x-small;">
+                           id="auto_email" class="custom-control-input" style="font-size: x-small;" onchange="setAutoEmail(this)" checked>
                     <label class="custom-control-label" for="auto_email">Yes</label>
                 </div>
 
@@ -221,9 +221,7 @@
             </div>
             <div class="form-group" style="margin-bottom: 20px !important">
                 <div class="custom-control custom-checkbox-toggle custom-control-inline mr-1 riggt">
-                    <input style="font-size:5px !important;margin-top:-10px !important" checked="" type="checkbox" onchange="setMode(this)"
-                           id="changemode" class="custom-control-input toggler" style="font-size: x-small;">
-
+                    <input style="font-size:5px !important;margin-top:-10px !important" checked="" type="checkbox" onchange="setMode(this)" id="changemode" class="custom-control-input toggler" style="font-size: x-small;" checked>
                     <label class="custom-control-label" for="changemode">Yes</label>
                 </div>
                 {% get_current_language as lang %}
@@ -323,14 +321,16 @@
             privacy_item = localStorage.getItem('privacyItemStu')
             if(privacy_item == null || privacy_item ==  '') {
                 privacy_item = {
-                    'mode': 0,
+                    'mode': 1,
+                    'auto_email': 1,
                     'lang': 0
                 }
             } else {
                 privacy_item = JSON.parse(privacy_item);
             }
             $("#changemode").prop('checked', privacy_item.mode)
-            $("#changelang").prop('checked', privacy_item.lang)
+            $("#auto_email").prop('checked', privacy_item.auto_email)
+            
             let mode = privacy_item.name == 0 ? 'الليلي' : 'الفاتح'
             $(".getmodename").html(mode)
         })
@@ -339,6 +339,12 @@
             let value = $(obj).is(":checked")
             value = value == true ? 1 : 0
             privacy_item.mode = value
+        }
+
+        function setAutoEmail(obj) {
+            let value = $(obj).is(":checked")
+            value = value == true ? 1 : 0
+            privacy_item.auto_email = value
         }
 
         function setLang(obj) {
@@ -386,13 +392,13 @@
 
         function saveChanges() {
             localStorage.setItem('privacyItemStu', JSON.stringify(privacy_item));
-            auto_email = $("#auto_email").is(":checked")
+            // auto_email = $("#auto_email").is(":checked")
             receive_email = $("#receive_email").is(":checked")
             user_id = '{{ request.user.id }}'
             let url = '/set_privacy/'
             let form_data = new FormData()
             form_data.append('user_id', user_id)
-            form_data.append('auto_email', auto_email)
+            // form_data.append('auto_email', auto_email)
             form_data.append('receive_email', receive_email)
             $.ajax({
                 url: url,
