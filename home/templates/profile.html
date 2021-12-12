@@ -470,41 +470,21 @@
         <input type="hidden" name="tab" id="tab" value="{{ tab }}">
     </form>
     <div class=" is-paddingless" style="">
-        {% if user.group_id == 3 and user.group_id == 4 %}
-            <div class="cover-bg" style="">
-                {% if teacher.header_img %}
-                <img class="avatar brd brd-dark" src="{% static teacher.profile.header_img %}" style=""
-                     data-demo-src="">
-                {% else %}
-                <img class="avatar brd brd-dark" src="{% static 'assets/img/defaultprofileheader.jpg' %}" style=""
-                     data-demo-src="">
-                {% endif %}
+        <div class="cover-bg" style="">
+            {% if teacher.profile.header_img %}
+                <img class="cover-image hero-single-course hero-single-course-dark" src="{% static teacher.profile.header_img %}">
+            {% else %}
+                <img class="cover-image hero-single-course hero-single-course-dark" src="{% static 'assets/img/defaultprofileheader.jpg' %}">
+            {% endif %}
 
-                {% if user.image %}
-                <div class="avatar">
-                    <img id="user-avatar" style="height: 100% !important;" class="avatar-image hero-single-course hero-single-course-dark" src="/static{{ user.image }}" style=""
-                     data-demo-src="">
+            <div class="avatar">
+                {% if teacher.image %}
+                    <img id="user-avatar" class="avatar-image hero-single-course hero-single-course-dark" src="{% static teacher.image %}" data-demo-src="assets/img/avatars/jenna.png" alt=""  style="height: 100% !important;">
                 {% else %}
-                <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style=""
-                     data-demo-src="">
-                {% endif %}
-
+                    <img id="user-avatar" class="avatar-image hero-single-course hero-single-course-dark"  src="{% static 'assets/img/userdefault.png' %}" style="height: 100% !important;" data-demo-src="">
+                {% endif %}          
             </div>
-        {% else %}
-            <div class="cover-bg" style="">
-                <img class="cover-image hero-single-course hero-single-course-dark" src=""
-                     data-demo-src="" alt="" style="">
-                <div class="avatar">
-                    {% if user.image %}
-                    <img id="user-avatar" class="avatar-image hero-single-course hero-single-course-dark" src="{% static teacher.image %}"
-                         data-demo-src="assets/img/avatars/jenna.png" alt=""  style="height: 100% !important;">
-                    {% else %}
-                         <img id="user-avatar" class="avatar-image hero-single-course hero-single-course-dark"  src="{% static 'assets/img/userdefault.png' %}" style="height: 100% !important;"
-                              data-demo-src="">
-                    {% endif %}          
-                </div>
-            </div>
-        {% endif %}
+        </div>
     </div>
 
 
@@ -782,11 +762,8 @@
                                             <div class="column is-6">
                                                 <div class="card" style="margin-bottom: 15px !important;width: 95%;margin:0 auto;">
                                                     <div class="card-body card-body-dark" style="display:flex;flex-direction:row;align-items:center">
-                    
-                                                             {% if user.image %}
-                                                             <div class="avatar brd brd-dark">
-                                                                 <img id="user-avatar" style="border-radius: 50%;margin-left: 10px;height: 40px !important;width: 40px !important; " class="avatar-image hero-single-course hero-single-course-dark" src="/static{{ user.image }}" style=""
-                                                                  data-demo-src="">
+                                                            {% if i.user.image %}
+                                                            <img class="avatar brd brd-dark" id="user-avatar" style="border-radius: 50%;margin-left: 10px;height: 40px !important;width: 40px !important; " src="/static{{ i.user.image }}" data-demo-src="">
                                                              {% else %}
                                                              <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style="border-radius: 50%;margin-left: 10px;height: 40px !important;width: 40px !important; "
                                                                   data-demo-src="">

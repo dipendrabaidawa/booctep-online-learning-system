@@ -948,11 +948,10 @@
                         
                     </div>
                     
-                    {% if user.image %}
-                    <img src="/static{{ user.image }}" alt="" class="brd brd-dark" style="margin-top: 0px;">
+                    {% if user_info.image %}
+                    <img src="/static{{ user_info.image }}" alt="" class="brd brd-dark" style="margin-top: 0px;">
                     {% else %}
-                    <img  class="brd brd-dark" style="margin-top: 0px;"src="{% static 'assets/img/userdefault.png' %}"
-                         data-demo-src="">
+                    <img  class="brd brd-dark" style="margin-top: 0px;"src="{% static 'assets/img/userdefault.png' %}" data-demo-src="">
                     {% endif %}
 
 
@@ -2351,27 +2350,19 @@
         </div>
     </div>
 
-
     <div id="videos-modal" class="modal videos-modal is-large has-light-bg">
         <div class="modal-background"></div>
         <div class="modal-content" style="height: auto !important;">
             <div class="card">
                 <div class="card-heading">
                     <div class="user-meta">
-                        {% if user.image %}
-                        <img class="avatar brd brd-dark" src="/static{{ user.image }}" style=""
-                             data-demo-src="">
-                        {% else %}
-                        <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style=""
-                             data-demo-src="">
-                        {% endif %}
+                        <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style="" data-demo-src="" id="modal-img">
                     </div>
                     <span class="user-meta-span"
                           id="modal-user-name ml-3">{{ course.user.first_name }}{{ course.user.last_name }} </span>
                     <span class="user-meta-span"
                           id="modal-course-name">&nbsp; &nbsp; |   {{ course.name }}&nbsp; &nbsp;</span>
                          
-
                     <!-- Close X button -->
                     <div class="close-wrap" >
                         <span class="close-modal" onclick="closeModal()" style="">

@@ -3068,7 +3068,6 @@ def getCourseDetailForPromo(request):
     url = request.POST.get('url')
     if url == None:
         url = ''
-    print("course_id", course_id)
     course = Courses.objects.get(pk=course_id)
     rateList = course_comments.objects.filter(course_id_id=course_id).values_list('rating', flat=True)
     cnt = 0
@@ -3802,6 +3801,7 @@ def viewProfile(request, id, pname):
     else:
         review = course_comments.objects.extra(where=["find_in_set(course_id_id,'" + mystr + "')"]).filter(
             approved_by_teacher=1).order_by('-date')
+    user.review = review
 
     review_list_paginator = Paginator(review, 4)
     try:
@@ -3810,7 +3810,6 @@ def viewProfile(request, id, pname):
         review = review_list_paginator.page(1)
     except EmptyPage:
         review = review_list_paginator.page(review_list_paginator.num_pages)
-    user.review = review
 
     course_id_arr = Courses.objects.filter(user_id=id).values_list('id', flat=True)
     course_id_arr = map(str, course_id_arr)
