@@ -527,26 +527,6 @@ body .container .content .studentnot-cont {
     }
 </style>
 
-<div class="banner banner-dark" style="display: none">
-    <div class="container ">
-        <div class="banner__content">
-            {% if lang == "ar" %}
-            <div class="banner__text" style="text-align: right;">
-                <b id="banner_text" style="text-align: right;"></b>
-            </div>
-            {% else %}
-            <div class="banner__text" style="text-align: left;">
-                <b id="banner_text" style="text-align: left;"></b>
-            </div>
-            {% endif %}
-            <button class="banner__close" type="button">
-                <span class="material-icons">
-                  <i class="fa fa-times"></i>
-                </span>
-            </button>
-        </div>
-    </div>
-</div>
 
 <div id="main-navbar" class="navbar navbar-dark is-inline-flex no-shadow is-hidden-mobile">
     <!-- style="margin-top:49px" -->
@@ -1956,68 +1936,5 @@ body .container .content .studentnot-cont {
     h.oninvalid = function(e) {
         e.target.setCustomValidity('{% trans "Write a course name please!" %}');
     };
-
-    var socket = io.connect("http://localhost:3000")
-    var myfunc = null
-    $(document).ready(function() {
-        socket.on('create_discount_complete', (data) =>{
-            $("div.banner").css("display", "block");
-            $("#main-navbar").css("top", "40px")
-
-            var expire_date = data.expire
-            var countDownDate = new Date(expire_date).getTime();
-            clearInterval(myfunc)
-            myfunc = setInterval(function() {
-                var now = new Date().getTime();
-                var timeleft = countDownDate - now;
-                if (timeleft <= 0) {
-                    $("div.banner").css("display", "none");
-                    $("#main-navbar").css("top", "0px")
-                    clearInterval(myfunc);
-                }    
-                var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
-
-                var banner_text =  res.description + " - " + hours + "hr " + minutes+ "min " + seconds + "sec " 
-
-                $("#banner_text").html(banner_text)
-            }, 1000)
-        })
-
-        $(".banner__close").click(function() {
-            $("div.banner").css("display", "none");
-            $("#main-navbar").css("top", "0px")
-            clearInterval(myfunc)
-        })
-
-        $.get("/discount_banner", function(res) {
-            if (res.status == 1) {
-                var expire_date = res.expire_date
-                var countDownDate = new Date(expire_date).getTime();
-                myfunc = setInterval(function() {
-                    var now = new Date().getTime();
-                    var timeleft = countDownDate - now;
-                    if (timeleft <= 0) {
-                        $("div.banner").css("display", "none");
-                        $("#main-navbar").css("top", "0px")
-                        clearInterval(myfunc);
-                    } else {
-                        $("div.banner").css("display", "block");
-                        $("#main-navbar").css("top", "40px")
-                    }   
-
-                    var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-                    var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
-
-                    var banner_text =  res.description + " - " + hours + "hr " + minutes+ "min " + seconds + "sec " 
-
-                    $("#banner_text").html(banner_text)
-                }, 1000)      
-            }
-        })
-    });
 
 </script>
