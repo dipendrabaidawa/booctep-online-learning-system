@@ -8,8 +8,6 @@ urlpatterns = [
     # url(r'^teacher/test_video/$', test_video, name='teacher new-course'),
     url(r'^teacher/save_testvideo/$', save_testvideo, name='teacher new-course'),
 
-
-
     url(r'^store_course/$', store_course, name="store course"),
     url(r'^store_course_2/$', store_course_2, name="store course2"),
     url(r'^store-course_3/$', store_course_3, name="store course3"),
@@ -18,5 +16,6 @@ urlpatterns = [
     url(r'^save_later_2/$', save_later_2, name="store course"),
     url(r'^save_later_4/$', save_later_4, name="store-course-4"),
     url(r'^deleteCourse/', deleteCourse, name='delete a course'),
+    url(r'^del_course_id_session/', deleteCourseSession, name='delete a course id in cookie'),
 
 ]

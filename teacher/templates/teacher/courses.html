@@ -364,8 +364,7 @@
             {% endfor %}
             <div class="col-lg-3 col-sm-6 card-group-row__col" >
                 {% get_current_language as lang %}
-                <a href="/{{lang}}/teacher/add_course/?step=1" class="card card-light card-group-row__card text-center card--raised "
-                   style="">
+                <a href="javascript:void(0)" class="card card-light card-group-row__card text-center card--raised" id="add_new_course">
                     <div class="card-body d-flex flex-column" style="margin-top: 135px;">
                         <div class="flex-grow mb-0pt">
                             {% get_current_language as lang %}
@@ -468,6 +467,17 @@
     {% endif %}
     <div class="sweet-overlay" tabindex="-1" style="opacity: 1.09; display: none;" id="modal_back"></div>
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#add_new_course").click(function() {
+                $.get("/del_course_id_session/", function(res) {
+                    console.log(res);
+                    if (res.msg == "ok")
+                        location.href = "/{{lang}}/teacher/add_course/?step=1";
+                })
+            })
+        })
+    </script>
 {% endblock %}
 {% block script %}
     <script>

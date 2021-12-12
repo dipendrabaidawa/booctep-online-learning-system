@@ -578,10 +578,10 @@ def add_course(request):
 
     if step == 1:
         # when creating another course
-        # if request.method == 'GET':
-        #     if request.session.get('course_id') != None:
-        #         del request.session['course_id']
-        #     course_id = ''
+        if request.method == 'GET':
+            if request.session.get('course_id') != None:
+                del request.session['course_id']
+            course_id = ''
 
         course = []
         obj_cat = categories.objects.all()
@@ -1322,6 +1322,16 @@ def getCourseDetailsById(request):
     to_return = {
         'msg': msg,
         'data': get_courseDetails(id)
+    }
+    serialized = json.dumps(to_return)
+    return HttpResponse(serialized, content_type="application/json")
+
+def deleteCourseSession(request):
+    if request.session.get('course_id') != None:
+        del request.session['course_id']
+        
+    to_return = {
+        'msg': "ok"
     }
     serialized = json.dumps(to_return)
     return HttpResponse(serialized, content_type="application/json")
