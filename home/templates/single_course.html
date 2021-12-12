@@ -1111,9 +1111,9 @@
                                                             {% endif %}
                                                         </div>
                                                         <div class="videos-wrapper has-player">
+                                                            {% if comment_list %}
+                                                                {% for i in comment_list %}
                                                             <div class="comments-wrap comments-wrap-dark">
-                                                                {% if comment_list %}
-                                                                    {% for i in comment_list %}
                                                                         <div class="is-comment is-comment-dark">
                                                                             <div>
                                                                                 <div class="media-left">
@@ -1154,7 +1154,7 @@
                                                                                             <h4>
                                                                                                 <a>{{ i.teacher_name }}</a>
                                                                                                 &nbsp
-                                                                                                <small>{{ i.date_updated | date:'D d-m-Y' }}</small>
+                                                                                                <small>{{ i.date_updated }} ( المعلم )</small>
                                                                                             </h4>
                                                                                             <p>{{ i.reply }}</p>
                                                                                         </div>
@@ -1163,17 +1163,17 @@
                                                                             {% endif %}
                                                                         </div>
 
-                                                                    {% endfor %}
-                                                                {% else %}
-                                                                {% get_current_language as lang %}
-                                                                {% if lang == "ar" %}
-                                                                    <b class="mediabout mediabout-dark"> لا يوجد تعليقات متاحة </b>
-                                                                    {% else %}
-                                                                    <p class="mediabout mediabout-dark"> Comments Not Found </p>
-                                                                    {% endif %}
-                                                                {% endif %}
                                                                 
                                                             </div>
+                                                            {% endfor %}
+                                                        {% else %}
+                                                        {% get_current_language as lang %}
+                                                        {% if lang == "ar" %}
+                                                            <b class="mediabout mediabout-dark"> لا يوجد تعليقات متاحة </b>
+                                                            {% else %}
+                                                            <p class="mediabout mediabout-dark"> Comments Not Found </p>
+                                                            {% endif %}
+                                                        {% endif %}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -1698,13 +1698,13 @@
                                                               {% if lang == "ar" %}
                                                                 <a onclick="addToCartList()" id="add_cart"
                                                                    class="button pop-button has-tooltip is-fullwidth second-button is-raised"
-                                                                   style="margin-bottom: 10px;"><p  class="mediabout mediabout-dark">
+                                                                   style="margin-bottom: 10px;"><p style="color: grey;">
                                                                     إزالة من المفضلة <i class="fa fa-shopping-cart"></i>
                                                                 </p></a>
                                                                {% else %}
                                                                <a onclick="addToCartList()" id="add_cart"
                                                                   class="button pop-button has-tooltip is-fullwidth second-button is-raised"
-                                                                  style="margin-bottom: 10px;"><p  class="mediabout mediabout-dark">
+                                                                  style="margin-bottom: 10px;"><p style="color: grey;">
                                                                    Remove from cart <i class="fa fa-shopping-cart"></i>
                                                                </p></a>
                                                                {% endif %}
@@ -1750,16 +1750,8 @@
                                                 </div>
                                                 <div class="summary-card summary-card-dark" style="margin-top:25px">
                                                     <div class="teacher-card">
-                                                        
-                                                        {% if user.image %}
-                                                        <div class="avatar brd brd-dark">
-                                                            <img id="user-avatar" style=" " class="avatar-image hero-single-course hero-single-course-dark" src="/static{{ user.image }}" style=""
-                                                             data-demo-src="">
-                                                        {% else %}
-                                                        <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style=""
-                                                             data-demo-src="">
-                                                        {% endif %}
-
+                                                        <img src="/static{{ user_info.image }}"
+                                                             style="width: 65px;height:65px" data-demo-src="" alt="">
                                                         <div class="teacher-card-info">
                                                             <h3 class=""><a href="/{{ lang }}/profile/{{ user_info.id }}/{{ user_info.url_name }}" class="mediabout mediabout-dark">
                                                                 {{ user_info.first_name }}{{ user_info.last_name }}</a>
@@ -2359,74 +2351,48 @@
         </div>
     </div>
 
+
     <div id="videos-modal" class="modal videos-modal is-large has-light-bg">
         <div class="modal-background"></div>
         <div class="modal-content" style="height: auto !important;">
             <div class="card">
                 <div class="card-heading">
                     <div class="user-meta">
-                        <img id="modal-img" src="/static/assets/img/man.jpg">
+                        {% if user.image %}
+                        <img class="avatar brd brd-dark" src="/static{{ user.image }}" style=""
+                             data-demo-src="">
+                        {% else %}
+                        <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style=""
+                             data-demo-src="">
+                        {% endif %}
                     </div>
                     <span class="user-meta-span"
-                          id="modal-user-name">{{ course.user.first_name }}{{ course.user.last_name }} </span>
+                          id="modal-user-name ml-3">{{ course.user.first_name }}{{ course.user.last_name }} </span>
                     <span class="user-meta-span"
                           id="modal-course-name">&nbsp; &nbsp; |   {{ course.name }}&nbsp; &nbsp;</span>
-                        
+                         
+
                     <!-- Close X button -->
                     <div class="close-wrap" >
-                        <span class="close-modal" onclick="closeModal()" style="background-color: #e9e9e9 !important;">
-                            <i data-feather="x" style="color: #c7c7c7 !important;"></i>
+                        <span class="close-modal" onclick="closeModal()" style="">
+                            <i class="fa fa-times"></i>
                         </span>
                     </div>
                 </div>
-                <div class="card-body"style="width: 100%;">
-                    <div class="inner" >
-                        <div class="app-video " style="width: 100%;">
-                            <video autoplay poster="/static/assets/img/setting.png" class="special" style="" id="videoplayer" playsinline controls>
-                                <source id="modal-video-src" src="" type="video/webm"/>
+                <div class="card-body">
+                    <div class="video-promo"><!--heree-->
+                        <video autoplay poster="/static/assets/img/setting.png" class="video-promo" style="max-height:450px !important"
+                               id="videoplayer"
+                               playsinline controls> <!-- Point play promo video -->
+                            <source id="modal-video-src" src="{{ course.video.promo }}" type="video/mp4"/>
 
-                                <!-- Captions are optional -->
-                                <!-- <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en" default/> -->
-                                <track kind="captions" label="English captions" src="" srclang="en" default/>
-                            </video>
-                        </div>
+                            <!-- Captions are optional -->
+                            <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en"
+                                   default/>
+                        </video>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div id="bulmamodal" class="modal">
-        <div class="modal-background"></div>
-        <div class="modal-card">
-            <header class="modal-card-head">
-                <p class="modal-card-title sharecoursename">Share This Course </p>
-                <button class="delete sharecoursemodalclose" aria-label="close"></button>
-            </header>
-            <div class="card" style="color: white; border: 0px;">
-                <section class="modal-card-body card-image" style="padding: 0px; overflow: hidden; max-height: 300px;">
-                    <img src="/static{{ course.header_img }}" class="sharecourseimage">
-                </section>
-                <div class="card-content is-overlay"
-                     style="background-color: rgba(0,0,0,0.6); top: 70%; padding-top: 0px; padding-right: 5px; padding-bottom: 0px;">
-                    <div style="line-height: 2; overflow: hidden; white-space: nowrap; text-overflow: ellipsis;"> {{ course.name }} </div>
-                    <div class="ellipsisco">{{ course.description | safe }}</div>
-                </div>
-            </div>
-            <footer class="modal-card-foot">
-{#                <div class="button is-success sharecoursebutton" style="background-color: rgb(22,102,197);color: #fff;">#}
-{#                </div>#}
-                {% post_to_twitter 'this is my test' course.url 'Twitter' 'post-twitter' %}
-                {% post_to_facebook course.url 'Facebook' 'post-facebook' %}
-                {% comment %} {% post_to_linkedin course.url 'post-linkedin' %} {% endcomment %}
-                <div class="linkedin-this">
-                    <a href="http://www.linkedin.com/shareArticle?url={{request.get_host}}{{request.get_full_path}}" target="_blank" class="post-linkedin">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                </div>
-
-                <button class="button sharecoursemodalclose">Cancel</button>
-            </footer>
         </div>
     </div>
 
@@ -2842,4 +2808,273 @@
     <script src="{% static 'assets/js/sideb.js' %}"></script>
     <script src="{% static 'assets/js/videos.js' %}"></script>
     <script src="{% static 'assets/js/settings.js' %}"></script>
+
+
+    <script>
+        let host_url = "{{host_url}}"
+        let cur_page = '{{ page }}'
+
+        function page_set(page) {
+            $("#page").val(page)
+            $("#index_form").submit()
+        }
+
+        function page_prev() {
+            page = cur_page * 1 - 1
+            $("#page").val(page)
+            $("#index_form").submit()
+        }
+
+        function page_next() {
+            page = cur_page * 1 + 1
+            $("#page").val(page)
+            $("#index_form").submit()
+        }
+
+        $("#category_id_2").on('change', function(){
+            $("#order").val($(this).val())
+            $("#index_form").submit()
+        })
+
+        function showVideoModal(obj) {
+            id = $(obj).data('id')
+            video_url = $(obj).data('url')
+            let url = `/get_course_detail_by_id/`
+            let form_data = new FormData()
+            form_data.append('id', id)
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'json',
+                async: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+            }).then((response) => {
+                $("#modal-user-name").html(response.user_name)
+                course = JSON.parse(response.course)
+                sections = JSON.parse(response.sections)
+                {% comment %} console.log("test::", course)
+                console.log("sections::", sections) {% endcomment %}
+                $("#modal-course-name").html(course[0].fields.name)
+                $("#modal-users").html(response.user_count)
+                $("#modal-rating").html(response.rating)
+                $("#modal-img").attr('src', '/static' + response.user_img)
+                html = ``;
+                key = 0
+                eleKey = 0
+                sections.forEach(item =>{
+                    html += `<div class="accordion__item">
+                                <a href="#" class="accordion__toggle collapsed" style="display:flex; justify-content: space-between;" data-toggle="collapse"
+                                   data-target="#course-toc-${key}" data-parent="#parent">
+                                    <span class="flex">${item.name}</span>
+                                    <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
+                                </a>`
+                        item.video_list.forEach(ele =>{
+                            if (eleKey == 0 && ele.lock == 0) {
+                                $("#modal-video-src").attr('src', "http://" + host_url + "/static" + ele.url)
+                                $("#modal-video-src").parent()[0].load()
+                            }
+                            videoname = ele.name.slice(0, -4)
+                            icon_name = `fa fa-lock`
+                            if (ele.lock == 0)
+                                icon_name = `fa fa-video`
+                            if (ele.lock == 0 && eleKey == 0) {
+                                icon_name = `fa fa-play`
+                                eleKey ++
+                            }
+                            html += `<div class="accordion__menu collapse" id="course-toc-${key}">
+                                        <div class="accordion__menu-link" style="cursor: pointer;">
+                                            <i class="${icon_name}" style="margin-right: 5px;color: rgb(194, 194, 194);"></i> &nbsp
+                                            <div data-url="${ele.url}"`
+                            if (ele.lock == 0)
+                                 html +=  `onclick="playmyvideo(this)"`
+                             html += `>${videoname}</div>
+                                        </div>
+                                    </div>`
+                        })
+                    html += `</div>`
+                    key ++
+                })
+                $("#modal-parent").html(html)
+            })
+        }
+
+        function closeModal() {
+            $(".app-video #videoplayer")[0].pause()
+        }
+
+        function setType(type) {
+            $("#type").val(type)
+            $("#index_form").submit()
+        }
+
+        function category() {
+            var category_id = $("#category_id").val();
+            var category_id_2 = $("#category_id_2").val();
+            $('#loadings').show();
+            if (!category_id) {
+                category_id = 0
+            }
+            if (!category_id_2) {
+                category_id_2 = 0
+            }
+            if (category_id_2 == 1) { // Most rated
+                $('.paidcoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('rating') - $(a).data('rating');
+                }).appendTo('.paidcoursearea');
+                $('.freecoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('rating') - $(a).data('rating');
+                }).appendTo('.freecoursearea');
+                $('.allcoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('rating') - $(a).data('rating');
+                }).appendTo('.allcoursearea');
+            }
+            if (category_id_2 == 2) {  // Most students
+                $('.paidcoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('ts') - $(a).data('ts');
+                }).appendTo('.paidcoursearea');
+                $('.freecoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('ts') - $(a).data('ts');
+                }).appendTo('.freecoursearea');
+                $('.allcoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('ts') - $(a).data('ts');
+                }).appendTo('.allcoursearea');
+            }
+            if (category_id_2 == 3) {  // Newest
+                $('.paidcoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('cd') - $(a).data('cd');
+                }).appendTo('.paidcoursearea');
+                $('.freecoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('cd') - $(a).data('cd');
+                }).appendTo('.freecoursearea');
+                $('.allcoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('cd') - $(a).data('cd');
+                }).appendTo('.allcoursearea');
+            }
+            if (category_id == 0) {
+                $(".coursecard").show();
+            } else {
+                $(".coursecard").hide();
+                $(".coursecard[data-cat-id=" + category_id + "]").show();
+                $('#loadings').hide();
+                if ($(".coursecard[data-cat-id=" + category_id + "]").length == 0) {
+                    swal({
+                        title: "Sorry, there are no course in this category ",
+                        icon: "warning",
+                        button: "Ok",
+                        closeOnClickOutside: false,
+                    })
+                }
+            }
+        }
+
+        {#category();#}
+
+        var myTimer = setInterval(Dataloading, 2000);
+
+        function Dataloading() {
+            $(".skeleton").hide();
+            $(".show-image ").delay(200).fadeIn(650);
+            $(".product-skeleton").hide();
+            $(".product-info ").delay(200).fadeIn(650);
+        }
+
+        $(document).ready(function () {
+
+            $(".rating").each(function() {
+                rating = $(this).data('rating')
+                if (typeof rating === "string") {
+                    rating = rating.replace(",",".")
+                    rating = parseFloat(rating)
+                }
+                rating = rating * 1.0
+                course = $(this).data('course')
+                num = Math.floor(rating / 0.5)
+                $(`#star${num}-${course}`).attr('checked', true)
+            })
+
+            const controls = [
+                'restart', // Restart playback
+                'rewind', // Rewind by the seek time (default 10 seconds)
+                'play', // Play/pause playback
+                'fast-forward', // Fast forward by the seek time (default 10 seconds)
+                'progress', // The progress bar and scrubber for playback and buffering
+                'current-time', // The current time of playback
+                'duration', // The full duration of the media
+                'mute', // Toggle mute
+                'volume', // Volume control
+                'airplay', // Airplay (currently Safari only)
+            ];
+
+            const player = Plyr.setup('#videoplayer', {controls});
+
+            $('#loadings').fadeOut(3000);
+            var inp = $("#tipue_drop_input").val();
+            var img = document.createElement("img");
+            img.src = "{% static 'assets/img/no-courses.svg' %}";
+
+            if ($(".freecoursearea").children().length == 0) {
+                $(".freecoursearea").append(img);
+            }
+
+            if ($(".allcoursearea").children().length == 0) {
+                $(".allcoursearea").append(img);
+            }
+
+            if ($(".paidcoursearea").children().length == 0) {
+                $(".paidcoursearea").append(img);
+            }
+        });
+
+        $(document).ready(function () {
+            {% comment %} $(".SlickCarousel ").slick({
+                rtl: false, // If RTL Make it true & .slick-slide{float:right;}
+                autoplay: true,
+                autoplaySpeed: 5000, //  Slide Delay
+                speed: 1000, // Transition Speed
+                slidesToShow: 4, // Number Of Carousel
+                slidesToScroll: 1, // Slide To Move
+                pauseOnHover: false,
+                appendArrows: $(".Head .Arrows "), // Class For Arrows Buttons
+                prevArrow: '<span class="Slick-Prev "></span>',
+                nextArrow: '<span class="Slick-Next "></span>',
+                easing: "linear ",
+                responsive: [{
+                    breakpoint: 900,
+                    settings: {
+                        slidesToShow: 2,
+                    }
+                }, {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                    }
+                },],
+            }) {% endcomment %}
+        })
+
+        function addFav(course_id) {
+            var user_id = '{{ request.user.id }}';
+            var url = '/student_favourite_courses/';
+            $.post(url, {student: user_id, course: course_id}, function (res) {
+                // document.location.reload();
+            });
+        }
+
+        function playmyvideo(obj) {
+            url = $(obj).data('url')
+            $("#modal-video-src").attr('src', "../../../../static" + url)
+            $(".app-video video")[0].load();
+            $("#videos-modal .fa-play").attr('class', 'fa fa-video')
+            $(obj).prev().attr('class', 'fa fa-play')
+        }
+
+        // document.querySelector(".banner__close").addEventListener("click", function () {
+        //     this.closest(".banner").style.display = "none";
+        // });
+
+    </script>
+    
 {% endblock %}
+

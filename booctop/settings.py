@@ -139,10 +139,10 @@ DATABASES = {
         # 'PORT': '3306',
 
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dzjq9t85dqv8kckj',
-        'USER': 'otp2j74kv3w9g03y', # 'root',
-        'PASSWORD': 'ow5vd8s2bue9y9xt',
-        'HOST': 'x8autxobia7sgh74.cbetxkdyhwsb.us-east-1.rds.amazonaws.com', #'localhost',   # Or an IP Address that your DB is hosted on
+        'NAME': 'booctop',
+        'USER': 'root', # 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost', #'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }
