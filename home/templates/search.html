@@ -547,7 +547,7 @@
     </div>
     <!-- Filters and courses -->
 
-    <!-- Course Detail -->
+
     <div id="videos-modal" class="modal videos-modal is-large has-light-bg">
         <div class="modal-background"></div>
         <div class="modal-content" style="height: auto !important;">
@@ -577,7 +577,7 @@
                 </div>
                 <div class="card-body">
                     <div class="video-promo"><!--heree-->
-                        <video autoplay poster="/static/assets/img/setting.png" class="video-promo" style=""
+                        <video autoplay poster="/static/assets/img/setting.png" class="video-promo" style="max-height:450px !important"
                                id="videoplayer"
                                playsinline controls> <!-- Point play promo video -->
                             <source id="modal-video-src" src="{{ course.video.promo }}" type="video/mp4"/>
@@ -592,33 +592,35 @@
         </div>
     </div>
 
+
+{% endblock %}
+
+{% block script %}
     <script>
-
-        var myTimer = setInterval(Dataloading, 2000);
         let host_url = "{{host_url}}"
+        let cur_page = '{{ page }}'
 
-        $(document).ready(function () {
-            $(".rating").each(function() {
-                rating = $(this).data('rating')
-                if (typeof rating === "string") {
-                    rating = rating.replace(",",".")
-                    rating = parseFloat(rating)
-                }
-                rating = rating * 1.0
-                course = $(this).data('course')
-                num = Math.floor(rating / 0.5)
-                $(`#star${num}-${course}`).attr('checked', true)
-            })
-        });
-
-        function Dataloading() {
-
-            $(".skeleton").hide();
-            $(".show-image ").delay(200).fadeIn(650);
-
-            $(".product-skeleton").hide();
-            $(".product-info ").delay(200).fadeIn(650);
+        function page_set(page) {
+            $("#page").val(page)
+            $("#index_form").submit()
         }
+
+        function page_prev() {
+            page = cur_page * 1 - 1
+            $("#page").val(page)
+            $("#index_form").submit()
+        }
+
+        function page_next() {
+            page = cur_page * 1 + 1
+            $("#page").val(page)
+            $("#index_form").submit()
+        }
+
+        $("#category_id_2").on('change', function(){
+            $("#order").val($(this).val())
+            $("#index_form").submit()
+        })
 
         function showVideoModal(obj) {
             id = $(obj).data('id')
@@ -684,129 +686,180 @@
             })
         }
 
+        function closeModal() {
+            $(".app-video #videoplayer")[0].pause()
+        }
+
         function setType(type) {
             $("#type").val(type)
-            $("#seh_form").submit()
+            $("#index_form").submit()
         }
-
-        let cur_page = '{{ page }}'
-
-        function page_set(page) {
-            $("#page").val(page)
-            $("#seh_form").submit()
-        }
-
-        function page_prev() {
-            page = cur_page * 1 - 1
-            $("#page").val(page)
-            $("#seh_form").submit()
-        }
-
-        function page_next() {
-            page = cur_page * 1 + 1
-            $("#page").val(page)
-            $("#seh_form").submit()
-        }
-
-        $("#category_id_2").on('change', function(){
-            $("#order").val($(this).val())
-            $("#seh_form").submit()
-        })
 
         function category() {
-
             var category_id = $("#category_id").val();
             var category_id_2 = $("#category_id_2").val();
-
             $('#loadings').show();
-
             if (!category_id) {
                 category_id = 0
             }
-
             if (!category_id_2) {
                 category_id_2 = 0
             }
-
-
             if (category_id_2 == 1) { // Most rated
-
                 $('.paidcoursearea .coursecard').sort(function (a, b) {
                     return $(b).data('rating') - $(a).data('rating');
                 }).appendTo('.paidcoursearea');
-
                 $('.freecoursearea .coursecard').sort(function (a, b) {
                     return $(b).data('rating') - $(a).data('rating');
                 }).appendTo('.freecoursearea');
-
                 $('.allcoursearea .coursecard').sort(function (a, b) {
                     return $(b).data('rating') - $(a).data('rating');
                 }).appendTo('.allcoursearea');
-
-
             }
-
-
             if (category_id_2 == 2) {  // Most students
-
                 $('.paidcoursearea .coursecard').sort(function (a, b) {
                     return $(b).data('ts') - $(a).data('ts');
                 }).appendTo('.paidcoursearea');
-
                 $('.freecoursearea .coursecard').sort(function (a, b) {
                     return $(b).data('ts') - $(a).data('ts');
                 }).appendTo('.freecoursearea');
-
                 $('.allcoursearea .coursecard').sort(function (a, b) {
                     return $(b).data('ts') - $(a).data('ts');
                 }).appendTo('.allcoursearea');
-
-
             }
-
-
             if (category_id_2 == 3) {  // Newest
-
                 $('.paidcoursearea .coursecard').sort(function (a, b) {
                     return $(b).data('cd') - $(a).data('cd');
                 }).appendTo('.paidcoursearea');
-
                 $('.freecoursearea .coursecard').sort(function (a, b) {
                     return $(b).data('cd') - $(a).data('cd');
                 }).appendTo('.freecoursearea');
-
                 $('.allcoursearea .coursecard').sort(function (a, b) {
                     return $(b).data('cd') - $(a).data('cd');
                 }).appendTo('.allcoursearea');
-
-
             }
-
-
             if (category_id == 0) {
-
                 $(".coursecard").show();
-
             } else {
                 $(".coursecard").hide();
                 $(".coursecard[data-cat-id=" + category_id + "]").show();
                 $('#loadings').hide();
-
                 if ($(".coursecard[data-cat-id=" + category_id + "]").length == 0) {
-
                     swal({
                         title: "Sorry, there are no course in this category ",
                         icon: "warning",
                         button: "Ok",
                         closeOnClickOutside: false,
                     })
-
                 }
+            }
+        }
 
+        {#category();#}
+
+        var myTimer = setInterval(Dataloading, 2000);
+
+        function Dataloading() {
+            $(".skeleton").hide();
+            $(".show-image ").delay(200).fadeIn(650);
+            $(".product-skeleton").hide();
+            $(".product-info ").delay(200).fadeIn(650);
+        }
+
+        $(document).ready(function () {
+
+            $(".rating").each(function() {
+                rating = $(this).data('rating')
+                if (typeof rating === "string") {
+                    rating = rating.replace(",",".")
+                    rating = parseFloat(rating)
+                }
+                rating = rating * 1.0
+                course = $(this).data('course')
+                num = Math.floor(rating / 0.5)
+                $(`#star${num}-${course}`).attr('checked', true)
+            })
+
+            const controls = [
+                'restart', // Restart playback
+                'rewind', // Rewind by the seek time (default 10 seconds)
+                'play', // Play/pause playback
+                'fast-forward', // Fast forward by the seek time (default 10 seconds)
+                'progress', // The progress bar and scrubber for playback and buffering
+                'current-time', // The current time of playback
+                'duration', // The full duration of the media
+                'mute', // Toggle mute
+                'volume', // Volume control
+                'airplay', // Airplay (currently Safari only)
+            ];
+
+            const player = Plyr.setup('#videoplayer', {controls});
+
+            $('#loadings').fadeOut(3000);
+            var inp = $("#tipue_drop_input").val();
+            var img = document.createElement("img");
+            img.src = "{% static 'assets/img/no-courses.svg' %}";
+
+            if ($(".freecoursearea").children().length == 0) {
+                $(".freecoursearea").append(img);
             }
 
+            if ($(".allcoursearea").children().length == 0) {
+                $(".allcoursearea").append(img);
+            }
 
+            if ($(".paidcoursearea").children().length == 0) {
+                $(".paidcoursearea").append(img);
+            }
+        });
+
+        $(document).ready(function () {
+            {% comment %} $(".SlickCarousel ").slick({
+                rtl: false, // If RTL Make it true & .slick-slide{float:right;}
+                autoplay: true,
+                autoplaySpeed: 5000, //  Slide Delay
+                speed: 1000, // Transition Speed
+                slidesToShow: 4, // Number Of Carousel
+                slidesToScroll: 1, // Slide To Move
+                pauseOnHover: false,
+                appendArrows: $(".Head .Arrows "), // Class For Arrows Buttons
+                prevArrow: '<span class="Slick-Prev "></span>',
+                nextArrow: '<span class="Slick-Next "></span>',
+                easing: "linear ",
+                responsive: [{
+                    breakpoint: 900,
+                    settings: {
+                        slidesToShow: 2,
+                    }
+                }, {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                    }
+                },],
+            }) {% endcomment %}
+        })
+
+        function addFav(course_id) {
+            var user_id = '{{ request.user.id }}';
+            var url = '/student_favourite_courses/';
+            $.post(url, {student: user_id, course: course_id}, function (res) {
+                // document.location.reload();
+            });
         }
+
+        function playmyvideo(obj) {
+            url = $(obj).data('url')
+            $("#modal-video-src").attr('src', "../../../../static" + url)
+            $(".app-video video")[0].load();
+            $("#videos-modal .fa-play").attr('class', 'fa fa-video')
+            $(obj).prev().attr('class', 'fa fa-play')
+        }
+
+        // document.querySelector(".banner__close").addEventListener("click", function () {
+        //     this.closest(".banner").style.display = "none";
+        // });
+
     </script>
 
 {% endblock %}
