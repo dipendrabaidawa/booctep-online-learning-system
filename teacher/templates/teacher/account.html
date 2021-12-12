@@ -287,9 +287,11 @@
                 <br><br>
                 <div class="media ">
                     <a href="" class="media-right ">
-                        <img src="{% static profile.header_img %}" style="border-radius: 2px;border: 1px solid #dadada;"
-                             id="header_photo"
-                             alt="people" width="60" height="50" class=""/>
+                        {% if profile.header_img %}
+                        <img src="{% static profile.header_img %}" style="border-radius: 2px;border: 1px solid #dadada;" id="header_photo" alt="people" width="60" height="50" class=""/>
+                        {% else %}
+                        <img src="{% static 'assets/img/defaultprofileheader.png' %}" style="border-radius: 2px;border: 1px solid #dadada;" id="header_photo" alt="people" width="60" height="50" class=""/>
+                        {% endif %}
                     </a>
                     <div class="media-body">
                         <div class="custom-file">
@@ -383,9 +385,12 @@
                 <label class="form-label mediabout mediabout-dark">Profile header photo</label>
                 <div class="media align-items-center">
                     <a href="" class="media-left mr-16pt">
-                        <img src="{% static profile.header_img %}" style="border: 2px solid grey; height: 56px;"
-                             id="header_photo"
-                             alt="people" width="60" height="50" class=""/>
+                        {% if profile.header_img %}
+                        <img src="{% static profile.header_img %}" style="border: 2px solid grey; height: 56px;" id="header_photo" alt="people" width="60" height="50" class=""/>
+                        {% else %}
+                        <img src="{% static 'assets/img/userdefault.png' %}"  style="border-radius: 50%;width: 50px !important;height: 40px !important;" class="avatar brd brd-dark"
+                             data-demo-src="">
+                        {% endif %}
                     </a>
                     <div class="media-body">
                         <div class="custom-file">

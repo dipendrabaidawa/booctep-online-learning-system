@@ -1200,6 +1200,12 @@ a.blakandwhate-dark{
                 console.log("Stored section group successfully", message);
                 if (message == "success") {
                     document.location.href = "/{{lang}}/teacher/courses/";
+                } else if (message == "failed") {
+                    swal({
+                        title: "You must add video.",
+                        closeOnConfirm: false,
+                    });
+                    return;
                 }
             })
             .catch(error => console.error(error));
@@ -1320,6 +1326,12 @@ a.blakandwhate-dark{
                         closeOnClickOutside: false,
                     })
                     $("#nextStep").submit();
+                } else if (message == "failed") {
+                    swal({
+                        title: "You must add video.",
+                        closeOnConfirm: false,
+                    });
+                    return;
                 }
             })
             .catch(error => console.error(error));          

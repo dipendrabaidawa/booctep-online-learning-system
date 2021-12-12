@@ -572,10 +572,17 @@ def add_course(request):
                 course_id = ''
     else:
         course_id = request.session.get('course_id')
+        
 
     print(course_id)
 
     if step == 1:
+        # when creating another course
+        # if request.method == 'GET':
+        #     if request.session.get('course_id') != None:
+        #         del request.session['course_id']
+        #     course_id = ''
+
         course = []
         obj_cat = categories.objects.all()
         autoUrl = ''
