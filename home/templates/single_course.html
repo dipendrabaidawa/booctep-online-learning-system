@@ -897,7 +897,6 @@
     </script>
 
     <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
     <script type="IN/Share" data-url="http://localhost:8000/en/single_course/49/"></script>
     
 
@@ -2387,8 +2386,6 @@
         </div>
     </div>
 
-    <button class="modal-close is-large" aria-label="close"></button>
-
     <form method="POST" action="ecommerce_payment/{{ course.id }}/" id="buyform" style="display: none;">
         {% csrf_token %}
         <input type="hidden" id="subtotalmoney" name="subtotalmoney">
@@ -2414,131 +2411,6 @@
             $(".product-skeleton").hide();
             $(".product-info ").delay(200).fadeIn(650);
         }
-
-        $(document).ready(function () {
-
-            $(".rating").each(function() {
-                rating = $(this).data('rating')
-                if (typeof rating === "string") {
-                    rating = rating.replace(",",".")
-                    rating = parseFloat(rating)
-                }
-                rating = rating * 1.0
-                course = $(this).data('course')
-                num = Math.floor(rating / 0.5)
-                $(`#star${num}-${course}`).attr('checked', true)
-            })
-
-            const controls = [
-                'restart', // Restart playback
-                'rewind', // Rewind by the seek time (default 10 seconds)
-                'play', // Play/pause playback
-                'fast-forward', // Fast forward by the seek time (default 10 seconds)
-                'progress', // The progress bar and scrubber for playback and buffering
-                'current-time', // The current time of playback
-                'duration', // The full duration of the media
-                'mute', // Toggle mute
-                'volume', // Volume control
-                'airplay', // Airplay (currently Safari only)
-            ];
-
-            const player = Plyr.setup('#videoplayer', {controls});
-
-            $("#videoplayer")[0].load();
-            $('#loadings').fadeOut(3000);
-            var inp = $("#tipue_drop_input").val()
-
-            $(".sharecourse").click(function () {
-                if ($(this).attr("id") == "tw") {
-                    $(".sharecoursename").empty();
-                    $(".sharecoursename").append("Share this course on Twitter");
-                    $(".sharecoursebutton").empty();
-                    //$(".sharecoursebutton").append("<a target='_blank' href='https://twitter.com/share?ref_src=twsrc%5Etfw' class='twitter-share-button' data-size='large' data-url='http://localhost:8000/en/single_course/49/' data-show-count='false' style='color: white;'>Share to Twitter</a>");
-                    $(".sharecoursebutton").addClass("mdi mdi-twitter");
-                    $(".post-twitter").get(0).click();
-                }
-
-                if ($(this).attr("id") == "fb") {
-                    $(".sharecoursename").empty();
-                    $(".sharecoursename").append("&nbsp; Share this course on Facebook");
-                    $(".sharecoursebutton").empty();
-                    $(".sharecoursebutton").removeAttr("data-href");
-                    $(".sharecoursebutton").removeAttr("data-layout");
-                    $(".sharecoursebutton").removeAttr("data-size");
-                    $(".sharecoursebutton").addClass("mdi mdi-facebook");
-                    $(".sharecoursebutton").attr("data-href", "https://booctep.com/");
-                    $(".sharecoursebutton").attr("data-layout", "button");
-                    $(".sharecoursebutton").attr("data-size", "large");
-                    //$(".sharecoursebutton").append("<a target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpencilerkali.com%2F&amp;src=sdkpreparse' class='fb-xfbml-parse-ignore' style='color: white;'>Share to Facebook</a>");
-                    $(".post-facebook").get(0).click();
-                }
-
-                if ($(this).attr("id") == "lin") {
-                    $(".sharecoursename").empty();
-                    $(".sharecoursename").append("Share this course on LinkedIn");
-                    $(".sharecoursebutton").empty();
-                    $(".sharecoursebutton").append("Share to LinkedIn");
-                    $(".sharecoursebutton").addClass("mdi mdi-linkedin");
-                    $(".post-linkedin").get(0).click();
-                }
-                // $("#bulmamodal").addClass("is-active");
-            });
-
-            // $(".sharecoursemodalclose").click(function () {
-            //     $("#bulmamodal").removeClass("is-active");
-            // });
-
-            $(".applypromobutton").click(function () {
-                var course_id = '{{ course.id }}';
-                var promoinput = $("#promoinput").val();
-                if (!promoinput) {
-                    $(".promoerror").empty();
-                    $(".promoerror").append("Please enter a valid promo code");
-                } else {
-                    $(".promoerror").empty();
-                    var url = 'checkdiscountcode/';
-                    $.post(url, {'promoinput': promoinput, 'courseid': course_id}, function (res) {
-                        if (res == 'failed') {
-                            $(".promoerror").empty();
-                            $(".promoerror").append("Please enter a valid promo code");
-                        } else {
-                            var totalsum = parseFloat($("#totalsumid").text());
-                            price_off_percentage = res
-                            price_off = (totalsum * price_off_percentage) / 100;
-                            price_off = Math.round((price_off + Number.EPSILON) * 100) / 100
-                            $(".discountamount").empty();
-                            $(".discountamount").append(price_off);
-                            $("#promoinput").prop('disabled', true);
-                            $(".applypromobutton").css("display", "none");
-                            $(".applypromobutton").prop("disabled", true);
-                            $(".cancelpromobutton").prop("disabled", false);
-                            $(".cancelpromobutton").css("display", "block");
-                            var totalsum = parseFloat($("#totalsumid").text());
-                            console.log(totalsum)
-                            $(".totalsum").empty();
-                            $(".totalsum").append((totalsum - price_off));
-                        }
-                    });
-                }
-            });            
-
-            $(".cancelpromobutton").click(function () {
-                $(".discountamount").empty();
-                $(".discountamount").append(discount);
-
-                $("#promoinput").prop('disabled', false);
-                $("#promoinput").val('');
-
-                $(".applypromobutton").css("display", "block");
-                $(".applypromobutton").prop("disabled", false);
-
-                $(".totalsum").empty();
-                $(".totalsum").append(after_discount);
-                
-                $(".cancelpromobutton").css("display", "none");
-                $(".cancelpromobutton").prop("disabled", true);
-            });
-        });
 
         function addFav() {
             var course_id = '{{ course.id }}';
@@ -3066,6 +2938,6 @@
         // });
 
     </script>
-    
+
 {% endblock %}
 
