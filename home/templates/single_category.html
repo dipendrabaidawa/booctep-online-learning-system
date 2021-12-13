@@ -86,7 +86,7 @@
             <div class="container">
                 {% get_current_language as lang %}
                 {% if lang == "ar" %}
-                <h3>{% blocktrans %} هناك عدد {{ course_cnt }} دورات في قسم {{ course_name }} {% endblocktrans %} </h3>
+                <h3>{% blocktrans %} هناك عدد {{ course_cnt }} دورات في قسم {{ course_namear }} {% endblocktrans %} </h3>
                 <p>{% trans "If you don't find what you want, be more specific.." %}</p>
                 {% else %}
                 <h3>{% blocktrans %} {{ course_cnt }} courses in {{ course_name }} {% endblocktrans %} </h3>
@@ -195,7 +195,7 @@
                                                                     <label class="half" for="star1-{{ course.id }}" title="Sucks big time - 0.5 stars"></label>
 
                                                                 </form>
-                                                                <span style="font-size: small; color: rgb(255, 238, 80); cursor: default;">{{ course.rating|unlocalize }} &nbsp; ( {{ course.count }} )</span>
+                                                                <span style="font-size: small; color: rgb(255, 238, 80); cursor: default;">{{ course.rating|unlocalize }} &nbsp; ( {{ course.ratingCnt }} )</span>
                                                             </div>
                                                         </div>
                                                         {% if user.is_authenticated %}
@@ -299,9 +299,35 @@
                                         <div class="product-actions ">
                                             <div class="left ">
                                                 {% if course.price > 0 %}
-                                                    <b style="color:red ">${{ course.price|unlocalize }}</b>
+                                                    {% if course.price != course.discount_price %}
+                                                      {% get_current_language as lang %}
+                                                      {% if lang == "ar" %}
+                                                        <b class="prcg prcg-dark">
+                                                            <del style="font-weight: bold" class="prcg prcg-dark"> {{ course.price|unlocalize }} <b>ريال</b> </del><br>   
+                                                            <b class="prcgr prcgr-dark"> {{ course.discount_price|unlocalize }} ريال </b>
+                                                        </b>
+                                                      {% else %}
+                                                      <b class="prcg prcg-dark">
+                                                          <del style="font-weight: bold" class="prcg prcg-dark">SR {{ course.price|floatformat:'2' }}</del> <br>  
+                                                          <b class="prcgr prcgr-dark">SR {{ course.discount_price|floatformat:'2' }}</b>
+                                                      </b>
+                                                      {% endif %}
+                                                    {% else %}
+                                                    {% get_current_language as lang %}
+                                                    {% if lang == "ar" %}
+                                                    <b class="prcg prcg-dark"> {{ course.price|unlocalize }} ريال</b>
+                                                    {% else %}
+                                                    <b class="prcg prcg-dark">SR {{ course.price }}</b>
+                                                    {% endif %}
+
+                                                    {% endif %}
                                                 {% else %}
-                                                    <b style="color:green "> Free! </b>
+                                                    {% get_current_language as lang %}
+                                                    {% if lang == "ar" %}
+                                                    <b class="prcgr prcgr-dark"> مجانا </b>
+                                                    {% else %}
+                                                    <b class="prcgr prcgr-dark"> Free </b>
+                                                    {% endif %}
                                                 {% endif %}
                                             </div>
                                             <div class="right ">
