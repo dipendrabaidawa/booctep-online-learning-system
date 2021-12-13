@@ -2632,7 +2632,7 @@
         }
 
         function closeModal() {
-            $(".app-video #videoplayer")[0].pause()
+            $(".video-promo #videoplayer")[0].pause()
         }
 
         function doBuyCourse() {
@@ -2698,74 +2698,6 @@
             $("#order").val($(this).val())
             $("#index_form").submit()
         })
-
-        function showVideoModal(obj) {
-            id = $(obj).data('id')
-            video_url = $(obj).data('url')
-            let url = `/get_course_detail_by_id/`
-            let form_data = new FormData()
-            form_data.append('id', id)
-            $.ajax({
-                url: url,
-                type: 'POST',
-                dataType: 'json',
-                async: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-            }).then((response) => {
-                $("#modal-user-name").html(response.user_name)
-                course = JSON.parse(response.course)
-                sections = JSON.parse(response.sections)
-                {% comment %} console.log("test::", course)
-                console.log("sections::", sections) {% endcomment %}
-                $("#modal-course-name").html(course[0].fields.name)
-                $("#modal-users").html(response.user_count)
-                $("#modal-rating").html(response.rating)
-                $("#modal-img").attr('src', '/static' + response.user_img)
-                html = ``;
-                key = 0
-                eleKey = 0
-                sections.forEach(item =>{
-                    html += `<div class="accordion__item">
-                                <a href="#" class="accordion__toggle collapsed" style="display:flex; justify-content: space-between;" data-toggle="collapse"
-                                   data-target="#course-toc-${key}" data-parent="#parent">
-                                    <span class="flex">${item.name}</span>
-                                    <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
-                                </a>`
-                        item.video_list.forEach(ele =>{
-                            if (eleKey == 0 && ele.lock == 0) {
-                                $("#modal-video-src").attr('src', "http://" + host_url + "/static" + ele.url)
-                                $("#modal-video-src").parent()[0].load()
-                            }
-                            videoname = ele.name.slice(0, -4)
-                            icon_name = `fa fa-lock`
-                            if (ele.lock == 0)
-                                icon_name = `fa fa-video`
-                            if (ele.lock == 0 && eleKey == 0) {
-                                icon_name = `fa fa-play`
-                                eleKey ++
-                            }
-                            html += `<div class="accordion__menu collapse" id="course-toc-${key}">
-                                        <div class="accordion__menu-link" style="cursor: pointer;">
-                                            <i class="${icon_name}" style="margin-right: 5px;color: rgb(194, 194, 194);"></i> &nbsp
-                                            <div data-url="${ele.url}"`
-                            if (ele.lock == 0)
-                                 html +=  `onclick="playmyvideo(this)"`
-                             html += `>${videoname}</div>
-                                        </div>
-                                    </div>`
-                        })
-                    html += `</div>`
-                    key ++
-                })
-                $("#modal-parent").html(html)
-            })
-        }
-
-        function closeModal() {
-            $(".app-video #videoplayer")[0].pause()
-        }
 
         function setType(type) {
             $("#type").val(type)
