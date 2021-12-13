@@ -1657,7 +1657,7 @@ def register_user(request):
             request.session['password'] = password
             domain = request.META['HTTP_HOST']
             msg = 'success'
-            # sendConfirmationMail(objUA, domain, user_group_id, request)
+            sendConfirmationMail(objUA, domain, user_group_id, request)
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
