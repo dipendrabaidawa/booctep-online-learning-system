@@ -5,6 +5,7 @@
 
     {% load l10n %}
 
+
     <style>
         @media only screen and (max-width: 600px) {
             .single_category {
@@ -443,7 +444,7 @@
                                         <p style="line-height: 1.5em; height: 3em; overflow: hidden; text-overflow: ellipsis;">{{ course.description }}</p>
 
                                         <i class="fa fa-users "></i>
-                                        <span style="font-size: small; ">{{ course.stuCnt }}</span>
+                                        <span style="font-size: small; ">{{ course.stuCnt }} </span>
                                         <i class="fa fa-video "></i>
                                         <span style="font-size: small; ">{{ course.video }} Videos</span>
                                         <div class="product-actions ">
@@ -588,6 +589,7 @@
 
 
 {% endblock %}
+
 
 {% block script %}
     <script>
