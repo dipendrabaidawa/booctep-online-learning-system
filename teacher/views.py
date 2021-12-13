@@ -180,6 +180,7 @@ def dashboard(request):
     course_list = Courses.objects.filter(user_id=user_id, type=0, approval_status=2)
     total_hold_money = 0
     total_transfer_money = 0
+    total_ready_money = 0
 
     # get discount information
     admin_discount = Discount.objects.all()
@@ -271,7 +272,8 @@ def dashboard(request):
 
         course.refund_money = 0
         total_hold_money += course.hold_money
-        total_transfer_money += transfer_money
+        total_ready_money += course.ready_money
+        total_transfer_money += course.transfer_money
 
     # # get total rating
     # rateSum = 0
@@ -300,10 +302,10 @@ def dashboard(request):
 
     return render(request, 'teacher/dashboard.html',
                   {'lang': getLanguage(request)[0], 'courses': course_list, 'total_rating': total_rating,
-                   'total_revenue': total_revenue,
+                   'total_revenue': total_revenue, 
                    'totalFreeStuCnt': totalFreeStuCnt, 'totalPaidStuCnt': totalPaidStuCnt, 'totalPrice': totalPrice,
                    'teacher_tax': teacher_tax,
-                   'total_hold_money': total_hold_money, 'total_transfer_money': total_transfer_money})
+                   'total_hold_money': total_hold_money, 'total_transfer_money': total_transfer_money, 'total_ready_money': total_ready_money})
 
 
 def teacher_courses(request):
