@@ -814,17 +814,20 @@ def findheader(userid):
 
 
 def signup(request):
+
     objC = categories.objects.all()
     cat_list = []
     for cat in objC:
         item = {'name': cat.name, 'namear': cat.namear, 'id': cat.id}
         cat_list.append(item)
-    print(cat_list)
+    
     user_id = request.session.get("user_id")
     if user_id == None:
-        return render(request, 'signup.html', {"objC": cat_list, 'lang': getLanguage(request)[0]})
-    else:
-        return redirect('/')
+        del request.session['user_id']
+        del request.session['user_type']
+    return render(request, 'signup.html', {"objC": cat_list, 'lang': getLanguage(request)[0]})
+    # else:
+    #     return redirect('/')
 
 
 def loginn(request):
@@ -1616,6 +1619,8 @@ def register_user(request):
             objUser.set_password(password)
 
             if type == "teacher":
+                group_id = 3
+            elif type == "student":
                 group_id = 2
 
             if Group.objects.filter(id=group_id).exists():
@@ -1634,7 +1639,7 @@ def register_user(request):
             objUA.save()
             user_group_id = str(objUser.group_id)
 
-            if user_group_id == "1":
+            if user_group_id == "2":
                 request.session['user_id'] = str(objUser.id)
                 request.session['user_type'] = "student"
             else:
@@ -1652,7 +1657,7 @@ def register_user(request):
             request.session['password'] = password
             domain = request.META['HTTP_HOST']
             msg = 'success'
-            sendConfirmationMail(objUA, domain, user_group_id, request)
+            # sendConfirmationMail(objUA, domain, user_group_id, request)
     except:
         tb = sys.exc_info()[2]
         tbinfo = traceback.format_tb(tb)[0]
