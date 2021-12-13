@@ -2722,7 +2722,7 @@ def searching(request):
     else:
         order = int(order)
 
-    totalsearchresult = Courses.objects.filter(name__icontains=searchkeyword).count()
+    
     sehList = []
 
     if user_id == None:
@@ -2736,6 +2736,8 @@ def searching(request):
             sehList = Courses.objects.filter(name__icontains=searchkeyword).filter(approval_status=2).exclude(id__in=register_course_ids)
         else:
             sehList = Courses.objects.filter(name__icontains=searchkeyword).filter(approval_status=2).filter(type=type).exclude(id__in=register_course_ids)
+
+    totalsearchresult = len(sehList)
 
     discount = Discount.objects.all()
     now = datetime.now().strftime('%Y-%m-%d')
@@ -2964,6 +2966,7 @@ def single_category(request, category_name, id):
 
     category = categories.objects.get(pk=id)
     categorie = category.name;
+    categorie_ar = category.namear;
     if user_id == None:
         if type == -1:
             course_list = Courses.objects.filter(scat_id=id).filter(approval_status=2).order_by('-created_at')
@@ -2976,12 +2979,31 @@ def single_category(request, category_name, id):
         else:
             course_list = Courses.objects.filter(scat_id=id).filter(type=type).filter(approval_status=2).exclude(id__in=register_course_ids).order_by('created_at')
 
+    # get discount information
+    discount = Discount.objects.all()
+    now = datetime.now().strftime('%Y-%m-%d')
+
     for course in course_list:
         rating_list = course_comments.objects.filter(course_id_id=course.id)
         course.stuCnt = student_register_courses.objects.filter(course_id_id=course.id).count()
         course.ratingCnt = course_comments.objects.filter(course_id_id=course.id).count()
         course.rating = getRatingFunc(rating_list)
         course.video = getVideoCnt(course)
+
+        if discount.count() == 0:
+            discount_percent = 1
+        else:
+            if now > discount[0].expire_date:
+                discount_percent = 1
+            else:
+                not_str = discount[0].not_apply_course
+                not_list = not_str.split('.')
+                if str(course.id) in not_list:
+                    discount_percent = 1
+                else:
+                    discount_percent = (100 - discount[0].discount) / 100
+        course.discount_price = round(course.price * discount_percent, 2)
+
     count = course_list.count()
     course_list_tmp = course_list
     if order == 1:
@@ -3003,7 +3025,7 @@ def single_category(request, category_name, id):
         rl = getLanguage(request)[0].split('/')
         return render(request, 'single_category.html',
                       {'lang': getLanguage(request)[0], 'course_list': course_list,
-                       "course_cnt": str(count), "course_name": categorie, "user_id": user_id,
+                       "course_cnt": str(count), "course_name": categorie, "course_namear": categorie_ar, "user_id": user_id,
                        'category': category, 'favList': favListShow, 'alreadyinFav': alreadyinFavView,
                        'alreadyinCart': alreadyinCartView, 'stu_courses':stu_courses,
                        'cartList': cartListShow, 'favCnt': len(favList), 'cartCnt': len(cartList),
@@ -3780,10 +3802,26 @@ def viewProfile(request, id, pname):
         profile.subCatStr = subCatStr
         user.profile = profile
 
+    discount = Discount.objects.all()
+    now = datetime.now().strftime('%Y-%m-%d')
+
     courses = Courses.objects.filter(user_id=id)
     for course in courses:
         rating_list = course_comments.objects.filter(course_id_id=course.id)
         course.rating = getRatingFunc(rating_list)
+        if discount.count() == 0:
+            discount_percent = 1
+        else:
+            if now > discount[0].expire_date:
+                discount_percent = 1
+            else:
+                not_str = discount[0].not_apply_course
+                not_list = not_str.split('.')
+                if str(course.id) in not_list:
+                    discount_percent = 1
+                else:
+                    discount_percent = (100 - discount[0].discount) / 100
+        course.discount_price = round(course.price * discount_percent, 2)
 
     course_list_paginator = Paginator(courses, 3)
     try:

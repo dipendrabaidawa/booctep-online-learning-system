@@ -454,7 +454,7 @@
                                             <select class="selecttt" id="category_id"
                                                     style="border-radius:3px;">
                                                 {% for i in categories %}
-                                                    {% if lang == 'ar/' %}
+                                                    {% if lang == 'ar' %}
                                                         <option value="{{ i.id }}">{{ i.namear }}</option>
                                                     {% else %}
                                                         <option value="{{ i.id }}">{{ i.name }}</option>
@@ -768,7 +768,7 @@
                 success: function (data) {
                     let html = ''
                     subcategoryList = data.subcat_list
-                    {% if lang == "ar/" %}
+                    {% if lang == "ar" %}
                         subcategoryList.forEach(item => {
                             html += `<option value="` + item.id + `">` + item.namear + `</option>`
                         })

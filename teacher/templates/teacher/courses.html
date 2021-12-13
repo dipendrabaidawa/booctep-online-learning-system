@@ -2,7 +2,7 @@
 
 {% load static %}
 {% load i18n %}
-
+{% load l10n %}
 
 {% block title %}
     Courses
@@ -301,7 +301,7 @@
                             </div>
                             <p class="d-flex justify-content-center align-items-center m-0">
                                 <span class=" m-0 font-weight-normal blllu blllu-light"
-                                      style="font-size: medium;">{% if course.price > 0 %}{{ course.price }}{% else %}
+                                      style="font-size: medium;">{% if course.price > 0 %}{{ course.price|unlocalize}}{% else %}
                                     مجانا{% endif %}</span>
                             </p>
                         </div>
