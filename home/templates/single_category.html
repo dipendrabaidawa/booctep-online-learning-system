@@ -1,9 +1,10 @@
-{% extends "base.html" %}
-{% block content %}
-    {% load static %}
-    {% load i18n %}
-{% load l10n %}
-{% get_current_language as lang %}
+{% extends "base.html" %} {% block content %} {% load static %} {% load i18n %}
+
+    <!-- HOEM SECTION -->
+    <!-- USER LOGE OUT -->
+
+    {% load l10n %}
+
 
 
 <style>
@@ -87,7 +88,7 @@
                 <div></div>
                 {% get_current_language as lang %}
                 {% if lang == "ar" %}
-                <h3>{% blocktrans %} هناك عدد {{ course_cnt }} دورات في قسم {{ course_namear }} {% endblocktrans %} </h3>
+                <h3>{% blocktrans %} هناك عدد {{ course_cnt }} دورات في قسم {{ course_name }} {% endblocktrans %} </h3>
                 <p>{% trans "If you don't find what you want, be more specific.." %}</p>
                 {% else %}
                 <h3>{% blocktrans %} {{ course_cnt }} courses in {{ course_name }} {% endblocktrans %} </h3>
@@ -142,27 +143,27 @@
         <div class="store-sections">
             <div class="container">
                 <!--Products-->
-                <div id="products-tab" class="store-tab-pane is-active" id="demo">
-                    <div class="columns  is-multiline">
+                <div id="products-tab" class="store-tab-pane is-active sortingdivparent" id="demo">
+                    <div class="columns  is-multiline sortingdiv allcoursearea">
                         {% for course in course_list %}
-                            <div class="column is-one-fifth-fullhd is-one-quarter-widescreen is-one-third-desktop is-half-tablet is-full-mobile">
-                                <div class="product-card  product-card-dark" data-name="Spring Red Dress"
+                            <div class="column is-one-fifth-fullhd is-one-quarter-widescreen is-one-third-desktop is-half-tablet is-full-mobile coursecard"
+                                 data-cat-id="{{ course.scat_id }}" data-rating="{{ course.rating }}"
+                                 data-ts="{{ course.stuCnt }}" data-cd="{{ course.created_at.timestamp }}">
+                                <div class="product-card  product-card-dark" data-name="{{ course.name }}"
                                      data-price="44.00" data-colors="true" data-variants="true"
-                                     data-path="/static/assets/img/products/1">
-                                        <div class="image-grid-wrap">
-                                            <div class="image-grid">
-                                                <!--Grid Row-->
-                                                <div class="image-row">
-                                                    <!--Photo-->
-                                                    
-
-                                                    <div class="flex-1 has-background-image show-image"
-                                                         data-background="{% static course.cover_img %}">
-                                                        <a href="../../../course/{{ course.link }}">
-                                                            <div class="overlay"></div>
-                                                        </a>
-                                                        <div class="image-owner">
-                                                            <div class="name" style="display: flex; align-items: center;" style="font-size: 10px !important;">
+                                     data-path="{% static 'assets/img/products/1' %}">
+                                    <div class="image-grid-wrap">
+                                        <div class="image-grid">
+                                            <div class="image-row">
+                                                <div class="flex-1 has-background-image show-image"
+                                                     data-background="{% static course.cover_img %}"
+                                                     data-demo-background="{% static 'assets/img/courses/pc.jpg' %}"
+                                                     style="display: none;">
+                                                     <a href="../../../course/{{ course.link }}">
+                                                         <div class="overlay"></div>
+                                                     </a>
+                                                    <div class="image-owner">
+                                                        <div class="name" style="display: flex; align-items: center;" style="font-size: 10px !important;">
                                                                 <form class="rating" data-rating="{{ course.rating }}" data-course="{{ course.id }}">
 
                                                                     <input type="radio" id="star10-{{ course.id }}" name="rating" value="5" disabled />
@@ -196,80 +197,159 @@
                                                                     <label class="half" for="star1-{{ course.id }}" title="Sucks big time - 0.5 stars"></label>
 
                                                                 </form>
-                                                                <span style="font-size: small; color: rgb(255, 238, 80); cursor: default;">{{ course.rating|unlocalize }} &nbsp; ( {{ course.ratingCnt }} )</span>
+                                                                <span style="font-size: small; color: rgb(255, 238, 80); cursor: default;">{{ course.rating|unlocalize }} &nbsp; ( {{ course.count }} )</span>
                                                             </div>
-                                                        </div>
-                                                        {% if user.is_authenticated %}
-                                                            {% if course.id in alreadyinFav %}
-                                                                <div id="invite-pop"
-                                                                     class="photo-like pop-button has-tooltip"
-                                                                     data-title="Relationship" data-id="{{ course.id }}">
-                                                                    <a href="#" class="inner">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                             xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                             aria-hidden="true" focusable="false"
-                                                                             width="1em"
-                                                                             height="1em"
-                                                                             style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
-                                                                             preserveAspectRatio="xMidYMid meet"
-                                                                             viewBox="0 0 24 24">
-                                                                            <g fill="red" stroke="red"
-                                                                               stroke-width="2"
-                                                                               stroke-linecap="round"
-                                                                               stroke-linejoin="round">
-                                                                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78l1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                                                                            </g>
-                                                                        </svg>
-                                                                    </a>
-                                                                </div>
-                                                            {% else %}
-                                                                <div class="photo-like pop-button has-tooltip favbutton"
-                                                                     id="invite-pop" data-id="{{ course.id }}">
-                                                                    <a class="inner"
-                                                                       data-title="Relationship"
-                                                                       data-type="addFav">
-                                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                                             xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                             aria-hidden="true" focusable="false"
-                                                                             width="1em"
-                                                                             height="1em"
-                                                                             style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
-                                                                             preserveAspectRatio="xMidYMid meet"
-                                                                             viewBox="0 0 24 24">
-                                                                            <g fill="none" stroke="#626262"
-                                                                               stroke-width="2"
-                                                                               stroke-linecap="round"
-                                                                               stroke-linejoin="round">
-                                                                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78l1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
-                                                                            </g>
-                                                                        </svg>
-                                                                    </a>
-                                                                </div>
-                                                            {% endif %}
-                                                            {% if course.price > 0 %}
-                                                                {% if course.id in alreadyinCart %}
-                                                                    <a id="follow-pop"
-                                                                       class="photo-time pop-button has-tooltip is-shifted is-active"
-                                                                       data-title="Relationship" data-id="{{ course.id }}">
-                                                                        <i class="fa fa-shopping-cart"
-                                                                           style=";font-size: 22px;color: skyblue"></i>
-                                                                    </a>
-                                                                {% else %}
-                                                                    <a id="follow-pop"
-                                                                       class="photo-time pop-button has-tooltip"
-                                                                       data-title="Relationship" data-id="{{ course.id }}">
-                                                                        <i class="fa fa-shopping-cart"
-                                                                           style="font-size: 22px;color: #fff;"></i>
-                                                                    </a>
-                                                                {% endif %}
-                                                            {% endif %}
-                                                        {% endif %}
                                                     </div>
+
+                                                    {% if course.price > 0 %}
+                                                      {% if user.is_authenticated %}
+                                                        {% if course.id in alreadyinFav %}
+                                                            <div class="photo-like pop-button has-tooltip is-shifted is-active favbutton"
+                                                                 id="invite-pop" data-id="{{ course.id }}">
+
+                                                                <a href="# " class="inner "
+                                                                   data-title="Relationship"
+                                                                   data-type="addFav" data-id="">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                         aria-hidden="true" focusable="false"
+                                                                         width="1em"
+                                                                         height="1em"
+                                                                         style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+                                                                         preserveAspectRatio="xMidYMid meet"
+                                                                         viewBox="0 0 24 24">
+                                                                        <g fill="red" stroke="red"
+                                                                           stroke-width="2"
+                                                                           stroke-linecap="round"
+                                                                           stroke-linejoin="round">
+                                                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78l1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                                                        </g>
+                                                                    </svg>
+                                                                </a>
+                                                            </div>
+                                                        {% else %}
+                                                            <div class="photo-like pop-button has-tooltip favbutton"
+                                                                 id="invite-pop" data-id="{{ course.id }}">
+
+                                                                <a href="# " class="inner "
+                                                                   data-title="Relationship"
+                                                                   data-type="addFav" data-id="">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                         aria-hidden="true" focusable="false"
+                                                                         width="1em"
+                                                                         height="1em"
+                                                                         style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+                                                                         preserveAspectRatio="xMidYMid meet"
+                                                                         viewBox="0 0 24 24">
+                                                                        <g fill="none" stroke="#626262"
+                                                                           stroke-width="2"
+                                                                           stroke-linecap="round"
+                                                                           stroke-linejoin="round">
+                                                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78l1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                                                        </g>
+                                                                    </svg>
+                                                                </a>
+                                                            </div>
+                                                        {% endif %}
+                                                        {% if course.id in alreadyinCart %}
+                                                            <a id="follow-pop"
+                                                               class="photo-time pop-button has-tooltip is-shifted is-active"
+                                                               data-title="Relationship"
+                                                               data-id="{{ course.id }}">
+                                                                <i class="fa fa-shopping-cart"
+                                                                   style="font-size: 22px;color: rgb(88, 88, 241);"></i>
+                                                            </a>
+                                                        {% else %}
+                                                            <a id="follow-pop"
+                                                               class="photo-time pop-button has-tooltip"
+                                                               data-title="Relationship"
+                                                               data-id="{{ course.id }}">
+                                                                <i class="fa fa-shopping-cart"
+                                                                   style="font-size: 22px;color: #fff;"></i>
+                                                            </a>
+                                                        {% endif %}
+                                                       {% else %}
+                                                       {% if user.is_authenticated %}
+                                                        <div class="photo-like pop-button has-tooltip favbutton"
+                                                             style="left:10px !important"
+                                                             data-title="Relationship"
+                                                             id="invite-pop" data-type="addFav"
+                                                             onclick="addFav({{ course.id }})">
+                                                            <a href="# " class="inner ">
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                     aria-hidden="true" focusable="false"
+                                                                     width="1em"
+                                                                     height="1em"
+                                                                     style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+                                                                     preserveAspectRatio="xMidYMid meet"
+                                                                     viewBox="0 0 24 24">
+                                                                    <g fill="none" stroke="#626262"
+                                                                       stroke-width="2"
+                                                                       stroke-linecap="round"
+                                                                       stroke-linejoin="round">
+                                                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78l1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                                                    </g>
+                                                                </svg>
+                                                            </a>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% endif %}
+                                                    {% endif %}
+                                                    {% if user.is_authenticated %}
+                                                        {% if course.id in alreadyinFav %}
+                                                            <div class="photo-like pop-button has-tooltip is-shifted is-active favbutton"
+                                                                 id="invite-pop" data-id="{{ course.id }}">
+                                                                <a class="inner"
+                                                                   data-title="Relationship"
+                                                                   data-type="addFav" data-id="">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                         aria-hidden="true" focusable="false"
+                                                                         width="1em"
+                                                                         height="1em"
+                                                                         style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+                                                                         preserveAspectRatio="xMidYMid meet"
+                                                                         viewBox="0 0 24 24">
+                                                                        <g fill="red" stroke="red"
+                                                                           stroke-width="2"
+                                                                           stroke-linecap="round"
+                                                                           stroke-linejoin="round">
+                                                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78l1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                                                        </g>
+                                                                    </svg>
+                                                                </a>
+                                                            </div>
+                                                        {% else %}
+                                                            <div class="photo-like pop-button has-tooltip favbutton"
+                                                                 id="invite-pop" data-id="{{ course.id }}">
+                                                                <a class="inner"
+                                                                   data-title="Relationship"
+                                                                   data-type="addFav" data-id="">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                         xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                         aria-hidden="true" focusable="false"
+                                                                         width="1em"
+                                                                         height="1em"
+                                                                         style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+                                                                         preserveAspectRatio="xMidYMid meet"
+                                                                         viewBox="0 0 24 24">
+                                                                        <g fill="none" stroke="#626262"
+                                                                           stroke-width="2"
+                                                                           stroke-linecap="round"
+                                                                           stroke-linejoin="round">
+                                                                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78l1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                                                        </g>
+                                                                    </svg>
+                                                                </a>
+                                                            </div>
+                                                        {% endif %}
+                                                    {% endif %}
                                                 </div>
                                             </div>
                                         </div>
-                                    </a>
-
+                                    </div>
                                     <div class="product-skeleton">
                                         <div class="pd_title loading"></div>
                                         <div class="pd_description">
@@ -285,20 +365,20 @@
                                             <div class="pd_button loading"></div>
                                         </div>
                                     </div>
-
+                                    <!-- <div class="product-info" style="display: none;"> -->
                                     <div class="product-info">
                                         <h3>
                                             <a href="# "
                                                style="display: block; width: 230px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; ">{{ course.name }}</a>
                                         </h3>
-                                        <p style="white-space: nowrap; text-overflow: ellipsis; overflow: hidden">{{ course.description | safe | truncatechars:20 }}</p>
+                                        <p style="line-height: 1.5em; height: 3em; overflow: hidden; text-overflow: ellipsis;">{{ course.description }}</p>
 
                                         <i class="fa fa-users "></i>
-                                        <span style="font-size: small; ">{{ course.stuCnt }}</span>
+                                        <span style="font-size: small; ">{{ course.stuCnt }} </span>
                                         <i class="fa fa-video "></i>
                                         <span style="font-size: small; ">{{ course.video }} Videos</span>
                                         <div class="product-actions ">
-                                            <div class="left ">
+                                            <div class="left">
                                                 {% if course.price > 0 %}
                                                     {% if course.price != course.discount_price %}
                                                       {% get_current_language as lang %}
@@ -323,19 +403,20 @@
 
                                                     {% endif %}
                                                 {% else %}
-                                                    {% get_current_language as lang %}
-                                                    {% if lang == "ar" %}
+                                                   {% get_current_language as lang %}
+                                                   {% if lang == "ar" %}
                                                     <b class="prcgr prcgr-dark"> مجانا </b>
-                                                    {% else %}
-                                                    <b class="prcgr prcgr-dark"> Free </b>
-                                                    {% endif %}
+                                                   {% else %}
+                                                   <b class="prcgr prcgr-dark"> Free </b>
+                                                   {% endif %}
                                                 {% endif %}
                                             </div>
+
                                             <div class="right ">
                                                 <a class="button primary-button is-solid raised story modal-trigger promo"
-                                                   data-id="{{ course.id }}" onclick="showVideoModal(this)"
-                                                   data-modal="videos-modal">
-                                                    <i class="fa fa-play" data-id="{{ course.id }}"></i> Promo
+                                                   data-modal="videos-modal" onclick="showVideoModal(this)"
+                                                   data-id="{{ course.id }}">
+                                                    <i class="fa fa-play"></i> {% trans 'Demo' %}
                                                 </a>
                                             </div>
                                         </div>
@@ -344,59 +425,48 @@
                             </div>
                         {% endfor %}
                     </div>
+
+
+                    <style>
+                        .pagination{
+                            direction: ltr !important;
+                        }
+                        .disabled-dark{
+                            background-color: rgb(211, 215, 221) !important;
+                            border: 1px solid rgb(211, 215, 221) !important;
+                            color: rgb(27, 63, 97) !important;
+                        }
+                        .itempagination-dark{
+                            background-color: rgb(224, 233, 240) !important;
+                        }
+                    </style>
                     <center>
                         {% if course_list.has_other_pages %}
                             <ul class="pagination">
-                                {% if course_list.number != 1 %}
-                                    <li class="active" style="background: #0d79df; color: white; cursor: pointer;"
-                                        onclick="page_set({{ 1 }})"><span style="font-size:18px;">First</span>
-                                    </li>
-                                {% endif %}
                                 {% if course_list.has_previous %}
-                                    <li><a onclick="page_prev()">
-                                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                                    <li style="" class="itempagination itempagination-dark"><a onclick="page_prev()" style="">
+                                        <i class="fa fa-angle-right" style="" aria-hidden="true"></i>
                                     </a></li>
                                 {% else %}
-                                    <li class="disabled">
+                                    <li class="disabled disabled-dark">
                                         <i class="fa fa-angle-left" aria-hidden="true"></i></li>
                                 {% endif %}
-                                {% if course_list.number > 2 %}
-                                    <li style="cursor: pointer;">
-                                        <span>...</span>
-                                    </li>
-                                {% endif %}
-                                {% if course_list.number > 1 %}
-                                    <li style="cursor: pointer;" onclick="page_set({{ course_list.number|add:"-1" }})">
-                                        <span>{{ course_list.number|add:"-1" }}</span>
-                                    </li>
-                                {% endif %}
-                                <li class="active" style="background: #0d79df; color: white; cursor: pointer;"
-                                    onclick="page_set({{ course_list.number }})">
-                                    <span>{{ course_list.number }}</span>
-                                </li>
-                                {% if course_list.number < course_list.paginator.num_pages %}
-                                    <li style="cursor: pointer;" onclick="page_set({{ course_list.number|add:"1" }})">
-                                        <span>{{ course_list.number|add:"1" }}</span>
-                                    </li>
-                                {% endif %}
-                                {% if course_list.number < course_list.paginator.num_pages|add:"-1" %}
-                                    <li style="cursor: pointer;">
-                                        <span>...</span>
-                                    </li>
-                                {% endif %}
+                                {% for i in course_list.paginator.page_range %}
+                                    {% if course_list.number == i %}
+                                        <li class="active activepagination" style=" cursor: pointer;"
+                                            onclick="page_set({{ i }})"><span>{{ i }}</span>
+                                        </li>
+                                    {% else %}
+                                        <li class="itempagination itempagination-dark"><a onclick="page_set({{ i }})">{{ i }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
                                 {% if course_list.has_next %}
-                                    <li><a onclick="page_next()">
+                                    <li class="itempagination itempagination-dark"><a onclick="page_next()">
                                         <i class="fa fa-angle-right" aria-hidden="true"></i>
                                     </a></li>
                                 {% else %}
-                                    <li class="disabled">
+                                    <li class="disabled disabled-dark">
                                         <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                    </li>
-                                {% endif %}
-                                {% if course_list.number != course_list.paginator.num_pages %}
-                                    <li style="background: #0d79df; color: white; cursor: pointer;"
-                                        onclick="page_set({{ course_list.paginator.num_pages }})"><span
-                                            style="font-size:18px;">Last</span>
                                     </li>
                                 {% endif %}
                             </ul>
@@ -410,95 +480,225 @@
 
     <!-- Course Detail -->
     <div id="parent" style="display: none"></div>
+
     <div id="videos-modal" class="modal videos-modal is-large has-light-bg">
         <div class="modal-background"></div>
         <div class="modal-content" style="height: auto !important;">
             <div class="card">
                 <div class="card-heading">
                     <div class="user-meta">
-                        <img id="modal-img" src="/static/assets/img/man.jpg">
+                        <img class="avatar brd brd-dark" src="{% static 'assets/img/userdefault.png' %}" style="" data-demo-src="" id="modal-img">
                     </div>
                     <span class="user-meta-span"
-                          id="modal-user-name">{{ course.user.first_name }}{{ course.user.last_name }} </span>
+                          id="modal-user-name ml-3">{{ course.user.first_name }}{{ course.user.last_name }} </span>
                     <span class="user-meta-span"
                           id="modal-course-name">&nbsp; &nbsp; |   {{ course.name }}&nbsp; &nbsp;</span>
-                    <a type="button" class="button" style="background-color: rgb(202, 0, 51);color: #fff;">Add to Fav
-                        &nbsp;<i class="fa fa-heart"></i></a>
+                         
+
                     <!-- Close X button -->
-                    <div class="close-wrap">
-                        <span class="close-modal" onclick="closeModal()">
-                            <i data-feather="x"></i>
+                    <div class="close-wrap" >
+                        <span class="close-modal" onclick="closeModal()" style="">
+                            <i class="fa fa-times"></i>
                         </span>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="inner">
-                        <div class="app-video left-section">
-                            <video autoplay poster="/static/assets/img/setting.png" class="special" style=""
-                                   id="videoplayer"
-                                   playsinline controls>
-                                <source id="modal-video-src" src="/static/assets/img/vid/html.mp4" type="video/webm"/>
+                    <div class="video-promo"><!--heree-->
+                        <video autoplay poster="/static/assets/img/setting.png" class="video-promo" style="max-height:450px !important"
+                               id="videoplayer"
+                               playsinline controls> <!-- Point play promo video -->
+                            <source id="modal-video-src" src="{{ course.video.promo }}" type="video/mp4"/>
 
-                                <!-- Captions are optional -->
-                                <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en"
-                                       default/>
-                            </video>
-                        </div>
-                        <div class="right-section">
-                            <div class="inner-content">
-                                <div class="live-stats">
-                                    <div class="social-count-2">
-                                        <div class="likes-count">
-                                            <i class="fa fa-users"></i>
-                                            <span id="modal-users">140,440</span>
-                                        </div>
-                                        <div class="shares-count">
-                                            <i class="fa fa-star" style="color: rgb(212, 173, 0);"></i>
-                                            <span id="modal-rating">4.8</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="tabs-wrapper">
-                                <div class="tabs is-fullwidth">
-                                    <ul>
-                                        <li class="is-active">
-                                            <a>Demo Videos</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="tab-content ">
-                                    <div class="accordion js-accordion accordion--boxed list-group-flush"
-                                         id="modal-parent">
-                                        <div class="accordion__item">
-                                            <a href="#" class="accordion__toggle collapsed" data-toggle="collapse"
-                                               data-target="#course-toc-{{ ele.id }}" data-parent="#parent">
-                                                <span class="flex">Section 1</span>
-                                                <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
-                                            </a>
-                                            <div class="accordion__menu collapse" id="course-toc-{{ ele.id }}">
-                                                <div class="accordion__menu-link" style="cursor: pointer;">
-                                                    <i class="material-icons icon-16pt tick{{ i.id }}"
-                                                       onclick="checkThis(this)"
-                                                       data-sr_no="{{ i.sr_no }}">check_circle</i> &nbsp
-                                                    <div data-id="{{ i.id }}" data-srno="{{ i.sr_no }}"
-                                                         data-url="{{ i.url }}"
-                                                         onclick="playmyvideo(this)">{{ i.video_name }}</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                            <!-- Captions are optional -->
+                            <track kind="captions" label="English captions" src="/path/to/captions.vtt" srclang="en"
+                                   default/>
+                        </video>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+
+    <style type="text/css">
+        .rating > .half:before {
+            content:  "" !important;
+        }
+    </style>
+
+
+{% endblock %}
+
+{% block script %}
     <script>
+        let host_url = "{{host_url}}"
+        let cur_page = '{{ page }}'
+
+        function page_set(page) {
+            $("#page").val(page)
+            $("#index_form").submit()
+        }
+
+        function page_prev() {
+            page = cur_page * 1 - 1
+            $("#page").val(page)
+            $("#index_form").submit()
+        }
+
+        function page_next() {
+            page = cur_page * 1 + 1
+            $("#page").val(page)
+            $("#index_form").submit()
+        }
+
+        $("#category_id_2").on('change', function(){
+            $("#order").val($(this).val())
+            $("#index_form").submit()
+        })
+
+        function showVideoModal(obj) {
+            id = $(obj).data('id')
+            video_url = $(obj).data('url')
+            let url = `/get_course_detail_by_id/`
+            let form_data = new FormData()
+            form_data.append('id', id)
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'json',
+                async: false,
+                contentType: false,
+                processData: false,
+                data: form_data,
+            }).then((response) => {
+                $("#modal-user-name").html(response.user_name)
+                course = JSON.parse(response.course)
+                sections = JSON.parse(response.sections)
+                {% comment %} console.log("test::", course)
+                console.log("sections::", sections) {% endcomment %}
+                $("#modal-course-name").html(course[0].fields.name)
+                $("#modal-users").html(response.user_count)
+                $("#modal-rating").html(response.rating)
+                $("#modal-img").attr('src', '/static' + response.user_img)
+                html = ``;
+                key = 0
+                eleKey = 0
+                sections.forEach(item =>{
+                    html += `<div class="accordion__item">
+                                <a href="#" class="accordion__toggle collapsed" style="display:flex; justify-content: space-between;" data-toggle="collapse"
+                                   data-target="#course-toc-${key}" data-parent="#parent">
+                                    <span class="flex">${item.name}</span>
+                                    <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
+                                </a>`
+                        item.video_list.forEach(ele =>{
+                            if (eleKey == 0 && ele.lock == 0) {
+                                $("#modal-video-src").attr('src', "http://" + host_url + "/static" + ele.url)
+                                $("#modal-video-src").parent()[0].load()
+                            }
+                            videoname = ele.name.slice(0, -4)
+                            icon_name = `fa fa-lock`
+                            if (ele.lock == 0)
+                                icon_name = `fa fa-video`
+                            if (ele.lock == 0 && eleKey == 0) {
+                                icon_name = `fa fa-play`
+                                eleKey ++
+                            }
+                            html += `<div class="accordion__menu collapse" id="course-toc-${key}">
+                                        <div class="accordion__menu-link" style="cursor: pointer;">
+                                            <i class="${icon_name}" style="margin-right: 5px;color: rgb(194, 194, 194);"></i> &nbsp
+                                            <div data-url="${ele.url}"`
+                            if (ele.lock == 0)
+                                 html +=  `onclick="playmyvideo(this)"`
+                             html += `>${videoname}</div>
+                                        </div>
+                                    </div>`
+                        })
+                    html += `</div>`
+                    key ++
+                })
+                $("#modal-parent").html(html)
+            })
+        }
+
+        function closeModal() {
+            $(".video-promo #videoplayer")[0].pause()
+        }
+
+        function setType(type) {
+            $("#type").val(type)
+            $("#index_form").submit()
+        }
+
+        function category() {
+            var category_id = $("#category_id").val();
+            var category_id_2 = $("#category_id_2").val();
+            $('#loadings').show();
+            if (!category_id) {
+                category_id = 0
+            }
+            if (!category_id_2) {
+                category_id_2 = 0
+            }
+            if (category_id_2 == 1) { // Most rated
+                $('.paidcoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('rating') - $(a).data('rating');
+                }).appendTo('.paidcoursearea');
+                $('.freecoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('rating') - $(a).data('rating');
+                }).appendTo('.freecoursearea');
+                $('.allcoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('rating') - $(a).data('rating');
+                }).appendTo('.allcoursearea');
+            }
+            if (category_id_2 == 2) {  // Most students
+                $('.paidcoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('ts') - $(a).data('ts');
+                }).appendTo('.paidcoursearea');
+                $('.freecoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('ts') - $(a).data('ts');
+                }).appendTo('.freecoursearea');
+                $('.allcoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('ts') - $(a).data('ts');
+                }).appendTo('.allcoursearea');
+            }
+            if (category_id_2 == 3) {  // Newest
+                $('.paidcoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('cd') - $(a).data('cd');
+                }).appendTo('.paidcoursearea');
+                $('.freecoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('cd') - $(a).data('cd');
+                }).appendTo('.freecoursearea');
+                $('.allcoursearea .coursecard').sort(function (a, b) {
+                    return $(b).data('cd') - $(a).data('cd');
+                }).appendTo('.allcoursearea');
+            }
+            if (category_id == 0) {
+                $(".coursecard").show();
+            } else {
+                $(".coursecard").hide();
+                $(".coursecard[data-cat-id=" + category_id + "]").show();
+                $('#loadings').hide();
+                if ($(".coursecard[data-cat-id=" + category_id + "]").length == 0) {
+                    swal({
+                        title: "Sorry, there are no course in this category ",
+                        icon: "warning",
+                        button: "Ok",
+                        closeOnClickOutside: false,
+                    })
+                }
+            }
+        }
+
+        {#category();#}
+
+        var myTimer = setInterval(Dataloading, 2000);
+
+        function Dataloading() {
+            $(".skeleton").hide();
+            $(".show-image ").delay(200).fadeIn(650);
+            $(".product-skeleton").hide();
+            $(".product-info ").delay(200).fadeIn(650);
+        }
 
         $(document).ready(function () {
 
@@ -528,23 +728,58 @@
             ];
 
             const player = Plyr.setup('#videoplayer', {controls});
+
+            $('#loadings').fadeOut(3000);
+            var inp = $("#tipue_drop_input").val();
+            var img = document.createElement("img");
+            img.src = "{% static 'assets/img/no-courses.svg' %}";
+
+            if ($(".freecoursearea").children().length == 0) {
+                $(".freecoursearea").append(img);
+            }
+
+            if ($(".allcoursearea").children().length == 0) {
+                $(".allcoursearea").append(img);
+            }
+
+            if ($(".paidcoursearea").children().length == 0) {
+                $(".paidcoursearea").append(img);
+            }
+        });
+
+        $(document).ready(function () {
+            {% comment %} $(".SlickCarousel ").slick({
+                rtl: false, // If RTL Make it true & .slick-slide{float:right;}
+                autoplay: true,
+                autoplaySpeed: 5000, //  Slide Delay
+                speed: 1000, // Transition Speed
+                slidesToShow: 4, // Number Of Carousel
+                slidesToScroll: 1, // Slide To Move
+                pauseOnHover: false,
+                appendArrows: $(".Head .Arrows "), // Class For Arrows Buttons
+                prevArrow: '<span class="Slick-Prev "></span>',
+                nextArrow: '<span class="Slick-Next "></span>',
+                easing: "linear ",
+                responsive: [{
+                    breakpoint: 900,
+                    settings: {
+                        slidesToShow: 2,
+                    }
+                }, {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 1,
+                    }
+                },],
+            }) {% endcomment %}
         })
 
-        function page_set(page) {
-            $("#page").val(page)
-            $("#category_form").submit()
-        }
-
-        function page_prev() {
-            page = cur_page * 1 - 1
-            $("#page").val(page)
-            $("#category_form").submit()
-        }
-
-        function page_next() {
-            page = cur_page * 1 + 1
-            $("#page").val(page)
-            $("#category_form").submit()
+        function addFav(course_id) {
+            var user_id = '{{ request.user.id }}';
+            var url = '/student_favourite_courses/';
+            $.post(url, {student: user_id, course: course_id}, function (res) {
+                // document.location.reload();
+            });
         }
 
         function playmyvideo(obj) {
@@ -555,89 +790,10 @@
             $(obj).prev().attr('class', 'fa fa-play')
         }
 
-        function setType(type) {
-            $("#type").val(type)
-            $("#category_form").submit()
-        }
-
-        function setOrder(obj) {
-            let order = $(obj).val()
-            $("#order").val(order)
-            $("#category_form").submit()
-        }
-
-        function closeModal() {
-            $(".app-video #videoplayer")[0].pause()
-        }
-
-        function showVideoModal(obj) {
-            id = $(obj).data('id')
-            video_url = $(obj).data('url')
-            let url = `/get_course_detail_by_id/`
-            let form_data = new FormData()
-            form_data.append('id', id)
-            $.ajax({
-                url: url,
-                type: 'POST',
-                dataType: 'json',
-                async: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-            }).then((response) => {
-                $("#modal-user-name").html(response.user_name)
-                course = JSON.parse(response.course)
-                sections = JSON.parse(response.sections)
-                console.log("test::", course)
-                console.log("sections::", sections)
-                $("#modal-course-name").html(course[0].fields.name)
-                $("#modal-users").html(response.user_count)
-                $("#modal-rating").html(response.rating)
-                $("#modal-img").attr('src', '/static' + response.user_img)
-                html = ``;
-                key = 0
-                eleKey = 0
-                sections.forEach(item => {
-                    html += `<div class="accordion__item">
-                                <a href="#" class="accordion__toggle collapsed" style="display:flex; justify-content: space-between;" data-toggle="collapse"
-                                   data-target="#course-toc-${key}" data-parent="#parent">
-                                    <span class="flex">${item.name}</span>
-                                    <span class="accordion__toggle-icon material-icons">keyboard_arrow_down</span>
-                                </a>`
-                    item.video_list.forEach(ele => {
-                        if (eleKey == 0 && ele.lock == 0) {
-                            $("#modal-video-src").attr('src', "../../../../static" + ele.url)
-                            $("#modal-video-src").parent()[0].load()
-                        }
-                        videoname = ele.name.slice(0, -4)
-                        icon_name = `fa fa-lock`
-                        if (ele.lock == 0)
-                            icon_name = `fa fa-video`
-                        if (ele.lock == 0 && eleKey == 0) {
-                            icon_name = `fa fa-play`
-                            eleKey++
-                        }
-                        html += `<div class="accordion__menu collapse" id="course-toc-${key}">
-                                        <div class="accordion__menu-link" style="cursor: pointer;">
-                                            <i class="${icon_name}" style="margin-right: 5px;color: rgb(194, 194, 194);"></i> &nbsp
-                                            <div data-url="${ele.url}"`
-                        if (ele.lock == 0)
-                            html += `onclick="playmyvideo(this)"`
-                        html += `>${videoname}</div>
-                                        </div>
-                                    </div>`
-                    })
-                    html += `</div>`
-                    key++
-                })
-                $("#modal-parent").html(html)
-            })
-        }
+        // document.querySelector(".banner__close").addEventListener("click", function () {
+        //     this.closest(".banner").style.display = "none";
+        // });
 
     </script>
-    <style type="text/css">
-        .rating > .half:before {
-            content:  "" !important;
-        }
-    </style>
+
 {% endblock %}
