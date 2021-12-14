@@ -1194,16 +1194,12 @@ def single_course(request, teacher_id, course_url):
 
     tax = 0
     # calculating the tax for course
-    if request.session.get('user_type') == "student":
-        if Admincontrol.objects.filter(id=1).exists():
-            tax = Admincontrol.objects.get(pk=1).student_tax
-    else:
-        if Admincontrol.objects.filter(id=1).exists():
-            tax = Admincontrol.objects.get(pk=1).teacher_tax
+    if Admincontrol.objects.filter(id=1).exists():
+        tax = Admincontrol.objects.get(pk=1).student_tax
     course.tax = round(course.price * tax / 100, 2)
 
     # calculating final price
-    course.discount_price = round(course.price - (course.price * discount_percent) - course.tax, 2)
+    course.discount_price = round(course.price - (course.price * discount_percent) + course.tax, 2)
     course.discount = round(course.price * discount_percent, 2)
 
     similar_cat = course.subcat_id
@@ -3177,12 +3173,8 @@ def showCartList(request):
     cartList = student_cart_courses.objects.filter(student_id_id=user_id)
     tax = 0
     
-    if request.session.get('user_type') == "student":
-        if Admincontrol.objects.filter(id=1).exists():
-            tax = Admincontrol.objects.get(pk=1).student_tax
-    else:
-        if Admincontrol.objects.filter(id=1).exists():
-            tax = Admincontrol.objects.get(pk=1).teacher_tax
+    if Admincontrol.objects.filter(id=1).exists():
+        tax = Admincontrol.objects.get(pk=1).student_tax
 
     discount = 0
     not_list = []
@@ -3226,7 +3218,7 @@ def showCartList(request):
     except EmptyPage:
         cartList = cartListTmp.page(cartListTmp.num_pages)
 
-    cartTotalSumPrice = round(subTotal - subTax - subDiscount, 2)
+    cartTotalSumPrice = round(subTotal + subTax - subDiscount, 2)
 
     favListShow, favCnt, alreadyinFavView, cartListShow, cartCnt, alreadyinCartView, cartTotalSum, noti_list, noti_cnt, msg_list, msg_cnt, stu_msg_list, stu_msg_cnt, total_msg_cnt = findheader(
         request.user.id)
@@ -3601,12 +3593,8 @@ def checkdiscountcode(request):
     discount_code = request.POST.get('promoinput')
 
     tax = 0
-    if request.session.get('user_type') == "student":
-        if Admincontrol.objects.filter(id=1).exists():
-            tax = Admincontrol.objects.get(pk=1).student_tax
-    else:
-        if Admincontrol.objects.filter(id=1).exists():
-            tax = Admincontrol.objects.get(pk=1).teacher_tax
+    if Admincontrol.objects.filter(id=1).exists():
+        tax = Admincontrol.objects.get(pk=1).student_tax
 
     not_list = []
     discounts = Discount.objects.all()
@@ -3636,7 +3624,7 @@ def checkdiscountcode(request):
 
         subTax += cart.course_id.price * (tax / 100)
 
-    cartTotalSumPrice = subTotal - subTax - subDiscount
+    cartTotalSumPrice = subTotal + subTax - subDiscount
 
     responseData = {
         'cartTotalSumPrice': cartTotalSumPrice,

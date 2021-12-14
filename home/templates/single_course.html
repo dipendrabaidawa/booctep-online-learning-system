@@ -2853,6 +2853,91 @@
             if ($(".paidcoursearea").children().length == 0) {
                 $(".paidcoursearea").append(img);
             }
+
+            $(".sharecourse").click(function () {
+                if ($(this).attr("id") == "tw") {
+                    $(".sharecoursename").empty();
+                    $(".sharecoursename").append("Share this course on Twitter");
+                    $(".sharecoursebutton").empty();
+                    //$(".sharecoursebutton").append("<a target='_blank' href='https://twitter.com/share?ref_src=twsrc%5Etfw' class='twitter-share-button' data-size='large' data-url='http://localhost:8000/en/single_course/49/' data-show-count='false' style='color: white;'>Share to Twitter</a>");
+                    $(".sharecoursebutton").addClass("mdi mdi-twitter");
+                    $(".post-twitter").get(0).click();
+                }
+
+                if ($(this).attr("id") == "fb") {
+                    $(".sharecoursename").empty();
+                    $(".sharecoursename").append("&nbsp; Share this course on Facebook");
+                    $(".sharecoursebutton").empty();
+                    $(".sharecoursebutton").removeAttr("data-href");
+                    $(".sharecoursebutton").removeAttr("data-layout");
+                    $(".sharecoursebutton").removeAttr("data-size");
+                    $(".sharecoursebutton").addClass("mdi mdi-facebook");
+                    $(".sharecoursebutton").attr("data-href", "https://booctep.com/");
+                    $(".sharecoursebutton").attr("data-layout", "button");
+                    $(".sharecoursebutton").attr("data-size", "large");
+                    //$(".sharecoursebutton").append("<a target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fpencilerkali.com%2F&amp;src=sdkpreparse' class='fb-xfbml-parse-ignore' style='color: white;'>Share to Facebook</a>");
+                    $(".post-facebook").get(0).click();
+                }
+
+                if ($(this).attr("id") == "lin") {
+                    $(".sharecoursename").empty();
+                    $(".sharecoursename").append("Share this course on LinkedIn");
+                    $(".sharecoursebutton").empty();
+                    $(".sharecoursebutton").append("Share to LinkedIn");
+                    $(".sharecoursebutton").addClass("mdi mdi-linkedin");
+                    $(".post-linkedin").get(0).click();
+                }
+                // $("#bulmamodal").addClass("is-active");
+            });
+
+            $(".applypromobutton").click(function () {
+                var course_id = '{{ course.id }}';
+                var promoinput = $("#promoinput").val();
+                if (!promoinput) {
+                    $(".promoerror").empty();
+                    $(".promoerror").append("Please enter a valid promo code");
+                } else {
+                    $(".promoerror").empty();
+                    var url = 'checkdiscountcode/';
+                    $.post(url, {'promoinput': promoinput, 'courseid': course_id}, function (res) {
+                        if (res == 'failed') {
+                            $(".promoerror").empty();
+                            $(".promoerror").append("Please enter a valid promo code");
+                        } else {
+                            var totalsum = parseFloat($("#totalsumid").text());
+                            price_off_percentage = res
+                            price_off = (totalsum * price_off_percentage) / 100;
+                            $(".discountamount").empty();
+                            $(".discountamount").append(price_off);
+                            $("#promoinput").prop('disabled', true);
+                            $(".applypromobutton").css("display", "none");
+                            $(".applypromobutton").prop("disabled", true);
+                            $(".cancelpromobutton").prop("disabled", false);
+                            $(".cancelpromobutton").css("display", "block");
+                            var totalsum = parseInt($("#totalsumid").text());
+                            $(".totalsum").empty();
+                            $(".totalsum").append((totalsum - price_off));
+                        }
+                    });
+                }
+            });            
+
+            $(".cancelpromobutton").click(function () {
+                $(".discountamount").empty();
+                $(".discountamount").append(discount);
+
+                $("#promoinput").prop('disabled', false);
+                $("#promoinput").val('');
+
+                $(".applypromobutton").css("display", "block");
+                $(".applypromobutton").prop("disabled", false);
+
+                $(".totalsum").empty();
+                $(".totalsum").append(after_discount);
+                
+                $(".cancelpromobutton").css("display", "none");
+                $(".cancelpromobutton").prop("disabled", true);
+            });
         });
 
         $(document).ready(function () {
