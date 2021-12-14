@@ -2808,6 +2808,36 @@
             $(".product-info ").delay(200).fadeIn(650);
         }
 
+
+        $(".applypromobutton").click(function () {
+                var promoinput = $("#promoinput").val();
+                
+                if (!promoinput) {
+                    $(".promoerror").empty();
+                    $(".promoerror").append("Please enter a valid promo code");
+                } else {
+                    $(".promoerror").empty();
+                    var url = 'checkdiscountcode/';
+                    $.post(url, {'promoinput': promoinput}, function (res) {
+                        if (res == 'failed') {
+                            $(".promoerror").empty();
+                            $(".promoerror").append("Please enter a valid promo code");
+                        } else {
+                            $(".discountamount.prcg").empty();
+                            $(".discountamount.prcg").append(res.subDiscount);
+                            $("#promoinput").prop('disabled', true);
+                            $(".applypromobutton").css("display", "none");
+                            $(".applypromobutton").prop("disabled", true);
+                            $(".cancelpromobutton").prop("disabled", false);
+                            $(".cancelpromobutton").css("display", "block");
+                            $(".totalsum").empty();
+                            $(".totalsum").append(res.cartTotalSumPrice);
+                        }
+                    });
+                }
+            });
+
+
         $(document).ready(function () {
 
             $(".rating").each(function() {
