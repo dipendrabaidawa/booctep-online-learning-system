@@ -84,6 +84,7 @@
 
         <div class="single_category" style="background-image: url('{% static category.image %}') !important">
             <div class="container">
+                <div></div>
                 {% get_current_language as lang %}
                 {% if lang == "ar" %}
                 <h3>{% blocktrans %} هناك عدد {{ course_cnt }} دورات في قسم {{ course_namear }} {% endblocktrans %} </h3>
