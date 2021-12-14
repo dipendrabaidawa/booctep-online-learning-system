@@ -263,9 +263,7 @@
             {% for course in course_list %}
                 <div class="col-lg-3 col-sm-6 card-group-row__col">
                     <div class="card card-group-row__card text-center o-hidden card--raised mb-lg-10">
-                        <img style="height: 180px;" src="
-
-                                {% if user_type == 'teacher' %}{% static course.cover_img %}{% else %}{% static '/user_images/7c586b74-138a-4018-86c6-9ca1edab4486.png' %}{% endif %}"
+                        <img style="height: 180px;" src="{% static course.cover_img %}"
                              alt="">
                         <span class="corner-ribbon corner-ribbon--default-right-top corner-ribbon--shadow bg-primary bg-primary-light text-white">
                    
