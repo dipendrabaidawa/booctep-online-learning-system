@@ -354,20 +354,22 @@
                                                                         </a>
                                                                     </div>
                                                                 {% endif %}
-                                                                {% if course.id in alreadyinCart %}
-                                                                    <a id="follow-pop"
-                                                                    class="photo-time pop-button has-tooltip is-shifted is-active"
-                                                                    data-title="Relationship" data-id="{{ course.id }}">
-                                                                        <i class="fa fa-shopping-cart"
-                                                                        style=";font-size: 22px;color: skyblue"></i>
-                                                                    </a>
-                                                                {% else %}
-                                                                    <a id="follow-pop"
-                                                                    class="photo-time pop-button has-tooltip"
-                                                                    data-title="Relationship" data-id="{{ course.id }}">
-                                                                        <i class="fa fa-shopping-cart"
-                                                                        style="font-size: 22px;color: #fff;"></i>
-                                                                    </a>
+                                                                {% if course.user_id != user.id %}
+                                                                    {% if course.id in alreadyinCart %}
+                                                                        <a id="follow-pop"
+                                                                        class="photo-time pop-button has-tooltip is-shifted is-active"
+                                                                        data-title="Relationship" data-id="{{ course.id }}">
+                                                                            <i class="fa fa-shopping-cart"
+                                                                            style=";font-size: 22px;color: skyblue"></i>
+                                                                        </a>
+                                                                    {% else %}
+                                                                        <a id="follow-pop"
+                                                                        class="photo-time pop-button has-tooltip"
+                                                                        data-title="Relationship" data-id="{{ course.id }}">
+                                                                            <i class="fa fa-shopping-cart"
+                                                                            style="font-size: 22px;color: #fff;"></i>
+                                                                        </a>
+                                                                    {% endif %}
                                                                 {% endif %}
                                                             {% endif %}
                                                         {% else %}

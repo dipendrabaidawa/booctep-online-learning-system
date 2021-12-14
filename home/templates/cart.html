@@ -566,6 +566,7 @@
         {% csrf_token %}
         <input type="hidden" id="subtotalmoney" name="subtotalmoney">
         <input type="hidden" id="discomontmoney" name="discomontmoney">
+        <input type="hidden" id="taxmoney" name="taxmoney">
         <input type="hidden" id="totalmoney" name="totalmoney">
         <input type="submit" name="cartformsubmit" id="cartformsubmit">
     </form>
@@ -761,9 +762,11 @@
         function doBuyCourses() {
             var stm = parseFloat(document.getElementsByClassName("cartsubtotal")[0].innerHTML);
             var dam = parseFloat(document.getElementsByClassName("discountamount")[0].innerHTML);
+            var txm = parseFloat(document.getElementsByClassName("tax")[0].innerHTML);
             var tot = parseFloat(document.getElementsByClassName("totalsum")[0].innerHTML);
             $("#subtotalmoney").val(stm);
             $("#discomontmoney").val(dam);
+            $("#taxmoney").val(txm);
             $("#totalmoney").val(tot);
             $("#cartformsubmit").click();
         }
