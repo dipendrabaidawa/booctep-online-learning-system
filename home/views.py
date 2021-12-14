@@ -822,7 +822,7 @@ def signup(request):
         cat_list.append(item)
     
     user_id = request.session.get("user_id")
-    if user_id == None:
+    if user_id is not None:
         del request.session['user_id']
         del request.session['user_type']
     return render(request, 'signup.html', {"objC": cat_list, 'lang': getLanguage(request)[0]})
@@ -1191,7 +1191,19 @@ def single_course(request, teacher_id, course_url):
                 discount_percent = 0
             else:
                 discount_percent = discount[0].discount / 100
-    course.discount_price = round(course.price - (course.price * discount_percent), 2)
+
+    tax = 0
+    # calculating the tax for course
+    if request.session.get('user_type') == "student":
+        if Admincontrol.objects.filter(id=1).exists():
+            tax = Admincontrol.objects.get(pk=1).student_tax
+    else:
+        if Admincontrol.objects.filter(id=1).exists():
+            tax = Admincontrol.objects.get(pk=1).teacher_tax
+    course.tax = round(course.price * tax / 100, 2)
+
+    # calculating final price
+    course.discount_price = round(course.price - (course.price * discount_percent) - course.tax, 2)
     course.discount = round(course.price * discount_percent, 2)
 
     similar_cat = course.subcat_id
@@ -3254,6 +3266,7 @@ def ecommerce_payment(request, teacher_id, id, course_url):
 
     subtotalmoney = request.POST.get('subtotalmoney')
     discountmoney = request.POST.get('discomontmoney')
+    taxmoney = request.POST.get('taxmoney')
     totalmoney = request.POST.get('totalmoney')
 
     orderid = generateRandomChar()
@@ -3293,7 +3306,7 @@ def ecommerce_payment(request, teacher_id, id, course_url):
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
     return render(request, 'ecommerce_payment.html',
                   {'form': form, 'orderid': orderid, 'totalmoney': totalmoney, 'subtotalmoney': subtotalmoney,
-                   'discountmoney': discountmoney, 'lang': getLanguage(request)[0], 'savedcard': list(savedcard),
+                   'discountmoney': discountmoney, 'taxmoney': taxmoney, 'lang': getLanguage(request)[0], 'savedcard': list(savedcard),
                    "course": course, "user_id": user_id, 'favList': favListShow, 'favCnt': favCnt, 'alreadyinFav': alreadyinFavView,
                    'cartList': cartListShow, 'cartCnt': cartCnt, 'alreadyinCart': alreadyinCartView, 'cartTotalSum': cartTotalSum, 'noti_list': noti_list,
                    'noti_cnt': noti_cnt, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_courses': stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})
@@ -3385,7 +3398,8 @@ def generateRandomChar():
 def checkout(request):
     # cartcourseids = request.POST.get('cartcourseids')
     subtotalmoney = request.POST.get('subtotalmoney')
-    discountmoney = request.POST.get('discountmoney')
+    discountmoney = request.POST.get('discomontmoney')
+    taxmoney = request.POST.get('taxmoney')
     totalmoney = request.POST.get('totalmoney')
     orderid = generateRandomChar()
     request.session['order_id'] = orderid,
@@ -3421,7 +3435,7 @@ def checkout(request):
 
     return render(request, 'ecommerce_payment.html',
                   {'form': form, 'orderid': orderid, 'totalmoney': totalmoney, 'subtotalmoney': subtotalmoney,
-                   'discountmoney': discountmoney, 'lang': getLanguage(request)[0], 'savedcard': list(savedcard),
+                   'discountmoney': discountmoney, 'taxmoney':taxmoney, 'lang': getLanguage(request)[0], 'savedcard': list(savedcard),
                    "user_id": user_id, 'favList': favListShow, 'favCnt': favCnt, 'alreadyinFav': alreadyinFavView,
                    'cartList': cartListShow, 'cartCnt': cartCnt, 'alreadyinCart': alreadyinCartView, 'cartTotalSum': cartTotalSum, 'noti_list': noti_list,
                    'noti_cnt': noti_cnt, 'msg_list': msg_list, 'msg_cnt': msg_cnt, 'stu_courses': stu_courses, 'stu_msg_list': stu_msg_list, 'stu_msg_cnt': stu_msg_cnt, 'total_msg_cnt': total_msg_cnt})

@@ -885,7 +885,7 @@ textarea {
                             <b class="mediabout mediabout-dark">ضريبة القيمة المضافة</b>
                         </div>
                         <div class="amount">
-                            <span data-currency="SR" class="pricee pricee-dark">0 ريال سعودي </span>
+                            <span data-currency="SR" class="pricee pricee-dark">{{taxmoney}} ريال سعودي </span>
                         </div>
                     </div>
                     <div class="order-line">
@@ -893,7 +893,7 @@ textarea {
                             <b class="mediabout mediabout-dark">خصم</b>
                         </div>
                         <div class="amount">
-                            <span data-currency="SR" class="pricee pricee-dark">0 ريال سعودي </span>
+                            <span data-currency="SR" class="pricee pricee-dark">{{discountmoney}} ريال سعودي </span>
                         </div>
                     </div>
                     <div class="order-line">
@@ -932,10 +932,10 @@ textarea {
          </div>
          <div class="order-line">
              <div class="item">
-                 <b class="mediabout mediabout-dark">Taxes</b>
+                 <b class="mediabout mediabout-dark">Tax</b>
              </div>
              <div class="amount">
-                 <span data-currency="SR" class="pricee pricee-dark">SR 0</span>
+                 <span data-currency="SR" class="pricee pricee-dark">SR {{taxmoney}}</span>
              </div>
          </div>
          <div class="order-line">
@@ -943,7 +943,7 @@ textarea {
                  <b class="mediabout mediabout-dark">Discount</b>
              </div>
              <div class="amount">
-                 <span data-currency="SR" class="pricee pricee-dark">SR {{discount_price}}</span>
+                 <span data-currency="SR" class="pricee pricee-dark">SR {{discountmoney}}</span>
              </div>
          </div>
          <div class="order-line">
