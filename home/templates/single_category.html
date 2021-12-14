@@ -87,7 +87,7 @@
             <div class="container">
                 {% get_current_language as lang %}
                 {% if lang == "ar" %}
-                <h3>{% blocktrans %} هناك عدد {{ course_cnt }} دورات في قسم {{ course_name }} {% endblocktrans %} </h3>
+                <h3>{% blocktrans %} هناك عدد {{ course_cnt }} دورات في قسم {{ categorie_ar }} {% endblocktrans %} </h3>
                 <p>{% trans "If you don't find what you want, be more specific.." %}</p>
                 {% else %}
                 <h3>{% blocktrans %} {{ course_cnt }} courses in {{ course_name }} {% endblocktrans %} </h3>
