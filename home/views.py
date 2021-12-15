@@ -822,12 +822,12 @@ def signup(request):
         cat_list.append(item)
     
     user_id = request.session.get("user_id")
-    if user_id is not None:
-        del request.session['user_id']
-        del request.session['user_type']
-    return render(request, 'signup.html', {"objC": cat_list, 'lang': getLanguage(request)[0]})
-    # else:
-    #     return redirect('/')
+    if user_id is None:
+        #del request.session['user_id']
+        #del request.session['user_type']
+        return render(request, 'signup.html', {"objC": cat_list, 'lang': getLanguage(request)[0]})
+    else:
+        return redirect('/')
 
 
 def loginn(request):
