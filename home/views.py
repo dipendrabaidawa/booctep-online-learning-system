@@ -1647,12 +1647,12 @@ def register_user(request):
             objUA.save()
             user_group_id = str(objUser.group_id)
 
-            if user_group_id == "2":
-                request.session['user_id'] = str(objUser.id)
-                request.session['user_type'] = "student"
-            else:
-                request.session['user_id'] = str(objUser.id)
-                request.session['user_type'] = "teacher"
+            # if user_group_id == "2":
+            #     request.session['user_id'] = str(objUser.id)
+            #     request.session['user_type'] = "student"
+            # else:
+            #     request.session['user_id'] = str(objUser.id)
+            #     request.session['user_type'] = "teacher"
 
             if type == "teacher":
                 print("subcategori ID: ", subcategory_id)
@@ -1863,6 +1863,13 @@ def activation(request):
 
     objU = authenticate(email=email, password=password)
     login(request, objU)
+
+    request.session['user_id'] = str(user_id)
+    user_group_id = user_object.group_id
+    if user_group_id == "2":
+        request.session['user_type'] = "student"
+    else:
+        request.session['user_type'] = "teacher"
 
     return HttpResponseRedirect("/" + request.LANGUAGE_CODE + "/activated")
 
