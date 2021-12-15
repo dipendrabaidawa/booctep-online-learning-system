@@ -1954,11 +1954,10 @@ def forgotChangepassword(request):
     msg = ''
     try:
         baseparam = request.POST.get('baseparam')
-        users = User.objects.filter(hash=baseparam)
+        u = User.objects.get(hash=baseparam)
         newpassword = request.POST.get('newpassword')
-        for u in users:
-            u.set_password(newpassword)
-            u.save()
+        u.set_password(newpassword)
+        u.save()
         msg = 'success'
     except:
         tb = sys.exc_info()[2]
