@@ -78,9 +78,8 @@
 }
 }
 
-
-
     </style>
+
     <div id="shop-page" class="shop-wrapper">
 
         <div class="single_category" style="background-image: url('{% static category.image %}') !important">
@@ -510,26 +509,73 @@
         let host_url = "{{host_url}}"
         let cur_page = '{{ page }}'
 
+        $(document).ready(function () {
+
+            $(".rating").each(function() {
+                rating = $(this).data('rating')
+                if (typeof rating === "string") {
+                    rating = rating.replace(",",".")
+                    rating = parseFloat(rating)
+                }
+                rating = rating * 1.0
+                course = $(this).data('course')
+                num = Math.floor(rating / 0.5)
+                $(`#star${num}-${course}`).attr('checked', true)
+            })
+
+            const controls = [
+                'restart', // Restart playback
+                'rewind', // Rewind by the seek time (default 10 seconds)
+                'play', // Play/pause playback
+                'fast-forward', // Fast forward by the seek time (default 10 seconds)
+                'progress', // The progress bar and scrubber for playback and buffering
+                'current-time', // The current time of playback
+                'duration', // The full duration of the media
+                'mute', // Toggle mute
+                'volume', // Volume control
+                'airplay', // Airplay (currently Safari only)
+            ];
+
+            const player = Plyr.setup('#videoplayer', {controls});
+
+            $('#loadings').fadeOut(3000);
+            var inp = $("#tipue_drop_input").val();
+            var img = document.createElement("img");
+            img.src = "{% static 'assets/img/no-courses.svg' %}";
+
+            if ($(".freecoursearea").children().length == 0) {
+                $(".freecoursearea").append(img);
+            }
+
+            if ($(".allcoursearea").children().length == 0) {
+                $(".allcoursearea").append(img);
+            }
+
+            if ($(".paidcoursearea").children().length == 0) {
+                $(".paidcoursearea").append(img);
+            }
+        });
+
         function page_set(page) {
             $("#page").val(page)
-            $("#index_form").submit()
+            $("#category_form").submit()
         }
 
         function page_prev() {
             page = cur_page * 1 - 1
             $("#page").val(page)
-            $("#index_form").submit()
+            $("#category_form").submit()
         }
 
         function page_next() {
             page = cur_page * 1 + 1
             $("#page").val(page)
-            $("#index_form").submit()
+            $("#category_form").submit()
         }
 
         $("#category_id_2").on('change', function(){
             $("#order").val($(this).val())
-            $("#index_form").submit()
+            $("#category_form").submit()
         })
 
         function showVideoModal(obj) {
@@ -675,53 +721,6 @@
             $(".product-skeleton").hide();
             $(".product-info ").delay(200).fadeIn(650);
         }
-
-        $(document).ready(function () {
-
-            $(".rating").each(function() {
-                rating = $(this).data('rating')
-                if (typeof rating === "string") {
-                    rating = rating.replace(",",".")
-                    rating = parseFloat(rating)
-                }
-                rating = rating * 1.0
-                course = $(this).data('course')
-                num = Math.floor(rating / 0.5)
-                $(`#star${num}-${course}`).attr('checked', true)
-            })
-
-            const controls = [
-                'restart', // Restart playback
-                'rewind', // Rewind by the seek time (default 10 seconds)
-                'play', // Play/pause playback
-                'fast-forward', // Fast forward by the seek time (default 10 seconds)
-                'progress', // The progress bar and scrubber for playback and buffering
-                'current-time', // The current time of playback
-                'duration', // The full duration of the media
-                'mute', // Toggle mute
-                'volume', // Volume control
-                'airplay', // Airplay (currently Safari only)
-            ];
-
-            const player = Plyr.setup('#videoplayer', {controls});
-
-            $('#loadings').fadeOut(3000);
-            var inp = $("#tipue_drop_input").val();
-            var img = document.createElement("img");
-            img.src = "{% static 'assets/img/no-courses.svg' %}";
-
-            if ($(".freecoursearea").children().length == 0) {
-                $(".freecoursearea").append(img);
-            }
-
-            if ($(".allcoursearea").children().length == 0) {
-                $(".allcoursearea").append(img);
-            }
-
-            if ($(".paidcoursearea").children().length == 0) {
-                $(".paidcoursearea").append(img);
-            }
-        });
 
         $(document).ready(function () {
             {% comment %} $(".SlickCarousel ").slick({

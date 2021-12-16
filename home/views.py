@@ -2933,6 +2933,7 @@ def searching(request):
 
 
 def single_category(request, category_name, id):
+    host_url = request.get_host()
     user_id = request.session.get("user_id")
     user_type = request.session.get("user_type")
     stu_courses = student_register_courses.objects.filter(student_id_id=request.user.id)
@@ -3040,7 +3041,7 @@ def single_category(request, category_name, id):
     if l != getLanguage(request)[0]:
         rl = getLanguage(request)[0].split('/')
         return render(request, 'single_category.html',
-                      {'lang': getLanguage(request)[0], 'course_list': course_list,
+                      {'lang': getLanguage(request)[0], 'course_list': course_list, 'host_url':host_url,
                        "course_cnt": str(count), "course_name": categorie, "course_namear": categorie_ar, "user_id": user_id,
                        'category': category, 'favList': favListShow, 'alreadyinFav': alreadyinFavView,
                        'alreadyinCart': alreadyinCartView, 'stu_courses':stu_courses,
@@ -3051,7 +3052,7 @@ def single_category(request, category_name, id):
 
     else:
         return render(request, 'single_category.html',
-                      {'lang': getLanguage(request)[0], 'course_list': course_list,
+                      {'lang': getLanguage(request)[0], 'course_list': course_list, 'host_url':host_url,
                        "course_cnt": str(count), "course_name": categorie, "user_id": user_id,
                        'category': category, 'favList': favListShow, 'alreadyinFav': alreadyinFavView,
                        'alreadyinCart': alreadyinCartView, 'stu_courses':stu_courses,
