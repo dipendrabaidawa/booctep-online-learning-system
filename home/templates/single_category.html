@@ -573,10 +573,11 @@
             $("#category_form").submit()
         }
 
-        $("#category_id_2").on('change', function(){
-            $("#order").val($(this).val())
+        function setOrder(obj) {
+            val = $(obj).val()
+            $("#order").val(val)
             $("#category_form").submit()
-        })
+        }
 
         function showVideoModal(obj) {
             id = $(obj).data('id')
