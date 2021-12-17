@@ -854,7 +854,8 @@ def store_course(request):
     # courseUrl = '_'.join(nameList)
 
     # making the courseUrl only with alphabets and underscore.
-    courseUrl = re.sub(r'[^\w]', '', name)
+    courseUrl = re.sub(r'[^\w\s]', '', name)
+    courseUrl = re.sub(r"\s+", '_', courseUrl)
 
     if id == '':  # add case
         objCourse = Courses(
