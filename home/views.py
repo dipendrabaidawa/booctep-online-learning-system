@@ -151,7 +151,7 @@ def home_view(request):
     
     # get discount information
     discount = Discount.objects.all()
-    now = datetime.now().strftime('%Y-%m-%d')
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     for course in course_list:
         course.link = courseUrlGenerator(course)
@@ -4348,7 +4348,7 @@ def checkPayoutStatus(request):
 @csrf_exempt
 def discount_banner(request):
     discount = Discount.objects.all()
-    now = datetime.now().strftime('%Y-%m-%d')
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     discount_description = ""
     discount_percent = ""
@@ -4368,7 +4368,8 @@ def discount_banner(request):
         'status': status,
         'description': discount_description,
         'discount': discount_percent,
-        'expire_date': discount_expire
+        'expire_date': discount_expire,
+        'now_date': now
     }
 
     return JsonResponse(ret)

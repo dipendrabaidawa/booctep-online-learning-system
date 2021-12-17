@@ -1184,67 +1184,80 @@
         // });
 
         var socket = io.connect("http://localhost:3000")
-    var myfunc = null
-    $(document).ready(function() {
-        socket.on('create_discount_complete', (data) =>{
-            $("div.banner").css("display", "block");
-            $("#main-navbar").css("top", "40px")
+        var myfunc = null
+        $(document).ready(function() {
+            socket.on('create_discount_complete', (data) =>{
+                $("div.banner").css("display", "block");
+                $("#main-navbar").css("top", "40px")
 
-            var expire_date = data.expire
-            var countDownDate = new Date(expire_date).getTime();
-            clearInterval(myfunc)
-            myfunc = setInterval(function() {
-                var now = new Date().getTime();
-                var timeleft = countDownDate - now;
-                if (timeleft <= 0) {
-                    $("div.banner").css("display", "none");
-                    $("#main-navbar").css("top", "0px")
-                    clearInterval(myfunc);
-                }    
-                var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
-                var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-                var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+                var expire_date = data.expire
+                var now_date = data.now
+                // initial difference between server timezone and browser timezone
+                var browser_now = new Date().getTime()
+                var server_now = new Date(now_date).getTime()
+                var diff0 = browser_now - server_now
 
-                var banner_text =  res.description + " - " + hours + "hr " + minutes+ "min " + seconds + "sec " 
-
-                $("#banner_text").html(banner_text)
-            }, 1000)
-        })
-
-        $(".banner__close").click(function() {
-            $("div.banner").css("display", "none");
-            $("#main-navbar").css("top", "0px")
-            clearInterval(myfunc)
-        })
-
-        $.get("/discount_banner", function(res) {
-            if (res.status == 1) {
-                var expire_date = res.expire_date
                 var countDownDate = new Date(expire_date).getTime();
+                clearInterval(myfunc)
                 myfunc = setInterval(function() {
                     var now = new Date().getTime();
-                    var timeleft = countDownDate - now;
+                    var timeleft = countDownDate - now + diff0;
                     if (timeleft <= 0) {
                         $("div.banner").css("display", "none");
                         $("#main-navbar").css("top", "0px")
                         clearInterval(myfunc);
-                    } else {
-                        $("div.banner").css("display", "block");
-                        $("#main-navbar").css("top", "40px")
-                    }   
-
+                    }    
+                    var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
                     var hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                     var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
                     var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
 
-                    var banner_text =  res.description + " - " + hours + "hr " + minutes+ "min " + seconds + "sec " 
+                    var banner_text =  data.description + " - " + hours + "hr " + minutes+ "min " + seconds + "sec " 
 
                     $("#banner_text").html(banner_text)
-                }, 1000)      
-            }
-        })
-    });
+                }, 1000)
+            })
+
+            $(".banner__close").click(function() {
+                $("div.banner").css("display", "none");
+                $("#main-navbar").css("top", "0px")
+                clearInterval(myfunc)
+            })
+
+            $.get("/discount_banner", function(res) {
+                if (res.status == 1) {
+                    var expire_date = res.expire_date
+                    var now_date = res.now_date
+
+                    var browser_now = new Date().getTime()
+                    var server_now = new Date(now_date).getTime()
+                    var diff0 = browser_now - server_now
+
+                    var countDownDate = new Date(expire_date).getTime();
+                    myfunc = setInterval(function() {
+                        var now = new Date().getTime();
+                        var timeleft = countDownDate - now + diff0;
+                        if (timeleft <= 0) {
+                            $("div.banner").css("display", "none");
+                            $("#main-navbar").css("top", "0px")
+                            clearInterval(myfunc);
+                        } else {
+                            $("div.banner").css("display", "block");
+                            $("#main-navbar").css("top", "40px")
+                        }   
+
+                        var days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+                        var hours = days * 24 + Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        var minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+                        var seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+
+                        var banner_text =  res.description + " - " + hours + "hr " + minutes+ "min " + seconds + "sec " 
+
+                        $("#banner_text").html(banner_text)
+                    }, 1000)      
+                }
+            })
+        });
 
     </script>
 
