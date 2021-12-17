@@ -1167,7 +1167,7 @@ def single_course(request, teacher_id, course_url):
 
     # get discount information
     discount = Discount.objects.all()
-    now = datetime.now().strftime('%Y-%m-%d')
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     if Courses.objects.filter(user_id=teacher_id, course_url=course_url).exists():
         course = Courses.objects.filter(user_id=teacher_id, course_url=course_url)[0]
@@ -1469,7 +1469,7 @@ def delete_Cart_courses_all(request):
 def student_Favourite_courses(request):
     print("test:::", type(request.POST.get('student')))
     course_id = request.POST.get('course')
-    if request.POST.get('student') == 'None' or request.POST.get('student') == '':
+    if request.POST.get('student') is None or request.POST.get('student') == '':
         return HttpResponse("require_login")
     else:
         student_id = request.POST.get('student')
@@ -2756,7 +2756,7 @@ def searching(request):
     totalsearchresult = len(sehList)
 
     discount = Discount.objects.all()
-    now = datetime.now().strftime('%Y-%m-%d')
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     for seh in sehList:
         course = Courses.objects.get(pk=seh.id)
@@ -2998,7 +2998,7 @@ def single_category(request, category_name, id):
 
     # get discount information
     discount = Discount.objects.all()
-    now = datetime.now().strftime('%Y-%m-%d')
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     for course in course_list:
         rating_list = course_comments.objects.filter(course_id_id=course.id)
@@ -3647,14 +3647,14 @@ def checkdiscountcodewithid(request, teacher_id, course_url):
     discount_code = request.POST.get('promoinput')
     course_id = request.POST.get('courseid')
 
-    discount_course = discount.objects.filter(course_id=course_id).filter(promo_code=discount_code)[0]
+    discount_courses = discount.objects.filter(course_id=course_id).filter(promo_code=discount_code)
 
-    if discount_course != None:
+    if len(discount_courses) > 0:
+        discount_course = discount_courses[0]
         expire_date = datetime.strptime(discount_course.expire + " 00:00:00", '%Y-%m-%d %H:%M:%S')
         expire_date = pytz.utc.localize(expire_date)
         nowtime = datetime.today()
         nowtime = pytz.utc.localize(nowtime)
-
 
         if expire_date >= nowtime:
             return HttpResponse(discount_course.discount_percent)
@@ -3703,7 +3703,7 @@ def showFavList(request):
                 favList.append(fav)
 
     discount = Discount.objects.all()
-    now = datetime.now().strftime('%Y-%m-%d')
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     for fav in favList:
         course = Courses.objects.get(pk=fav.course_id_id)
         fav.videoCnt = getVideoCnt(course)
@@ -3814,7 +3814,7 @@ def viewProfile(request, id, pname):
         user.profile = profile
 
     discount = Discount.objects.all()
-    now = datetime.now().strftime('%Y-%m-%d')
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
     courses = Courses.objects.filter(user_id=id)
     for course in courses:
@@ -4089,7 +4089,7 @@ def enrollment(request, course_id):
     similar_course = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).filter(approval_status=2).exclude(id=course_id).exclude(id__in=register_course_ids).order_by('scat_id')
 
     discount = Discount.objects.all()
-    now = datetime.now().strftime('%Y-%m-%d')
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     for i in similar_course:
         if discount.count() == 0:
             discount_percent = 1
@@ -4196,7 +4196,7 @@ def enrollments(request, course_ids):
     similar_course = Courses.objects.filter(Q(subcat_id=similar_cat) | Q(scat_id=similar_parent_cat)).filter(approval_status=2).exclude(id=course.id).exclude(id__in=register_course_ids).order_by('scat_id')
 
     discount = Discount.objects.all()
-    now = datetime.now().strftime('%Y-%m-%d')
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     for i in similar_course:
         if discount.count() == 0:
             discount_percent = 1

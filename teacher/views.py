@@ -167,6 +167,9 @@ def dashboard(request):
     else:
         total_rating = round(sum / cnt, 1)
 
+    teacher_tax = 0
+    offer_percent = 0
+
     # calculating the teacher level
     # Evaluate the revenue type
     percentage_revenue = 50
@@ -174,6 +177,15 @@ def dashboard(request):
         percentage_revenue = 60
     elif number_free_courses >= 3 and total_rating > 4.7 and total_students > 5000:
         percentage_revenue = 70
+    # if offer is provided by admin
+    controls = Admincontrol.objects.all()
+    if len(controls) > 0:
+        teacher_tax = controls[0].teacher_tax
+        offer_percentage = controls[0].offer_percentage
+        if offer_percentage is not None:
+            offer_percent = offer_percentage
+    if offer_percent > percentage_revenue:
+        percentage_revenue = offer_percent
 
     # get total revenue
     total_revenue = 0
@@ -189,8 +201,6 @@ def dashboard(request):
 
     total_students = 0
     is_there_free_course = 0
-
-    teacher_tax = Admincontrol.objects.get(pk=1).teacher_tax
 
     for course in course_list:
         price = 0
@@ -274,6 +284,10 @@ def dashboard(request):
         total_hold_money += course.hold_money
         total_ready_money += course.ready_money
         total_transfer_money += course.transfer_money
+
+    total_transfer_money = round(total_transfer_money, 2)
+    total_ready_money = round(total_ready_money, 2)
+    total_hold_money = round(total_hold_money, 2)
 
     # # get total rating
     # rateSum = 0

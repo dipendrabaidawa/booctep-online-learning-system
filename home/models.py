@@ -113,11 +113,6 @@ class notifications(models.Model):
     created_at = models.CharField(max_length=255,null=True)
     type = models.IntegerField(max_length=3, null=True)
 
-class Admincontrol(models.Model):
-    priority = models.IntegerField(max_length=11, null=True)
-    student_tax = models.IntegerField(max_length=11)
-    teacher_tax = models.IntegerField(max_length=11)
-
 class Messages(models.Model):
     sender = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='message_sender_user')
     receiver = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='message_receiver_user')
@@ -149,6 +144,8 @@ class Admincontrol(models.Model):
     priority = models.IntegerField(max_length=11)
     student_tax = models.IntegerField(max_length=11)
     teacher_tax = models.IntegerField(max_length=11)
+    offer_title = models.CharField(max_length=255, default='')
+    offer_percentage = models.IntegerField(max_length=11, null=True)
 
 class Card(models.Model):
     user = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
