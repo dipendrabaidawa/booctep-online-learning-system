@@ -689,7 +689,7 @@
                     $(".promoerror").empty();
                     var url = 'checkdiscountcode/';
                     $.post(url, {'promoinput': promoinput}, function (res) {
-                        if (res == 'failed') {
+                        if (res.promoError == 1) {
                             $(".promoerror").empty();
                             $(".promoerror").append("Please enter a valid promo code");
                         } else {
@@ -707,27 +707,6 @@
                 }
             });
 
-
-            // $(".cancelpromobutton").click(function () {
-            //     var current_discount = parseInt($(".discountamount").text());
-            //     $(".discountamount").empty();
-            //     $(".discountamount").append("0");
-            //     $("#promoinput").prop('disabled', false);
-            //     $("#promoinput").val('');
-
-            //     $(".applypromobutton").css("display", "block");
-            //     $(".applypromobutton").prop("disabled", false);
-
-            //     var totalsum = parseInt($(".totalsum").text());
-            //     $(".totalsum").empty();
-            //     $(".totalsum").append((totalsum + current_discount));
-
-
-            //     $(".cancelpromobutton").css("display", "none");
-            //     $(".cancelpromobutton").prop("disabled", true);
-
-            // });
-
             $(".cancelpromobutton").click(function () {
                 var origin_subtotal = parseFloat($('#h_subtotal').val());
                 var origin_discount = parseFloat($('#h_discount').val());
@@ -744,7 +723,7 @@
                 $(".applypromobutton").css("display", "block");
                 $(".applypromobutton").prop("disabled", false);
 
-                var totalsum = parseInt(origin_subtotal - origin_discount - origin_tax);
+                var totalsum = Math.round(parseFloat(origin_subtotal - origin_discount + origin_tax));
                 $(".totalsum").empty();
                 $(".totalsum").append(totalsum);
 

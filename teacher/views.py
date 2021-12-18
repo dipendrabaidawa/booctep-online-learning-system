@@ -42,8 +42,51 @@ def teacher_account(request):
     if user_profile.objects.filter(user_id=request.user.id).exists():
         profile = user_profile.objects.get(user_id=request.user.id)
 
+    # get total rating of the courses
+    course_list = Courses.objects.filter(user_id=request.user.id, approval_status=2)
+    sum = 0
+    cnt = 0
+    number_free_courses = 0
+    total_students = 0
+    for course in course_list:
+        rating_list = course_comments.objects.filter(course_id_id=course.id)
+        sum += getRatingFunc(rating_list)
+        if len(rating_list) > 0:
+            cnt += 1
+        if course.type == 1:
+            number_free_courses += 1
+
+        # getting the number of student registered with course
+        stu_num = student_register_courses.objects.filter(course_id_id=course.id).count()
+        total_students += stu_num
+
+    if cnt == 0:
+        total_rating = 0
+    else:
+        total_rating = round(sum / cnt, 1)
+
+    # Evaluate the type of teacher account
+    offer_percent = 0
+    teacher_level_str = "basic"
+    percentage_revenue = 50
+    if number_free_courses >= 1 and total_rating > 4.5 and total_students > 1000:
+        percentage_revenue = 60
+        teacher_level_str = "expert"
+    elif number_free_courses >= 3 and total_rating > 4.7 and total_students > 5000:
+        percentage_revenue = 70
+        teacher_level_str = "boocteper"
+    # if offer is provided by admin
+    controls = Admincontrol.objects.all()
+    if len(controls) > 0:
+        offer_percentage = controls[0].offer_percentage
+        if offer_percentage is not None:
+            offer_percent = offer_percentage
+    if offer_percent > percentage_revenue:
+        percentage_revenue = offer_percent
+        teacher_level_str = controls[0].offer_title
+
     return render(request, 'teacher/account.html',
-                  {'objC': objC, 'profile': profile, 'sub_categories': sub_categories, 'lang': getLanguage(request)[0]})
+                  {'objC': objC, 'profile': profile, 'sub_categories': sub_categories, 'teacher_level_str':teacher_level_str,'lang': getLanguage(request)[0]})
 
 
 def teacher_security(request):
@@ -150,10 +193,11 @@ def dashboard(request):
         where=['find_in_set(course_id_id, "' + paid_course_id_str + '")']).count()
 
     # get total rating of the courses
-    course_list = Courses.objects.filter(user_id=user_id)
+    course_list = Courses.objects.filter(user_id=user_id, approval_status=2)
     sum = 0
     cnt = 0
     number_free_courses = 0
+    total_students = 0
     for course in course_list:
         rating_list = course_comments.objects.filter(course_id_id=course.id)
         sum += getRatingFunc(rating_list)
@@ -161,6 +205,10 @@ def dashboard(request):
             cnt += 1
         if course.type == 1:
             number_free_courses += 1
+
+        # getting the number of student registered with course
+        stu_num = student_register_courses.objects.filter(course_id_id=course.id).count()
+        total_students += stu_num
 
     if cnt == 0:
         total_rating = 0
@@ -199,14 +247,12 @@ def dashboard(request):
     now = datetime.now().strftime('%Y-%m-%d')
     nowtime = datetime.now()
 
-    total_students = 0
     is_there_free_course = 0
 
     for course in course_list:
         price = 0
         # getting the number of student registered with course
         stu_num = student_register_courses.objects.filter(course_id_id=course.id).count()
-        total_students += stu_num
         price = course.price * stu_num
 
         total_revenue += price

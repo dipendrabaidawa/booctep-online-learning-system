@@ -3185,21 +3185,25 @@ def showCartList(request):
     if Admincontrol.objects.filter(id=1).exists():
         tax = Admincontrol.objects.get(pk=1).student_tax
 
-    discount = 0
     not_list = []
-    expire_date = datetime.today() - timedelta(days=1)
-    discounts = Discount.objects.all()
-    if discounts.count() != 0:
-        expire_date = discounts[0].expire_date
-        discount = discounts[0].discount
-        not_str = discounts[0].not_apply_course
-        not_list = not_str.split(',')
 
     subTotal = 0
     subDiscount = 0
     subTax = 0
-    # cartCourseIds = []
-    now = datetime.now().strftime('%Y-%m-%d')
+    
+    # get discount information
+    discount = Discount.objects.all()
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+    if discount.count() == 0:
+        discount_percent = 0
+    else:
+        if now > discount[0].expire_date:
+            discount_percent = 0
+        else:
+            not_str = discount[0].not_apply_course
+            not_list = not_str.split(',')
+
     for cart in cartList:
         # cartCourseIds.append(cart.course_id.id)
         subTotal += cart.course_id.price
@@ -3208,11 +3212,12 @@ def showCartList(request):
         else:
             cart.is_fav = 0
 
-        if cart.course_id.approval_status == 2 and str(cart.course_id.id) not in not_list:
-            # subDiscount += cart.course_id.price - (cart.course_id.price * (discount / 100))
-            if now < expire_date:
-                subDiscount += cart.course_id.price * (discount / 100)
-
+        if str(cart.course_id.id) in not_list:
+            discount_percent = 0
+        else:
+            discount_percent = discount[0].discount / 100
+                
+        subDiscount += cart.course_id.price * discount_percent
         subTax += cart.course_id.price * (tax / 100)
     
     subDiscount = round(subDiscount, 2)
@@ -3594,50 +3599,77 @@ def payment_canceled(request):
 
 @csrf_exempt
 def checkdiscountcode(request):
-    if request.session.get('user_id') == None:
-        return redirect('/')
+    discount_code = request.POST.get('promoinput')
+
     user_id = request.user.id
     cartList = student_cart_courses.objects.filter(student_id_id=user_id)
-
-    discount_code = request.POST.get('promoinput')
 
     tax = 0
     if Admincontrol.objects.filter(id=1).exists():
         tax = Admincontrol.objects.get(pk=1).student_tax
 
     not_list = []
-    discounts = Discount.objects.all()
-    if discounts.count() != 0:
-        discount_percent = discounts[0].discount
-        not_str = discounts[0].not_apply_course
-        not_list = not_str.split(',')
-    
-    subTotal = 0
-    subDiscount = 0
-    subTax = 0
+    # get discount information
+    admin_discount = Discount.objects.all()
+    now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    if admin_discount.count() == 0:
+        discount_percent = 0
+    else:
+        if now > admin_discount[0].expire_date:
+            discount_percent = 0
+        else:
+            not_str = admin_discount[0].not_apply_course
+            not_list = not_str.split(',')
+
     for cart in cartList:
-        subTotal += cart.course_id.price
-        
-        if cart.course_id.approval_status == 2 and str(cart.course_id.id) not in not_list:
-            subDiscount += cart.course_id.price * (discount_percent / 100)
+        if str(cart.course_id.id) in not_list:
+            cart.discount_percent = 0
+        else:
+            cart.discount_percent = admin_discount[0].discount / 100
 
         discount_courses = discount.objects.filter(course_id=cart.course_id_id).filter(promo_code=discount_code)
-        if discount_courses.count() > 0:
+        if len(discount_courses) > 0:
             discount_course = discount_courses[0]
             expire_date = datetime.strptime(discount_course.expire + " 00:00:00", '%Y-%m-%d %H:%M:%S')
             expire_date = pytz.utc.localize(expire_date)
             nowtime = datetime.today()
             nowtime = pytz.utc.localize(nowtime)
             if expire_date >= nowtime:
-                subDiscount += cart.course_id.price * (discount_course.discount_percent / 100)
+                cart.promo_discount = discount_course.discount_percent / 100
+            else:
+                cart.promo_discount = 0
+        else:
+            cart.promo_discount = 0
+
+    subTotal = 0
+    subDiscount = 0
+    subPromoDiscount = 0
+    subTax = 0
+    promoError = 0
+    for cart in cartList:
+        subTotal += cart.course_id.price
+        
+        subDiscount += cart.course_id.price * cart.discount_percent
 
         subTax += cart.course_id.price * (tax / 100)
 
-    cartTotalSumPrice = subTotal + subTax - subDiscount
+        subPromoDiscount += (cart.course_id.price - cart.course_id.price * cart.discount_percent + cart.course_id.price * (tax / 100)) * cart.promo_discount
+        
+
+    print("subTotal:::", subTotal)
+    print("subDiscount:::", subDiscount)
+    print("subPromoDiscount:::", subPromoDiscount)
+    print("subTax:::", subTax)
+
+    cartTotalSumPrice = subTotal + subTax - subDiscount - subPromoDiscount
+
+    if subPromoDiscount == 0:
+        promoError = 1
 
     responseData = {
-        'cartTotalSumPrice': cartTotalSumPrice,
-        'subDiscount': subDiscount
+        'cartTotalSumPrice': round(cartTotalSumPrice, 2),
+        'subDiscount': round(subDiscount + subPromoDiscount, 2),
+        'promoError': promoError
     }
     
     return JsonResponse(responseData)
@@ -3816,8 +3848,9 @@ def viewProfile(request, id, pname):
     discount = Discount.objects.all()
     now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-    courses = Courses.objects.filter(user_id=id)
+    courses = Courses.objects.filter(user_id=id, approval_status=2)
     for course in courses:
+        course.link = courseUrlGenerator(course)
         rating_list = course_comments.objects.filter(course_id_id=course.id)
         course.rating = getRatingFunc(rating_list)
         if discount.count() == 0:

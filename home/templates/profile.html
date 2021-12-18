@@ -669,10 +669,10 @@
                                                             class="fa fa-star"></span> {{ course.rating }}</b>
                                                             {% get_current_language as lang %}
                                                             {% if lang == "ar" %}
-                                                        <a href="/course/{{ teacher.id }}/{{ course.name }}" class="button probtn probtn-dark"
+                                                        <a href="/ar/course/{{ course.link }}" class="button probtn probtn-dark"
                                                            style="position: absolute;right: 10px;bottom: 5px;">تفاصيل</a>
                                                            {% else %}
-                                                           <a href="/course/{{ teacher.id }}/{{ course.name }}" class="button probtn probtn-dark"
+                                                           <a href="/en/course/{{ course.link }}" class="button probtn probtn-dark"
                                                               style="position: absolute;right: 10px;bottom: 5px;">details</a>
                                                            {% endif %}
                                                     </div>

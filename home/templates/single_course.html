@@ -2804,16 +2804,19 @@
                             $(".promoerror").append("Please enter a valid promo code");
                         } else {
                             var totalsum = parseFloat($("#totalsumid").text());
-                            price_off_percentage = res
-                            price_off = (totalsum * price_off_percentage) / 100;
+                            console.log(totalsum)
+                            var price_off_percentage = res
+                            var price_off = (totalsum * price_off_percentage) / 100;
+                            console.log(price_off)
+                            var discount_price = parseFloat($(".discountamount").text());
+                            console.log(discount_price)
                             $(".discountamount").empty();
-                            $(".discountamount").append(price_off);
+                            $(".discountamount").append(discount_price + price_off);
                             $("#promoinput").prop('disabled', true);
                             $(".applypromobutton").css("display", "none");
                             $(".applypromobutton").prop("disabled", true);
                             $(".cancelpromobutton").prop("disabled", false);
                             $(".cancelpromobutton").css("display", "block");
-                            var totalsum = parseInt($("#totalsumid").text());
                             $(".totalsum").empty();
                             $(".totalsum").append((totalsum - price_off));
                         }
