@@ -856,9 +856,16 @@
                     return;
                 }
             }
-            
 
-            // data.append('courseUrl', '');
+            if ((type == 0 && parseInt(price) == 0) || (type == 0 && isNaN(parseInt(price)))) {
+                swal({
+                    title: "الدورة المدفوعة ليس لها سعر 0 أو سعر فارغ.",
+                    icon: "warning",
+                    closeOnConfirm: false,
+                });
+                return;
+            }
+
             data.append('user_id', '{{ request.user.id }}');
 
             $.ajax({
